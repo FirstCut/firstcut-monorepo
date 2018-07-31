@@ -1,0 +1,48 @@
+body {
+  padding-bottom: 50px;
+}
+.ui.feed > .event {
+  margin-top: 2em;
+}
+
+.padding-md {
+  padding: 50px;
+}
+
+.firstcut-hidden {
+  display: none;
+}
+
+#react-root {
+  white-space: pre-wrap;
+  padding-bottom: 50px;
+}
+
+.no-scroll {
+  overflow-x: visible !important;
+}
+
+.menu-fits-container {
+  top: auto !important;
+}
+
+.fill-container {
+  height: 100% !important;
+  width: 100% !important;
+}
+
+.full-height {
+  height: 100vh !important;
+}
+
+.no-border {
+  border: none !important;
+}
+
+.ui.active.dimmer.modals.transition {
+  display: flex !important;
+}
+
+.ui.modal.active {
+  margin-top: 0em !important;
+}

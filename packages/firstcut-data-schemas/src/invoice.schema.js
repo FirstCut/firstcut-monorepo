@@ -1,0 +1,66 @@
+import {FCSchema as Schema} from 'firstcut-schema-builder';
+import {INVOICE_TYPES, INVOICE_STATUS} from 'firstcut-enum';
+import BaseSchema from './shared/base.schema.js';
+
+const InvoiceSchema = new Schema({
+  type: {
+    type: String,
+    required: true,
+    label: 'Gig Type',
+    enumOptions: INVOICE_TYPES
+  },
+  status: {
+    type: String,
+    enumOptions: INVOICE_STATUS,
+    sortBy: 'off',
+    defaultValue: "NOT_DUE",
+    required: true
+  },
+  gigId: {
+    type: String,
+    label: 'Gig',
+    required: true
+  },
+  payeeId: {
+    type: String,
+    label: 'Payee',
+    serviceDependency: 'COLLABORATOR',
+    required: true
+  },
+  transactionId: {
+    type: String
+  },
+  date_due: {
+    type: Date,
+    autoValue: function() {
+      const status = this.siblingField('status');
+      const due = status.isSet && status.value == 'DUE';
+      if (!this.isSet && due) {
+        return new Date();
+      }
+    }
+  },
+  date_paid: {
+    type: Date,
+    autoValue: function() {
+      const status = this.siblingField('status');
+      const paid = status.isSet && status.value == 'PAID';
+      if (!this.isSet && paid) {
+        return new Date();
+      }
+    }
+  },
+  amount: {
+    type: Number, //TODO: check that this allows for floats or maybe even use SimpleSchema.
+    defaultValue: 0,
+    required: true
+  },
+  note: {
+    type: String,
+    label: 'Note'
+  }
+});
+
+InvoiceSchema.extend(BaseSchema);
+
+export default InvoiceSchema;

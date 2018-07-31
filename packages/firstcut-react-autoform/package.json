@@ -1,0 +1,14 @@
+{
+  "name": "firstcut-react-autoform",
+  "private": true,
+  "version": "0.0.0",
+  "main": "lib/index.js",
+  "dependencies": {
+    "@babel/runtime": "^7.0.0-beta.51",
+    "firstcut-models": "^0.0.0",
+    "firstcut-schema-builder": "^0.0.0",
+    "lodash": "^4.17.10",
+    "remove": "^0.1.5",
+    "simpl-schema": "^1.5.0"
+  }
+}

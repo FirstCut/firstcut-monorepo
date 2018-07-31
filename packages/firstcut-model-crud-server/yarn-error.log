@@ -1,0 +1,59 @@
+Arguments: 
+  /usr/local/lib/node_modules/node/bin/node /usr/local/Cellar/yarn/1.5.1_1/libexec/bin/yarn.js run test
+
+PATH: 
+  /Users/artichokes/FirstCut/firstcut-mono/packages/firstcut-model-crud-server/node_modules/.bin:/Users/artichokes/FirstCut/firstcut-mono/packages/node_modules/.bin:/Users/artichokes/FirstCut/firstcut-mono/node_modules/.bin:/Users/artichokes/FirstCut/node_modules/.bin:/Users/artichokes/node_modules/.bin:/Users/node_modules/.bin:/node_modules/.bin:/usr/local/lib/node_modules/node/bin:/Users/artichokes/google-cloud-sdk/bin:/Users/artichokes/.fastlane/bin:/Users/artichokes/.meteor:/Users/artichokes/Scripts:/usr/local/git/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/opt/local/bin:/opt/local/sbin:/usr/X11/bin:/Users/artichokes/Library/Android/sdk/tools:/Users/artichokes/Library/Android/sdk/platform-tools:/Users/artichokes/Library/Android/sdk/tools:/Applications/Postgres.app/Contents/Versions/latest/bin:/Users/artichokes/Library/Android/sdk/build-tools/27.0.2
+
+Yarn version: 
+  1.5.1
+
+Node version: 
+  9.2.0
+
+Platform: 
+  darwin x64
+
+npm manifest: 
+  {
+    "name": "firstcut-model-crud-server",
+    "private": true,
+    "scripts": {
+      "start": "meteor run",
+      "test": "meteor test --once --driver-package meteortesting:mocha",
+      "test-app": "TEST_WATCH=1 meteor test --full-app --driver-package meteortesting:mocha",
+      "visualize": "meteor --production --extra-packages bundle-visualizer"
+    },
+    "dependencies": {
+      "@babel/runtime": "^7.0.0-beta.51",
+      "firstcut-models": "^0.0.0",
+      "meteor-node-stubs": "^0.4.1"
+    },
+    "meteor": {
+      "mainModule": {
+        "client": "client/main.js",
+        "server": "server/main.js"
+      },
+      "testModule": "tests/main.js"
+    }
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile
+
+Trace: 
+  Error: Command failed.
+  Exit code: 254
+  Command: sh
+  Arguments: -c meteor test --once --driver-package meteortesting:mocha
+  Directory: /Users/artichokes/FirstCut/firstcut-mono/packages/firstcut-model-crud-server
+  Output:
+  
+      at ProcessTermError.MessageError (/usr/local/Cellar/yarn/1.5.1_1/libexec/lib/cli.js:186:110)
+      at new ProcessTermError (/usr/local/Cellar/yarn/1.5.1_1/libexec/lib/cli.js:226:113)
+      at ChildProcess.<anonymous> (/usr/local/Cellar/yarn/1.5.1_1/libexec/lib/cli.js:30281:17)
+      at ChildProcess.emit (events.js:159:13)
+      at maybeClose (internal/child_process.js:943:16)
+      at Process.ChildProcess._handle.onexit (internal/child_process.js:220:5)

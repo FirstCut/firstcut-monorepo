@@ -1,0 +1,16 @@
+{
+  "name": "firstcut-aws",
+  "private": true,
+  "version": "0.0.0",
+  "main": "lib/index.js",
+  "dependencies": {
+    "@babel/runtime": "^7.0.0-beta.51",
+    "aws-sdk": "^2.284.1",
+    "firstcut-models": "^0.0.0",
+    "firstcut-retrieve-url": "^0.0.0",
+    "firstcut-utils": "^0.0.0",
+    "meteor-random": "^0.0.3",
+    "remove": "^0.1.5",
+    "simpl-schema": "^1.5.3"
+  }
+}
