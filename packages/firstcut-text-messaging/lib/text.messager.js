@@ -1,5 +1,7 @@
 "use strict";
 
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
@@ -11,8 +13,6 @@ var _twilio = _interopRequireDefault(require("twilio"));
 var _simplSchema = _interopRequireDefault(require("simpl-schema"));
 
 var _firstcutUtils = require("firstcut-utils");
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var SUPPORTED_COUNTRIES = ['United States', 'United Kingdom'];
 exports.SUPPORTED_COUNTRIES = SUPPORTED_COUNTRIES;

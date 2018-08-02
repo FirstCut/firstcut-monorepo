@@ -1,9 +1,27 @@
 "use strict";
 
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.BaseModel = void 0;
+
+var _keys = _interopRequireDefault(require("@babel/runtime/core-js/object/keys"));
+
+var _objectSpread2 = _interopRequireDefault(require("@babel/runtime/helpers/objectSpread"));
+
+var _classCallCheck2 = _interopRequireDefault(require("@babel/runtime/helpers/classCallCheck"));
+
+var _possibleConstructorReturn2 = _interopRequireDefault(require("@babel/runtime/helpers/possibleConstructorReturn"));
+
+var _getPrototypeOf2 = _interopRequireDefault(require("@babel/runtime/helpers/getPrototypeOf"));
+
+var _get2 = _interopRequireDefault(require("@babel/runtime/helpers/get"));
+
+var _createClass2 = _interopRequireDefault(require("@babel/runtime/helpers/createClass"));
+
+var _inherits2 = _interopRequireDefault(require("@babel/runtime/helpers/inherits"));
 
 var _firstcutSchemaBuilder = require("firstcut-schema-builder");
 
@@ -15,43 +33,14 @@ var _factories = _interopRequireDefault(require("./utils/factories.js"));
 
 var _lodash = require("lodash");
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _get(target, property, receiver) { if (typeof Reflect !== "undefined" && Reflect.get) { _get = Reflect.get; } else { _get = function _get(target, property, receiver) { var base = _superPropBase(target, property); if (!base) return; var desc = Object.getOwnPropertyDescriptor(base, property); if (desc.get) { return desc.get.call(receiver); } return desc.value; }; } return _get(target, property, receiver || target); }
-
-function _superPropBase(object, property) { while (!Object.prototype.hasOwnProperty.call(object, property)) { object = _getPrototypeOf(object); if (object === null) break; } return object; }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
 var DEFAULT_COUNTRY = 'United States';
 
 var BaseModel = function BaseModel(defaultValues) {
   return (
     /*#__PURE__*/
     function (_Record) {
-      _inherits(_class, _Record);
-
-      _createClass(_class, [{
+      (0, _inherits2.default)(_class, _Record);
+      (0, _createClass2.default)(_class, [{
         key: "createNew",
         value: function createNew(properties) {
           return this.constructor.createNew(properties);
@@ -218,16 +207,14 @@ var BaseModel = function BaseModel(defaultValues) {
 
       function _class(properties) {
         var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
-
-        _classCallCheck(this, _class);
-
-        return _possibleConstructorReturn(this, _getPrototypeOf(_class).call(this, _objectSpread({}, properties))); // if (!options.prevent_initialization_of_nested_structures) {
+        (0, _classCallCheck2.default)(this, _class);
+        return (0, _possibleConstructorReturn2.default)(this, (0, _getPrototypeOf2.default)(_class).call(this, (0, _objectSpread2.default)({}, properties))); // if (!options.prevent_initialization_of_nested_structures) {
         //   let self = this.initializeSubobjects();
         //   return self.initializeSubobjectArrays();
         // }
       }
 
-      _createClass(_class, [{
+      (0, _createClass2.default)(_class, [{
         key: "initializeSubobjects",
         value: function initializeSubobjects() {
           var _this2 = this;
@@ -262,15 +249,14 @@ var BaseModel = function BaseModel(defaultValues) {
         value: function keyIsOfTypeArray(key) {
           var parent_key = _firstcutSchemaBuilder.SchemaParser.getLeastNestedFieldName(key);
 
-          return Array.isArray(_get(_getPrototypeOf(_class.prototype), "get", this).call(this, parent_key));
+          return Array.isArray((0, _get2.default)((0, _getPrototypeOf2.default)(_class.prototype), "get", this).call(this, parent_key));
         }
       }, {
         key: "keyIsOfTypePlainObject",
         value: function keyIsOfTypePlainObject(key) {
           var parent_key = _firstcutSchemaBuilder.SchemaParser.getLeastNestedFieldName(key);
 
-          var value = _get(_getPrototypeOf(_class.prototype), "get", this).call(this, parent_key);
-
+          var value = (0, _get2.default)((0, _getPrototypeOf2.default)(_class.prototype), "get", this).call(this, parent_key);
           return !(value instanceof _immutable.Record) && value instanceof Object;
         }
       }, {
@@ -283,10 +269,10 @@ var BaseModel = function BaseModel(defaultValues) {
           var index = _firstcutSchemaBuilder.SchemaParser.getIndexInObjectArrayField(key);
 
           if (child_key == index) {
-            return _get(_getPrototypeOf(_class.prototype), parent_key, this)[index];
+            return (0, _get2.default)((0, _getPrototypeOf2.default)(_class.prototype), parent_key, this)[index];
           }
 
-          return _get(_getPrototypeOf(_class.prototype), parent_key, this)[index][child_key];
+          return (0, _get2.default)((0, _getPrototypeOf2.default)(_class.prototype), parent_key, this)[index][child_key];
         }
       }, {
         key: "get",
@@ -301,7 +287,7 @@ var BaseModel = function BaseModel(defaultValues) {
             return this.getIn(nested_fields);
           }
 
-          return _get(_getPrototypeOf(_class.prototype), "get", this).call(this, key);
+          return (0, _get2.default)((0, _getPrototypeOf2.default)(_class.prototype), "get", this).call(this, key);
         }
       }, {
         key: "set",
@@ -320,7 +306,7 @@ var BaseModel = function BaseModel(defaultValues) {
 
                 var child_field = _firstcutSchemaBuilder.SchemaParser.getMostNestedFieldName(key);
 
-                var array = _get(_getPrototypeOf(_class.prototype), parent_field, this);
+                var array = (0, _get2.default)((0, _getPrototypeOf2.default)(_class.prototype), parent_field, this);
 
                 if (child_field == index) {
                   array[index] = value;
@@ -328,7 +314,7 @@ var BaseModel = function BaseModel(defaultValues) {
                   array[index][child_field] = value;
                 }
 
-                return _get(_getPrototypeOf(_class.prototype), "set", this).call(this, parent_field, array);
+                return (0, _get2.default)((0, _getPrototypeOf2.default)(_class.prototype), "set", this).call(this, parent_field, array);
               }
 
               var nested_fields = _firstcutSchemaBuilder.SchemaParser.parseNestedFields(key);
@@ -336,7 +322,7 @@ var BaseModel = function BaseModel(defaultValues) {
               return this.setIn(nested_fields, value);
             }
 
-            return _get(_getPrototypeOf(_class.prototype), "set", this).call(this, key, value);
+            return (0, _get2.default)((0, _getPrototypeOf2.default)(_class.prototype), "set", this).call(this, key, value);
           }
         }
       }, {
@@ -481,9 +467,8 @@ var BaseModel = function BaseModel(defaultValues) {
           return this.models.Invoice;
         }
       }]);
-
       return _class;
-    }((0, _immutable.Record)(_objectSpread({}, defaultValues)))
+    }((0, _immutable.Record)((0, _objectSpread2.default)({}, defaultValues)))
   );
 };
 
@@ -503,7 +488,7 @@ function applyBlueprint(record, blueprint) {
   }
 
   var defaults = record.available_blueprints[blueprint].defaults;
-  Object.keys(defaults).forEach(function (key) {
+  (0, _keys.default)(defaults).forEach(function (key) {
     return record = record.set(key, defaults[key]);
   });
   return record;

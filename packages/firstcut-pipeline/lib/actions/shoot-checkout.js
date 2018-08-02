@@ -1,5 +1,7 @@
 "use strict";
 
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
@@ -20,8 +22,6 @@ var _moment = _interopRequireDefault(require("moment"));
 var _simplSchema = _interopRequireDefault(require("simpl-schema"));
 
 var _lodash = require("lodash");
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var ShootCheckout = new _immutable.Map({
   key: 'shoot_checkout',

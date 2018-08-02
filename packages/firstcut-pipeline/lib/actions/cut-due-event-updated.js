@@ -1,5 +1,7 @@
 "use strict";
 
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
@@ -16,8 +18,6 @@ var _pipelineEnum = require("../shared/pipeline.enum.js");
 var _firstcutUtils = require("firstcut-utils");
 
 var _moment = _interopRequireDefault(require("moment"));
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var CutDueEventUpdated = new _immutable.Map({
   key: 'cut_due_event_updated',

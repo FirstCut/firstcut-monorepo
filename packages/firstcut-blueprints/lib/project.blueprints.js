@@ -1,10 +1,15 @@
 "use strict";
 
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.not_a_template = exports.customer_testimonial = void 0;
-var customer_testimonial = Object.freeze({
+
+var _freeze = _interopRequireDefault(require("@babel/runtime/core-js/object/freeze"));
+
+var customer_testimonial = (0, _freeze.default)({
   label: "Customer Testimonial",
   defaults: {},
   default_children: {
@@ -14,7 +19,7 @@ var customer_testimonial = Object.freeze({
   }
 });
 exports.customer_testimonial = customer_testimonial;
-var not_a_template = Object.freeze({
+var not_a_template = (0, _freeze.default)({
   label: "Not a Template",
   defaults: {},
   default_children: {

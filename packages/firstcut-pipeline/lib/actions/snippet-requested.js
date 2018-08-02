@@ -1,9 +1,15 @@
 "use strict";
 
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = void 0;
+
+var _objectSpread2 = _interopRequireDefault(require("@babel/runtime/helpers/objectSpread"));
+
+var _objectWithoutProperties2 = _interopRequireDefault(require("@babel/runtime/helpers/objectWithoutProperties"));
 
 var _immutable = require("immutable");
 
@@ -18,14 +24,6 @@ var _firstcutAws = require("firstcut-aws");
 var _simplSchema = _interopRequireDefault(require("simpl-schema"));
 
 var _pubsubJs = _interopRequireDefault(require("pubsub-js"));
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-function _objectWithoutProperties(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } if (Object.getOwnPropertySymbols) { var sourceSymbolKeys = Object.getOwnPropertySymbols(source); for (i = 0; i < sourceSymbolKeys.length; i++) { key = sourceSymbolKeys[i]; if (excluded.indexOf(key) >= 0) continue; if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue; target[key] = source[key]; } } return target; }
 
 var SnippetRequested = new _immutable.Map({
   key: 'snippet_requested',
@@ -70,10 +68,8 @@ var SnippetRequested = new _immutable.Map({
           start: start,
           end: end
         });
-
         var event = event_data.event,
-            copy = _objectWithoutProperties(event_data, ["event"]);
-
+            copy = (0, _objectWithoutProperties2.default)(event_data, ["event"]);
         console.log('calling with this key');
         console.log(cut_key);
 
@@ -90,7 +86,7 @@ var SnippetRequested = new _immutable.Map({
           if (err || result.Payload.errorMessage) {
             _pubsubJs.default.publish('error', 'error creating snippet for' + cut.displayName);
           } else {
-            _pubsubJs.default.publish('snippet_created', _objectSpread({}, copy, {
+            _pubsubJs.default.publish('snippet_created', (0, _objectSpread2.default)({}, copy, {
               record_type: event_data.record_type,
               snippet_key: destination_key
             }));

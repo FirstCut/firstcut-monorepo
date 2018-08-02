@@ -1,9 +1,13 @@
 "use strict";
 
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = void 0;
+
+var _keys = _interopRequireDefault(require("@babel/runtime/core-js/object/keys"));
 
 var _firstcutBlueprints = require("firstcut-blueprints");
 
@@ -16,8 +20,6 @@ var _firstcutEnum = require("firstcut-enum");
 var _firstcutUtils = require("firstcut-utils");
 
 var _firstcutRegex = _interopRequireDefault(require("firstcut-regex"));
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var ShootsSchema = new _firstcutBlueprints.BlueprintableSchema({
   "isDummy": {
@@ -160,7 +162,7 @@ var ShootsSchema = new _firstcutBlueprints.BlueprintableSchema({
   "screenshots.$.cameraId": {
     type: String,
     label: "Camera",
-    allowedValues: Object.keys(_firstcutEnum.CAMERAS)
+    allowedValues: (0, _keys.default)(_firstcutEnum.CAMERAS)
   },
   "subjects": {
     type: Array

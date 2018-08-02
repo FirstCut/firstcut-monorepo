@@ -1,15 +1,17 @@
 "use strict";
 
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = void 0;
 
+var _freeze = _interopRequireDefault(require("@babel/runtime/core-js/object/freeze"));
+
 var _firstcutRegex = _interopRequireDefault(require("firstcut-regex"));
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var ProfileSchema = Object.freeze({
+var ProfileSchema = (0, _freeze.default)({
   "firstName": {
     type: String,
     label: "First Name",

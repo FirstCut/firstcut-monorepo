@@ -1,16 +1,18 @@
 // import {Meteor} from 'meteor/meteor';
-import 'babel-polyfill';
 import {
   fulfillsPrerequisites,
   handleEvent,
   getEventActionsAsDescriptiveString,
-} from './execute.actions.js';
+} from './execute.actions';
 
-import initSubscriptions from './server/pubsub.js';
+import initSubscriptions from './pubsub';
+
+console.log('Init subscriptions in the pipeline');
+console.log(initSubscriptions);
 
 export {
   fulfillsPrerequisites,
   initSubscriptions,
   handleEvent,
-  getEventActionsAsDescriptiveString
+  getEventActionsAsDescriptiveString,
 };

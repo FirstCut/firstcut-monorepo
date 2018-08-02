@@ -1,5 +1,7 @@
 "use strict";
 
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
@@ -10,8 +12,6 @@ var _react = _interopRequireDefault(require("react"));
 var _universeI18n = _interopRequireDefault(require("meteor/universe:i18n"));
 
 var _meteor = require("meteor/meteor");
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 // instance of translate component in "accounts-ui" namespace
 var T = _universeI18n.default.createComponent(_universeI18n.default.createTranslator('accounts-ui'));

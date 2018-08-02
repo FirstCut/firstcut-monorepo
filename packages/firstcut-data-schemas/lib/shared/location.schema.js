@@ -1,18 +1,20 @@
 "use strict";
 
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = exports.LocationParser = void 0;
 
+var _freeze = _interopRequireDefault(require("@babel/runtime/core-js/object/freeze"));
+
 var _firstcutSchemaBuilder = _interopRequireDefault(require("firstcut-schema-builder"));
 
 var _enum = require("./enum.js");
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
 // import SimpleSchema from 'simpl-schema';
-var LocationSchema = Object.freeze({
+var LocationSchema = (0, _freeze.default)({
   location: {
     type: Object,
     customType: 'location',
@@ -68,7 +70,7 @@ var LocationSchema = Object.freeze({
     allowedValues: _enum.SUPPORTED_TIMEZONES
   }
 });
-var LocationParser = Object.freeze({
+var LocationParser = (0, _freeze.default)({
   locationDisplayName: function locationDisplayName(record) {
     var location = getRecordLocation(record);
     return buildDisplayString(location, 'name', 'street_address');

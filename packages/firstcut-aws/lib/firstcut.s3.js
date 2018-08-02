@@ -1,5 +1,7 @@
 "use strict";
 
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
@@ -7,6 +9,10 @@ exports.initFirstcutAWS = initFirstcutAWS;
 exports.fileRefFromId = fileRefFromId;
 exports.getPathFromId = getPathFromId;
 exports.getSignedUrlOfKey = exports.getSignedUrl = exports.listObjects = exports.copyFile = exports.invokeCreateSnippet = exports.invokeCopyFootage = void 0;
+
+var _stringify = _interopRequireDefault(require("@babel/runtime/core-js/json/stringify"));
+
+var _promise = _interopRequireDefault(require("@babel/runtime/core-js/promise"));
 
 var _simplSchema = _interopRequireDefault(require("simpl-schema"));
 
@@ -29,8 +35,6 @@ var _s = _interopRequireDefault(require("aws-sdk/clients/s3"));
 var _lambda = _interopRequireDefault(require("aws-sdk/clients/lambda"));
 
 var _fs = _interopRequireDefault(require("fs"));
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 // import { getPath, buildS3FilePath } from './filestore.utils.js';
 var s3,
@@ -76,12 +80,12 @@ var invokeCopyFootage = new ValidatedMethod({
         srcFolder = _ref2.srcFolder;
 
     if (Meteor.isServer) {
-      return new Promise(function (resolve, reject) {
+      return new _promise.default(function (resolve, reject) {
         var params = {
           FunctionName: Meteor.settings.lambda.copy_footage,
           InvocationType: "RequestResponse",
           LogType: "Tail",
-          Payload: JSON.stringify({
+          Payload: (0, _stringify.default)({
             srcBucket: srcBucket,
             destBucket: destBucket,
             srcFolder: srcFolder
@@ -118,12 +122,12 @@ var invokeCreateSnippet = new ValidatedMethod({
         brand_intro_key = _ref4.brand_intro_key;
 
     if (Meteor.isServer) {
-      return new Promise(function (resolve, reject) {
+      return new _promise.default(function (resolve, reject) {
         var params = {
           FunctionName: lambda.snippet_creator,
           InvocationType: "RequestResponse",
           LogType: "Tail",
-          Payload: JSON.stringify({
+          Payload: (0, _stringify.default)({
             bucket: Meteor.settings.public.s3bucket,
             cut_key: cut_key,
             destination_key: destination_key,
@@ -174,7 +178,7 @@ var copyFile = new ValidatedMethod({
         Key: destination_key,
         Tagging: tag_query
       };
-      return new Promise(function (resolve, reject) {
+      return new _promise.default(function (resolve, reject) {
         s3.copyObject(params, function (err, url) {
           if (err) {
             reject(err);
@@ -233,7 +237,7 @@ var getSignedUrlOfKey = new ValidatedMethod({
         bucket = _ref11.bucket;
 
     if (Meteor.isServer) {
-      return new Promise(function (resolve, reject) {
+      return new _promise.default(function (resolve, reject) {
         if (!key) {
           resolve('');
         }

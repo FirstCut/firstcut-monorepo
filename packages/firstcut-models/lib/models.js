@@ -1,9 +1,19 @@
 "use strict";
 
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = void 0;
+
+var _values = _interopRequireDefault(require("@babel/runtime/core-js/object/values"));
+
+var _objectSpread2 = _interopRequireDefault(require("@babel/runtime/helpers/objectSpread"));
+
+var _keys = _interopRequireDefault(require("@babel/runtime/core-js/object/keys"));
+
+var _freeze = _interopRequireDefault(require("@babel/runtime/core-js/object/freeze"));
 
 var _collaboratorFactory = _interopRequireDefault(require("./factories/collaborator.factory.js"));
 
@@ -35,12 +45,6 @@ var _crud = require("./utils/crud.js");
 
 var _generateDefaults = _interopRequireDefault(require("./utils/generate-defaults.js"));
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 var CollaboratorBase = (0, _firstcutModel.FirstCutModel)((0, _generateDefaults.default)(_firstcutDataSchemas.CollaboratorSchema)); // const CollaboratorBase = FirstCutModel(generateImmutableDefaults(PublicCollaboratorSchema));
 
 var ClientBase = (0, _firstcutModel.FirstCutModel)((0, _generateDefaults.default)(_firstcutDataSchemas.ClientSchema));
@@ -62,7 +66,7 @@ var Company = (0, _companyFactory.default)(CompanyBase, _firstcutDataSchemas.Com
 var Project = (0, _projectFactory.default)(ProjectBase, _firstcutDataSchemas.ProjectSchema);
 var Invoice = (0, _invoiceFactory.default)(InvoiceBase, _firstcutDataSchemas.InvoiceSchema);
 var Job = (0, _jobFactory.default)(JobBase, _firstcutDataSchemas.JobSchema);
-var models = Object.freeze({
+var models = (0, _freeze.default)({
   Collaborator: Collaborator,
   Client: Client,
   Company: Company,
@@ -75,7 +79,7 @@ var models = Object.freeze({
   Cut: Cut
 });
 var asset = new Asset({});
-var legacy_models = Object.freeze({
+var legacy_models = (0, _freeze.default)({
   'COLLABORATOR': Collaborator,
   'CLIENT': Client,
   'COMPANY': Company,
@@ -85,26 +89,24 @@ var legacy_models = Object.freeze({
   'INVOICE': Invoice,
   'CUT': Cut
 });
-Object.keys(models).forEach(function (key) {
+(0, _keys.default)(models).forEach(function (key) {
   var model = models[key];
   model.model_name = key; // enableBasePublications(model);
 
   (0, _crud.enableCrud)(model);
 }); // dependency injection solved by pulling this out into another object?
 
-Object.keys(models).forEach(function (i) {
+(0, _keys.default)(models).forEach(function (i) {
   var model = models[i];
   model.models = models;
 });
-
-var Models = _objectSpread({
-  allModels: Object.values(models)
+var Models = (0, _objectSpread2.default)({
+  allModels: (0, _values.default)(models)
 }, models, legacy_models, {
   getRecordFromId: function getRecordFromId(type, id) {
     var model = models[type];
     return model.fromId(id);
   }
 });
-
 var _default = Models;
 exports.default = _default;

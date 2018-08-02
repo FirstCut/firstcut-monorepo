@@ -1,9 +1,21 @@
 "use strict";
 
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = JobFactory;
+
+var _classCallCheck2 = _interopRequireDefault(require("@babel/runtime/helpers/classCallCheck"));
+
+var _possibleConstructorReturn2 = _interopRequireDefault(require("@babel/runtime/helpers/possibleConstructorReturn"));
+
+var _getPrototypeOf2 = _interopRequireDefault(require("@babel/runtime/helpers/getPrototypeOf"));
+
+var _createClass2 = _interopRequireDefault(require("@babel/runtime/helpers/createClass"));
+
+var _inherits2 = _interopRequireDefault(require("@babel/runtime/helpers/inherits"));
 
 var _nodeSchedule = _interopRequireDefault(require("node-schedule"));
 
@@ -11,31 +23,11 @@ var _pubsubJs = require("pubsub-js");
 
 var _immutable = require("immutable");
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
 var JOBS = {
-  'scheduled_event': function scheduled_event(job) {
+  scheduled_event: function scheduled_event(job) {
     _pubsubJs.PubSub.publish(job.event_data.event, job.event_data);
   },
-  'verify_google_credentials': function verify_google_credentials() {
+  verify_google_credentials: function verify_google_credentials() {
     Meteor.call('checkOauthCredentials', function (err) {
       if (err) {
         _pubsubJs.PubSub.publish('error', {
@@ -52,9 +44,8 @@ function JobFactory(Base, schema) {
   var Job =
   /*#__PURE__*/
   function (_Base) {
-    _inherits(Job, _Base);
-
-    _createClass(Job, null, [{
+    (0, _inherits2.default)(Job, _Base);
+    (0, _createClass2.default)(Job, null, [{
       key: "getExistingJobId",
       // static get model_name() { return 'jobs'; }
       value: function getExistingJobId(_ref) {
@@ -74,12 +65,11 @@ function JobFactory(Base, schema) {
     }]);
 
     function Job(properties) {
-      _classCallCheck(this, Job);
-
-      return _possibleConstructorReturn(this, _getPrototypeOf(Job).call(this, properties));
+      (0, _classCallCheck2.default)(this, Job);
+      return (0, _possibleConstructorReturn2.default)(this, (0, _getPrototypeOf2.default)(Job).call(this, properties));
     }
 
-    _createClass(Job, [{
+    (0, _createClass2.default)(Job, [{
       key: "cron",
       get: function get() {
         return this.get('cron');
@@ -90,7 +80,6 @@ function JobFactory(Base, schema) {
         return JOBS[this.jobName];
       }
     }]);
-
     return Job;
   }(Base);
 
@@ -98,10 +87,10 @@ function JobFactory(Base, schema) {
   /*#__PURE__*/
   function () {
     function Tracker() {
-      _classCallCheck(this, Tracker);
+      (0, _classCallCheck2.default)(this, Tracker);
     }
 
-    _createClass(Tracker, null, [{
+    (0, _createClass2.default)(Tracker, null, [{
       key: "cancelJob",
       value: function cancelJob(id) {
         var running = this.running_jobs.get(id);
@@ -160,7 +149,6 @@ function JobFactory(Base, schema) {
         });
       }
     }]);
-
     return Tracker;
   }();
 

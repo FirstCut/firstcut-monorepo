@@ -1,5 +1,7 @@
 "use strict";
 
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
@@ -8,11 +10,11 @@ exports.fromNowDate = fromNowDate;
 exports.userTimezone = userTimezone;
 exports.isUTC = exports.DATE_FORMATS = void 0;
 
+var _freeze = _interopRequireDefault(require("@babel/runtime/core-js/object/freeze"));
+
 var _moment = _interopRequireDefault(require("moment"));
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var DATE_FORMATS = Object.freeze({
+var DATE_FORMATS = (0, _freeze.default)({
   'verbose': "dddd, MMMM Do YYYY, h:mm:ss a z",
   'short': "MMM Do",
   // Apr 20th,

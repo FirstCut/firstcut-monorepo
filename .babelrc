@@ -14,9 +14,9 @@
     "@babel/preset-react"
   ],
   "plugins": [
+    "@babel/plugin-transform-runtime",
     "@babel/plugin-proposal-object-rest-spread",
-    "transform-class-properties",
-    "babel-plugin-transform-async-to-generator"
+    "transform-class-properties"
   ],
   "env": {
     "test": {
@@ -36,8 +36,8 @@
       ],
       "plugins": [
         "@babel/plugin-proposal-object-rest-spread",
-        "transform-class-properties",
-        "babel-plugin-transform-async-to-generator"
+        "@babel/plugin-transform-runtime",
+        "transform-class-properties"
       ],
     }
   }

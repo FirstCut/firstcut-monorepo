@@ -1,9 +1,13 @@
 "use strict";
 
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = void 0;
+
+var _keys = _interopRequireDefault(require("@babel/runtime/core-js/object/keys"));
 
 var _firstcutSchemaBuilder = require("firstcut-schema-builder");
 
@@ -11,13 +15,11 @@ var _firstcutEnum = require("firstcut-enum");
 
 var _simplSchema = _interopRequireDefault(require("simpl-schema"));
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
 var JobSchema = new _firstcutSchemaBuilder.FCSchema({
   _id: String,
   jobName: {
     type: String,
-    allowedValues: Object.keys(_firstcutEnum.JOB_KEYS)
+    allowedValues: (0, _keys.default)(_firstcutEnum.JOB_KEYS)
   },
   key: String,
   isRecurring: Boolean,

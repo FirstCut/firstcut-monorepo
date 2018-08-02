@@ -1,15 +1,17 @@
 "use strict";
 
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = void 0;
 
+var _objectDestructuringEmpty2 = _interopRequireDefault(require("@babel/runtime/helpers/objectDestructuringEmpty"));
+
 var _immutable = require("immutable");
 
 var _pipelineSchemas = require("../shared/pipeline.schemas.js");
-
-function _objectDestructuringEmpty(obj) { if (obj == null) throw new TypeError("Cannot destructure undefined"); }
 
 var CollaboratorRemoved = new _immutable.Map({
   key: 'collaborator_removed',
@@ -21,8 +23,7 @@ var CollaboratorRemoved = new _immutable.Map({
         initiator = _ref.initiator;
   },
   generateActions: function generateActions(event_data) {
-    _objectDestructuringEmpty(event_data);
-
+    (0, _objectDestructuringEmpty2.default)(event_data);
     return [];
   }
 });

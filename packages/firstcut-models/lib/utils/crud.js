@@ -1,9 +1,13 @@
 "use strict";
 
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.enableCrud = enableCrud;
+
+var _promise = _interopRequireDefault(require("@babel/runtime/core-js/promise"));
 
 var _meteorRandom = require("meteor-random");
 
@@ -11,14 +15,12 @@ var _recordPersister = _interopRequireDefault(require("./record.persister.js"));
 
 var _simplSchema = _interopRequireDefault(require("simpl-schema"));
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
 function enableCrud(cls) {
   var persister = new _recordPersister.default({
     cls: cls,
     namespace: cls.collection_name,
     onSave: function onSave(record) {
-      return new Promise(function (resolve, reject) {
+      return new _promise.default(function (resolve, reject) {
         if (!record._id) {
           record._id = _meteorRandom.Random.id();
         }
@@ -39,7 +41,7 @@ function enableCrud(cls) {
       });
     },
     onRemove: function onRemove(record) {
-      return new Promise(function (resolve, reject) {
+      return new _promise.default(function (resolve, reject) {
         cls._persist_remove.call(record, function (err, res) {
           if (err) reject(err);
           resolve();

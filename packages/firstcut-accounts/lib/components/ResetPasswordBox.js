@@ -1,9 +1,23 @@
 "use strict";
 
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = void 0;
+
+var _classCallCheck2 = _interopRequireDefault(require("@babel/runtime/helpers/classCallCheck"));
+
+var _possibleConstructorReturn2 = _interopRequireDefault(require("@babel/runtime/helpers/possibleConstructorReturn"));
+
+var _getPrototypeOf2 = _interopRequireDefault(require("@babel/runtime/helpers/getPrototypeOf"));
+
+var _createClass2 = _interopRequireDefault(require("@babel/runtime/helpers/createClass"));
+
+var _inherits2 = _interopRequireDefault(require("@babel/runtime/helpers/inherits"));
+
+var _assertThisInitialized2 = _interopRequireDefault(require("@babel/runtime/helpers/assertThisInitialized"));
 
 var _react = _interopRequireDefault(require("react"));
 
@@ -21,35 +35,14 @@ var _ErrorMessages = _interopRequireDefault(require("./ErrorMessages"));
 
 var _LoggedIn = _interopRequireDefault(require("./LoggedIn"));
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
 // instance of translate component in "accounts-ui" namespace
 var T = _universeI18n.default.createComponent(_universeI18n.default.createTranslator('accounts-ui'));
 
 var ResetPasswordBox =
 /*#__PURE__*/
 function (_React$Component) {
-  _inherits(ResetPasswordBox, _React$Component);
-
-  _createClass(ResetPasswordBox, null, [{
+  (0, _inherits2.default)(ResetPasswordBox, _React$Component);
+  (0, _createClass2.default)(ResetPasswordBox, null, [{
     key: "renderErrorMessages",
     value: function renderErrorMessages() {
       if (this.state.errors) {
@@ -65,22 +58,21 @@ function (_React$Component) {
   function ResetPasswordBox(props) {
     var _this;
 
-    _classCallCheck(this, ResetPasswordBox);
-
-    _this = _possibleConstructorReturn(this, _getPrototypeOf(ResetPasswordBox).call(this, props));
+    (0, _classCallCheck2.default)(this, ResetPasswordBox);
+    _this = (0, _possibleConstructorReturn2.default)(this, (0, _getPrototypeOf2.default)(ResetPasswordBox).call(this, props));
     _this.state = {
       loading: false,
       error: null,
       emailSent: false,
       email: ''
     };
-    ResetPasswordBox.renderErrorMessages = ResetPasswordBox.renderErrorMessages.bind(_assertThisInitialized(_assertThisInitialized(_this)));
-    _this.handleChange = _this.handleChange.bind(_assertThisInitialized(_assertThisInitialized(_this)));
-    _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_assertThisInitialized(_this)));
+    ResetPasswordBox.renderErrorMessages = ResetPasswordBox.renderErrorMessages.bind((0, _assertThisInitialized2.default)((0, _assertThisInitialized2.default)(_this)));
+    _this.handleChange = _this.handleChange.bind((0, _assertThisInitialized2.default)((0, _assertThisInitialized2.default)(_this)));
+    _this.handleSubmit = _this.handleSubmit.bind((0, _assertThisInitialized2.default)((0, _assertThisInitialized2.default)(_this)));
     return _this;
   }
 
-  _createClass(ResetPasswordBox, [{
+  (0, _createClass2.default)(ResetPasswordBox, [{
     key: "handleChange",
     value: function handleChange(e) {
       var newState = {};
@@ -173,7 +165,6 @@ function (_React$Component) {
       }, "\xA0", _react.default.createElement(T, null, "register_here"))) : '', ResetPasswordBox.renderErrorMessages());
     }
   }]);
-
   return ResetPasswordBox;
 }(_react.default.Component);
 

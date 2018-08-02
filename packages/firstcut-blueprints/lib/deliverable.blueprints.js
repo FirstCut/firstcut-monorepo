@@ -1,9 +1,14 @@
 "use strict";
 
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.not_a_template = exports.snippet = exports.full = void 0;
+
+var _freeze = _interopRequireDefault(require("@babel/runtime/core-js/object/freeze"));
+
 var full = {
   label: 'Full Testimonial Video',
   defaults: {
@@ -24,7 +29,7 @@ var snippet = {
   description: "This is a testimonial snippet"
 };
 exports.snippet = snippet;
-var not_a_template = Object.freeze({
+var not_a_template = (0, _freeze.default)({
   label: 'Not a Template',
   defaults: {
     estimatedDuration: 120 //in seconds

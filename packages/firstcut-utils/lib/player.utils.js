@@ -1,5 +1,7 @@
 "use strict";
 
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
@@ -13,17 +15,11 @@ exports.getPlayer = getPlayer;
 exports.getPlayerFromQuery = getPlayerFromQuery;
 exports.playerIsClient = playerIsClient;
 
+var _values = _interopRequireDefault(require("@babel/runtime/core-js/object/values"));
+
+var _toConsumableArray2 = _interopRequireDefault(require("@babel/runtime/helpers/toConsumableArray"));
+
 var _simplSchema = _interopRequireDefault(require("simpl-schema"));
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
-
-function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
-
-function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
-
-function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
 
 // export const hasUserProfile = new ValidatedMethod({
 //   name: 'has-user-profile',
@@ -48,16 +44,16 @@ function getUserEmails(user) {
     var user_emails = user.emails.map(function (email) {
       return email.address;
     });
-    emails = _toConsumableArray(user_emails).concat(_toConsumableArray(emails));
+    emails = (0, _toConsumableArray2.default)(user_emails).concat((0, _toConsumableArray2.default)(emails));
   }
 
   if (user.services) {
-    var service_emails = Object.values(user.services).map(function (service) {
+    var service_emails = (0, _values.default)(user.services).map(function (service) {
       return service.email;
     }).filter(function (email) {
       return email != null;
     });
-    emails = _toConsumableArray(emails).concat(_toConsumableArray(service_emails));
+    emails = (0, _toConsumableArray2.default)(emails).concat((0, _toConsumableArray2.default)(service_emails));
   }
 
   return emails;

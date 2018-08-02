@@ -1,5 +1,7 @@
 "use strict";
 
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
@@ -52,8 +54,6 @@ var _ComboBox = _interopRequireDefault(require("./components/ComboBox"));
 var _EnrollmentBox = _interopRequireDefault(require("./components/EnrollmentBox"));
 
 var _OAuthButton = _interopRequireDefault(require("./components/OAuthButton"));
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var hasUserProfile = new ValidatedMethod({
   name: 'has-user-profile',

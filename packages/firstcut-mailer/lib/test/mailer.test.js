@@ -1,5 +1,15 @@
 "use strict";
 
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+
+var _regenerator = _interopRequireDefault(require("@babel/runtime/regenerator"));
+
+var _asyncToGenerator2 = _interopRequireDefault(require("@babel/runtime/helpers/asyncToGenerator"));
+
+var _values = _interopRequireDefault(require("@babel/runtime/core-js/object/values"));
+
+var _keys = _interopRequireDefault(require("@babel/runtime/core-js/object/keys"));
+
 var _meteor = require("meteor/meteor");
 
 var _mailer = _interopRequireDefault(require("../mailer.js"));
@@ -13,10 +23,6 @@ var _mailerEnum = require("../mailer.enum.js");
 var _immutable = require("immutable");
 
 var _sinon = _interopRequireDefault(require("sinon"));
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } } function _next(value) { step("next", value); } function _throw(err) { step("throw", err); } _next(); }); }; }
 
 var mailer = new _mailer.default();
 describe('mailer', function () {
@@ -32,8 +38,8 @@ describe('mailer', function () {
   });
   describe('getSubstitutionData', function () {
     it('should have a generator function defined for each template', function () {
-      var generator_keys = Object.keys(_mailerEnum.substitution_data_generators);
-      var templates = Object.values(_mailerEnum.TEMPLATES);
+      var generator_keys = (0, _keys.default)(_mailerEnum.substitution_data_generators);
+      var templates = (0, _values.default)(_mailerEnum.TEMPLATES);
       expect(generator_keys).to.include.all.members(templates);
     });
     it('should throw validation error when template_id not in TEMPLATES', function () {
@@ -50,7 +56,7 @@ describe('mailer', function () {
       var record = new _immutable.Record({})();
       var recipient = new _immutable.Record({})();
 
-      var _arr = Object.values(_mailerEnum.TEMPLATES);
+      var _arr = (0, _values.default)(_mailerEnum.TEMPLATES);
 
       for (var _i = 0; _i < _arr.length; _i++) {
         template = _arr[_i];
@@ -62,7 +68,7 @@ describe('mailer', function () {
       var record = new _immutable.Record({})();
       var recipient = new _immutable.Record({})();
 
-      var _arr2 = Object.values(_mailerEnum.TEMPLATES);
+      var _arr2 = (0, _values.default)(_mailerEnum.TEMPLATES);
 
       for (var _i2 = 0; _i2 < _arr2.length; _i2++) {
         template = _arr2[_i2];
@@ -77,18 +83,20 @@ describe('mailer', function () {
     });
   });
   describe('send', function () {
-    it('should accept optional substitution data', function () {
-      var _ref = _asyncToGenerator(
+    it('should accept optional substitution data',
+    /*#__PURE__*/
+    function () {
+      var _ref = (0, _asyncToGenerator2.default)(
       /*#__PURE__*/
-      regeneratorRuntime.mark(function _callee(done) {
+      _regenerator.default.mark(function _callee(done) {
         var result;
-        return regeneratorRuntime.wrap(function _callee$(_context) {
+        return _regenerator.default.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
                 _context.prev = 0;
                 _context.next = 3;
-                return mailer.send(Object.values(_mailerEnum.TEMPLATES)[0], [_meteor.Meteor.settings.test_email], {
+                return mailer.send((0, _values.default)(_mailerEnum.TEMPLATES)[0], [_meteor.Meteor.settings.test_email], {
                   name: "Lucy"
                 });
 
@@ -115,18 +123,20 @@ describe('mailer', function () {
         return _ref.apply(this, arguments);
       };
     }());
-    it('should throw validation error when emails not correctly formatted email', function () {
-      var _ref2 = _asyncToGenerator(
+    it('should throw validation error when emails not correctly formatted email',
+    /*#__PURE__*/
+    function () {
+      var _ref2 = (0, _asyncToGenerator2.default)(
       /*#__PURE__*/
-      regeneratorRuntime.mark(function _callee2(done) {
+      _regenerator.default.mark(function _callee2(done) {
         var result;
-        return regeneratorRuntime.wrap(function _callee2$(_context2) {
+        return _regenerator.default.wrap(function _callee2$(_context2) {
           while (1) {
             switch (_context2.prev = _context2.next) {
               case 0:
                 _context2.prev = 0;
                 _context2.next = 3;
-                return mailer.send(Object.values(_mailerEnum.TEMPLATES)[0], ['l']);
+                return mailer.send((0, _values.default)(_mailerEnum.TEMPLATES)[0], ['l']);
 
               case 3:
                 result = _context2.sent;
@@ -154,12 +164,14 @@ describe('mailer', function () {
         return _ref2.apply(this, arguments);
       };
     }());
-    it('should throw validation error when template not in allowed templates', function () {
-      var _ref3 = _asyncToGenerator(
+    it('should throw validation error when template not in allowed templates',
+    /*#__PURE__*/
+    function () {
+      var _ref3 = (0, _asyncToGenerator2.default)(
       /*#__PURE__*/
-      regeneratorRuntime.mark(function _callee3(done) {
+      _regenerator.default.mark(function _callee3(done) {
         var result;
-        return regeneratorRuntime.wrap(function _callee3$(_context3) {
+        return _regenerator.default.wrap(function _callee3$(_context3) {
           while (1) {
             switch (_context3.prev = _context3.next) {
               case 0:
@@ -193,12 +205,14 @@ describe('mailer', function () {
         return _ref3.apply(this, arguments);
       };
     }());
-    it('should succeed with allowed template_id and properly formatted emails', function () {
-      var _ref4 = _asyncToGenerator(
+    it('should succeed with allowed template_id and properly formatted emails',
+    /*#__PURE__*/
+    function () {
+      var _ref4 = (0, _asyncToGenerator2.default)(
       /*#__PURE__*/
-      regeneratorRuntime.mark(function _callee4(done) {
+      _regenerator.default.mark(function _callee4(done) {
         var mock_mailer, expectation, result;
-        return regeneratorRuntime.wrap(function _callee4$(_context4) {
+        return _regenerator.default.wrap(function _callee4$(_context4) {
           while (1) {
             switch (_context4.prev = _context4.next) {
               case 0:
@@ -206,7 +220,7 @@ describe('mailer', function () {
                 mock_mailer = _sinon.default.mock(_mailer.default.prototype);
                 expectation = mock_mailer.expects('_send').once();
                 _context4.next = 5;
-                return mailer.send(Object.values(_mailerEnum.TEMPLATES)[0], [_meteor.Meteor.settings.test_email]);
+                return mailer.send((0, _values.default)(_mailerEnum.TEMPLATES)[0], [_meteor.Meteor.settings.test_email]);
 
               case 5:
                 result = _context4.sent;

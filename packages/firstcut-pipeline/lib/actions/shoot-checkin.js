@@ -1,5 +1,7 @@
 "use strict";
 
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
@@ -14,8 +16,6 @@ var _pipelineSchemas = require("../shared/pipeline.schemas.js");
 var _pipelineEnum = require("../shared/pipeline.enum.js");
 
 var _simplSchema = _interopRequireDefault(require("simpl-schema"));
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var ShootCheckin = new _immutable.Map({
   key: 'shoot_checkin',

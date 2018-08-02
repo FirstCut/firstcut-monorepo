@@ -1,9 +1,13 @@
 "use strict";
 
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = void 0;
+
+var _toConsumableArray2 = _interopRequireDefault(require("@babel/runtime/helpers/toConsumableArray"));
 
 var _immutable = require("immutable");
 
@@ -18,14 +22,6 @@ var _firstcutUtils = require("firstcut-utils");
 var _firstcutModels = require("firstcut-models");
 
 var _firstcutRetrieveUrl = require("firstcut-retrieve-url");
-
-function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
-
-function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
-
-function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
-
-function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
 
 var UpcomingShootReminder = new _immutable.Map({
   key: 'upcoming_shoot_reminder',
@@ -95,10 +91,8 @@ var UpcomingShootReminder = new _immutable.Map({
         };
       }
     });
-
-    var email_actions = _toConsumableArray(internal_emails).concat(_toConsumableArray(client_emails), _toConsumableArray(videographer_emails));
-
-    return _toConsumableArray(email_actions).concat([{
+    var email_actions = (0, _toConsumableArray2.default)(internal_emails).concat((0, _toConsumableArray2.default)(client_emails), (0, _toConsumableArray2.default)(videographer_emails));
+    return (0, _toConsumableArray2.default)(email_actions).concat([{
       type: _pipelineEnum.ACTIONS.slack_notify,
       content: {
         text: "Reminder about an upcoming shoot: ".concat(shoot.displayName, " is scheduled for ").concat(scheduled_date)

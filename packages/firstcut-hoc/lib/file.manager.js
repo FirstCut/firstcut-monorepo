@@ -1,9 +1,31 @@
 "use strict";
 
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = withFileManager;
+
+var _promise = _interopRequireDefault(require("@babel/runtime/core-js/promise"));
+
+var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
+
+var _regenerator = _interopRequireDefault(require("@babel/runtime/regenerator"));
+
+var _asyncToGenerator2 = _interopRequireDefault(require("@babel/runtime/helpers/asyncToGenerator"));
+
+var _classCallCheck2 = _interopRequireDefault(require("@babel/runtime/helpers/classCallCheck"));
+
+var _createClass2 = _interopRequireDefault(require("@babel/runtime/helpers/createClass"));
+
+var _possibleConstructorReturn2 = _interopRequireDefault(require("@babel/runtime/helpers/possibleConstructorReturn"));
+
+var _getPrototypeOf3 = _interopRequireDefault(require("@babel/runtime/helpers/getPrototypeOf"));
+
+var _inherits2 = _interopRequireDefault(require("@babel/runtime/helpers/inherits"));
+
+var _assertThisInitialized2 = _interopRequireDefault(require("@babel/runtime/helpers/assertThisInitialized"));
 
 var _react = _interopRequireDefault(require("react"));
 
@@ -17,48 +39,24 @@ var _immutable = require("immutable");
 
 var _firstcutS = require("firstcut-s3");
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
-
-function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } } function _next(value) { step("next", value); } function _throw(err) { step("throw", err); } _next(); }); }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
 function withFileManager(WrappedComponent) {
   return (
     /*#__PURE__*/
     function (_React$Component) {
-      _inherits(_class2, _React$Component);
+      (0, _inherits2.default)(_class2, _React$Component);
 
       function _class2() {
         var _getPrototypeOf2;
 
         var _temp, _this;
 
-        _classCallCheck(this, _class2);
+        (0, _classCallCheck2.default)(this, _class2);
 
         for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
           args[_key] = arguments[_key];
         }
 
-        return _possibleConstructorReturn(_this, (_temp = _this = _possibleConstructorReturn(this, (_getPrototypeOf2 = _getPrototypeOf(_class2)).call.apply(_getPrototypeOf2, [this].concat(args))), _this.state = {
+        return (0, _possibleConstructorReturn2.default)(_this, (_temp = _this = (0, _possibleConstructorReturn2.default)(this, (_getPrototypeOf2 = (0, _getPrototypeOf3.default)(_class2)).call.apply(_getPrototypeOf2, [this].concat(args))), _this.state = {
           name_to_id: new _immutable.Map(),
           in_progress: false,
           progress: 0,
@@ -166,7 +164,7 @@ function withFileManager(WrappedComponent) {
 
           var emitter = result.emitter;
           emitter.on('error', _this.fileError);
-          emitter.on('uploaded', _this.fileUploadSuccess.bind(_assertThisInitialized(_assertThisInitialized(_this)), result.record));
+          emitter.on('uploaded', _this.fileUploadSuccess.bind((0, _assertThisInitialized2.default)((0, _assertThisInitialized2.default)(_this)), result.record));
           emitter.on('progress', function (progress) {
             _this.setProgress(progress);
           });
@@ -175,18 +173,18 @@ function withFileManager(WrappedComponent) {
         }, _temp));
       }
 
-      _createClass(_class2, [{
+      (0, _createClass2.default)(_class2, [{
         key: "fetchDocuments",
         value: function () {
-          var _ref = _asyncToGenerator(
+          var _fetchDocuments = (0, _asyncToGenerator2.default)(
           /*#__PURE__*/
-          regeneratorRuntime.mark(function _callee(_ref2) {
+          _regenerator.default.mark(function _callee(_ref) {
             var fieldname, record, docs;
-            return regeneratorRuntime.wrap(function _callee$(_context) {
+            return _regenerator.default.wrap(function _callee$(_context) {
               while (1) {
                 switch (_context.prev = _context.next) {
                   case 0:
-                    fieldname = _ref2.fieldname, record = _ref2.record;
+                    fieldname = _ref.fieldname, record = _ref.record;
                     _context.next = 3;
                     return getFileDocuments(record, fieldname);
 
@@ -204,11 +202,9 @@ function withFileManager(WrappedComponent) {
             }, _callee, this);
           }));
 
-          function fetchDocuments(_x) {
-            return _ref.apply(this, arguments);
-          }
-
-          return fetchDocuments;
+          return function fetchDocuments(_x) {
+            return _fetchDocuments.apply(this, arguments);
+          };
         }()
       }, {
         key: "componentDidMount",
@@ -230,7 +226,7 @@ function withFileManager(WrappedComponent) {
           var _this$props6 = this.props,
               record = _this$props6.record,
               fieldname = _this$props6.fieldname;
-          return _react.default.createElement(WrappedComponent, _extends({
+          return _react.default.createElement(WrappedComponent, (0, _extends2.default)({
             onFileAdded: this.onFileAdded,
             onFileRemoved: this.onFileRemoved,
             files: this.state.docs,
@@ -239,7 +235,6 @@ function withFileManager(WrappedComponent) {
           }, this.props));
         }
       }]);
-
       return _class2;
     }(_react.default.Component)
   );
@@ -249,15 +244,17 @@ function getFileDocuments(record, fieldname) {
   var store = getFileStore(record, fieldname);
   var ids = getFileIds(record, fieldname);
   console.log(ids);
-  var promises = ids.map(function () {
-    var _ref3 = _asyncToGenerator(
+  var promises = ids.map(
+  /*#__PURE__*/
+  function () {
+    var _ref2 = (0, _asyncToGenerator2.default)(
     /*#__PURE__*/
-    regeneratorRuntime.mark(function _callee2(id) {
-      return regeneratorRuntime.wrap(function _callee2$(_context2) {
+    _regenerator.default.mark(function _callee2(id) {
+      return _regenerator.default.wrap(function _callee2$(_context2) {
         while (1) {
           switch (_context2.prev = _context2.next) {
             case 0:
-              return _context2.abrupt("return", new Promise(function (resolve, reject) {
+              return _context2.abrupt("return", new _promise.default(function (resolve, reject) {
                 // getSignedCookies.call({file_ref:f}, (err, result) => {
                 //   cookies.set('CloudFront-Key-Pair-Id', result['CloudFront-Key-Pair-Id']);
                 //   cookies.set('CloudFront-Policy', result['CloudFront-Policy']);
@@ -289,10 +286,10 @@ function getFileDocuments(record, fieldname) {
     }));
 
     return function (_x2) {
-      return _ref3.apply(this, arguments);
+      return _ref2.apply(this, arguments);
     };
   }());
-  return Promise.all(promises);
+  return _promise.default.all(promises);
 }
 
 function removeFileWithId(id, store) {

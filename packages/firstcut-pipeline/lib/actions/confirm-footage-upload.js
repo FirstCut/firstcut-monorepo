@@ -1,9 +1,13 @@
 "use strict";
 
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = void 0;
+
+var _toConsumableArray2 = _interopRequireDefault(require("@babel/runtime/helpers/toConsumableArray"));
 
 var _immutable = require("immutable");
 
@@ -18,14 +22,6 @@ var _pipelineUtils = require("../shared/pipeline.utils.js");
 var _firstcutRetrieveUrl = require("firstcut-retrieve-url");
 
 var _firstcutUtils = require("firstcut-utils");
-
-function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
-
-function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
-
-function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
-
-function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
 
 var key = 'confirm_footage_uploaded';
 var ConfirmFootageUpload = new _immutable.Map({
@@ -78,15 +74,13 @@ var ConfirmFootageUpload = new _immutable.Map({
         };
       }
     });
-
-    var email_actions = _toConsumableArray(confirmation_emails).concat(_toConsumableArray(internal_emails));
-
+    var email_actions = (0, _toConsumableArray2.default)(confirmation_emails).concat((0, _toConsumableArray2.default)(internal_emails));
     return [{
       type: _pipelineEnum.ACTIONS.slack_notify,
       content: {
         text: "Footage for ".concat(shoot.displayName, " has been confirmed as uploaded by ").concat(collaborator.displayName, ".")
       }
-    }].concat(_toConsumableArray(email_actions));
+    }].concat((0, _toConsumableArray2.default)(email_actions));
   }
 });
 var _default = ConfirmFootageUpload;

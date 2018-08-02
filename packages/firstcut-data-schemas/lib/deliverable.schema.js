@@ -1,5 +1,7 @@
 "use strict";
 
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
@@ -12,8 +14,6 @@ var _baseSchema = _interopRequireDefault(require("./shared/base.schema.js"));
 var _simplSchema = _interopRequireDefault(require("simpl-schema"));
 
 var _firstcutRegex = _interopRequireDefault(require("firstcut-regex"));
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var DeliverableSchema = new _firstcutBlueprints.BlueprintableSchema({
   name: {

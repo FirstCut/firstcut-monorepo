@@ -1,5 +1,11 @@
 "use strict";
 
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+
+var _keys = _interopRequireDefault(require("@babel/runtime/core-js/object/keys"));
+
+var _values = _interopRequireDefault(require("@babel/runtime/core-js/object/values"));
+
 var _testingUtils = require("/imports/api/testing-utils");
 
 var _velocityMeteorStubs = require("meteor/velocity:meteor-stubs");
@@ -15,8 +21,6 @@ var _slackEnum = require("../slack.enum.js");
 var _sinon = _interopRequireDefault(require("sinon"));
 
 var _immutable = require("immutable");
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var sandbox = _sinon.default.createSandbox({});
 
@@ -44,7 +48,7 @@ describe('slack', function () {
       }
     });
     it('should not throw error when template supported', function () {
-      var _arr = Object.values(_slackEnum.TEMPLATES);
+      var _arr = (0, _values.default)(_slackEnum.TEMPLATES);
 
       for (var _i = 0; _i < _arr.length; _i++) {
         template = _arr[_i];
@@ -61,12 +65,12 @@ describe('slack', function () {
   });
   describe('template generators', function () {
     it('should have a generator function defined for each template', function () {
-      var generator_keys = Object.keys(_slackEnum.template_generators);
-      var templates = Object.values(_slackEnum.TEMPLATES);
+      var generator_keys = (0, _keys.default)(_slackEnum.template_generators);
+      var templates = (0, _values.default)(_slackEnum.TEMPLATES);
       expect(generator_keys).to.include.all.members(templates);
     });
     it('should return json that validates against the SlackTemplateSchema', function () {
-      var _arr2 = Object.values(_slackEnum.template_generators);
+      var _arr2 = (0, _values.default)(_slackEnum.template_generators);
 
       for (var _i2 = 0; _i2 < _arr2.length; _i2++) {
         generator = _arr2[_i2];

@@ -6,17 +6,6 @@ describe("firstcut-pipeline-server", function () {
     assert.strictEqual(name, "firstcut-pipeline-server");
   });
 
-  it("handles a POST to executePipelineEvent", async function () {
-    HTTP.methods({
-      'executePipelineEvent': function(data) {
-        handleEvent.call(data, (result) => {
-          console.log('In the response');
-          console.log(result);
-        });
-      }
-    });
-  });
-
   if (Meteor.isClient) {
     it("client is not server", function () {
       assert.strictEqual(Meteor.isServer, false);

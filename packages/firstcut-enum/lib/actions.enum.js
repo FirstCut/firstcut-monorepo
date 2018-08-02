@@ -1,9 +1,13 @@
 "use strict";
 
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.ACTIONS = exports.FALLBACK_PHONE_NUMBER = exports.EVENT_ACTION_TITLES = exports.EVENT_LABELS = exports.EVENTS = exports.SUPPORTED_EVENTS = void 0;
+
+var _freeze = _interopRequireDefault(require("@babel/runtime/core-js/object/freeze"));
 
 /* EVENTUALLY THESE NEED TO BE API CALLS SO THEY CAN BE DYNAMICALLY GENERATED.
 TURN THESE INTO API CALLS ONCE YOU NEED TO EDIT THESE */
@@ -17,7 +21,7 @@ var EVENT_ACTION_TITLES = {};
 exports.EVENT_ACTION_TITLES = EVENT_ACTION_TITLES;
 var FALLBACK_PHONE_NUMBER = '';
 exports.FALLBACK_PHONE_NUMBER = FALLBACK_PHONE_NUMBER;
-var ACTIONS = Object.freeze({
+var ACTIONS = (0, _freeze.default)({
   send_email: 'send_email',
   slack_notify: 'slack_notify',
   schedule_job: 'schedule_job',

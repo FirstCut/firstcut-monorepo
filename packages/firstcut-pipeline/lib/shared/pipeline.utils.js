@@ -3,19 +3,13 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.historyIncludesEvent = historyIncludesEvent;
 exports.eventsInHistory = eventsInHistory;
+exports.historyIncludesEvent = historyIncludesEvent;
 exports.setInvoicesToDue = setInvoicesToDue;
 exports.getEmailActions = getEmailActions;
-exports.slack_template_defaults = void 0;
+exports.slackTemplateDefaults = void 0;
 
-var _pipelineEnum = require("./pipeline.enum.js");
-
-function historyIncludesEvent(_ref) {
-  var record = _ref.record,
-      event = _ref.event;
-  return eventsInHistory(record).includes(event);
-}
+var _firstcutEnum = require("firstcut-enum");
 
 function eventsInHistory(record) {
   return record.history.toArray().map(function (event) {
@@ -23,11 +17,19 @@ function eventsInHistory(record) {
   });
 }
 
+function historyIncludesEvent(_ref) {
+  var record = _ref.record,
+      event = _ref.event;
+  return eventsInHistory(record).includes(event);
+}
+
 function setInvoicesToDue(record) {
   record.invoices.forEach(function (invoice) {
-    if (!invoice.paid) {
-      invoice = invoice.markAsDue();
-      invoice.save();
+    var dueInvoice = invoice;
+
+    if (!dueInvoice.paid) {
+      dueInvoice = dueInvoice.markAsDue();
+      dueInvoice.save();
     }
   });
 }
@@ -42,7 +44,7 @@ function getEmailActions(_ref2) {
     }
 
     return {
-      type: _pipelineEnum.ACTIONS.send_email,
+      type: _firstcutEnum.ACTIONS.send_email,
       to: [recipient.email],
       substitution_data: getSubstitutionData(recipient),
       template: template
@@ -53,8 +55,8 @@ function getEmailActions(_ref2) {
   });
 }
 
-var slack_template_defaults = {
+var slackTemplateDefaults = {
   username: 'firstcut',
   link_names: true
 };
-exports.slack_template_defaults = slack_template_defaults;
+exports.slackTemplateDefaults = slackTemplateDefaults;

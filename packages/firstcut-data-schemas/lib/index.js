@@ -1,5 +1,7 @@
 "use strict";
 
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
@@ -83,5 +85,3 @@ var _jobSchema = _interopRequireDefault(require("./job.schema.js"));
 var _shootSchema = _interopRequireDefault(require("./shoot.schema.js"));
 
 var _companySchema = _interopRequireDefault(require("./company.schema.js"));
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }

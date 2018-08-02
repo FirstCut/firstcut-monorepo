@@ -5,23 +5,19 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = initSubscriptions;
 
-var _simplSchema = _interopRequireDefault(require("simpl-schema"));
-
 var _pubsubJs = require("pubsub-js");
 
 var _firstcutEnum = require("firstcut-enum");
 
-var _index = require("../index.js");
-
 var _firstcutUtils = require("firstcut-utils");
-
-var _immutable = require("immutable");
 
 var _firstcutModels = require("firstcut-models");
 
 var _lodash = require("lodash");
 
 var _moment = _interopRequireDefault(require("moment"));
+
+var _execute = require("../execute.actions");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -44,9 +40,7 @@ function initSubscriptions() {
       var collaborator = record[collaborator_key] || {};
       var prev_collaborator = prev_record[collaborator_key] || {};
 
-      if (collaborator && prev_collaborator && collaborator._id == prev_collaborator._id) {
-        return;
-      } else {
+      if (collaborator && prev_collaborator && collaborator._id == prev_collaborator._id) {} else {
         result = true;
       }
     });
@@ -270,7 +264,7 @@ function initSubscriptions() {
           record_id: doc._id,
           initiator_player_id: initiator_player_id,
           record_type: model.model_name
-        }); //generate and save all dependent records //TOOD this will need to be removed into a separate service
+        }); // generate and save all dependent records //TOOD this will need to be removed into a separate service
 
 
         var record = _firstcutModels.Models.getRecordFromId(model.model_name, doc._id);
@@ -289,7 +283,7 @@ function initSubscriptions() {
 
   _firstcutEnum.SUPPORTED_EVENTS.forEach(function (e) {
     _pubsubJs.PubSub.subscribe(e, Meteor.bindEnvironment(function (msg, data) {
-      _index.handleEvent.call({
+      _execute.handleEvent.call({
         event_data: _objectSpread({
           event: e
         }, data)

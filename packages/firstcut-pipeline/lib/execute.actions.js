@@ -1,5 +1,7 @@
 "use strict";
 
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
@@ -7,21 +9,23 @@ exports.fulfillsPrerequisites = fulfillsPrerequisites;
 exports.getEventActionsAsDescriptiveString = getEventActionsAsDescriptiveString;
 exports.handleEvent = void 0;
 
-var _lodash = require("lodash");
+var _getIterator2 = _interopRequireDefault(require("@babel/runtime/core-js/get-iterator"));
+
+var _regenerator = _interopRequireDefault(require("@babel/runtime/regenerator"));
+
+var _objectSpread2 = _interopRequireDefault(require("@babel/runtime/helpers/objectSpread"));
+
+var _asyncToGenerator2 = _interopRequireDefault(require("@babel/runtime/helpers/asyncToGenerator"));
 
 var _meteorRandom = require("meteor-random");
 
 var _firstcutEnum = require("firstcut-enum");
-
-var _pipelineUtils = require("./shared/pipeline.utils.js");
 
 var _firstcutModels = require("firstcut-models");
 
 var _firstcutMailer = require("firstcut-mailer");
 
 var _firstcutSlack = require("firstcut-slack");
-
-var _pipelineSchemas = require("./shared/pipeline.schemas.js");
 
 var _firstcutTextMessaging = require("firstcut-text-messaging");
 
@@ -31,25 +35,176 @@ var _pubsubJs = require("pubsub-js");
 
 var _actions = _interopRequireDefault(require("./actions"));
 
-var _firstcutAws = require("firstcut-aws");
+var _pipelineSchemas = require("./shared/pipeline.schemas.js");
 
-var execute = function () {
-  var _ref8 = _asyncToGenerator(
+var _pipelineUtils = require("./shared/pipeline.utils.js");
+
+function fulfillsPrerequisites(_ref) {
+  var event = _ref.event,
+      record = _ref.record,
+      initiator = _ref.initiator;
+
+  if (Meteor.settings.public.environment == 'development') {
+    return true;
+  }
+
+  return _actions.default[event].get('fulfillsPrerequisites')({
+    record: record,
+    initiator: initiator
+  });
+}
+
+var handleEvent = new ValidatedMethod({
+  name: 'handle-pipeline-event',
+  validate: function validate(_ref2) {
+    var event_data = _ref2.event_data;
+    var schema = getEventActionSchema(event_data.event);
+
+    if (Meteor.settings.public.environment == 'development' && schema) {
+      schema.validate(event_data);
+    }
+  },
+  run: function () {
+    var _run = (0, _asyncToGenerator2.default)(
+    /*#__PURE__*/
+    _regenerator.default.mark(function _callee(_ref3) {
+      var event_data, actions, result, record;
+      return _regenerator.default.wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              event_data = _ref3.event_data;
+
+              if (!Meteor.isServer) {
+                _context.next = 15;
+                break;
+              }
+
+              _context.prev = 2;
+              actions = getActionsForEvent({
+                event_data: event_data
+              });
+              _context.next = 6;
+              return execute({
+                actions: actions
+              });
+
+            case 6:
+              result = _context.sent;
+              event_data = (0, _objectSpread2.default)({}, event_data, result);
+
+              if (event_data.record_type) {
+                record = _firstcutModels.Models.getRecordFromId(event_data.record_type, event_data.record_id);
+                saveToHistory({
+                  event_data: event_data,
+                  record: record
+                });
+              }
+
+              _context.next = 15;
+              break;
+
+            case 11:
+              _context.prev = 11;
+              _context.t0 = _context["catch"](2);
+              console.log(_context.t0);
+
+              _pubsubJs.PubSub.publish('error', _context.t0);
+
+            case 15:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee, this, [[2, 11]]);
+    }));
+
+    return function run(_x) {
+      return _run.apply(this, arguments);
+    };
+  }()
+});
+exports.handleEvent = handleEvent;
+
+function getEventActionSchema(event) {
+  return _actions.default[event].get('schema');
+}
+
+function getActionsForEvent(_ref4) {
+  var event_data = _ref4.event_data;
+  var event = event_data.event;
+  return _actions.default[event].get('generateActions')(event_data);
+}
+
+function getEventActionsAsDescriptiveString(_ref5) {
+  var event_data = _ref5.event_data;
+  var actions = getActionsForEvent({
+    event_data: event_data
+  });
+  var label = EVENT_LABELS[event_data.event];
+  var str = "Triggering ".concat(label, " will ");
+  actions.forEach(function (a, i) {
+    if (i == actions.length - 1) {
+      str += "and ".concat(actionAsDescriptiveString(a));
+    } else {
+      str += "".concat(actionAsDescriptiveString(a), ", ");
+    }
+  });
+  return "".concat(str, ".");
+}
+
+function actionAsDescriptiveString(action) {
+  switch (action.type) {
+    case _firstcutEnum.ACTIONS.send_email:
+      return "send an email to ".concat(action.to.toString());
+
+    case _firstcutEnum.ACTIONS.slack_notify:
+      return 'emit a slack notification';
+
+    case _firstcutEnum.ACTIONS.text_message:
+      return "send a text to ".concat(action.phone);
+
+    case _firstcutEnum.ACTIONS.calendar_event:
+      return "create a calendar event and invite ".concat(action.attendees.toString());
+
+    default:
+      return action.title;
+  }
+}
+
+function saveToHistory(_ref6) {
+  var event_data = _ref6.event_data,
+      record = _ref6.record;
+
+  if (!record) {
+    return;
+  }
+
+  var with_history = record.appendToHistory(event_data);
+  return with_history.save();
+}
+
+function execute(_x2) {
+  return _execute.apply(this, arguments);
+}
+
+function _execute() {
+  _execute = (0, _asyncToGenerator2.default)(
   /*#__PURE__*/
-  regeneratorRuntime.mark(function _callee2(_ref9) {
+  _regenerator.default.mark(function _callee2(_ref7) {
     var actions, result, _iteratorNormalCompletion, _didIteratorError, _iteratorError, _iterator, _step, action_result;
 
-    return regeneratorRuntime.wrap(function _callee2$(_context2) {
+    return _regenerator.default.wrap(function _callee2$(_context2) {
       while (1) {
         switch (_context2.prev = _context2.next) {
           case 0:
-            actions = _ref9.actions;
+            actions = _ref7.actions;
             result = {};
             _iteratorNormalCompletion = true;
             _didIteratorError = false;
             _iteratorError = undefined;
             _context2.prev = 5;
-            _iterator = actions[Symbol.iterator]();
+            _iterator = (0, _getIterator2.default)(actions);
 
           case 7:
             if (_iteratorNormalCompletion = (_step = _iterator.next()).done) {
@@ -68,7 +223,7 @@ var execute = function () {
             action_result = _context2.sent;
 
             if (result) {
-              result = _objectSpread({}, action_result, result);
+              result = (0, _objectSpread2.default)({}, action_result, result);
             }
 
             _context2.next = 19;
@@ -129,22 +284,28 @@ var execute = function () {
       }
     }, _callee2, this, [[5, 24, 28, 36], [9, 16], [29,, 31, 35]]);
   }));
+  return _execute.apply(this, arguments);
+}
 
-  return function execute(_x2) {
-    return _ref8.apply(this, arguments);
-  };
-}();
+function executeCustomFunction(_ref8) {
+  var action = _ref8.action;
+  return action.execute();
+}
 
-var scheduleJob = function () {
-  var _ref12 = _asyncToGenerator(
+function scheduleJob(_x3) {
+  return _scheduleJob.apply(this, arguments);
+}
+
+function _scheduleJob() {
+  _scheduleJob = (0, _asyncToGenerator2.default)(
   /*#__PURE__*/
-  regeneratorRuntime.mark(function _callee3(_ref13) {
+  _regenerator.default.mark(function _callee3(_ref9) {
     var action, job, existing_job_id, result;
-    return regeneratorRuntime.wrap(function _callee3$(_context3) {
+    return _regenerator.default.wrap(function _callee3$(_context3) {
       while (1) {
         switch (_context3.prev = _context3.next) {
           case 0:
-            action = _ref13.action;
+            action = _ref9.action;
             job = action.job;
             existing_job_id = _firstcutModels.Models.Job.getExistingJobId({
               record_id: job.event_data.record_id,
@@ -173,22 +334,23 @@ var scheduleJob = function () {
       }
     }, _callee3, this);
   }));
+  return _scheduleJob.apply(this, arguments);
+}
 
-  return function scheduleJob(_x3) {
-    return _ref12.apply(this, arguments);
-  };
-}();
+function sendEmails(_x4) {
+  return _sendEmails.apply(this, arguments);
+}
 
-var sendEmails = function () {
-  var _ref14 = _asyncToGenerator(
+function _sendEmails() {
+  _sendEmails = (0, _asyncToGenerator2.default)(
   /*#__PURE__*/
-  regeneratorRuntime.mark(function _callee4(_ref15) {
+  _regenerator.default.mark(function _callee4(_ref10) {
     var action, to, template, substitution_data, mailer;
-    return regeneratorRuntime.wrap(function _callee4$(_context4) {
+    return _regenerator.default.wrap(function _callee4$(_context4) {
       while (1) {
         switch (_context4.prev = _context4.next) {
           case 0:
-            action = _ref15.action;
+            action = _ref10.action;
 
             _pipelineSchemas.EmailActionSchema.validate(action);
 
@@ -207,22 +369,45 @@ var sendEmails = function () {
       }
     }, _callee4, this);
   }));
+  return _sendEmails.apply(this, arguments);
+}
 
-  return function sendEmails(_x4) {
-    return _ref14.apply(this, arguments);
-  };
-}();
+function sendSlackNotification(_ref11) {
+  var action = _ref11.action;
 
-var createCalendarEvent = function () {
-  var _ref18 = _asyncToGenerator(
+  _pipelineSchemas.SlackActionSchema.validate(action);
+
+  var content = action.content,
+      channel = action.channel;
+  content = (0, _objectSpread2.default)({}, _pipelineUtils.slackTemplateDefaults, content);
+  return _firstcutSlack.Slack.postMessage(content, channel);
+}
+
+function text(_ref12) {
+  var action = _ref12.action;
+
+  _pipelineSchemas.TextMessageActionSchema.validate(action);
+
+  var to = action.to,
+      body = action.body,
+      country = action.country;
+  return (0, _firstcutTextMessaging.sendTextMessage)(action);
+}
+
+function createCalendarEvent(_x5) {
+  return _createCalendarEvent.apply(this, arguments);
+}
+
+function _createCalendarEvent() {
+  _createCalendarEvent = (0, _asyncToGenerator2.default)(
   /*#__PURE__*/
-  regeneratorRuntime.mark(function _callee5(_ref19) {
+  _regenerator.default.mark(function _callee5(_ref13) {
     var action, event, user_id, event_id;
-    return regeneratorRuntime.wrap(function _callee5$(_context5) {
+    return _regenerator.default.wrap(function _callee5$(_context5) {
       while (1) {
         switch (_context5.prev = _context5.next) {
           case 0:
-            action = _ref19.action;
+            action = _ref13.action;
 
             _pipelineSchemas.CalendarActionSchema.validate(action);
 
@@ -240,197 +425,11 @@ var createCalendarEvent = function () {
       }
     }, _callee5, this);
   }));
-
-  return function createCalendarEvent(_x5) {
-    return _ref18.apply(this, arguments);
-  };
-}();
-
-var setInvoicesToDue = function () {
-  var _ref20 = _asyncToGenerator(
-  /*#__PURE__*/
-  regeneratorRuntime.mark(function _callee6(record) {
-    return regeneratorRuntime.wrap(function _callee6$(_context6) {
-      while (1) {
-        switch (_context6.prev = _context6.next) {
-          case 0:
-            record.invoices.forEach(function (invoice) {
-              if (!invoice.paid) {
-                invoice = invoice.markAsDue();
-                invoice.save();
-              }
-            });
-
-          case 1:
-          case "end":
-            return _context6.stop();
-        }
-      }
-    }, _callee6, this);
-  }));
-
-  return function setInvoicesToDue(_x6) {
-    return _ref20.apply(this, arguments);
-  };
-}();
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } } function _next(value) { step("next", value); } function _throw(err) { step("throw", err); } _next(); }); }; }
-
-function fulfillsPrerequisites(_ref) {
-  var event = _ref.event,
-      record = _ref.record,
-      initiator = _ref.initiator;
-
-  if (Meteor.settings.public.environment == 'development') {
-    return true;
-  } else {
-    return _actions.default[event].get('fulfillsPrerequisites')({
-      record: record,
-      initiator: initiator
-    });
-  }
+  return _createCalendarEvent.apply(this, arguments);
 }
 
-var handleEvent = new ValidatedMethod({
-  name: 'handle-pipeline-event',
-  validate: function validate(_ref2) {
-    var event_data = _ref2.event_data;
-    var schema = getEventActionSchema(event_data.event);
-
-    if (Meteor.settings.public.environment == 'development' && schema) {
-      schema.validate(event_data);
-    }
-  },
-  run: function () {
-    var _ref3 = _asyncToGenerator(
-    /*#__PURE__*/
-    regeneratorRuntime.mark(function _callee(_ref4) {
-      var event_data, actions, result, record;
-      return regeneratorRuntime.wrap(function _callee$(_context) {
-        while (1) {
-          switch (_context.prev = _context.next) {
-            case 0:
-              event_data = _ref4.event_data;
-
-              if (!Meteor.isServer) {
-                _context.next = 15;
-                break;
-              }
-
-              _context.prev = 2;
-              actions = getActionsForEvent({
-                event_data: event_data
-              });
-              _context.next = 6;
-              return execute({
-                actions: actions
-              });
-
-            case 6:
-              result = _context.sent;
-              event_data = _objectSpread({}, event_data, result);
-
-              if (event_data.record_type) {
-                record = _firstcutModels.Models.getRecordFromId(event_data.record_type, event_data.record_id);
-                saveToHistory({
-                  event_data: event_data,
-                  record: record
-                });
-              }
-
-              _context.next = 15;
-              break;
-
-            case 11:
-              _context.prev = 11;
-              _context.t0 = _context["catch"](2);
-              console.log(_context.t0);
-
-              _pubsubJs.PubSub.publish('error', _context.t0);
-
-            case 15:
-            case "end":
-              return _context.stop();
-          }
-        }
-      }, _callee, this, [[2, 11]]);
-    }));
-
-    function run(_x) {
-      return _ref3.apply(this, arguments);
-    }
-
-    return run;
-  }()
-});
-exports.handleEvent = handleEvent;
-
-function getEventActionSchema(event) {
-  return _actions.default[event].get('schema');
-}
-
-function getActionsForEvent(_ref5) {
-  var event_data = _ref5.event_data;
-  var event = event_data.event;
-  return _actions.default[event].get('generateActions')(event_data);
-}
-
-function getEventActionsAsDescriptiveString(_ref6) {
-  var event_data = _ref6.event_data;
-  var actions = getActionsForEvent({
-    event_data: event_data
-  });
-  var label = EVENT_LABELS[event_data.event];
-  var str = "Triggering ".concat(label, " will ");
-  actions.forEach(function (a, i) {
-    if (i == actions.length - 1) {
-      str += 'and ' + actionAsDescriptiveString(a);
-    } else {
-      str += actionAsDescriptiveString(a) + ', ';
-    }
-  });
-  return str + '.';
-}
-
-function actionAsDescriptiveString(action) {
-  switch (action.type) {
-    case _firstcutEnum.ACTIONS.send_email:
-      return 'send an email to ' + action.to.toString();
-
-    case _firstcutEnum.ACTIONS.slack_notify:
-      return 'emit a slack notification';
-
-    case _firstcutEnum.ACTIONS.text_message:
-      return 'send a text to ' + action.phone;
-
-    case _firstcutEnum.ACTIONS.calendar_event:
-      return 'create a calendar event and invite ' + action.attendees.toString();
-
-    default:
-      return action.title;
-  }
-}
-
-function saveToHistory(_ref7) {
-  var event_data = _ref7.event_data,
-      record = _ref7.record;
-
-  if (!record) {
-    return;
-  }
-
-  var with_history = record.appendToHistory(event_data);
-  return with_history.save();
-}
-
-function executeAction(_ref10) {
-  var action = _ref10.action;
+function executeAction(_ref14) {
+  var action = _ref14.action;
 
   switch (action.type) {
     case _firstcutEnum.ACTIONS.send_email:
@@ -466,36 +465,4 @@ function executeAction(_ref10) {
     default:
       throw new Meteor.Error('unsupported_action', "Action ".concat(action.type, " not supported by the pipeline."));
   }
-}
-
-function executeCustomFunction(_ref11) {
-  var action = _ref11.action;
-  return action.execute();
-}
-
-function sendSlackNotification(_ref16) {
-  var action = _ref16.action;
-
-  _pipelineSchemas.SlackActionSchema.validate(action);
-
-  var content = action.content,
-      channel = action.channel;
-  content = _objectSpread({}, _pipelineUtils.slack_template_defaults, content);
-  return _firstcutSlack.Slack.postMessage(content, channel);
-}
-
-function text(_ref17) {
-  var action = _ref17.action;
-
-  _pipelineSchemas.TextMessageActionSchema.validate(action);
-
-  var to = action.to,
-      body = action.body,
-      country = action.country;
-  return (0, _firstcutTextMessaging.sendTextMessage)(action);
-}
-
-function setInvoiceToPaid(invoice) {
-  invoice = invoice.markAsPaid();
-  invoice.save();
 }

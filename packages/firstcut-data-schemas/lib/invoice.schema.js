@@ -1,5 +1,7 @@
 "use strict";
 
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
@@ -10,8 +12,6 @@ var _firstcutSchemaBuilder = require("firstcut-schema-builder");
 var _firstcutEnum = require("firstcut-enum");
 
 var _baseSchema = _interopRequireDefault(require("./shared/base.schema.js"));
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var InvoiceSchema = new _firstcutSchemaBuilder.FCSchema({
   type: {

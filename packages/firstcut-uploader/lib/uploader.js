@@ -1,5 +1,7 @@
 "use strict";
 
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
@@ -9,8 +11,6 @@ exports.upload = upload;
 var _evaporate = _interopRequireDefault(require("evaporate"));
 
 var _awsSdk = _interopRequireDefault(require("aws-sdk"));
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 require("buffer").Buffer;
 var evaporate_config = {};

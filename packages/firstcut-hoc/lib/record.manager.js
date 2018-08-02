@@ -1,9 +1,25 @@
 "use strict";
 
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = withRecordManager;
+
+var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
+
+var _classCallCheck2 = _interopRequireDefault(require("@babel/runtime/helpers/classCallCheck"));
+
+var _createClass2 = _interopRequireDefault(require("@babel/runtime/helpers/createClass"));
+
+var _possibleConstructorReturn2 = _interopRequireDefault(require("@babel/runtime/helpers/possibleConstructorReturn"));
+
+var _getPrototypeOf2 = _interopRequireDefault(require("@babel/runtime/helpers/getPrototypeOf"));
+
+var _inherits2 = _interopRequireDefault(require("@babel/runtime/helpers/inherits"));
+
+var _assertThisInitialized2 = _interopRequireDefault(require("@babel/runtime/helpers/assertThisInitialized"));
 
 var _react = _interopRequireDefault(require("react"));
 
@@ -15,44 +31,21 @@ var _pubsubJs = require("pubsub-js");
 
 var _ = require("/imports/ui/pages/404.jsx");
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
 function withRecordManager(WrappedComponent) {
   var _class, _temp, _initialiseProps;
 
   return _temp = _class =
   /*#__PURE__*/
   function (_React$Component) {
-    _inherits(_class, _React$Component);
+    (0, _inherits2.default)(_class, _React$Component);
 
     function _class(props) {
       var _this;
 
-      _classCallCheck(this, _class);
+      (0, _classCallCheck2.default)(this, _class);
+      _this = (0, _possibleConstructorReturn2.default)(this, (0, _getPrototypeOf2.default)(_class).call(this, props));
 
-      _this = _possibleConstructorReturn(this, _getPrototypeOf(_class).call(this, props));
-
-      _initialiseProps.call(_assertThisInitialized(_assertThisInitialized(_this)));
+      _initialiseProps.call((0, _assertThisInitialized2.default)((0, _assertThisInitialized2.default)(_this)));
 
       var save_subscription = _pubsubJs.PubSub.subscribe(props.save_event, _this.saveRecord);
 
@@ -73,7 +66,7 @@ function withRecordManager(WrappedComponent) {
       return _this;
     }
 
-    _createClass(_class, [{
+    (0, _createClass2.default)(_class, [{
       key: "componentWillUnmount",
       value: function componentWillUnmount() {
         _pubsubJs.PubSub.unsubscribe(this.state.change_subscription);
@@ -86,7 +79,7 @@ function withRecordManager(WrappedComponent) {
         if (!this.state.record) {
           return _react.default.createElement(_.NotFound, null);
         } else {
-          return _react.default.createElement(WrappedComponent, _extends({
+          return _react.default.createElement(WrappedComponent, (0, _extends2.default)({
             onChange: this.onChange,
             record: this.state.record,
             errors: this.state.validation_errors
@@ -94,7 +87,6 @@ function withRecordManager(WrappedComponent) {
         }
       }
     }]);
-
     return _class;
   }(_react.default.Component), _initialiseProps = function _initialiseProps() {
     var _this2 = this;

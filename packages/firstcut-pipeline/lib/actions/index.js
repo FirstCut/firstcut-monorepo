@@ -1,5 +1,7 @@
 "use strict";
 
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
@@ -66,8 +68,6 @@ var _checkinCheckoutReminder = _interopRequireDefault(require("./checkin-checkou
 var _applicationSubmitted = _interopRequireDefault(require("./application-submitted.js"));
 
 var _errorEvent = _interopRequireDefault(require("./error-event.js"));
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var templates = [_errorEvent.default, _applicationSubmitted.default, _confirmFootageUpload.default, _deliverableKickoff.default, _checkinCheckoutReminder.default, _screenshotRejected.default, _screenshotUploaded.default, _projectWrap.default, _revisionsSent.default, _cutApproved.default, _cutSentToClient.default, _sendCutToClient.default, _cutUploaded.default, _preproductionKickoff.default, _collaboratorAdded.default, _sendInviteLink.default, _collaboratorRemoved.default, _shootEventUpdated.default, _recordCreated.default, _shootCheckout.default, _shootCheckin.default, _screenshotApproved.default, _footageVerificationReminder.default, _snippetRequested.default, _cutDueEventUpdated.default, _upcomingShootReminder.default, _shootWrap.default, _feedbackSubmittedByClient.default, _snippetCreated.default, _invoicePaid.default, _footageVerified.default];
 var ActionTemplates = templates.reduce(function (result, template) {

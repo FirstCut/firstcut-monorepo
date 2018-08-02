@@ -1,10 +1,15 @@
 "use strict";
 
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.STAGES = void 0;
-var STAGES = Object.freeze({
+
+var _freeze = _interopRequireDefault(require("@babel/runtime/core-js/object/freeze"));
+
+var STAGES = (0, _freeze.default)({
   //TODO This should be called PROJECT_STAGES 
   'IN_SALES': 'In Sales',
   'BOOKING': 'Booking',

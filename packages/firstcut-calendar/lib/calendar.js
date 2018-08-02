@@ -1,9 +1,15 @@
 "use strict";
 
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.createEvent = createEvent;
+
+var _objectSpread2 = _interopRequireDefault(require("@babel/runtime/helpers/objectSpread"));
+
+var _promise = _interopRequireDefault(require("@babel/runtime/core-js/promise"));
 
 var _moment = _interopRequireDefault(require("moment"));
 
@@ -11,23 +17,17 @@ var _calendarSchemas = require("./calendar.schemas.js");
 
 var _firstcutGoogleApi = _interopRequireDefault(require("firstcut-google-api"));
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 function getOrganizerId() {
   return Meteor.settings.oauth_credentials_user;
 }
 
 function createEvent(args) {
-  return new Promise(function (resolve, reject) {
+  return new _promise.default(function (resolve, reject) {
     _calendarSchemas.CalendarEventContentSchema.validate(args.event);
 
     var event = args.event,
         event_id = args.event_id;
-    event = _objectSpread({}, event, {
+    event = (0, _objectSpread2.default)({}, event, {
       'reminders': {
         'useDefault': false,
         'overrides': [{

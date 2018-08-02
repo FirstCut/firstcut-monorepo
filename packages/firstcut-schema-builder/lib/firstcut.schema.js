@@ -1,9 +1,21 @@
 "use strict";
 
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = void 0;
+
+var _getOwnPropertyNames = _interopRequireDefault(require("@babel/runtime/core-js/object/get-own-property-names"));
+
+var _keys = _interopRequireDefault(require("@babel/runtime/core-js/object/keys"));
+
+var _objectSpread2 = _interopRequireDefault(require("@babel/runtime/helpers/objectSpread"));
+
+var _classCallCheck2 = _interopRequireDefault(require("@babel/runtime/helpers/classCallCheck"));
+
+var _createClass2 = _interopRequireDefault(require("@babel/runtime/helpers/createClass"));
 
 var _simplSchema = _interopRequireDefault(require("simpl-schema"));
 
@@ -11,24 +23,12 @@ var _schemaParser = _interopRequireDefault(require("./schema.parser.js"));
 
 var _lodash = require("lodash");
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
 _simplSchema.default.extendOptions(['helpText', 'sortBy', 'options', 'placeholder', 'hidden', 'customType', 'store', 'serviceFilter', 'enumOptions', 'restricted', 'unique', 'serviceDependency']);
 
 var FCSchema =
 /*#__PURE__*/
 function () {
-  _createClass(FCSchema, null, [{
+  (0, _createClass2.default)(FCSchema, null, [{
     key: "fromSubSchema",
     value: function fromSubSchema(schema, field) {
       var quick_type_1 = schema.getQuickTypeForKey(field);
@@ -60,9 +60,7 @@ function () {
 
   function FCSchema(props) {
     var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
-
-    _classCallCheck(this, FCSchema);
-
+    (0, _classCallCheck2.default)(this, FCSchema);
     // if (options.restrict_fields) {
     //   props = _.reduce(props, (result, value, key) => {
     //     const parent_key = SchemaParser.getLeastNestedFieldName(key);
@@ -72,13 +70,13 @@ function () {
     //     return result;
     //   }, {});
     // }
-    this.as_json = _objectSpread({}, props);
+    this.as_json = (0, _objectSpread2.default)({}, props);
     this.error_messages = {};
 
     this._precalculateProperties();
   }
 
-  _createClass(FCSchema, [{
+  (0, _createClass2.default)(FCSchema, [{
     key: "publicFieldsOnly",
     value: function publicFieldsOnly() {
       return new this.constructor(this.as_json, {
@@ -105,7 +103,7 @@ function () {
         return key;
       };
 
-      return this.findFieldsSatisfyingCondition(Object.keys(this.as_json), isFileSchemaKey, getKey);
+      return this.findFieldsSatisfyingCondition((0, _keys.default)(this.as_json), isFileSchemaKey, getKey);
     }
   }, {
     key: "getFileSchemaKeys",
@@ -120,7 +118,7 @@ function () {
         return key;
       };
 
-      return this.findFieldsSatisfyingCondition(Object.keys(this.as_json), isFileSchemaKey, getKey);
+      return this.findFieldsSatisfyingCondition((0, _keys.default)(this.as_json), isFileSchemaKey, getKey);
     }
   }, {
     key: "getRelatedRecordSchemaKeys",
@@ -141,7 +139,7 @@ function () {
         return key;
       };
 
-      return this.findFieldsSatisfyingCondition(Object.keys(this.as_json), serviceDependencyInModels, getKey);
+      return this.findFieldsSatisfyingCondition((0, _keys.default)(this.as_json), serviceDependencyInModels, getKey);
     }
   }, {
     key: "_precalculateProperties",
@@ -281,7 +279,7 @@ function () {
 
       if (!quick_type) {
         var def = this.asSchema.getObjectSchema(field).getDefinition();
-        if (Object.getOwnPropertyNames(def).length > 0) quick_type = 'object';
+        if ((0, _getOwnPropertyNames.default)(def).length > 0) quick_type = 'object';
       }
 
       return quick_type;
@@ -310,12 +308,11 @@ function () {
   }, {
     key: "addErrorMessages",
     value: function addErrorMessages(msgs) {
-      this.error_messages = _objectSpread({}, this.error_messages, {
+      this.error_messages = (0, _objectSpread2.default)({}, this.error_messages, {
         msgs: msgs
       });
     }
   }]);
-
   return FCSchema;
 }();
 

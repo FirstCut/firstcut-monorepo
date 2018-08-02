@@ -1,9 +1,13 @@
 "use strict";
 
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = void 0;
+
+var _stringify = _interopRequireDefault(require("@babel/runtime/core-js/json/stringify"));
 
 var _immutable = require("immutable");
 
@@ -25,7 +29,7 @@ var ErrorEvent = new _immutable.Map({
       type: _pipelineEnum.ACTIONS.slack_notify,
       channel: 'app-errors',
       content: {
-        text: "ERROR: ".concat(JSON.stringify(event_data))
+        text: "ERROR: ".concat((0, _stringify.default)(event_data))
       }
     }];
   }

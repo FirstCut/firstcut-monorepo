@@ -1,13 +1,18 @@
 "use strict";
 
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = void 0;
+
+var _freeze = _interopRequireDefault(require("@babel/runtime/core-js/object/freeze"));
+
 var ARRAY_INDICATOR = '$';
 var FIELD_NAME_DELINEATOR = '.';
 var ARRAY_INDEX_REGEX = /[0-9]+/;
-var SchemaParser = Object.freeze({
+var SchemaParser = (0, _freeze.default)({
   getFieldSchema: function getFieldSchema(schema, fieldname) {
     return _getFieldSchema(fieldname);
   },

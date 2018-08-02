@@ -1,5 +1,7 @@
 "use strict";
 
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
@@ -18,8 +20,6 @@ var _firstcutRetrieveUrl = require("firstcut-retrieve-url");
 var _firstcutUtils = require("firstcut-utils");
 
 var _moment = _interopRequireDefault(require("moment"));
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var UpdatedShootEvent = new _immutable.Map({
   key: 'shoot_event_updated',

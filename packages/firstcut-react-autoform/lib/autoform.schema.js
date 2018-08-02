@@ -1,19 +1,21 @@
 "use strict";
 
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = getAutoformSchema;
+
+var _keys = _interopRequireDefault(require("@babel/runtime/core-js/object/keys"));
+
+var _objectSpread2 = _interopRequireDefault(require("@babel/runtime/helpers/objectSpread"));
 
 var _firstcutModels = require("firstcut-models");
 
 var _immutable = require("immutable");
 
 var _firstcutSchemaBuilder = require("firstcut-schema-builder");
-
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 var DEFAULT_SORT_METHOD = 'text';
 
@@ -22,9 +24,7 @@ function getAutoformSchema(schema, field, options) {
       errors = _options$errors === void 0 ? {} : _options$errors,
       _options$overrides = options.overrides,
       overrides = _options$overrides === void 0 ? {} : _options$overrides;
-
-  var field_schema = _objectSpread({}, overrides[field], schema.getFieldSchema(field));
-
+  var field_schema = (0, _objectSpread2.default)({}, overrides[field], schema.getFieldSchema(field));
   var result = {
     type: _getAutoformType(schema, field, field_schema),
     name: _getAutoformFieldName(schema, field),
@@ -36,7 +36,7 @@ function getAutoformSchema(schema, field, options) {
   result.help_text = _getHelpText(field_schema);
   result.single_file = _acceptsSingleFile(field_schema);
   result.sortBy = field_schema.sortBy ? field_schema.sortBy : DEFAULT_SORT_METHOD;
-  result = _objectSpread({}, field_schema, result); // if (field_schema.defaultValue) {
+  result = (0, _objectSpread2.default)({}, field_schema, result); // if (field_schema.defaultValue) {
   //   result.defaultValue = field_schema.defaultValue;
   // }
   // if (field_schema.hidden) {
@@ -94,7 +94,7 @@ function _hasEnum(field_schema) {
 }
 
 function _generateEnumOptions(field_schema) {
-  return (0, _immutable.List)(Object.keys(field_schema.enumOptions).map(function (t) {
+  return (0, _immutable.List)((0, _keys.default)(field_schema.enumOptions).map(function (t) {
     return {
       key: t,
       value: t,
@@ -136,7 +136,7 @@ function _applyExtras(result, field, overrides) {
   var field_extras = overrides[field];
 
   if (field_extras) {
-    Object.keys(field_extras).forEach(function (e) {
+    (0, _keys.default)(field_extras).forEach(function (e) {
       result[e] = field_extras[e];
     });
   }

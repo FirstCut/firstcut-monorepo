@@ -1,29 +1,35 @@
 "use strict";
 
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.removePunctuation = removePunctuation;
 exports.executeAsyncWithCallback = executeAsyncWithCallback;
+exports.asAsync = asAsync;
 exports.isEmpty = isEmpty;
 exports.logError = logError;
 exports.isURL = isURL;
 exports.asUSDollars = asUSDollars;
 exports.htmlifyString = htmlifyString;
-exports.asAsync = void 0;
+
+var _regenerator = _interopRequireDefault(require("@babel/runtime/regenerator"));
+
+var _asyncToGenerator2 = _interopRequireDefault(require("@babel/runtime/helpers/asyncToGenerator"));
+
+var _promise = _interopRequireDefault(require("@babel/runtime/core-js/promise"));
 
 var _lodash = require("lodash");
 
 var _playerUtils = require("./player.utils.js");
-
-function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } } function _next(value) { step("next", value); } function _throw(err) { step("throw", err); } _next(); }); }; }
 
 function removePunctuation(str) {
   return str.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()\ ]/g, "");
 }
 
 function executeAsyncWithCallback(func, cb) {
-  return new Promise(function (resolve, reject) {
+  return new _promise.default(function (resolve, reject) {
     func(function (err, res) {
       if (err) {
         reject(err);
@@ -34,11 +40,15 @@ function executeAsyncWithCallback(func, cb) {
   });
 }
 
-var asAsync = function () {
-  var _ref = _asyncToGenerator(
+function asAsync(_x) {
+  return _asAsync.apply(this, arguments);
+}
+
+function _asAsync() {
+  _asAsync = (0, _asyncToGenerator2.default)(
   /*#__PURE__*/
-  regeneratorRuntime.mark(function _callee(func) {
-    return regeneratorRuntime.wrap(function _callee$(_context) {
+  _regenerator.default.mark(function _callee(func) {
+    return _regenerator.default.wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
@@ -55,13 +65,8 @@ var asAsync = function () {
       }
     }, _callee, this);
   }));
-
-  return function asAsync(_x) {
-    return _ref.apply(this, arguments);
-  };
-}();
-
-exports.asAsync = asAsync;
+  return _asAsync.apply(this, arguments);
+}
 
 function isEmpty(something) {
   if (!something) {
