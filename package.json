@@ -42,5 +42,8 @@
 				"watch": "yarn build:babel",
 				"predeploy": "yarn build",
 				"deploy": "gh-pages -d packages/orchestra/dist"
+		},
+		"dependencies": {
+				"soap": "^0.24.0"
 		}
 }
