@@ -21,7 +21,7 @@ Meteor.startup(() => {
       let clients = [];
 
       project.name = obj['sf:Name'];
-      project.amount = obj['sf:Amount'];
+      project.invoiceAmount = obj['sf:Amount'];
       project.notes = obj['sf:Description'];
 
       const sessionId = notifications.SessionId;
