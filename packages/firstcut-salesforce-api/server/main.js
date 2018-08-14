@@ -12,156 +12,87 @@ Meteor.startup(() => {
       const xml = data.toString('utf8');
       const json = JSON.parse(parser.toJson(xml));
       const { notifications } = json['soapenv:Envelope']['soapenv:Body'];
+      const obj = notifications.Notification.sObject;
+
+      const accountId = obj['sf:AccountId'];
+      const producerEmail = getProducerEmail(obj['sf:Producer__c']);
+      const project = {};
+      const company = {};
+      let clients = [];
+
+      project.name = obj['sf:Name'];
+      project.amount = obj['sf:Amount'];
+      project.notes = obj['sf:Description'];
+
       const sessionId = notifications.SessionId;
       const serverUrl = notifications.EnterpriseUrl;
       const conn = new sf.Connection({
         serverUrl,
         sessionId,
       });
-
-      const obj = notifications.Notification.sObject;
-      const accountId = obj['sf:AccountId'];
-      const project = {};
-      let company = {};
-      let clients = [];
-      project._id = Random.id();
-      project.name = obj['sf:Name'];
-      project.amount = obj['sf:Amount'];
-      project.notes = obj['sf:Description'];
-      findProducerRecord(obj['sf:Producer__c'])
-        .then((producer) => {
-          if (producer) {
-            project.adminOwnerId = producer._id;
-          }
-          return getCompanyInfo(accountId, conn);
-        })
+      getCompanyInfo(accountId, conn)
         .then((companyInfo) => {
-          company._id = Random.id();
           company.name = companyInfo.Name;
-          company.companyId = companyInfo.Id;
           company.website = companyInfo.Website;
           company.location = salesforceAddressToLocation(companyInfo.BillingAddress);
-          project.companyId = company._id;
-          return findExistingCompanyRecord(company);
-        })
-        .then((companyRecord) => {
-          if (companyRecord) {
-            company = companyRecord;
-          } else {
-            console.log('NOt sounf');
-            // postToFirstcutDatabase(company, 'companies'); // yes this will be posted multiple times potentially
-          }
+
           return getRelatedContacts(accountId, conn);
         })
         .then((relatedContacts) => {
           clients = relatedContacts.map((contact) => {
-            const client = {};
             const { first, last } = splitFullName(contact.Name);
-            client._id = Random.id();
-            client.companyId = company._id;
-            client.firstName = first;
-            client.lastName = last;
-            client.phone = contact.Phone;
-            client.email = contact.Email;
-            return client;
-          // postToFirstcutDatabase(client, 'clients');
+            return {
+              companyId: company._id,
+              firstName: first,
+              lastName: last,
+              phone: contact.Phone,
+              email: contact.Email,
+            };
           });
-
-          const getClientRecords = clients.map(c => findExistingClientRecord(c));
-          return Promise.all(getClientRecords);
-        })
-        .then((clientRecords) => {
-          console.log('CLIENT RECORDS');
-          console.log(clientRecords);
-          clientRecords.forEach((record, i) => {
-            let client = clients[i];
-            if (record) {
-              client = record;
-            }
-            project.clientOwnerId = client._id;
-          });
-          console.log(project);
-          console.log(clients);
-          console.log(company);
         })
         .then(() => {
-          projectHandoff({ project, company, clients });
+          console.log(clients);
+          projectHandoff({
+            project, company, clients, producerEmail,
+          });
         })
         .catch((err) => {
           console.log('ERROR CAUGHT');
           console.log(err);
         });
 
-      // console.log(JSON.parse(data.toString()));
-      // console.log(JSON.stringify(data).data);
-      // console.log(JSON.stringify(data.data).data);
       return '<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:out="http://soap.sforce.com/2005/09/outbound"><soapenv:Header/><soapenv:Body><out:notificationsResponse><out:Ack>true</out:Ack></out:notificationsResponse></soapenv:Body></soapenv:Envelope>';
     },
   });
 });
 
-function findProducerRecord(producerSalesforceId) {
-  if (!producerSalesforceId) {
-    return new Promise((resolve, reject) => {
-      resolve(null);
-    });
+function getProducerEmail(fullname) {
+  switch (fullname) {
+    case 'Alex Lim':
+      return 'alex@firstcut.io';
+    case 'Rebecca Jackson':
+      return 'rebecca@firstcut.io';
+    case 'Tomas De Matteis':
+      return 'tomas@firstcut.io';
+    case 'Shaun Mcreedy':
+      return 'shaun@firstcut.io';
+      break;
+    default:
   }
-  const query = { salesforceId: producerSalesforceId };
-  return findExistingRecord('Collaborator', query);
 }
-
-function findExistingCompanyRecord(company) {
-  const query = { name: company.name };
-  return findExistingRecord('Company', query);
-}
-
-function findExistingClientRecord(client) {
-  // const query = JSON.stringify({ email: client.email });
-  const query = { email: client.email };
-  return findExistingRecord('Client', query);
-}
-
-function findExistingRecord(modelName, query) {
-  const { firstcutDataServerUrl } = Meteor.settings;
-  return new Promise((resolve, reject) => {
-    HTTP.call('GET', `${firstcutDataServerUrl}/recordExists`, { params: { modelName, query } }, (err, res) => {
-      if (err) {
-        reject(err);
-      }
-      console.log(res.content);
-      const content = JSON.parse(res.content);
-      resolve(content.record);
-    });
-  });
-}
-
-// function postToFirstcutDatabase(data, modelName) {
-//   if (Array.isArray(data)) {
-//     _.forEach(data, (record) => {
-//       postRecord(record, modelName);
-//     });
-//   } else {
-//     postRecord(data, modelName);
-//   }
-// }
-//
 function projectHandoff({
-  project, company, clients, producerSalesforceId,
+  project, company, clients, producerEmail,
 }) {
   const { firstcutDataServerUrl } = Meteor.settings;
   HTTP.call('GET', `${firstcutDataServerUrl}/projectHandoff`, {
     params: {
-      company, clients, project, producerSalesforceId,
+      company, clients: JSON.stringify(clients), project, producerEmail,
     },
   }, (err, res) => {
     if (err) {
       console.log('ERRrrrrrr posting');
       console.log('posting THIS');
-      console.log(record);
-      console.log(collectionName);
-    } else {
-      console.log('the result');
-      console.log(res);
+      console.log(err);
     }
   });
 }
