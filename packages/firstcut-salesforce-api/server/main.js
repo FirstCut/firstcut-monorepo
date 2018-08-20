@@ -8,7 +8,7 @@ const sf = require('jsforce');
 
 Meteor.startup(() => {
   HTTP.methods({
-    async salesforceOutboundMessage(data) {
+    salesforceOutboundMessage(data) {
       const xml = data.toString('utf8');
       const json = JSON.parse(parser.toJson(xml));
       const { notifications } = json['soapenv:Envelope']['soapenv:Body'];
@@ -23,6 +23,7 @@ Meteor.startup(() => {
       project.name = obj['sf:Name'];
       project.invoiceAmount = obj['sf:Amount'];
       project.notes = obj['sf:Description'];
+      project.salesforceId = obj['sf:Id'];
 
       const sessionId = notifications.SessionId;
       const serverUrl = notifications.EnterpriseUrl;
@@ -45,15 +46,23 @@ Meteor.startup(() => {
               companyId: company._id,
               firstName: first,
               lastName: last,
+              salesforceId: contact.Id,
               phone: contact.Phone,
               email: contact.Email,
             };
           });
+          return getPrimaryContactSalesforceId(project.salesforceId, conn);
         })
-        .then(() => {
-          console.log(clients);
+        .then((primaryContactSalesforceId) => {
+          let primaryContact = clients[0]; // first client by default
+          if (primaryContactSalesforceId) {
+            const hasSameSalesforceId = clients.filter(c => c.salesforceId === primaryContactSalesforceId);
+            if (hasSameSalesforceId.length > 0) {
+              primaryContact = hasSameSalesforceId[0];
+            }
+          }
           projectHandoff({
-            project, company, clients, producerEmail,
+            project, company, clients, producerEmail, primaryContact,
           });
         })
         .catch((err) => {
@@ -81,12 +90,12 @@ function getProducerEmail(fullname) {
   }
 }
 function projectHandoff({
-  project, company, clients, producerEmail,
+  project, company, clients, producerEmail, primaryContact,
 }) {
   const { firstcutDataServerUrl } = Meteor.settings;
   HTTP.call('GET', `${firstcutDataServerUrl}/projectHandoff`, {
     params: {
-      company, clients: JSON.stringify(clients), project, producerEmail,
+      company, clients: JSON.stringify(clients), project, producerEmail, primaryContact,
     },
   }, (err, res) => {
     if (err) {
@@ -116,6 +125,23 @@ function splitFullName(name) {
   return { first, last };
 }
 
+function getPrimaryContactSalesforceId(opportunityId, conn) {
+  return new Promise((resolve, reject) => {
+    conn.query(`SELECT ContactId FROM OpportunityContactRole WHERE OpportunityId = '${opportunityId}' AND Role = 'Client Owner'`)
+      .on('record', (record) => {
+        resolve(record.ContactId);
+      })
+      .on('end', () => {
+        resolve(null);
+      })
+      .on('error', (err) => {
+        reject(err);
+      })
+      .run({ autoFetch: true, maxFetch: 4000 });
+  });
+}
+
+
 function getCompanyInfo(accountId, conn) {
   return new Promise((resolve, reject) => {
     conn.query(`SELECT Id, Name, BillingAddress, Website FROM Account WHERE Id = '${accountId}'`)
@@ -123,7 +149,7 @@ function getCompanyInfo(accountId, conn) {
         resolve(record);
       })
       .on('end', () => {
-        console.log('all records retrieved');
+        resolve(null);
       })
       .on('error', (err) => {
         reject(err);

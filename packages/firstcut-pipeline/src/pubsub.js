@@ -153,7 +153,7 @@ export default function initSubscriptions() {
   });
 
   Models.allModels.forEach((model) => {
-    if (model.model_name == 'Asset') {
+    if (model.model_name === 'Asset') {
       return;
     }
     let initializing = true;
@@ -162,7 +162,6 @@ export default function initSubscriptions() {
     }
     model.collection.find({}).observe({
       added: (doc) => {
-        console.log('ADDED');
         if (initializing) {
           return;
         }
@@ -170,13 +169,10 @@ export default function initSubscriptions() {
         const initiator_player_id = getPlayerIdFromUser(user);
         PubSub.publish('record_created', { record_id: doc._id, initiator_player_id, record_type: model.model_name });
 
-        // generate and save all dependent records //TOOD this will need to be removed into a separate service
+        // generate and save all dependent records //TODO this will need to be removed into a separate service
         const record = Models.getRecordFromId(model.model_name, doc._id);
         const dependent_records = record.generateDependentRecords(doc.createdBy);
         dependent_records.forEach((r) => {
-          const defaultCreatedBy = '111111';
-          const createdBy = (doc.createdBy) ? doc.createdBy : defaultCreatedBy;
-          r = r.set('createdBy', createdBy);
           r.save();
         });
       },
@@ -187,7 +183,7 @@ export default function initSubscriptions() {
 
   SUPPORTED_EVENTS.forEach((e) => {
     PubSub.subscribe(e, Meteor.bindEnvironment((msg, data) => {
-      handleEvent.call({ event_data: { event: e, ...data } });
+      handleEvent.call({ event: e, ...data });
     }));
   });
 
