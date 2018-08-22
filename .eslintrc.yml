@@ -6,6 +6,8 @@ extends:
 plugins:
   - react
   - jest
+rules:
+  no-use-before-define: 0
 env:
   browser: true
   es6: true
