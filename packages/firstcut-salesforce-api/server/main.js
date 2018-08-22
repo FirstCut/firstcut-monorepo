@@ -107,6 +107,9 @@ function projectHandoff({
 }
 
 function salesforceAddressToLocation(addr) {
+  if (!addr) {
+    return {};
+  }
   const {
     city, country, latitude, longitude, postalCode, street,
   } = addr;
