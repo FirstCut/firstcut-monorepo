@@ -5,12 +5,9 @@
   "main": "lib/index.js",
   "dependencies": {
     "@babel/runtime": "^7.0.0-beta.51",
-    "@slack/client": "^4.3.1",
-    "bufferutil": "^4.0.0",
-    "electron": "^2.0.6",
+    "firstcut-google-api": "^0.0.0",
     "lodash": "^4.17.10",
     "remove": "^0.1.5",
-    "simpl-schema": "^1.5.0",
-    "utf-8-validate": "^5.0.1"
+    "simpl-schema": "^1.5.0"
   }
 }

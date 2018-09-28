@@ -1,153 +1,72 @@
 import SimpleSchema from 'simpl-schema';
-import {SlackContentSchema} from 'firstcut-slack';
-import {CalendarEventContentSchema} from 'firstcut-calendar';
-import {ACTIONS} from 'firstcut-enum';
+import { SlackContentSchema } from '/imports/api/slack';
+import { CalendarEventContentSchema } from '/imports/api/calendar';
+import { ACTIONS } from 'firstcut-pipeline-consts';
 
-export const EventSchema = new SimpleSchema({
-  event: String,
-  record_type: {
-    type: String,
-    optional: true
-  },
-  initiator_player_id: {
-    type: String,
-    optional: true
-  }
-});
-
-export const ScreenshotEvents = new SimpleSchema({
-  record_id: String,
-  screenshot: Object,
-  "screenshot.filename": String,
-  "screenshot.userId": String,
-  "screenshot.version": Number,
-  "screenshot.cameraId": String,
-  "screenshot.approved": Boolean,
-  "screenshot.notes": String
-}, {requiredByDefault: false}).extend(EventSchema)
-
-export const RecordEvents = new SimpleSchema({record_id: String}).extend(EventSchema)
-
-// const EventDataSchemas = Object.freeze({
-//   [EVENTS.snippet_created]: new SimpleSchema({
-//     snippet_key: String,
-//     start: String,
-//     end: String
-//   }).extend(EventSchema).extend(RecordEvents),
-//   [EVENTS.snippet_requested]: new SimpleSchema({
-//     start: String,
-//     end: String
-//   }).extend(EventSchema).extend(RecordEvents),
-//   [EVENTS.record_created]: RecordEvents,
-//   [EVENTS.confirm_footage_uploaded]: RecordEvents,
-//   [EVENTS.screenshot_uploaded]: ScreenshotEvents,
-//   [EVENTS.screenshot_approved]: ScreenshotEvents,
-//   [EVENTS.screenshot_rejected]: ScreenshotEvents,
-//   [EVENTS.shoot_event_updated]: RecordEvents,
-//   [EVENTS.cut_due_event_updated]: RecordEvents,
-//   [EVENTS.shoot_checkin]: new SimpleSchema({
-//     record_id: String,
-//     collaborator_key: {
-//       type: String,
-//       allowedValues: SUPPORTED_RECIPIENTS
-//     }
-//   }).extend(EventSchema),
-//   [EVENTS.shoot_checkout]: new SimpleSchema({
-//     record_id: String,
-//     collaborator_key: {
-//       type: String,
-//       allowedValues: SUPPORTED_RECIPIENTS
-//     }
-//   }).extend(EventSchema),
-//   [EVENTS.deliverable_kickoff]: RecordEvents,
-//   [EVENTS.shoot_wrap]: RecordEvents,
-//   [EVENTS.preproduction_kickoff]: RecordEvents,
-//   [EVENTS.collaborator_added]: new SimpleSchema({
-//     gig_id: String,
-//     gig_type: String,
-//     record_id: String,
-//     collaborator_key: {
-//       type: String,
-//       allowedValues: SUPPORTED_RECIPIENTS
-//     }
-//   }).extend(EventSchema),
-//   [EVENTS.collaborator_removed]: new SimpleSchema({
-//     gig_id: String,
-//     gig_type: String,
-//     record_id: String,
-//     collaborator_key: {
-//       type: String,
-//       allowedValues: SUPPORTED_RECIPIENTS
-//     }
-//   }).extend(EventSchema),
-//   [EVENTS.cut_uploaded]: RecordEvents,
-//   [EVENTS.has_been_sent_to_client]: RecordEvents,
-//   [EVENTS.feedback_submitted_by_client]: RecordEvents,
-//   [EVENTS.revisions_sent]: RecordEvents,
-//   [EVENTS.cut_approved_by_client]: RecordEvents,
-//   [EVENTS.project_wrap]: RecordEvents,
-//   [EVENTS.upcoming_shoot_reminder]: RecordEvents,
-//   [EVENTS.footage_verified]: RecordEvents,
-//   [EVENTS.footage_verification_reminder]: RecordEvents,
-//   [EVENTS.invoice_paid]: RecordEvents,
-//   [EVENTS.send_invite_link]: RecordEvents,
-// });
-//
 export const EmailActionSchema = new SimpleSchema({
   substitution_data: {
     type: Object,
-    blackbox: true
+    blackbox: true,
   },
   template: {
-    type: String
+    type: String,
   },
   to: Array,
   'to.$': {
     type: String,
-    regEx: SimpleSchema.RegEx.email
+    regEx: SimpleSchema.RegEx.email,
+  },
+  cc: {
+    type: Array,
+    optional: true,
+  },
+  'cc.$': {
+    optional: true,
+    type: String,
+    regEx: SimpleSchema.RegEx.email,
   },
   type: {
     type: String,
-    allowedValues: [ACTIONS.send_email]
-  }
+    allowedValues: [ACTIONS.send_email],
+  },
 });
 
 export const TextMessageActionSchema = new SimpleSchema({
   body: String,
   to: {
     type: String,
-    regEx: SimpleSchema.RegEx.phone
+    regEx: SimpleSchema.RegEx.phone,
   },
   type: {
     type: String,
-    allowedValues: [ACTIONS.text_message]
+    allowedValues: [ACTIONS.text_message],
   },
   country: {
     type: String,
-    optional: true
-  }
+    optional: true,
+  },
 });
 
 export const CalendarActionSchema = new SimpleSchema({
   event: CalendarEventContentSchema,
   event_id: {
     type: String,
-    optional: true
+    optional: true,
   },
   type: {
     type: String,
-    allowedValues: [ACTIONS.calendar_event]
-  }
+    allowedValues: [ACTIONS.calendar_event],
+  },
 });
 
 export const SlackActionSchema = new SimpleSchema({
   content: SlackContentSchema,
   channel: {
     type: String,
-    optional: true
+    optional: true,
   },
   type: {
     type: String,
-    allowedValues: [ACTIONS.slack_notify]
-  }
+    allowedValues: [ACTIONS.slack_notify],
+  },
 });

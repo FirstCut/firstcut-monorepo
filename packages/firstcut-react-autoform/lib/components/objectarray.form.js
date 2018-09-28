@@ -17,28 +17,24 @@ var _propTypes = _interopRequireDefault(require("prop-types"));
 
 var _semanticUiReact = require("semantic-ui-react");
 
-var _immutable = require("immutable");
-
-var _buttons = _interopRequireDefault(require("/imports/ui/components/utils/buttons.jsx"));
+var _buttons = _interopRequireDefault(require("/imports/ui/components/utils/buttons"));
 
 var _schema = require("/imports/api/schema");
-
-var _firstcutModels = require("firstcut-models");
 
 var _lodash = require("lodash");
 
 function ObjectArrayForm(props) {
-  addSubobjectToSubarray = function addSubobjectToSubarray(e) {
+  var addSubobjectToSubarray = function addSubobjectToSubarray(e) {
     var field = props.fieldname;
-    var new_record = props.record.addSubobjectToSubarray(field, {});
-    updateField(e, new_record[field]);
+    var newRecord = props.record.addSubobjectToSubarray(field, {});
+    updateField(e, newRecord[field]);
   };
 
-  removeSubobjectFromSubarray = function removeSubobjectFromSubarray(index) {
+  var removeSubobjectFromSubarray = function removeSubobjectFromSubarray(index) {
     return function (e) {
       var field = props.fieldname;
-      var new_record = props.record.removeSubobjectFromSubarray(field, index);
-      updateField(e, new_record[field]);
+      var newRecord = props.record.removeSubobjectFromSubarray(field, index);
+      updateField(e, newRecord[field]);
     };
   };
 
@@ -62,15 +58,15 @@ function ObjectArrayForm(props) {
     return function (e, _ref) {
       var name = _ref.name,
           value = _ref.value;
-      var new_value = props.value.setIn([index, name], value);
-      updateField(e, new_value);
+      var newValue = props.value.setIn([index, name], value);
+      updateField(e, newValue);
     };
   };
 
-  var updateField = function updateField(e, new_value) {
+  var updateField = function updateField(e, newValue) {
     props.onChange(e, {
       name: props.fieldname,
-      value: new_value
+      value: newValue
     });
   };
 
@@ -82,20 +78,19 @@ function ObjectArrayForm(props) {
         rest = (0, _objectWithoutProperties2.default)(props, ["renderFields", "onChange", "record", "fieldname"]);
     rest.onChange = onInputChange(index, onChange);
     var errors = getNestedErrors(fieldname, index, props.errors);
-    var field_props = (0, _objectSpread2.default)({}, rest, {
+    var fieldProps = (0, _objectSpread2.default)({}, rest, {
       errors: errors
     });
     return _react.default.createElement(_semanticUiReact.Segment, null, _react.default.cloneElement(renderFields, (0, _objectSpread2.default)({
       record: obj,
       key: fieldname,
       fields: obj.schema.objectKeys()
-    }, field_props)), removeButton(index)());
+    }, fieldProps)), removeButton(index)());
   };
 
-  var objects = props.record.get(props.fieldname);
   return _react.default.createElement("div", null, _react.default.createElement(_semanticUiReact.Divider, {
     horizontal: true
-  }, props.label, " "), props.value && props.value.map(function (o, index) {
+  }, props.label, ' '), props.value && props.value.map(function (o, index) {
     return subobject(o, index, props);
   }), addNewButton());
 }
@@ -103,16 +98,14 @@ function ObjectArrayForm(props) {
 function getNestedErrors(fieldname, index, errors) {
   var nested = {};
 
-  var key_to_nested_value = _schema.SchemaParser.fieldAsIndexedObjectArrayKey(fieldname, index);
+  var keyToNestedValue = _schema.SchemaParser.fieldAsIndexedObjectArrayKey(fieldname, index);
 
   _lodash._.mapKeys(errors, function (value, key) {
-    var parsed = _schema.SchemaParser.parseNestedFields(key);
+    var nestedKey = key.split(keyToNestedValue);
 
-    var nested_key = key.split(key_to_nested_value);
-
-    if (nested_key.length > 0) {
-      nested_key = _lodash._.last(nested_key);
-      nested[nested_key] = _lodash._.last(value);
+    if (nestedKey.length > 0) {
+      nestedKey = _lodash._.last(nestedKey);
+      nested[nestedKey] = _lodash._.last(value);
     }
   });
 

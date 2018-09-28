@@ -10,45 +10,53 @@ exports.getCutViewLink = getCutViewLink;
 exports.getHeadshotURL = getHeadshotURL;
 exports.getInviteLink = getInviteLink;
 exports.getScreenshotURL = getScreenshotURL;
+exports.getSalesforceLink = getSalesforceLink;
 exports.getRecordUrl = getRecordUrl;
 exports.getRecordPath = getRecordPath;
 exports.getRelatedRecordPath = getRelatedRecordPath;
+exports.getProjectSalesforceLink = getProjectSalesforceLink;
+
+var _meteor = require("meteor/meteor");
 
 var _firstcutUtils = require("firstcut-utils");
 
-var _urlEnum = require("./url.enum.js");
+var _url = require("./url.enum");
 
 function getS3Url(_ref) {
   var key = _ref.key;
-  return _urlEnum.S3_URL + key;
+  return _url.S3_URL + key;
 }
 
 function getBasepath(model) {
-  return "/".concat(model.collection_name);
+  return "/".concat(model.collectionName);
 }
 
 function getPublicCutViewLink(cut) {
   if (cut.fileId) {
-    return Meteor.settings.public.ROOT_URL + '/view_cut/' + cut._id;
-  } else {
-    return cut.fileUrl;
+    return "".concat(_meteor.Meteor.settings.public.PLATFORM_ROOT_URL, "/view_cut/").concat(cut._id);
   }
+
+  return cut.fileUrl;
 }
 
 function getCutViewLink(cut) {
   if (cut.fileId) {
     return getRecordUrl(cut);
-  } else {
-    return cut.fileUrl;
   }
+
+  return cut.fileUrl;
 }
 
 function getHeadshotURL(filename) {
   if ((0, _firstcutUtils.isURL)(filename)) {
     return filename;
-  } else if (filename) {
-    return _urlEnum.S3_URL + _urlEnum.HEADSHOT_DIR + filename;
   }
+
+  if (filename) {
+    return _url.S3_URL + _url.HEADSHOT_DIR + filename;
+  }
+
+  return '';
 }
 
 function getInviteLink(player) {
@@ -66,11 +74,21 @@ function getInviteLink(player) {
 }
 
 function getScreenshotURL(filename) {
-  return _urlEnum.S3_URL + _urlEnum.SCREENSHOT_DIR + filename;
+  return _url.S3_URL + _url.SCREENSHOT_DIR + filename;
+}
+
+function getSalesforceLink(record) {
+  var salesforceId = record.salesforceId;
+
+  if (!salesforceId) {
+    return '';
+  }
+
+  return "".concat(_meteor.Meteor.settings.public.salesforceRoot, "/").concat(salesforceId);
 }
 
 function getRecordUrl(record) {
-  return Meteor.settings.public.ROOT_URL + getRecordPath(record);
+  return _meteor.Meteor.settings.public.PLATFORM_ROOT_URL + getRecordPath(record);
 }
 
 function getRecordPath(record) {
@@ -83,12 +101,14 @@ function getRecordPath(record) {
 }
 
 function getRelatedRecordPath(property, record) {
-  var related_rec = record[property];
+  var relatedRec = record[property];
 
-  if (!related_rec) {
+  if (!relatedRec) {
     return '';
   }
 
-  var basepath = getBasepath(related_rec.model);
-  return "".concat(basepath, "/").concat(related_rec._id);
+  var basepath = getBasepath(relatedRec.model);
+  return "".concat(basepath, "/").concat(relatedRec._id);
 }
+
+function getProjectSalesforceLink(project) {}

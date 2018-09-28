@@ -1,8 +1,8 @@
 Arguments: 
-  /usr/local/lib/node_modules/node/bin/node /usr/local/Cellar/yarn/1.5.1_1/libexec/bin/yarn.js remove firstcut-internal-dashboard
+  /usr/local/lib/node_modules/node/bin/node /usr/local/Cellar/yarn/1.5.1_1/libexec/bin/yarn.js install --mutex network:42424 --non-interactive
 
 PATH: 
-  /Users/artichokes/google-cloud-sdk/bin:/Users/artichokes/.fastlane/bin:/Users/artichokes/.meteor:/Users/artichokes/Scripts:/usr/local/git/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/opt/local/bin:/opt/local/sbin:/usr/X11/bin:/Users/artichokes/Library/Android/sdk/tools:/Users/artichokes/Library/Android/sdk/platform-tools:/Users/artichokes/Library/Android/sdk/tools:/Applications/Postgres.app/Contents/Versions/latest/bin:/Users/artichokes/Library/Android/sdk/build-tools/27.0.2
+  /Users/artichokes/FirstCut/firstcut-mono/packages/firstcut-pipeline/node_modules/.bin:/Users/artichokes/FirstCut/firstcut-mono/packages/node_modules/.bin:/Users/artichokes/FirstCut/firstcut-mono/node_modules/.bin:/Users/artichokes/FirstCut/node_modules/.bin:/Users/artichokes/node_modules/.bin:/Users/node_modules/.bin:/node_modules/.bin:/usr/local/lib/node_modules/node/bin:/Users/artichokes/google-cloud-sdk/bin:/Users/artichokes/.fastlane/bin:/Users/artichokes/.meteor:/Users/artichokes/Scripts:/usr/local/git/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/opt/local/bin:/opt/local/sbin:/usr/X11/bin:/Users/artichokes/Library/Android/sdk/tools:/Users/artichokes/Library/Android/sdk/platform-tools:/Users/artichokes/Library/Android/sdk/tools:/Applications/Postgres.app/Contents/Versions/latest/bin:/Users/artichokes/Library/Android/sdk/build-tools/27.0.2
 
 Yarn version: 
   1.5.1
@@ -15,21 +15,18 @@ Platform:
 
 npm manifest: 
   {
-    "name": "firstcut-pipeline",
-    "private": true,
-    "version": "0.0.0",
-    "main": "lib/index.js",
-    "dependencies": {
-      "@babel/runtime": "^7.0.0-beta.51",
-      "firstcut-calendar": "^0.0.0",
-      "firstcut-models": "^0.0.0",
-      "firstcut-slack": "^0.0.0",
-      "firstcut-text-messaging": "^0.0.0",
-      "lodash": "^4.17.10",
-      "meteor-random": "^0.0.3",
-      "remove": "^0.1.5",
-      "simpl-schema": "^1.5.0"
-    }
+  	"dependencies": {
+  		"@babel/runtime": "^7.0.0-beta.51",
+  		"firstcut-enum": "^0.0.0",
+  		"firstcut-models": "^0.0.0",
+  		"immutable": "^3.8.2",
+  		"lodash": "^4.17.10",
+  		"meteor-random": "^0.0.3",
+  		"moment": "^2.22.2",
+  		"pubsub-js": "^1.6.0",
+  		"remove": "^0.1.5",
+  		"simpl-schema": "^1.5.0"
+  	}
   }
 
 yarn manifest: 
@@ -47,6 +44,21 @@ Lockfile:
       core-js "^2.5.7"
       regenerator-runtime "^0.11.1"
   
+  babel-polyfill@^6.26.0:
+    version "6.26.0"
+    resolved "https://registry.yarnpkg.com/babel-polyfill/-/babel-polyfill-6.26.0.tgz#379937abc67d7895970adc621f284cd966cf2153"
+    dependencies:
+      babel-runtime "^6.26.0"
+      core-js "^2.5.0"
+      regenerator-runtime "^0.10.5"
+  
+  babel-runtime@^6.26.0:
+    version "6.26.0"
+    resolved "https://registry.yarnpkg.com/babel-runtime/-/babel-runtime-6.26.0.tgz#965c7058668e82b55d7bfe04ff2337bc8b5647fe"
+    dependencies:
+      core-js "^2.4.0"
+      regenerator-runtime "^0.11.0"
+  
   "chainsaw@>=0.0.7 <0.1":
     version "0.0.9"
     resolved "https://registry.yarnpkg.com/chainsaw/-/chainsaw-0.0.9.tgz#11a05102d1c4c785b6d0415d336d5a3a1612913e"
@@ -57,13 +69,20 @@ Lockfile:
     version "2.1.1"
     resolved "https://registry.yarnpkg.com/clone/-/clone-2.1.1.tgz#d217d1e961118e3ac9a4b8bba3285553bf647cdb"
   
-  core-js@^2.5.7:
+  core-js@^2.4.0, core-js@^2.5.0, core-js@^2.5.7:
     version "2.5.7"
     resolved "https://registry.yarnpkg.com/core-js/-/core-js-2.5.7.tgz#f972608ff0cead68b841a16a932d0b183791814e"
   
   crypto@0.0.3:
     version "0.0.3"
     resolved "https://registry.yarnpkg.com/crypto/-/crypto-0.0.3.tgz#470a81b86be4c5ee17acc8207a1f5315ae20dbb0"
+  
+  electro@^2.1.1:
+    version "2.1.1"
+    resolved "https://registry.yarnpkg.com/electro/-/electro-2.1.1.tgz#d7d5a6a3e9914d528b40a84380a735656b217d70"
+    dependencies:
+      minimist "~1.2.0"
+      subarg "^1.0.0"
   
   extend@^3.0.1:
     version "3.0.1"
@@ -74,6 +93,10 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/hashish/-/hashish-0.0.4.tgz#6d60bc6ffaf711b6afd60e426d077988014e6554"
     dependencies:
       traverse ">=0.2.4"
+  
+  immutable@^3.8.2:
+    version "3.8.2"
+    resolved "https://registry.yarnpkg.com/immutable/-/immutable-3.8.2.tgz#c2439951455bb39913daf281376f1530e104adf3"
   
   lodash._basecallback@^3.0.0:
     version "3.3.1"
@@ -253,6 +276,14 @@ Lockfile:
     dependencies:
       crypto "0.0.3"
   
+  minimist@^1.1.0, minimist@~1.2.0:
+    version "1.2.0"
+    resolved "https://registry.yarnpkg.com/minimist/-/minimist-1.2.0.tgz#a35008b20f41383eec1fb914f4cd5df79a264284"
+  
+  moment@^2.22.2:
+    version "2.22.2"
+    resolved "https://registry.yarnpkg.com/moment/-/moment-2.22.2.tgz#3c257f9839fc0e93ff53149632239eb90783ff66"
+  
   mongo-object@^0.1.2:
     version "0.1.2"
     resolved "https://registry.yarnpkg.com/mongo-object/-/mongo-object-0.1.2.tgz#1102ad0c12a23c9ad8dc4e0ce230d25bb39544be"
@@ -262,7 +293,15 @@ Lockfile:
       lodash.isobject "^3.0.2"
       lodash.without "^4.4.0"
   
-  regenerator-runtime@^0.11.1:
+  pubsub-js@^1.6.0:
+    version "1.6.0"
+    resolved "https://registry.yarnpkg.com/pubsub-js/-/pubsub-js-1.6.0.tgz#232d36485ce7905a54629ec5783d9f6f4c638026"
+  
+  regenerator-runtime@^0.10.5:
+    version "0.10.5"
+    resolved "https://registry.yarnpkg.com/regenerator-runtime/-/regenerator-runtime-0.10.5.tgz#336c3efc1220adcedda2c9fab67b5a7955a33658"
+  
+  regenerator-runtime@^0.11.0, regenerator-runtime@^0.11.1:
     version "0.11.1"
     resolved "https://registry.yarnpkg.com/regenerator-runtime/-/regenerator-runtime-0.11.1.tgz#be05ad7f9bf7d22e056f9726cee5017fbf19e2e9"
   
@@ -298,6 +337,12 @@ Lockfile:
       message-box "^0.2.0"
       mongo-object "^0.1.2"
   
+  subarg@^1.0.0:
+    version "1.0.0"
+    resolved "https://registry.yarnpkg.com/subarg/-/subarg-1.0.0.tgz#f62cf17581e996b48fc965699f54c06ae268b8d2"
+    dependencies:
+      minimist "^1.1.0"
+  
   traverse@>=0.2.4:
     version "0.6.6"
     resolved "https://registry.yarnpkg.com/traverse/-/traverse-0.6.6.tgz#cbdf560fd7b9af632502fed40f918c157ea97137"
@@ -307,7 +352,7 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/traverse/-/traverse-0.3.9.tgz#717b8f220cc0bb7b44e40514c22b2e8bbc70d8b9"
 
 Trace: 
-  Error: https://registry.yarnpkg.com/firstcut-calendar: Not found
+  Error: https://registry.yarnpkg.com/firstcut-enum: Not found
       at Request.params.callback [as _callback] (/usr/local/Cellar/yarn/1.5.1_1/libexec/lib/cli.js:65019:18)
       at Request.self.callback (/usr/local/Cellar/yarn/1.5.1_1/libexec/lib/cli.js:132430:22)
       at Request.emit (events.js:159:13)

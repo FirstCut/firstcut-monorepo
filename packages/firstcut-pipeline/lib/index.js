@@ -5,6 +5,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+exports.init = init;
 Object.defineProperty(exports, "fulfillsPrerequisites", {
   enumerable: true,
   get: function get() {
@@ -17,23 +18,25 @@ Object.defineProperty(exports, "handleEvent", {
     return _execute.handleEvent;
   }
 });
+Object.defineProperty(exports, "getCustomFieldsSchema", {
+  enumerable: true,
+  get: function get() {
+    return _execute.getCustomFieldsSchema;
+  }
+});
 Object.defineProperty(exports, "getEventActionsAsDescriptiveString", {
   enumerable: true,
   get: function get() {
     return _execute.getEventActionsAsDescriptiveString;
   }
 });
-Object.defineProperty(exports, "initSubscriptions", {
-  enumerable: true,
-  get: function get() {
-    return _pubsub.default;
-  }
-});
 
 var _execute = require("./execute.actions");
 
-var _pubsub = _interopRequireDefault(require("./pubsub"));
+var _pubsub = _interopRequireDefault(require("./server/pubsub"));
 
 // import {Meteor} from 'meteor/meteor';
-console.log('Init subscriptions in the pipeline');
-console.log(_pubsub.default);
+// this is silly. why
+function init() {
+  (0, _pubsub.default)();
+}

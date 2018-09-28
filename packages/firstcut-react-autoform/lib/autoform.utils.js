@@ -13,12 +13,12 @@ var _objectWithoutProperties2 = _interopRequireDefault(require("@babel/runtime/h
 function removeNonDomFields(props) {
   var regEx = props.regEx,
       enumOptions = props.enumOptions,
-      single_file = props.single_file,
+      singleFile = props.singleFile,
       customType = props.customType,
       custom = props.custom,
       serviceFilter = props.serviceFilter,
       restricted = props.restricted,
       record = props.record,
-      dom_props = (0, _objectWithoutProperties2.default)(props, ["regEx", "enumOptions", "single_file", "customType", "custom", "serviceFilter", "restricted", "record"]);
-  return dom_props;
+      domProps = (0, _objectWithoutProperties2.default)(props, ["regEx", "enumOptions", "singleFile", "customType", "custom", "serviceFilter", "restricted", "record"]);
+  return domProps;
 }

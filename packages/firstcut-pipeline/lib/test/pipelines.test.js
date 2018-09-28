@@ -1,14 +1,14 @@
 // import { Meteor } from 'meteor/meteor';
-// import { Models } from 'firstcut-models';
+// import Models from 'firstcut-models';
 // import { PubSub } from 'pubsub-js';
 // import { DELIVERABLE_BLUEPRINTS, SHOOT_BLUEPRINTS, PROJECT_BLUEPRINTS } from '/imports/api/blueprints';
 // import { DELIVERABLE_ID, POSTPO_OWNER_ID, PROJECT_ID, CLIENT_OWNER_ID_FOR_DELIVERABLE, stubUser, validateAgainstSchema, insertTestData } from '/imports/api/testing-utils';
-// import { SUPPORTED_EVENTS, SUPPORTED_ACTIONS, ACTIONS, EVENTS } from '../shared/pipeline.enum.js';
-// import { EmailActionSchema, SlackActionSchema, EventDataSchemas } from '../shared/pipeline.schemas.js';
+// import { SUPPORTED_EVENTS, SUPPORTED_ACTIONS, ACTIONS, EVENTS } from 'firstcut-pipeline-consts';
+// import { EmailActionSchema, SlackActionSchema, EventDataSchemas } from '../shared/pipeline.schemas';
 // import { MeteorStubs } from 'meteor/velocity:meteor-stubs';
-// import { init } from '../index.js';
-// import Pipeline, { ALL_PIPELINES } from '../pipeline.js';
-// import { execute } from '../server/pubsub.js';
+// import { init } from '../index';
+// import Pipeline, { ALL_PIPELINES } from '../pipeline';
+// import { execute } from '../server/pubsub';
 // import { Mailer } from '/imports/api/mailer';
 // import { Slack } from '/imports/api/slack';
 // import sinon from 'sinon';
@@ -22,9 +22,9 @@
 //   before(function() {
 //     MeteorStubs.install();
 //
-//     Deliverable.available_blueprints = DELIVERABLE_BLUEPRINTS;
-//     Shoot.available_blueprints = SHOOT_BLUEPRINTS;
-//     Project.available_blueprints = PROJECT_BLUEPRINTS;
+//     Deliverable.availableBlueprints = DELIVERABLE_BLUEPRINTS;
+//     Shoot.availableBlueprints = SHOOT_BLUEPRINTS;
+//     Project.availableBlueprints = PROJECT_BLUEPRINTS;
 //
 //     insertTestData();
 //     stubUser();
@@ -88,8 +88,8 @@
 //           SUPPORTED_EVENTS.forEach(function(event) {
 //             const stub = sandbox.stub(Pipeline.prototype.constructor, 'getPipeline').returns(pipeline);
 //             const pipeline_actions = Pipeline.getActionsForEvent({record_type: 'Deliverable', record:new Record({})(), event});
-//             let send_email_actions = pipeline_actions.filter(a => a.type == ACTIONS.send_email);
-//             send_email_actions.forEach(a => {
+//             let send_emailActions = pipeline_actions.filter(a => a.type == ACTIONS.send_email);
+//             send_emailActions.forEach(a => {
 //               expect(validateAgainstSchema.bind(this, a, EmailActionSchema)).to.not.throw();
 //             });
 //             sandbox.restore();

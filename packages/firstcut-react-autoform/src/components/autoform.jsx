@@ -1,124 +1,145 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Record, List } from 'immutable';
-import { Form, Icon, Input } from 'semantic-ui-react';
-import { Random } from 'meteor/random';
-import getAutoformSchema from '../autoform.schema.js';
-import { htmlifyString } from 'firstcut-utils';
-import {removeNonDomFields} from '../autoform.utils.js';
+import { _ } from 'lodash';
+import { Record } from 'immutable';
+import { Form, Input } from 'semantic-ui-react';
+import moment from 'moment';
+import getAutoformSchema from '../autoform.schema';
+import { removeNonDomFields } from '../autoform.utils';
 
-import ObjectArrayForm from './objectarray.form.jsx';
-import Label from './label.jsx';
-import LocationField from './location.jsx';
-import Datetime from './datetime.jsx';
-import Checkbox from './checkbox.jsx';
-import Dropzone from './dropzone.jsx';
-import Select from './select.jsx';
-import NumberInput from './number.jsx';
+import ObjectArrayForm from './objectarray.form';
+import Label from './label';
+import LocationField from './location';
+import Datetime from './datetime';
+import Checkbox from './checkbox';
+import Dropzone from './dropzone';
+import Select from './select';
+import NumberInput from './number';
 
 export default class Autoform extends React.Component {
   render() {
-    let disable_defaults = (this.props.disable_defaults === undefined)? false: this.props.disable_defaults;
+    const disableDefaults = (this.props.disableDefaults === undefined) ? false : this.props.disableDefaults;
     return (
       <Form>
-        <AutoformFields disable_defaults={disable_defaults} {...this.props}/>
+        <AutoformFields disableDefaults={disableDefaults} {...this.props} />
       </Form>
-    )
+    );
   }
 }
 
 function AutoformFields(props) {
-  const {fields, ...rest} = props;
-  return fields.map((field, i)=>{
-    const is_row = field instanceof Array;
-    const react_key = `form-group-${i}`;
-    if (is_row) {
-      return <FieldRow key={react_key} fields={field} {...rest}/>;
+  const { fields, ...rest } = props;
+  return fields.map((field, i) => {
+    const isRow = field instanceof Array;
+    const reactKey = `form-group-${i}`;
+    if (isRow) {
+      return <FieldRow key={reactKey} fields={field} {...rest} />;
     }
 
-    return <Field key={react_key} field={field} {...rest}/>;
+    return <Field key={reactKey} field={field} {...rest} />;
   });
 }
 
 function FieldRow(props) {
   return (
-    <Form.Group widths='equal'>
-      <AutoformFields {...props}/>
+    <Form.Group widths="equal">
+      <AutoformFields {...props} />
     </Form.Group>
-  )
+  );
 }
 
 function getLabel(props) {
-  const {type, help_text, label, error} = props;
-  if (type == 'boolean') {
+  const {
+    type, helpText, label, error,
+  } = props;
+  if (type === 'boolean') {
     return label;
-  } else {
-    return (<Label type={type} label={label} help_text={help_text} error={error}/>);
   }
+  return (<Label type={type} label={label} helpText={helpText} error={error} />);
 }
 
 class Field extends React.PureComponent {
   componentDidMount() {
-    const {onChange, record, field, errors, overrides, disable_defaults} = this.props;
+    const {
+      onChange, record, field, errors, overrides, disableDefaults,
+    } = this.props;
     const options = {
-      errors: errors,
-      overrides: overrides
-    }
-    const field_schema = getAutoformSchema(record.schema, field, options);
-    if (!disable_defaults && !record.get(field) && field_schema.defaultValue) {
-      //save the default value to the record
-      onChange(null, {name: field, value: field_schema.defaultValue});
+      errors,
+      overrides,
+    };
+    const fieldSchema = getAutoformSchema(record, field, options);
+    if (!disableDefaults && !record.get(field) && fieldSchema.defaultValue) {
+      // save the default value to the record
+      onChange(null, { name: field, value: fieldSchema.defaultValue });
     }
   }
 
   render() {
-    const {record, field, onChange, errors, overrides, disable_defaults} = this.props;
+    const {
+      record, field, onChange, errors, overrides, disableDefaults,
+    } = this.props;
     const options = {
-      errors: errors,
-      overrides: overrides
+      errors,
+      overrides,
+    };
+    const fieldSchema = getAutoformSchema(record, field, options);
+    const { type, defaultValue, ...fieldProps } = fieldSchema;
+    if (fieldProps.hidden) {
+      return <div />;
     }
-    const field_schema = getAutoformSchema(record.schema, field, options);
-    const {type, defaultValue, ...field_props} = field_schema;
-    if (field_props.hidden) {
-      return <div></div>;
+    fieldProps.label = getLabel({ ...fieldProps, type });
+    fieldProps.value = record.get(field);
+    if (fieldProps.value === '') {
+      // do not allow empty string fields, prefer null
+      onChange(null, { name: field, value: null });
     }
-    field_props.label = getLabel({...field_props, type});
-    field_props.value = record.get(field);
-    if (field_props.value === '') {
-      //do not allow empty string fields, prefer null
-      onChange(null, {name: field, value: null});
+    if (fieldProps.options && fieldProps.value) {
+      const valueIsArray = Array.isArray(fieldProps.value);
+      const values = (valueIsArray) ? fieldProps.value : [fieldProps.value];
+      const optionValues = fieldProps.options.map(o => o.key);
+      const filteredValues = values.filter(val => optionValues.includes(val));
+      if (!_.isEqual(filteredValues, values)) {
+        if (valueIsArray) {
+          onChange(null, { name: field, value: filteredValues });
+        } else {
+          onChange(null, { name: field, value: null });
+        }
+      }
     }
-    field_props.record = record;
-    field_props.fieldname = field;
-    field_props.name = field;
-    field_props.onChange = onChange;
-    field_props.key = `${field}`;
+    fieldProps.record = record;
+    fieldProps.fieldname = field;
+    fieldProps.name = field;
+    fieldProps.onChange = onChange;
+    fieldProps.key = `${field}`;
     switch (type) {
       case 'options':
-        return <Select {...field_props}/>
+        return <Select {...fieldProps} />;
+      case 'multiselect':
+        return <Select {...fieldProps} multiple />;
       case 'string':
-        let dom_props = removeNonDomFields(field_props);
-        return <Form.Field control={Input} {...dom_props}/>
+        const domProps = removeNonDomFields(fieldProps);
+        return <Form.Field control={Input} {...domProps} />;
       case 'boolean':
-        return <Checkbox {...field_props} />;
+        return <Checkbox {...fieldProps} />;
       case 'number':
-        return <NumberInput {...field_props} />;
+        return <NumberInput {...fieldProps} />;
       case 'date':
-        return <Datetime {...field_props} timezone={record.timezone}/>;
+        // const timezone = record.timezone || getTimezoneFromDate(fieldProps.value);
+        return <Datetime {...fieldProps} timezone={fieldProps.timezone || record.timezone} />;
       case 'textarea':
-        return <Form.TextArea {...field_props} />;
+        return <Form.TextArea {...fieldProps} />;
       case 'location':
-        return <LocationField {...field_props} />;
+        return <LocationField {...fieldProps} />;
       case 'file':
-        return <Dropzone {...field_props} />;
+        return <Dropzone {...fieldProps} />;
       case 'fileArray':
-        return <Dropzone {...field_props} />;
+        return <Dropzone {...fieldProps} />;
       case 'objectArray':
-        return <ObjectArrayForm errors={errors} {...field_props} renderFields={<AutoformFields/>} />
+        return <ObjectArrayForm errors={errors} {...fieldProps} renderFields={<AutoformFields />} />;
       default:
-        console.log(field_props.name);
         console.log(`you need to implement type ${type}`);
+        return <div />;
         // throw new Meteor.Error('Error field type not in allowed types [String]');
     }
   }
@@ -132,7 +153,7 @@ AutoformFields.propTypes = {
   fields: PropTypes.arrayOf(
     PropTypes.oneOfType([
       PropTypes.arrayOf(PropTypes.string),
-      PropTypes.string
-    ])
-  )
+      PropTypes.string,
+    ]),
+  ),
 };

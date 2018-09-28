@@ -7,10 +7,13 @@ import {
   getCutViewLink,
   getScreenshotURL,
   getBasepath,
+  getSalesforceLink,
   getRecordPath,
-  getRecordUrl } from './retrieve.url.js';
+  getRecordUrl,
+} from './retrieve.url';
 
 export {
+  getSalesforceLink,
   getInviteLink,
   getPublicCutViewLink,
   getHeadshotURL,
@@ -20,5 +23,5 @@ export {
   getCutViewLink,
   getBasepath,
   getRecordPath,
-  getRecordUrl
+  getRecordUrl,
 };

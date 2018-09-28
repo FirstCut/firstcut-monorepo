@@ -1,3 +1,3 @@
-import Mailer from './mailer.js';
+import Mailer from './mailer';
 
 export {Mailer};

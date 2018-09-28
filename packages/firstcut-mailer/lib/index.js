@@ -12,4 +12,4 @@ Object.defineProperty(exports, "Mailer", {
   }
 });
 
-var _mailer = _interopRequireDefault(require("./mailer.js"));
+var _mailer = _interopRequireDefault(require("./mailer"));

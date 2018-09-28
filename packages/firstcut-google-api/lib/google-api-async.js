@@ -5,9 +5,9 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.GoogleApi = void 0;
 
-var _utils = require("./utils.js");
+var _http = require("meteor/http");
 
-var _lodash = require("lodash");
+var _utils = require("./utils");
 
 // kill logs
 var Log = function Log() {};
@@ -32,27 +32,28 @@ var GoogleApi = {
 
           self._call(method, path, options, callback);
         });
-      } else {
-        callback(error, result);
       }
+
+      callback(error, result);
     }, 'Google Api callAndRefresh'));
   },
   // call a GAPI Meteor.http function if the accessToken is good
   _call: function _call(method, path, options, callback) {
-    Log('GoogleApi._call, path:' + path); // copy existing options to modify
+    Log("GoogleApi._call, path:".concat(path)); // copy existing options to modify
 
-    options = _lodash._.extend({}, options);
+    options = _.extend({}, options);
     var user = options.user || Meteor.user();
     delete options.user;
 
     if (user && user.services && user.services.google && user.services.google.accessToken) {
       options.headers = options.headers || {};
-      options.headers.Authorization = 'Bearer ' + user.services.google.accessToken;
-      HTTP.call(method, this._host + '/' + path, options, function (error, result) {
+      options.headers.Authorization = "Bearer ".concat(user.services.google.accessToken);
+
+      _http.HTTP.call(method, "".concat(this._host, "/").concat(path), options, function (error, result) {
         callback(error, result && result.data);
       });
     } else {
-      callback(new Meteor.Error(403, "Auth token not found." + "Connect your google account"));
+      callback(new Meteor.Error(403, 'Auth token not found.' + 'Connect your google account'));
     }
   },
   _refresh: function _refresh(user, callback) {
@@ -60,15 +61,15 @@ var GoogleApi = {
     Meteor.call('exchangeRefreshToken', user && user._id, function (error, result) {
       callback(error, result && result.access_token);
     });
-  } // setup HTTP verbs
+  }
+}; // setup HTTP verbs
 
-};
 exports.GoogleApi = GoogleApi;
-var httpVerbs = ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'];
+httpVerbs = ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'];
 
-_lodash._.each(httpVerbs, function (verb) {
+_.each(httpVerbs, function (verb) {
   GoogleApi[verb.toLowerCase()] = (0, _utils.wrapAsync)(function (path, options, callback) {
-    if (_lodash._.isFunction(options)) {
+    if (_.isFunction(options)) {
       callback = options;
       options = {};
     }

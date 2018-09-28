@@ -8,6 +8,8 @@ Object.defineProperty(exports, "__esModule", {
 exports.sendTextMessage = sendTextMessage;
 exports.SUPPORTED_COUNTRIES = void 0;
 
+var _meteor = require("meteor/meteor");
+
 var _twilio = _interopRequireDefault(require("twilio"));
 
 var _simplSchema = _interopRequireDefault(require("simpl-schema"));
@@ -18,15 +20,15 @@ var SUPPORTED_COUNTRIES = ['United States', 'United Kingdom'];
 exports.SUPPORTED_COUNTRIES = SUPPORTED_COUNTRIES;
 
 function getFromNumber(country) {
-  if (Meteor.settings.public.environment == 'development') {
+  if (_meteor.Meteor.settings.public.environment === 'development') {
     return '+15005550006';
-  } else if (country == 'United Kingdom') {
+  }
+
+  if (country === 'United Kingdom') {
     return '+441133203346';
   }
 
-  {
-    return '+17162190340';
-  }
+  return '+17162190340';
 }
 
 function sendTextMessage(_ref) {
@@ -49,14 +51,14 @@ function sendTextMessage(_ref) {
     body: body,
     country: country
   });
-  var sid = Meteor.settings.twilio.sid;
-  var authToken = Meteor.settings.twilio.authToken;
+  var _Meteor$settings$twil = _meteor.Meteor.settings.twilio,
+      sid = _Meteor$settings$twil.sid,
+      authToken = _Meteor$settings$twil.authToken;
   var client = (0, _twilio.default)(sid, authToken);
   var from = getFromNumber(country);
-  to = (0, _firstcutUtils.removePunctuation)(to);
   return client.messages.create({
     body: body,
     from: from,
-    to: to
+    to: (0, _firstcutUtils.removePunctuation)(to)
   });
 }

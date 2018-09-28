@@ -12,4 +12,4 @@ Object.defineProperty(exports, "Autoform", {
   }
 });
 
-var _autoform = _interopRequireDefault(require("./components/autoform.jsx"));
+var _autoform = _interopRequireDefault(require("./components/autoform"));

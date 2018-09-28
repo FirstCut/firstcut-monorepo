@@ -5,13 +5,15 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.ensureLoggedIn = void 0;
 
+var _mdgValidationError = require("meteor/mdg:validation-error");
+
 var ensureLoggedIn = function ensureLoggedIn() {
   if (!Meteor.userId && !Meteor.isTest) {
     var error = {
       name: 'user',
       type: 'not-logged-in'
     };
-    throw new ValidationError([error]);
+    throw new _mdgValidationError.ValidationError([error]);
   }
 };
 

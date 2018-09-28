@@ -1,3 +1,4 @@
 
-import { sendTextMessage } from './text.messager.js';
+import { sendTextMessage } from './text.messager';
+
 export { sendTextMessage };

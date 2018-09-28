@@ -1,15 +1,9 @@
 
-import Models from './models.js';
-import generateImmutableDefaults from './utils/generate-defaults.js';
-import RecordWithSchemaFactory, {SaveableRecord} from './utils/factories.js'
-import { BaseModel } from './base.model.js';
-import RecordPersister from './utils/record.persister.js';
+import Models from './models';
+import initPublications from './utils/publications';
 
-export {
-  RecordPersister,
-  generateImmutableDefaults,
-  BaseModel,
-  RecordWithSchemaFactory,
-  SaveableRecord,
-  Models
-};
+if (Meteor.isServer) {
+  initPublications(Models);
+}
+
+export default Models;

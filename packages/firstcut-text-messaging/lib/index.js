@@ -6,8 +6,8 @@ Object.defineProperty(exports, "__esModule", {
 Object.defineProperty(exports, "sendTextMessage", {
   enumerable: true,
   get: function get() {
-    return _textMessager.sendTextMessage;
+    return _text.sendTextMessage;
   }
 });
 
-var _textMessager = require("./text.messager.js");
+var _text = require("./text.messager");

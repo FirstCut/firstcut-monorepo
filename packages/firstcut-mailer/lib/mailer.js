@@ -7,13 +7,13 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 
+var _toConsumableArray2 = _interopRequireDefault(require("@babel/runtime/helpers/toConsumableArray"));
+
 var _classCallCheck2 = _interopRequireDefault(require("@babel/runtime/helpers/classCallCheck"));
 
 var _createClass2 = _interopRequireDefault(require("@babel/runtime/helpers/createClass"));
 
 var _sparkpost = _interopRequireDefault(require("sparkpost"));
-
-var _simplSchema = _interopRequireDefault(require("simpl-schema"));
 
 var FROM_DOMAIN = 'email@firstcut.io';
 var API_KEY = Meteor.settings.email.api_key;
@@ -30,30 +30,42 @@ function () {
     key: "send",
     value: function send(_ref) {
       var template = _ref.template,
-          addresses = _ref.addresses,
+          to = _ref.to,
+          _ref$cc = _ref.cc,
+          cc = _ref$cc === void 0 ? [] : _ref$cc,
           _ref$substitution_dat = _ref.substitution_data,
           substitution_data = _ref$substitution_dat === void 0 ? {} : _ref$substitution_dat;
-      new _simplSchema.default({
-        addresses: Array,
-        'addresses.$': {
-          type: String,
-          regEx: _simplSchema.default.RegEx.Email
-        }
-      }).validate({
-        addresses: addresses
-      });
-      var recipients = addresses.map(function (to) {
+      var recipients = to.map(function (email) {
         return {
-          address: to
+          address: {
+            email: email
+          }
         };
       });
+      var ccRecipients = cc.map(function (email) {
+        return {
+          address: {
+            email: email,
+            header_to: to[0]
+          }
+        };
+      });
+      var content = {
+        from: FROM_DOMAIN,
+        template_id: template
+      };
+
+      if (cc.length > 0) {
+        var headerCC = cc.join(',');
+        content.headers = {
+          CC: headerCC
+        };
+      }
+
       return this._send({
-        content: {
-          from: FROM_DOMAIN,
-          template_id: template
-        },
+        content: content,
         substitution_data: substitution_data,
-        recipients: recipients
+        recipients: (0, _toConsumableArray2.default)(recipients).concat((0, _toConsumableArray2.default)(ccRecipients))
       });
     }
   }, {

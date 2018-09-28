@@ -18,19 +18,19 @@ var _semanticUiReact = require("semantic-ui-react");
 function Label(props) {
   var _props = (0, _objectSpread2.default)({}, props),
       label = _props.label,
-      help_text = _props.help_text,
+      helpText = _props.helpText,
       error = _props.error;
 
   label = error ? label + " -- " + error : label;
-  return _react.default.createElement("div", null, label, help_text && _react.default.createElement(_semanticUiReact.Popup, {
+  return _react.default.createElement("div", null, label, helpText && _react.default.createElement(_semanticUiReact.Popup, {
     trigger: _react.default.createElement(_semanticUiReact.Icon, {
       name: "question circle"
     })
-  }, " ", help_text, " "));
+  }, " ", helpText, " "));
 }
 
 Label.propTypes = {
   label: _propTypes.default.string,
   error: _propTypes.default.array,
-  help_text: _propTypes.default.string
+  helpText: _propTypes.default.string
 };

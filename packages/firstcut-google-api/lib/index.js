@@ -5,8 +5,9 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 
-var _googleApiAsync = require("./google-api-async.js");
+var _googleApiAsync = require("./google-api-async");
 
-// import './google-api-methods.js';
+require("./google-api-methods");
+
 var _default = _googleApiAsync.GoogleApi;
 exports.default = _default;

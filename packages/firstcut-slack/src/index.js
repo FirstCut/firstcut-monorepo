@@ -1,8 +1,8 @@
-import { postMessage } from './slack.js';
-import { SlackContentSchema } from './slack.schemas.js';
+import { postMessage } from './slack';
+import { SlackContentSchema } from './slack.schemas';
 
 const Slack = {
-  postMessage
+  postMessage,
 }
 
 export { Slack, SlackContentSchema };

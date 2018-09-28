@@ -21,7 +21,7 @@ Meteor.methods({
       }
     }
   },
-
+  
   exchangeRefreshToken: function(userId) {
     this.unblock();
 
@@ -64,6 +64,8 @@ Meteor.methods({
     }
 
     if (result.statusCode === 200) {
+      // console.log('success');
+      // console.log(EJSON.stringify(result.data));
 
       Meteor.users.update(user._id, {
         '$set': {

@@ -7,6 +7,8 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.SlackContentSchema = void 0;
 
+var _meteor = require("meteor/meteor");
+
 var _simplSchema = _interopRequireDefault(require("simpl-schema"));
 
 /* View documentation at

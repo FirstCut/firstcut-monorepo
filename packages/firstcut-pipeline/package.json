@@ -6,6 +6,7 @@
   "dependencies": {
     "@babel/runtime": "^7.0.0-beta.51",
     "firstcut-aws": "^0.0.0",
+    "firstcut-billing": "^0.0.0",
     "firstcut-calendar": "^0.0.0",
     "firstcut-enum": "^0.0.0",
     "firstcut-mailer": "^0.0.0",

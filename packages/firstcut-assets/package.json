@@ -1,0 +1,10 @@
+{
+  "name": "firstcut-assets",
+  "private": true,
+  "version": "0.0.0",
+  "main": "lib/index.js",
+  "dependencies": {
+    "@babel/runtime": "^7.0.0-beta.51",
+    "firstcut-uploader": "^0.0.0"
+  }
+}

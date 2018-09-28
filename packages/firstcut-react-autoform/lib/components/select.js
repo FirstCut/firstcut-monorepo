@@ -19,24 +19,26 @@ var _propTypes = _interopRequireDefault(require("prop-types"));
 
 var _semanticUiReact = require("semantic-ui-react");
 
+var _lodash = require("lodash");
+
 function Select(props) {
   var _props = (0, _objectSpread2.default)({}, props),
       options = _props.options,
       additionLabel = _props.additionLabel,
-      field_props = (0, _objectWithoutProperties2.default)(_props, ["options", "additionLabel"]);
+      fieldProps = (0, _objectWithoutProperties2.default)(_props, ["options", "additionLabel"]);
 
   if (!options) {
     return _react.default.createElement("div", null);
   }
 
-  var with_null_options = options.unshift({
+  var sorted = _lodash._.sortBy(options, function (item) {
+    return item[props.sortBy] ? item[props.sortBy].toLowerCase() : null;
+  });
+
+  sorted.unshift({
     key: '',
     value: null,
     text: ''
-  });
-
-  var sorted = _.sortBy(with_null_options.toArray(), function (item) {
-    return item[props.sortBy] ? item[props.sortBy].toLowerCase() : null;
   });
 
   if (additionLabel) {
@@ -46,12 +48,12 @@ function Select(props) {
       allowAdditions: true,
       additionLabel: additionLabel,
       options: sorted
-    }, field_props));
-  } else {
-    return _react.default.createElement(_semanticUiReact.Form.Field, (0, _extends2.default)({
-      control: _semanticUiReact.Select,
-      search: true,
-      options: sorted
-    }, field_props));
+    }, fieldProps));
   }
+
+  return _react.default.createElement(_semanticUiReact.Form.Field, (0, _extends2.default)({
+    control: _semanticUiReact.Select,
+    search: true,
+    options: sorted
+  }, fieldProps));
 }

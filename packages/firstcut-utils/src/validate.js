@@ -1,4 +1,6 @@
 
+import { ValidationError } from 'meteor/mdg:validation-error';
+
 export const ensureLoggedIn = function() {
   if (!Meteor.userId && !Meteor.isTest) {
     const error = {

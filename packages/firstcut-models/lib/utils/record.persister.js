@@ -19,11 +19,13 @@ function () {
   function RecordPersister(_ref) {
     var cls = _ref.cls,
         onSave = _ref.onSave,
-        onRemove = _ref.onRemove;
+        onRemove = _ref.onRemove,
+        namespace = _ref.namespace;
     (0, _classCallCheck2.default)(this, RecordPersister);
     this.cls = cls;
     this.onSave = onSave;
     this.onRemove = onRemove;
+    this.namespace = namespace;
   }
 
   (0, _createClass2.default)(RecordPersister, [{
@@ -33,11 +35,11 @@ function () {
     }
   }, {
     key: "save",
-    value: function save(record, options) {
+    value: function save(record) {
       var _this = this;
 
       return new _promise.default(function (resolve, reject) {
-        var cleaned = _this.clean(record.schema, record.toJS());
+        var cleaned = _this.clean(record);
 
         _this.validate(cleaned);
 
@@ -47,12 +49,15 @@ function () {
   }, {
     key: "validate",
     value: function validate(record) {
-      this.cls.validate(record);
+      if (this.cls.validate && typeof this.cls.validate === 'function') {
+        this.cls.validate(record);
+      }
     }
   }, {
     key: "clean",
-    value: function clean(schema, record) {
-      return schema.clean(record);
+    value: function clean(record) {
+      // const withAutovalues = this.cls.schema.calculateAutovalueFields(record);
+      return this.cls.schema.clean(record.toJS());
     }
   }]);
   return RecordPersister;

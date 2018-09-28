@@ -10,29 +10,35 @@ exports.postMessage = postMessage;
 
 var _objectSpread2 = _interopRequireDefault(require("@babel/runtime/helpers/objectSpread"));
 
+var _meteor = require("meteor/meteor");
+
 var _client = require("@slack/client");
 
-var _slackSchemas = require("./slack.schemas.js");
+var _slack = require("./slack.schemas");
 
-var access_token = Meteor.settings.slack.api_token;
+var access_token = _meteor.Meteor.settings.slack.api_token;
 var slack = new _client.WebClient(access_token);
-var client_id = Meteor.settings.slack.client_id;
-var client_secret = Meteor.settings.slack.client_secret;
+var client_id = _meteor.Meteor.settings.slack.client_id;
+var client_secret = _meteor.Meteor.settings.slack.client_secret;
 
 function getChannel() {
-  if (Meteor.isTest) {
+  if (_meteor.Meteor.isTest) {
     return 'devtesting';
-  } else if (Meteor.settings.public.environment == 'development') {
-    return 'devtesting';
-  } else if (Meteor.settings.public.environment == 'production') {
-    return 'postproduction';
-  } else {
-    throw Meteor.Error('unsatisfied-conditions', 'Could not retrieve channel. Is not test, development, or production environment.');
   }
+
+  if (_meteor.Meteor.settings.public.environment == 'development') {
+    return 'devtesting';
+  }
+
+  if (_meteor.Meteor.settings.public.environment == 'production') {
+    return 'postproduction';
+  }
+
+  throw _meteor.Meteor.Error('unsatisfied-conditions', 'Could not retrieve channel. Is not test, development, or production environment.');
 }
 
 function postMessage(content, channel) {
-  if (!channel || Meteor.settings.public.environment == 'development') {
+  if (!channel || _meteor.Meteor.settings.public.environment == 'development') {
     channel = getChannel();
   }
 
@@ -40,7 +46,7 @@ function postMessage(content, channel) {
     channel: channel
   }, content);
 
-  _slackSchemas.SlackContentSchema.validate(result);
+  _slack.SlackContentSchema.validate(result);
 
   return slack.chat.postMessage(result);
 }

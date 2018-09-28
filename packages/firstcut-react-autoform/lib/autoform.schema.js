@@ -11,142 +11,155 @@ var _keys = _interopRequireDefault(require("@babel/runtime/core-js/object/keys")
 
 var _objectSpread2 = _interopRequireDefault(require("@babel/runtime/helpers/objectSpread"));
 
-var _firstcutModels = require("firstcut-models");
+var _firstcutModels = _interopRequireDefault(require("firstcut-models"));
 
 var _immutable = require("immutable");
 
-var _firstcutSchemaBuilder = require("firstcut-schema-builder");
+var _schema = require("/imports/api/schema");
+
+var _lodash = require("lodash");
 
 var DEFAULT_SORT_METHOD = 'text';
 
-function getAutoformSchema(schema, field, options) {
+function getAutoformSchema(record, field, options) {
+  var schema = record.schema;
   var _options$errors = options.errors,
       errors = _options$errors === void 0 ? {} : _options$errors,
       _options$overrides = options.overrides,
       overrides = _options$overrides === void 0 ? {} : _options$overrides;
-  var field_schema = (0, _objectSpread2.default)({}, overrides[field], schema.getFieldSchema(field));
+  var fieldSchema = (0, _objectSpread2.default)({}, overrides[field], schema.getFieldSchema(field));
+  var label = fieldSchema.label ? fieldSchema.label : schema.getFieldLabel(field);
   var result = {
-    type: _getAutoformType(schema, field, field_schema),
+    type: _getAutoformType(schema, field, fieldSchema),
     name: _getAutoformFieldName(schema, field),
-    label: schema.getFieldLabel(field)
+    label: label
   };
+  result.defaultValue = _getDefaultValue(fieldSchema, record);
   result.error = _getError(errors, field);
-  result.options = _getOptions(field_schema);
-  result.placeholder = _getPlaceholder(field_schema);
-  result.help_text = _getHelpText(field_schema);
-  result.single_file = _acceptsSingleFile(field_schema);
-  result.sortBy = field_schema.sortBy ? field_schema.sortBy : DEFAULT_SORT_METHOD;
-  result = (0, _objectSpread2.default)({}, field_schema, result); // if (field_schema.defaultValue) {
-  //   result.defaultValue = field_schema.defaultValue;
-  // }
-  // if (field_schema.hidden) {
-  //   result.hidden = field_schema.hidden;
-  // }
-  // if (field_schema.additionLabel) {
-  //   result.additionLabel = field_schema.additionLabel;
-  // }
+  result.options = _getOptions(fieldSchema);
 
+  if (result.options && result.options.toArray) {
+    result.options = result.options.toArray(); // if an immutable list is returned
+  }
+
+  result.placeholder = _getPlaceholder(fieldSchema);
+  result.helpText = _getHelpText(fieldSchema);
+  result.singleFile = _acceptsSingleFile(fieldSchema);
+  result.sortBy = fieldSchema.sortBy ? fieldSchema.sortBy : DEFAULT_SORT_METHOD;
+  result = (0, _objectSpread2.default)({}, fieldSchema, result);
   return result;
+}
+
+function _getDefaultValue(schema, record) {
+  if (!schema.defaultValue) {
+    return null;
+  }
+
+  if (typeof schema.defaultValue === 'function') {
+    return schema.defaultValue(record);
+  }
+
+  return schema.defaultValue;
 }
 
 function _getAutoformFieldName(schema, field) {
   if (schema.isSubobjectArrayField(field)) {
-    return _firstcutSchemaBuilder.SchemaParser.getMostNestedFieldName(field);
-  } else {
-    return field;
-  }
-}
-
-function _acceptsSingleFile(field_schema) {
-  return field_schema.customType && field_schema.customType == 'file';
-}
-
-function _getAutoformType(schema, field, field_schema) {
-  if (field_schema.customType) {
-    return field_schema.customType;
+    return _schema.SchemaParser.getMostNestedFieldName(field);
   }
 
-  if (_fieldHasOptions(field, field_schema)) {
+  return field;
+}
+
+function _acceptsSingleFile(fieldSchema) {
+  return fieldSchema.customType && fieldSchema.customType === 'file';
+}
+
+function _getAutoformType(schema, field, fieldSchema) {
+  if (fieldSchema.customType) {
+    return fieldSchema.customType;
+  }
+
+  if (_fieldHasOptions(field, fieldSchema)) {
     return 'options';
   }
 
   return schema.getQuickTypeForKey(field);
 }
 
-function _fieldHasOptions(field, field_schema) {
-  return field_schema.options || field_schema.serviceDependency || field_schema.enumOptions;
+function _fieldHasOptions(field, fieldSchema) {
+  return fieldSchema.options || fieldSchema.serviceDependency || fieldSchema.enumOptions;
 }
 
-function _getOptions(field_schema) {
-  if (_hasPredefinedOptions(field_schema)) {
-    return _predefinedOptions(field_schema);
-  } else if (_hasEnum(field_schema)) {
-    return _generateEnumOptions(field_schema);
-  } else if (_hasExternalServiceOptions(field_schema)) {
-    return _externalServiceOptions(field_schema);
-  } else {
-    return null;
+function _getOptions(fieldSchema) {
+  if (_hasPredefinedOptions(fieldSchema)) {
+    return _predefinedOptions(fieldSchema);
   }
+
+  if (_hasEnum(fieldSchema)) {
+    return _generateEnumOptions(fieldSchema);
+  }
+
+  if (_hasExternalServiceOptions(fieldSchema)) {
+    return _externalServiceOptions(fieldSchema);
+  }
+
+  return null;
 }
 
-function _hasEnum(field_schema) {
-  return field_schema.enumOptions != null;
+function _hasEnum(fieldSchema) {
+  return fieldSchema.enumOptions != null;
 }
 
-function _generateEnumOptions(field_schema) {
-  return (0, _immutable.List)((0, _keys.default)(field_schema.enumOptions).map(function (t) {
+function _generateEnumOptions(fieldSchema) {
+  return (0, _immutable.List)((0, _keys.default)(fieldSchema.enumOptions).map(function (t) {
     return {
       key: t,
       value: t,
-      text: field_schema.enumOptions[t]
+      text: fieldSchema.enumOptions[t]
     };
   }));
 }
 
-function _hasPredefinedOptions(field_schema) {
-  return field_schema.options != null;
+function _hasPredefinedOptions(fieldSchema) {
+  return fieldSchema.options != null;
 }
 
-function _predefinedOptions(field_schema) {
-  return field_schema.options();
+function _predefinedOptions(fieldSchema) {
+  return fieldSchema.options();
 }
 
-function _hasExternalServiceOptions(field_schema) {
-  return field_schema.serviceDependency != null;
+function _hasExternalServiceOptions(fieldSchema) {
+  return fieldSchema.serviceDependency != null;
 }
 
-function _externalServiceOptions(field_schema) {
-  var service = field_schema.serviceDependency;
-  return service ? _toDropDownOptions(service, field_schema.serviceFilter) : null;
+function _externalServiceOptions(fieldSchema) {
+  var service = fieldSchema.serviceDependency;
+  return service ? _toDropDownOptions(service, fieldSchema.serviceFilter) : null;
 }
 
-function _getPlaceholder(field_schema) {
-  return field_schema.placeholder ? field_schema.placeholder : null;
+function _getPlaceholder(fieldSchema) {
+  return fieldSchema.placeholder ? fieldSchema.placeholder : null;
 }
 
 function _getError(errors, field) {
   return errors[field] ? errors[field] : null;
 }
 
-function _getHelpText(field_schema) {
-  return field_schema.helpText ? field_schema.helpText : null;
+function _getHelpText(fieldSchema) {
+  return fieldSchema.helpText ? fieldSchema.helpText : null;
 }
 
-function _applyExtras(result, field, overrides) {
-  var field_extras = overrides[field];
+function _toDropDownOptions(serviceKey) {
+  var filter = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
 
-  if (field_extras) {
-    (0, _keys.default)(field_extras).forEach(function (e) {
-      result[e] = field_extras[e];
-    });
+  if (Array.isArray(serviceKey)) {
+    var options = serviceKey.reduce(function (res, key) {
+      return res.concat(_toDropDownOptions(key, filter));
+    }, new _immutable.List());
+    return options;
   }
 
-  return result;
-}
-
-function _toDropDownOptions(service_key) {
-  var filter = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
-  return _firstcutModels.Models[service_key].find(filter).map(function (p) {
+  return _firstcutModels.default[serviceKey].find(filter).map(function (p) {
     return {
       key: p._id,
       value: p._id,

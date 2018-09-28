@@ -27,33 +27,33 @@ var _react = _interopRequireDefault(require("react"));
 
 var _propTypes = _interopRequireDefault(require("prop-types"));
 
+var _lodash = require("lodash");
+
 var _immutable = require("immutable");
 
 var _semanticUiReact = require("semantic-ui-react");
 
-var _random = require("meteor/random");
+var _moment = _interopRequireDefault(require("moment"));
 
-var _autoformSchema = _interopRequireDefault(require("../autoform.schema.js"));
+var _autoform = _interopRequireDefault(require("../autoform.schema"));
 
-var _firstcutUtils = require("firstcut-utils");
+var _autoform2 = require("../autoform.utils");
 
-var _autoformUtils = require("../autoform.utils.js");
+var _objectarray = _interopRequireDefault(require("./objectarray.form"));
 
-var _objectarrayForm = _interopRequireDefault(require("./objectarray.form.jsx"));
+var _label = _interopRequireDefault(require("./label"));
 
-var _label = _interopRequireDefault(require("./label.jsx"));
+var _location = _interopRequireDefault(require("./location"));
 
-var _location = _interopRequireDefault(require("./location.jsx"));
+var _datetime = _interopRequireDefault(require("./datetime"));
 
-var _datetime = _interopRequireDefault(require("./datetime.jsx"));
+var _checkbox = _interopRequireDefault(require("./checkbox"));
 
-var _checkbox = _interopRequireDefault(require("./checkbox.jsx"));
+var _dropzone = _interopRequireDefault(require("./dropzone"));
 
-var _dropzone = _interopRequireDefault(require("./dropzone.jsx"));
+var _select = _interopRequireDefault(require("./select"));
 
-var _select = _interopRequireDefault(require("./select.jsx"));
-
-var _number = _interopRequireDefault(require("./number.jsx"));
+var _number = _interopRequireDefault(require("./number"));
 
 var Autoform =
 /*#__PURE__*/
@@ -68,9 +68,9 @@ function (_React$Component) {
   (0, _createClass2.default)(Autoform, [{
     key: "render",
     value: function render() {
-      var disable_defaults = this.props.disable_defaults === undefined ? false : this.props.disable_defaults;
+      var disableDefaults = this.props.disableDefaults === undefined ? false : this.props.disableDefaults;
       return _react.default.createElement(_semanticUiReact.Form, null, _react.default.createElement(AutoformFields, (0, _extends2.default)({
-        disable_defaults: disable_defaults
+        disableDefaults: disableDefaults
       }, this.props)));
     }
   }]);
@@ -83,18 +83,18 @@ function AutoformFields(props) {
   var fields = props.fields,
       rest = (0, _objectWithoutProperties2.default)(props, ["fields"]);
   return fields.map(function (field, i) {
-    var is_row = field instanceof Array;
-    var react_key = "form-group-".concat(i);
+    var isRow = field instanceof Array;
+    var reactKey = "form-group-".concat(i);
 
-    if (is_row) {
+    if (isRow) {
       return _react.default.createElement(FieldRow, (0, _extends2.default)({
-        key: react_key,
+        key: reactKey,
         fields: field
       }, rest));
     }
 
     return _react.default.createElement(Field, (0, _extends2.default)({
-      key: react_key,
+      key: reactKey,
       field: field
     }, rest));
   });
@@ -108,20 +108,20 @@ function FieldRow(props) {
 
 function getLabel(props) {
   var type = props.type,
-      help_text = props.help_text,
+      helpText = props.helpText,
       label = props.label,
       error = props.error;
 
-  if (type == 'boolean') {
+  if (type === 'boolean') {
     return label;
-  } else {
-    return _react.default.createElement(_label.default, {
-      type: type,
-      label: label,
-      help_text: help_text,
-      error: error
-    });
   }
+
+  return _react.default.createElement(_label.default, {
+    type: type,
+    label: label,
+    helpText: helpText,
+    error: error
+  });
 }
 
 var Field =
@@ -143,18 +143,18 @@ function (_React$PureComponent) {
           field = _this$props.field,
           errors = _this$props.errors,
           overrides = _this$props.overrides,
-          disable_defaults = _this$props.disable_defaults;
+          disableDefaults = _this$props.disableDefaults;
       var options = {
         errors: errors,
         overrides: overrides
       };
-      var field_schema = (0, _autoformSchema.default)(record.schema, field, options);
+      var fieldSchema = (0, _autoform.default)(record, field, options);
 
-      if (!disable_defaults && !record.get(field) && field_schema.defaultValue) {
-        //save the default value to the record
+      if (!disableDefaults && !record.get(field) && fieldSchema.defaultValue) {
+        // save the default value to the record
         onChange(null, {
           name: field,
-          value: field_schema.defaultValue
+          value: fieldSchema.defaultValue
         });
       }
     }
@@ -167,82 +167,113 @@ function (_React$PureComponent) {
           onChange = _this$props2.onChange,
           errors = _this$props2.errors,
           overrides = _this$props2.overrides,
-          disable_defaults = _this$props2.disable_defaults;
+          disableDefaults = _this$props2.disableDefaults;
       var options = {
         errors: errors,
         overrides: overrides
       };
-      var field_schema = (0, _autoformSchema.default)(record.schema, field, options);
-      var type = field_schema.type,
-          defaultValue = field_schema.defaultValue,
-          field_props = (0, _objectWithoutProperties2.default)(field_schema, ["type", "defaultValue"]);
+      var fieldSchema = (0, _autoform.default)(record, field, options);
+      var type = fieldSchema.type,
+          defaultValue = fieldSchema.defaultValue,
+          fieldProps = (0, _objectWithoutProperties2.default)(fieldSchema, ["type", "defaultValue"]);
 
-      if (field_props.hidden) {
+      if (fieldProps.hidden) {
         return _react.default.createElement("div", null);
       }
 
-      field_props.label = getLabel((0, _objectSpread2.default)({}, field_props, {
+      fieldProps.label = getLabel((0, _objectSpread2.default)({}, fieldProps, {
         type: type
       }));
-      field_props.value = record.get(field);
+      fieldProps.value = record.get(field);
 
-      if (field_props.value === '') {
-        //do not allow empty string fields, prefer null
+      if (fieldProps.value === '') {
+        // do not allow empty string fields, prefer null
         onChange(null, {
           name: field,
           value: null
         });
       }
 
-      field_props.record = record;
-      field_props.fieldname = field;
-      field_props.name = field;
-      field_props.onChange = onChange;
-      field_props.key = "".concat(field);
+      if (fieldProps.options && fieldProps.value) {
+        var valueIsArray = Array.isArray(fieldProps.value);
+        var values = valueIsArray ? fieldProps.value : [fieldProps.value];
+        var optionValues = fieldProps.options.map(function (o) {
+          return o.key;
+        });
+        var filteredValues = values.filter(function (val) {
+          return optionValues.includes(val);
+        });
+
+        if (!_lodash._.isEqual(filteredValues, values)) {
+          if (valueIsArray) {
+            onChange(null, {
+              name: field,
+              value: filteredValues
+            });
+          } else {
+            onChange(null, {
+              name: field,
+              value: null
+            });
+          }
+        }
+      }
+
+      fieldProps.record = record;
+      fieldProps.fieldname = field;
+      fieldProps.name = field;
+      fieldProps.onChange = onChange;
+      fieldProps.key = "".concat(field);
 
       switch (type) {
         case 'options':
-          return _react.default.createElement(_select.default, field_props);
+          return _react.default.createElement(_select.default, fieldProps);
+
+        case 'multiselect':
+          return _react.default.createElement(_select.default, (0, _extends2.default)({}, fieldProps, {
+            multiple: true
+          }));
 
         case 'string':
-          var dom_props = (0, _autoformUtils.removeNonDomFields)(field_props);
+          var domProps = (0, _autoform2.removeNonDomFields)(fieldProps);
           return _react.default.createElement(_semanticUiReact.Form.Field, (0, _extends2.default)({
             control: _semanticUiReact.Input
-          }, dom_props));
+          }, domProps));
 
         case 'boolean':
-          return _react.default.createElement(_checkbox.default, field_props);
+          return _react.default.createElement(_checkbox.default, fieldProps);
 
         case 'number':
-          return _react.default.createElement(_number.default, field_props);
+          return _react.default.createElement(_number.default, fieldProps);
 
         case 'date':
-          return _react.default.createElement(_datetime.default, (0, _extends2.default)({}, field_props, {
-            timezone: record.timezone
+          // const timezone = record.timezone || getTimezoneFromDate(fieldProps.value);
+          return _react.default.createElement(_datetime.default, (0, _extends2.default)({}, fieldProps, {
+            timezone: fieldProps.timezone || record.timezone
           }));
 
         case 'textarea':
-          return _react.default.createElement(_semanticUiReact.Form.TextArea, field_props);
+          return _react.default.createElement(_semanticUiReact.Form.TextArea, fieldProps);
 
         case 'location':
-          return _react.default.createElement(_location.default, field_props);
+          return _react.default.createElement(_location.default, fieldProps);
 
         case 'file':
-          return _react.default.createElement(_dropzone.default, field_props);
+          return _react.default.createElement(_dropzone.default, fieldProps);
 
         case 'fileArray':
-          return _react.default.createElement(_dropzone.default, field_props);
+          return _react.default.createElement(_dropzone.default, fieldProps);
 
         case 'objectArray':
-          return _react.default.createElement(_objectarrayForm.default, (0, _extends2.default)({
+          return _react.default.createElement(_objectarray.default, (0, _extends2.default)({
             errors: errors
-          }, field_props, {
+          }, fieldProps, {
             renderFields: _react.default.createElement(AutoformFields, null)
           }));
 
         default:
-          console.log(field_props.name);
           console.log("you need to implement type ".concat(type));
+          return _react.default.createElement("div", null);
         // throw new Meteor.Error('Error field type not in allowed types [String]');
       }
     }

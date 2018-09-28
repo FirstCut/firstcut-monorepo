@@ -6,14 +6,14 @@ Object.defineProperty(exports, "__esModule", {
 Object.defineProperty(exports, "SlackContentSchema", {
   enumerable: true,
   get: function get() {
-    return _slackSchemas.SlackContentSchema;
+    return _slack2.SlackContentSchema;
   }
 });
 exports.Slack = void 0;
 
-var _slack = require("./slack.js");
+var _slack = require("./slack");
 
-var _slackSchemas = require("./slack.schemas.js");
+var _slack2 = require("./slack.schemas");
 
 var Slack = {
   postMessage: _slack.postMessage

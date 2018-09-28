@@ -8,32 +8,39 @@ Object.defineProperty(exports, "__esModule", {
 exports.initUploader = initUploader;
 exports.upload = upload;
 
+var _meteor = require("meteor/meteor");
+
+var _cryptoJs = _interopRequireDefault(require("crypto-js"));
+
 var _evaporate = _interopRequireDefault(require("evaporate"));
 
 var _awsSdk = _interopRequireDefault(require("aws-sdk"));
 
-require("buffer").Buffer;
-var evaporate_config = {};
+require('buffer').Buffer;
+var evaporateConfig = {
+  aws_key: _meteor.Meteor.settings.public.s3.key,
+  bucket: _meteor.Meteor.settings.public.s3.assets_bucket,
+  awsRegion: _meteor.Meteor.settings.public.s3.region,
+  logging: _meteor.Meteor.settings.public.environment === 'development',
+  computeContentMd5: true,
+  s3FileCacheHoursAgo: 4,
+  awsSignatureVersion: '4',
+  // partSize: 37748736, // aws mentioned 72 as ideal part size, this requires experimentation
+  s3Acceleration: true,
+  signerUrl: "".concat(_meteor.Meteor.settings.public.PLATFORM_ROOT_URL, "/computeSignature"),
+  cryptoMd5Method: function cryptoMd5Method(data) {
+    return _awsSdk.default.util.crypto.md5(data, 'base64');
+  },
+  cryptoHexEncodedHash256: function cryptoHexEncodedHash256(data) {
+    return _awsSdk.default.util.crypto.sha256(data, 'hex');
+  }
+};
+var evaporate = null;
 
-function initUploader(conf) {
-  evaporate_config = {
-    aws_key: conf.aws_key,
-    bucket: conf.bucket,
-    awsRegion: conf.awsRegion,
-    computeContentMd5: true,
-    s3FileCacheHoursAgo: 4,
-    awsSignatureVersion: '4',
-    allowS3ExistenceOptimization: true,
-    s3Acceleration: true,
-    signerUrl: conf.computeSignatureEndpoint,
-    cryptoMd5Method: function cryptoMd5Method(data) {
-      return _awsSdk.default.util.crypto.md5(data, 'base64');
-    },
-    cryptoHexEncodedHash256: function cryptoHexEncodedHash256(data) {
-      return _awsSdk.default.util.crypto.sha256(data, 'hex');
-    } // cryptoMd5Method: function (data) { return crypto.createHash('md5').update(data).digest('base64'); },
-
-  };
+function initUploader() {
+  _evaporate.default.create(evaporateConfig).then(function (eva) {
+    evaporate = eva;
+  });
 }
 
 function upload(opts) {
@@ -41,27 +48,28 @@ function upload(opts) {
       path = opts.path,
       emitter = opts.emitter,
       _opts$bucket = opts.bucket,
-      bucket = _opts$bucket === void 0 ? Meteor.settings.public.s3.assets_bucket : _opts$bucket;
-  return _evaporate.default.create(evaporate_config).then(function (evaporate) {
-    var config = {
-      name: path,
-      file: file,
-      contentType: file.type,
-      progress: function progress(val) {
-        emitter.emit('progress', val);
-      },
-      complete: function complete(_xhr, awsKey) {
-        emitter.emit('complete', awsKey);
-      }
-    };
-    var overrides = {
-      bucket: bucket
-    };
-    evaporate.add(config, overrides).then(function (awsObjectKey) {
-      console.log('File successfully uploaded to:', awsObjectKey);
-      emitter.emit('uploaded', awsObjectKey);
-    }, function (reason) {
-      emitter.emit('error', reason);
-    });
+      bucket = _opts$bucket === void 0 ? _meteor.Meteor.settings.public.s3.assets_bucket : _opts$bucket;
+  var config = {
+    name: path,
+    file: file,
+    contentType: file.type,
+    progress: function progress(val, stats) {
+      emitter.emit('progress', val, stats);
+    },
+    complete: function complete(_xhr, awsKey) {
+      emitter.emit('complete', awsKey);
+    }
+  };
+  var overrides = {
+    bucket: bucket
+  };
+  evaporate.add(config, overrides).then(function (awsObjectKey) {
+    emitter.emit('uploaded', awsObjectKey);
+  }, function (reason) {
+    emitter.emit('error', reason);
   });
+}
+
+function hmac(key, value) {
+  return _cryptoJs.default.HmacSHA256(value, key); // return AWS.util.crypto.lib.createHmac(value, key);
 }

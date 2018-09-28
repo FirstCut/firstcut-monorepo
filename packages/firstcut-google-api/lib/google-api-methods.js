@@ -72,6 +72,8 @@ _meteor.Meteor.methods({
     }
 
     if (result.statusCode === 200) {
+      // console.log('success');
+      // console.log(EJSON.stringify(result.data));
       _meteor.Meteor.users.update(user._id, {
         '$set': {
           'services.google.accessToken': result.data.access_token,

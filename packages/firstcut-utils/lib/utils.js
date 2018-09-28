@@ -5,27 +5,60 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+exports.pluralize = pluralize;
 exports.removePunctuation = removePunctuation;
+exports.formatBytes = formatBytes;
 exports.executeAsyncWithCallback = executeAsyncWithCallback;
-exports.asAsync = asAsync;
+exports.emitPipelineEvent = emitPipelineEvent;
 exports.isEmpty = isEmpty;
 exports.logError = logError;
 exports.isURL = isURL;
 exports.asUSDollars = asUSDollars;
 exports.htmlifyString = htmlifyString;
 
-var _regenerator = _interopRequireDefault(require("@babel/runtime/regenerator"));
+var _stringify = _interopRequireDefault(require("@babel/runtime/core-js/json/stringify"));
 
-var _asyncToGenerator2 = _interopRequireDefault(require("@babel/runtime/helpers/asyncToGenerator"));
+var _typeof2 = _interopRequireDefault(require("@babel/runtime/helpers/typeof"));
+
+var _objectSpread2 = _interopRequireDefault(require("@babel/runtime/helpers/objectSpread"));
+
+var _objectWithoutProperties2 = _interopRequireDefault(require("@babel/runtime/helpers/objectWithoutProperties"));
 
 var _promise = _interopRequireDefault(require("@babel/runtime/core-js/promise"));
 
 var _lodash = require("lodash");
 
-var _playerUtils = require("./player.utils.js");
+var _firstcutPlayers = require("firstcut-players");
+
+var _analytics = _interopRequireDefault(require("/imports/api/analytics"));
+
+var _http = require("meteor/http");
+
+// import { handleEvent } from '/imports/api/pipeline';
+function pluralize(str) {
+  var lastLetter = str[str.length - 1];
+
+  if (lastLetter === 'y') {
+    var withoutY = str.substring(0, str.length - 1);
+    return "".concat(withoutY, "ies");
+  }
+
+  return "".concat(str, "s");
+}
 
 function removePunctuation(str) {
-  return str.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()\ ]/g, "");
+  return str.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()\ ]/g, '');
+} // Shamelessly copied from stack overflow...
+// https://stackoverflow.com/questions/15900485/correct-way-to-convert-size-in-bytes-to-kb-mb-gb-in-javascript
+
+
+function formatBytes(bytes, decimals) {
+  if (bytes === 0) return '0 Bytes';
+  var k = 1024;
+  var dm = decimals || 2;
+  var sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
+  var i = Math.floor(Math.log(bytes) / Math.log(k));
+  return "".concat(parseFloat((bytes / Math.pow(k, i)).toFixed(dm)), " ").concat(sizes[i]);
 }
 
 function executeAsyncWithCallback(func, cb) {
@@ -40,32 +73,37 @@ function executeAsyncWithCallback(func, cb) {
   });
 }
 
-function asAsync(_x) {
-  return _asAsync.apply(this, arguments);
-}
+function emitPipelineEvent(args) {
+  if ((0, _firstcutPlayers.inSimulationMode)()) {
+    return;
+  }
 
-function _asAsync() {
-  _asAsync = (0, _asyncToGenerator2.default)(
-  /*#__PURE__*/
-  _regenerator.default.mark(function _callee(func) {
-    return _regenerator.default.wrap(function _callee$(_context) {
-      while (1) {
-        switch (_context.prev = _context.next) {
-          case 0:
-            _context.next = 2;
-            return func();
+  var record = args.record,
+      rest = (0, _objectWithoutProperties2.default)(args, ["record"]);
 
-          case 2:
-            return _context.abrupt("return", _context.sent);
+  var params = _lodash._.mapValues((0, _objectSpread2.default)({}, rest, {
+    record_id: record._id,
+    record_type: record.modelName,
+    initiator_player_id: (0, _firstcutPlayers.userPlayerId)()
+  }), function (val) {
+    if ((0, _typeof2.default)(val) === 'object') {
+      return (0, _stringify.default)(val);
+    }
 
-          case 3:
-          case "end":
-            return _context.stop();
-        }
-      }
-    }, _callee, this);
-  }));
-  return _asAsync.apply(this, arguments);
+    return val ? val.toString() : '';
+  });
+
+  _analytics.default.trackAction(args); // handleEvent.call(eventData);
+
+
+  _http.HTTP.post("".concat(Meteor.settings.public.PIPELINE_ROOT, "/handleEvent"), {
+    content: params,
+    params: params,
+    query: params,
+    data: params
+  }, function (res) {
+    console.log(res);
+  });
 }
 
 function isEmpty(something) {
@@ -82,25 +120,25 @@ function isEmpty(something) {
 
   if (something.isEmpty != null) {
     return something.isEmpty();
-  } else {
-    return _lodash._.isEmpty(something);
   }
+
+  return _lodash._.isEmpty(something);
 }
 
 function logError(error) {
-  console.log(error);
+  _analytics.default.trackError(error);
 }
 
 function isURL(str) {
   if (str) {
     return str.match(/(www|http:|https:)+[^\s]+[\w]/);
-  } else {
-    return null;
   }
+
+  return null;
 }
 
 function asUSDollars(num) {
-  return '$' + num;
+  return "$".concat(num);
 }
 
 function htmlifyString(str) {

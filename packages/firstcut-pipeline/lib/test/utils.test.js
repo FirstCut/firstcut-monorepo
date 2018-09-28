@@ -1,5 +1,5 @@
-// import { SUPPORTED_EVENTS, ACTIONS } from '../shared/pipeline.enum.js';
-// import Pipeline from '../pipeline.js';
+// import { SUPPORTED_EVENTS, ACTIONS } from 'firstcut-pipeline-consts';
+// import Pipeline from '../pipeline';
 // import { _ } from 'lodash';
 // import { Record } from 'immutable';
 // import sinon from 'sinon';

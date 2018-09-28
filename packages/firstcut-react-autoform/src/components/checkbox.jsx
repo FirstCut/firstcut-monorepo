@@ -5,7 +5,7 @@ import { Record, List } from 'immutable';
 import { Form, Icon, Input, Checkbox as SemanticCheckbox} from 'semantic-ui-react';
 
 export default function Checkbox(props) {
-  const { value, onChange, ...field_props } = {...props};
+  const { value, onChange, ...fieldProps } = {...props};
 
   const onCheckboxChange = (onChange, name, prev_value) => (e)=> {
     const new_value = !prev_value;
@@ -13,8 +13,8 @@ export default function Checkbox(props) {
   }
 
   if (value) {
-    field_props.checked = true;
+    fieldProps.checked = true;
   }
-  field_props.onChange = onCheckboxChange(onChange, props.name, value);
-  return <Form.Field control={SemanticCheckbox} {...field_props}/>
+  fieldProps.onChange = onCheckboxChange(onChange, props.name, value);
+  return <Form.Field control={SemanticCheckbox} {...fieldProps}/>
 }

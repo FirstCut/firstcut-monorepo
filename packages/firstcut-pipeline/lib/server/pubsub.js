@@ -1,17 +1,25 @@
 "use strict";
 
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = initSubscriptions;
 
+var _objectSpread2 = _interopRequireDefault(require("@babel/runtime/helpers/objectSpread"));
+
+var _keys = _interopRequireDefault(require("@babel/runtime/core-js/object/keys"));
+
+var _meteor = require("meteor/meteor");
+
 var _pubsubJs = require("pubsub-js");
 
-var _firstcutEnum = require("firstcut-enum");
+var _firstcutPipelineConsts = require("firstcut-pipeline-consts");
 
-var _firstcutUtils = require("firstcut-utils");
+var _firstcutPlayers = require("firstcut-players");
 
-var _firstcutModels = require("firstcut-models");
+var _firstcutModels = _interopRequireDefault(require("firstcut-models"));
 
 var _lodash = require("lodash");
 
@@ -19,47 +27,43 @@ var _moment = _interopRequireDefault(require("moment"));
 
 var _execute = require("../execute.actions");
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 function initSubscriptions() {
-  var Cut = _firstcutModels.Models.Cut,
-      Deliverable = _firstcutModels.Models.Deliverable,
-      Shoot = _firstcutModels.Models.Shoot;
+  var Cut = _firstcutModels.default.Cut,
+      Deliverable = _firstcutModels.default.Deliverable,
+      Shoot = _firstcutModels.default.Shoot,
+      Invoice = _firstcutModels.default.Invoice;
   /* Listens to all records for updates to all keys in COLLABORATOR_TYPES_TO_LABELS */
 
   /* Publishes a 'collaborator_added' event if a collaborator has changed */
 
-  function collaboratorsChanged(record, prev_record) {
+  function collaboratorsChanged(record, prevRecord) {
     var result = false;
-    var type_keys = Object.keys(_firstcutEnum.COLLABORATOR_TYPES_TO_LABELS);
-    type_keys.forEach(function (collaborator_key) {
+    var typeKeys = (0, _keys.default)(_firstcutPipelineConsts.COLLABORATOR_TYPES_TO_LABELS);
+    typeKeys.forEach(function (collaborator_key) {
       var collaborator = record[collaborator_key] || {};
-      var prev_collaborator = prev_record[collaborator_key] || {};
+      var prevCollaborator = prevRecord[collaborator_key] || {};
+      var sameCollaborator = collaborator && prevCollaborator && collaborator._id === prevCollaborator._id;
 
-      if (collaborator && prev_collaborator && collaborator._id == prev_collaborator._id) {} else {
+      if (!sameCollaborator) {
         result = true;
       }
     });
     return result;
   }
 
-  function notifyCollaboratorsTheyWereAddedOrRemoved(model, fields, prev_fields) {
+  function notifyCollaboratorsTheyWereAddedOrRemoved(model, fields, prevFields) {
     var record = model.createNew(fields);
-    var prev_record = model.createNew(prev_fields);
-    var type_keys = Object.keys(_firstcutEnum.COLLABORATOR_TYPES_TO_LABELS);
-    type_keys.forEach(function (collaborator_key) {
+    var prevRecord = model.createNew(prevFields);
+    var typeKeys = (0, _keys.default)(_firstcutPipelineConsts.COLLABORATOR_TYPES_TO_LABELS);
+    typeKeys.forEach(function (collaborator_key) {
       var collaborator = record[collaborator_key] || {};
-      var prev_collaborator = prev_record[collaborator_key] || {};
+      var prevCollaborator = prevRecord[collaborator_key] || {};
 
-      if (collaborator && prev_collaborator && collaborator._id == prev_collaborator._id) {
+      if (collaborator && prevCollaborator && collaborator._id === prevCollaborator._id) {
         return;
       }
 
-      var gig_type = record.model_name;
+      var gig_type = record.modelName;
       var gig_id = record._id;
 
       if (collaborator && collaborator._id) {
@@ -70,15 +74,18 @@ function initSubscriptions() {
           gig_id: gig_id,
           collaborator_key: collaborator_key
         });
-      } // if (prev_collaborator && prev_collaborator._id) {
-      //   PubSub.publish(EVENTS.collaborator_removed, {record_id: prev_collaborator._id, record_type: 'Collaborator', gig_type, gig_id, collaborator_key});
-      // }
-
+      }
     });
   }
 
   var initializing = true;
+  var query = _meteor.Meteor.settings.public.environment === 'development' ? {} : {
+    isDummy: {
+      $ne: true
+    }
+  };
   Shoot.collection.find({}).observe({
+    // allow actions on dummy shoots for videographer training purposes
     added: function added(doc) {
       if (initializing) {
         return;
@@ -91,25 +98,28 @@ function initSubscriptions() {
         record_type: 'Shoot'
       });
     },
-    changed: function changed(fields, prev_fields) {
+    changed: function changed(fields, prevFields) {
       if (initializing) {
         return;
       }
 
       var shoot = new Shoot(fields);
-      var prev_shoot = new Shoot(prev_fields);
+      var prevShoot = new Shoot(prevFields);
       var screenshots = shoot.screenshots.toArray();
-      var prev_screenshots = prev_shoot.screenshots.toArray();
-      var prev_date = (0, _moment.default)(prev_shoot.date);
+      var prevScreenshots = prevShoot.screenshots.toArray();
+      var prevDate = (0, _moment.default)(prevShoot.date);
       var date = (0, _moment.default)(shoot.date);
-      var same_date = prev_date && prev_date.isSame(date);
-      var prev_location = prev_shoot.location || {};
+      var sameDate = prevDate && prevDate.isSame(date);
+      var prevExtraAttendees = prevShoot.extraCalendarEventAttendees || [];
+      var extraAttendees = shoot.extraCalendarEventAttendees || [];
+      var extraAttendeesChanged = !_lodash._.isEqual(extraAttendees, prevExtraAttendees);
+      var prevLocation = prevShoot.location || {};
       var location = shoot.location || null;
-      var location_changed = location && location.place_id != prev_location.place_id;
-      var preproduction_status_changed = shoot.preproHasBeenKickedOff && !prev_shoot.preproHasBeenKickedOff;
+      var locationChanged = location && location.place_id !== prevLocation.place_id;
+      var preproductionStatusChanged = shoot.preproHasBeenKickedOff && !prevShoot.preproHasBeenKickedOff;
 
-      if (!same_date || collaboratorsChanged(shoot, prev_shoot) || location_changed || preproduction_status_changed) {
-        if (shoot.preproHasBeenKickedOff) {
+      if (!sameDate || extraAttendeesChanged || collaboratorsChanged(shoot, prevShoot) || locationChanged || preproductionStatusChanged) {
+        if (shoot.preproHasBeenKickedOff && !shoot.isDummy) {
           _pubsubJs.PubSub.publish('shoot_event_updated', {
             record_id: shoot._id,
             record_type: 'Shoot'
@@ -117,8 +127,8 @@ function initSubscriptions() {
         }
       }
 
-      if (screenshots.length > prev_screenshots.length) {
-        var uploaded = _lodash._.last(_lodash._.differenceBy(screenshots, prev_screenshots, function (s) {
+      if (screenshots.length > prevScreenshots.length) {
+        var uploaded = _lodash._.last(_lodash._.differenceBy(screenshots, prevScreenshots, function (s) {
           return s.filename;
         }));
 
@@ -129,27 +139,27 @@ function initSubscriptions() {
         });
       }
 
-      var approval_changed = _lodash._.last(_lodash._.differenceBy(screenshots, prev_screenshots, function (s) {
+      var approvalChanged = _lodash._.last(_lodash._.differenceBy(screenshots, prevScreenshots, function (s) {
         return s.filename + s.notes + s.approved;
       }));
 
-      if (approval_changed && shoot.screenshotApproved(approval_changed)) {
+      if (approvalChanged && shoot.screenshotApproved(approvalChanged)) {
         _pubsubJs.PubSub.publish('screenshot_approved', {
           record_id: shoot._id,
-          screenshot: approval_changed,
+          screenshot: approvalChanged,
           record_type: 'Shoot'
         });
       }
 
-      if (approval_changed && shoot.screenshotRejected(approval_changed)) {
+      if (approvalChanged && Shoot.screenshotRejected(approvalChanged)) {
         _pubsubJs.PubSub.publish('screenshot_rejected', {
           record_id: shoot._id,
-          screenshot: approval_changed,
+          screenshot: approvalChanged,
           record_type: 'Shoot'
         });
       }
 
-      if (shoot.checkouts.length > prev_shoot.checkouts.length) {
+      if (shoot.checkouts.length > prevShoot.checkouts.length) {
         var collaboratorKey = shoot.latestCheckout.collaboratorKey;
 
         _pubsubJs.PubSub.publish('shoot_checkout', {
@@ -159,7 +169,7 @@ function initSubscriptions() {
         });
       }
 
-      if (shoot.checkins.length > prev_shoot.checkins.length) {
+      if (shoot.checkins.length > prevShoot.checkins.length) {
         var _collaboratorKey = shoot.latestCheckin.collaboratorKey;
 
         _pubsubJs.PubSub.publish('shoot_checkin', {
@@ -169,10 +179,10 @@ function initSubscriptions() {
         });
       }
 
-      notifyCollaboratorsTheyWereAddedOrRemoved(_firstcutModels.Models.Shoot, fields, prev_fields);
+      notifyCollaboratorsTheyWereAddedOrRemoved(_firstcutModels.default.Shoot, fields, prevFields);
     }
   });
-  Cut.collection.find({}).observe({
+  Cut.collection.find(query).observe({
     added: function added(doc) {
       if (initializing) {
         return;
@@ -187,23 +197,54 @@ function initSubscriptions() {
         });
       }
     },
-    changed: function changed(fields, prev_fields) {
+    changed: function changed(fields, prevFields) {
       if (initializing) {
         return;
       }
 
       var cut = new Cut(fields);
-      var prev_cut = new Cut(prev_fields);
+      var prevCut = new Cut(prevFields);
 
-      if (cut.hasFile && !prev_cut.hasFile) {
+      if (cut.hasFile && !prevCut.hasFile) {
         _pubsubJs.PubSub.publish('cut_uploaded', {
           record_id: cut._id,
-          record_type: Cut.model_name
+          record_type: Cut.modelName
         });
       }
     }
   });
-  Deliverable.collection.find({}).observe({
+  Invoice.collection.find(query).observe({
+    added: function added(doc) {
+      if (initializing) {
+        return;
+      }
+
+      var invoice = Invoice.fromId(doc._id);
+
+      if (invoice.isDue()) {
+        _pubsubJs.PubSub.publish('invoice_set_to_due', {
+          record_id: doc._id,
+          record_type: Invoice.modelName
+        });
+      }
+    },
+    changed: function changed(fields, prevFields) {
+      if (initializing) {
+        return;
+      }
+
+      var invoice = new Invoice(fields);
+      var prevInvoice = new Invoice(prevFields);
+
+      if (!prevInvoice.isDue() && invoice.isDue()) {
+        _pubsubJs.PubSub.publish('invoice_set_to_due', {
+          record_id: invoice._id,
+          record_type: Invoice.modelName
+        });
+      }
+    }
+  });
+  Deliverable.collection.find(query).observe({
     added: function added(doc) {
       if (initializing) {
         return;
@@ -218,18 +259,18 @@ function initSubscriptions() {
         });
       }
     },
-    changed: function changed(fields, prev_fields) {
+    changed: function changed(fields, prevFields) {
       if (initializing) {
         return;
       }
 
       var deliverable = new Deliverable(fields);
-      var prev_deliverable = new Deliverable(prev_fields);
-      var prev_due = (0, _moment.default)(prev_deliverable.nextCutDue);
+      var prevDeliverable = new Deliverable(prevFields);
+      var prevDue = (0, _moment.default)(prevDeliverable.nextCutDue);
       var due = (0, _moment.default)(deliverable.nextCutDue);
-      var same_date = prev_due && prev_due.isSame(due);
+      var sameDate = prevDue && prevDue.isSame(due);
 
-      if (!same_date || collaboratorsChanged(deliverable, prev_deliverable)) {
+      if (!sameDate || collaboratorsChanged(deliverable, prevDeliverable)) {
         _pubsubJs.PubSub.publish('cut_due_event_updated', {
           record_id: deliverable._id,
           record_type: 'Deliverable'
@@ -238,42 +279,37 @@ function initSubscriptions() {
     }
   });
 
-  _firstcutModels.Models.allModels.forEach(function (model) {
-    if (model.model_name == 'Asset') {
+  _firstcutModels.default.allModels.forEach(function (model) {
+    if (model.modelName === 'Asset') {
       return;
     }
 
     var initializing = true;
 
-    if ([_firstcutModels.Models.Job.model_name, _firstcutModels.Models.Cut.model_name].includes(model.model_name)) {
+    if ([_firstcutModels.default.Job.modelName, _firstcutModels.default.Cut.modelName].includes(model.modelName)) {
       return;
     }
 
-    model.collection.find({}).observe({
+    model.collection.find(query).observe({
       added: function added(doc) {
-        console.log('ADDED');
-
         if (initializing) {
           return;
         }
 
-        var user = Meteor.users.findOne(doc.createdBy);
-        var initiator_player_id = (0, _firstcutUtils.getPlayerIdFromUser)(user);
+        var record = _firstcutModels.default.getRecordFromId(model.modelName, doc._id);
+
+        var user = _meteor.Meteor.users.findOne(record.createdBy);
+
+        var initiator_player_id = (0, _firstcutPlayers.getPlayerIdFromUser)(user);
 
         _pubsubJs.PubSub.publish('record_created', {
           record_id: doc._id,
           initiator_player_id: initiator_player_id,
-          record_type: model.model_name
-        }); // generate and save all dependent records //TOOD this will need to be removed into a separate service
+          record_type: model.modelName
+        });
 
-
-        var record = _firstcutModels.Models.getRecordFromId(model.model_name, doc._id);
-
-        var dependent_records = record.generateDependentRecords(doc.createdBy);
-        dependent_records.forEach(function (r) {
-          var defaultCreatedBy = '111111';
-          var createdBy = doc.createdBy ? doc.createdBy : defaultCreatedBy;
-          r = r.set('createdBy', createdBy);
+        var dependentRecords = record.generateDependentRecords(doc.createdBy);
+        dependentRecords.forEach(function (r) {
           r.save();
         });
       }
@@ -281,13 +317,48 @@ function initSubscriptions() {
     initializing = false;
   });
 
-  _firstcutEnum.SUPPORTED_EVENTS.forEach(function (e) {
-    _pubsubJs.PubSub.subscribe(e, Meteor.bindEnvironment(function (msg, data) {
-      _execute.handleEvent.call({
-        event_data: _objectSpread({
-          event: e
-        }, data)
+  _meteor.Meteor.users.find({}).observe({
+    added: function added(doc) {
+      if (initializing) {
+        return;
+      }
+
+      handleNewUser(doc);
+    },
+    changed: function changed(fields, prevFields) {
+      if (initializing) {
+        return;
+      }
+
+      var newPlayerId = (0, _firstcutPlayers.getPlayerIdFromUser)(fields);
+      var oldPlayerId = (0, _firstcutPlayers.getPlayerIdFromUser)(prevFields);
+
+      if (newPlayerId && newPlayerId !== oldPlayerId) {
+        handleNewUser(fields);
+      }
+    }
+  });
+
+  function handleNewUser(user) {
+    var playerId = (0, _firstcutPlayers.getPlayerIdFromUser)(user);
+
+    if (playerId) {
+      var player = (0, _firstcutPlayers.getPlayerFromQuery)({
+        _id: playerId
       });
+
+      if (player && !player.hasUserProfile) {
+        player = player.set('hasUserProfile', true);
+        player.save();
+      }
+    }
+  }
+
+  _firstcutPipelineConsts.SUPPORTED_EVENTS.forEach(function (e) {
+    _pubsubJs.PubSub.subscribe(e, _meteor.Meteor.bindEnvironment(function (msg, data) {
+      (0, _execute.handleEvent)((0, _objectSpread2.default)({
+        event: e
+      }, data));
     }));
   });
 

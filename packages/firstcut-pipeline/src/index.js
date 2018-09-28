@@ -2,17 +2,20 @@
 import {
   fulfillsPrerequisites,
   handleEvent,
+  getCustomFieldsSchema,
   getEventActionsAsDescriptiveString,
 } from './execute.actions';
 
-import initSubscriptions from './pubsub';
+import initSubscriptions from './server/pubsub';
 
-console.log('Init subscriptions in the pipeline');
-console.log(initSubscriptions);
+// this is silly. why
+export function init() {
+  initSubscriptions();
+}
 
 export {
   fulfillsPrerequisites,
-  initSubscriptions,
   handleEvent,
+  getCustomFieldsSchema,
   getEventActionsAsDescriptiveString,
 };

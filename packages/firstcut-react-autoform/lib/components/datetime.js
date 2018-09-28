@@ -31,7 +31,7 @@ var _reactDatetime = _interopRequireDefault(require("react-datetime"));
 
 var _moment = _interopRequireDefault(require("moment"));
 
-// import { isUTC } from 'firstcut-utils/datetime.js';
+// import { isUTC } from 'firstcut-utils/datetime';
 var COMPONENT_DEFAULT_TZ = 'Etc/UTC';
 
 var AutoformDatetime =
@@ -51,17 +51,21 @@ function (_React$Component) {
     }
 
     return (0, _possibleConstructorReturn2.default)(_this, (_temp = _this = (0, _possibleConstructorReturn2.default)(this, (_getPrototypeOf2 = (0, _getPrototypeOf3.default)(AutoformDatetime)).call.apply(_getPrototypeOf2, [this].concat(args))), _this.state = {
-      as_if_utc_date: null
+      asIfUtcDate: null
     }, _this.onDateChange = function (value) {
-      var as_if_in_timezone = _this.getUtcDateAsIfInTimezone(value, _this.props.timezone);
+      var _this$props = _this.props,
+          onChange = _this$props.onChange,
+          name = _this$props.name,
+          timezone = _this$props.timezone;
+      var asIfInTimezone = getUtcDateAsIfInTimezone(value, timezone);
 
       _this.setState({
-        as_if_utc_date: value
+        asIfUtcDate: value
       });
 
-      _this.props.onChange(null, {
-        name: _this.props.name,
-        value: as_if_in_timezone.toDate()
+      onChange(null, {
+        name: name,
+        value: asIfInTimezone.toDate()
       });
     }, _temp));
   }
@@ -69,40 +73,52 @@ function (_React$Component) {
   (0, _createClass2.default)(AutoformDatetime, [{
     key: "componentDidMount",
     value: function componentDidMount() {
-      var as_if_utc_date = this.props.value ? replaceTimezone(this.props.value, this.props.timezone, COMPONENT_DEFAULT_TZ) : null;
+      var _this$props2 = this.props,
+          value = _this$props2.value,
+          timezone = _this$props2.timezone;
+      var asIfUtcDate = value ? replaceTimezone(value, timezone, COMPONENT_DEFAULT_TZ) : null;
       this.setState({
-        as_if_utc_date: as_if_utc_date
+        asIfUtcDate: asIfUtcDate
       });
     }
   }, {
     key: "componentDidUpdate",
-    value: function componentDidUpdate(prev_props, prev_state) {
-      if (this.props.timezone != prev_props.timezone) {
-        var as_if_in_timezone = this.getUtcDateAsIfInTimezone(this.state.as_if_utc_date, this.props.timezone);
-        this.props.onChange(null, {
-          name: this.props.name,
-          value: as_if_in_timezone.toDate()
+    value: function componentDidUpdate(prevProps, prevState) {
+      var _this$props3 = this.props,
+          onChange = _this$props3.onChange,
+          name = _this$props3.name,
+          value = _this$props3.value,
+          timezone = _this$props3.timezone;
+      var asIfUtcDate = this.state.asIfUtcDate;
+
+      if (timezone !== prevProps.timezone) {
+        var asIfInTimezone = getUtcDateAsIfInTimezone(asIfUtcDate, timezone);
+        onChange(null, {
+          name: name,
+          value: asIfInTimezone.toDate()
+        });
+      }
+
+      if (!asIfUtcDate && !prevProps.value && value) {
+        var utcDate = value ? replaceTimezone(value, timezone, COMPONENT_DEFAULT_TZ) : null;
+        this.setState({
+          asIfUtcDate: utcDate
         });
       }
     }
   }, {
-    key: "getUtcDateAsIfInTimezone",
-    value: function getUtcDateAsIfInTimezone(value, in_timezone) {
-      return replaceTimezone(value, 'Etc/UTC', in_timezone);
-    }
-  }, {
     key: "render",
     value: function render() {
-      var _this$props = this.props,
-          onChange = _this$props.onChange,
-          value = _this$props.value,
-          field_props = (0, _objectWithoutProperties2.default)(_this$props, ["onChange", "value"]);
-      field_props.onChange = this.onDateChange;
+      var _this$props4 = this.props,
+          onChange = _this$props4.onChange,
+          value = _this$props4.value,
+          fieldProps = (0, _objectWithoutProperties2.default)(_this$props4, ["onChange", "value"]);
+      fieldProps.onChange = this.onDateChange;
       return _react.default.createElement(_semanticUiReact.Form.Input, (0, _extends2.default)({
         control: _reactDatetime.default,
         utc: true
-      }, field_props, {
-        value: this.state.as_if_utc_date
+      }, fieldProps, {
+        value: this.state.asIfUtcDate
       }));
     }
   }]);
@@ -111,13 +127,19 @@ function (_React$Component) {
 
 exports.default = AutoformDatetime;
 
-var replaceTimezone = function replaceTimezone(date) {
+function replaceTimezone(date) {
   var old_tz = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : COMPONENT_DEFAULT_TZ;
-  var new_tz = arguments.length > 2 ? arguments[2] : undefined;
-  var as_moment = (0, _moment.default)(date);
-  var stripped_date = as_moment.tz(old_tz).format("YYYY-MM-DD HH:mm");
+  var newTimezone = arguments.length > 2 ? arguments[2] : undefined;
+  var asMoment = (0, _moment.default)(date);
+  var strippedDate = asMoment.tz(old_tz).format('YYYY-MM-DD HH:mm');
+  console.log('STRIPEd');
+  console.log(strippedDate);
 
-  var replaced = _moment.default.tz(stripped_date, new_tz);
+  var replaced = _moment.default.tz(strippedDate, newTimezone);
 
   return replaced;
-};
+}
+
+function getUtcDateAsIfInTimezone(value, inTimezone) {
+  return replaceTimezone(value, 'Etc/UTC', inTimezone);
+}

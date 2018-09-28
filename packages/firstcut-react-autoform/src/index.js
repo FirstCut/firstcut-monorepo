@@ -1,3 +1,3 @@
-import Autoform from './components/autoform.jsx';
+import Autoform from './components/autoform';
 
 export { Autoform };

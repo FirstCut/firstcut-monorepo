@@ -1,5 +1,5 @@
-import { createEvent } from './calendar.js';
-import { CalendarEventContentSchema } from './calendar.schemas.js';
+import { createEvent } from './calendar';
+import { CalendarEventContentSchema } from './calendar.schemas';
 
 export {
   CalendarEventContentSchema,

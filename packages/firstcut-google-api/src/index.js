@@ -1,4 +1,4 @@
-import { GoogleApi } from './google-api-async.js';
-// import './google-api-methods.js';
+import { GoogleApi } from './google-api-async';
+import './google-api-methods';
 
 export default GoogleApi;

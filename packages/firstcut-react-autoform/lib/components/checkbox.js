@@ -25,7 +25,7 @@ function Checkbox(props) {
   var _props = (0, _objectSpread2.default)({}, props),
       value = _props.value,
       onChange = _props.onChange,
-      field_props = (0, _objectWithoutProperties2.default)(_props, ["value", "onChange"]);
+      fieldProps = (0, _objectWithoutProperties2.default)(_props, ["value", "onChange"]);
 
   var onCheckboxChange = function onCheckboxChange(onChange, name, prev_value) {
     return function (e) {
@@ -38,11 +38,11 @@ function Checkbox(props) {
   };
 
   if (value) {
-    field_props.checked = true;
+    fieldProps.checked = true;
   }
 
-  field_props.onChange = onCheckboxChange(onChange, props.name, value);
+  fieldProps.onChange = onCheckboxChange(onChange, props.name, value);
   return _react.default.createElement(_semanticUiReact.Form.Field, (0, _extends2.default)({
     control: _semanticUiReact.Checkbox
-  }, field_props));
+  }, fieldProps));
 }

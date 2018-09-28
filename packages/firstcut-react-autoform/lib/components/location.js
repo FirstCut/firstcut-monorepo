@@ -8,8 +8,6 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = LocationField;
 exports.googleLocationToSchema = googleLocationToSchema;
 
-var _defineProperty2 = _interopRequireDefault(require("@babel/runtime/helpers/defineProperty"));
-
 var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
 
 var _objectSpread2 = _interopRequireDefault(require("@babel/runtime/helpers/objectSpread"));
@@ -37,7 +35,7 @@ function LocationField(props) {
   var _props = (0, _objectSpread2.default)({}, props),
       record = _props.record,
       onChange = _props.onChange,
-      field_props = (0, _objectWithoutProperties2.default)(_props, ["record", "onChange"]);
+      fieldProps = (0, _objectWithoutProperties2.default)(_props, ["record", "onChange"]);
 
   onPlaceSelected = function onPlaceSelected(onChange, name) {
     return function (location) {
@@ -51,25 +49,36 @@ function LocationField(props) {
   };
 
   clearLocation = function clearLocation() {
-    return _this.onPlaceSelected(onChange, field_props.name)(null);
+    return _this.onPlaceSelected(onChange, fieldProps.name)(null);
   };
 
   locationDisplayName = record.locationDisplayName;
 
   if (locationDisplayName) {
-    field_props.placeholder = locationDisplayName;
+    fieldProps.placeholder = locationDisplayName;
   }
 
-  field_props.onPlaceSelected = onPlaceSelected(onChange, field_props.name);
-  field_props.types = [];
-  delete field_props.value; // autocomplete location doesn't work well as a controlled component
+  fieldProps.onPlaceSelected = onPlaceSelected(onChange, fieldProps.name);
+  var types = fieldProps.locationTypes || [];
+  delete fieldProps.value; // autocomplete location doesn't work well as a controlled component
+
+  delete fieldProps.locationTypes; // autocomplete location doesn't work well as a controlled component
+
+  delete fieldProps.customType; // autocomplete location doesn't work well as a controlled component
+
+  delete fieldProps.singleFile; // autocomplete location doesn't work well as a controlled component
+
+  delete fieldProps.custom; // autocomplete location doesn't work well as a controlled component
+
+  delete fieldProps.serviceDependency; // autocomplete location doesn't work well as a controlled component
 
   return _react.default.createElement("div", null, _react.default.createElement(_semanticUiReact.Form.Field, (0, _extends2.default)({
+    types: types,
     control: _reactGoogleAutocomplete.default
-  }, field_props)), _react.default.createElement(_semanticUiReact.Button, (0, _defineProperty2.default)({
+  }, fieldProps)), _react.default.createElement(_semanticUiReact.Button, {
     attached: "bottom",
     onClick: clearLocation
-  }, "attached", true), "CLEAR LOCATION"));
+  }, "CLEAR LOCATION")); // return (<div><Autocomplete types={['(cities)']} {...fieldProps}/><Button attached='bottom' onClick={clearLocation} attached>CLEAR LOCATION</Button></div>);
 }
 
 function googleLocationToSchema(location, callback) {
@@ -125,11 +134,11 @@ function getTimezone(lat, lng, timestamp, cb) {
 
   var callback = arguments[arguments.length - 1];
 
-  if (typeof callback != 'function') {
+  if (typeof callback !== 'function') {
     throw new Error('Missing callback function');
   }
 
-  var location = lat + ',' + lng;
+  var location = "".concat(lat, ",").concat(lng);
   var options = {
     location: location,
     timestamp: timestamp,
@@ -140,7 +149,7 @@ function getTimezone(lat, lng, timestamp, cb) {
 
   _http.HTTP.call('get', requestURL, function (err, response, data) {
     if (err || response.statusCode != 200) {
-      return callback(new Error('Google API request error: ' + data));
+      return callback(new Error("Google API request error: ".concat(data)));
     }
 
     callback(null, response.data.timeZoneId);
