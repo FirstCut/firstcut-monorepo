@@ -1,8 +1,13 @@
+import { Meteor } from 'meteor/meteor';
 import { _ } from 'lodash';
 // import { handleEvent } from 'firstcut-pipeline';
 import { userPlayerId, inSimulationMode } from 'firstcut-players';
 import Analytics from 'firstcut-analytics';
 import { HTTP } from 'meteor/http';
+
+export function isDevEnv(str) {
+  return Meteor.settings.public.environment === 'development';
+}
 
 export function pluralize(str) {
   const lastLetter = str[str.length - 1];

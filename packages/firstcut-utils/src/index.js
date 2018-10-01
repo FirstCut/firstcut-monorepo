@@ -10,6 +10,7 @@ import {
   emitPipelineEvent,
   removePunctuation,
   pluralize,
+  isDevEnv,
 } from './utils';
 
 import {
@@ -17,7 +18,6 @@ import {
   DATE_FORMATS,
   humanReadableDate,
   fromNowDate,
-  getTimezoneFromDate,
   userTimezone,
 } from './datetime';
 
@@ -25,7 +25,7 @@ import { ensureLoggedIn } from './validate';
 
 export {
   formatBytes,
-  getTimezoneFromDate,
+  isDevEnv,
   pluralize,
   executeAsyncWithCallback,
   removePunctuation,
