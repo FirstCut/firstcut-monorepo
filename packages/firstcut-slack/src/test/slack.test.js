@@ -1,12 +1,12 @@
 //
-// import { stubUser } from '/imports/api/testing-utils';
+// import { stubUser } from 'firstcut-testing-utils';
 // import { MeteorStubs } from 'meteor/velocity:meteor-stubs';
 // import { Deliverable, Project, Cut, Shoot, Collaborator, Client } from 'firstcut-models';
 // import { postMessage, getMessageContent } from '../slack';
 // import { WebClient } from '@slack/client';
 // import { template_generators, TEMPLATES, SlackTemplateSchema, getChannel } from '../slack.enum';
-// import { insertTestData, restoreTestData, DELIVERABLE_ID, POSTPO_OWNER_ID, PROJECT_ID, CLIENT_OWNER_ID_FOR_DELIVERABLE, validateAgainstSchema } from '/imports/api/testing-utils';
-// import { sample_clients, sample_collaborators, sample_cuts, sample_projects, sample_deliverables } from '/imports/api/testing-utils';
+// import { insertTestData, restoreTestData, DELIVERABLE_ID, POSTPO_OWNER_ID, PROJECT_ID, CLIENT_OWNER_ID_FOR_DELIVERABLE, validateAgainstSchema } from 'firstcut-testing-utils';
+// import { sample_clients, sample_collaborators, sample_cuts, sample_projects, sample_deliverables } from 'firstcut-testing-utils';
 // import sinon from 'sinon';
 // import { Record } from 'immutable';
 //

@@ -11,11 +11,9 @@ var _toConsumableArray2 = _interopRequireDefault(require("@babel/runtime/helpers
 
 var _immutable = require("immutable");
 
-var _action = require("./shared/action.schemas");
+var _firstcutActionUtils = require("firstcut-action-utils");
 
 var _firstcutPipelineConsts = require("firstcut-pipeline-consts");
-
-var _action2 = require("./shared/action.utils");
 
 var _firstcutUtils = require("firstcut-utils");
 
@@ -27,7 +25,7 @@ var UpcomingShootReminder = new _immutable.Map({
   key: 'upcoming_shoot_reminder',
   action_title: 'Send Upcoming Shoot Reminder',
   completed_title: 'Upcoming Shoot Reminder Sent',
-  schema: _action.RecordEvents,
+  schema: _firstcutActionUtils.RecordEvents,
   fulfillsPrerequisites: function fulfillsPrerequisites(_ref) {
     var record = _ref.record,
         initiator = _ref.initiator;
@@ -43,7 +41,7 @@ var UpcomingShootReminder = new _immutable.Map({
       format: 'clean'
     });
     var footageFolder = shoot.footageFolder || shoot.generateFootageFolderName();
-    var internalEmails = (0, _action2.getEmailActions)({
+    var internalEmails = (0, _firstcutActionUtils.getEmailActions)({
       recipients: [shoot.adminOwner, shoot.interviewer, shoot.videographer],
       template: 'upcoming-shoot-reminder',
       getSubstitutionData: function getSubstitutionData(recipient) {
@@ -56,7 +54,7 @@ var UpcomingShootReminder = new _immutable.Map({
         };
       }
     });
-    var videographerEmails = (0, _action2.getEmailActions)({
+    var videographerEmails = (0, _firstcutActionUtils.getEmailActions)({
       recipients: [shoot.videographer],
       template: 'videographer-upcoming-shoot-reminder',
       getSubstitutionData: function getSubstitutionData(recipient) {
@@ -72,7 +70,7 @@ var UpcomingShootReminder = new _immutable.Map({
         };
       }
     });
-    var clientEmails = (0, _action2.getEmailActions)({
+    var clientEmails = (0, _firstcutActionUtils.getEmailActions)({
       recipients: [shoot.clientOwner],
       cc: [shoot.adminOwner],
       template: 'ttc-shoot-reminder',

@@ -1,9 +1,9 @@
 import { Map } from 'immutable';
 import Models from 'firstcut-models';
 import moment from 'moment';
-import { RecordEvents } from './shared/action.schemas';
+import { RecordEvents } from 'firstcut-action-utils';
 import { ACTIONS, JOB_KEYS } from 'firstcut-pipeline-consts';
-import { getEmailActions } from './shared/action.utils';
+import { getEmailActions } from 'firstcut-action-utils';
 import { getRecordUrl } from 'firstcut-retrieve-url';
 
 const FeedbackSubmittedByClient = new Map({

@@ -23,13 +23,13 @@ var _lodash = require("lodash");
 
 var _base = require("./base.model");
 
-var _schema = require("/imports/api/schema");
+var _firstcutSchema = require("firstcut-schema");
 
 var _firstcutRetrieveUrl = require("firstcut-retrieve-url");
 
 var _generateDefaults = _interopRequireDefault(require("./utils/generate-defaults"));
 
-var _actions = require("/imports/api/actions");
+var _firstcutActionUtils = require("firstcut-action-utils");
 
 function createFirstCutModel(schema) {
   return FirstCutModel((0, _generateDefaults.default)(schema));
@@ -60,7 +60,7 @@ var FirstCutModel = function FirstCutModel(defaultValues) {
       }, {
         key: "getLatestEvent",
         value: function getLatestEvent() {
-          var events = (0, _actions.eventsInHistory)(this.history);
+          var events = (0, _firstcutActionUtils.eventsInHistory)(this.history);
           return _lodash._.last(events);
         }
       }, {
@@ -166,7 +166,7 @@ var FirstCutModel = function FirstCutModel(defaultValues) {
       }, {
         key: "locationUrl",
         get: function get() {
-          return _schema.LocationParser.locationUrl(this);
+          return _firstcutSchema.LocationParser.locationUrl(this);
         }
       }, {
         key: "historyAsArray",
@@ -180,12 +180,12 @@ var FirstCutModel = function FirstCutModel(defaultValues) {
       }, {
         key: "locationDisplayName",
         get: function get() {
-          return _schema.LocationParser.locationDisplayName(this);
+          return _firstcutSchema.LocationParser.locationDisplayName(this);
         }
       }, {
         key: "cityDisplayName",
         get: function get() {
-          return _schema.LocationParser.cityDisplayName(this);
+          return _firstcutSchema.LocationParser.cityDisplayName(this);
         }
       }, {
         key: "projectDisplayName",

@@ -25,9 +25,9 @@ var _firstcutPipelineConsts = require("firstcut-pipeline-consts");
 
 var _collaborators2 = _interopRequireDefault(require("./collaborators.schema"));
 
-var _modelBase = require("/imports/api/model-base");
+var _firstcutModelBase = require("firstcut-model-base");
 
-var Base = (0, _modelBase.createFirstCutModel)(_collaborators2.default);
+var Base = (0, _firstcutModelBase.createFirstCutModel)(_collaborators2.default);
 
 var Collaborator =
 /*#__PURE__*/

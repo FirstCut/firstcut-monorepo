@@ -1,7 +1,7 @@
-import { SimpleSchemaWrapper as Schema } from '/imports/api/schema';
+import { SimpleSchemaWrapper as Schema } from 'firstcut-schema';
 import { CUT_TYPES } from './cuts.enum';
 import SimpleSchema from 'simpl-schema';
-import BaseSchema from '/imports/api/schema/base.schema';
+import BaseSchema from 'firstcut-schema';
 
 const CutSchema = new Schema({
   fileId: {

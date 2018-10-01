@@ -46,35 +46,41 @@ class LoginBox extends React.Component {
           />
         </div>
 
-        {(this.props.onClickRegister || this.props.resetLink) ?
-          <div className="ui large bottom attached info icon message">
-            <i className="user icon" />
+        {(this.props.onClickRegister || this.props.resetLink)
+          ? (
+            <div className="ui large bottom attached info icon message">
+              <i className="user icon" />
 
-            <div className="content">
-              <div className="ui list">
-                {this.props.onClickRegister ?
-                  <div className="item">
-                    <T>dont_have_an_account</T>
-                    <a
-                      onClick={this.props.onClickRegister}
-                    >
-                      <T>register_here</T>
-                    </a>
-                  </div>
-                  : ''}
-                {this.props.resetLink ?
-                  <div className="item">
-                    <T>forgot_your_password</T>
-                    <a
-                      href={this.props.resetLink}
-                    >
-                      <T>click_to_reset</T>
-                    </a>
-                  </div>
-                  : ''}
+              <div className="content">
+                <div className="ui list">
+                  {this.props.onClickRegister
+                    ? (
+                      <div className="item">
+                        <T>dont_have_an_account</T>
+                        <a
+                          onClick={this.props.onClickRegister}
+                        >
+                          <T>register_here</T>
+                        </a>
+                      </div>
+                    )
+                    : ''}
+                  {this.props.resetLink
+                    ? (
+                      <div className="item">
+                        <T>forgot_your_password</T>
+                        <a
+                          href={this.props.resetLink}
+                        >
+                          <T>click_to_reset</T>
+                        </a>
+                      </div>
+                    )
+                    : ''}
+                </div>
               </div>
             </div>
-          </div>
+          )
           : ''}
 
         {LoginBox.renderErrorMessages()}

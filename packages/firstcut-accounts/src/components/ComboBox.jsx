@@ -59,15 +59,18 @@ class RegisterBox extends React.Component {
           </div>
         </div>
 
-        {this.props.resetLink ?
-          <div className="ui large bottom attached info icon message">
-            <i className="user icon" />
-            <T>forgot_your_password</T>
-            <a href={this.props.resetLink}>
-              &nbsp;<T>click_to_reset</T>
-            </a>
-          </div>
-                    : ''}
+        {this.props.resetLink
+          ? (
+            <div className="ui large bottom attached info icon message">
+              <i className="user icon" />
+              <T>forgot_your_password</T>
+              <a href={this.props.resetLink}>
+              &nbsp;
+                <T>click_to_reset</T>
+              </a>
+            </div>
+          )
+          : ''}
 
         { RegisterBox.renderErrorMessages() }
       </div>

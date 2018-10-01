@@ -8,7 +8,7 @@ import {
   Container,
 } from 'semantic-ui-react';
 
-import { listObjects, getSignedUrlOfKey } from '/imports/api/filestore';
+import { listObjects, getSignedUrlOfKey } from 'firstcut-filestore';
 import InfoPage from '/imports/ui/pages/info.page';
 import ProfileItem from '../utils/profile.card';
 import { UpdateFieldButton } from '/imports/ui/components/utils/utils';
@@ -19,7 +19,7 @@ import { userExperience } from '/imports/ui/config';
 import ShootInfo, { behindTheScenesSection } from './shoot.components';
 import ShootClientInfoPage from './shoot.client';
 import ShootVideographerInfoPage from './shoot.videographer';
-import { SchemaParser } from '/imports/api/schema';
+import { SchemaParser } from 'firstcut-schema';
 
 export function ShootInfoPage(props) {
   if (userExperience().isVideographer) {

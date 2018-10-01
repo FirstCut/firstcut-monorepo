@@ -7,7 +7,7 @@ import { EVENTS } from 'firstcut-pipeline-consts';
 import { getHeadshotURL, getScreenshotURL } from 'firstcut-retrieve-url';
 import SHOOT_BLUEPRINTS from './shoots.blueprints';
 import ShootSchema from './shoots.schema';
-import { createFirstCutModel } from '/imports/api/model-base';
+import { createFirstCutModel } from 'firstcut-model-base';
 
 const Base = createFirstCutModel(ShootSchema);
 

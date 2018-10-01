@@ -13,13 +13,11 @@ var _immutable = require("immutable");
 
 var _firstcutModels = _interopRequireDefault(require("firstcut-models"));
 
-var _schema = require("/imports/api/schema");
+var _firstcutSchema = require("firstcut-schema");
 
-var _action = require("./shared/action.schemas");
+var _firstcutActionUtils = require("firstcut-action-utils");
 
 var _firstcutPipelineConsts = require("firstcut-pipeline-consts");
-
-var _action2 = require("./shared/action.utils");
 
 var _firstcutRetrieveUrl = require("firstcut-retrieve-url");
 
@@ -28,9 +26,9 @@ var EditFeedback = new _immutable.Map({
   key: key,
   action_title: 'Edit feedback',
   completed_title: 'Feedback edited',
-  schema: _action.RecordEvents,
+  schema: _firstcutActionUtils.RecordEvents,
   customFieldsSchema: function customFieldsSchema(record) {
-    return new _schema.SimpleSchemaWrapper({
+    return new _firstcutSchema.SimpleSchemaWrapper({
       name: {
         type: String,
         required: true,
@@ -62,7 +60,7 @@ var EditFeedback = new _immutable.Map({
     var cut = _firstcutModels.default.Cut.fromId(record_id);
 
     var link = (0, _firstcutRetrieveUrl.getRecordUrl)(cut);
-    var emailActions = (0, _action2.getEmailActions)({
+    var emailActions = (0, _firstcutActionUtils.getEmailActions)({
       recipients: [cut.clientOwner],
       cc: [new _firstcutModels.default.Client({
         email: email,

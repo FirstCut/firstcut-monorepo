@@ -1,15 +1,10 @@
 "use strict";
 
-var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
-
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.CUT_TYPES = void 0;
-
-var _freeze = _interopRequireDefault(require("@babel/runtime/core-js/object/freeze"));
-
-var CUT_TYPES = (0, _freeze.default)({
+var CUT_TYPES = Object.freeze({
   FIRST_CUT: 'First Cut',
   REVISIONS_CUT: 'Revisions Cut',
   FINAL_CUT: 'Final Cut',

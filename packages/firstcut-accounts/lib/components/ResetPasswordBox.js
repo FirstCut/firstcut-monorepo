@@ -162,7 +162,7 @@ function (_React$Component) {
         className: "user icon"
       }), _react.default.createElement(T, null, "dont_have_an_account"), _react.default.createElement("a", {
         href: this.props.registerLink
-      }, "\xA0", _react.default.createElement(T, null, "register_here"))) : '', ResetPasswordBox.renderErrorMessages());
+      }, _react.default.createElement(T, null, "register_here"))) : '', ResetPasswordBox.renderErrorMessages());
     }
   }]);
   return ResetPasswordBox;

@@ -1,10 +1,10 @@
 
 import { Meteor } from 'meteor/meteor';
-import { SchemaParser } from '/imports/api/schema';
+import { SchemaParser } from 'firstcut-schema';
 import { Record, List } from 'immutable';
 import { _ } from 'lodash';
 import { isEmpty } from 'firstcut-utils';
-import { eventsInHistory } from '/imports/api/actions';
+import { eventsInHistory } from 'firstcut-action-utils';
 import { inSimulationMode } from 'firstcut-players';
 import { PubSub } from 'pubsub-js';
 import RecordWithSchemaFactory from './utils/factories';

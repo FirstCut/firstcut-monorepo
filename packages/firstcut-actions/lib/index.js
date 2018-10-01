@@ -5,18 +5,6 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-Object.defineProperty(exports, "eventsInHistory", {
-  enumerable: true,
-  get: function get() {
-    return _action.eventsInHistory;
-  }
-});
-Object.defineProperty(exports, "recordHistoryIncludesEvent", {
-  enumerable: true,
-  get: function get() {
-    return _action.recordHistoryIncludesEvent;
-  }
-});
 exports.default = void 0;
 
 var _upcomingShootReminder = _interopRequireDefault(require("./upcoming-shoot-reminder"));
@@ -112,8 +100,6 @@ var _editFeedback = _interopRequireDefault(require("./edit-feedback"));
 var _addonRequested = _interopRequireDefault(require("./addon-requested"));
 
 var _projectHandoff = _interopRequireDefault(require("./project-handoff"));
-
-var _action = require("./shared/action.utils");
 
 var templates = [_errorEvent.default, _editFeedback.default, _chargeClient.default, _editShootScript.default, _reminderToGetClientFeedback.default, _invoiceSetToDue.default, _addonRequested.default, _footageBatchUploaded.default, _inviteToEditScript.default, _footageUploadInitiated.default, _projectHandoff.default, _applicationSubmitted.default, _reminderToSetCutDue.default, _cutDueReminder.default, _markTaskAsComplete.default, _sendFeedbackReminder.default, _confirmFootageUpload.default, _deliverableKickoff.default, _checkinCheckoutReminder.default, _screenshotRejected.default, _screenshotUploaded.default, _projectWrap.default, _feedbackSent.default, _cutApproved.default, _cutSentToClient.default, _sendCutToClient.default, _cutUploaded.default, _shootReady.default, _preproductionKickoff.default, _collaboratorAdded.default, _sendInviteLink.default, _collaboratorRemoved.default, _shootEventUpdated.default, _recordCreated.default, _shootReady.default, _shootCheckout.default, _shootCheckin.default, _screenshotApproved.default, _footageVerificationReminder.default, _snippetRequested.default, _cutDueEventUpdated.default, _upcomingShootReminder.default, _shootWrap.default, _feedbackSubmittedByClient.default, _snippetCreated.default, _generateBookingInvoices.default, _invoicePaid.default, _footageVerified.default];
 var ActionTemplates = templates.reduce(function (r, template) {

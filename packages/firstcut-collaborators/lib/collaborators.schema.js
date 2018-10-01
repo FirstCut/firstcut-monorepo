@@ -9,11 +9,11 @@ exports.default = void 0;
 
 var _simplSchema = _interopRequireDefault(require("simpl-schema"));
 
-var _schema = require("/imports/api/schema");
+var _firstcutSchema = require("firstcut-schema");
 
 var _collaborators = require("./collaborators.enum");
 
-var CollaboratorSchema = new _schema.SimpleSchemaWrapper({
+var CollaboratorSchema = new _firstcutSchema.SimpleSchemaWrapper({
   type: {
     // TODO: we should remove this all together righ LUCY?
     type: String,
@@ -78,8 +78,8 @@ var CollaboratorSchema = new _schema.SimpleSchemaWrapper({
     type: String
   }
 });
-CollaboratorSchema.extend(_schema.BaseSchema);
-CollaboratorSchema.extend(_schema.ProfileSchema);
-CollaboratorSchema.extend(_schema.LocationSchema);
+CollaboratorSchema.extend(_firstcutSchema.BaseSchema);
+CollaboratorSchema.extend(_firstcutSchema.ProfileSchema);
+CollaboratorSchema.extend(_firstcutSchema.LocationSchema);
 var _default = CollaboratorSchema;
 exports.default = _default;

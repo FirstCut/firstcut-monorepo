@@ -11,11 +11,9 @@ var _toConsumableArray2 = _interopRequireDefault(require("@babel/runtime/helpers
 
 var _immutable = require("immutable");
 
-var _action = require("./shared/action.schemas");
+var _firstcutActionUtils = require("firstcut-action-utils");
 
 var _firstcutPipelineConsts = require("firstcut-pipeline-consts");
-
-var _action2 = require("./shared/action.utils");
 
 var _firstcutModels = _interopRequireDefault(require("firstcut-models"));
 
@@ -25,7 +23,7 @@ var ProjectHandoff = new _immutable.Map({
   key: 'project_handoff',
   action_title: 'Handoff project',
   completed_title: 'Project handoff',
-  schema: _action.RecordEvents,
+  schema: _firstcutActionUtils.RecordEvents,
   fulfillsPrerequisites: function fulfillsPrerequisites(_ref) {
     var record = _ref.record,
         initiator = _ref.initiator;
@@ -45,7 +43,7 @@ var ProjectHandoff = new _immutable.Map({
 
     var billing = _firstcutModels.default.Collaborator.getBillingProfile();
 
-    var emailActions = (0, _action2.getEmailActions)({
+    var emailActions = (0, _firstcutActionUtils.getEmailActions)({
       recipients: [project.adminOwner],
       template: 'project-handoff',
       getSubstitutionData: function getSubstitutionData(recipient) {
@@ -56,7 +54,7 @@ var ProjectHandoff = new _immutable.Map({
         };
       }
     });
-    emailActions = emailActions.concat((0, _action2.getEmailActions)({
+    emailActions = emailActions.concat((0, _firstcutActionUtils.getEmailActions)({
       recipients: [nicole, billing, robert],
       template: 'project-handoff-billing-notification',
       getSubstitutionData: function getSubstitutionData(recipient) {
@@ -69,7 +67,7 @@ var ProjectHandoff = new _immutable.Map({
         };
       }
     }));
-    emailActions = emailActions.concat((0, _action2.getEmailActions)({
+    emailActions = emailActions.concat((0, _firstcutActionUtils.getEmailActions)({
       recipients: [project.clientOwner],
       cc: [project.adminOwner, robert],
       template: 'project-handoff-client',

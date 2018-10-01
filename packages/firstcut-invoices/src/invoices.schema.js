@@ -1,6 +1,6 @@
-import { SimpleSchemaWrapper as Schema } from '/imports/api/schema';
+import { SimpleSchemaWrapper as Schema } from 'firstcut-schema';
 import { INVOICE_TYPES, INVOICE_STATUS } from './invoices.enum';
-import BaseSchema from '/imports/api/schema/base.schema';
+import BaseSchema from 'firstcut-schema';
 
 const InvoiceSchema = new Schema({
   type: {

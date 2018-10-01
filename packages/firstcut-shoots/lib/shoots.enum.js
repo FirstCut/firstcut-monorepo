@@ -1,17 +1,12 @@
 "use strict";
 
-var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
-
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.STAGES = exports.RATINGS = exports.CAMERAS = exports.FILETYPE = void 0;
-
-var _freeze = _interopRequireDefault(require("@babel/runtime/core-js/object/freeze"));
-
 var FILETYPE = '.png';
 exports.FILETYPE = FILETYPE;
-var CAMERAS = (0, _freeze.default)({
+var CAMERAS = Object.freeze({
   camA: 'Camera A (Main Shot)',
   camB: 'Camera B (Close-up Shot)',
   behindTheScenes1: 'Behind the Scenes I',
@@ -22,7 +17,7 @@ var CAMERAS = (0, _freeze.default)({
 exports.CAMERAS = CAMERAS;
 var RATINGS = [0, 1, 2, 3, 4, 5];
 exports.RATINGS = RATINGS;
-var STAGES = (0, _freeze.default)({
+var STAGES = Object.freeze({
   PREPRO: 'in Pre-Production',
   IN_PROGRESS: 'Shoot in Progress',
   UPLOADING: 'Footage is being uploaded',

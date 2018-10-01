@@ -14,7 +14,7 @@ import ShootForm from '../components/forms/shoot.form';
 import DeliverableForm from '../components/forms/deliverable.form';
 import CutForm from '../components/forms/cut.form';
 import InvoiceForm from '../components/forms/invoice.form';
-import Analytics from '/imports/api/analytics';
+import Analytics from 'firstcut-analytics';
 
 const {
   Project, Client, Collaborator, Deliverable, Cut, Shoot, Company, Invoice, Task,

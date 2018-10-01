@@ -1,14 +1,10 @@
 "use strict";
 
-var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
-
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.getValidator = getValidator;
 exports.default = void 0;
-
-var _keys = _interopRequireDefault(require("@babel/runtime/core-js/object/keys"));
 
 var _firstcutPipelineConsts = require("firstcut-pipeline-consts");
 
@@ -58,7 +54,7 @@ var ActionValidators = new _immutable.Map({
     throw new Error('unimplemented validator');
   },
   validateEmailAction: function validateEmailAction(action) {
-    var keys = (0, _keys.default)(action);
+    var keys = Object.keys(action);
     expect(keys).to.have.members(['type', 'to', 'substitution_data', 'template', 'cc']);
     expect(action.to).to.be.an('array');
     expect(action.to).to.not.have.lengthOf(0);
@@ -79,7 +75,7 @@ var ActionValidators = new _immutable.Map({
     throw new Error('unimplemented validator');
   },
   validateSlackNotificationAction: function validateSlackNotificationAction(action) {
-    var keys = (0, _keys.default)(action);
+    var keys = Object.keys(action);
     expect(keys).to.have.members(['type', 'content']);
     expect(action.content).to.be.an('object');
   }

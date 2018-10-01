@@ -1,9 +1,7 @@
 
-import '/imports/api/scripts';
-
 import 'firstcut-models';
-import '/imports/api/calendar';
-import '/imports/api/google-api';
+// import 'firstcut-calendar';
+import 'firstcut-google-api';
 
 Meteor.startup(() => {
   // /I KNOW THIS IS SKETCHY BUT IT IS SO CONVENIENT I PROMISE I WILL CHANGE

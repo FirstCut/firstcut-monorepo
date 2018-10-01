@@ -2,10 +2,10 @@
 import { Meteor } from 'meteor/meteor';
 import React from 'react';
 import PropTypes from 'prop-types';
-import { LoginBox, RegisterBox } from '/imports/api/accounts';
+import { LoginBox, RegisterBox } from 'firstcut-accounts';
 import { Container, Grid, Image } from 'semantic-ui-react';
 import { getPlayer, setPlayerId } from 'firstcut-players';
-import Analytics from '/imports/api/analytics';
+import Analytics from 'firstcut-analytics';
 
 export default class LoginPage extends React.Component {
   state = { registering: false }

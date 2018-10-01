@@ -3,7 +3,7 @@ import { _ } from 'lodash';
 import { COLLABORATOR_TYPES, COLLABORATOR_SKILLS } from './collaborators.enum';
 import { COLLABORATOR_TYPES_TO_LABELS } from 'firstcut-pipeline-consts';
 import CollaboratorSchema from './collaborators.schema';
-import { createFirstCutModel } from '/imports/api/model-base';
+import { createFirstCutModel } from 'firstcut-model-base';
 
 const Base = createFirstCutModel(CollaboratorSchema);
 

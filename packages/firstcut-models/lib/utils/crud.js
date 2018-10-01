@@ -7,8 +7,6 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = enableCrud;
 
-var _promise = _interopRequireDefault(require("@babel/runtime/core-js/promise"));
-
 var _meteor = require("meteor/meteor");
 
 var _random = require("meteor/random");
@@ -20,7 +18,7 @@ function enableCrud(cls) {
     cls: cls,
     namespace: cls.collectionName,
     onSave: function onSave(r) {
-      return new _promise.default(function (resolve, reject) {
+      return new Promise(function (resolve, reject) {
         var record = r;
 
         if (!record._id) {
@@ -36,7 +34,7 @@ function enableCrud(cls) {
       });
     },
     onRemove: function onRemove(record) {
-      return new _promise.default(function (resolve, reject) {
+      return new Promise(function (resolve, reject) {
         cls._persist_remove.call(record, function (err, res) {
           if (err) reject(err);
           resolve();

@@ -31,7 +31,7 @@ import { CutInfoPage } from '../info-view/cut.info';
 import ShootInfoPage from '../info-view/shoot';
 import { InvoiceInfoPage } from '../info-view/invoice.info';
 import PlayerPermissionsRequired from '../../pages/player-required.page';
-import Analytics from '/imports/api/analytics';
+import Analytics from 'firstcut-analytics';
 import withRecord from '../../containers/record.container';
 
 const {

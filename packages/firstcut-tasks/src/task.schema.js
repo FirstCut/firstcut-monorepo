@@ -1,6 +1,6 @@
 
-import { SimpleSchemaWrapper as Schema } from '/imports/api/schema';
-import BaseSchema from '/imports/api/schema/base.schema';
+import { SimpleSchemaWrapper as Schema } from 'firstcut-schema';
+import BaseSchema from 'firstcut-schema';
 
 const TaskSchema = new Schema({
   assignedToPlayerType: {

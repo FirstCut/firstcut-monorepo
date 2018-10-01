@@ -1,5 +1,5 @@
 import {Map} from "immutable";
-import {RecordEvents} from './shared/action.schemas';
+import {RecordEvents} from 'firstcut-action-utils';
 
 const CollaboratorRemoved = new Map({
   key: 'collaborator_removed',

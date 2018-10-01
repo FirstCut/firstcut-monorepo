@@ -4,7 +4,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 
 var _firstcutModels = _interopRequireDefault(require("firstcut-models"));
 
-var _testingUtils = require("/imports/api/testing-utils");
+var _firstcutTestingUtils = require("firstcut-testing-utils");
 
 var _project = require("./project");
 
@@ -408,16 +408,16 @@ var EXAMPLE_HISTORIES = new _immutable.List([{
 }]);
 describe('project model', function () {
   before(function () {
-    (0, _testingUtils.insertTestData)();
+    (0, _firstcutTestingUtils.insertTestData)();
   });
   describe('immutable factory', function () {
     it('should combine shoot, cut, and deliverable events into complete history', function () {
       var projectId = '11123222';
-      var cutOneTemplate = _testingUtils.sample_cuts[0];
-      var cutTwoTemplate = _testingUtils.sample_cuts[1];
-      var deliverableTemplate = _testingUtils.sample_deliverables[0];
-      var shootTemplate = _testingUtils.sample_shoots[0];
-      var projectTemplate = _testingUtils.sample_projects[0];
+      var cutOneTemplate = _firstcutTestingUtils.sample_cuts[0];
+      var cutTwoTemplate = _firstcutTestingUtils.sample_cuts[1];
+      var deliverableTemplate = _firstcutTestingUtils.sample_deliverables[0];
+      var shootTemplate = _firstcutTestingUtils.sample_shoots[0];
+      var projectTemplate = _firstcutTestingUtils.sample_projects[0];
       var combinedHistories = [EXAMPLE_HISTORIES.get(0).histories[0], EXAMPLE_HISTORIES.get(1).histories[0], EXAMPLE_HISTORIES.get(1).histories[1], EXAMPLE_HISTORIES.get(2).histories[0], EXAMPLE_HISTORIES.get(2).histories[1]];
       projectTemplate._id = projectId;
       deliverableTemplate.projectId = projectTemplate._id;
@@ -456,7 +456,7 @@ describe('project model', function () {
       var projectTemplate;
       EXAMPLE_HISTORIES.forEach(function (example) {
         example.histories.forEach(function (h) {
-          _testingUtils.sample_projects.forEach(function (p) {
+          _firstcutTestingUtils.sample_projects.forEach(function (p) {
             projectTemplate = p;
             projectTemplate.history = h;
             projectTemplate._id = 'fakeId';

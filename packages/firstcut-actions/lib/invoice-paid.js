@@ -13,11 +13,9 @@ var _immutable = require("immutable");
 
 var _firstcutModels = _interopRequireDefault(require("firstcut-models"));
 
-var _action = require("./shared/action.schemas");
+var _firstcutActionUtils = require("firstcut-action-utils");
 
 var _firstcutPipelineConsts = require("firstcut-pipeline-consts");
-
-var _action2 = require("./shared/action.utils");
 
 var _firstcutRetrieveUrl = require("firstcut-retrieve-url");
 
@@ -26,11 +24,11 @@ var InvoicePaid = new _immutable.Map({
   key: key,
   action_title: 'Mark invoice as paid',
   completed_title: 'Invoice marked as paid',
-  schema: _action.RecordEvents,
+  schema: _firstcutActionUtils.RecordEvents,
   fulfillsPrerequisites: function fulfillsPrerequisites(_ref) {
     var record = _ref.record,
         initiator = _ref.initiator;
-    return !(0, _action2.recordHistoryIncludesEvent)({
+    return !(0, _firstcutActionUtils.recordHistoryIncludesEvent)({
       record: record,
       event: key
     });
@@ -41,7 +39,7 @@ var InvoicePaid = new _immutable.Map({
     var invoice = _firstcutModels.default.Invoice.fromId(record_id);
 
     var link = (0, _firstcutRetrieveUrl.getRecordUrl)(invoice);
-    var emailActions = (0, _action2.getEmailActions)({
+    var emailActions = (0, _firstcutActionUtils.getEmailActions)({
       recipients: [invoice.payee],
       template: 'ttp-invoice-paid',
       getSubstitutionData: function getSubstitutionData(recipient) {

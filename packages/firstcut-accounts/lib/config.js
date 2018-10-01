@@ -5,7 +5,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 var _default = {
-  'google': {
+  google: {
     options: {
       requestPermissions: ['https://www.googleapis.com/auth/calendar'],
       requestOfflineToken: true

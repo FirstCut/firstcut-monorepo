@@ -14,7 +14,7 @@ var _firstcutModels = _interopRequireDefault(require("firstcut-models"));
 
 var _random = require("meteor/random");
 
-var _pipeline = require("/imports/api/pipeline");
+var _firstcutPipeline = require("firstcut-pipeline");
 
 _http.HTTP.methods({
   computeSignature: function computeSignature(data) {
@@ -29,7 +29,7 @@ _http.HTTP.methods({
   },
   handleEvent: function handleEvent(args) {
     var data = this.query;
-    return (0, _pipeline.handleEvent)(data);
+    return (0, _firstcutPipeline.handleEvent)(data);
   },
   recordExists: function recordExists(data) {
     var _this$query = this.query,

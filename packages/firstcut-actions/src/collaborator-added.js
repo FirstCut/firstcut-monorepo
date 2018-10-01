@@ -1,7 +1,7 @@
 import { Map } from 'immutable';
 import Models from 'firstcut-models';
 import SimpleSchema from 'simpl-schema';
-import { EventSchema } from './shared/action.schemas';
+import { EventSchema } from 'firstcut-action-utils';
 import { ACTIONS, FALLBACK_PHONE_NUMBER, COLLABORATOR_TYPES_TO_LABELS } from 'firstcut-pipeline-consts';
 
 const CollaboratorAdded = new Map({

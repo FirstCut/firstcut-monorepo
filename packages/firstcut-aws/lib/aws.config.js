@@ -2,8 +2,6 @@
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _stringify = _interopRequireDefault(require("@babel/runtime/core-js/json/stringify"));
-
 var _awsSdk = _interopRequireDefault(require("aws-sdk"));
 
 var _lambda = _interopRequireDefault(require("aws-sdk/clients/lambda"));
@@ -24,7 +22,7 @@ var params = {
   FunctionName: lambda.snippet_creator,
   InvocationType: 'RequestResponse',
   LogType: 'Tail',
-  Payload: (0, _stringify.default)({
+  Payload: JSON.stringify({
     result: 'TESTING'
   })
 };

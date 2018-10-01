@@ -5,7 +5,7 @@ import { _ } from 'lodash';
 import App from '../layouts/app';
 import { userPlayerId } from 'firstcut-players';
 import { getSubscriptions } from '../config';
-import Analytics from '/imports/api/analytics';
+import Analytics from 'firstcut-analytics';
 
 const Subs = new SubsManager();
 const PlayerSubs = new SubsManager();

@@ -7,15 +7,15 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 
-var _schema = require("/imports/api/schema");
+var _firstcutSchema = require("firstcut-schema");
 
-var _filestore = require("/imports/api/filestore");
+var _firstcutFilestore = require("firstcut-filestore");
 
 var _immutable = require("immutable");
 
 var _firstcutModels = _interopRequireDefault(require("firstcut-models"));
 
-var _action = require("./shared/action.schemas");
+var _firstcutActionUtils = require("firstcut-action-utils");
 
 var _firstcutPipelineConsts = require("firstcut-pipeline-consts");
 
@@ -28,7 +28,7 @@ var GenerateBookingInvoices = new _immutable.Map({
   key: key,
   action_title: 'Generate Booking Invoices',
   completed_title: 'Generated booking invoices',
-  customFieldsSchema: new _schema.SimpleSchemaWrapper({
+  customFieldsSchema: new _firstcutSchema.SimpleSchemaWrapper({
     generateInterviewerBookingInvoice: {
       type: Boolean,
       defaultValue: true
@@ -38,7 +38,7 @@ var GenerateBookingInvoices = new _immutable.Map({
       defaultValue: true
     }
   }),
-  schema: _action.RecordEvents,
+  schema: _firstcutActionUtils.RecordEvents,
   fulfillsPrerequisites: function fulfillsPrerequisites(_ref) {
     var record = _ref.record,
         initiator = _ref.initiator;

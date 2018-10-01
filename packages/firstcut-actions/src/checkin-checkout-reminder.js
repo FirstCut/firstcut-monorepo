@@ -1,6 +1,6 @@
 import { Map } from 'immutable';
 import Models from 'firstcut-models';
-import { RecordEvents } from './shared/action.schemas';
+import { RecordEvents } from 'firstcut-action-utils';
 import { ACTIONS, FALLBACK_PHONE_NUMBER } from 'firstcut-pipeline-consts';
 
 const CheckinCheckoutReminder = new Map({

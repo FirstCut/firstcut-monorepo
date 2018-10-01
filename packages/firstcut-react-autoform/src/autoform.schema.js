@@ -1,7 +1,7 @@
 
 import Models from 'firstcut-models';
 import { List } from 'immutable';
-import { SchemaParser } from '/imports/api/schema';
+import { SchemaParser } from 'firstcut-schema';
 import { _ } from 'lodash';
 
 const DEFAULT_SORT_METHOD = 'text';

@@ -47,8 +47,6 @@ import EditFeedback from './edit-feedback';
 import AddOnRequested from './addon-requested';
 import ProjectHandoff from './project-handoff';
 
-import { eventsInHistory, recordHistoryIncludesEvent } from './shared/action.utils';
-
 const templates = [
   ErrorEvent,
   EditFeedback,
@@ -108,7 +106,3 @@ const ActionTemplates = templates.reduce((r, template) => {
 }, {});
 
 export default ActionTemplates;
-export {
-  eventsInHistory,
-  recordHistoryIncludesEvent,
-};

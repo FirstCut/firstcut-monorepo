@@ -1,10 +1,10 @@
 import { Map } from 'immutable';
 import SimpleSchema from 'simpl-schema';
-import { RecordEvents, EventSchema } from './shared/action.schemas';
+import { RecordEvents, EventSchema } from 'firstcut-action-utils';
 import { ACTIONS } from 'firstcut-pipeline-consts';
 import Models from 'firstcut-models';
-import { getSignedUrlOfKey } from '/imports/api/filestore';
-import { getEmailActions } from './shared/action.utils';
+import { getSignedUrlOfKey } from 'firstcut-filestore';
+import { getEmailActions } from 'firstcut-action-utils';
 
 const SnippetCreated = new Map({
   key: 'snippet_created',

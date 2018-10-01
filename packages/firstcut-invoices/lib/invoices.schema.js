@@ -1,19 +1,17 @@
 "use strict";
 
-var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = void 0;
 
-var _schema = require("/imports/api/schema");
+var _firstcutSchema = _interopRequireWildcard(require("firstcut-schema"));
 
 var _invoices = require("./invoices.enum");
 
-var _base = _interopRequireDefault(require("/imports/api/schema/base.schema"));
-
-var InvoiceSchema = new _schema.SimpleSchemaWrapper({
+var InvoiceSchema = new _firstcutSchema.SimpleSchemaWrapper({
   type: {
     type: String,
     required: true,
@@ -78,6 +76,6 @@ var InvoiceSchema = new _schema.SimpleSchemaWrapper({
     label: 'Note'
   }
 });
-InvoiceSchema.extend(_base.default);
+InvoiceSchema.extend(_firstcutSchema.default);
 var _default = InvoiceSchema;
 exports.default = _default;

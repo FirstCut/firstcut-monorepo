@@ -2,20 +2,18 @@
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
+var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
+
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = void 0;
 
-var _schema = require("/imports/api/schema");
-
-var _base = _interopRequireDefault(require("/imports/api/schema/base.schema"));
-
-var _location = _interopRequireDefault(require("/imports/api/schema/location.schema"));
+var _firstcutSchema = _interopRequireWildcard(require("firstcut-schema"));
 
 var _simplSchema = _interopRequireDefault(require("simpl-schema"));
 
-var CompanySchema = new _schema.SimpleSchemaWrapper({
+var CompanySchema = new _firstcutSchema.SimpleSchemaWrapper({
   name: {
     type: String,
     label: 'Company Name',
@@ -49,7 +47,7 @@ var CompanySchema = new _schema.SimpleSchemaWrapper({
     blackbox: true
   })
 });
-CompanySchema.extend(_base.default);
-CompanySchema.extend(_location.default);
+CompanySchema.extend(_firstcutSchema.default);
+CompanySchema.extend(_firstcutSchema.default);
 var _default = CompanySchema;
 exports.default = _default;

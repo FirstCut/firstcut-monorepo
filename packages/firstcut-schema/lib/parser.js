@@ -1,21 +1,15 @@
 "use strict";
 
-var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
-
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = exports.FIELD_NAME_DELINEATOR = exports.ARRAY_INDICATOR = void 0;
-
-var _freeze = _interopRequireDefault(require("@babel/runtime/core-js/object/freeze"));
-
 var ARRAY_INDICATOR = '$';
 exports.ARRAY_INDICATOR = ARRAY_INDICATOR;
 var FIELD_NAME_DELINEATOR = '.';
 exports.FIELD_NAME_DELINEATOR = FIELD_NAME_DELINEATOR;
 var ARRAY_INDEX_REGEX = /[0-9]+/;
-
-var _default = SchemaParser = (0, _freeze.default)({
+var SchemaParser = Object.freeze({
   getFieldSchema: function getFieldSchema(schema, fieldname) {
     return _getFieldSchema(fieldname);
   },
@@ -78,8 +72,6 @@ var _default = SchemaParser = (0, _freeze.default)({
     return _getIndexInObjectArrayField(field);
   }
 });
-
-exports.default = _default;
 
 function _getIndexInObjectArrayField(field) {
   return field.match(ARRAY_INDEX_REGEX);
@@ -169,3 +161,6 @@ function _subfieldIndicatorIndex(key) {
 function _arrayIndicatorIndex(key) {
   return key.indexOf(ARRAY_INDICATOR);
 }
+
+var _default = SchemaParser;
+exports.default = _default;

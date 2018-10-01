@@ -23,13 +23,13 @@ var _moment = _interopRequireDefault(require("moment"));
 
 var _task = _interopRequireDefault(require("./task.schema"));
 
-var _modelBase = require("/imports/api/model-base");
+var _firstcutModelBase = require("firstcut-model-base");
 
 var _firstcutPlayers = require("firstcut-players");
 
 var _tasks = require("./tasks.enum");
 
-var Base = (0, _modelBase.createFirstCutModel)(_task.default);
+var Base = (0, _firstcutModelBase.createFirstCutModel)(_task.default);
 
 var Task =
 /*#__PURE__*/

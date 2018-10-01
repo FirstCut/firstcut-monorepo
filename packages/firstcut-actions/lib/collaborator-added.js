@@ -13,7 +13,7 @@ var _firstcutModels = _interopRequireDefault(require("firstcut-models"));
 
 var _simplSchema = _interopRequireDefault(require("simpl-schema"));
 
-var _action = require("./shared/action.schemas");
+var _firstcutActionUtils = require("firstcut-action-utils");
 
 var _firstcutPipelineConsts = require("firstcut-pipeline-consts");
 
@@ -26,7 +26,7 @@ var CollaboratorAdded = new _immutable.Map({
     gig_type: String,
     record_id: String,
     collaborator_key: String
-  }).extend(_action.EventSchema),
+  }).extend(_firstcutActionUtils.EventSchema),
   fulfillsPrerequisites: function fulfillsPrerequisites(_ref) {
     var record = _ref.record,
         initiator = _ref.initiator;

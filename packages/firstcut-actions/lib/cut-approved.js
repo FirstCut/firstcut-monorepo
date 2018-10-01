@@ -13,11 +13,9 @@ var _immutable = require("immutable");
 
 var _firstcutModels = _interopRequireDefault(require("firstcut-models"));
 
-var _action = require("./shared/action.schemas");
+var _firstcutActionUtils = require("firstcut-action-utils");
 
 var _firstcutPipelineConsts = require("firstcut-pipeline-consts");
-
-var _action2 = require("./shared/action.utils");
 
 var _firstcutRetrieveUrl = require("firstcut-retrieve-url");
 
@@ -26,11 +24,11 @@ var CutApprovedByClient = new _immutable.Map({
   key: key,
   action_title: 'Mark cut as approved by client',
   completed_title: 'Cut marked as approved by client',
-  schema: _action.RecordEvents,
+  schema: _firstcutActionUtils.RecordEvents,
   fulfillsPrerequisites: function fulfillsPrerequisites(_ref) {
     var record = _ref.record,
         initiator = _ref.initiator;
-    return !(0, _action2.recordHistoryIncludesEvent)({
+    return !(0, _firstcutActionUtils.recordHistoryIncludesEvent)({
       record: record,
       event: key
     });
@@ -42,7 +40,7 @@ var CutApprovedByClient = new _immutable.Map({
 
     var deliverable = cut.deliverable;
     var link = (0, _firstcutRetrieveUrl.getRecordUrl)(cut);
-    var emailActions = (0, _action2.getEmailActions)({
+    var emailActions = (0, _firstcutActionUtils.getEmailActions)({
       recipients: [cut.postpoOwner, cut.adminOwner],
       template: 'cut-approved-by-client',
       getSubstitutionData: function getSubstitutionData(recipient) {
@@ -71,7 +69,7 @@ var CutApprovedByClient = new _immutable.Map({
       type: _firstcutPipelineConsts.ACTIONS.custom_function,
       title: "set the deliverable's invoices to due",
       execute: function execute() {
-        (0, _action2.setAllRecordInvoicesToDue)(deliverable);
+        (0, _firstcutActionUtils.setAllRecordInvoicesToDue)(deliverable);
       }
     }]);
   }

@@ -25,11 +25,11 @@ var _pubsubJs = require("pubsub-js");
 
 var _jobs = require("./jobs.enum");
 
-var _modelBase = require("/imports/api/model-base");
+var _firstcutModelBase = require("firstcut-model-base");
 
 var _jobs2 = _interopRequireDefault(require("./jobs.schema"));
 
-var Base = (0, _modelBase.createBaseModel)(_jobs2.default);
+var Base = (0, _firstcutModelBase.createBaseModel)(_jobs2.default);
 
 var Job =
 /*#__PURE__*/

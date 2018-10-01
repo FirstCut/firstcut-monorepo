@@ -1,9 +1,9 @@
 import { Map } from 'immutable';
 import Models from 'firstcut-models';
-import { SimpleSchemaWrapper } from '/imports/api/schema';
-import { RecordEvents } from './shared/action.schemas';
+import { SimpleSchemaWrapper } from 'firstcut-schema';
+import { RecordEvents } from 'firstcut-action-utils';
 import { ACTIONS } from 'firstcut-pipeline-consts';
-import { getEmailActions, setAllRecordInvoicesToDue, recordHistoryIncludesEvent } from './shared/action.utils';
+import { getEmailActions, setAllRecordInvoicesToDue, recordHistoryIncludesEvent } from 'firstcut-action-utils';
 import { getRecordUrl } from 'firstcut-retrieve-url';
 
 const key = 'project_wrap';

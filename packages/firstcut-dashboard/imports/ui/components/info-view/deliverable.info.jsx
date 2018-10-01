@@ -9,7 +9,7 @@ import InfoPage from '../../pages/info.page';
 import { FilePortal, FileView } from '../utils/file.portal';
 import { getCompanyInfo } from './company.info';
 import { getCutInfo } from './cut.info';
-import { isEmpty } from 'firstcut-utils/utils';
+import { isEmpty } from 'firstcut-utils';
 import { getRecordPath } from 'firstcut-retrieve-url';
 import { asLinkToRecord } from '../utils/utils';
 import { HumanReadableDate } from '/imports/ui/components/utils/dates';

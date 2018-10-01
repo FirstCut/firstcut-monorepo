@@ -1,9 +1,9 @@
 import { _ } from 'lodash';
 import { BaseModel } from './base.model';
-import { LocationParser } from '/imports/api/schema';
+import { LocationParser } from 'firstcut-schema';
 import { getSalesforceLink } from 'firstcut-retrieve-url';
 import generateImmutableDefaults from './utils/generate-defaults';
-import { eventsInHistory } from '/imports/api/actions';
+import { eventsInHistory } from 'firstcut-action-utils';
 
 function createFirstCutModel(schema) {
   return FirstCutModel(generateImmutableDefaults(schema));

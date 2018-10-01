@@ -9,9 +9,9 @@ exports.SlackActionSchema = exports.CalendarActionSchema = exports.TextMessageAc
 
 var _simplSchema = _interopRequireDefault(require("simpl-schema"));
 
-var _slack = require("/imports/api/slack");
+var _firstcutSlack = require("firstcut-slack");
 
-var _calendar = require("/imports/api/calendar");
+var _firstcutCalendar = require("firstcut-calendar");
 
 var _firstcutPipelineConsts = require("firstcut-pipeline-consts");
 
@@ -60,7 +60,7 @@ var TextMessageActionSchema = new _simplSchema.default({
 });
 exports.TextMessageActionSchema = TextMessageActionSchema;
 var CalendarActionSchema = new _simplSchema.default({
-  event: _calendar.CalendarEventContentSchema,
+  event: _firstcutCalendar.CalendarEventContentSchema,
   event_id: {
     type: String,
     optional: true
@@ -72,7 +72,7 @@ var CalendarActionSchema = new _simplSchema.default({
 });
 exports.CalendarActionSchema = CalendarActionSchema;
 var SlackActionSchema = new _simplSchema.default({
-  content: _slack.SlackContentSchema,
+  content: _firstcutSlack.SlackContentSchema,
   channel: {
     type: String,
     optional: true

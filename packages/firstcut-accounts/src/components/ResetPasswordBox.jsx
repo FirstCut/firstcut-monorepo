@@ -118,13 +118,17 @@ class ResetPasswordBox extends React.Component {
           </form>
         </div>
 
-        {this.props.registerLink ?
-          <div className="ui large bottom attached info icon message">
-            <i className="user icon" />
-            <T>dont_have_an_account</T>
-            <a href={this.props.registerLink}>&nbsp;<T>register_here</T></a>
-          </div>
-                    : ''}
+        {this.props.registerLink
+          ? (
+            <div className="ui large bottom attached info icon message">
+              <i className="user icon" />
+              <T>dont_have_an_account</T>
+              <a href={this.props.registerLink}>
+                <T>register_here</T>
+              </a>
+            </div>
+          )
+          : ''}
 
         { ResetPasswordBox.renderErrorMessages() }
       </div>

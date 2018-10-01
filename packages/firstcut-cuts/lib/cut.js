@@ -27,9 +27,9 @@ var _firstcutPipelineConsts = require("firstcut-pipeline-consts");
 
 var _cuts2 = _interopRequireDefault(require("./cuts.schema"));
 
-var _modelBase = require("/imports/api/model-base");
+var _firstcutModelBase = require("firstcut-model-base");
 
-var Base = (0, _modelBase.createFirstCutModel)(_cuts2.default);
+var Base = (0, _firstcutModelBase.createFirstCutModel)(_cuts2.default);
 
 var Cut =
 /*#__PURE__*/

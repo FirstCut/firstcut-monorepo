@@ -3,7 +3,7 @@ import schedule from 'node-schedule';
 import { Map } from 'immutable';
 import { PubSub } from 'pubsub-js';
 import { JOBS } from './jobs.enum';
-import { createBaseModel } from '/imports/api/model-base';
+import { createBaseModel } from 'firstcut-model-base';
 import JobSchema from './jobs.schema';
 
 const Base = createBaseModel(JobSchema);

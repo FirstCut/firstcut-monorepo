@@ -6,8 +6,7 @@ import AppContainer from '/imports/ui/containers/app.container';
 
 import '/imports/startup/both';
 import 'firstcut-models';
-import { initUploader } from '/imports/api/uploader';
-import Analytics from '/imports/api/analytics';
+import Analytics from 'firstcut-analytics';
 
 
 Meteor.startup(() => {
@@ -21,6 +20,5 @@ Meteor.startup(() => {
   // } else {
   render(<AppContainer />, document.getElementById('react-root'));
   Analytics.init();
-  initUploader();
   // }
 });

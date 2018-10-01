@@ -1,5 +1,5 @@
 
-import ActionTemplates from '/imports/api/actions';
+import ActionTemplates from 'firstcut-actions';
 import { _ } from 'lodash';
 import fs from 'fs';
 

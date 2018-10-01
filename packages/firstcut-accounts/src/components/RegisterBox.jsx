@@ -49,13 +49,17 @@ class RegisterBox extends React.Component {
 
         </div>
 
-        {this.props.onClickLogin ?
-          <div className="ui large bottom attached info icon message">
-            <i className="user icon" />
-            <T>already_have_an_account</T>
-            <a onClick={this.props.onClickLogin}>&nbsp;<T>click_to_login</T></a>
-          </div>
-                    : ''}
+        {this.props.onClickLogin
+          ? (
+            <div className="ui large bottom attached info icon message">
+              <i className="user icon" />
+              <T>already_have_an_account</T>
+              <a onClick={this.props.onClickLogin}>
+                <T>click_to_login</T>
+              </a>
+            </div>
+          )
+          : ''}
 
       </div>
     );
@@ -73,4 +77,5 @@ RegisterBox.propTypes = {
 
 export default withTracker(() => ({
   user: Meteor.users.findOne(),
+
 }))(RegisterBox);

@@ -1,9 +1,9 @@
 
 import { Map } from 'immutable';
 import Models from 'firstcut-models';
-import { RecordEvents } from './shared/action.schemas';
+import { RecordEvents } from 'firstcut-action-utils';
 import { ACTIONS } from 'firstcut-pipeline-consts';
-import { recordHistoryIncludesEvent } from './shared/action.utils';
+import { recordHistoryIncludesEvent } from 'firstcut-action-utils';
 import { getRecordUrl } from 'firstcut-retrieve-url';
 
 const key = 'invoice_set_to_due';

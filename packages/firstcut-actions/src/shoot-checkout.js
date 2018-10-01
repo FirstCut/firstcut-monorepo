@@ -5,7 +5,7 @@ import { getRecordUrl } from 'firstcut-retrieve-url';
 import moment from 'moment';
 import SimpleSchema from 'simpl-schema';
 import { _ } from 'lodash';
-import { EventSchema } from './shared/action.schemas';
+import { EventSchema } from 'firstcut-action-utils';
 
 const ShootCheckout = new Map({
   key: 'shoot_checkout',

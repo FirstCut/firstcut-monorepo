@@ -6,9 +6,9 @@ var _regenerator = _interopRequireDefault(require("@babel/runtime/regenerator"))
 
 var _asyncToGenerator2 = _interopRequireDefault(require("@babel/runtime/helpers/asyncToGenerator"));
 
-var _mailer = require("/imports/api/mailer");
+var _firstcutMailer = require("firstcut-mailer");
 
-var _slack = require("/imports/api/slack");
+var _firstcutSlack = require("firstcut-slack");
 
 var _pubsubJs = require("pubsub-js");
 
@@ -16,11 +16,11 @@ var _firstcutModels = _interopRequireDefault(require("firstcut-models"));
 
 var _velocityMeteorStubs = require("meteor/velocity:meteor-stubs");
 
-var _testingUtils = require("/imports/api/testing-utils");
+var _firstcutTestingUtils = require("firstcut-testing-utils");
 
 var _sinon = _interopRequireDefault(require("sinon"));
 
-var _pipeline = require("/imports/api/pipeline");
+var _firstcutPipeline = require("firstcut-pipeline");
 
 // import { Meteor } from 'meteor/meteor';
 var Cut = _firstcutModels.default.Cut,
@@ -36,8 +36,8 @@ describe('Feedback sent event', function () {
   before(function () {
     _velocityMeteorStubs.MeteorStubs.install();
 
-    (0, _testingUtils.stubUser)();
-    (0, _testingUtils.insertTestData)();
+    (0, _firstcutTestingUtils.stubUser)();
+    (0, _firstcutTestingUtils.insertTestData)();
   });
   afterEach(function () {
     sandbox.restore();
@@ -57,12 +57,12 @@ describe('Feedback sent event', function () {
 
               _pubsubJs.PubSub.subscribe('error', callback);
 
-              mock_slack = sandbox.mock(_slack.Slack);
+              mock_slack = sandbox.mock(_firstcutSlack.Slack);
               mock_slack.expects('postMessage').once();
-              (0, _pipeline.handleEvent)({
+              (0, _firstcutPipeline.handleEvent)({
                 event_data: {
                   event: 'revisions_sent',
-                  record_id: _testingUtils.CUT_ID,
+                  record_id: _firstcutTestingUtils.CUT_ID,
                   record_type: Cut.modelName
                 }
               }, function () {

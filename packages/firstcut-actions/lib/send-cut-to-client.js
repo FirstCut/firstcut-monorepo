@@ -13,15 +13,13 @@ var _immutable = require("immutable");
 
 var _moment = _interopRequireDefault(require("moment"));
 
-var _schema = require("/imports/api/schema");
+var _firstcutSchema = require("firstcut-schema");
 
 var _firstcutModels = _interopRequireDefault(require("firstcut-models"));
 
-var _action = require("./shared/action.schemas");
+var _firstcutActionUtils = require("firstcut-action-utils");
 
 var _firstcutPipelineConsts = require("firstcut-pipeline-consts");
-
-var _action2 = require("./shared/action.utils");
 
 var _firstcutRetrieveUrl = require("firstcut-retrieve-url");
 
@@ -32,7 +30,7 @@ var SendCutToClient = new _immutable.Map({
   completed_title: 'Cut sent to client',
   customFieldsSchema: function customFieldsSchema(record) {
     if (!record.clientOwner) {
-      return new _schema.SimpleSchemaWrapper({});
+      return new _firstcutSchema.SimpleSchemaWrapper({});
     }
 
     var intro = "Hey ".concat(record.clientOwner.firstName, ",\nCongrats! The ").concat(record.typeLabel, " of ").concat(record.deliverableDisplayName, " has just been completed and is ready for review!\n\n");
@@ -50,7 +48,7 @@ var SendCutToClient = new _immutable.Map({
       defaultEmailContent = "We have implemented all the changes that you requested. So this version should be perfect.\n\nMusic: We incorporated a preview version of a song. If you are happy with this choice, let us know and we'll buy the licensed version of the song and replace it in the next version of your video. If you would like to try a different song just send us a new song link.\n\nPlease have a look and reply with your final approval and we’ll follow up with a project wrap-up email.";
     }
 
-    return new _schema.SimpleSchemaWrapper({
+    return new _firstcutSchema.SimpleSchemaWrapper({
       clientEmailContent: {
         type: String,
         rows: 10,
@@ -60,11 +58,11 @@ var SendCutToClient = new _immutable.Map({
       }
     });
   },
-  schema: _action.RecordEvents,
+  schema: _firstcutActionUtils.RecordEvents,
   fulfillsPrerequisites: function fulfillsPrerequisites(_ref) {
     var record = _ref.record,
         initiator = _ref.initiator;
-    return !(0, _action2.recordHistoryIncludesEvent)({
+    return !(0, _firstcutActionUtils.recordHistoryIncludesEvent)({
       record: record,
       event: key
     });
@@ -78,7 +76,7 @@ var SendCutToClient = new _immutable.Map({
 
     var cutLink = (0, _firstcutRetrieveUrl.getRecordUrl)(cut);
     var lines = clientEmailContent !== 'undefined' && clientEmailContent ? clientEmailContent.split(/\n/) : [''];
-    var clientEmails = (0, _action2.getEmailActions)({
+    var clientEmails = (0, _firstcutActionUtils.getEmailActions)({
       recipients: [cut.clientOwner],
       cc: [cut.adminOwner],
       template: 't-customizable-send-cut-to-client-ii',
@@ -95,7 +93,7 @@ var SendCutToClient = new _immutable.Map({
       }
     });
     var link = (0, _firstcutRetrieveUrl.getRecordUrl)(cut);
-    var internalEmails = (0, _action2.getEmailActions)({
+    var internalEmails = (0, _firstcutActionUtils.getEmailActions)({
       recipients: [cut.postpoOwner, cut.adminOwner],
       template: 'cut-has-been-sent-to-client',
       getSubstitutionData: function getSubstitutionData(recipient) {

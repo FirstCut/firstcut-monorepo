@@ -7,19 +7,17 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 
-var _keys = _interopRequireDefault(require("@babel/runtime/core-js/object/keys"));
-
-var _schema = require("/imports/api/schema");
+var _firstcutSchema = require("firstcut-schema");
 
 var _jobs = require("./jobs.enum");
 
 var _simplSchema = _interopRequireDefault(require("simpl-schema"));
 
-var JobSchema = new _schema.SimpleSchemaWrapper({
+var JobSchema = new _firstcutSchema.SimpleSchemaWrapper({
   _id: String,
   jobName: {
     type: String,
-    allowedValues: (0, _keys.default)(_jobs.JOBS)
+    allowedValues: Object.keys(_jobs.JOBS)
   },
   key: String,
   isRecurring: Boolean,

@@ -2,8 +2,8 @@
 import React from 'react';
 import Models from 'firstcut-models';
 import Modals from '/imports/ui/components/utils/modals';
-import { SimpleSchemaWrapper } from '/imports/api/schema';
-import { RecordWithSchemaFactory } from '/imports/api/model-base';
+import { SimpleSchemaWrapper } from 'firstcut-schema';
+import { RecordWithSchemaFactory } from 'firstcut-model-base';
 import { Record } from 'immutable';
 import { Button } from 'semantic-ui-react';
 import { setSimulationPlayerId } from 'firstcut-players';

@@ -1,10 +1,10 @@
-import { SimpleSchemaWrapper } from '/imports/api/schema';
+import { SimpleSchemaWrapper } from 'firstcut-schema';
 import { Map } from 'immutable';
 import Models from 'firstcut-models';
 import moment from 'moment';
-import { RecordEvents } from './shared/action.schemas';
+import { RecordEvents } from 'firstcut-action-utils';
 import { ACTIONS } from 'firstcut-pipeline-consts';
-import { getEmailActions, recordHistoryIncludesEvent } from './shared/action.utils';
+import { getEmailActions, recordHistoryIncludesEvent } from 'firstcut-action-utils';
 import { getRecordUrl } from 'firstcut-retrieve-url';
 
 const key = 'revisions_sent';

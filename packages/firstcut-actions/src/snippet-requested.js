@@ -2,11 +2,11 @@
 import { Map } from 'immutable';
 import Models from 'firstcut-models';
 import { ACTIONS } from 'firstcut-pipeline-consts';
-import { getPathFromId, fileRefFromId, buildSnippetRequestFilePath } from '/imports/api/filestore';
-import { invokeCreateSnippet } from '/imports/api/filestore';
+import { getPathFromId, fileRefFromId, buildSnippetRequestFilePath } from 'firstcut-filestore';
+import { invokeCreateSnippet } from 'firstcut-filestore';
 import SimpleSchema from 'simpl-schema';
 import PubSub from 'pubsub-js';
-import { EventSchema, RecordEvents } from './shared/action.schemas';
+import { EventSchema, RecordEvents } from 'firstcut-action-utils';
 
 const SnippetRequested = new Map({
   key: 'snippet_requested',

@@ -3,7 +3,7 @@ import React from 'react';
 import { Popup } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import moment from 'moment';
-import { SUPPORTED_TIMEZONES } from '/imports/api/schema';
+import { SUPPORTED_TIMEZONES } from 'firstcut-schema';
 import { humanReadableDate as _humanReadableDate, fromNowDate as _fromNowDate } from 'firstcut-utils';
 import { userTimezone, DATE_FORMATS } from 'firstcut-utils';
 

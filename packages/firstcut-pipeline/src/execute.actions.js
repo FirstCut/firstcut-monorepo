@@ -1,22 +1,22 @@
 
 import { Meteor } from 'meteor/meteor';
-import { SimpleSchemaWrapper } from '/imports/api/schema';
+import { SimpleSchemaWrapper } from 'firstcut-schema';
 import { Random } from 'meteor/random';
 import { ACTIONS, EVENT_LABELS } from 'firstcut-pipeline-consts';
 import Models from 'firstcut-models';
-import { Mailer } from '/imports/api/mailer';
-import { Slack } from '/imports/api/slack';
-import { Billing } from '/imports/api/billing';
+import { Mailer } from 'firstcut-mailer';
+import { Slack } from 'firstcut-slack';
+import { Billing } from 'firstcut-billing';
 import {
   EmailActionSchema,
   CalendarActionSchema,
   SlackActionSchema,
   TextMessageActionSchema,
 } from './shared/pipeline.schemas';
-import { sendTextMessage } from '/imports/api/text-messaging';
-import { createEvent } from '/imports/api/calendar';
+import { sendTextMessage } from 'firstcut-text-messaging';
+import { createEvent } from 'firstcut-calendar';
 import { PubSub } from 'pubsub-js';
-import ActionTemplates from '/imports/api/actions';
+import ActionTemplates from 'firstcut-actions';
 
 const slackTemplateDefaults = {
   username: 'firstcut',

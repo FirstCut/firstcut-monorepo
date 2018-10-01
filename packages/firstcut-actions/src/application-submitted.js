@@ -1,9 +1,9 @@
 import { Map } from 'immutable';
 import Models from 'firstcut-models';
-import { RecordEvents } from './shared/action.schemas';
+import { RecordEvents } from 'firstcut-action-utils';
 import { ACTIONS } from 'firstcut-pipeline-consts';
 import { getRecordUrl } from 'firstcut-retrieve-url';
-import { getEmailActions } from './shared/action.utils';
+import { getEmailActions } from 'firstcut-action-utils';
 
 const ApplicationSubmitted = new Map({
   key: 'application_submitted',

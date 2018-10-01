@@ -11,11 +11,9 @@ exports.fromNowDate = fromNowDate;
 exports.userTimezone = userTimezone;
 exports.DATE_FORMATS = void 0;
 
-var _freeze = _interopRequireDefault(require("@babel/runtime/core-js/object/freeze"));
-
 var _moment = _interopRequireDefault(require("moment"));
 
-var DATE_FORMATS = (0, _freeze.default)({
+var DATE_FORMATS = Object.freeze({
   verbose: 'dddd, MMMM Do YYYY, h:mm:ss a z',
   short: 'MMM Do',
   // Apr 20th,

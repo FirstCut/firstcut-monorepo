@@ -11,13 +11,13 @@ var _objectDestructuringEmpty2 = _interopRequireDefault(require("@babel/runtime/
 
 var _immutable = require("immutable");
 
-var _action = require("./shared/action.schemas");
+var _firstcutActionUtils = require("firstcut-action-utils");
 
 var CollaboratorRemoved = new _immutable.Map({
   key: 'collaborator_removed',
   action_title: 'Remove Collaborator',
   completed_title: 'Collaborator removed',
-  schema: _action.RecordEvents,
+  schema: _firstcutActionUtils.RecordEvents,
   fulfillsPrerequisites: function fulfillsPrerequisites(_ref) {
     var record = _ref.record,
         initiator = _ref.initiator;

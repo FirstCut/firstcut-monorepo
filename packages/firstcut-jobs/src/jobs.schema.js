@@ -1,5 +1,5 @@
 
-import { SimpleSchemaWrapper as Schema } from '/imports/api/schema';
+import { SimpleSchemaWrapper as Schema } from 'firstcut-schema';
 import { JOBS } from './jobs.enum';
 import SimpleSchema from 'simpl-schema';
 

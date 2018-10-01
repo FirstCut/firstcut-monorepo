@@ -1,8 +1,8 @@
 Arguments: 
-  /usr/local/lib/node_modules/node/bin/node /usr/local/Cellar/yarn/1.5.1_1/libexec/bin/yarn.js remove firstcut-internal-dashboard
+  /usr/local/lib/node_modules/node/bin/node /usr/local/Cellar/yarn/1.5.1_1/libexec/bin/yarn.js install --mutex network:42424 --non-interactive
 
 PATH: 
-  /Users/artichokes/google-cloud-sdk/bin:/Users/artichokes/.fastlane/bin:/Users/artichokes/.meteor:/Users/artichokes/Scripts:/usr/local/git/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/opt/local/bin:/opt/local/sbin:/usr/X11/bin:/Users/artichokes/Library/Android/sdk/tools:/Users/artichokes/Library/Android/sdk/platform-tools:/Users/artichokes/Library/Android/sdk/tools:/Applications/Postgres.app/Contents/Versions/latest/bin:/Users/artichokes/Library/Android/sdk/build-tools/27.0.2
+  /Users/artichokes/FirstCut/firstcut-mono/packages/firstcut-react-autoform/node_modules/.bin:/Users/artichokes/FirstCut/firstcut-mono/packages/node_modules/.bin:/Users/artichokes/FirstCut/firstcut-mono/node_modules/.bin:/Users/artichokes/FirstCut/node_modules/.bin:/Users/artichokes/node_modules/.bin:/Users/node_modules/.bin:/node_modules/.bin:/usr/local/lib/node_modules/node/bin:/Users/artichokes/google-cloud-sdk/bin:/Users/artichokes/.fastlane/bin:/Users/artichokes/.meteor:/Users/artichokes/Scripts:/usr/local/git/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/opt/local/bin:/opt/local/sbin:/usr/X11/bin:/Users/artichokes/Library/Android/sdk/tools:/Users/artichokes/Library/Android/sdk/platform-tools:/Users/artichokes/Library/Android/sdk/tools:/Applications/Postgres.app/Contents/Versions/latest/bin:/Users/artichokes/Library/Android/sdk/build-tools/27.0.2
 
 Yarn version: 
   1.5.1
@@ -15,18 +15,13 @@ Platform:
 
 npm manifest: 
   {
-    "name": "firstcut-react-autoform",
-    "private": true,
-    "version": "0.0.0",
-    "main": "lib/index.js",
-    "dependencies": {
-      "@babel/runtime": "^7.0.0-beta.51",
-      "firstcut-models": "^0.0.0",
-      "firstcut-schema-builder": "^0.0.0",
-      "lodash": "^4.17.10",
-      "remove": "^0.1.5",
-      "simpl-schema": "^1.5.0"
-    }
+  	"dependencies": {
+  		"@babel/runtime": "^7.0.0-beta.51",
+  		"firstcut-schema-builder": "^0.0.0",
+  		"lodash": "^4.17.10",
+  		"remove": "^0.1.5",
+  		"simpl-schema": "^1.5.0"
+  	}
   }
 
 yarn manifest: 
@@ -294,7 +289,7 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/traverse/-/traverse-0.3.9.tgz#717b8f220cc0bb7b44e40514c22b2e8bbc70d8b9"
 
 Trace: 
-  Error: https://registry.yarnpkg.com/firstcut-models: Not found
+  Error: https://registry.yarnpkg.com/firstcut-schema-builder: Not found
       at Request.params.callback [as _callback] (/usr/local/Cellar/yarn/1.5.1_1/libexec/lib/cli.js:65019:18)
       at Request.self.callback (/usr/local/Cellar/yarn/1.5.1_1/libexec/lib/cli.js:132430:22)
       at Request.emit (events.js:159:13)

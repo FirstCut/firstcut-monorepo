@@ -1,7 +1,7 @@
 
 import SimpleSchema from 'simpl-schema';
 
-export default ProfileSchema = Object.freeze({
+const ProfileSchema = Object.freeze({
   firstName: {
     type: String,
     label: 'First Name',
@@ -40,3 +40,5 @@ export default ProfileSchema = Object.freeze({
     regEx: SimpleSchema.RegEx.Url,
   },
 });
+
+export default ProfileSchema;

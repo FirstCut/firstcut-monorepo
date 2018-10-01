@@ -1,10 +1,10 @@
 import { Map } from 'immutable';
 import moment from 'moment';
-import { SimpleSchemaWrapper } from '/imports/api/schema';
+import { SimpleSchemaWrapper } from 'firstcut-schema';
 import Models from 'firstcut-models';
-import { RecordEvents } from './shared/action.schemas';
+import { RecordEvents } from 'firstcut-action-utils';
 import { ACTIONS, JOB_KEYS } from 'firstcut-pipeline-consts';
-import { getEmailActions, recordHistoryIncludesEvent } from './shared/action.utils';
+import { getEmailActions, recordHistoryIncludesEvent } from 'firstcut-action-utils';
 import { getRecordUrl } from 'firstcut-retrieve-url';
 
 const key = 'send_cut_to_client';

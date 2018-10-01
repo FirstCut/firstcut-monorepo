@@ -17,13 +17,13 @@ var _firstcutModels = _interopRequireDefault(require("firstcut-models"));
 
 var _firstcutPipelineConsts = require("firstcut-pipeline-consts");
 
-var _filestore = require("/imports/api/filestore");
+var _firstcutFilestore = require("firstcut-filestore");
 
 var _simplSchema = _interopRequireDefault(require("simpl-schema"));
 
 var _pubsubJs = _interopRequireDefault(require("pubsub-js"));
 
-var _action = require("./shared/action.schemas");
+var _firstcutActionUtils = require("firstcut-action-utils");
 
 var SnippetRequested = new _immutable.Map({
   key: 'snippet_requested',
@@ -32,7 +32,7 @@ var SnippetRequested = new _immutable.Map({
   schema: new _simplSchema.default({
     start: String,
     end: String
-  }).extend(_action.EventSchema).extend(_action.RecordEvents),
+  }).extend(_firstcutActionUtils.EventSchema).extend(_firstcutActionUtils.RecordEvents),
   fulfillsPrerequisites: function fulfillsPrerequisites(_ref) {
     var record = _ref.record,
         initiator = _ref.initiator;
@@ -54,16 +54,16 @@ var SnippetRequested = new _immutable.Map({
       title: 'trigger snippet request lambda function on AWS',
       execute: function execute() {
         console.log('EXECUTION');
-        var cut_key = (0, _filestore.getPathFromId)({
+        var cut_key = (0, _firstcutFilestore.getPathFromId)({
           fileId: cut.fileId
         });
-        var brand_intro_key = (0, _filestore.getPathFromId)({
+        var brand_intro_key = (0, _firstcutFilestore.getPathFromId)({
           fileId: cut.brandIntroId
         });
-        var cutFileRef = (0, _filestore.fileRefFromId)({
+        var cutFileRef = (0, _firstcutFilestore.fileRefFromId)({
           fileId: cut.fileId
         });
-        var destination_key = (0, _filestore.buildSnippetRequestFilePath)({
+        var destination_key = (0, _firstcutFilestore.buildSnippetRequestFilePath)({
           cutFileRef: cutFileRef,
           start: start,
           end: end
@@ -73,7 +73,7 @@ var SnippetRequested = new _immutable.Map({
         console.log('calling with this key');
         console.log(cut_key);
 
-        _filestore.invokeCreateSnippet.call({
+        _firstcutFilestore.invokeCreateSnippet.call({
           cut_key: cut_key,
           start: start,
           end: end,

@@ -1,7 +1,7 @@
 
 // import { Meteor } from 'meteor/meteor';
-import { Mailer } from '/imports/api/mailer';
-import { Slack } from '/imports/api/slack';
+import { Mailer } from 'firstcut-mailer';
+import { Slack } from 'firstcut-slack';
 import { PubSub } from 'pubsub-js';
 import Models from 'firstcut-models';
 import { MeteorStubs } from 'meteor/velocity:meteor-stubs';
@@ -13,10 +13,10 @@ import {
   CLIENT_OWNER_ID_FOR_DELIVERABLE,
   stubUser,
   insertTestData,
-} from '/imports/api/testing-utils';
+} from 'firstcut-testing-utils';
 
 import sinon from 'sinon';
-import { handleEvent } from '/imports/api/pipeline';
+import { handleEvent } from 'firstcut-pipeline';
 
 const {
   Cut, Deliverable, Project, Collaborator, Client, Shoot,

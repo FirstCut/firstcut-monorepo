@@ -11,7 +11,7 @@ import {
 } from 'firstcut-players';
 import { emitPipelineEvent } from 'firstcut-utils';
 import { getRecordPath } from 'firstcut-retrieve-url';
-import Analytics from '/imports/api/analytics';
+import Analytics from 'firstcut-analytics';
 
 export default class ApplyToBeAVideographerPage extends React.Component {
   state = { confirmationOpen: false }

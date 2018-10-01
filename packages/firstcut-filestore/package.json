@@ -5,9 +5,10 @@
   "main": "lib/index.js",
   "dependencies": {
     "@babel/runtime": "^7.0.0-beta.51",
-    "firstcut-google-api": "^0.0.0",
+    "firstcut-models": "^0.0.0",
+    "firstcut-retrieve-url": "^0.0.0",
+    "firstcut-utils": "^0.0.0",
     "lodash": "^4.17.10",
-    "remove": "^0.1.5",
-    "simpl-schema": "^1.5.0"
+    "querystring": "^0.2.0"
   }
 }

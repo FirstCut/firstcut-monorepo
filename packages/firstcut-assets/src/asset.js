@@ -2,11 +2,11 @@
 import { Meteor } from 'meteor/meteor';
 import sanitize from 'sanitize-filename';
 import { Random } from 'meteor/random';
-import { upload } from '/imports/api/uploader';
+import { upload } from 'firstcut-uploader';
 import { _ } from 'lodash';
 import EventEmitter from 'events';
 import AssetSchema from './assets.schema';
-import { createBaseModel } from '/imports/api/model-base';
+import { createBaseModel } from 'firstcut-model-base';
 
 const Base = createBaseModel(AssetSchema);
 

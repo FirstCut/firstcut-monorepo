@@ -19,7 +19,7 @@ var _semanticUiReact = require("semantic-ui-react");
 
 var _buttons = _interopRequireDefault(require("/imports/ui/components/utils/buttons"));
 
-var _schema = require("/imports/api/schema");
+var _firstcutSchema = require("firstcut-schema");
 
 var _lodash = require("lodash");
 
@@ -98,7 +98,7 @@ function ObjectArrayForm(props) {
 function getNestedErrors(fieldname, index, errors) {
   var nested = {};
 
-  var keyToNestedValue = _schema.SchemaParser.fieldAsIndexedObjectArrayKey(fieldname, index);
+  var keyToNestedValue = _firstcutSchema.SchemaParser.fieldAsIndexedObjectArrayKey(fieldname, index);
 
   _lodash._.mapKeys(errors, function (value, key) {
     var nestedKey = key.split(keyToNestedValue);

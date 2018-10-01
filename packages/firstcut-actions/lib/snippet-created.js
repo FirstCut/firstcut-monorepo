@@ -13,15 +13,13 @@ var _immutable = require("immutable");
 
 var _simplSchema = _interopRequireDefault(require("simpl-schema"));
 
-var _action = require("./shared/action.schemas");
+var _firstcutActionUtils = require("firstcut-action-utils");
 
 var _firstcutPipelineConsts = require("firstcut-pipeline-consts");
 
 var _firstcutModels = _interopRequireDefault(require("firstcut-models"));
 
-var _filestore = require("/imports/api/filestore");
-
-var _action2 = require("./shared/action.utils");
+var _firstcutFilestore = require("firstcut-filestore");
 
 var SnippetCreated = new _immutable.Map({
   key: 'snippet_created',
@@ -31,7 +29,7 @@ var SnippetCreated = new _immutable.Map({
     snippet_key: String,
     start: String,
     end: String
-  }).extend(_action.EventSchema).extend(_action.RecordEvents),
+  }).extend(_firstcutActionUtils.EventSchema).extend(_firstcutActionUtils.RecordEvents),
   fulfillsPrerequisites: function fulfillsPrerequisites(_ref) {
     var record = _ref.record,
         initiator = _ref.initiator;
@@ -44,11 +42,11 @@ var SnippetCreated = new _immutable.Map({
 
     var cut = _firstcutModels.default.Cut.fromId(record_id);
 
-    var snippet_link = _filestore.getSignedUrlOfKey.call({
+    var snippet_link = _firstcutFilestore.getSignedUrlOfKey.call({
       key: snippet_key
     });
 
-    var client_emails = (0, _action2.getEmailActions)({
+    var client_emails = (0, _firstcutActionUtils.getEmailActions)({
       recipients: [cut.adminOwner],
       template: 'client-snippet-created',
       getSubstitutionData: function getSubstitutionData(recipient) {

@@ -1,12 +1,12 @@
 import '/imports/startup/both';
-import { init as initPipelines } from '/imports/api/pipeline';
+// import { init as initPipelines } from 'firstcut-pipeline';
 import { getUserEmails, getPlayerFromEmails } from 'firstcut-players';
-import '/imports/api/api';
+import 'firstcut-api';
 
 Meteor.startup(() => {
-  if (Meteor.settings.public.isPipelineDeployment) {
-    initPipelines();
-  }
+  // if (Meteor.settings.public.isPipelineDeployment) {
+  //   initPipelines();
+  // }
 
   ServiceConfiguration.configurations.upsert({
     service: 'google',

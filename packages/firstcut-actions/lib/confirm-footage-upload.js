@@ -15,11 +15,9 @@ var _firstcutModels = _interopRequireDefault(require("firstcut-models"));
 
 var _moment = _interopRequireDefault(require("moment"));
 
-var _action = require("./shared/action.schemas");
+var _firstcutActionUtils = require("firstcut-action-utils");
 
 var _firstcutPipelineConsts = require("firstcut-pipeline-consts");
-
-var _action2 = require("./shared/action.utils");
 
 var _firstcutRetrieveUrl = require("firstcut-retrieve-url");
 
@@ -30,17 +28,17 @@ var ConfirmFootageUpload = new _immutable.Map({
   key: key,
   action_title: 'Confirm footage uploaded',
   completed_title: 'Footage confirmed uploaded',
-  schema: _action.RecordEvents,
+  schema: _firstcutActionUtils.RecordEvents,
   fulfillsPrerequisites: function fulfillsPrerequisites(_ref) {
     var record = _ref.record,
         initiator = _ref.initiator;
     // TODO: include this when confirmed recordHistoryIncludesEvent({record, event: 'shoot_wrap'});
     var dayOfShoot = (0, _moment.default)(record.date);
     var isAfterDayOfShoot = (0, _moment.default)().isAfter(dayOfShoot);
-    return isAfterDayOfShoot && !(0, _action2.recordHistoryIncludesEvent)({
+    return isAfterDayOfShoot && !(0, _firstcutActionUtils.recordHistoryIncludesEvent)({
       record: record,
       event: key
-    }) && !(0, _action2.recordHistoryIncludesEvent)({
+    }) && !(0, _firstcutActionUtils.recordHistoryIncludesEvent)({
       record: record,
       event: 'footage_verified'
     });
@@ -52,7 +50,7 @@ var ConfirmFootageUpload = new _immutable.Map({
     var shoot = _firstcutModels.default.Shoot.fromId(record_id);
 
     var collaborator = (0, _firstcutPlayers.getPlayer)(initiator_player_id);
-    var internal_emails = (0, _action2.getEmailActions)({
+    var internal_emails = (0, _firstcutActionUtils.getEmailActions)({
       recipients: [shoot.adminOwner],
       template: 'footage-confirmed-uploaded',
       getSubstitutionData: function getSubstitutionData(recipient) {
@@ -65,7 +63,7 @@ var ConfirmFootageUpload = new _immutable.Map({
         };
       }
     });
-    var confirmation_emails = (0, _action2.getEmailActions)({
+    var confirmation_emails = (0, _firstcutActionUtils.getEmailActions)({
       recipients: [collaborator],
       template: 'thank-you-for-uploading-footage',
       getSubstitutionData: function getSubstitutionData(recipient) {

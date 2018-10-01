@@ -13,7 +13,7 @@ var _immutable = require("immutable");
 
 var _firstcutModels = _interopRequireDefault(require("firstcut-models"));
 
-var _action = require("./shared/action.schemas");
+var _firstcutActionUtils = require("firstcut-action-utils");
 
 var _firstcutPipelineConsts = require("firstcut-pipeline-consts");
 
@@ -21,13 +21,11 @@ var _firstcutRetrieveUrl = require("firstcut-retrieve-url");
 
 var _firstcutPlayers = require("firstcut-players");
 
-var _action2 = require("./shared/action.utils");
-
 var AddOnRequested = new _immutable.Map({
   key: 'add_on_requested',
   action_title: 'Request add on',
   completed_title: 'Add on requested',
-  schema: _action.RecordEvents,
+  schema: _firstcutActionUtils.RecordEvents,
   fulfillsPrerequisites: function fulfillsPrerequisites(_ref) {
     var record = _ref.record,
         initiator = _ref.initiator;
@@ -41,7 +39,7 @@ var AddOnRequested = new _immutable.Map({
 
     var link = (0, _firstcutRetrieveUrl.getRecordUrl)(cut);
     var player = (0, _firstcutPlayers.getPlayer)(initiator_player_id);
-    var internalEmails = (0, _action2.getEmailActions)({
+    var internalEmails = (0, _firstcutActionUtils.getEmailActions)({
       recipients: [cut.adminOwner],
       template: 'add-on-requested',
       getSubstitutionData: function getSubstitutionData(recipient) {
@@ -56,7 +54,7 @@ var AddOnRequested = new _immutable.Map({
         };
       }
     });
-    var clientEmails = (0, _action2.getEmailActions)({
+    var clientEmails = (0, _firstcutActionUtils.getEmailActions)({
       recipients: [player],
       cc: [cut.adminOwner],
       template: 'client-confirm-addon-requested',

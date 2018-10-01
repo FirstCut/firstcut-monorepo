@@ -1,11 +1,11 @@
 
-import { SimpleSchemaWrapper } from '/imports/api/schema';
+import { SimpleSchemaWrapper } from 'firstcut-schema';
 import { Map } from 'immutable';
 import Models from 'firstcut-models';
 import moment from 'moment';
-import { RecordEvents } from './shared/action.schemas';
+import { RecordEvents } from 'firstcut-action-utils';
 import { ACTIONS } from 'firstcut-pipeline-consts';
-import { getEmailActions } from './shared/action.utils';
+import { getEmailActions } from 'firstcut-action-utils';
 import { getRecordUrl, getCutViewLink } from 'firstcut-retrieve-url';
 
 const CutSentToClient = new Map({

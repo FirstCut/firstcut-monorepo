@@ -1,7 +1,7 @@
 import SimpleSchema from 'simpl-schema';
 import {
   SimpleSchemaWrapper as Schema, LocationSchema, ProfileSchema, BaseSchema,
-} from '/imports/api/schema';
+} from 'firstcut-schema';
 import { COLLABORATOR_TYPES, PAYMENT_METHODS, COLLABORATOR_SKILLS } from './collaborators.enum';
 
 const CollaboratorSchema = new Schema({

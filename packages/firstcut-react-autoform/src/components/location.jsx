@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { Form, Button } from 'semantic-ui-react';
 import Autocomplete from 'react-google-autocomplete';
 // import timezone from 'node-google-timezone';
-import GoogleApi from '/imports/api/google-api';
+import GoogleApi from 'firstcut-google-api';
 import { HTTP } from 'meteor/http';
 import qs from 'qs';
 

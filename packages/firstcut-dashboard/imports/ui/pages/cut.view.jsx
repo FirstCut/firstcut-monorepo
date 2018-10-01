@@ -1,6 +1,6 @@
 
 import React from 'react';
-import Analytics from '/imports/api/analytics';
+import Analytics from 'firstcut-analytics';
 import { Link } from 'react-router-dom';
 import {
   Icon, Button, Popup, Input, Modal, Container, Header,
@@ -12,8 +12,8 @@ import { emitPipelineEvent } from 'firstcut-utils';
 import Modals, { ConfirmationModal } from '/imports/ui/components/utils/modals';
 import { EVENTS, ADD_ONS } from 'firstcut-pipeline-consts';
 import { Record } from 'immutable';
-import { RecordWithSchemaFactory } from '/imports/api/model-base';
-import { SimpleSchemaWrapper as Schema } from '/imports/api/schema';
+import { RecordWithSchemaFactory } from 'firstcut-model-base';
+import { SimpleSchemaWrapper as Schema } from 'firstcut-schema';
 import { HumanReadableDate } from '/imports/ui/components/utils/dates';
 import { PipelineActionComponent } from '/imports/ui/components/pipeline-actions/actions';
 import { CopyToClipboard } from 'react-copy-to-clipboard';

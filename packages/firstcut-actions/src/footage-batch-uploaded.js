@@ -2,7 +2,7 @@
 import { Map } from 'immutable';
 import Models from 'firstcut-models';
 import { _ } from 'lodash';
-import { RecordEvents } from './shared/action.schemas';
+import { RecordEvents } from 'firstcut-action-utils';
 import { ACTIONS } from 'firstcut-pipeline-consts';
 import { getRecordUrl } from 'firstcut-retrieve-url';
 import { getPlayer } from 'firstcut-players';

@@ -11,7 +11,7 @@ var _blueprints = require("/imports/api/blueprints");
 
 var _projects = require("./projects.enum");
 
-var _base = _interopRequireDefault(require("/imports/api/schema/base.schema"));
+var _firstcutSchema = _interopRequireDefault(require("firstcut-schema"));
 
 var _simplSchema = _interopRequireDefault(require("simpl-schema"));
 
@@ -105,6 +105,6 @@ var ProjectSchema = new _blueprints.BlueprintableSchema({
     blackbox: true
   })
 });
-ProjectSchema.extend(_base.default);
+ProjectSchema.extend(_firstcutSchema.default);
 var _default = ProjectSchema;
 exports.default = _default;

@@ -1,11 +1,11 @@
 
 import { Map } from 'immutable';
 import Models from 'firstcut-models';
-import { RecordEvents } from './shared/action.schemas';
+import { RecordEvents } from 'firstcut-action-utils';
 import { getAddOnPrice, ACTIONS } from 'firstcut-pipeline-consts';
 import { getRecordUrl } from 'firstcut-retrieve-url';
 import { getPlayer } from 'firstcut-players';
-import { getEmailActions } from './shared/action.utils';
+import { getEmailActions } from 'firstcut-action-utils';
 
 const AddOnRequested = new Map({
   key: 'add_on_requested',

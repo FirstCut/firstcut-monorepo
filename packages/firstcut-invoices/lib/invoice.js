@@ -21,9 +21,9 @@ var _invoices = require("./invoices.enum");
 
 var _invoices2 = _interopRequireDefault(require("./invoices.schema"));
 
-var _modelBase = require("/imports/api/model-base");
+var _firstcutModelBase = require("firstcut-model-base");
 
-var Base = (0, _modelBase.createFirstCutModel)(_invoices2.default);
+var Base = (0, _firstcutModelBase.createFirstCutModel)(_invoices2.default);
 
 var Invoice =
 /*#__PURE__*/

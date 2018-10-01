@@ -13,13 +13,11 @@ var _immutable = require("immutable");
 
 var _firstcutModels = _interopRequireDefault(require("firstcut-models"));
 
-var _schema = require("/imports/api/schema");
+var _firstcutSchema = require("firstcut-schema");
 
-var _action = require("./shared/action.schemas");
+var _firstcutActionUtils = require("firstcut-action-utils");
 
 var _firstcutPipelineConsts = require("firstcut-pipeline-consts");
-
-var _action2 = require("./shared/action.utils");
 
 var _firstcutRetrieveUrl = require("firstcut-retrieve-url");
 
@@ -28,9 +26,9 @@ var ProjectWrap = new _immutable.Map({
   key: key,
   action_title: 'Wrap project',
   completed_title: 'Project wrapped',
-  schema: _action.RecordEvents,
+  schema: _firstcutActionUtils.RecordEvents,
   customFieldsSchema: function customFieldsSchema(record) {
-    return new _schema.SimpleSchemaWrapper({
+    return new _firstcutSchema.SimpleSchemaWrapper({
       clientEmailContent: {
         type: String,
         rows: 10,
@@ -43,7 +41,7 @@ var ProjectWrap = new _immutable.Map({
   fulfillsPrerequisites: function fulfillsPrerequisites(_ref) {
     var record = _ref.record,
         initiator = _ref.initiator;
-    return !(0, _action2.recordHistoryIncludesEvent)({
+    return !(0, _firstcutActionUtils.recordHistoryIncludesEvent)({
       record: record,
       event: key
     });
@@ -56,7 +54,7 @@ var ProjectWrap = new _immutable.Map({
 
     var link = (0, _firstcutRetrieveUrl.getRecordUrl)(project);
     var lines = clientEmailContent !== 'undefined' && clientEmailContent ? clientEmailContent.split(/\n/) : [''];
-    var clientEmailActions = (0, _action2.getEmailActions)({
+    var clientEmailActions = (0, _firstcutActionUtils.getEmailActions)({
       recipients: [project.clientOwner],
       cc: [project.adminOwner],
       template: 'project-wrap-client',
@@ -86,7 +84,7 @@ var ProjectWrap = new _immutable.Map({
       type: _firstcutPipelineConsts.ACTIONS.custom_function,
       title: 'set this projects invoices to due',
       execute: function execute() {
-        (0, _action2.setAllRecordInvoicesToDue)(project);
+        (0, _firstcutActionUtils.setAllRecordInvoicesToDue)(project);
       }
     }, {
       type: _firstcutPipelineConsts.ACTIONS.slack_notify,

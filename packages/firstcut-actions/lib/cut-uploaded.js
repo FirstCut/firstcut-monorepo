@@ -13,11 +13,9 @@ var _immutable = require("immutable");
 
 var _firstcutModels = _interopRequireDefault(require("firstcut-models"));
 
-var _action = require("./shared/action.schemas");
+var _firstcutActionUtils = require("firstcut-action-utils");
 
 var _firstcutPipelineConsts = require("firstcut-pipeline-consts");
-
-var _action2 = require("./shared/action.utils");
 
 var _firstcutRetrieveUrl = require("firstcut-retrieve-url");
 
@@ -25,7 +23,7 @@ var CutUploaded = new _immutable.Map({
   key: 'cut_uploaded',
   action_title: 'Upload cut',
   completed_title: 'Cut uploaded',
-  schema: _action.RecordEvents,
+  schema: _firstcutActionUtils.RecordEvents,
   fulfillsPrerequisites: function fulfillsPrerequisites(_ref) {
     var record = _ref.record,
         initiator = _ref.initiator;
@@ -38,7 +36,7 @@ var CutUploaded = new _immutable.Map({
     var deliverable = cut.deliverable;
     var link = (0, _firstcutRetrieveUrl.getRecordUrl)(cut);
     var viewLink = (0, _firstcutRetrieveUrl.getCutViewLink)(cut);
-    var emailActions = (0, _action2.getEmailActions)({
+    var emailActions = (0, _firstcutActionUtils.getEmailActions)({
       recipients: [deliverable.postpoOwner, deliverable.adminOwner],
       template: 'cut-uploaded',
       getSubstitutionData: function getSubstitutionData(recipient) {

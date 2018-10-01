@@ -7,11 +7,9 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 
-var _freeze = _interopRequireDefault(require("@babel/runtime/core-js/object/freeze"));
-
 var _simplSchema = _interopRequireDefault(require("simpl-schema"));
 
-var _default = ProfileSchema = (0, _freeze.default)({
+var ProfileSchema = Object.freeze({
   firstName: {
     type: String,
     label: 'First Name',
@@ -50,5 +48,5 @@ var _default = ProfileSchema = (0, _freeze.default)({
     regEx: _simplSchema.default.RegEx.Url
   }
 });
-
+var _default = ProfileSchema;
 exports.default = _default;

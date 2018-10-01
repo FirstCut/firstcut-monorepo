@@ -1,7 +1,7 @@
 
 import React from 'react';
 import Models from 'firstcut-models';
-import { BaseModel, RecordWithSchemaFactory } from '/imports/api/model-base';
+import { BaseModel, RecordWithSchemaFactory } from 'firstcut-model-base';
 
 export default function withFilters(WrappedComponent) {
   return class extends React.PureComponent {

@@ -7,8 +7,6 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.BlueprintableSchema = void 0;
 
-var _keys = _interopRequireDefault(require("@babel/runtime/core-js/object/keys"));
-
 var _classCallCheck2 = _interopRequireDefault(require("@babel/runtime/helpers/classCallCheck"));
 
 var _createClass2 = _interopRequireDefault(require("@babel/runtime/helpers/createClass"));
@@ -19,7 +17,7 @@ var _getPrototypeOf2 = _interopRequireDefault(require("@babel/runtime/helpers/ge
 
 var _inherits2 = _interopRequireDefault(require("@babel/runtime/helpers/inherits"));
 
-var _schema = require("/imports/api/schema");
+var _firstcutSchema = require("firstcut-schema");
 
 var _immutable = require("immutable");
 
@@ -47,7 +45,7 @@ function (_SimpleSchemaWrapper) {
     key: "setBlueprintOptions",
     value: function setBlueprintOptions(blueprints) {
       var getBlueprintOptions = function getBlueprintOptions() {
-        return (0, _immutable.List)((0, _keys.default)(blueprints).map(function (b) {
+        return (0, _immutable.List)(Object.keys(blueprints).map(function (b) {
           return {
             key: b,
             value: b,
@@ -58,13 +56,13 @@ function (_SimpleSchemaWrapper) {
 
       this.extend({
         blueprint: {
-          allowedValues: (0, _keys.default)(blueprints),
+          allowedValues: Object.keys(blueprints),
           options: getBlueprintOptions
         }
       });
     }
   }]);
   return BlueprintableSchema;
-}(_schema.SimpleSchemaWrapper);
+}(_firstcutSchema.SimpleSchemaWrapper);
 
 exports.BlueprintableSchema = BlueprintableSchema;

@@ -4,8 +4,8 @@ import { STAGES } from './projects.enum';
 import { EVENT_LABELS } from 'firstcut-pipeline-consts';
 import PROJECT_BLUEPRINTS from './projects.blueprints';
 import ProjectSchema from './projects.schema';
-import { eventsInHistory } from '/imports/api/actions';
-import { createFirstCutModel } from '/imports/api/model-base';
+import { eventsInHistory } from 'firstcut-action-utils';
+import { createFirstCutModel } from 'firstcut-model-base';
 
 const Base = createFirstCutModel(ProjectSchema);
 

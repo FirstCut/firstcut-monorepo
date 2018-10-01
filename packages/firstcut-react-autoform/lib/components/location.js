@@ -22,7 +22,7 @@ var _semanticUiReact = require("semantic-ui-react");
 
 var _reactGoogleAutocomplete = _interopRequireDefault(require("react-google-autocomplete"));
 
-var _googleApi = _interopRequireDefault(require("/imports/api/google-api"));
+var _firstcutGoogleApi = _interopRequireDefault(require("firstcut-google-api"));
 
 var _http = require("meteor/http");
 

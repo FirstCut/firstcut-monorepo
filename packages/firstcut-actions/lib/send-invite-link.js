@@ -11,7 +11,7 @@ var _toConsumableArray2 = _interopRequireDefault(require("@babel/runtime/helpers
 
 var _immutable = require("immutable");
 
-var _action = require("./shared/action.schemas");
+var _firstcutActionUtils = require("firstcut-action-utils");
 
 var _firstcutPipelineConsts = require("firstcut-pipeline-consts");
 
@@ -19,13 +19,11 @@ var _firstcutRetrieveUrl = require("firstcut-retrieve-url");
 
 var _firstcutPlayers = require("firstcut-players");
 
-var _action2 = require("./shared/action.utils");
-
 var SendInviteLink = new _immutable.Map({
   key: 'send_invite_link',
   action_title: 'Send invite link',
   completed_title: 'Invite link sent',
-  schema: _action.RecordEvents,
+  schema: _firstcutActionUtils.RecordEvents,
   fulfillsPrerequisites: function fulfillsPrerequisites(_ref) {
     var record = _ref.record,
         initiator = _ref.initiator;
@@ -37,7 +35,7 @@ var SendInviteLink = new _immutable.Map({
     var player = (0, _firstcutPlayers.getPlayer)(record_id);
     var initiator = (0, _firstcutPlayers.getPlayer)(initiator_player_id);
     var inviteLink = (0, _firstcutRetrieveUrl.getInviteLink)(player);
-    var invites = (0, _action2.getEmailActions)({
+    var invites = (0, _firstcutActionUtils.getEmailActions)({
       recipients: [player],
       cc: [initiator],
       template: 'tc-send-invite-link',

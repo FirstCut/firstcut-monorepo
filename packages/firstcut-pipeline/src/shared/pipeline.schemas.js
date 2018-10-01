@@ -1,6 +1,6 @@
 import SimpleSchema from 'simpl-schema';
-import { SlackContentSchema } from '/imports/api/slack';
-import { CalendarEventContentSchema } from '/imports/api/calendar';
+import { SlackContentSchema } from 'firstcut-slack';
+import { CalendarEventContentSchema } from 'firstcut-calendar';
 import { ACTIONS } from 'firstcut-pipeline-consts';
 
 export const EmailActionSchema = new SimpleSchema({

@@ -2,7 +2,7 @@
 import Models from 'firstcut-models';
 import {
   sample_projects, sample_shoots, sample_deliverables, sample_cuts, insertTestData,
-} from '/imports/api/testing-utils';
+} from 'firstcut-testing-utils';
 import { calculateStage } from './project';
 import { List } from 'immutable';
 import { _ } from 'lodash';

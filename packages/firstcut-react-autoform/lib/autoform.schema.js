@@ -7,15 +7,13 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = getAutoformSchema;
 
-var _keys = _interopRequireDefault(require("@babel/runtime/core-js/object/keys"));
-
 var _objectSpread2 = _interopRequireDefault(require("@babel/runtime/helpers/objectSpread"));
 
 var _firstcutModels = _interopRequireDefault(require("firstcut-models"));
 
 var _immutable = require("immutable");
 
-var _schema = require("/imports/api/schema");
+var _firstcutSchema = require("firstcut-schema");
 
 var _lodash = require("lodash");
 
@@ -64,7 +62,7 @@ function _getDefaultValue(schema, record) {
 
 function _getAutoformFieldName(schema, field) {
   if (schema.isSubobjectArrayField(field)) {
-    return _schema.SchemaParser.getMostNestedFieldName(field);
+    return _firstcutSchema.SchemaParser.getMostNestedFieldName(field);
   }
 
   return field;
@@ -111,7 +109,7 @@ function _hasEnum(fieldSchema) {
 }
 
 function _generateEnumOptions(fieldSchema) {
-  return (0, _immutable.List)((0, _keys.default)(fieldSchema.enumOptions).map(function (t) {
+  return (0, _immutable.List)(Object.keys(fieldSchema.enumOptions).map(function (t) {
     return {
       key: t,
       value: t,

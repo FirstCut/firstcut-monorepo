@@ -7,8 +7,6 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = exports.BaseModel = void 0;
 
-var _keys = _interopRequireDefault(require("@babel/runtime/core-js/object/keys"));
-
 var _defineProperty2 = _interopRequireDefault(require("@babel/runtime/helpers/defineProperty"));
 
 var _objectSpread2 = _interopRequireDefault(require("@babel/runtime/helpers/objectSpread"));
@@ -27,7 +25,7 @@ var _inherits2 = _interopRequireDefault(require("@babel/runtime/helpers/inherits
 
 var _meteor = require("meteor/meteor");
 
-var _schema = require("/imports/api/schema");
+var _firstcutSchema = require("firstcut-schema");
 
 var _immutable = require("immutable");
 
@@ -35,7 +33,7 @@ var _lodash = require("lodash");
 
 var _firstcutUtils = require("firstcut-utils");
 
-var _actions = require("/imports/api/actions");
+var _firstcutActionUtils = require("firstcut-action-utils");
 
 var _firstcutPlayers = require("firstcut-players");
 
@@ -150,14 +148,14 @@ var BaseModel = function BaseModel(defaultValues) {
       }, {
         key: "keyIsOfTypeArray",
         value: function keyIsOfTypeArray(key) {
-          var parentKey = _schema.SchemaParser.getLeastNestedFieldName(key);
+          var parentKey = _firstcutSchema.SchemaParser.getLeastNestedFieldName(key);
 
           return Array.isArray((0, _get2.default)((0, _getPrototypeOf2.default)(_class.prototype), "get", this).call(this, parentKey));
         }
       }, {
         key: "keyIsOfTypePlainObject",
         value: function keyIsOfTypePlainObject(key) {
-          var parentKey = _schema.SchemaParser.getLeastNestedFieldName(key);
+          var parentKey = _firstcutSchema.SchemaParser.getLeastNestedFieldName(key);
 
           var value = (0, _get2.default)((0, _getPrototypeOf2.default)(_class.prototype), "get", this).call(this, parentKey);
           return !(value instanceof _immutable.Record) && value instanceof Object;
@@ -165,11 +163,11 @@ var BaseModel = function BaseModel(defaultValues) {
       }, {
         key: "getValueOfNestedArrayField",
         value: function getValueOfNestedArrayField(key) {
-          var parentKey = _schema.SchemaParser.getLeastNestedFieldName(key);
+          var parentKey = _firstcutSchema.SchemaParser.getLeastNestedFieldName(key);
 
-          var childKey = _schema.SchemaParser.getMostNestedFieldName(key);
+          var childKey = _firstcutSchema.SchemaParser.getMostNestedFieldName(key);
 
-          var index = _schema.SchemaParser.getIndexInObjectArrayField(key);
+          var index = _firstcutSchema.SchemaParser.getIndexInObjectArrayField(key);
 
           if (childKey === index) {
             return (0, _get2.default)((0, _getPrototypeOf2.default)(_class.prototype), parentKey, this)[index];
@@ -180,12 +178,12 @@ var BaseModel = function BaseModel(defaultValues) {
       }, {
         key: "get",
         value: function get(key) {
-          if (_schema.SchemaParser.hasNestedFields(key)) {
+          if (_firstcutSchema.SchemaParser.hasNestedFields(key)) {
             if (this.keyIsOfTypeArray(key)) {
               return this.getValueOfNestedArrayField(key);
             }
 
-            var nestedFields = _schema.SchemaParser.parseNestedFields(key);
+            var nestedFields = _firstcutSchema.SchemaParser.parseNestedFields(key);
 
             return this.getIn(nestedFields);
           }
@@ -202,13 +200,13 @@ var BaseModel = function BaseModel(defaultValues) {
             return record.set('blueprint', value, false);
           }
 
-          if (_schema.SchemaParser.hasNestedFields(key)) {
+          if (_firstcutSchema.SchemaParser.hasNestedFields(key)) {
             if (this.keyIsOfTypeArray(key)) {
-              var index = _schema.SchemaParser.getIndexInObjectArrayField(key);
+              var index = _firstcutSchema.SchemaParser.getIndexInObjectArrayField(key);
 
-              var parentField = _schema.SchemaParser.getLeastNestedFieldName(key);
+              var parentField = _firstcutSchema.SchemaParser.getLeastNestedFieldName(key);
 
-              var childField = _schema.SchemaParser.getMostNestedFieldName(key);
+              var childField = _firstcutSchema.SchemaParser.getMostNestedFieldName(key);
 
               var array = (0, _get2.default)((0, _getPrototypeOf2.default)(_class.prototype), parentField, this);
 
@@ -221,7 +219,7 @@ var BaseModel = function BaseModel(defaultValues) {
               return (0, _get2.default)((0, _getPrototypeOf2.default)(_class.prototype), "set", this).call(this, parentField, array);
             }
 
-            var nestedFields = _schema.SchemaParser.parseNestedFields(key);
+            var nestedFields = _firstcutSchema.SchemaParser.parseNestedFields(key);
 
             return this.setIn(nestedFields, value);
           }
@@ -306,7 +304,7 @@ var BaseModel = function BaseModel(defaultValues) {
       }, {
         key: "eventsInHistory",
         get: function get() {
-          return (0, _actions.eventsInHistory)(this.history);
+          return (0, _firstcutActionUtils.eventsInHistory)(this.history);
         }
       }, {
         key: "publicFields",
@@ -572,7 +570,7 @@ function applyBlueprint(r, blueprint) {
   }
 
   var defaults = record.availableBlueprints[blueprint].defaults;
-  (0, _keys.default)(defaults).forEach(function (key) {
+  Object.keys(defaults).forEach(function (key) {
     record = record.set(key, defaults[key]);
   });
   return record;
@@ -639,7 +637,7 @@ function flattenNestedFields(m) {
       _lodash._.forEach(_lodash._.keys(value), function (subfield) {
         if (!isMongoOperator(subfield) && typeof subfield !== 'function') {
           // e.g. {"contact": {"name": "value"}}
-          var queryKey = _schema.SchemaParser.buildObjectField(field, subfield);
+          var queryKey = _firstcutSchema.SchemaParser.buildObjectField(field, subfield);
 
           result[queryKey] = value[subfield];
         } else {

@@ -2,10 +2,10 @@
 import { Map } from 'immutable';
 import Models from 'firstcut-models';
 import moment from 'moment';
-import { RecordEvents } from './shared/action.schemas';
-import { setAllRecordInvoicesToDue, recordHistoryIncludesEvent } from './shared/action.utils';
+import { RecordEvents } from 'firstcut-action-utils';
+import { setAllRecordInvoicesToDue, recordHistoryIncludesEvent } from 'firstcut-action-utils';
 import { ACTIONS } from 'firstcut-pipeline-consts';
-// import { invokeCopyFootage } from '/imports/api/filestore';
+// import { invokeCopyFootage } from 'firstcut-filestore';
 
 const key = 'footage_verified';
 

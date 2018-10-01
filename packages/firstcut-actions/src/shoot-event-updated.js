@@ -2,7 +2,7 @@
 import { Map } from 'immutable';
 import Models from 'firstcut-models';
 import moment from 'moment';
-import { RecordEvents } from './shared/action.schemas';
+import { RecordEvents } from 'firstcut-action-utils';
 import { ACTIONS, JOB_KEYS } from 'firstcut-pipeline-consts';
 import { getRecordUrl } from 'firstcut-retrieve-url';
 import { humanReadableDate } from 'firstcut-utils';

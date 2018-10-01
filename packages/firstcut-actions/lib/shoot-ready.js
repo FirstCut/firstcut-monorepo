@@ -7,17 +7,15 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 
-var _schema = require("/imports/api/schema");
+var _firstcutSchema = require("firstcut-schema");
 
 var _immutable = require("immutable");
 
 var _firstcutModels = _interopRequireDefault(require("firstcut-models"));
 
-var _action = require("./shared/action.schemas");
+var _firstcutActionUtils = require("firstcut-action-utils");
 
 var _firstcutPipelineConsts = require("firstcut-pipeline-consts");
-
-var _action2 = require("./shared/action.utils");
 
 var _firstcutRetrieveUrl = require("firstcut-retrieve-url");
 
@@ -28,7 +26,7 @@ var ShootReady = new _immutable.Map({
   key: key,
   action_title: 'Shoot ready',
   completed_title: 'Shoot ready',
-  customFieldsSchema: new _schema.SimpleSchemaWrapper({
+  customFieldsSchema: new _firstcutSchema.SimpleSchemaWrapper({
     generateInterviewerHourlyInvoice: {
       type: Boolean,
       defaultValue: true
@@ -38,11 +36,11 @@ var ShootReady = new _immutable.Map({
       defaultValue: true
     }
   }),
-  schema: _action.RecordEvents,
+  schema: _firstcutActionUtils.RecordEvents,
   fulfillsPrerequisites: function fulfillsPrerequisites(_ref) {
     var record = _ref.record,
         initiator = _ref.initiator;
-    return !(0, _action2.recordHistoryIncludesEvent)({
+    return !(0, _firstcutActionUtils.recordHistoryIncludesEvent)({
       record: record,
       event: key
     });

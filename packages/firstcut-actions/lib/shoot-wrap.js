@@ -13,11 +13,9 @@ var _immutable = require("immutable");
 
 var _firstcutModels = _interopRequireDefault(require("firstcut-models"));
 
-var _action = require("./shared/action.schemas");
+var _firstcutActionUtils = require("firstcut-action-utils");
 
 var _firstcutPipelineConsts = require("firstcut-pipeline-consts");
-
-var _action2 = require("./shared/action.utils");
 
 var _firstcutRetrieveUrl = require("firstcut-retrieve-url");
 
@@ -25,7 +23,7 @@ var ShootWrap = new _immutable.Map({
   key: 'shoot_wrap',
   action_title: 'Shoot wrap',
   completed_title: 'Shoot wrapped',
-  schema: _action.RecordEvents,
+  schema: _firstcutActionUtils.RecordEvents,
   fulfillsPrerequisites: function fulfillsPrerequisites(_ref) {
     var record = _ref.record,
         initiator = _ref.initiator;
@@ -39,7 +37,7 @@ var ShootWrap = new _immutable.Map({
     var behindTheScenesURLs = behindTheScenesShots.map(function (s) {
       return shoot.screenshotURL(s.filename);
     });
-    var emailActions = (0, _action2.getEmailActions)({
+    var emailActions = (0, _firstcutActionUtils.getEmailActions)({
       recipients: [shoot.clientOwner],
       cc: [shoot.adminOwner],
       template: 'ttc-shoot-wrap',

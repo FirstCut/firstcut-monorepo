@@ -22,8 +22,6 @@ exports.playerIsClient = playerIsClient;
 exports.initializeCollaboratorFromUser = initializeCollaboratorFromUser;
 exports.setPlayerId = void 0;
 
-var _values = _interopRequireDefault(require("@babel/runtime/core-js/object/values"));
-
 var _toConsumableArray2 = _interopRequireDefault(require("@babel/runtime/helpers/toConsumableArray"));
 
 var _simplSchema = _interopRequireDefault(require("simpl-schema"));
@@ -104,7 +102,7 @@ function getUserEmails(user) {
   }
 
   if (user.services) {
-    var services = (0, _values.default)(user.services);
+    var services = Object.values(user.services);
     var serviceEmails = services.map(function (service) {
       return service.email;
     });

@@ -17,11 +17,11 @@ var _getPrototypeOf2 = _interopRequireDefault(require("@babel/runtime/helpers/ge
 
 var _inherits2 = _interopRequireDefault(require("@babel/runtime/helpers/inherits"));
 
-var _modelBase = require("/imports/api/model-base");
+var _firstcutModelBase = require("firstcut-model-base");
 
 var _companies = _interopRequireDefault(require("./companies.schema"));
 
-var Base = (0, _modelBase.createFirstCutModel)(_companies.default);
+var Base = (0, _firstcutModelBase.createFirstCutModel)(_companies.default);
 
 var Company =
 /*#__PURE__*/

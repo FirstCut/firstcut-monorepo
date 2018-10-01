@@ -7,15 +7,13 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 
-var _keys = _interopRequireDefault(require("@babel/runtime/core-js/object/keys"));
-
 var _simplSchema = _interopRequireDefault(require("simpl-schema"));
 
 var _blueprints = require("/imports/api/blueprints");
 
 var _firstcutPipelineConsts = require("firstcut-pipeline-consts");
 
-var _schema = require("/imports/api/schema");
+var _firstcutSchema = require("firstcut-schema");
 
 var _shoots = require("./shoots.enum");
 
@@ -182,7 +180,7 @@ var ShootsSchema = new _blueprints.BlueprintableSchema({
   'screenshots.$.cameraId': {
     type: String,
     label: 'Camera',
-    allowedValues: (0, _keys.default)(_shoots.CAMERAS)
+    allowedValues: Object.keys(_shoots.CAMERAS)
   },
   subjects: {
     type: Array
@@ -257,8 +255,8 @@ var ShootsSchema = new _blueprints.BlueprintableSchema({
     type: String
   }
 });
-ShootsSchema.extend(_schema.BaseSchema);
-ShootsSchema.extend(_schema.LocationSchema);
+ShootsSchema.extend(_firstcutSchema.BaseSchema);
+ShootsSchema.extend(_firstcutSchema.LocationSchema);
 ShootsSchema.extend({
   location: {
     custom: function custom() {

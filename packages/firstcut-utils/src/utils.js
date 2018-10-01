@@ -1,7 +1,7 @@
 import { _ } from 'lodash';
-// import { handleEvent } from '/imports/api/pipeline';
+// import { handleEvent } from 'firstcut-pipeline';
 import { userPlayerId, inSimulationMode } from 'firstcut-players';
-import Analytics from '/imports/api/analytics';
+import Analytics from 'firstcut-analytics';
 import { HTTP } from 'meteor/http';
 
 export function pluralize(str) {

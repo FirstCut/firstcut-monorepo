@@ -7,8 +7,6 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.lambda = exports.s3_conf = exports.s3 = void 0;
 
-var _promise = _interopRequireDefault(require("@babel/runtime/core-js/promise"));
-
 var _objectSpread2 = _interopRequireDefault(require("@babel/runtime/helpers/objectSpread"));
 
 var _stream = _interopRequireDefault(require("stream"));
@@ -80,7 +78,7 @@ enableAcceleration(Meteor.settings.public.source_footage_bucket);
 enableAcceleration(Meteor.settings.public.target_footage_bucket);
 
 s3.delete = function (vref) {
-  return new _promise.default(function (resolve, reject) {
+  return new Promise(function (resolve, reject) {
     if (!(vref && vref.meta && vref.meta.pipePath)) {
       reject(new Meteor.Error('invalid-params', 'vref not configured to use s3. Cannot delete'));
     }
@@ -100,7 +98,7 @@ s3.delete = function (vref) {
 };
 
 s3.put = function (vref, path, version) {
-  return new _promise.default(function (resolve, reject) {
+  return new Promise(function (resolve, reject) {
     s3.putObject({
       // ServerSideEncryption: 'AES256', // Optional
       StorageClass: 'STANDARD',

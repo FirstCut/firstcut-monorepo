@@ -11,7 +11,7 @@ var _immutable = require("immutable");
 
 var _firstcutModels = _interopRequireDefault(require("firstcut-models"));
 
-var _action = require("./shared/action.schemas");
+var _firstcutActionUtils = require("firstcut-action-utils");
 
 var _firstcutPipelineConsts = require("firstcut-pipeline-consts");
 
@@ -19,7 +19,7 @@ var ScreenshotRejected = new _immutable.Map({
   key: 'screenshot_rejected',
   action_title: 'Reject screenshot',
   completed_title: 'Screenshot rejected',
-  schema: _action.ScreenshotEvents,
+  schema: _firstcutActionUtils.ScreenshotEvents,
   fulfillsPrerequisites: function fulfillsPrerequisites(_ref) {
     var record = _ref.record,
         initiator = _ref.initiator;

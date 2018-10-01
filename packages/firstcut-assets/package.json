@@ -5,6 +5,7 @@
   "main": "lib/index.js",
   "dependencies": {
     "@babel/runtime": "^7.0.0-beta.51",
+    "firstcut-schema": "^0.0.0",
     "firstcut-uploader": "^0.0.0"
   }
 }

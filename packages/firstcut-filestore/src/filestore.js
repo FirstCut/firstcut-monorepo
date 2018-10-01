@@ -1,6 +1,5 @@
 
 import { getS3Url } from 'firstcut-retrieve-url';
-import { _ } from 'lodash';
 // import { getPath, buildS3FilePath } from './filestore.utils';
 import querystring from 'querystring';
 import { executeAsyncWithCallback } from 'firstcut-utils';

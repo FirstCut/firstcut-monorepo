@@ -16,25 +16,21 @@ exports.isURL = isURL;
 exports.asUSDollars = asUSDollars;
 exports.htmlifyString = htmlifyString;
 
-var _stringify = _interopRequireDefault(require("@babel/runtime/core-js/json/stringify"));
-
 var _typeof2 = _interopRequireDefault(require("@babel/runtime/helpers/typeof"));
 
 var _objectSpread2 = _interopRequireDefault(require("@babel/runtime/helpers/objectSpread"));
 
 var _objectWithoutProperties2 = _interopRequireDefault(require("@babel/runtime/helpers/objectWithoutProperties"));
 
-var _promise = _interopRequireDefault(require("@babel/runtime/core-js/promise"));
-
 var _lodash = require("lodash");
 
 var _firstcutPlayers = require("firstcut-players");
 
-var _analytics = _interopRequireDefault(require("/imports/api/analytics"));
+var _firstcutAnalytics = _interopRequireDefault(require("firstcut-analytics"));
 
 var _http = require("meteor/http");
 
-// import { handleEvent } from '/imports/api/pipeline';
+// import { handleEvent } from 'firstcut-pipeline';
 function pluralize(str) {
   var lastLetter = str[str.length - 1];
 
@@ -62,7 +58,7 @@ function formatBytes(bytes, decimals) {
 }
 
 function executeAsyncWithCallback(func, cb) {
-  return new _promise.default(function (resolve, reject) {
+  return new Promise(function (resolve, reject) {
     func(function (err, res) {
       if (err) {
         reject(err);
@@ -87,13 +83,13 @@ function emitPipelineEvent(args) {
     initiator_player_id: (0, _firstcutPlayers.userPlayerId)()
   }), function (val) {
     if ((0, _typeof2.default)(val) === 'object') {
-      return (0, _stringify.default)(val);
+      return JSON.stringify(val);
     }
 
     return val ? val.toString() : '';
   });
 
-  _analytics.default.trackAction(args); // handleEvent.call(eventData);
+  _firstcutAnalytics.default.trackAction(args); // handleEvent.call(eventData);
 
 
   _http.HTTP.post("".concat(Meteor.settings.public.PIPELINE_ROOT, "/handleEvent"), {
@@ -126,7 +122,7 @@ function isEmpty(something) {
 }
 
 function logError(error) {
-  _analytics.default.trackError(error);
+  _firstcutAnalytics.default.trackError(error);
 }
 
 function isURL(str) {

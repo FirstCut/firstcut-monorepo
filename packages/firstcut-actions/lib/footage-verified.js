@@ -13,25 +13,23 @@ var _firstcutModels = _interopRequireDefault(require("firstcut-models"));
 
 var _moment = _interopRequireDefault(require("moment"));
 
-var _action = require("./shared/action.schemas");
-
-var _action2 = require("./shared/action.utils");
+var _firstcutActionUtils = require("firstcut-action-utils");
 
 var _firstcutPipelineConsts = require("firstcut-pipeline-consts");
 
-// import { invokeCopyFootage } from '/imports/api/filestore';
+// import { invokeCopyFootage } from 'firstcut-filestore';
 var key = 'footage_verified';
 var FootageVerified = new _immutable.Map({
   key: key,
   action_title: 'Verify Footage',
   completed_title: 'Footage Verified',
-  schema: _action.RecordEvents,
+  schema: _firstcutActionUtils.RecordEvents,
   fulfillsPrerequisites: function fulfillsPrerequisites(_ref) {
     var record = _ref.record,
         initiator = _ref.initiator;
     var dayOfShoot = (0, _moment.default)(record.date);
     var isAfterDayOfShoot = (0, _moment.default)().isAfter(dayOfShoot);
-    return isAfterDayOfShoot && !(0, _action2.recordHistoryIncludesEvent)({
+    return isAfterDayOfShoot && !(0, _firstcutActionUtils.recordHistoryIncludesEvent)({
       record: record,
       event: key
     });
@@ -52,7 +50,7 @@ var FootageVerified = new _immutable.Map({
       type: _firstcutPipelineConsts.ACTIONS.custom_function,
       title: 'set shoot invoices to due',
       execute: function execute() {
-        (0, _action2.setAllRecordInvoicesToDue)(shoot);
+        (0, _firstcutActionUtils.setAllRecordInvoicesToDue)(shoot);
       } // }, {
       //   type: ACTIONS.custom_function,
       //   title: `copy footage from the ${srcBucket} to the ${destBucket} s3 buckets`,

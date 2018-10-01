@@ -1,8 +1,8 @@
 //
 // import { Meteor } from 'meteor/meteor';
 // import Mailer from '../mailer';
-// import { insertTestData, restoreTestData, TEST_DELIVERABLE, POSTPO_OWNER_ID, PROJECT_ID, CLIENT_OWNER_ID_FOR_DELIVERABLE } from '/imports/api/testing-utils';
-// import { stubUser } from '/imports/api/testing-utils';
+// import { insertTestData, restoreTestData, TEST_DELIVERABLE, POSTPO_OWNER_ID, PROJECT_ID, CLIENT_OWNER_ID_FOR_DELIVERABLE } from 'firstcut-testing-utils';
+// import { stubUser } from 'firstcut-testing-utils';
 // import { MeteorStubs } from 'meteor/velocity:meteor-stubs';
 // import { TEMPLATES, substitution_data_generators } from '../mailer.enum';
 // import { Record } from 'immutable';

@@ -9,7 +9,7 @@ exports.default = void 0;
 
 var _blueprints = require("/imports/api/blueprints");
 
-var _base = _interopRequireDefault(require("/imports/api/schema/base.schema"));
+var _firstcutSchema = _interopRequireDefault(require("firstcut-schema"));
 
 var _simplSchema = _interopRequireDefault(require("simpl-schema"));
 
@@ -116,6 +116,6 @@ var DeliverableSchema = new _blueprints.BlueprintableSchema({
     type: String
   }
 });
-DeliverableSchema.extend(_base.default);
+DeliverableSchema.extend(_firstcutSchema.default);
 var _default = DeliverableSchema;
 exports.default = _default;

@@ -11,11 +11,11 @@ var _immutable = require("immutable");
 
 var _firstcutModels = _interopRequireDefault(require("firstcut-models"));
 
-var _schema = require("/imports/api/schema");
+var _firstcutSchema = require("firstcut-schema");
 
 var _moment = _interopRequireDefault(require("moment"));
 
-var _action = require("./shared/action.schemas");
+var _firstcutActionUtils = require("firstcut-action-utils");
 
 var _firstcutPipelineConsts = require("firstcut-pipeline-consts");
 
@@ -28,9 +28,9 @@ var EditShootScript = new _immutable.Map({
   key: key,
   action_title: 'Edit shoot script',
   completed_title: 'Shoot script edited',
-  schema: _action.RecordEvents,
+  schema: _firstcutActionUtils.RecordEvents,
   customFieldsSchema: function customFieldsSchema(record) {
-    return new _schema.SimpleSchemaWrapper({
+    return new _firstcutSchema.SimpleSchemaWrapper({
       script: {
         type: String,
         customType: 'textarea',

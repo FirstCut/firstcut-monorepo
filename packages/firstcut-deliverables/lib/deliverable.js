@@ -29,9 +29,9 @@ var _immutable = require("immutable");
 
 var _deliverables2 = _interopRequireDefault(require("./deliverables.schema"));
 
-var _modelBase = require("/imports/api/model-base");
+var _firstcutModelBase = require("firstcut-model-base");
 
-var Base = (0, _modelBase.createFirstCutModel)(_deliverables2.default);
+var Base = (0, _firstcutModelBase.createFirstCutModel)(_deliverables2.default);
 
 var Deliverable =
 /*#__PURE__*/

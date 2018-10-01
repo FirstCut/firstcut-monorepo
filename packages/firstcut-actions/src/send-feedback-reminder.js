@@ -1,5 +1,5 @@
 import { Map } from 'immutable';
-import { RecordEvents } from './shared/action.schemas';
+import { RecordEvents } from 'firstcut-action-utils';
 import { ACTIONS } from 'firstcut-pipeline-consts';
 import Models from 'firstcut-models';
 import { getRecordUrl } from 'firstcut-retrieve-url';

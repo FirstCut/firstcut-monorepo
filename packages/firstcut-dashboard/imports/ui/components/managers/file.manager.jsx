@@ -5,10 +5,10 @@ import PropTypes from 'prop-types';
 import Models from 'firstcut-models';
 import { PubSub } from 'pubsub-js';
 import { List, Map } from 'immutable';
-import { getSignedUrl } from '/imports/api/filestore';
+import { getSignedUrl } from 'firstcut-filestore';
 import { _ } from 'lodash';
 import { DDP } from 'meteor/ddp-client';
-import Analytics from '/imports/api/analytics';
+import Analytics from 'firstcut-analytics';
 import { userExperience, USER_IS_UPLOADING, UPLOAD_SUCCESSFUL } from '/imports/ui/config';
 
 export default function withFileManager(WrappedComponent) {

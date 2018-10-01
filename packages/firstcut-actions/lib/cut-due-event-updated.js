@@ -13,7 +13,7 @@ var _firstcutModels = _interopRequireDefault(require("firstcut-models"));
 
 var _moment = _interopRequireDefault(require("moment"));
 
-var _action = require("./shared/action.schemas");
+var _firstcutActionUtils = require("firstcut-action-utils");
 
 var _firstcutPipelineConsts = require("firstcut-pipeline-consts");
 
@@ -25,7 +25,7 @@ var CutDueEventUpdated = new _immutable.Map({
   key: 'cut_due_event_updated',
   action_title: 'Update Cut Due Event',
   completed_title: 'Cut due event updated',
-  schema: _action.RecordEvents,
+  schema: _firstcutActionUtils.RecordEvents,
   fulfillsPrerequisites: function fulfillsPrerequisites(_ref) {
     var record = _ref.record,
         initiator = _ref.initiator;

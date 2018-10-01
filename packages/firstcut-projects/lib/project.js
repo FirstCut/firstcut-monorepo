@@ -32,11 +32,11 @@ var _projects2 = _interopRequireDefault(require("./projects.blueprints"));
 
 var _projects3 = _interopRequireDefault(require("./projects.schema"));
 
-var _actions = require("/imports/api/actions");
+var _firstcutActionUtils = require("firstcut-action-utils");
 
-var _modelBase = require("/imports/api/model-base");
+var _firstcutModelBase = require("firstcut-model-base");
 
-var Base = (0, _modelBase.createFirstCutModel)(_projects3.default);
+var Base = (0, _firstcutModelBase.createFirstCutModel)(_projects3.default);
 
 var Project =
 /*#__PURE__*/
@@ -279,7 +279,7 @@ function calculateStage(h) {
   var history = h; // ensure the history is sorted by timestamp
 
   history = _lodash._.reverse(_lodash._.sortBy(history, ['timestamp']));
-  var events = (0, _actions.eventsInHistory)(history);
+  var events = (0, _firstcutActionUtils.eventsInHistory)(history);
 
   var findLatestEvent = function findLatestEvent(historyToSearch, eventsToFind) {
     var latest = _lodash._.find(historyToSearch, function (e) {

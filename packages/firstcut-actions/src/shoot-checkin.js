@@ -2,7 +2,7 @@
 import { Map } from 'immutable';
 import Models from 'firstcut-models';
 import SimpleSchema from 'simpl-schema';
-import { EventSchema } from './shared/action.schemas';
+import { EventSchema } from 'firstcut-action-utils';
 import { ACTIONS, COLLABORATOR_TYPES_TO_LABELS } from 'firstcut-pipeline-consts';
 
 const ShootCheckin = new Map({

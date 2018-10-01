@@ -7,10 +7,6 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 
-var _getOwnPropertyNames = _interopRequireDefault(require("@babel/runtime/core-js/object/get-own-property-names"));
-
-var _keys = _interopRequireDefault(require("@babel/runtime/core-js/object/keys"));
-
 var _objectSpread2 = _interopRequireDefault(require("@babel/runtime/helpers/objectSpread"));
 
 var _classCallCheck2 = _interopRequireDefault(require("@babel/runtime/helpers/classCallCheck"));
@@ -98,7 +94,7 @@ function () {
         return key;
       };
 
-      return findFieldsSatisfyingCondition((0, _keys.default)(this.asJson), isPublic, getKey);
+      return findFieldsSatisfyingCondition(Object.keys(this.asJson), isPublic, getKey);
     }
   }, {
     key: "getFileSchemaKeys",
@@ -113,7 +109,7 @@ function () {
         return key;
       };
 
-      return findFieldsSatisfyingCondition((0, _keys.default)(this.asJson), isFileSchemaKey, getKey);
+      return findFieldsSatisfyingCondition(Object.keys(this.asJson), isFileSchemaKey, getKey);
     }
   }, {
     key: "getRelatedRecordSchemaKeys",
@@ -134,7 +130,7 @@ function () {
         return key;
       };
 
-      return findFieldsSatisfyingCondition((0, _keys.default)(this.asJson), serviceDependencyInModels, getKey);
+      return findFieldsSatisfyingCondition(Object.keys(this.asJson), serviceDependencyInModels, getKey);
     }
   }, {
     key: "_getAsSchema",
@@ -274,7 +270,7 @@ function () {
 
       if (!quickType) {
         var def = this.asSchema.getObjectSchema(field).getDefinition();
-        if ((0, _getOwnPropertyNames.default)(def).length > 0) quickType = 'object';
+        if (Object.getOwnPropertyNames(def).length > 0) quickType = 'object';
       }
 
       return quickType;

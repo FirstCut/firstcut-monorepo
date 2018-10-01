@@ -1,7 +1,7 @@
 
 import moment from 'moment';
 import TaskSchema from './task.schema';
-import { createFirstCutModel } from '/imports/api/model-base';
+import { createFirstCutModel } from 'firstcut-model-base';
 import { getPlayer, userPlayerId } from 'firstcut-players';
 import { UPCOMING_THRESHOLD_IN_HOURS } from './tasks.enum';
 

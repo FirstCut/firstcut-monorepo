@@ -5,10 +5,10 @@
   "main": "lib/index.js",
   "dependencies": {
     "@babel/runtime": "^7.0.0-beta.51",
+    "firstcut-actions": "^0.0.0",
     "firstcut-aws": "^0.0.0",
     "firstcut-billing": "^0.0.0",
     "firstcut-calendar": "^0.0.0",
-    "firstcut-enum": "^0.0.0",
     "firstcut-mailer": "^0.0.0",
     "firstcut-models": "^0.0.0",
     "firstcut-retrieve-url": "^0.0.0",

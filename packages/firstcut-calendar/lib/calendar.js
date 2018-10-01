@@ -9,22 +9,20 @@ exports.createEvent = createEvent;
 
 var _objectSpread2 = _interopRequireDefault(require("@babel/runtime/helpers/objectSpread"));
 
-var _promise = _interopRequireDefault(require("@babel/runtime/core-js/promise"));
-
 var _meteor = require("meteor/meteor");
 
 var _moment = _interopRequireDefault(require("moment"));
 
 var _calendar = require("./calendar.schemas");
 
-var _googleApi = _interopRequireDefault(require("/imports/api/google-api"));
+var _firstcutGoogleApi = _interopRequireDefault(require("firstcut-google-api"));
 
 function getOrganizerId() {
   return _meteor.Meteor.settings.oauth_credentials_user;
 }
 
 function createEvent(args) {
-  return new _promise.default(function (resolve, reject) {
+  return new Promise(function (resolve, reject) {
     _calendar.CalendarEventContentSchema.validate(args.event);
 
     var event = args.event,
@@ -54,7 +52,7 @@ function createEvent(args) {
       method = 'put';
     }
 
-    _googleApi.default[method](url, {
+    _firstcutGoogleApi.default[method](url, {
       user: user,
       data: event,
       params: {

@@ -2,7 +2,7 @@
 import { SUPPORTED_EVENTS, SUPPORTED_RECIPIENTS } from 'firstcut-pipeline-consts';
 // import SimpleSchema from 'simpl-schema';
 
-export default BaseSchema = Object.freeze({
+const BaseSchema = Object.freeze({
   _id: {
     type: String,
   },
@@ -70,3 +70,5 @@ export default BaseSchema = Object.freeze({
   },
   'history.$.collaborator_key': String,
 });
+
+export default BaseSchema;

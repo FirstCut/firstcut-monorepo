@@ -9,8 +9,6 @@ exports.default = initSubscriptions;
 
 var _objectSpread2 = _interopRequireDefault(require("@babel/runtime/helpers/objectSpread"));
 
-var _keys = _interopRequireDefault(require("@babel/runtime/core-js/object/keys"));
-
 var _meteor = require("meteor/meteor");
 
 var _pubsubJs = require("pubsub-js");
@@ -38,7 +36,7 @@ function initSubscriptions() {
 
   function collaboratorsChanged(record, prevRecord) {
     var result = false;
-    var typeKeys = (0, _keys.default)(_firstcutPipelineConsts.COLLABORATOR_TYPES_TO_LABELS);
+    var typeKeys = Object.keys(_firstcutPipelineConsts.COLLABORATOR_TYPES_TO_LABELS);
     typeKeys.forEach(function (collaborator_key) {
       var collaborator = record[collaborator_key] || {};
       var prevCollaborator = prevRecord[collaborator_key] || {};
@@ -54,7 +52,7 @@ function initSubscriptions() {
   function notifyCollaboratorsTheyWereAddedOrRemoved(model, fields, prevFields) {
     var record = model.createNew(fields);
     var prevRecord = model.createNew(prevFields);
-    var typeKeys = (0, _keys.default)(_firstcutPipelineConsts.COLLABORATOR_TYPES_TO_LABELS);
+    var typeKeys = Object.keys(_firstcutPipelineConsts.COLLABORATOR_TYPES_TO_LABELS);
     typeKeys.forEach(function (collaborator_key) {
       var collaborator = record[collaborator_key] || {};
       var prevCollaborator = prevRecord[collaborator_key] || {};

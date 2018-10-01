@@ -25,7 +25,7 @@ var _sanitizeFilename = _interopRequireDefault(require("sanitize-filename"));
 
 var _random = require("meteor/random");
 
-var _uploader = require("/imports/api/uploader");
+var _firstcutUploader = require("firstcut-uploader");
 
 var _lodash = require("lodash");
 
@@ -33,9 +33,9 @@ var _events = _interopRequireDefault(require("events"));
 
 var _assets = _interopRequireDefault(require("./assets.schema"));
 
-var _modelBase = require("/imports/api/model-base");
+var _firstcutModelBase = require("firstcut-model-base");
 
-var Base = (0, _modelBase.createBaseModel)(_assets.default);
+var Base = (0, _firstcutModelBase.createBaseModel)(_assets.default);
 var snippetExtension = 'mp4';
 var VIDEO_MIME_TYPES = ['video/x-flv', 'video/mp4', 'video/webm', 'video/ogg'];
 
@@ -166,7 +166,7 @@ function (_Base) {
       promise.catch(function (err) {
         return emitter.emit('error', err);
       });
-      (0, _uploader.upload)({
+      (0, _firstcutUploader.upload)({
         file: file,
         path: path,
         emitter: emitter,

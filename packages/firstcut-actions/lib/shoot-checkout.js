@@ -21,7 +21,7 @@ var _simplSchema = _interopRequireDefault(require("simpl-schema"));
 
 var _lodash = require("lodash");
 
-var _action = require("./shared/action.schemas");
+var _firstcutActionUtils = require("firstcut-action-utils");
 
 var ShootCheckout = new _immutable.Map({
   key: 'shoot_checkout',
@@ -30,7 +30,7 @@ var ShootCheckout = new _immutable.Map({
   schema: new _simplSchema.default({
     record_id: String,
     collaborator_key: String
-  }).extend(_action.EventSchema),
+  }).extend(_firstcutActionUtils.EventSchema),
   fulfillsPrerequisites: function fulfillsPrerequisites(_ref) {
     var record = _ref.record,
         initiator = _ref.initiator;

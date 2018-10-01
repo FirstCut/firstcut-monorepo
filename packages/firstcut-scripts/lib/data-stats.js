@@ -7,8 +7,6 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = countVideographerCities;
 
-var _stringify = _interopRequireDefault(require("@babel/runtime/core-js/json/stringify"));
-
 var _firstcutModels = _interopRequireDefault(require("firstcut-models"));
 
 var _fs = _interopRequireDefault(require("fs"));
@@ -34,7 +32,7 @@ function countVideographerCities() {
     return cities;
   }, {});
   var filename = 'videographercities.json';
-  var json = (0, _stringify.default)(counts);
+  var json = JSON.stringify(counts);
 
   _fs.default.writeFileSync("/Users/artichokes/FirstCut/firstcutfirstcut-pipeline-consts/".concat(filename), json);
 }

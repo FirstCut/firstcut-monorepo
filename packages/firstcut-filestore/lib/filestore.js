@@ -9,13 +9,7 @@ exports.fileRefFromId = fileRefFromId;
 exports.getPathFromId = getPathFromId;
 exports.getSignedUrlOfKey = exports.getSignedUrl = exports.listObjects = exports.copyFile = exports.invokeCreateSnippet = exports.invokeCopyFootage = void 0;
 
-var _stringify = _interopRequireDefault(require("@babel/runtime/core-js/json/stringify"));
-
-var _promise = _interopRequireDefault(require("@babel/runtime/core-js/promise"));
-
 var _firstcutRetrieveUrl = require("firstcut-retrieve-url");
-
-var _lodash = require("lodash");
 
 var _querystring = _interopRequireDefault(require("querystring"));
 
@@ -39,12 +33,12 @@ var invokeCopyFootage = new ValidatedMethod({
         srcFolder = _ref2.srcFolder;
 
     if (Meteor.isServer) {
-      return new _promise.default(function (resolve, reject) {
+      return new Promise(function (resolve, reject) {
         var params = {
           FunctionName: Meteor.settings.lambda.copy_footage,
           InvocationType: 'RequestResponse',
           LogType: 'Tail',
-          Payload: (0, _stringify.default)({
+          Payload: JSON.stringify({
             srcBucket: srcBucket,
             destBucket: destBucket,
             srcFolder: srcFolder
@@ -82,12 +76,12 @@ var invokeCreateSnippet = new ValidatedMethod({
         brand_intro_key = _ref4.brand_intro_key;
 
     if (Meteor.isServer) {
-      return new _promise.default(function (resolve, reject) {
+      return new Promise(function (resolve, reject) {
         var params = {
           FunctionName: _s.lambda.snippet_creator,
           InvocationType: 'RequestResponse',
           LogType: 'Tail',
-          Payload: (0, _stringify.default)({
+          Payload: JSON.stringify({
             bucket: Meteor.settings.public.s3bucket,
             cut_key: cut_key,
             destination_key: destination_key,
@@ -139,7 +133,7 @@ var copyFile = new ValidatedMethod({
         Key: destination_key,
         Tagging: tag_query
       };
-      return new _promise.default(function (resolve, reject) {
+      return new Promise(function (resolve, reject) {
         s3.copyObject(params, function (err, url) {
           if (err) {
             reject(err);
@@ -198,7 +192,7 @@ var getSignedUrlOfKey = new ValidatedMethod({
         bucket = _ref11.bucket;
 
     if (Meteor.isServer) {
-      return new _promise.default(function (resolve, reject) {
+      return new Promise(function (resolve, reject) {
         if (!key) {
           resolve('');
         }

@@ -20,7 +20,7 @@ var _asyncToGenerator2 = _interopRequireDefault(require("@babel/runtime/helpers/
 
 var _meteor = require("meteor/meteor");
 
-var _schema = require("/imports/api/schema");
+var _firstcutSchema = require("firstcut-schema");
 
 var _random = require("meteor/random");
 
@@ -28,21 +28,21 @@ var _firstcutPipelineConsts = require("firstcut-pipeline-consts");
 
 var _firstcutModels = _interopRequireDefault(require("firstcut-models"));
 
-var _mailer = require("/imports/api/mailer");
+var _firstcutMailer = require("firstcut-mailer");
 
-var _slack = require("/imports/api/slack");
+var _firstcutSlack = require("firstcut-slack");
 
-var _billing = require("/imports/api/billing");
+var _firstcutBilling = require("firstcut-billing");
 
 var _pipeline = require("./shared/pipeline.schemas");
 
-var _textMessaging = require("/imports/api/text-messaging");
+var _firstcutTextMessaging = require("firstcut-text-messaging");
 
-var _calendar = require("/imports/api/calendar");
+var _firstcutCalendar = require("firstcut-calendar");
 
 var _pubsubJs = require("pubsub-js");
 
-var _actions = _interopRequireDefault(require("/imports/api/actions"));
+var _firstcutActions = _interopRequireDefault(require("firstcut-actions"));
 
 var slackTemplateDefaults = {
   username: 'firstcut',
@@ -58,7 +58,7 @@ function fulfillsPrerequisites(_ref) {
     return true;
   }
 
-  return _actions.default[event].get('fulfillsPrerequisites')({
+  return _firstcutActions.default[event].get('fulfillsPrerequisites')({
     record: record,
     initiator: initiator
   });
@@ -120,12 +120,12 @@ function _handleEvent() {
 }
 
 function getEventActionSchema(event) {
-  return _actions.default[event].get('schema');
+  return _firstcutActions.default[event].get('schema');
 }
 
 function getActionsForEvent(args) {
   var event = args.event;
-  return _actions.default[event].get('generateActions')(args);
+  return _firstcutActions.default[event].get('generateActions')(args);
 }
 
 function getEventActionsAsDescriptiveString(args) {
@@ -142,10 +142,10 @@ function getEventActionsAsDescriptiveString(args) {
 }
 
 function getCustomFieldsSchema(event, record) {
-  var customSchema = _actions.default[event].get('customFieldsSchema');
+  var customSchema = _firstcutActions.default[event].get('customFieldsSchema');
 
   if (!customSchema) {
-    customSchema = new _schema.SimpleSchemaWrapper();
+    customSchema = new _firstcutSchema.SimpleSchemaWrapper();
   }
 
   if (typeof customSchema === 'function') {
@@ -328,7 +328,7 @@ function sendEmails(action) {
       substitution_data = action.substitution_data,
       _action$cc = action.cc,
       cc = _action$cc === void 0 ? [] : _action$cc;
-  var mailer = new _mailer.Mailer();
+  var mailer = new _firstcutMailer.Mailer();
   return mailer.send({
     template: template,
     to: to,
@@ -340,7 +340,7 @@ function sendEmails(action) {
 function chargeInvoice(action) {
   var invoice = action.invoice,
       token = action.token;
-  return _billing.Billing.chargeInvoice(invoice, token);
+  return _firstcutBilling.Billing.chargeInvoice(invoice, token);
 }
 
 function sendSlackNotification(action) {
@@ -349,13 +349,13 @@ function sendSlackNotification(action) {
   var content = action.content;
   var channel = action.channel;
   content = (0, _objectSpread2.default)({}, slackTemplateDefaults, content);
-  return _slack.Slack.postMessage(content, channel);
+  return _firstcutSlack.Slack.postMessage(content, channel);
 }
 
 function text(action) {
   _pipeline.TextMessageActionSchema.validate(action);
 
-  return (0, _textMessaging.sendTextMessage)(action);
+  return (0, _firstcutTextMessaging.sendTextMessage)(action);
 }
 
 function createCalendarEvent(action) {
@@ -364,7 +364,7 @@ function createCalendarEvent(action) {
   var event = action.event,
       user_id = action.user_id,
       event_id = action.event_id;
-  return (0, _calendar.createEvent)({
+  return (0, _firstcutCalendar.createEvent)({
     event_id: event_id,
     event: event,
     user_id: user_id

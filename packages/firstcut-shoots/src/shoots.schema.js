@@ -1,7 +1,7 @@
 import SimpleSchema from 'simpl-schema';
 import { BlueprintableSchema as Schema } from '/imports/api/blueprints';
 import { COLLABORATOR_TYPES_TO_LABELS } from 'firstcut-pipeline-consts';
-import { LocationSchema, BaseSchema } from '/imports/api/schema';
+import { LocationSchema, BaseSchema } from 'firstcut-schema';
 import { STAGES, CAMERAS, RATINGS } from './shoots.enum';
 import { isEmpty } from 'firstcut-utils';
 

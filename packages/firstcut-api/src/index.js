@@ -4,7 +4,7 @@ import { HTTP } from 'meteor/http';
 import { PubSub } from 'pubsub-js';
 import Models from 'firstcut-models';
 import { Random } from 'meteor/random';
-import { handleEvent as pipelineExecuteEvent } from '/imports/api/pipeline';
+import { handleEvent as pipelineExecuteEvent } from 'firstcut-pipeline';
 
 HTTP.methods({
   computeSignature(data) {

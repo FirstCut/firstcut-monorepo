@@ -3,7 +3,7 @@
 import SchemaParser from './parser';
 import { SUPPORTED_TIMEZONES } from './enum';
 
-export default LocationSchema = Object.freeze({
+const LocationSchema = Object.freeze({
   location: {
     type: Object,
     customType: 'location',
@@ -91,3 +91,5 @@ function buildDisplayString(record, first_field, second_field) {
 
 const getFieldValue = (record, field) => ((record[field]) ? record[field] : null);
 const format = (first, second) => `${first}, ${second}`;
+
+export default LocationSchema;

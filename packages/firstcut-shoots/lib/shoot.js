@@ -35,9 +35,9 @@ var _shoots2 = _interopRequireDefault(require("./shoots.blueprints"));
 
 var _shoots3 = _interopRequireDefault(require("./shoots.schema"));
 
-var _modelBase = require("/imports/api/model-base");
+var _firstcutModelBase = require("firstcut-model-base");
 
-var Base = (0, _modelBase.createFirstCutModel)(_shoots3.default);
+var Base = (0, _firstcutModelBase.createFirstCutModel)(_shoots3.default);
 
 var Shoot =
 /*#__PURE__*/

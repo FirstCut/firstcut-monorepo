@@ -5,7 +5,7 @@ import {
   Divider, Segment,
 } from 'semantic-ui-react';
 import Buttons from '/imports/ui/components/utils/buttons';
-import { SchemaParser } from '/imports/api/schema';
+import { SchemaParser } from 'firstcut-schema';
 import { _ } from 'lodash';
 
 export default function ObjectArrayForm(props) {

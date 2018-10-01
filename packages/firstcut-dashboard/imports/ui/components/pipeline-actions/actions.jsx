@@ -1,13 +1,13 @@
 
 import React from 'react';
 import { EVENT_ACTION_TITLES } from 'firstcut-pipeline-consts';
-import { getEventActionsAsDescriptiveString, getCustomFieldsSchema } from '/imports/api/pipeline';
+import { getEventActionsAsDescriptiveString, getCustomFieldsSchema } from 'firstcut-pipeline';
 import Modals from '/imports/ui/components/utils/modals';
-import { Button, Container } from 'semantic-ui-react';
+import { Button } from 'semantic-ui-react';
 import { Record } from 'immutable';
 import { emitPipelineEvent } from 'firstcut-utils';
 import { userPlayerId } from 'firstcut-players';
-import { RecordWithSchemaFactory } from '/imports/api/model-base';
+import { RecordWithSchemaFactory } from 'firstcut-model-base';
 import { getUserActions, userExperience } from '/imports/ui/config';
 
 export function PipelineActionComponent(props) {

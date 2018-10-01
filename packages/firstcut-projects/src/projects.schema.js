@@ -1,6 +1,6 @@
 import { BlueprintableSchema as Schema } from '/imports/api/blueprints';
 import { STAGES } from './projects.enum';
-import BaseSchema from '/imports/api/schema/base.schema';
+import BaseSchema from 'firstcut-schema';
 import SimpleSchema from 'simpl-schema';
 
 const ProjectSchema = new Schema({

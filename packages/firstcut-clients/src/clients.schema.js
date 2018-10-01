@@ -1,8 +1,8 @@
 
-import { SimpleSchemaWrapper as Schema } from '/imports/api/schema';
-import BaseSchema from '/imports/api/schema/base.schema';
-import ProfileSchema from '/imports/api/schema/profile.schema';
-import LocationSchema from '/imports/api/schema/location.schema';
+import { SimpleSchemaWrapper as Schema } from 'firstcut-schema';
+import BaseSchema from 'firstcut-schema';
+import ProfileSchema from 'firstcut-schema';
+import LocationSchema from 'firstcut-schema';
 
 const ClientSchema = new Schema({
   companyId: {

@@ -9,7 +9,7 @@ import DefaultConfig, { PublicConfig } from './default.config';
 import { userPlayer, userPlayerId, playerIsClient } from 'firstcut-players';
 import Routes from '../components/routing/routes';
 import { UNIVERSAL_PERMISSIONS } from './config.enum';
-import { fulfillsPrerequisites } from '/imports/api/pipeline';
+import { fulfillsPrerequisites } from 'firstcut-pipeline';
 
 export {
   UNIVERSAL_PERMISSIONS,

@@ -13,7 +13,7 @@ var _firstcutModels = _interopRequireDefault(require("firstcut-models"));
 
 var _lodash = require("lodash");
 
-var _action = require("./shared/action.schemas");
+var _firstcutActionUtils = require("firstcut-action-utils");
 
 var _firstcutPipelineConsts = require("firstcut-pipeline-consts");
 
@@ -26,7 +26,7 @@ var FootageUploadInitiated = new _immutable.Map({
   key: key,
   action_title: 'Initiate footage uploaded',
   completed_title: 'Footage upload initiated',
-  schema: _action.RecordEvents,
+  schema: _firstcutActionUtils.RecordEvents,
   fulfillsPrerequisites: function fulfillsPrerequisites(_ref) {
     var record = _ref.record,
         initiator = _ref.initiator;

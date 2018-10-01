@@ -3,7 +3,7 @@ export const ARRAY_INDICATOR = '$';
 export const FIELD_NAME_DELINEATOR = '.';
 const ARRAY_INDEX_REGEX = /[0-9]+/;
 
-export default SchemaParser = Object.freeze({
+const SchemaParser = Object.freeze({
   getFieldSchema(schema, fieldname) {
     return _getFieldSchema(fieldname);
   },
@@ -156,3 +156,5 @@ function _subfieldIndicatorIndex(key) {
 function _arrayIndicatorIndex(key) {
   return key.indexOf(ARRAY_INDICATOR);
 }
+
+export default SchemaParser;

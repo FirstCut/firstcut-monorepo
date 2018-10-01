@@ -3,15 +3,15 @@
 // import Models from 'firstcut-models';
 // import { PubSub } from 'pubsub-js';
 // import { DELIVERABLE_BLUEPRINTS, SHOOT_BLUEPRINTS, PROJECT_BLUEPRINTS } from '/imports/api/blueprints';
-// import { DELIVERABLE_ID, POSTPO_OWNER_ID, PROJECT_ID, CLIENT_OWNER_ID_FOR_DELIVERABLE, stubUser, validateAgainstSchema, insertTestData } from '/imports/api/testing-utils';
+// import { DELIVERABLE_ID, POSTPO_OWNER_ID, PROJECT_ID, CLIENT_OWNER_ID_FOR_DELIVERABLE, stubUser, validateAgainstSchema, insertTestData } from 'firstcut-testing-utils';
 // import { SUPPORTED_EVENTS, SUPPORTED_ACTIONS, ACTIONS, EVENTS } from 'firstcut-pipeline-consts';
 // import { EmailActionSchema, SlackActionSchema, EventDataSchemas } from '../shared/pipeline.schemas';
 // import { MeteorStubs } from 'meteor/velocity:meteor-stubs';
 // import { init } from '../index';
 // import Pipeline, { ALL_PIPELINES } from '../pipeline';
 // import { execute } from '../server/pubsub';
-// import { Mailer } from '/imports/api/mailer';
-// import { Slack } from '/imports/api/slack';
+// import { Mailer } from 'firstcut-mailer';
+// import { Slack } from 'firstcut-slack';
 // import sinon from 'sinon';
 // import { Record } from 'immutable';
 //

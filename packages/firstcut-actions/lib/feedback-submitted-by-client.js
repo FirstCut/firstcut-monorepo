@@ -15,11 +15,9 @@ var _firstcutModels = _interopRequireDefault(require("firstcut-models"));
 
 var _moment = _interopRequireDefault(require("moment"));
 
-var _action = require("./shared/action.schemas");
+var _firstcutActionUtils = require("firstcut-action-utils");
 
 var _firstcutPipelineConsts = require("firstcut-pipeline-consts");
-
-var _action2 = require("./shared/action.utils");
 
 var _firstcutRetrieveUrl = require("firstcut-retrieve-url");
 
@@ -27,7 +25,7 @@ var FeedbackSubmittedByClient = new _immutable.Map({
   key: 'feedback_submitted_by_client',
   action_title: 'Submit feedback to producer',
   completed_title: 'Feedback submitted',
-  schema: _action.RecordEvents,
+  schema: _firstcutActionUtils.RecordEvents,
   fulfillsPrerequisites: function fulfillsPrerequisites(_ref) {
     var record = _ref.record,
         initiator = _ref.initiator;
@@ -39,7 +37,7 @@ var FeedbackSubmittedByClient = new _immutable.Map({
 
     var link = (0, _firstcutRetrieveUrl.getRecordUrl)(cut);
     var changes = cut.revisions ? cut.revisions.split(/\n/) : [];
-    var emailActions = (0, _action2.getEmailActions)({
+    var emailActions = (0, _firstcutActionUtils.getEmailActions)({
       recipients: [cut.adminOwner],
       template: 'feedback-submitted-by-client',
       getSubstitutionData: function getSubstitutionData(recipient) {

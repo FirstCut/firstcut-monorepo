@@ -1,9 +1,9 @@
 
 import { Map } from 'immutable';
 import Models from 'firstcut-models';
-import { RecordEvents } from './shared/action.schemas';
+import { RecordEvents } from 'firstcut-action-utils';
 import { ACTIONS } from 'firstcut-pipeline-consts';
-import { getEmailActions } from './shared/action.utils';
+import { getEmailActions } from 'firstcut-action-utils';
 import { getRecordUrl, getInviteLink } from 'firstcut-retrieve-url';
 
 const ShootWrap = new Map({

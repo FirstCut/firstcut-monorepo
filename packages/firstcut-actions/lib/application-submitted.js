@@ -13,19 +13,17 @@ var _immutable = require("immutable");
 
 var _firstcutModels = _interopRequireDefault(require("firstcut-models"));
 
-var _action = require("./shared/action.schemas");
+var _firstcutActionUtils = require("firstcut-action-utils");
 
 var _firstcutPipelineConsts = require("firstcut-pipeline-consts");
 
 var _firstcutRetrieveUrl = require("firstcut-retrieve-url");
 
-var _action2 = require("./shared/action.utils");
-
 var ApplicationSubmitted = new _immutable.Map({
   key: 'application_submitted',
   action_title: 'Submit Application',
   completed_title: 'Application Submitted',
-  schema: _action.RecordEvents,
+  schema: _firstcutActionUtils.RecordEvents,
   fulfillsPrerequisites: function fulfillsPrerequisites(_ref) {
     var record = _ref.record,
         initiator = _ref.initiator;
@@ -36,7 +34,7 @@ var ApplicationSubmitted = new _immutable.Map({
     var collaborator = _firstcutModels.default.Collaborator.fromId(record_id);
 
     var link = (0, _firstcutRetrieveUrl.getRecordUrl)(collaborator);
-    var emailActions = (0, _action2.getEmailActions)({
+    var emailActions = (0, _firstcutActionUtils.getEmailActions)({
       recipients: [collaborator],
       template: 'thank-you-for-submitting-application',
       getSubstitutionData: function getSubstitutionData(recipient) {

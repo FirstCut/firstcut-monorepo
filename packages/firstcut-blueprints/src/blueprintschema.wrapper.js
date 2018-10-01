@@ -1,4 +1,4 @@
-import { SimpleSchemaWrapper } from '/imports/api/schema';
+import { SimpleSchemaWrapper } from 'firstcut-schema';
 import { List } from 'immutable';
 
 export class BlueprintableSchema extends SimpleSchemaWrapper {

@@ -1,7 +1,7 @@
 
 import { Map } from 'immutable';
 import Models from 'firstcut-models';
-import { ScreenshotEvents } from './shared/action.schemas';
+import { ScreenshotEvents } from 'firstcut-action-utils';
 import { ACTIONS, FALLBACK_PHONE_NUMBER } from 'firstcut-pipeline-consts';
 
 const ScreenshotApproved = new Map({

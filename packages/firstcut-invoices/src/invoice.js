@@ -4,7 +4,7 @@ import {
   INVOICE_STATUS,
 } from './invoices.enum';
 import InvoiceSchema from './invoices.schema';
-import { createFirstCutModel } from '/imports/api/model-base';
+import { createFirstCutModel } from 'firstcut-model-base';
 
 const Base = createFirstCutModel(InvoiceSchema);
 

@@ -4,7 +4,7 @@ import { _ } from 'lodash';
 import { CUT_TYPES } from './cuts.enum';
 import { EVENTS } from 'firstcut-pipeline-consts';
 import CutSchema from './cuts.schema';
-import { createFirstCutModel } from '/imports/api/model-base';
+import { createFirstCutModel } from 'firstcut-model-base';
 
 const Base = createFirstCutModel(CutSchema);
 

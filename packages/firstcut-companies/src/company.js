@@ -1,6 +1,6 @@
 
 
-import { createFirstCutModel } from '/imports/api/model-base';
+import { createFirstCutModel } from 'firstcut-model-base';
 import CompanySchema from './companies.schema';
 
 const Base = createFirstCutModel(CompanySchema);

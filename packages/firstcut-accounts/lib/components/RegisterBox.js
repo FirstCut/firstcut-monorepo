@@ -91,7 +91,7 @@ function (_React$Component) {
         className: "user icon"
       }), _react.default.createElement(T, null, "already_have_an_account"), _react.default.createElement("a", {
         onClick: this.props.onClickLogin
-      }, "\xA0", _react.default.createElement(T, null, "click_to_login"))) : '');
+      }, _react.default.createElement(T, null, "click_to_login"))) : '');
     }
   }]);
   return RegisterBox;

@@ -35,7 +35,7 @@
 				"dev": "concurrently \"yarn watch\" \"lerna run dev --stream\"",
 				"lint": "eslint --cache --ignore-path .gitignore ./packages/*/src",
 				"test": "jest",
-				"build:babel": "lerna exec --parallel -- babel src -d lib --config-file ../../.babelrc --watch",
+				"build:babel": "lerna exec --parallel -- babel src -d lib --config-file ../../.babelrc --watch --copy-files",
 				"build:webpack": "lerna run build:webpack",
 				"build": "yarn build:babel && yarn build:webpack",
 				"release": "yarn lint && yarn build && lerna publish",

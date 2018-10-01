@@ -8,7 +8,7 @@ import { withRecordManager } from '/imports/ui/components/managers';
 import { Record } from 'immutable';
 import { Link } from 'react-router-dom';
 import { PubSub } from 'pubsub-js';
-import { asUSDollars } from 'firstcut-utils/utils';
+import { asUSDollars } from 'firstcut-utils';
 import { Autoform } from 'firstcut-react-autoform';
 import { getRecordPath } from 'firstcut-retrieve-url';
 

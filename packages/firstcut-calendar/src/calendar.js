@@ -1,7 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 import moment from 'moment';
 import { CalendarEventContentSchema } from './calendar.schemas';
-import GoogleApi from '/imports/api/google-api';
+import GoogleApi from 'firstcut-google-api';
 
 function getOrganizerId() {
   return Meteor.settings.oauth_credentials_user;

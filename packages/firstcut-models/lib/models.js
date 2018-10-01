@@ -7,13 +7,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 
-var _values = _interopRequireDefault(require("@babel/runtime/core-js/object/values"));
-
 var _objectSpread2 = _interopRequireDefault(require("@babel/runtime/helpers/objectSpread"));
-
-var _keys = _interopRequireDefault(require("@babel/runtime/core-js/object/keys"));
-
-var _freeze = _interopRequireDefault(require("@babel/runtime/core-js/object/freeze"));
 
 var _firstcutCollaborators = _interopRequireDefault(require("firstcut-collaborators"));
 
@@ -41,7 +35,7 @@ var _crud = _interopRequireDefault(require("./utils/crud"));
 
 var _publications = _interopRequireDefault(require("./utils/publications.base"));
 
-var models = (0, _freeze.default)({
+var models = Object.freeze({
   Collaborator: _firstcutCollaborators.default,
   Task: _firstcutTasks.default,
   Client: _firstcutClients.default,
@@ -54,7 +48,7 @@ var models = (0, _freeze.default)({
   Asset: _firstcutAssets.default,
   Cut: _firstcutCuts.default
 });
-var legacyModels = (0, _freeze.default)({
+var legacyModels = Object.freeze({
   COLLABORATOR: _firstcutCollaborators.default,
   CLIENT: _firstcutClients.default,
   COMPANY: _firstcutCompanies.default,
@@ -64,19 +58,19 @@ var legacyModels = (0, _freeze.default)({
   INVOICE: _firstcutInvoices.default,
   CUT: _firstcutCuts.default
 });
-(0, _keys.default)(models).forEach(function (key) {
+Object.keys(models).forEach(function (key) {
   var model = models[key];
   model.modelName = key;
   (0, _publications.default)(model);
   (0, _crud.default)(model);
 }); // dependency injection solved by pulling this out into another object?
 
-(0, _keys.default)(models).forEach(function (i) {
+Object.keys(models).forEach(function (i) {
   var model = models[i];
   model.models = models;
 });
 var Models = (0, _objectSpread2.default)({
-  allModels: (0, _values.default)(models)
+  allModels: Object.values(models)
 }, models, legacyModels, {
   getRecordFromId: function getRecordFromId(type, id) {
     var model = models[type];

@@ -9,7 +9,7 @@ exports.default = void 0;
 
 var _immutable = require("immutable");
 
-var _action = require("./shared/action.schemas");
+var _firstcutActionUtils = require("firstcut-action-utils");
 
 var _firstcutPipelineConsts = require("firstcut-pipeline-consts");
 
@@ -21,7 +21,7 @@ var ReminderToSetCutDue = new _immutable.Map({
   key: 'reminder_to_set_cut_due',
   action_title: 'Remind To Set Cut Due',
   completed_title: 'Reminder to set cut due sent',
-  schema: _action.RecordEvents,
+  schema: _firstcutActionUtils.RecordEvents,
   fulfillsPrerequisites: function fulfillsPrerequisites(_ref) {
     var record = _ref.record,
         initiator = _ref.initiator;

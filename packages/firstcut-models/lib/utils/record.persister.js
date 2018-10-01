@@ -7,8 +7,6 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 
-var _promise = _interopRequireDefault(require("@babel/runtime/core-js/promise"));
-
 var _classCallCheck2 = _interopRequireDefault(require("@babel/runtime/helpers/classCallCheck"));
 
 var _createClass2 = _interopRequireDefault(require("@babel/runtime/helpers/createClass"));
@@ -38,7 +36,7 @@ function () {
     value: function save(record) {
       var _this = this;
 
-      return new _promise.default(function (resolve, reject) {
+      return new Promise(function (resolve, reject) {
         var cleaned = _this.clean(record);
 
         _this.validate(cleaned);
