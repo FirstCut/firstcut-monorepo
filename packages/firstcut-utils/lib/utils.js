@@ -22,15 +22,16 @@ var _objectSpread2 = _interopRequireDefault(require("@babel/runtime/helpers/obje
 
 var _objectWithoutProperties2 = _interopRequireDefault(require("@babel/runtime/helpers/objectWithoutProperties"));
 
+var _firstcutMeteor = require("firstcut-meteor");
+
 var _lodash = require("lodash");
+
+var _firstcutPipeline = require("firstcut-pipeline");
 
 var _firstcutPlayers = require("firstcut-players");
 
 var _firstcutAnalytics = _interopRequireDefault(require("firstcut-analytics"));
 
-var _http = require("meteor/http");
-
-// import { handleEvent } from 'firstcut-pipeline';
 function pluralize(str) {
   var lastLetter = str[str.length - 1];
 
@@ -92,7 +93,7 @@ function emitPipelineEvent(args) {
   _firstcutAnalytics.default.trackAction(args); // handleEvent.call(eventData);
 
 
-  _http.HTTP.post("".concat(Meteor.settings.public.PIPELINE_ROOT, "/handleEvent"), {
+  _firstcutMeteor.HTTP.post("".concat(_firstcutMeteor.Meteor.settings.public.PIPELINE_ROOT, "/handleEvent"), {
     content: params,
     params: params,
     query: params,

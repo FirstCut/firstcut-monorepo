@@ -26,7 +26,7 @@ export default class ShootForm extends React.Component {
       'footageFiles',
     ];
 
-    if (Meteor.settings.public.environment === 'development') {
+    if (isDevelopment()) {
       fields.push('checkins');
       fields.push('checkouts');
       fields.push('screenshots');

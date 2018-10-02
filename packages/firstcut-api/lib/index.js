@@ -6,17 +6,17 @@ var _objectSpread2 = _interopRequireDefault(require("@babel/runtime/helpers/obje
 
 var _cryptoJs = _interopRequireDefault(require("crypto-js"));
 
-var _http = require("meteor/http");
+var _firstcutMeteor = require("firstcut-meteor");
 
 var _pubsubJs = require("pubsub-js");
 
 var _firstcutModels = _interopRequireDefault(require("firstcut-models"));
 
-var _random = require("meteor/random");
+var _meteorRandom = require("meteor-random");
 
 var _firstcutPipeline = require("firstcut-pipeline");
 
-_http.HTTP.methods({
+_firstcutMeteor.HTTP.methods({
   computeSignature: function computeSignature(data) {
     var date = this.query.datetime.substr(0, 8);
     var stringToSign = this.query.to_sign;
@@ -85,7 +85,7 @@ _http.HTTP.methods({
 
       if (!companyRecord || !bareWebsite) {
         companyRecord = _firstcutModels.default.Company.createNew((0, _objectSpread2.default)({
-          _id: _random.Random.id()
+          _id: _meteorRandom.Random.id()
         }, company));
       }
 
@@ -98,7 +98,7 @@ _http.HTTP.methods({
 
         if (!record) {
           record = _firstcutModels.default.Client.createNew((0, _objectSpread2.default)({
-            _id: _random.Random.id()
+            _id: _meteorRandom.Random.id()
           }, c));
         }
 
@@ -112,7 +112,7 @@ _http.HTTP.methods({
       console.log('PRIMAR CONTACT ID');
       console.log(primaryContactId);
       projectRecord = _firstcutModels.default.Project.createNew((0, _objectSpread2.default)({
-        _id: _random.Random.id(),
+        _id: _meteorRandom.Random.id(),
         adminOwnerId: producer._id,
         clientOwnerId: primaryContactId,
         companyId: companyRecord._id

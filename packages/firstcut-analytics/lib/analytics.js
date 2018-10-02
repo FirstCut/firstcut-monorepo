@@ -11,13 +11,15 @@ var _objectSpread2 = _interopRequireDefault(require("@babel/runtime/helpers/obje
 
 var _objectWithoutProperties2 = _interopRequireDefault(require("@babel/runtime/helpers/objectWithoutProperties"));
 
+var _firstcutMeteor = require("firstcut-meteor");
+
 var _firstcutPlayers = require("firstcut-players");
 
 var _firstcutPipelineConsts = require("firstcut-pipeline-consts");
 
 // import { getQualifiedSkills } from '/imports/ui/config';
-if (Meteor.settings.public.environment === 'development') {
-  analytics = {
+if ((0, _firstcutMeteor.isDevelopment)()) {
+  var _analytics = {
     load: function load() {
       console.log('Analytics load');
     },
@@ -93,7 +95,7 @@ var Analytics = {
     if ((0, _firstcutPlayers.inSimulationMode)()) {
       analytics.identify('Simulation', {
         _id: (0, _firstcutPlayers.userId)(),
-        playerId: (0, _firstcutPlayers.getPlayerIdFromUser)(Meteor.user()),
+        playerId: (0, _firstcutPlayers.getPlayerIdFromUser)(_firstcutMeteor.Meteor.user()),
         simulationPlayerId: (0, _firstcutPlayers.userPlayerId)()
       });
       analytics.group('Simulation');

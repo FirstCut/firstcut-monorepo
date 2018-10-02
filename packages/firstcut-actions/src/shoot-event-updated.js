@@ -49,7 +49,7 @@ const UpdatedShootEvent = new Map({
 
     /* SHOOT WRAP JOB */
     let shoot_wrap_cron = moment(shoot.date).add(shoot.duration, 'hour').add(SHOOT_WRAP_NOTIFICATION_PADDING, 'hour').toDate();
-    if (Meteor.settings.public.environment === 'development') {
+    if (isDevelopment()) {
       shoot_wrap_cron = moment().add(2, 'minute').toDate();
     }
     const shoot_wrap = Models.Job.createNew({

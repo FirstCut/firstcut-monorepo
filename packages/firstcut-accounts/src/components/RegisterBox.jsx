@@ -1,6 +1,6 @@
 import React from 'react';
 import i18n from 'meteor/universe:i18n';
-import { Meteor } from 'meteor/meteor';
+import { Meteor } from 'firstcut-meteor';
 import PropTypes from 'prop-types';
 import { withTracker } from 'meteor/react-meteor-data';
 import ErrorMessages from './ErrorMessages';

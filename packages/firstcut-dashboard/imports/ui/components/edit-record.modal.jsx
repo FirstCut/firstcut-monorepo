@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Modal } from 'semantic-ui-react';
 import { Record, List } from 'immutable';
-import { Random } from 'meteor/random';
+import { Random } from 'meteor-random';
 import { withRecordManager } from '/imports/ui/components/managers';
 import { USER_IS_UPLOADING } from '/imports/ui/config';
 import { PubSub } from 'pubsub-js';

@@ -5,9 +5,11 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.GoogleApi = void 0;
 
-var _http = require("meteor/http");
+var _firstcutMeteor = require("firstcut-meteor");
 
 var _utils = require("./utils");
+
+var _lodash = require("lodash");
 
 // kill logs
 var Log = function Log() {};
@@ -41,7 +43,7 @@ var GoogleApi = {
   _call: function _call(method, path, options, callback) {
     Log("GoogleApi._call, path:".concat(path)); // copy existing options to modify
 
-    options = _.extend({}, options);
+    options = _lodash._.extend({}, options);
     var user = options.user || Meteor.user();
     delete options.user;
 
@@ -49,7 +51,7 @@ var GoogleApi = {
       options.headers = options.headers || {};
       options.headers.Authorization = "Bearer ".concat(user.services.google.accessToken);
 
-      _http.HTTP.call(method, "".concat(this._host, "/").concat(path), options, function (error, result) {
+      _firstcutMeteor.HTTP.call(method, "".concat(this._host, "/").concat(path), options, function (error, result) {
         callback(error, result && result.data);
       });
     } else {
@@ -65,11 +67,11 @@ var GoogleApi = {
 }; // setup HTTP verbs
 
 exports.GoogleApi = GoogleApi;
-httpVerbs = ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'];
+var httpVerbs = ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'];
 
-_.each(httpVerbs, function (verb) {
+_lodash._.each(httpVerbs, function (verb) {
   GoogleApi[verb.toLowerCase()] = (0, _utils.wrapAsync)(function (path, options, callback) {
-    if (_.isFunction(options)) {
+    if (_lodash._.isFunction(options)) {
       callback = options;
       options = {};
     }

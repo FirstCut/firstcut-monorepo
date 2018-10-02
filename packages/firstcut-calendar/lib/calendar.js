@@ -9,7 +9,7 @@ exports.createEvent = createEvent;
 
 var _objectSpread2 = _interopRequireDefault(require("@babel/runtime/helpers/objectSpread"));
 
-var _meteor = require("meteor/meteor");
+var _firstcutMeteor = require("firstcut-meteor");
 
 var _moment = _interopRequireDefault(require("moment"));
 
@@ -18,7 +18,7 @@ var _calendar = require("./calendar.schemas");
 var _firstcutGoogleApi = _interopRequireDefault(require("firstcut-google-api"));
 
 function getOrganizerId() {
-  return _meteor.Meteor.settings.oauth_credentials_user;
+  return _firstcutMeteor.Meteor.settings.oauth_credentials_user;
 }
 
 function createEvent(args) {
@@ -41,7 +41,7 @@ function createEvent(args) {
     });
     var user_id = getOrganizerId();
 
-    var user = _meteor.Meteor.users.findOne(user_id);
+    var user = _firstcutMeteor.Meteor.users.findOne(user_id);
 
     var cal_id = user.services.google.email;
     var url = "calendar/v3/calendars/".concat(cal_id, "/events");

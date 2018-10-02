@@ -1,5 +1,5 @@
 import React from 'react';
-import { Meteor } from 'meteor/meteor';
+import { Meteor } from 'firstcut-meteor';
 import i18n from 'meteor/universe:i18n';
 import { Accounts } from 'meteor/accounts-base';
 import PropTypes from 'prop-types';

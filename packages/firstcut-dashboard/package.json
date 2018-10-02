@@ -22,6 +22,7 @@
     "firstcut-api": "^0.0.0",
     "firstcut-filestore": "^0.0.0",
     "firstcut-google-api": "^0.0.0",
+    "firstcut-meteor": "^0.0.0",
     "firstcut-model-base": "^0.0.0",
     "firstcut-models": "^0.0.0",
     "firstcut-pipeline": "^0.0.0",

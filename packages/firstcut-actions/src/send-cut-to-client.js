@@ -89,7 +89,7 @@ const SendCutToClient = new Map({
 
     /* UPCOMING SHOOT REMINDER JOB */
     let cron = moment().add(72, 'hour').toDate();
-    if (Meteor.settings.public.environment === 'development') {
+    if (isDevelopment()) {
       cron = moment().add(1, 'minute').toDate();
     }
     const reminderToGetClientFeedback = Models.Job.createNew({

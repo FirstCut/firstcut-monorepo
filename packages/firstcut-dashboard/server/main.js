@@ -1,4 +1,4 @@
-import { Meteor } from 'meteor/meteor';
+import { Meteor } from 'firstcut-meteor';
 import '/imports/startup/server/';
 
 Meteor.startup(() => {

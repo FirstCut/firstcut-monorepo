@@ -74,5 +74,4 @@ class Task extends Base {
   }
 }
 
-console.log(Task.collection.find({}).count());
 export default Task;

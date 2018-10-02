@@ -1,5 +1,5 @@
 
-import { ValidationError } from 'meteor/mdg:validation-error';
+import { ValidationError } from 'firstcut-meteor';
 
 export const ensureLoggedIn = function() {
   if (!Meteor.userId && !Meteor.isTest) {

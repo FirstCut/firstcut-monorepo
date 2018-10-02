@@ -1,5 +1,5 @@
 
-import { Meteor } from 'meteor/meteor';
+import { Meteor } from 'firstcut-meteor';
 import React from 'react';
 import PropTypes from 'prop-types';
 import { LoginBox, RegisterBox } from 'firstcut-accounts';

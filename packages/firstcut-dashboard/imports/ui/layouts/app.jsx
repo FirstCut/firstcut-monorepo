@@ -137,7 +137,7 @@ class AppBody extends React.Component {
         </Grid.Column>
         <Grid.Column onClick={hideSidebar} stretched width={14} style={{ padding: '50px' }}>
           { inSimulationMode() && <SimulationEnvAlert /> }
-          { Meteor.settings.public.environment === 'development' && <DevEnvAlert /> }
+          { isDevelopment() && <DevEnvAlert /> }
           { doneLoading && routes }
           { doneLoading && !userPlayer() && <NoProfileFoundAlert /> }
           { !doneLoading && <Loading /> }

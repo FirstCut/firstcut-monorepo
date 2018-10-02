@@ -1,6 +1,6 @@
 
 
-import { Meteor } from 'meteor/meteor';
+import { Meteor } from 'firstcut-meteor';
 import SimpleSchema from 'simpl-schema';
 
 /* View documentation at

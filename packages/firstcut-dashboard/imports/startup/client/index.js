@@ -1,5 +1,5 @@
 import React from 'react';
-import { Meteor } from 'meteor/meteor';
+import { Meteor } from 'firstcut-meteor';
 import { render } from 'react-dom';
 
 import AppContainer from '/imports/ui/containers/app.container';

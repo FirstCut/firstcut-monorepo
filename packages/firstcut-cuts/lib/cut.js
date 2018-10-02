@@ -17,7 +17,7 @@ var _getPrototypeOf2 = _interopRequireDefault(require("@babel/runtime/helpers/ge
 
 var _inherits2 = _interopRequireDefault(require("@babel/runtime/helpers/inherits"));
 
-var _meteor = require("meteor/meteor");
+var _firstcutMeteor = require("firstcut-meteor");
 
 var _lodash = require("lodash");
 
@@ -96,7 +96,7 @@ function (_Base) {
     key: "projectDirectory",
     get: function get() {
       if (!this.project) {
-        throw new _meteor.Meteor.Error('requirements-not-fulfilled', 'Project is required in order to upload files for this document');
+        throw new _firstcutMeteor.Meteor.Error('requirements-not-fulfilled', 'Project is required in order to upload files for this document');
       }
 
       return this.project.projectDirectory;

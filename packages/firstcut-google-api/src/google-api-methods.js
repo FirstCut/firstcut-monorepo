@@ -1,5 +1,5 @@
-import { Meteor } from 'meteor/meteor';
-import { HTTP } from 'meteor/http'
+import { Meteor } from 'firstcut-meteor';
+import { HTTP } from 'firstcut-meteor'
 
 Meteor.methods({
   // Obtain a new access token using the refresh token

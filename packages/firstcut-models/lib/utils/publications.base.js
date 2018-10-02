@@ -5,10 +5,13 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = enableBasePublications;
 
+var _firstcutMeteor = require("firstcut-meteor");
+
 function enableBasePublications(cls) {
-  if (Meteor.isServer) {
+  if (_firstcutMeteor.Meteor.isServer) {
     var name = "".concat(cls.collectionName, ".all");
-    Meteor.publish(name, function () {
+
+    _firstcutMeteor.Meteor.publish(name, function () {
       return cls.collection.find({});
     });
   }

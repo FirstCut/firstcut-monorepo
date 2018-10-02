@@ -7,9 +7,9 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = enableCrud;
 
-var _meteor = require("meteor/meteor");
+var _firstcutMeteor = require("firstcut-meteor");
 
-var _random = require("meteor/random");
+var _meteorRandom = require("meteor-random");
 
 var _record = _interopRequireDefault(require("./record.persister"));
 
@@ -22,7 +22,7 @@ function enableCrud(cls) {
         var record = r;
 
         if (!record._id) {
-          record._id = _random.Random.id();
+          record._id = _meteorRandom.Random.id();
         }
 
         cls._persist_save.call(record, function (err, updatedRecord) {
@@ -43,12 +43,12 @@ function enableCrud(cls) {
     }
   });
   var name = "".concat(cls.collectionName, ".upsert");
-  cls._persist_save = new ValidatedMethod({
+  cls._persist_save = new _firstcutMeteor.ValidatedMethod({
     name: name,
     validate: cls.schema.validator(),
     run: function run(record) {
       if (!record._id) {
-        record._id = _random.Random.id();
+        record._id = _meteorRandom.Random.id();
       }
 
       this.unblock();
@@ -59,11 +59,11 @@ function enableCrud(cls) {
     }
   });
   name = "".concat(cls.collectionName, ".remove");
-  cls._persist_remove = new ValidatedMethod({
+  cls._persist_remove = new _firstcutMeteor.ValidatedMethod({
     name: name,
     validate: cls.schema.validator(),
     run: function run(record) {
-      if (_meteor.Meteor.isServer) {
+      if (_firstcutMeteor.Meteor.isServer) {
         cls.collection.remove(record._id);
       }
     }

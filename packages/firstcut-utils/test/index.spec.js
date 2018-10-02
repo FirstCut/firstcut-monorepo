@@ -1,5 +1,8 @@
 
-import { pluralize } from 'src/index.js';
+jest.mock('firstcut-meteor');
+jest.mock('firstcut-filestore');
+jest.mock('firstcut-players');
+import { pluralize } from '../src/index.js';
 
 test('should pluralize by appending s in correct cases', () => {
   expect(pluralize('project')).toBe('projects');

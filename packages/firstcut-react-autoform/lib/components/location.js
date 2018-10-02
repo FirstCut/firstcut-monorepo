@@ -24,7 +24,7 @@ var _reactGoogleAutocomplete = _interopRequireDefault(require("react-google-auto
 
 var _firstcutGoogleApi = _interopRequireDefault(require("firstcut-google-api"));
 
-var _http = require("meteor/http");
+var _firstcutMeteor = require("firstcut-meteor");
 
 var _qs = _interopRequireDefault(require("qs"));
 
@@ -147,7 +147,7 @@ function getTimezone(lat, lng, timestamp, cb) {
 
   var requestURL = GOOGLE_TIMEZONE_API_URL + _qs.default.stringify(options);
 
-  _http.HTTP.call('get', requestURL, function (err, response, data) {
+  _firstcutMeteor.HTTP.call('get', requestURL, function (err, response, data) {
     if (err || response.statusCode != 200) {
       return callback(new Error("Google API request error: ".concat(data)));
     }

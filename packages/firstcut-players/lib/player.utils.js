@@ -26,16 +26,14 @@ var _toConsumableArray2 = _interopRequireDefault(require("@babel/runtime/helpers
 
 var _simplSchema = _interopRequireDefault(require("simpl-schema"));
 
-var _meteor = require("meteor/meteor");
+var _firstcutMeteor = require("firstcut-meteor");
 
 var _firstcutModels = _interopRequireDefault(require("firstcut-models"));
-
-var _session = require("meteor/session");
 
 var _moment = _interopRequireDefault(require("moment"));
 
 var SIMULATE_PLAYER_ID = 'simulatePlayerId';
-var setPlayerId = new ValidatedMethod({
+var setPlayerId = new _firstcutMeteor.ValidatedMethod({
   name: 'set-player-id',
   validate: new _simplSchema.default({
     playerId: String
@@ -45,20 +43,20 @@ var setPlayerId = new ValidatedMethod({
 
     // update on the client for immediate, synchronous use
     // if a playerId is already set
-    if (_meteor.Meteor.user().profile.playerId) {
+    if (_firstcutMeteor.Meteor.user().profile.playerId) {
       return;
     } // if a user already exists with that playerId already set
 
 
-    if (playerId && _meteor.Meteor.users.findOne({
+    if (playerId && _firstcutMeteor.Meteor.users.findOne({
       'profile.playerId': playerId
     })) {
       return;
     }
 
-    _meteor.Meteor.user().profile.playerId = playerId;
+    _firstcutMeteor.Meteor.user().profile.playerId = playerId;
 
-    _meteor.Meteor.users.update(_meteor.Meteor.userId(), {
+    _firstcutMeteor.Meteor.users.update(_firstcutMeteor.Meteor.userId(), {
       $set: {
         'profile.playerId': playerId
       }
@@ -68,23 +66,23 @@ var setPlayerId = new ValidatedMethod({
 exports.setPlayerId = setPlayerId;
 
 function getSimulationPlayerId() {
-  if (_meteor.Meteor.isServer) {
+  if (_firstcutMeteor.Meteor.isServer) {
     return '';
   }
 
-  return _session.Session.get(SIMULATE_PLAYER_ID);
+  return _firstcutMeteor.Session.get(SIMULATE_PLAYER_ID);
 }
 
 function setSimulationPlayerId(playerId) {
-  if (_meteor.Meteor.isServer) {
+  if (_firstcutMeteor.Meteor.isServer) {
     return null;
   }
 
-  return _session.Session.set(SIMULATE_PLAYER_ID, playerId);
+  return _firstcutMeteor.Session.set(SIMULATE_PLAYER_ID, playerId);
 }
 
 function inSimulationMode() {
-  if (_meteor.Meteor.isServer) {
+  if (_firstcutMeteor.Meteor.isServer) {
     return false;
   }
 
@@ -146,19 +144,19 @@ function userPlayerId() {
     return getSimulationPlayerId();
   }
 
-  if (_meteor.Meteor.settings.public.playerIdOverride) {
-    return _meteor.Meteor.settings.public.playerIdOverride;
+  if (_firstcutMeteor.Meteor.settings.public.playerIdOverride) {
+    return _firstcutMeteor.Meteor.settings.public.playerIdOverride;
   }
 
-  if (_meteor.Meteor.user()) {
-    return getPlayerIdFromUser(_meteor.Meteor.user());
+  if (_firstcutMeteor.Meteor.user()) {
+    return getPlayerIdFromUser(_firstcutMeteor.Meteor.user());
   }
 
   return '';
 }
 
 function userId() {
-  return _meteor.Meteor.user() ? _meteor.Meteor.user()._id : '';
+  return _firstcutMeteor.Meteor.user() ? _firstcutMeteor.Meteor.user()._id : '';
 }
 
 function userPlayer() {

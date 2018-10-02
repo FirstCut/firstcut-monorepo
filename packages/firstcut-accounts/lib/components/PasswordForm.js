@@ -21,7 +21,7 @@ var _assertThisInitialized2 = _interopRequireDefault(require("@babel/runtime/hel
 
 var _react = _interopRequireDefault(require("react"));
 
-var _meteor = require("meteor/meteor");
+var _firstcutMeteor = require("firstcut-meteor");
 
 var _universeI18n = _interopRequireDefault(require("meteor/universe:i18n"));
 
@@ -83,7 +83,7 @@ function (_React$Component) {
           loading: true
         });
 
-        _meteor.Meteor.loginWithPassword(email, password, function (err) {
+        _firstcutMeteor.Meteor.loginWithPassword(email, password, function (err) {
           // let errors = this.state.errors;
           _this2.setState({
             loading: false

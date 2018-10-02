@@ -9,7 +9,7 @@ exports.default = void 0;
 
 var _simplSchema = _interopRequireDefault(require("simpl-schema"));
 
-var _blueprints = require("/imports/api/blueprints");
+var _firstcutBlueprints = require("firstcut-blueprints");
 
 var _firstcutPipelineConsts = require("firstcut-pipeline-consts");
 
@@ -19,7 +19,9 @@ var _shoots = require("./shoots.enum");
 
 var _firstcutUtils = require("firstcut-utils");
 
-var ShootsSchema = new _blueprints.BlueprintableSchema({
+var _firstcutMeteor = require("firstcut-meteor");
+
+var ShootsSchema = new _firstcutBlueprints.BlueprintableSchema({
   isDummy: {
     type: Boolean
   },
@@ -103,7 +105,7 @@ var ShootsSchema = new _blueprints.BlueprintableSchema({
   footageFiles: {
     type: Array,
     customType: 'fileArray',
-    bucket: Meteor.settings.public.target_footage_bucket,
+    bucket: _firstcutMeteor.Meteor.settings.public.target_footage_bucket,
     label: 'Footage files'
   },
   'footageFiles.$': {

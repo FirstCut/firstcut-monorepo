@@ -1,6 +1,6 @@
 
-import { Meteor } from 'meteor/meteor';
-import { Random } from 'meteor/random';
+import { Meteor, ValidatedMethod } from 'firstcut-meteor';
+import { Random } from 'meteor-random';
 import RecordPersister from './record.persister';
 
 export default function enableCrud(cls) {

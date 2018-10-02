@@ -63,6 +63,12 @@ Object.defineProperty(exports, "pluralize", {
     return _utils.pluralize;
   }
 });
+Object.defineProperty(exports, "isDevEnv", {
+  enumerable: true,
+  get: function get() {
+    return _utils.isDevEnv;
+  }
+});
 Object.defineProperty(exports, "isUTC", {
   enumerable: true,
   get: function get() {
@@ -85,12 +91,6 @@ Object.defineProperty(exports, "fromNowDate", {
   enumerable: true,
   get: function get() {
     return _datetime.fromNowDate;
-  }
-});
-Object.defineProperty(exports, "getTimezoneFromDate", {
-  enumerable: true,
-  get: function get() {
-    return _datetime.getTimezoneFromDate;
   }
 });
 Object.defineProperty(exports, "userTimezone", {

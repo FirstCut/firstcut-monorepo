@@ -123,6 +123,5 @@ function (_Base) {
   return Task;
 }(Base);
 
-console.log(Task.collection.find({}).count());
 var _default = Task;
 exports.default = _default;

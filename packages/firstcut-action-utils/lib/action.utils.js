@@ -55,14 +55,14 @@ function getEmailActions(_ref2) {
       _ref2$cc = _ref2.cc,
       cc = _ref2$cc === void 0 ? [] : _ref2$cc;
   cc = cc.map(function (recipient) {
-    return Meteor.settings.public.environment === 'development' || !recipient ? 'lucy@firstcut.io' : recipient.email;
+    return isDevelopment() || !recipient ? 'lucy@firstcut.io' : recipient.email;
   });
   var emailActions = recipients.map(function (recipient) {
     if (!recipient) {
       return null;
     }
 
-    var email = Meteor.settings.public.environment === 'development' ? 'lucyannerichards@gmail.com' : recipient.email;
+    var email = isDevelopment() ? 'lucyannerichards@gmail.com' : recipient.email;
     var args = {
       type: _firstcutPipelineConsts.ACTIONS.send_email,
       to: [email],

@@ -77,5 +77,4 @@ class Collaborator extends Base {
 }
 
 
-Collaborator.schema = CollaboratorSchema;
 export default Collaborator;

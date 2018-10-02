@@ -1,1 +1,0 @@
-import './aws.config.js';

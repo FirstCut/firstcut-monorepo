@@ -1,9 +1,9 @@
 
 import CryptoJS from 'crypto-js';
-import { HTTP } from 'meteor/http';
+import { HTTP } from 'firstcut-meteor';
 import { PubSub } from 'pubsub-js';
 import Models from 'firstcut-models';
-import { Random } from 'meteor/random';
+import { Random } from 'meteor-random';
 import { handleEvent as pipelineExecuteEvent } from 'firstcut-pipeline';
 
 HTTP.methods({

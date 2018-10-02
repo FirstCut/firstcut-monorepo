@@ -163,6 +163,5 @@ function (_Base) {
   return Collaborator;
 }(Base);
 
-Collaborator.schema = _collaborators2.default;
 var _default = Collaborator;
 exports.default = _default;

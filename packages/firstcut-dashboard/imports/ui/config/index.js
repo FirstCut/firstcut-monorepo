@@ -1,5 +1,5 @@
 
-import { Meteor } from 'meteor/meteor';
+import { Meteor } from 'firstcut-meteor';
 import { _ } from 'lodash';
 import VideoEditorConfig from './editor.config';
 import { SuperuserConfig, VideoProjectManagerConfig } from './projectmanager.config';

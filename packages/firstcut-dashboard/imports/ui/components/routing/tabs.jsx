@@ -1,5 +1,5 @@
 
-import { Meteor } from 'meteor/meteor';
+import { Meteor } from 'firstcut-meteor';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Menu } from 'semantic-ui-react';

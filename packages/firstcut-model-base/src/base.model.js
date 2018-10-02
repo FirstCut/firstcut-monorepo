@@ -1,5 +1,5 @@
 
-import { Meteor } from 'meteor/meteor';
+import { Meteor } from 'firstcut-meteor';
 import { SchemaParser } from 'firstcut-schema';
 import { Record, List } from 'immutable';
 import { _ } from 'lodash';
@@ -99,6 +99,7 @@ export const BaseModel = defaultValues => class extends Record({
 
   /* TODO: hide this better */
   static get collection() {
+    console.log('GETTING COLLECTION');
     if (!this._collection) {
       try {
         this._collection = new Mongo.Collection(this.collectionName);

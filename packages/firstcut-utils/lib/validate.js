@@ -5,7 +5,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.ensureLoggedIn = void 0;
 
-var _mdgValidationError = require("meteor/mdg:validation-error");
+var _firstcutMeteor = require("firstcut-meteor");
 
 var ensureLoggedIn = function ensureLoggedIn() {
   if (!Meteor.userId && !Meteor.isTest) {
@@ -13,7 +13,7 @@ var ensureLoggedIn = function ensureLoggedIn() {
       name: 'user',
       type: 'not-logged-in'
     };
-    throw new _mdgValidationError.ValidationError([error]);
+    throw new _firstcutMeteor.ValidationError([error]);
   }
 };
 

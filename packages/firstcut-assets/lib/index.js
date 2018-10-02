@@ -7,14 +7,17 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 
+var _firstcutMeteor = require("firstcut-meteor");
+
 var _firstcutUploader = require("firstcut-uploader");
 
 var _asset = _interopRequireDefault(require("./asset"));
 
-Meteor.startup(function () {
-  if (Meteor.isClient) {
+_firstcutMeteor.Meteor.startup(function () {
+  if (_firstcutMeteor.Meteor.isClient) {
     (0, _firstcutUploader.initUploader)();
   }
 });
+
 var _default = _asset.default;
 exports.default = _default;

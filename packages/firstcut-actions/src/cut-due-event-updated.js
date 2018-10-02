@@ -45,7 +45,7 @@ const CutDueEventUpdated = new Map({
     }];
 
     let cutDueReminderCron = moment(due).subtract(24, 'hour').toDate();
-    if (Meteor.settings.public.environment === 'development') {
+    if (isDevelopment()) {
       cutDueReminderCron = moment().add(2, 'minute').toDate();
     }
     const cutDueReminder = Models.Job.createNew({

@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Meteor } from 'meteor/meteor';
+import { Meteor } from 'firstcut-meteor';
 import PropTypes from 'prop-types';
 import Models from 'firstcut-models';
 import { PubSub } from 'pubsub-js';

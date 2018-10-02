@@ -1,6 +1,6 @@
 
 import { _ } from 'lodash';
-import { Random } from 'meteor/random';
+import { Random } from 'meteor-random';
 
 const parser = require('xml2json');
 const prettyjson = require('prettyjson');

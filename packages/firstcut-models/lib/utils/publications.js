@@ -5,6 +5,8 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = initPublications;
 
+var _firstcutMeteor = require("firstcut-meteor");
+
 var _lodash = require("lodash");
 
 function initPublications(Models) {
@@ -18,7 +20,8 @@ function initPublications(Models) {
       Shoot = Models.Shoot,
       Task = Models.Task,
       Invoice = Models.Invoice;
-  Meteor.publish('editor.all', function (playerId) {
+
+  _firstcutMeteor.Meteor.publish('editor.all', function (playerId) {
     check(playerId, String);
     var deliverables = Deliverable.collection.find({
       postpoOwnerId: playerId
@@ -50,7 +53,8 @@ function initPublications(Models) {
       }
     })];
   });
-  Meteor.publish('videographer.all', function (playerId) {
+
+  _firstcutMeteor.Meteor.publish('videographer.all', function (playerId) {
     check(playerId, String);
     var shoots = Shoot.collection.find({
       $or: [{
@@ -84,7 +88,8 @@ function initPublications(Models) {
       payeeId: playerId
     }), subscribeToPublicFields(Company, {}), subscribeToPublicFields(Client, {}), subscribeToPublicFields(Collaborator, {})];
   });
-  Meteor.publish('projectmanager.all', function (playerId) {
+
+  _firstcutMeteor.Meteor.publish('projectmanager.all', function (playerId) {
     check(playerId, String);
     var projects = Project.collection.find({
       adminOwnerId: playerId
@@ -110,7 +115,8 @@ function initPublications(Models) {
       }
     }), Invoice.collection.find({})];
   });
-  Meteor.publish('client.all', function (playerId) {
+
+  _firstcutMeteor.Meteor.publish('client.all', function (playerId) {
     check(playerId, String);
     var SISTER_COMPANY_IDS = ['BxEFi9JtChbZeS6KX', 'ZaHziWiQfrcKJp2D2'];
     var player = Client.findOne({
@@ -172,7 +178,8 @@ function initPublications(Models) {
       _id: playerId
     }), subscribeToPublicFields(Collaborator, {})];
   });
-  Meteor.publish('base.all', function (playerId) {
+
+  _firstcutMeteor.Meteor.publish('base.all', function (playerId) {
     if (!playerId) {
       return [];
     }
@@ -186,7 +193,8 @@ function initPublications(Models) {
       assignedToPlayerId: playerId
     })];
   });
-  Meteor.publish('public.all', function () {
+
+  _firstcutMeteor.Meteor.publish('public.all', function () {
     var cuts = Cut.collection.find({});
     var assets = getRelatedRecordsById({
       sourceRecords: cuts,
@@ -210,16 +218,20 @@ function initPublications(Models) {
     });
     return [companies, projects, deliverables, cuts, assets, subscribeToPublicFields(Client, {}), subscribeToPublicFields(Collaborator, {})];
   });
-  Meteor.publish('records.all', function () {
+
+  _firstcutMeteor.Meteor.publish('records.all', function () {
     return [Project.collection.find({}), Deliverable.collection.find({}), Asset.collection.find({}), Company.collection.find({}), Client.collection.find({}), Collaborator.collection.find({}), Cut.collection.find({}), Shoot.collection.find({}), Task.collection.find({}), Invoice.collection.find({})];
   });
-  Meteor.publish('cuts.public', function () {
+
+  _firstcutMeteor.Meteor.publish('cuts.public', function () {
     return [subscribeToPublicFields(Cut, {})];
   });
-  Meteor.publish('players.public', function () {
+
+  _firstcutMeteor.Meteor.publish('players.public', function () {
     return [subscribeToPublicFields(Collaborator, {})];
   });
-  Meteor.publish('clients.public', function () {
+
+  _firstcutMeteor.Meteor.publish('clients.public', function () {
     return [subscribeToPublicFields(Client, {})];
   });
 }

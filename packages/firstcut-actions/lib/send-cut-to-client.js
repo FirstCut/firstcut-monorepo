@@ -118,7 +118,7 @@ var SendCutToClient = new _immutable.Map({
 
     var cron = (0, _moment.default)().add(72, 'hour').toDate();
 
-    if (Meteor.settings.public.environment === 'development') {
+    if (isDevelopment()) {
       cron = (0, _moment.default)().add(1, 'minute').toDate();
     }
 

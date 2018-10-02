@@ -1,12 +1,13 @@
 
+import { Meteor, isDevelopment } from 'firstcut-meteor';
 import {
   userPlayer, userId, getPlayerIdFromUser, inSimulationMode, userPlayerId,
 } from 'firstcut-players';
 import { EVENT_LABELS } from 'firstcut-pipeline-consts';
 // import { getQualifiedSkills } from '/imports/ui/config';
 
-if (Meteor.settings.public.environment === 'development') {
-  analytics = {
+if (isDevelopment()) {
+  let analytics = {
     load() { console.log('Analytics load'); },
     page() { console.log('Analytics page'); },
     track() { console.log('Analytics track'); },

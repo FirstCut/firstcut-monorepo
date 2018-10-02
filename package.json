@@ -2,13 +2,13 @@
 		"private": true,
 		"homepage": "https://dmk255.github.io/lerna-webpack-example/",
 		"devDependencies": {
-				"@babel/cli": "^7.0.0-beta.42",
-				"@babel/core": "^7.0.0-beta.42",
-				"@babel/plugin-syntax-dynamic-import": "^7.0.0-beta.42",
-				"@babel/plugin-transform-runtime": "^7.0.0-beta.55",
-				"@babel/preset-env": "^7.0.0-beta.42",
-				"@babel/preset-react": "^7.0.0-beta.42",
-				"babel-core": "^7.0.0-0",
+				"@babel/cli": "^7.0.0-beta.51",
+				"@babel/core": "^7.0.0-beta.51",
+				"@babel/plugin-syntax-dynamic-import": "^7.0.0-beta.51",
+				"@babel/plugin-transform-runtime": "^7.0.0-beta.51",
+				"@babel/preset-env": "^7.0.0-beta.51",
+				"@babel/preset-react": "^7.0.0-beta.51",
+				"babel-core": "^7.0.0-beta.51",
 				"babel-eslint": "^8.2.2",
 				"babel-jest": "^23.0.0-alpha.0",
 				"babel-loader": "^8.0.0-beta",
@@ -31,20 +31,26 @@
 		},
 		"scripts": {
 				"prebuild": "git clean -fdx packages -e packages/*/node_modules",
-				"clean": "lerna clean | rm -rf packages/*/lib",
+				"clean": "lerna clean | echo 'y' | yarn clean:babel",
 				"bootstrap": "lerna bootstrap",
 				"dev": "concurrently \"yarn watch\" \"lerna run dev --stream\"",
 				"lint": "eslint --cache --ignore-path .gitignore ./packages/*/src",
 				"test": "jest",
-				"build:babel": "lerna exec --parallel -- babel src -d lib --config-file ../../.babelrc --watch --copy-files --delete-dir-on-start",
+				"build:babel": "lerna exec --parallel -- babel src -d lib --config-file ../../babel.config.js --watch --copy-files --ignore '**/__mocks__/**'",
 				"build:webpack": "lerna run build:webpack",
 				"build": "yarn build:babel && yarn build:webpack",
 				"release": "yarn lint && yarn build && lerna publish",
-				"watch": "yarn build:babel",
+				"watch": "yarn clean:babel | yarn build:babel",
 				"predeploy": "yarn build",
+				"copymocks": "[ -d 'packages/*/mocks' ] && cp -r packages/*/mocks ./lib/__mocks__",
+				"clean:babel": "rm -rf packages/*/lib",
 				"deploy": "gh-pages -d packages/orchestra/dist"
 		},
 		"dependencies": {
 				"soap": "^0.24.0"
-		}
+		},
+		"jest": {
+    	"testPathIgnorePatterns": ["/node_modules/", "/lib/"],
+    	"bail": true
+  	}
 }

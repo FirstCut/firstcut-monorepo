@@ -1,5 +1,5 @@
 
-import { Meteor } from 'meteor/meteor';
+import { Meteor } from 'firstcut-meteor';
 import { isURL } from 'firstcut-utils';
 import { S3_URL, HEADSHOT_DIR, SCREENSHOT_DIR } from './url.enum';
 

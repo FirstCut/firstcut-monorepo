@@ -1,5 +1,5 @@
 
-import { Meteor } from 'meteor/meteor';
+import { Meteor } from 'firstcut-meteor';
 import { _ } from 'lodash';
 import { CUT_TYPES } from './cuts.enum';
 import { EVENTS } from 'firstcut-pipeline-consts';

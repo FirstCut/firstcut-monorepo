@@ -1,7 +1,7 @@
 
-import { Meteor } from 'meteor/meteor';
+import { Meteor } from 'firstcut-meteor';
 import { SimpleSchemaWrapper } from 'firstcut-schema';
-import { Random } from 'meteor/random';
+import { Random } from 'meteor-random';
 import { ACTIONS, EVENT_LABELS } from 'firstcut-pipeline-consts';
 import Models from 'firstcut-models';
 import { Mailer } from 'firstcut-mailer';
@@ -24,7 +24,7 @@ const slackTemplateDefaults = {
 };
 
 export function fulfillsPrerequisites({ event, record, initiator }) {
-  if (Meteor.settings.public.environment === 'development') {
+  if (isDevelopment()) {
     return true;
   }
   return ActionTemplates[event].get('fulfillsPrerequisites')({ record, initiator });

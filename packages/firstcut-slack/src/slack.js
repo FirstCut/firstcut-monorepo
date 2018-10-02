@@ -1,5 +1,5 @@
 
-import { Meteor } from 'meteor/meteor';
+import { Meteor } from 'firstcut-meteor';
 import { WebClient } from '@slack/client';
 import { SlackContentSchema } from './slack.schemas';
 

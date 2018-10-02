@@ -16,7 +16,7 @@ exports.getRecordPath = getRecordPath;
 exports.getRelatedRecordPath = getRelatedRecordPath;
 exports.getProjectSalesforceLink = getProjectSalesforceLink;
 
-var _meteor = require("meteor/meteor");
+var _firstcutMeteor = require("firstcut-meteor");
 
 var _firstcutUtils = require("firstcut-utils");
 
@@ -33,7 +33,7 @@ function getBasepath(model) {
 
 function getPublicCutViewLink(cut) {
   if (cut.fileId) {
-    return "".concat(_meteor.Meteor.settings.public.PLATFORM_ROOT_URL, "/view_cut/").concat(cut._id);
+    return "".concat(_firstcutMeteor.Meteor.settings.public.PLATFORM_ROOT_URL, "/view_cut/").concat(cut._id);
   }
 
   return cut.fileUrl;
@@ -84,11 +84,11 @@ function getSalesforceLink(record) {
     return '';
   }
 
-  return "".concat(_meteor.Meteor.settings.public.salesforceRoot, "/").concat(salesforceId);
+  return "".concat(_firstcutMeteor.Meteor.settings.public.salesforceRoot, "/").concat(salesforceId);
 }
 
 function getRecordUrl(record) {
-  return _meteor.Meteor.settings.public.PLATFORM_ROOT_URL + getRecordPath(record);
+  return _firstcutMeteor.Meteor.settings.public.PLATFORM_ROOT_URL + getRecordPath(record);
 }
 
 function getRecordPath(record) {

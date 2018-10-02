@@ -1,3 +1,4 @@
+import { Meteor } from 'firstcut-meteor';
 
 export default function enableBasePublications(cls) {
   if (Meteor.isServer) {

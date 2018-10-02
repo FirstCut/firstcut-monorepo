@@ -10,35 +10,35 @@ exports.postMessage = postMessage;
 
 var _objectSpread2 = _interopRequireDefault(require("@babel/runtime/helpers/objectSpread"));
 
-var _meteor = require("meteor/meteor");
+var _firstcutMeteor = require("firstcut-meteor");
 
 var _client = require("@slack/client");
 
 var _slack = require("./slack.schemas");
 
-var access_token = _meteor.Meteor.settings.slack.api_token;
+var access_token = _firstcutMeteor.Meteor.settings.slack.api_token;
 var slack = new _client.WebClient(access_token);
-var client_id = _meteor.Meteor.settings.slack.client_id;
-var client_secret = _meteor.Meteor.settings.slack.client_secret;
+var client_id = _firstcutMeteor.Meteor.settings.slack.client_id;
+var client_secret = _firstcutMeteor.Meteor.settings.slack.client_secret;
 
 function getChannel() {
-  if (_meteor.Meteor.isTest) {
+  if (_firstcutMeteor.Meteor.isTest) {
     return 'devtesting';
   }
 
-  if (_meteor.Meteor.settings.public.environment == 'development') {
+  if (_firstcutMeteor.Meteor.settings.public.environment == 'development') {
     return 'devtesting';
   }
 
-  if (_meteor.Meteor.settings.public.environment == 'production') {
+  if (_firstcutMeteor.Meteor.settings.public.environment == 'production') {
     return 'postproduction';
   }
 
-  throw _meteor.Meteor.Error('unsatisfied-conditions', 'Could not retrieve channel. Is not test, development, or production environment.');
+  throw _firstcutMeteor.Meteor.Error('unsatisfied-conditions', 'Could not retrieve channel. Is not test, development, or production environment.');
 }
 
 function postMessage(content, channel) {
-  if (!channel || _meteor.Meteor.settings.public.environment == 'development') {
+  if (!channel || _firstcutMeteor.Meteor.settings.public.environment == 'development') {
     channel = getChannel();
   }
 

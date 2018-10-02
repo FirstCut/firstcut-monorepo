@@ -1,5 +1,5 @@
 
-import { Meteor } from 'meteor/meteor';
+import { Meteor, isDevelopment } from 'firstcut-meteor';
 import CryptoJS from 'crypto-js';
 import Evaporate from 'evaporate';
 import AWS from 'aws-sdk';
@@ -10,7 +10,7 @@ const evaporateConfig = {
   aws_key: Meteor.settings.public.s3.key,
   bucket: Meteor.settings.public.s3.assets_bucket,
   awsRegion: Meteor.settings.public.s3.region,
-  logging: (Meteor.settings.public.environment === 'development'),
+  logging: (isDevelopment()),
   computeContentMd5: true,
   s3FileCacheHoursAgo: 4,
   awsSignatureVersion: '4',

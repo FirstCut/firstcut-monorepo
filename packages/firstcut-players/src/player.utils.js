@@ -1,8 +1,7 @@
 
 import SimpleSchema from 'simpl-schema';
-import { Meteor } from 'meteor/meteor';
+import { Meteor, Session, ValidatedMethod } from 'firstcut-meteor';
 import Models from 'firstcut-models';
-import { Session } from 'meteor/session';
 import moment from 'moment';
 
 const SIMULATE_PLAYER_ID = 'simulatePlayerId';

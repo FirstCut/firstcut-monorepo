@@ -76,7 +76,7 @@ var CutDueEventUpdated = new _immutable.Map({
     }];
     var cutDueReminderCron = (0, _moment.default)(due).subtract(24, 'hour').toDate();
 
-    if (Meteor.settings.public.environment === 'development') {
+    if (isDevelopment()) {
       cutDueReminderCron = (0, _moment.default)().add(2, 'minute').toDate();
     }
 

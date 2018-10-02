@@ -1,6 +1,7 @@
 // kill logs
-import { HTTP } from 'meteor/http';
+import { HTTP } from 'firstcut-meteor';
 import { wrapAsync } from './utils';
+import {_} from 'lodash';
 
 const Log = function () {};
 
@@ -66,7 +67,7 @@ export const GoogleApi = {
 };
 
 // setup HTTP verbs
-httpVerbs = ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'];
+const httpVerbs = ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'];
 _.each(httpVerbs, (verb) => {
   GoogleApi[verb.toLowerCase()] = wrapAsync(function (path, options, callback) {
     if (_.isFunction(options)) {

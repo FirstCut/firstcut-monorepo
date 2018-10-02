@@ -5,7 +5,7 @@ import { Form, Button } from 'semantic-ui-react';
 import Autocomplete from 'react-google-autocomplete';
 // import timezone from 'node-google-timezone';
 import GoogleApi from 'firstcut-google-api';
-import { HTTP } from 'meteor/http';
+import { HTTP } from 'firstcut-meteor';
 import qs from 'qs';
 
 export default function LocationField(props) {

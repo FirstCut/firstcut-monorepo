@@ -85,7 +85,7 @@ var UpdatedShootEvent = new _immutable.Map({
 
     var shoot_wrap_cron = (0, _moment.default)(shoot.date).add(shoot.duration, 'hour').add(SHOOT_WRAP_NOTIFICATION_PADDING, 'hour').toDate();
 
-    if (Meteor.settings.public.environment === 'development') {
+    if (isDevelopment()) {
       shoot_wrap_cron = (0, _moment.default)().add(2, 'minute').toDate();
     }
 

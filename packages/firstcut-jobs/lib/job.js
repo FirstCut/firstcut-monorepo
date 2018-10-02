@@ -19,6 +19,8 @@ var _inherits2 = _interopRequireDefault(require("@babel/runtime/helpers/inherits
 
 var _nodeSchedule = _interopRequireDefault(require("node-schedule"));
 
+var _firstcutMeteor = require("firstcut-meteor");
+
 var _immutable = require("immutable");
 
 var _pubsubJs = require("pubsub-js");
@@ -53,6 +55,7 @@ function (_Base) {
     }
   }], [{
     key: "getExistingJobId",
+    // static get modelName() { return 'jobs'; }
     value: function getExistingJobId(_ref) {
       var record_id = _ref.record_id,
           key = _ref.key;
@@ -71,11 +74,6 @@ function (_Base) {
     key: "schema",
     get: function get() {
       return _jobs2.default;
-    }
-  }, {
-    key: "modelName",
-    get: function get() {
-      return 'jobs';
     }
   }]);
   return Job;
@@ -129,7 +127,7 @@ function () {
   }, {
     key: "scheduleJob",
     value: function scheduleJob(job) {
-      var scheduled = _nodeSchedule.default.scheduleJob(job.cron, Meteor.bindEnvironment(function () {
+      var scheduled = _nodeSchedule.default.scheduleJob(job.cron, _firstcutMeteor.Meteor.bindEnvironment(function () {
         try {
           job.execute();
 
@@ -150,8 +148,8 @@ function () {
   return Tracker;
 }();
 
-if (Meteor.isServer) {
-  Meteor.startup(function () {
+if (_firstcutMeteor.Meteor.isServer) {
+  _firstcutMeteor.Meteor.startup(function () {
     Job.collection.find({}).observe({
       added: function added(doc) {
         var job = new Job(doc);

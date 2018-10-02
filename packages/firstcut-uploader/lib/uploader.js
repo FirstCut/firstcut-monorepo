@@ -8,7 +8,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.initUploader = initUploader;
 exports.upload = upload;
 
-var _meteor = require("meteor/meteor");
+var _firstcutMeteor = require("firstcut-meteor");
 
 var _cryptoJs = _interopRequireDefault(require("crypto-js"));
 
@@ -18,16 +18,16 @@ var _awsSdk = _interopRequireDefault(require("aws-sdk"));
 
 require('buffer').Buffer;
 var evaporateConfig = {
-  aws_key: _meteor.Meteor.settings.public.s3.key,
-  bucket: _meteor.Meteor.settings.public.s3.assets_bucket,
-  awsRegion: _meteor.Meteor.settings.public.s3.region,
-  logging: _meteor.Meteor.settings.public.environment === 'development',
+  aws_key: _firstcutMeteor.Meteor.settings.public.s3.key,
+  bucket: _firstcutMeteor.Meteor.settings.public.s3.assets_bucket,
+  awsRegion: _firstcutMeteor.Meteor.settings.public.s3.region,
+  logging: (0, _firstcutMeteor.isDevelopment)(),
   computeContentMd5: true,
   s3FileCacheHoursAgo: 4,
   awsSignatureVersion: '4',
   // partSize: 37748736, // aws mentioned 72 as ideal part size, this requires experimentation
   s3Acceleration: true,
-  signerUrl: "".concat(_meteor.Meteor.settings.public.PLATFORM_ROOT_URL, "/computeSignature"),
+  signerUrl: "".concat(_firstcutMeteor.Meteor.settings.public.PLATFORM_ROOT_URL, "/computeSignature"),
   cryptoMd5Method: function cryptoMd5Method(data) {
     return _awsSdk.default.util.crypto.md5(data, 'base64');
   },
@@ -48,7 +48,7 @@ function upload(opts) {
       path = opts.path,
       emitter = opts.emitter,
       _opts$bucket = opts.bucket,
-      bucket = _opts$bucket === void 0 ? _meteor.Meteor.settings.public.s3.assets_bucket : _opts$bucket;
+      bucket = _opts$bucket === void 0 ? _firstcutMeteor.Meteor.settings.public.s3.assets_bucket : _opts$bucket;
   var config = {
     name: path,
     file: file,

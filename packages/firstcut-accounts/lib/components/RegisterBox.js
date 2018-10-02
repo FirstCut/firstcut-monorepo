@@ -23,7 +23,7 @@ var _react = _interopRequireDefault(require("react"));
 
 var _universeI18n = _interopRequireDefault(require("meteor/universe:i18n"));
 
-var _meteor = require("meteor/meteor");
+var _firstcutMeteor = require("firstcut-meteor");
 
 var _propTypes = _interopRequireDefault(require("prop-types"));
 
@@ -108,7 +108,7 @@ RegisterBox.propTypes = {
 
 var _default = (0, _reactMeteorData.withTracker)(function () {
   return {
-    user: _meteor.Meteor.users.findOne()
+    user: _firstcutMeteor.Meteor.users.findOne()
   };
 })(RegisterBox);
 

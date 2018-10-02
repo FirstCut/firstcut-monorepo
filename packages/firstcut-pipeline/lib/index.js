@@ -35,7 +35,7 @@ var _execute = require("./execute.actions");
 
 var _pubsub = _interopRequireDefault(require("./server/pubsub"));
 
-// import {Meteor} from 'meteor/meteor';
+// import {Meteor} from 'firstcut-meteor';
 // this is silly. why
 function init() {
   (0, _pubsub.default)();

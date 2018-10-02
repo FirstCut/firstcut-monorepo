@@ -9,6 +9,7 @@
     "firstcut-pipeline-consts": "^0.0.0",
     "firstcut-utils": "^0.0.0",
     "immutable": "^3.8.2",
+    "pubsub-js": "^1.7.0",
     "simpl-schema": "^1.5.3"
   }
 }

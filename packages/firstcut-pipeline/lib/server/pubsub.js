@@ -9,7 +9,7 @@ exports.default = initSubscriptions;
 
 var _objectSpread2 = _interopRequireDefault(require("@babel/runtime/helpers/objectSpread"));
 
-var _meteor = require("meteor/meteor");
+var _firstcutMeteor = require("firstcut-meteor");
 
 var _pubsubJs = require("pubsub-js");
 
@@ -77,7 +77,7 @@ function initSubscriptions() {
   }
 
   var initializing = true;
-  var query = _meteor.Meteor.settings.public.environment === 'development' ? {} : {
+  var query = isDevelopment() ? {} : {
     isDummy: {
       $ne: true
     }
@@ -296,7 +296,7 @@ function initSubscriptions() {
 
         var record = _firstcutModels.default.getRecordFromId(model.modelName, doc._id);
 
-        var user = _meteor.Meteor.users.findOne(record.createdBy);
+        var user = _firstcutMeteor.Meteor.users.findOne(record.createdBy);
 
         var initiator_player_id = (0, _firstcutPlayers.getPlayerIdFromUser)(user);
 
@@ -315,7 +315,7 @@ function initSubscriptions() {
     initializing = false;
   });
 
-  _meteor.Meteor.users.find({}).observe({
+  _firstcutMeteor.Meteor.users.find({}).observe({
     added: function added(doc) {
       if (initializing) {
         return;
@@ -353,7 +353,7 @@ function initSubscriptions() {
   }
 
   _firstcutPipelineConsts.SUPPORTED_EVENTS.forEach(function (e) {
-    _pubsubJs.PubSub.subscribe(e, _meteor.Meteor.bindEnvironment(function (msg, data) {
+    _pubsubJs.PubSub.subscribe(e, _firstcutMeteor.Meteor.bindEnvironment(function (msg, data) {
       (0, _execute.handleEvent)((0, _objectSpread2.default)({
         event: e
       }, data));
