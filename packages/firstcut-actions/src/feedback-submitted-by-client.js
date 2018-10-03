@@ -41,7 +41,7 @@ const FeedbackSubmittedByClient = new Map({
     ];
 
     let feedbackSentReminderCron = moment().add(12, 'hour').toDate();
-    if (isDevelopment()) {
+    if (Meteor.settings.public.environment === 'development'()) {
       feedbackSentReminderCron = moment().add(2, 'minute').toDate();
     }
     const feedbackSentReminder = Models.Job.createNew({

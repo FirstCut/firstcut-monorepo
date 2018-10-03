@@ -12,7 +12,7 @@ export default class InvoiceForm extends React.Component {
       'amount',
       'transactionId',
     ];
-    if (isDevelopment()) {
+    if (Meteor.settings.public.environment === 'development'()) {
       fields.push('status');
     }
     if (record.type) {

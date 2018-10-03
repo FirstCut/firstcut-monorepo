@@ -1,4 +1,4 @@
-// import {Meteor} from 'firstcut-meteor';
+// import {Meteor} from 'meteor/meteor';
 import {
   fulfillsPrerequisites,
   handleEvent,

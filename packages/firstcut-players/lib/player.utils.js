@@ -20,69 +20,35 @@ exports.getPlayer = getPlayer;
 exports.getPlayerFromQuery = getPlayerFromQuery;
 exports.playerIsClient = playerIsClient;
 exports.initializeCollaboratorFromUser = initializeCollaboratorFromUser;
-exports.setPlayerId = void 0;
 
 var _toConsumableArray2 = _interopRequireDefault(require("@babel/runtime/helpers/toConsumableArray"));
 
 var _simplSchema = _interopRequireDefault(require("simpl-schema"));
-
-var _firstcutMeteor = require("firstcut-meteor");
 
 var _firstcutModels = _interopRequireDefault(require("firstcut-models"));
 
 var _moment = _interopRequireDefault(require("moment"));
 
 var SIMULATE_PLAYER_ID = 'simulatePlayerId';
-var setPlayerId = new _firstcutMeteor.ValidatedMethod({
-  name: 'set-player-id',
-  validate: new _simplSchema.default({
-    playerId: String
-  }).validator(),
-  run: function run(_ref) {
-    var playerId = _ref.playerId;
-
-    // update on the client for immediate, synchronous use
-    // if a playerId is already set
-    if (_firstcutMeteor.Meteor.user().profile.playerId) {
-      return;
-    } // if a user already exists with that playerId already set
-
-
-    if (playerId && _firstcutMeteor.Meteor.users.findOne({
-      'profile.playerId': playerId
-    })) {
-      return;
-    }
-
-    _firstcutMeteor.Meteor.user().profile.playerId = playerId;
-
-    _firstcutMeteor.Meteor.users.update(_firstcutMeteor.Meteor.userId(), {
-      $set: {
-        'profile.playerId': playerId
-      }
-    });
-  }
-});
-exports.setPlayerId = setPlayerId;
 
 function getSimulationPlayerId() {
-  if (_firstcutMeteor.Meteor.isServer) {
+  if (Meteor.isServer) {
     return '';
   }
 
-  return _firstcutMeteor.Session.get(SIMULATE_PLAYER_ID);
+  return Session.get(SIMULATE_PLAYER_ID);
 }
 
 function setSimulationPlayerId(playerId) {
-  if (_firstcutMeteor.Meteor.isServer) {
+  if (Meteor.isServer) {
     return null;
   }
 
-  return _firstcutMeteor.Session.set(SIMULATE_PLAYER_ID, playerId);
+  return Session.set(SIMULATE_PLAYER_ID, playerId);
 }
 
 function inSimulationMode() {
-  if (_firstcutMeteor.Meteor.isServer) {
+  if (Meteor.isServer) {
     return false;
   }
 
@@ -144,19 +110,19 @@ function userPlayerId() {
     return getSimulationPlayerId();
   }
 
-  if (_firstcutMeteor.Meteor.settings.public.playerIdOverride) {
-    return _firstcutMeteor.Meteor.settings.public.playerIdOverride;
+  if (Meteor.settings.public.playerIdOverride) {
+    return Meteor.settings.public.playerIdOverride;
   }
 
-  if (_firstcutMeteor.Meteor.user()) {
-    return getPlayerIdFromUser(_firstcutMeteor.Meteor.user());
+  if (Meteor.user()) {
+    return getPlayerIdFromUser(Meteor.user());
   }
 
   return '';
 }
 
 function userId() {
-  return _firstcutMeteor.Meteor.user() ? _firstcutMeteor.Meteor.user()._id : '';
+  return Meteor.user() ? Meteor.user()._id : '';
 }
 
 function userPlayer() {

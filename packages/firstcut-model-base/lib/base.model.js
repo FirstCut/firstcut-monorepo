@@ -23,8 +23,6 @@ var _get2 = _interopRequireDefault(require("@babel/runtime/helpers/get"));
 
 var _inherits2 = _interopRequireDefault(require("@babel/runtime/helpers/inherits"));
 
-var _firstcutMeteor = require("firstcut-meteor");
-
 var _firstcutSchema = require("firstcut-schema");
 
 var _immutable = require("immutable");
@@ -560,15 +558,15 @@ function applyBlueprint(r, blueprint) {
   var record = r;
 
   if (!blueprint) {
-    throw new _firstcutMeteor.Meteor.Error('malformed-params', 'Cannot apply blueprint when blueprint is undefined or null');
+    throw new Meteor.Error('malformed-params', 'Cannot apply blueprint when blueprint is undefined or null');
   }
 
   if (!record.availableBlueprints) {
-    throw new _firstcutMeteor.Meteor.Error('malformed-params', 'Record does not have available blueprints assigned to it. Cannot apply blueprint');
+    throw new Meteor.Error('malformed-params', 'Record does not have available blueprints assigned to it. Cannot apply blueprint');
   }
 
   if (!record.availableBlueprints[blueprint]) {
-    throw new _firstcutMeteor.Meteor.Error('malformed-params', "Blueprint ".concat(blueprint, " not one of record's available blueprints"));
+    throw new Meteor.Error('malformed-params', "Blueprint ".concat(blueprint, " not one of record's available blueprints"));
   }
 
   var defaults = record.availableBlueprints[blueprint].defaults;

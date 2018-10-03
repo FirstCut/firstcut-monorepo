@@ -1,11 +1,11 @@
 
 import React from 'react';
-import { Meteor } from 'firstcut-meteor';
+import { Meteor } from 'meteor/meteor';
 import PropTypes from 'prop-types';
 import Models from 'firstcut-models';
 import { PubSub } from 'pubsub-js';
 import { List, Map } from 'immutable';
-import { getSignedUrl } from 'firstcut-filestore';
+import { getSignedUrl } from '/imports/api/filestore';
 import { _ } from 'lodash';
 import { DDP } from 'meteor/ddp-client';
 import Analytics from 'firstcut-analytics';

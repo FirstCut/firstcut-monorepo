@@ -42,7 +42,6 @@
 				"release": "yarn lint && yarn build && lerna publish",
 				"watch": "yarn clean:babel | yarn build:babel",
 				"predeploy": "yarn build",
-				"copymocks": "[ -d 'packages/*/mocks' ] && cp -r packages/*/mocks ./lib/__mocks__",
 				"clean:babel": "rm -rf packages/*/lib",
 				"deploy": "gh-pages -d packages/orchestra/dist"
 		},

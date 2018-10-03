@@ -17,7 +17,6 @@ var _firstcutActionUtils = require("firstcut-action-utils");
 
 var _firstcutPipelineConsts = require("firstcut-pipeline-consts");
 
-// import { invokeCopyFootage } from 'firstcut-filestore';
 var key = 'footage_verified';
 var FootageVerified = new _immutable.Map({
   key: key,
@@ -37,9 +36,7 @@ var FootageVerified = new _immutable.Map({
   generateActions: function generateActions(event_data) {
     var record_id = event_data.record_id;
 
-    var shoot = _firstcutModels.default.Shoot.fromId(record_id); // const srcBucket = Meteor.settings.public.source_footage_bucket;
-    // const destBucket = `${Meteor.settings.public.target_footage_bucket}/${Meteor.settings.public.footage_folder}`;
-
+    var shoot = _firstcutModels.default.Shoot.fromId(record_id);
 
     return [{
       type: _firstcutPipelineConsts.ACTIONS.slack_notify,
@@ -51,22 +48,7 @@ var FootageVerified = new _immutable.Map({
       title: 'set shoot invoices to due',
       execute: function execute() {
         (0, _firstcutActionUtils.setAllRecordInvoicesToDue)(shoot);
-      } // }, {
-      //   type: ACTIONS.custom_function,
-      //   title: `copy footage from the ${srcBucket} to the ${destBucket} s3 buckets`,
-      //   execute: () => {
-      //     invokeCopyFootage.call({
-      //       srcBucket,
-      //       destBucket,
-      //       srcFolder: shoot.footageFolderName,
-      //     }, Meteor.bindEnvironment((err, res) => {
-      //       if (err) {
-      //         console.log('Publishing error in the invoke footage event');
-      //         Meteor.publish('error', err);
-      //       }
-      //     }));
-      // },
-
+      }
     }];
   }
 });

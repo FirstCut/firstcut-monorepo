@@ -13,12 +13,10 @@ var _classCallCheck2 = _interopRequireDefault(require("@babel/runtime/helpers/cl
 
 var _createClass2 = _interopRequireDefault(require("@babel/runtime/helpers/createClass"));
 
-var _firstcutMeteor = require("firstcut-meteor");
-
 var _sparkpost = _interopRequireDefault(require("sparkpost"));
 
 var FROM_DOMAIN = 'email@firstcut.io';
-var API_KEY = _firstcutMeteor.Meteor.settings.email.api_key;
+var API_KEY = Meteor.settings.email.api_key;
 
 var Mailer =
 /*#__PURE__*/

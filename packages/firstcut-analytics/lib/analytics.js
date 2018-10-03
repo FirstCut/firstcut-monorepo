@@ -11,35 +11,33 @@ var _objectSpread2 = _interopRequireDefault(require("@babel/runtime/helpers/obje
 
 var _objectWithoutProperties2 = _interopRequireDefault(require("@babel/runtime/helpers/objectWithoutProperties"));
 
-var _firstcutMeteor = require("firstcut-meteor");
-
 var _firstcutPlayers = require("firstcut-players");
 
 var _firstcutPipelineConsts = require("firstcut-pipeline-consts");
 
 // import { getQualifiedSkills } from '/imports/ui/config';
-if ((0, _firstcutMeteor.isDevelopment)()) {
-  var _analytics = {
-    load: function load() {
-      console.log('Analytics load');
-    },
-    page: function page() {
-      console.log('Analytics page');
-    },
-    track: function track() {
-      console.log('Analytics track');
-    },
-    identify: function identify() {
-      console.log('Analytics identify');
-    },
-    group: function group() {
-      console.log('Analytics group');
-    }
-  };
-}
-
 var Analytics = {
-  init: function init() {
+  init: function init(options) {
+    if (options.development) {
+      var _analytics = {
+        load: function load() {
+          console.log('Analytics load');
+        },
+        page: function page() {
+          console.log('Analytics page');
+        },
+        track: function track() {
+          console.log('Analytics track');
+        },
+        identify: function identify() {
+          console.log('Analytics identify');
+        },
+        group: function group() {
+          console.log('Analytics group');
+        }
+      };
+    }
+
     analytics.load('q7fljn00pJH2VTzpOAv08t2AH5d2tfFy');
 
     if ((0, _firstcutPlayers.userId)()) {
@@ -95,7 +93,7 @@ var Analytics = {
     if ((0, _firstcutPlayers.inSimulationMode)()) {
       analytics.identify('Simulation', {
         _id: (0, _firstcutPlayers.userId)(),
-        playerId: (0, _firstcutPlayers.getPlayerIdFromUser)(_firstcutMeteor.Meteor.user()),
+        playerId: (0, _firstcutPlayers.getPlayerIdFromUser)(Meteor.user()),
         simulationPlayerId: (0, _firstcutPlayers.userPlayerId)()
       });
       analytics.group('Simulation');

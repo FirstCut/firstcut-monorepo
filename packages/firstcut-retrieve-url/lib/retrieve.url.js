@@ -3,7 +3,6 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.getS3Url = getS3Url;
 exports.getBasepath = getBasepath;
 exports.getPublicCutViewLink = getPublicCutViewLink;
 exports.getCutViewLink = getCutViewLink;
@@ -16,16 +15,9 @@ exports.getRecordPath = getRecordPath;
 exports.getRelatedRecordPath = getRelatedRecordPath;
 exports.getProjectSalesforceLink = getProjectSalesforceLink;
 
-var _firstcutMeteor = require("firstcut-meteor");
-
 var _firstcutUtils = require("firstcut-utils");
 
 var _url = require("./url.enum");
-
-function getS3Url(_ref) {
-  var key = _ref.key;
-  return _url.S3_URL + key;
-}
 
 function getBasepath(model) {
   return "/".concat(model.collectionName);
@@ -33,7 +25,7 @@ function getBasepath(model) {
 
 function getPublicCutViewLink(cut) {
   if (cut.fileId) {
-    return "".concat(_firstcutMeteor.Meteor.settings.public.PLATFORM_ROOT_URL, "/view_cut/").concat(cut._id);
+    return "".concat(Meteor.settings.public.PLATFORM_ROOT_URL, "/view_cut/").concat(cut._id);
   }
 
   return cut.fileUrl;
@@ -53,7 +45,7 @@ function getHeadshotURL(filename) {
   }
 
   if (filename) {
-    return _url.S3_URL + _url.HEADSHOT_DIR + filename;
+    return S3_URL + _url.HEADSHOT_DIR + filename;
   }
 
   return '';
@@ -74,7 +66,7 @@ function getInviteLink(player) {
 }
 
 function getScreenshotURL(filename) {
-  return _url.S3_URL + _url.SCREENSHOT_DIR + filename;
+  return S3_URL + _url.SCREENSHOT_DIR + filename;
 }
 
 function getSalesforceLink(record) {
@@ -84,11 +76,11 @@ function getSalesforceLink(record) {
     return '';
   }
 
-  return "".concat(_firstcutMeteor.Meteor.settings.public.salesforceRoot, "/").concat(salesforceId);
+  return "".concat(Meteor.settings.public.salesforceRoot, "/").concat(salesforceId);
 }
 
 function getRecordUrl(record) {
-  return _firstcutMeteor.Meteor.settings.public.PLATFORM_ROOT_URL + getRecordPath(record);
+  return Meteor.settings.public.PLATFORM_ROOT_URL + getRecordPath(record);
 }
 
 function getRecordPath(record) {

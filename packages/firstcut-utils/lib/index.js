@@ -3,12 +3,6 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-Object.defineProperty(exports, "executeAsyncWithCallback", {
-  enumerable: true,
-  get: function get() {
-    return _utils.executeAsyncWithCallback;
-  }
-});
 Object.defineProperty(exports, "logError", {
   enumerable: true,
   get: function get() {

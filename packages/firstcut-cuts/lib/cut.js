@@ -17,8 +17,6 @@ var _getPrototypeOf2 = _interopRequireDefault(require("@babel/runtime/helpers/ge
 
 var _inherits2 = _interopRequireDefault(require("@babel/runtime/helpers/inherits"));
 
-var _firstcutMeteor = require("firstcut-meteor");
-
 var _lodash = require("lodash");
 
 var _cuts = require("./cuts.enum");
@@ -96,7 +94,7 @@ function (_Base) {
     key: "projectDirectory",
     get: function get() {
       if (!this.project) {
-        throw new _firstcutMeteor.Meteor.Error('requirements-not-fulfilled', 'Project is required in order to upload files for this document');
+        throw new Meteor.Error('requirements-not-fulfilled', 'Project is required in order to upload files for this document');
       }
 
       return this.project.projectDirectory;

@@ -1,12 +1,10 @@
 
 import UpcomingShootReminder from './upcoming-shoot-reminder';
-import SnippetCreated from './snippet-created';
 import ShootWrap from './shoot-wrap';
 import FeedbackSubmittedByClient from './feedback-submitted-by-client';
 import InvoicePaid from './invoice-paid';
 import FootageVerified from './footage-verified';
 import CutDueEventUpdated from './cut-due-event-updated';
-import SnippetRequested from './snippet-requested';
 import FootageVerificationReminder from './footage-verification-reminder';
 import ScreenshotApproved from './screenshot-approved';
 import ScreenshotRejected from './screenshot-rejected';
@@ -87,12 +85,10 @@ const templates = [
   ShootCheckin,
   ScreenshotApproved,
   FootageVerificationReminder,
-  SnippetRequested,
   CutDueEventUpdated,
   UpcomingShootReminder,
   ShootWrap,
   FeedbackSubmittedByClient,
-  SnippetCreated,
   GenerateBookingInvoices,
   InvoicePaid,
   FootageVerified,

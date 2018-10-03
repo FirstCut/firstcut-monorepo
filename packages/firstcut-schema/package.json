@@ -4,10 +4,6 @@
   "version": "0.0.0",
   "main": "lib/index.js",
   "dependencies": {
-    "@babel/runtime": "^7.0.0-beta.51",
-    "firstcut-pipeline-consts": "^0.0.0",
-    "lodash": "^4.17.10",
-    "moment-timezone": "^0.5.21",
-    "simpl-schema": "^1.5.0"
+    "firstcut-pipeline-consts": "^0.0.0"
   }
 }

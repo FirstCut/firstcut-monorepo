@@ -18,11 +18,7 @@ var _objectWithoutProperties2 = _interopRequireDefault(require("@babel/runtime/h
 
 var _asyncToGenerator2 = _interopRequireDefault(require("@babel/runtime/helpers/asyncToGenerator"));
 
-var _firstcutMeteor = require("firstcut-meteor");
-
 var _firstcutSchema = require("firstcut-schema");
-
-var _meteorRandom = require("meteor-random");
 
 var _firstcutPipelineConsts = require("firstcut-pipeline-consts");
 
@@ -44,6 +40,8 @@ var _pubsubJs = require("pubsub-js");
 
 var _firstcutActions = _interopRequireDefault(require("firstcut-actions"));
 
+var _meteorStandaloneRandom = require("meteor-standalone-random");
+
 var slackTemplateDefaults = {
   username: 'firstcut',
   link_names: true
@@ -54,7 +52,7 @@ function fulfillsPrerequisites(_ref) {
       record = _ref.record,
       initiator = _ref.initiator;
 
-  if (isDevelopment()) {
+  if (Meteor.settings.public.environment === 'development'()) {
     return true;
   }
 
@@ -77,7 +75,7 @@ function _handleEvent() {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
-            if (!_firstcutMeteor.Meteor.isServer) {
+            if (!Meteor.isServer) {
               _context.next = 13;
               break;
             }
@@ -287,7 +285,7 @@ function executeAction(action) {
       return createCalendarEvent(action);
 
     default:
-      throw new _firstcutMeteor.Meteor.Error('unsupported_action', "Action ".concat(action.type, " not supported by the pipeline."));
+      throw new Meteor.Error('unsupported_action', "Action ".concat(action.type, " not supported by the pipeline."));
   }
 }
 
@@ -306,7 +304,7 @@ function scheduleJob(action) {
   if (existingJobId) {
     job = job.set('_id', existingJobId);
   } else if (!job._id) {
-    job = job.set('_id', _meteorRandom.Random.id());
+    job = job.set('_id', _meteorStandaloneRandom.Random.id());
   }
 
   job.save();

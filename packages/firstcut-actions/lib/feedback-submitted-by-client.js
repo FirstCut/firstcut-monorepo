@@ -58,7 +58,7 @@ var FeedbackSubmittedByClient = new _immutable.Map({
     }]);
     var feedbackSentReminderCron = (0, _moment.default)().add(12, 'hour').toDate();
 
-    if (isDevelopment()) {
+    if (Meteor.settings.public.environment === 'development'()) {
       feedbackSentReminderCron = (0, _moment.default)().add(2, 'minute').toDate();
     }
 

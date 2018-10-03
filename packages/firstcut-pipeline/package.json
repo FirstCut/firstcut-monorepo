@@ -4,9 +4,7 @@
   "version": "0.0.0",
   "main": "lib/index.js",
   "dependencies": {
-    "@babel/runtime": "^7.0.0-beta.51",
     "firstcut-actions": "^0.0.0",
-    "firstcut-aws": "^0.0.0",
     "firstcut-billing": "^0.0.0",
     "firstcut-calendar": "^0.0.0",
     "firstcut-mailer": "^0.0.0",
@@ -15,12 +13,6 @@
     "firstcut-slack": "^0.0.0",
     "firstcut-text-messaging": "^0.0.0",
     "firstcut-utils": "^0.0.0",
-    "immutable": "^3.8.2",
-    "lodash": "^4.17.10",
-    "meteor-random": "^0.0.3",
-    "moment": "^2.22.2",
-    "pubsub-js": "^1.6.0",
-    "remove": "^0.1.5",
-    "simpl-schema": "^1.5.0"
+    "meteor-standalone-random": "^1.0.67"
   }
 }

@@ -5,7 +5,6 @@
 // 2i. else on the server, run sync
 // 2ii. else on the client, return a promise
 
-import { Meteor } from 'firstcut-meteor';
 var wrap = Meteor.wrapAsync || Meteor._wrapAsync;
 
 export const wrapAsync = function(fn) {

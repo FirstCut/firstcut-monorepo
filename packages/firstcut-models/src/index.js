@@ -1,6 +1,5 @@
 
-import { Meteor } from 'firstcut-meteor';
-import Models from './models';
+import Models, { initModels } from './models';
 import initPublications from './utils/publications';
 
 if (Meteor.isServer) {
@@ -8,3 +7,4 @@ if (Meteor.isServer) {
 }
 
 export default Models;
+export { initModels };

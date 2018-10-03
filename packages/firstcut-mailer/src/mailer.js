@@ -1,5 +1,4 @@
 
-import { Meteor } from 'firstcut-meteor';
 import SparkPost from 'sparkpost';
 
 const FROM_DOMAIN = 'email@firstcut.io';

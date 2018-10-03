@@ -1,22 +1,21 @@
 
-import { Meteor, isDevelopment } from 'firstcut-meteor';
 import {
   userPlayer, userId, getPlayerIdFromUser, inSimulationMode, userPlayerId,
 } from 'firstcut-players';
 import { EVENT_LABELS } from 'firstcut-pipeline-consts';
 // import { getQualifiedSkills } from '/imports/ui/config';
 
-if (isDevelopment()) {
-  let analytics = {
-    load() { console.log('Analytics load'); },
-    page() { console.log('Analytics page'); },
-    track() { console.log('Analytics track'); },
-    identify() { console.log('Analytics identify'); },
-    group() { console.log('Analytics group'); },
-  };
-}
 const Analytics = {
-  init() {
+  init(options) {
+    if (options.development) {
+      let analytics = {
+        load() { console.log('Analytics load'); },
+        page() { console.log('Analytics page'); },
+        track() { console.log('Analytics track'); },
+        identify() { console.log('Analytics identify'); },
+        group() { console.log('Analytics group'); },
+      };
+    }
     analytics.load('q7fljn00pJH2VTzpOAv08t2AH5d2tfFy');
     if (userId()) {
       this.identifyCurrentUser();

@@ -4,9 +4,7 @@
   "version": "0.0.0",
   "main": "lib/index.js",
   "dependencies": {
-    "@babel/runtime": "^7.0.0-beta.51",
-    "firstcut-schema": "^0.0.0",
-    "immutable": "^3.8.2",
-    "simpl-schema": "^1.5.3"
+    "firstcut-blueprints": "^0.0.0",
+    "firstcut-schema": "^0.0.0"
   }
 }

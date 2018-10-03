@@ -21,12 +21,6 @@ Object.defineProperty(exports, "getPublicCutViewLink", {
     return _retrieve.getPublicCutViewLink;
   }
 });
-Object.defineProperty(exports, "getS3Url", {
-  enumerable: true,
-  get: function get() {
-    return _retrieve.getS3Url;
-  }
-});
 Object.defineProperty(exports, "getRelatedRecordPath", {
   enumerable: true,
   get: function get() {

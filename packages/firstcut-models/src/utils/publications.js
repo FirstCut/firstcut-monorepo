@@ -1,5 +1,4 @@
 
-import { Meteor } from 'firstcut-meteor';
 import { _ } from 'lodash';
 
 export default function initPublications(Models) {

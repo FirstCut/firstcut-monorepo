@@ -1,0 +1,6 @@
+{
+  "name": "firstcut-messenger",
+  "private": true,
+  "version": "0.0.0",
+  "main": "lib/index.js"
+}

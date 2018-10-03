@@ -1,4 +1,3 @@
-import { Meteor } from 'firstcut-meteor';
 import moment from 'moment';
 import { CalendarEventContentSchema } from './calendar.schemas';
 import GoogleApi from 'firstcut-google-api';

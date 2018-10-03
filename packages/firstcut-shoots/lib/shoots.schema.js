@@ -19,8 +19,6 @@ var _shoots = require("./shoots.enum");
 
 var _firstcutUtils = require("firstcut-utils");
 
-var _firstcutMeteor = require("firstcut-meteor");
-
 var ShootsSchema = new _firstcutBlueprints.BlueprintableSchema({
   isDummy: {
     type: Boolean
@@ -105,7 +103,7 @@ var ShootsSchema = new _firstcutBlueprints.BlueprintableSchema({
   footageFiles: {
     type: Array,
     customType: 'fileArray',
-    bucket: _firstcutMeteor.Meteor.settings.public.target_footage_bucket,
+    bucket: Meteor.settings.public.target_footage_bucket,
     label: 'Footage files'
   },
   'footageFiles.$': {

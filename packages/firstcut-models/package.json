@@ -4,7 +4,6 @@
   "version": "0.0.0",
   "main": "lib/index.js",
   "dependencies": {
-    "@babel/runtime": "^7.0.0-beta.51",
     "firstcut-assets": "^0.0.0",
     "firstcut-clients": "^0.0.0",
     "firstcut-collaborators": "^0.0.0",
@@ -15,7 +14,6 @@
     "firstcut-jobs": "^0.0.0",
     "firstcut-projects": "^0.0.0",
     "firstcut-shoots": "^0.0.0",
-    "firstcut-tasks": "^0.0.0",
-    "meteor-random": "^0.0.3"
+    "firstcut-tasks": "^0.0.0"
   }
 }

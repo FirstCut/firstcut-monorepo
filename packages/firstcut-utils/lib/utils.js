@@ -8,7 +8,6 @@ Object.defineProperty(exports, "__esModule", {
 exports.pluralize = pluralize;
 exports.removePunctuation = removePunctuation;
 exports.formatBytes = formatBytes;
-exports.executeAsyncWithCallback = executeAsyncWithCallback;
 exports.emitPipelineEvent = emitPipelineEvent;
 exports.isEmpty = isEmpty;
 exports.logError = logError;
@@ -21,8 +20,6 @@ var _typeof2 = _interopRequireDefault(require("@babel/runtime/helpers/typeof"));
 var _objectSpread2 = _interopRequireDefault(require("@babel/runtime/helpers/objectSpread"));
 
 var _objectWithoutProperties2 = _interopRequireDefault(require("@babel/runtime/helpers/objectWithoutProperties"));
-
-var _firstcutMeteor = require("firstcut-meteor");
 
 var _lodash = require("lodash");
 
@@ -58,18 +55,6 @@ function formatBytes(bytes, decimals) {
   return "".concat(parseFloat((bytes / Math.pow(k, i)).toFixed(dm)), " ").concat(sizes[i]);
 }
 
-function executeAsyncWithCallback(func, cb) {
-  return new Promise(function (resolve, reject) {
-    func(function (err, res) {
-      if (err) {
-        reject(err);
-      } else {
-        resolve(res);
-      }
-    });
-  });
-}
-
 function emitPipelineEvent(args) {
   if ((0, _firstcutPlayers.inSimulationMode)()) {
     return;
@@ -93,7 +78,7 @@ function emitPipelineEvent(args) {
   _firstcutAnalytics.default.trackAction(args); // handleEvent.call(eventData);
 
 
-  _firstcutMeteor.HTTP.post("".concat(_firstcutMeteor.Meteor.settings.public.PIPELINE_ROOT, "/handleEvent"), {
+  HTTP.post("".concat(Meteor.settings.public.PIPELINE_ROOT, "/handleEvent"), {
     content: params,
     params: params,
     query: params,

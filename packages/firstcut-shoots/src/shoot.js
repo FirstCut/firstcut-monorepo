@@ -1,5 +1,4 @@
 
-import { Meteor } from 'firstcut-meteor';
 import moment from 'moment';
 import { _ } from 'lodash';
 import { STAGES, CAMERAS } from './shoots.enum';

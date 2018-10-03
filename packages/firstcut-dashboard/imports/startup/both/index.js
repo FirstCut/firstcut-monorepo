@@ -1,10 +1,17 @@
 
-import 'firstcut-models';
+import { Random } from 'meteor-standalone-random';
+import { initModels } from 'firstcut-models';
 // import 'firstcut-calendar';
 import 'firstcut-google-api';
+import { ValidatedMethod } from 'meteor/mdg:validated-method';
+import { Session } from 'meteor/session';
 
 Meteor.startup(() => {
+  initModels(ValidatedMethod);
   // /I KNOW THIS IS SKETCHY BUT IT IS SO CONVENIENT I PROMISE I WILL CHANGE
+  // .........
+  /// I KNOW OK FINE I"LL CHANGE IT.... jeez
+  // .............
   if (!Array.prototype.toJS) {
     Array.prototype.toJS = function () {
       return this;

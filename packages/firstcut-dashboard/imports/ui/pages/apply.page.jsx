@@ -7,8 +7,9 @@ import {
 } from 'semantic-ui-react';
 import PubSub from 'pubsub-js';
 import {
-  userPlayer, playerIsClient, initializeCollaboratorFromUser, setPlayerId,
+  userPlayer, playerIsClient, initializeCollaboratorFromUser,
 } from 'firstcut-players';
+import { setPlayerId } from '/imports/api/api';
 import { emitPipelineEvent } from 'firstcut-utils';
 import { getRecordPath } from 'firstcut-retrieve-url';
 import Analytics from 'firstcut-analytics';

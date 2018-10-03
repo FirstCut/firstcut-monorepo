@@ -3,12 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.HEADSHOT_DIR = exports.SCREENSHOT_DIR = exports.S3_URL = void 0;
-
-var _firstcutMeteor = require("firstcut-meteor");
-
-var S3_URL = "https://" + _firstcutMeteor.Meteor.settings.public.s3bucket + ".s3-us-west-2.amazonaws.com/";
-exports.S3_URL = S3_URL;
+exports.HEADSHOT_DIR = exports.SCREENSHOT_DIR = void 0;
 var SCREENSHOT_DIR = 'screenshots/';
 exports.SCREENSHOT_DIR = SCREENSHOT_DIR;
 var HEADSHOT_DIR = 'headshots/';

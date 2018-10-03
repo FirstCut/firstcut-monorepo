@@ -1,7 +1,7 @@
 import '/imports/startup/both';
 // import { init as initPipelines } from 'firstcut-pipeline';
 import { getUserEmails, getPlayerFromEmails } from 'firstcut-players';
-import 'firstcut-api';
+import '/imports/api/api';
 
 Meteor.startup(() => {
   // if (Meteor.settings.public.isPipelineDeployment) {

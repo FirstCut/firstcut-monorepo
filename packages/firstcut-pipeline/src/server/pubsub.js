@@ -1,5 +1,4 @@
 
-import { Meteor } from 'firstcut-meteor';
 import { PubSub } from 'pubsub-js';
 import { COLLABORATOR_TYPES_TO_LABELS, SUPPORTED_EVENTS } from 'firstcut-pipeline-consts';
 import { getPlayerIdFromUser, getPlayerFromQuery } from 'firstcut-players';
@@ -54,7 +53,7 @@ export default function initSubscriptions() {
   }
 
   let initializing = true;
-  const query = (isDevelopment()) ? {} : { isDummy: { $ne: true } };
+  const query = (Meteor.settings.public.environment === 'development'()) ? {} : { isDummy: { $ne: true } };
   Shoot.collection.find({}).observe({ // allow actions on dummy shoots for videographer training purposes
     added: (doc) => {
       if (initializing) {

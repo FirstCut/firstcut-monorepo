@@ -19,11 +19,9 @@ var _getPrototypeOf2 = _interopRequireDefault(require("@babel/runtime/helpers/ge
 
 var _inherits2 = _interopRequireDefault(require("@babel/runtime/helpers/inherits"));
 
-var _firstcutMeteor = require("firstcut-meteor");
-
 var _sanitizeFilename = _interopRequireDefault(require("sanitize-filename"));
 
-var _meteorRandom = require("meteor-random");
+var _meteorStandaloneRandom = require("meteor-standalone-random");
 
 var _firstcutUploader = require("firstcut-uploader");
 
@@ -88,7 +86,7 @@ function (_Base) {
   }, {
     key: "bucket",
     get: function get() {
-      return this.meta.bucket || _firstcutMeteor.Meteor.settings.public.s3.assets_bucket;
+      return this.meta.bucket || Meteor.settings.public.s3.assets_bucket;
     },
     set: function set(bucket) {
       this.set('meta.bucket', bucket);
@@ -138,7 +136,7 @@ function (_Base) {
           end = _ref2.end;
       var snippetRequestPrefix = 'snippet';
       var name = getAssetnameWithoutExtension(cutFileRef);
-      return "".concat(snippetRequestPrefix, "_").concat(name, "_").concat(start, "_").concat(end, "_").concat(_meteorRandom.Random.id(), ".").concat(snippetExtension);
+      return "".concat(snippetRequestPrefix, "_").concat(name, "_").concat(start, "_").concat(end, "_").concat(_meteorStandaloneRandom.Random.id(), ".").concat(snippetExtension);
     }
   }, {
     key: "insert",
@@ -149,7 +147,7 @@ function (_Base) {
       var version = 'original';
       var properties = extractPropertiesOfFile(file);
       var extension = properties.extension;
-      record = record.set('_id', _meteorRandom.Random.id());
+      record = record.set('_id', _meteorStandaloneRandom.Random.id());
       record = record.set('name', file.name);
       record = record.set('mime', file.type);
       record = record.set('type', file.type);

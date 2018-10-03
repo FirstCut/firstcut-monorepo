@@ -1,10 +1,11 @@
 
-import { Meteor } from 'firstcut-meteor';
+import { Meteor } from 'meteor/meteor';
 import React from 'react';
 import PropTypes from 'prop-types';
 import { LoginBox, RegisterBox } from 'firstcut-accounts';
 import { Container, Grid, Image } from 'semantic-ui-react';
-import { getPlayer, setPlayerId } from 'firstcut-players';
+import { getPlayer } from 'firstcut-players';
+import { setPlayerId } from '/imports/api/api';
 import Analytics from 'firstcut-analytics';
 
 export default class LoginPage extends React.Component {

@@ -1,7 +1,6 @@
 
-import { Meteor } from 'firstcut-meteor';
 import sanitize from 'sanitize-filename';
-import { Random } from 'meteor-random';
+import { Random } from 'meteor-standalone-random';
 import { upload } from 'firstcut-uploader';
 import { _ } from 'lodash';
 import EventEmitter from 'events';

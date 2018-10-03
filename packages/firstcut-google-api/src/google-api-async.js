@@ -1,7 +1,6 @@
 // kill logs
-import { HTTP } from 'firstcut-meteor';
-import { wrapAsync } from './utils';
-import {_} from 'lodash';
+import { _ } from 'lodash';
+import { wrapAsync } from './utils.js';
 
 const Log = function () {};
 

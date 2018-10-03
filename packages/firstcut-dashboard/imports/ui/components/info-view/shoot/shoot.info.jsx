@@ -8,7 +8,7 @@ import {
   Container,
 } from 'semantic-ui-react';
 
-import { listObjects, getSignedUrlOfKey } from 'firstcut-filestore';
+import { listObjects, getSignedUrlOfKey } from '/imports/api/filestore';
 import InfoPage from '/imports/ui/pages/info.page';
 import ProfileItem from '../utils/profile.card';
 import { UpdateFieldButton } from '/imports/ui/components/utils/utils';

@@ -20,7 +20,7 @@ npm manifest:
   		"firstcut-enum": "^0.0.0",
   		"immutable": "^3.8.2",
   		"lodash": "^4.17.10",
-  		"meteor-random": "^0.0.3",
+  		"meteor-standalone-random": "^0.0.3",
   		"moment": "^2.22.2",
   		"pubsub-js": "^1.6.0",
   		"remove": "^0.1.5",
@@ -247,9 +247,9 @@ Lockfile:
       lodash.merge "^4.6.0"
       lodash.template "^4.4.0"
   
-  meteor-random@^0.0.3:
+  meteor-standalone-random@^0.0.3:
     version "0.0.3"
-    resolved "https://registry.yarnpkg.com/meteor-random/-/meteor-random-0.0.3.tgz#0d1489ecdb9bcb58bb52decebfbceddf54473a68"
+    resolved "https://registry.yarnpkg.com/meteor-standalone-random/-/meteor-standalone-random-0.0.3.tgz#0d1489ecdb9bcb58bb52decebfbceddf54473a68"
     dependencies:
       crypto "0.0.3"
   

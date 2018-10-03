@@ -1,6 +1,5 @@
 
 import {
-  executeAsyncWithCallback,
   logError,
   formatBytes,
   isEmpty,
@@ -27,7 +26,6 @@ export {
   formatBytes,
   isDevEnv,
   pluralize,
-  executeAsyncWithCallback,
   removePunctuation,
   logError,
   isEmpty,

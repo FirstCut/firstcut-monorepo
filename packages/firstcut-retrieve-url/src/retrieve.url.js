@@ -1,11 +1,6 @@
 
-import { Meteor } from 'firstcut-meteor';
 import { isURL } from 'firstcut-utils';
-import { S3_URL, HEADSHOT_DIR, SCREENSHOT_DIR } from './url.enum';
-
-export function getS3Url({ key }) {
-  return S3_URL + key;
-}
+import { HEADSHOT_DIR, SCREENSHOT_DIR } from './url.enum';
 
 export function getBasepath(model) {
   return `/${model.collectionName}`;

@@ -28,30 +28,6 @@ const models = Object.freeze({
   Cut,
 });
 
-const legacyModels = Object.freeze({
-  COLLABORATOR: Collaborator,
-  CLIENT: Client,
-  COMPANY: Company,
-  PROJECT: Project,
-  SHOOT: Shoot,
-  DELIVERABLE: Deliverable,
-  INVOICE: Invoice,
-  CUT: Cut,
-});
-
-Object.keys(models).forEach((key) => {
-  const model = models[key];
-  model.modelName = key;
-  enableBasePublications(model);
-  enableCrud(model);
-});
-
-// dependency injection solved by pulling this out into another object?
-Object.keys(models).forEach((i) => {
-  const model = models[i];
-  model.models = models;
-});
-
 const Models = {
   allModels: Object.values(models),
   ...models,
@@ -65,5 +41,31 @@ const Models = {
     return model.findOne(query);
   },
 };
+
+const legacyModels = Object.freeze({
+  COLLABORATOR: Collaborator,
+  CLIENT: Client,
+  COMPANY: Company,
+  PROJECT: Project,
+  SHOOT: Shoot,
+  DELIVERABLE: Deliverable,
+  INVOICE: Invoice,
+  CUT: Cut,
+});
+
+export function initModels(ValidatedMethod) {
+  Object.keys(models).forEach((key) => {
+    const model = models[key];
+    model.modelName = key;
+    enableBasePublications(model);
+    enableCrud(model, ValidatedMethod);
+  });
+
+  // dependency injection solved by pulling this out into another object?
+  Object.keys(models).forEach((i) => {
+    const model = models[i];
+    model.models = models;
+  });
+}
 
 export default Models;

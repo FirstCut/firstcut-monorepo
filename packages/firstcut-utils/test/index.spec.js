@@ -1,6 +1,5 @@
 
-jest.mock('firstcut-meteor');
-jest.mock('firstcut-filestore');
+jest.mock('meteor/meteor');
 jest.mock('firstcut-players');
 import { pluralize } from '../src/index.js';
 

@@ -113,7 +113,7 @@ exports.TEST_PROJECT = TEST_PROJECT;
 function insertTestData() {
   Mongo.Collection.prototype.attachSchema = function () {};
 
-  if (Meteor.isServer && isDevelopment()) {
+  if (Meteor.isServer && Meteor.settings.public.environment === 'development'()) {
     Deliverable.createNew(TEST_DELIVERABLE).save();
     Project.createNew(TEST_PROJECT).save();
     Client.createNew(TEST_CLIENT_OWNER_OF_DELIVERABLE).save();

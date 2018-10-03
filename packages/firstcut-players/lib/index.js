@@ -39,12 +39,6 @@ Object.defineProperty(exports, "getPendingPlayerTasks", {
     return _player.getPendingPlayerTasks;
   }
 });
-Object.defineProperty(exports, "setPlayerId", {
-  enumerable: true,
-  get: function get() {
-    return _player.setPlayerId;
-  }
-});
 Object.defineProperty(exports, "getPlayerIdFromUser", {
   enumerable: true,
   get: function get() {

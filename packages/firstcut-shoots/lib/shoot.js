@@ -19,8 +19,6 @@ var _getPrototypeOf2 = _interopRequireDefault(require("@babel/runtime/helpers/ge
 
 var _inherits2 = _interopRequireDefault(require("@babel/runtime/helpers/inherits"));
 
-var _firstcutMeteor = require("firstcut-meteor");
-
 var _moment = _interopRequireDefault(require("moment"));
 
 var _lodash = require("lodash");
@@ -54,7 +52,7 @@ function (_Base) {
     value: function filesRoot(field) {
       if (field === 'footageFiles') {
         var folderName = this.generateFootageFolderName();
-        return "".concat(_firstcutMeteor.Meteor.settings.public.footage_folder, "/").concat(folderName);
+        return "".concat(Meteor.settings.public.footage_folder, "/").concat(folderName);
       }
 
       return '';
@@ -139,8 +137,7 @@ function (_Base) {
   }, {
     key: "screenshotCollaborator",
     value: function screenshotCollaborator(screenshot) {
-      var user = _firstcutMeteor.Meteor.users.findOne(screenshot.userId);
-
+      var user = Meteor.users.findOne(screenshot.userId);
       var collaborator = user && user.profile.playerId ? this.collaboratorService.fromId(user.profile.playerId) : null; // if that didn't work, perhaps the screenshot's userId is a
       // collaborator Id, so try to get a collaborator directly
 

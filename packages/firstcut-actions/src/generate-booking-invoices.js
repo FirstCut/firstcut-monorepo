@@ -1,6 +1,5 @@
 
 import { SimpleSchemaWrapper } from 'firstcut-schema';
-import { s3 } from 'firstcut-filestore';
 import { Map } from 'immutable';
 import Models from 'firstcut-models';
 import { RecordEvents } from 'firstcut-action-utils';

@@ -1,6 +1,5 @@
 
 import schedule from 'node-schedule';
-import { Meteor } from 'firstcut-meteor';
 import { Map } from 'immutable';
 import { PubSub } from 'pubsub-js';
 import { JOBS } from './jobs.enum';

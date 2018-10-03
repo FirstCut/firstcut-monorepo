@@ -1,5 +1,5 @@
 import React from 'react';
-import { Meteor } from 'firstcut-meteor';
+import { Meteor } from 'meteor/meteor';
 import { render } from 'react-dom';
 
 import AppContainer from '/imports/ui/containers/app.container';
@@ -19,6 +19,8 @@ Meteor.startup(() => {
   //   );
   // } else {
   render(<AppContainer />, document.getElementById('react-root'));
-  Analytics.init();
+  Analytics.init({
+    development: Meteor.settings.public.environment === 'development'
+  });
   // }
 });

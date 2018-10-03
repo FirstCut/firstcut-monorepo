@@ -1,4 +1,3 @@
-import { Meteor } from 'firstcut-meteor';
 import { initUploader } from 'firstcut-uploader';
 import Asset from './asset';
 

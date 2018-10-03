@@ -1,9 +1,8 @@
 
-import { Meteor, ValidatedMethod } from 'firstcut-meteor';
-import { Random } from 'meteor-random';
+import { Random } from 'meteor-standalone-random';
 import RecordPersister from './record.persister';
 
-export default function enableCrud(cls) {
+export default function enableCrud(cls, ValidatedMethod) {
   const persister = new RecordPersister({
     cls,
     namespace: cls.collectionName,

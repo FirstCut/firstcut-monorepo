@@ -1,5 +1,4 @@
 
-import { Meteor } from 'firstcut-meteor';
 import { SchemaParser } from 'firstcut-schema';
 import { Record, List } from 'immutable';
 import { _ } from 'lodash';

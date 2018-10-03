@@ -6,7 +6,6 @@ import {
   getUserEmails,
   numPendingTasks,
   getPendingPlayerTasks,
-  setPlayerId,
   getPlayerIdFromUser,
   getPlayer,
   playerIsClient,
@@ -20,7 +19,6 @@ import {
 export {
   userId,
   initializeCollaboratorFromUser,
-  setPlayerId,
   numPendingTasks,
   setSimulationPlayerId,
   inSimulationMode,

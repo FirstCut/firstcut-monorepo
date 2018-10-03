@@ -1,4 +1,3 @@
-import { Meteor } from 'firstcut-meteor';
 import twilio from 'twilio';
 import SimpleSchema from 'simpl-schema';
 import { removePunctuation } from 'firstcut-utils';
@@ -6,7 +5,7 @@ import { removePunctuation } from 'firstcut-utils';
 export const SUPPORTED_COUNTRIES = ['United States', 'United Kingdom'];
 
 function getFromNumber(country) {
-  if (isDevelopment()) {
+  if (Meteor.settings.public.environment === 'development'()) {
     return '+15005550006';
   } if (country === 'United Kingdom') {
     return '+441133203346';

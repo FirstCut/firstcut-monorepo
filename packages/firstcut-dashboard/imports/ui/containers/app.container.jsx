@@ -1,6 +1,6 @@
-import { Meteor } from 'firstcut-meteor';
+import { Meteor } from 'meteor/meteor';
 import { withTracker } from 'meteor/react-meteor-data';
-import { SubsManager } from 'firstcut-meteorhacks:subs-manager';
+import { SubsManager } from 'meteor/meteorhacks:subs-manager';
 import { _ } from 'lodash';
 import App from '../layouts/app';
 import { userPlayerId } from 'firstcut-players';

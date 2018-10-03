@@ -1,8 +1,6 @@
 "use strict";
 
-var _firstcutMeteor = require("firstcut-meteor");
-
-_firstcutMeteor.Meteor.methods({
+Meteor.methods({
   // Obtain a new access token using the refresh token
   checkOauthCredentials: function checkOauthCredentials() {
     var config = Accounts.loginServiceConfiguration.findOne({
@@ -17,13 +15,13 @@ _firstcutMeteor.Meteor.methods({
     var auth_url = "https://accounts.google.com/o/oauth2/v2/auth";
 
     try {
-      var result = _firstcutMeteor.HTTP.call("POST", auth_url, {
+      var result = HTTP.call("POST", auth_url, {
         params: params
       });
     } catch (e) {
       if (e) {
         var code = e.response ? e.response.statusCode : 500;
-        throw new _firstcutMeteor.Meteor.Error(code, 'Unable to verify google oauth credentials.', e.response);
+        throw new Meteor.Error(code, 'Unable to verify google oauth credentials.', e.response);
       }
     }
   },
@@ -35,28 +33,28 @@ _firstcutMeteor.Meteor.methods({
       if (this.userId) {
         userId = this.userId;
       } else {
-        throw new _firstcutMeteor.Meteor.Error(403, "Must be signed in to use Google API.");
+        throw new Meteor.Error(403, "Must be signed in to use Google API.");
       }
     }
 
     var user;
 
-    if (userId && _firstcutMeteor.Meteor.isServer) {
-      user = _firstcutMeteor.Meteor.users.findOne({
+    if (userId && Meteor.isServer) {
+      user = Meteor.users.findOne({
         _id: userId
       });
     } else {
-      user = _firstcutMeteor.Meteor.user();
+      user = Meteor.user();
     }
 
     var config = Accounts.loginServiceConfiguration.findOne({
       service: "google"
     });
-    if (!config) throw new _firstcutMeteor.Meteor.Error(500, "Google service not configured.");
-    if (!user.services || !user.services.google || !user.services.google.refreshToken) throw new _firstcutMeteor.Meteor.Error(500, "Refresh token not found.");
+    if (!config) throw new Meteor.Error(500, "Google service not configured.");
+    if (!user.services || !user.services.google || !user.services.google.refreshToken) throw new Meteor.Error(500, "Refresh token not found.");
 
     try {
-      var result = _firstcutMeteor.HTTP.call("POST", "https://accounts.google.com/o/oauth2/token", {
+      var result = HTTP.call("POST", "https://accounts.google.com/o/oauth2/token", {
         params: {
           'client_id': config.clientId,
           'client_secret': config.secret,
@@ -66,22 +64,21 @@ _firstcutMeteor.Meteor.methods({
       });
     } catch (e) {
       var code = e.response ? e.response.statusCode : 500;
-      throw new _firstcutMeteor.Meteor.Error(code, 'Unable to exchange google refresh token.', e.response);
+      throw new Meteor.Error(code, 'Unable to exchange google refresh token.', e.response);
     }
 
     if (result.statusCode === 200) {
       // console.log('success');
       // console.log(EJSON.stringify(result.data));
-      _firstcutMeteor.Meteor.users.update(user._id, {
+      Meteor.users.update(user._id, {
         '$set': {
           'services.google.accessToken': result.data.access_token,
           'services.google.expiresAt': +new Date() + 1000 * result.data.expires_in
         }
       });
-
       return result.data;
     } else {
-      throw new _firstcutMeteor.Meteor.Error(result.statusCode, 'Unable to exchange google refresh token.', result);
+      throw new Meteor.Error(result.statusCode, 'Unable to exchange google refresh token.', result);
     }
   }
 });

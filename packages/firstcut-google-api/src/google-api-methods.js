@@ -1,5 +1,3 @@
-import { Meteor } from 'firstcut-meteor';
-import { HTTP } from 'firstcut-meteor'
 
 Meteor.methods({
   // Obtain a new access token using the refresh token
@@ -21,7 +19,7 @@ Meteor.methods({
       }
     }
   },
-  
+
   exchangeRefreshToken: function(userId) {
     this.unblock();
 

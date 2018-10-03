@@ -9,8 +9,6 @@ exports.default = void 0;
 
 var _upcomingShootReminder = _interopRequireDefault(require("./upcoming-shoot-reminder"));
 
-var _snippetCreated = _interopRequireDefault(require("./snippet-created"));
-
 var _shootWrap = _interopRequireDefault(require("./shoot-wrap"));
 
 var _feedbackSubmittedByClient = _interopRequireDefault(require("./feedback-submitted-by-client"));
@@ -20,8 +18,6 @@ var _invoicePaid = _interopRequireDefault(require("./invoice-paid"));
 var _footageVerified = _interopRequireDefault(require("./footage-verified"));
 
 var _cutDueEventUpdated = _interopRequireDefault(require("./cut-due-event-updated"));
-
-var _snippetRequested = _interopRequireDefault(require("./snippet-requested"));
 
 var _footageVerificationReminder = _interopRequireDefault(require("./footage-verification-reminder"));
 
@@ -101,7 +97,7 @@ var _addonRequested = _interopRequireDefault(require("./addon-requested"));
 
 var _projectHandoff = _interopRequireDefault(require("./project-handoff"));
 
-var templates = [_errorEvent.default, _editFeedback.default, _chargeClient.default, _editShootScript.default, _reminderToGetClientFeedback.default, _invoiceSetToDue.default, _addonRequested.default, _footageBatchUploaded.default, _inviteToEditScript.default, _footageUploadInitiated.default, _projectHandoff.default, _applicationSubmitted.default, _reminderToSetCutDue.default, _cutDueReminder.default, _markTaskAsComplete.default, _sendFeedbackReminder.default, _confirmFootageUpload.default, _deliverableKickoff.default, _checkinCheckoutReminder.default, _screenshotRejected.default, _screenshotUploaded.default, _projectWrap.default, _feedbackSent.default, _cutApproved.default, _cutSentToClient.default, _sendCutToClient.default, _cutUploaded.default, _shootReady.default, _preproductionKickoff.default, _collaboratorAdded.default, _sendInviteLink.default, _collaboratorRemoved.default, _shootEventUpdated.default, _recordCreated.default, _shootReady.default, _shootCheckout.default, _shootCheckin.default, _screenshotApproved.default, _footageVerificationReminder.default, _snippetRequested.default, _cutDueEventUpdated.default, _upcomingShootReminder.default, _shootWrap.default, _feedbackSubmittedByClient.default, _snippetCreated.default, _generateBookingInvoices.default, _invoicePaid.default, _footageVerified.default];
+var templates = [_errorEvent.default, _editFeedback.default, _chargeClient.default, _editShootScript.default, _reminderToGetClientFeedback.default, _invoiceSetToDue.default, _addonRequested.default, _footageBatchUploaded.default, _inviteToEditScript.default, _footageUploadInitiated.default, _projectHandoff.default, _applicationSubmitted.default, _reminderToSetCutDue.default, _cutDueReminder.default, _markTaskAsComplete.default, _sendFeedbackReminder.default, _confirmFootageUpload.default, _deliverableKickoff.default, _checkinCheckoutReminder.default, _screenshotRejected.default, _screenshotUploaded.default, _projectWrap.default, _feedbackSent.default, _cutApproved.default, _cutSentToClient.default, _sendCutToClient.default, _cutUploaded.default, _shootReady.default, _preproductionKickoff.default, _collaboratorAdded.default, _sendInviteLink.default, _collaboratorRemoved.default, _shootEventUpdated.default, _recordCreated.default, _shootReady.default, _shootCheckout.default, _shootCheckin.default, _screenshotApproved.default, _footageVerificationReminder.default, _cutDueEventUpdated.default, _upcomingShootReminder.default, _shootWrap.default, _feedbackSubmittedByClient.default, _generateBookingInvoices.default, _invoicePaid.default, _footageVerified.default];
 var ActionTemplates = templates.reduce(function (r, template) {
   var result = r;
   var key = template.get('key');

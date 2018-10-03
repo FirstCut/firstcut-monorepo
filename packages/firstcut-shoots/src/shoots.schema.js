@@ -4,7 +4,6 @@ import { COLLABORATOR_TYPES_TO_LABELS } from 'firstcut-pipeline-consts';
 import { LocationSchema, BaseSchema } from 'firstcut-schema';
 import { STAGES, CAMERAS, RATINGS } from './shoots.enum';
 import { isEmpty } from 'firstcut-utils';
-import { Meteor } from 'firstcut-meteor';
 
 const ShootsSchema = new Schema({
   isDummy: {

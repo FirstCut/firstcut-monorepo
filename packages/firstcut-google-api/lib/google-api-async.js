@@ -5,11 +5,9 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.GoogleApi = void 0;
 
-var _firstcutMeteor = require("firstcut-meteor");
-
-var _utils = require("./utils");
-
 var _lodash = require("lodash");
+
+var _utils = require("./utils.js");
 
 // kill logs
 var Log = function Log() {};
@@ -50,8 +48,7 @@ var GoogleApi = {
     if (user && user.services && user.services.google && user.services.google.accessToken) {
       options.headers = options.headers || {};
       options.headers.Authorization = "Bearer ".concat(user.services.google.accessToken);
-
-      _firstcutMeteor.HTTP.call(method, "".concat(this._host, "/").concat(path), options, function (error, result) {
+      HTTP.call(method, "".concat(this._host, "/").concat(path), options, function (error, result) {
         callback(error, result && result.data);
       });
     } else {
