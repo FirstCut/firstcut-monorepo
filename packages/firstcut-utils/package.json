@@ -2,8 +2,5 @@
   "name": "firstcut-utils",
   "private": true,
   "version": "0.0.0",
-  "main": "lib/index.js",
-  "dependencies": {
-    "firstcut-players": "^0.0.0"
-  }
+  "main": "lib/index.js"
 }

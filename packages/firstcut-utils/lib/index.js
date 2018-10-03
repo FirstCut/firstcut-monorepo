@@ -3,12 +3,6 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-Object.defineProperty(exports, "logError", {
-  enumerable: true,
-  get: function get() {
-    return _utils.logError;
-  }
-});
 Object.defineProperty(exports, "formatBytes", {
   enumerable: true,
   get: function get() {
@@ -37,12 +31,6 @@ Object.defineProperty(exports, "htmlifyString", {
   enumerable: true,
   get: function get() {
     return _utils.htmlifyString;
-  }
-});
-Object.defineProperty(exports, "emitPipelineEvent", {
-  enumerable: true,
-  get: function get() {
-    return _utils.emitPipelineEvent;
   }
 });
 Object.defineProperty(exports, "removePunctuation", {

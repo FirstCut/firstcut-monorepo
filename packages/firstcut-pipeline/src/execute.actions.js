@@ -16,11 +16,38 @@ import { createEvent } from 'firstcut-calendar';
 import { PubSub } from 'pubsub-js';
 import ActionTemplates from 'firstcut-actions';
 import { Random } from 'meteor-standalone-random';
+import { userPlayerId, inSimulationMode } from 'firstcut-players';
 
 const slackTemplateDefaults = {
   username: 'firstcut',
   link_names: true,
 };
+
+export function emitPipelineEvent(args) {
+  if (inSimulationMode()) {
+    return;
+  }
+  const { record, ...rest } = args;
+  const params = _.mapValues({
+    ...rest,
+    record_id: record._id,
+    record_type: record.modelName,
+    initiator_player_id: userPlayerId(),
+  }, (val) => {
+    if (typeof val === 'object') {
+      return JSON.stringify(val);
+    }
+    return (val) ? val.toString() : '';
+  });
+
+  Analytics.trackAction(args);
+  // handleEvent.call(eventData);
+  HTTP.post(`${Meteor.settings.public.PIPELINE_ROOT}/handleEvent`, {
+    content: params, params, query: params, data: params,
+  }, (res) => {
+    console.log(res);
+  });
+}
 
 export function fulfillsPrerequisites({ event, record, initiator }) {
   if (Meteor.settings.public.environment === 'development'()) {

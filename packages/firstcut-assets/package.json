@@ -4,6 +4,7 @@
   "version": "0.0.0",
   "main": "lib/index.js",
   "dependencies": {
+    "firstcut-model-base": "^0.0.0",
     "firstcut-schema": "^0.0.0",
     "firstcut-uploader": "^0.0.0",
     "sanitize-filename": "^1.6.1"

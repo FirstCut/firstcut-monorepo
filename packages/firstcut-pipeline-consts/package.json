@@ -4,6 +4,8 @@
   "version": "0.0.0",
   "main": "lib/index.js",
   "dependencies": {
-    "firstcut-google-api": "^0.0.0"
+    "@babel/runtime": "7.0.0-beta.55",
+    "firstcut-google-api": "^0.0.0",
+    "immutable": "^3.8.2"
   }
 }

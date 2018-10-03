@@ -1,33 +1,17 @@
 "use strict";
 
-var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
-
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.pluralize = pluralize;
 exports.removePunctuation = removePunctuation;
 exports.formatBytes = formatBytes;
-exports.emitPipelineEvent = emitPipelineEvent;
 exports.isEmpty = isEmpty;
-exports.logError = logError;
 exports.isURL = isURL;
 exports.asUSDollars = asUSDollars;
 exports.htmlifyString = htmlifyString;
 
-var _typeof2 = _interopRequireDefault(require("@babel/runtime/helpers/typeof"));
-
-var _objectSpread2 = _interopRequireDefault(require("@babel/runtime/helpers/objectSpread"));
-
-var _objectWithoutProperties2 = _interopRequireDefault(require("@babel/runtime/helpers/objectWithoutProperties"));
-
 var _lodash = require("lodash");
-
-var _firstcutPipeline = require("firstcut-pipeline");
-
-var _firstcutPlayers = require("firstcut-players");
-
-var _firstcutAnalytics = _interopRequireDefault(require("firstcut-analytics"));
 
 function pluralize(str) {
   var lastLetter = str[str.length - 1];
@@ -55,39 +39,6 @@ function formatBytes(bytes, decimals) {
   return "".concat(parseFloat((bytes / Math.pow(k, i)).toFixed(dm)), " ").concat(sizes[i]);
 }
 
-function emitPipelineEvent(args) {
-  if ((0, _firstcutPlayers.inSimulationMode)()) {
-    return;
-  }
-
-  var record = args.record,
-      rest = (0, _objectWithoutProperties2.default)(args, ["record"]);
-
-  var params = _lodash._.mapValues((0, _objectSpread2.default)({}, rest, {
-    record_id: record._id,
-    record_type: record.modelName,
-    initiator_player_id: (0, _firstcutPlayers.userPlayerId)()
-  }), function (val) {
-    if ((0, _typeof2.default)(val) === 'object') {
-      return JSON.stringify(val);
-    }
-
-    return val ? val.toString() : '';
-  });
-
-  _firstcutAnalytics.default.trackAction(args); // handleEvent.call(eventData);
-
-
-  HTTP.post("".concat(Meteor.settings.public.PIPELINE_ROOT, "/handleEvent"), {
-    content: params,
-    params: params,
-    query: params,
-    data: params
-  }, function (res) {
-    console.log(res);
-  });
-}
-
 function isEmpty(something) {
   if (!something) {
     return true;
@@ -105,10 +56,6 @@ function isEmpty(something) {
   }
 
   return _lodash._.isEmpty(something);
-}
-
-function logError(error) {
-  _firstcutAnalytics.default.trackError(error);
 }
 
 function isURL(str) {

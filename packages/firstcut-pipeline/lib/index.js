@@ -30,6 +30,12 @@ Object.defineProperty(exports, "getEventActionsAsDescriptiveString", {
     return _execute.getEventActionsAsDescriptiveString;
   }
 });
+Object.defineProperty(exports, "emitPipelineEvent", {
+  enumerable: true,
+  get: function get() {
+    return _execute.emitPipelineEvent;
+  }
+});
 
 var _execute = require("./execute.actions");
 

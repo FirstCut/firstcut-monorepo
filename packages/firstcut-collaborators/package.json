@@ -6,6 +6,7 @@
   "dependencies": {
     "firstcut-model-base": "^0.0.0",
     "firstcut-pipeline-consts": "^0.0.0",
-    "firstcut-schema": "^0.0.0"
+    "firstcut-schema": "^0.0.0",
+    "lodash": "^4.17.11"
   }
 }

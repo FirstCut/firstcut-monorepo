@@ -5,6 +5,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+exports.emitPipelineEvent = emitPipelineEvent;
 exports.fulfillsPrerequisites = fulfillsPrerequisites;
 exports.handleEvent = handleEvent;
 exports.getEventActionsAsDescriptiveString = getEventActionsAsDescriptiveString;
@@ -12,11 +13,13 @@ exports.getCustomFieldsSchema = getCustomFieldsSchema;
 
 var _regenerator = _interopRequireDefault(require("@babel/runtime/regenerator"));
 
+var _asyncToGenerator2 = _interopRequireDefault(require("@babel/runtime/helpers/asyncToGenerator"));
+
+var _typeof2 = _interopRequireDefault(require("@babel/runtime/helpers/typeof"));
+
 var _objectSpread2 = _interopRequireDefault(require("@babel/runtime/helpers/objectSpread"));
 
 var _objectWithoutProperties2 = _interopRequireDefault(require("@babel/runtime/helpers/objectWithoutProperties"));
-
-var _asyncToGenerator2 = _interopRequireDefault(require("@babel/runtime/helpers/asyncToGenerator"));
 
 var _firstcutSchema = require("firstcut-schema");
 
@@ -42,10 +45,44 @@ var _firstcutActions = _interopRequireDefault(require("firstcut-actions"));
 
 var _meteorStandaloneRandom = require("meteor-standalone-random");
 
+var _firstcutPlayers = require("firstcut-players");
+
 var slackTemplateDefaults = {
   username: 'firstcut',
   link_names: true
 };
+
+function emitPipelineEvent(args) {
+  if ((0, _firstcutPlayers.inSimulationMode)()) {
+    return;
+  }
+
+  var record = args.record,
+      rest = (0, _objectWithoutProperties2.default)(args, ["record"]);
+
+  var params = _.mapValues((0, _objectSpread2.default)({}, rest, {
+    record_id: record._id,
+    record_type: record.modelName,
+    initiator_player_id: (0, _firstcutPlayers.userPlayerId)()
+  }), function (val) {
+    if ((0, _typeof2.default)(val) === 'object') {
+      return JSON.stringify(val);
+    }
+
+    return val ? val.toString() : '';
+  });
+
+  Analytics.trackAction(args); // handleEvent.call(eventData);
+
+  HTTP.post("".concat(Meteor.settings.public.PIPELINE_ROOT, "/handleEvent"), {
+    content: params,
+    params: params,
+    query: params,
+    data: params
+  }, function (res) {
+    console.log(res);
+  });
+}
 
 function fulfillsPrerequisites(_ref) {
   var event = _ref.event,

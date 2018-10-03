@@ -4,6 +4,8 @@
   "version": "0.0.0",
   "main": "lib/index.js",
   "dependencies": {
+    "firstcut-pipeline-consts": "^0.0.0",
+    "firstcut-model-base": "^0.0.0",
     "firstcut-schema": "^0.0.0"
   }
 }

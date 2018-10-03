@@ -1,12 +1,10 @@
 
 import {
-  logError,
   formatBytes,
   isEmpty,
   isURL,
   asUSDollars,
   htmlifyString,
-  emitPipelineEvent,
   removePunctuation,
   pluralize,
   isDevEnv,
@@ -27,7 +25,6 @@ export {
   isDevEnv,
   pluralize,
   removePunctuation,
-  logError,
   isEmpty,
   isUTC,
   ensureLoggedIn,
@@ -35,7 +32,6 @@ export {
   asUSDollars,
   htmlifyString,
   userTimezone,
-  emitPipelineEvent,
   DATE_FORMATS,
   humanReadableDate,
   fromNowDate,

@@ -33,8 +33,6 @@ var _firstcutUtils = require("firstcut-utils");
 
 var _firstcutActionUtils = require("firstcut-action-utils");
 
-var _firstcutPlayers = require("firstcut-players");
-
 var _pubsubJs = require("pubsub-js");
 
 var _factories = _interopRequireDefault(require("./utils/factories"));
@@ -237,10 +235,6 @@ var BaseModel = function BaseModel(defaultValues) {
       }, {
         key: "save",
         value: function save() {
-          if ((0, _firstcutPlayers.inSimulationMode)()) {
-            return;
-          }
-
           var promise = this.constructor.persister.save(this);
           return promise;
         }
@@ -497,19 +491,25 @@ var BaseModel = function BaseModel(defaultValues) {
       }, {
         key: "collection",
         get: function get() {
-          console.log('GETTING COLLECTION');
+          var collection = this._collection;
 
-          if (!this._collection) {
+          if (!collection) {
             try {
-              this._collection = new Mongo.Collection(this.collectionName);
-
-              this._collection.attachSchema(this.schema.asSchema);
+              collection = new Mongo.Collection(this.collectionName);
+              collection.attachSchema(this.schema.asSchema);
+              console.log('THE COLLECTION');
+              this._collection = collection;
             } catch (e) {
+              console.log('WAS THERE AN ERROR');
+              console.log(e);
+
               _pubsubJs.PubSub.publish('error', e);
             }
           }
 
-          return this._collection;
+          console.log('Returning the collection');
+          console.log(collection);
+          return collection;
         }
       }, {
         key: "models",

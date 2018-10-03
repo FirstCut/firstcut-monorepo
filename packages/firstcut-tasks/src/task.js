@@ -2,7 +2,6 @@
 import moment from 'moment';
 import TaskSchema from './task.schema';
 import { createFirstCutModel } from 'firstcut-model-base';
-import { getPlayer, userPlayerId } from 'firstcut-players';
 import { UPCOMING_THRESHOLD_IN_HOURS } from './tasks.enum';
 
 const Base = createFirstCutModel(TaskSchema);
@@ -42,14 +41,6 @@ class Task extends Base {
       return null;
     }
     return this.getServiceOfType(this.relatedRecordType).fromId(this.relatedRecordId);
-  }
-
-  getPlayerWhoAssignedTask() {
-    return getPlayer(this.assignedByPlayerId);
-  }
-
-  getPlayerAssignedTo() {
-    return getPlayer(this.assignedToId);
   }
 
   getDescription() {

@@ -4,6 +4,7 @@ import {
   handleEvent,
   getCustomFieldsSchema,
   getEventActionsAsDescriptiveString,
+  emitPipelineEvent,
 } from './execute.actions';
 
 import initSubscriptions from './server/pubsub';
@@ -16,6 +17,7 @@ export function init() {
 export {
   fulfillsPrerequisites,
   handleEvent,
+  emitPipelineEvent,
   getCustomFieldsSchema,
   getEventActionsAsDescriptiveString,
 };

@@ -5,6 +5,7 @@
   "main": "lib/index.js",
   "dependencies": {
     "firstcut-action-utils": "^0.0.0",
+    "firstcut-model-base": "^0.0.0",
     "firstcut-schema": "^0.0.0"
   }
 }

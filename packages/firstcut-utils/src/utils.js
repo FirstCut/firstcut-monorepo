@@ -1,7 +1,4 @@
 import { _ } from 'lodash';
-import { handleEvent } from 'firstcut-pipeline';
-import { userPlayerId, inSimulationMode } from 'firstcut-players';
-import Analytics from 'firstcut-analytics';
 
 export function pluralize(str) {
   const lastLetter = str[str.length - 1];
@@ -27,32 +24,6 @@ export function formatBytes(bytes, decimals) {
   return `${parseFloat((bytes / Math.pow(k, i)).toFixed(dm))} ${sizes[i]}`;
 }
 
-export function emitPipelineEvent(args) {
-  if (inSimulationMode()) {
-    return;
-  }
-  const { record, ...rest } = args;
-  const params = _.mapValues({
-    ...rest,
-    record_id: record._id,
-    record_type: record.modelName,
-    initiator_player_id: userPlayerId(),
-  }, (val) => {
-    if (typeof val === 'object') {
-      return JSON.stringify(val);
-    }
-    return (val) ? val.toString() : '';
-  });
-
-  Analytics.trackAction(args);
-  // handleEvent.call(eventData);
-  HTTP.post(`${Meteor.settings.public.PIPELINE_ROOT}/handleEvent`, {
-    content: params, params, query: params, data: params,
-  }, (res) => {
-    console.log(res);
-  });
-}
-
 export function isEmpty(something) {
   if (!something) {
     return true;
@@ -66,10 +37,6 @@ export function isEmpty(something) {
   }
 
   return _.isEmpty(something);
-}
-
-export function logError(error) {
-  Analytics.trackError(error);
 }
 
 export function isURL(str) {

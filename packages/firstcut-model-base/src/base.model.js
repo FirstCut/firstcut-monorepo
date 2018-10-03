@@ -4,7 +4,6 @@ import { Record, List } from 'immutable';
 import { _ } from 'lodash';
 import { isEmpty } from 'firstcut-utils';
 import { eventsInHistory } from 'firstcut-action-utils';
-import { inSimulationMode } from 'firstcut-players';
 import { PubSub } from 'pubsub-js';
 import RecordWithSchemaFactory from './utils/factories';
 
@@ -98,16 +97,22 @@ export const BaseModel = defaultValues => class extends Record({
 
   /* TODO: hide this better */
   static get collection() {
-    console.log('GETTING COLLECTION');
-    if (!this._collection) {
+    let collection = this._collection;
+    if (!collection) {
       try {
-        this._collection = new Mongo.Collection(this.collectionName);
-        this._collection.attachSchema(this.schema.asSchema);
+        collection = new Mongo.Collection(this.collectionName);
+        collection.attachSchema(this.schema.asSchema);
+        console.log('THE COLLECTION');
+        this._collection = collection;
       } catch (e) {
+        console.log('WAS THERE AN ERROR');
+        console.log(e);
         PubSub.publish('error', e);
       }
     }
-    return this._collection;
+    console.log('Returning the collection');
+    console.log(collection);
+    return collection;
   }
 
   static set models(models) {
@@ -378,9 +383,6 @@ export const BaseModel = defaultValues => class extends Record({
   }
 
   save() {
-    if (inSimulationMode()) {
-      return;
-    }
     const promise = this.constructor.persister.save(this);
     return promise;
   }

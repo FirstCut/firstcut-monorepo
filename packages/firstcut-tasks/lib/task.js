@@ -25,8 +25,6 @@ var _task = _interopRequireDefault(require("./task.schema"));
 
 var _firstcutModelBase = require("firstcut-model-base");
 
-var _firstcutPlayers = require("firstcut-players");
-
 var _tasks = require("./tasks.enum");
 
 var Base = (0, _firstcutModelBase.createFirstCutModel)(_task.default);
@@ -55,16 +53,6 @@ function (_Base) {
       }
 
       return this.getServiceOfType(this.relatedRecordType).fromId(this.relatedRecordId);
-    }
-  }, {
-    key: "getPlayerWhoAssignedTask",
-    value: function getPlayerWhoAssignedTask() {
-      return (0, _firstcutPlayers.getPlayer)(this.assignedByPlayerId);
-    }
-  }, {
-    key: "getPlayerAssignedTo",
-    value: function getPlayerAssignedTo() {
-      return (0, _firstcutPlayers.getPlayer)(this.assignedToId);
     }
   }, {
     key: "getDescription",
@@ -101,8 +89,8 @@ function (_Base) {
     value: function createNew(props) {
       if (Meteor.isClient) {
         return new this((0, _objectSpread2.default)({
-          assignedToPlayerId: (0, _firstcutPlayers.userPlayerId)(),
-          assignedByPlayerId: (0, _firstcutPlayers.userPlayerId)(),
+          assignedToPlayerId: userPlayerId(),
+          assignedByPlayerId: userPlayerId(),
           assignedToPlayerType: 'Collaborator'
         }, props));
       }

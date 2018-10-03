@@ -4,6 +4,7 @@
   "version": "0.0.0",
   "main": "lib/index.js",
   "dependencies": {
+    "firstcut-model-base": "^0.0.0",
     "firstcut-schema": "^0.0.0"
   }
 }
