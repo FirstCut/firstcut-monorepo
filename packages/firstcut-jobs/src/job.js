@@ -13,8 +13,6 @@ class Job extends Base {
 
   static get schema() { return JobSchema; }
 
-  // static get modelName() { return 'jobs'; }
-
   static getExistingJobId({ record_id, key }) {
     const jobRecord = this.findOne({ key, 'event_data.record_id': record_id });
     return (jobRecord) ? jobRecord._id : null;

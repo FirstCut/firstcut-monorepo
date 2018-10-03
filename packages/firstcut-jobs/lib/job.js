@@ -53,7 +53,6 @@ function (_Base) {
     }
   }], [{
     key: "getExistingJobId",
-    // static get modelName() { return 'jobs'; }
     value: function getExistingJobId(_ref) {
       var record_id = _ref.record_id,
           key = _ref.key;

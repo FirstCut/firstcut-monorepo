@@ -46,10 +46,14 @@
 				"deploy": "gh-pages -d packages/orchestra/dist"
 		},
 		"dependencies": {
+				"meteor-standalone-random": "^1.0.67",
 				"soap": "^0.24.0"
 		},
 		"jest": {
-    	"testPathIgnorePatterns": ["/node_modules/", "/lib/"],
-    	"bail": true
-  	}
+				"testPathIgnorePatterns": [
+						"/node_modules/",
+						"/lib/"
+				],
+				"bail": true
+		}
 }
