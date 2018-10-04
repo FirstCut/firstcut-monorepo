@@ -4,16 +4,17 @@
   "version": "0.0.0",
   "main": "lib/index.js",
   "dependencies": {
-    "firstcut-assets": "^0.0.0",
-    "firstcut-clients": "^0.0.0",
-    "firstcut-collaborators": "^0.0.0",
-    "firstcut-companies": "^0.0.0",
-    "firstcut-cuts": "^0.0.0",
-    "firstcut-deliverables": "^0.0.0",
-    "firstcut-invoices": "^0.0.0",
-    "firstcut-jobs": "^0.0.0",
-    "firstcut-projects": "^0.0.0",
-    "firstcut-shoots": "^0.0.0",
-    "firstcut-tasks": "^0.0.0"
+    "@babel/runtime": "^7.1.2",
+    "firstcut-assets": "file:../firstcut-assets",
+    "firstcut-clients": "file:../firstcut-clients",
+    "firstcut-collaborators": "file:../firstcut-collaborators",
+    "firstcut-companies": "file:../firstcut-companies",
+    "firstcut-cuts": "file:../firstcut-cuts",
+    "firstcut-deliverables": "file:../firstcut-deliverables",
+    "firstcut-invoices": "file:../firstcut-invoices",
+    "firstcut-jobs": "file:../firstcut-jobs",
+    "firstcut-projects": "file:../firstcut-projects",
+    "firstcut-shoots": "file:../firstcut-shoots",
+    "firstcut-tasks": "file:../firstcut-tasks"
   }
 }

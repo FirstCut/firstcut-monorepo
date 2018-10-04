@@ -497,18 +497,12 @@ var BaseModel = function BaseModel(defaultValues) {
             try {
               collection = new Mongo.Collection(this.collectionName);
               collection.attachSchema(this.schema.asSchema);
-              console.log('THE COLLECTION');
               this._collection = collection;
             } catch (e) {
-              console.log('WAS THERE AN ERROR');
-              console.log(e);
-
               _pubsubJs.PubSub.publish('error', e);
             }
           }
 
-          console.log('Returning the collection');
-          console.log(collection);
           return collection;
         }
       }, {

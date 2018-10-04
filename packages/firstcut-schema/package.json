@@ -4,7 +4,7 @@
   "version": "0.0.0",
   "main": "lib/index.js",
   "dependencies": {
-    "@babel/runtime": "7.0.0-beta.55",
-    "firstcut-pipeline-consts": "^0.0.0"
+    "@babel/runtime": "^7.1.2",
+    "firstcut-pipeline-consts": "file:../firstcut-pipeline-consts"
   }
 }

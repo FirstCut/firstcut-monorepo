@@ -4,7 +4,9 @@
   "version": "0.0.0",
   "main": "lib/index.js",
   "dependencies": {
-    "@babel/runtime": "7.0.0-beta.55",
-    "simpl-schema": "^1.5.3"
+    "@babel/runtime": "^7.1.2",
+    "firstcut-utils": "file:../firstcut-utils",
+    "simpl-schema": "^1.5.3",
+    "twilio": "^3.21.0"
   }
 }

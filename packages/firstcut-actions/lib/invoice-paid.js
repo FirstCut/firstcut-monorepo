@@ -13,9 +13,9 @@ var _immutable = require("immutable");
 
 var _firstcutModels = _interopRequireDefault(require("firstcut-models"));
 
-var _firstcutActionUtils = require("firstcut-action-utils");
-
 var _firstcutPipelineConsts = require("firstcut-pipeline-consts");
+
+var _firstcutActionUtils = require("firstcut-action-utils");
 
 var _firstcutRetrieveUrl = require("firstcut-retrieve-url");
 

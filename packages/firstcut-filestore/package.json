@@ -1,10 +1,10 @@
 {
-  "name": "firstcut-scripts",
+  "name": "firstcut-filestore",
   "private": true,
   "version": "0.0.0",
   "main": "lib/index.js",
   "dependencies": {
     "@babel/runtime": "^7.1.2",
-    "firstcut-actions": "file:../firstcut-actions"
+    "aws-sdk": "^2.327.0"
   }
 }

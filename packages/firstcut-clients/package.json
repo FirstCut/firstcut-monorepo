@@ -4,8 +4,9 @@
   "version": "0.0.0",
   "main": "lib/index.js",
   "dependencies": {
-    "firstcut-action-utils": "^0.0.0",
-    "firstcut-model-base": "^0.0.0",
-    "firstcut-schema": "^0.0.0"
+    "@babel/runtime": "^7.1.2",
+    "firstcut-action-utils": "file:../firstcut-action-utils",
+    "firstcut-model-base": "file:../firstcut-model-base",
+    "firstcut-schema": "file:../firstcut-schema"
   }
 }

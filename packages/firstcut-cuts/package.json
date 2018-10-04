@@ -4,8 +4,9 @@
   "version": "0.0.0",
   "main": "lib/index.js",
   "dependencies": {
-    "firstcut-pipeline-consts": "^0.0.0",
-    "firstcut-model-base": "^0.0.0",
-    "firstcut-schema": "^0.0.0"
+    "@babel/runtime": "^7.1.2",
+    "firstcut-model-base": "file:../firstcut-model-base",
+    "firstcut-pipeline-consts": "file:../firstcut-pipeline-consts",
+    "firstcut-schema": "file:../firstcut-schema"
   }
 }

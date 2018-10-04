@@ -53,10 +53,15 @@ const legacyModels = Object.freeze({
   CUT: Cut,
 });
 
+Object.keys(models).forEach((key) => {
+  const model = models[key];
+  model.modelName = key;
+});
+
 export function initModels(ValidatedMethod) {
+  console.log('INITING MODELS');
   Object.keys(models).forEach((key) => {
     const model = models[key];
-    model.modelName = key;
     enableBasePublications(model);
     enableCrud(model, ValidatedMethod);
   });

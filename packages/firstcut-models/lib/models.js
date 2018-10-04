@@ -71,11 +71,15 @@ var legacyModels = Object.freeze({
   INVOICE: _firstcutInvoices.default,
   CUT: _firstcutCuts.default
 });
+Object.keys(models).forEach(function (key) {
+  var model = models[key];
+  model.modelName = key;
+});
 
 function initModels(ValidatedMethod) {
+  console.log('INITING MODELS');
   Object.keys(models).forEach(function (key) {
     var model = models[key];
-    model.modelName = key;
     (0, _publications.default)(model);
     (0, _crud.default)(model, ValidatedMethod);
   }); // dependency injection solved by pulling this out into another object?

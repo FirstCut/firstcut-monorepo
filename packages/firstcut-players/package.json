@@ -4,6 +4,7 @@
   "version": "0.0.0",
   "main": "lib/index.js",
   "dependencies": {
-    "firstcut-models": "^0.0.0"
+    "@babel/runtime": "^7.1.2",
+    "firstcut-models": "file:../firstcut-models"
   }
 }

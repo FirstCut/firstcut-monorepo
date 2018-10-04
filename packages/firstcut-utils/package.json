@@ -2,5 +2,8 @@
   "name": "firstcut-utils",
   "private": true,
   "version": "0.0.0",
-  "main": "lib/index.js"
+  "main": "lib/index.js",
+  "dependencies": {
+    "@babel/runtime": "^7.1.2"
+  }
 }

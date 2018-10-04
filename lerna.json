@@ -1,9 +1,9 @@
 {
   "lerna": "3.4.0",
-  "packages": [
-    "packages/*",
-    "apps/*"
-  ],
-  "npmClient": "npm",
-  "version": "independent"
+  "bootstrap": {
+    "ignore": "firstcut-filestore"
+  },
+  "version": "independent",
+  "useWorkspaces": true,
+  "npmClient": "yarn"
 }

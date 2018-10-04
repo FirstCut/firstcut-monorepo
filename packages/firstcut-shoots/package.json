@@ -4,12 +4,12 @@
   "version": "0.0.0",
   "main": "lib/index.js",
   "dependencies": {
-    "@babel/runtime": "7.0.0-beta.55",
-    "firstcut-blueprints": "^0.0.0",
-    "firstcut-model-base": "^0.0.0",
-    "firstcut-pipeline-consts": "^0.0.0",
-    "firstcut-retrieve-url": "^0.0.0",
-    "firstcut-schema": "^0.0.0",
-    "firstcut-utils": "^0.0.0"
+    "@babel/runtime": "^7.1.2",
+    "firstcut-blueprints": "file:../firstcut-blueprints",
+    "firstcut-model-base": "file:../firstcut-model-base",
+    "firstcut-pipeline-consts": "file:../firstcut-pipeline-consts",
+    "firstcut-retrieve-url": "file:../firstcut-retrieve-url",
+    "firstcut-schema": "file:../firstcut-schema",
+    "firstcut-utils": "file:../firstcut-utils"
   }
 }

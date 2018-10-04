@@ -4,9 +4,10 @@
   "version": "0.0.0",
   "main": "lib/index.js",
   "dependencies": {
-    "firstcut-action-utils": "^0.0.0",
-    "firstcut-retrieve-url": "^0.0.0",
-    "firstcut-schema": "^0.0.0",
-    "firstcut-utils": "^0.0.0"
+    "@babel/runtime": "^7.1.2",
+    "firstcut-action-utils": "file:../firstcut-action-utils",
+    "firstcut-retrieve-url": "file:../firstcut-retrieve-url",
+    "firstcut-schema": "file:../firstcut-schema",
+    "firstcut-utils": "file:../firstcut-utils"
   }
 }
