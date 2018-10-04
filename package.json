@@ -36,7 +36,7 @@
 				"bootstrap": "lerna bootstrap",
 				"dev": "concurrently \"yarn watch\" \"lerna run dev --stream\"",
 				"lint": "eslint --cache --ignore-path .gitignore ./packages/*/src",
-				"test": "jest",
+				"test": "jest --watch",
 				"build:babel": "lerna exec --parallel -- babel src -d lib --config-file ../../babel.config.js --watch --copy-files --ignore '**/__mocks__/**'",
 				"build:webpack": "lerna run build:webpack",
 				"build": "yarn build:babel && yarn build:webpack",
@@ -54,10 +54,16 @@
 				"soap": "^0.24.0"
 		},
 		"jest": {
-				"testPathIgnorePatterns": [
-						"/node_modules/",
-						"/lib/"
-				],
-				"bail": true
+			"moduleNameMapper": {
+    		"meteor/meteor": "<rootDir>/jest/mocks/meteor.mock.js"
+  		},
+			"setupFiles": [
+		    "<rootDir>/jest/globals.js"
+		  ],
+			"testPathIgnorePatterns": [
+				"/node_modules/",
+				"/lib/"
+			],
+			"bail": true
 		}
 }

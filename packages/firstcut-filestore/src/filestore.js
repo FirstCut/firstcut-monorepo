@@ -1,26 +1,12 @@
 
+import SimpleSchema from 'simpl-schema';
 import Models from 'firstcut-models';
-import { conf, filestore, initFilestore } from './config.js';
-
-
-function enableAcceleration(bucket) {
-  filestore.putBucketAccelerateConfiguration({
-    AccelerateConfiguration: { /* required */
-      Status: 'Enabled',
-    },
-    Bucket: bucket,
-  }, (err, data) => {
-    if (err) {
-      console.log(err, err.stack); // an error occurred
-    }
-  });
-}
-
-
-function executeAsyncWithCallback(func, cb) {
-}
+import { s3 as filestore, awsConf as conf } from 'firstcut-aws';
 
 function listObjects(args) {
+  if (!filestore) {
+    throw new Error('not-initialized', 'filestore not initialized');
+  }
   return new Promise((resolve, reject) => {
     filestore.listObjects(args, (err, res) => {
       if (err) {
@@ -33,13 +19,33 @@ function listObjects(args) {
 }
 
 function getSignedUrl(args) {
+  if (!filestore) {
+    throw new Error('not-initialized', 'filestore not initialized');
+  }
+  new SimpleSchema({
+    fileId: String,
+    version: {
+      type: String,
+      defaultValue: 'original',
+    },
+  }).validate(args);
   const { fileId, version } = args;
   const key = getPathFromId({ fileId, version });
   return getSignedUrlOfKey({ key });
 }
 
 function getSignedUrlOfKey(args) {
+  if (!filestore) {
+    throw new Error('not-initialized', 'filestore not initialized');
+  }
   const { bucket = conf.bucket, key } = args;
+  new SimpleSchema({
+    key: String,
+    bucket: {
+      type: String,
+      optional: true,
+    },
+  }).validate(args);
   return new Promise((resolve, reject) => {
     if (!key) {
       resolve('');
@@ -70,3 +76,5 @@ export function getPathFromId({ fileId, version = 'original' }) {
   }
   return asset.getPath(version);
 }
+
+export { getSignedUrl, getSignedUrlOfKey, listObjects };

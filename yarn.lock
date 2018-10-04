@@ -3396,6 +3396,10 @@ crypto-browserify@^3.11.0:
     randombytes "^2.0.0"
     randomfill "^1.0.3"
 
+crypto-js@^3.1.9-1:
+  version "3.1.9-1"
+  resolved "https://registry.yarnpkg.com/crypto-js/-/crypto-js-3.1.9-1.tgz#fda19e761fc077e01ffbfdc6e9fdfc59e8806cd8"
+
 css-select@^1.1.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/css-select/-/css-select-1.2.0.tgz#2b3a110539c5355f1cd8d314623e870b121ec858"
@@ -4142,6 +4146,10 @@ etag@~1.8.1:
   version "1.8.1"
   resolved "https://registry.yarnpkg.com/etag/-/etag-1.8.1.tgz#41ae2eeb65efa62268aebfea83ac7d79299b0887"
 
+evaporate@^2.1.4:
+  version "2.1.4"
+  resolved "https://registry.yarnpkg.com/evaporate/-/evaporate-2.1.4.tgz#44aa46a930347fdffe9027bae3bb2af71e7a3299"
+
 eventemitter3@^3.0.0:
   version "3.1.0"
   resolved "https://registry.yarnpkg.com/eventemitter3/-/eventemitter3-3.1.0.tgz#090b4d6cdbd645ed10bf750d4b5407942d7ba163"
@@ -4532,6 +4540,12 @@ first-chunk-stream@^2.0.0:
     firstcut-uploader "file:../../Library/Caches/Yarn/v1/firstcut-uploader"
     sanitize-filename "^1.6.1"
 
+"firstcut-aws@file:packages/firstcut-aws":
+  version "0.0.0"
+  dependencies:
+    "@babel/runtime" "^7.1.2"
+    aws-sdk "^2.327.0"
+
 "firstcut-billing@file:packages/firstcut-billing":
   version "0.0.0"
   dependencies:
@@ -4627,6 +4641,7 @@ first-chunk-stream@^2.0.0:
     firstcut-retrieve-url "file:../../Library/Caches/Yarn/v1/firstcut-retrieve-url"
     firstcut-schema "file:../../Library/Caches/Yarn/v1/firstcut-schema"
     firstcut-utils "file:../../Library/Caches/Yarn/v1/firstcut-utils"
+    pubsub-js "^1.7.0"
 
 "firstcut-models@file:packages/firstcut-models":
   version "0.0.0"
@@ -4719,6 +4734,8 @@ first-chunk-stream@^2.0.0:
   dependencies:
     "@babel/runtime" "^7.1.2"
     aws-sdk "^2.327.0"
+    crypto-js "^3.1.9-1"
+    evaporate "^2.1.4"
 
 "firstcut-utils@file:packages/firstcut-utils":
   version "0.0.0"
@@ -8251,6 +8268,10 @@ public-encrypt@^4.0.0:
     parse-asn1 "^5.0.0"
     randombytes "^2.0.1"
     safe-buffer "^5.1.2"
+
+pubsub-js@^1.7.0:
+  version "1.7.0"
+  resolved "https://registry.yarnpkg.com/pubsub-js/-/pubsub-js-1.7.0.tgz#eca97f9a4217bef62b2d3aaa1552005260cc2e49"
 
 pump@^2.0.0, pump@^2.0.1:
   version "2.0.1"

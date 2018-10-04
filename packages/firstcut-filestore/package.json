@@ -5,6 +5,8 @@
   "main": "lib/index.js",
   "dependencies": {
     "@babel/runtime": "^7.1.2",
-    "aws-sdk": "^2.327.0"
+    "firstcut-aws": "file:../firstcut-aws",
+    "firstcut-models": "file:../firstcut-models",
+    "simpl-schema": "^1.5.3"
   }
 }

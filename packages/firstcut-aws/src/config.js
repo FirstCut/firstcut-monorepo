@@ -2,22 +2,21 @@
 import SimpleSchema from 'simpl-schema';
 import S3 from 'aws-sdk/clients/s3';
 
+let awsConf = null;
+let s3 = null;
 
-let conf = null;
-let filestore = null;
-
-function initFilestore(opts) {
+function initAwsIntegration(opts) {
   new SimpleSchema({
     key: String,
     secret: String,
     region: String,
     bucket: String,
   }).validate(opts);
-  conf = opts;
-  filestore = new S3({
-    secretAccessKey: conf.secret,
-    accessKeyId: conf.key,
-    region: conf.region,
+  awsConf = opts;
+  s3 = new S3({
+    secretAccessKey: awsConf.secret,
+    accessKeyId: awsConf.key,
+    region: awsConf.region,
     // sslEnabled: true, // optional
     useAccelerateEndpoint: true,
     httpOptions: {
@@ -28,4 +27,4 @@ function initFilestore(opts) {
 }
 
 
-export { conf, initFilestore, filestore };
+export { awsConf, initAwsIntegration, s3 };
