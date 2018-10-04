@@ -1,7 +1,9 @@
 
 jest.mock('firstcut-aws');
+jest.mock('firstcut-models');
 
-import { initFilestore, s3 } from 'firstcut-aws';
+import { initAwsIntegration, s3 } from 'firstcut-aws';
+import Models from 'firstcut-models';
 import { getSignedUrl, getSignedUrlOfKey, listObjects } from '../src/filestore';
 
 describe('uninitialized filestore', () => {
@@ -20,7 +22,7 @@ describe('uninitialized filestore', () => {
 
 describe('initialized filestore', () => {
   beforeAll(() => {
-    initFilestore({
+    initAwsIntegration({
       key: 'key',
       secret: 'secret',
       bucket: 'bucket',
@@ -40,8 +42,26 @@ describe('initialized filestore', () => {
     const args = {};
     expect.assertions(2);
     return listObjects(args).then((url) => {
-      expect(url).toEqual('testurl');
+      expect(url).toEqual([]);
       expect(s3.listObjects).toHaveBeenCalled();
+    });
+  });
+
+  test('getSignedUrlOfKey should call s3.getSignedUrl', () => {
+    const args = { key: 'testkey' };
+    expect.assertions(1);
+    return getSignedUrlOfKey(args).then((url) => {
+      expect(s3.getSignedUrl).toHaveBeenCalled();
+    });
+  });
+
+  test('getSignedUrl should call s3.getSignedUrl and Models.Asset', () => {
+    const fileId = 'testFileId';
+    const args = { fileId };
+    expect.assertions(2);
+    return getSignedUrl(args).then((url) => {
+      expect(Models.Asset.fromId).toHaveBeenCalledWith(fileId);
+      expect(s3.getSignedUrl).toHaveBeenCalled();
     });
   });
 });

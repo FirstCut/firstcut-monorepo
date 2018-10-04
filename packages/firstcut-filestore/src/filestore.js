@@ -26,6 +26,7 @@ function getSignedUrl(args) {
     fileId: String,
     version: {
       type: String,
+      optional: true,
       defaultValue: 'original',
     },
   }).validate(args);

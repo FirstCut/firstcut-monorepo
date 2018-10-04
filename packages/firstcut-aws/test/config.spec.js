@@ -1,8 +1,8 @@
 jest.mock('aws-sdk/clients/s3');
 
-import { awsConf, s3, initAwsIntegration } from '../src/config';
+import { awsConf, s3, initAwsIntegration } from '../src';
 
-test('initFilestore should throw if params are missing', () => {
+test('initAwsIntegration should throw if params are missing', () => {
   expect(() => initAwsIntegration({
     secret: 'secret',
     bucket: 'bucket',
@@ -10,7 +10,7 @@ test('initFilestore should throw if params are missing', () => {
   })).toThrow();
 });
 
-test('initFilestore should not throw if params are correct', () => {
+test('initAwsIntegration should not throw if params are correct', () => {
   expect(() => initAwsIntegration({
     secret: 'secret',
     bucket: 'bucket',
