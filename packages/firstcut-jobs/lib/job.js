@@ -23,13 +23,13 @@ var _immutable = require("immutable");
 
 var _pubsubJs = require("pubsub-js");
 
-var _jobs = require("./jobs.enum");
-
 var _firstcutModelBase = require("firstcut-model-base");
+
+var _jobs = require("./jobs.enum");
 
 var _jobs2 = _interopRequireDefault(require("./jobs.schema"));
 
-var Base = (0, _firstcutModelBase.createBaseModel)(_jobs2.default);
+var Base = (0, _firstcutModelBase.createFirstCutModel)(_jobs2.default);
 
 var Job =
 /*#__PURE__*/
@@ -145,25 +145,24 @@ function () {
   return Tracker;
 }();
 
-if (Meteor.isServer) {
-  Meteor.startup(function () {
-    Job.collection.find({}).observe({
-      added: function added(doc) {
-        var job = new Job(doc);
-        Tracker.scheduleJob(job);
-      },
-      changed: function changed(fields, prev_fields) {
-        Tracker.rescheduleJob({
-          id: fields._id,
-          cron: fields.cron
-        });
-      },
-      removed: function removed(id) {
-        Tracker.cancelJob(id);
-      }
-    });
+function subscribeToDatabaseChanges() {
+  Job.collection.find({}).observe({
+    added: function added(doc) {
+      var job = new Job(doc);
+      Tracker.scheduleJob(job);
+    },
+    changed: function changed(fields, prev_fields) {
+      Tracker.rescheduleJob({
+        id: fields._id,
+        cron: fields.cron
+      });
+    },
+    removed: function removed(id) {
+      Tracker.cancelJob(id);
+    }
   });
 }
 
+Job.onInit = subscribeToDatabaseChanges;
 var _default = Job;
 exports.default = _default;

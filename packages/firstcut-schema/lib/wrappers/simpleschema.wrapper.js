@@ -19,8 +19,6 @@ var _lodash = require("lodash");
 
 var _parser = _interopRequireDefault(require("../parser"));
 
-_simplSchema.default.extendOptions(['helpText', 'sortBy', 'options', 'placeholder', 'hidden', 'customType', 'rows', 'store', 'bucket', 'serviceFilter', 'enumOptions', 'unique', 'restricted', 'customAutoValue', 'serviceDependency']);
-
 var SimpleSchemaWrapper =
 /*#__PURE__*/
 function () {
@@ -135,6 +133,8 @@ function () {
   }, {
     key: "_getAsSchema",
     value: function _getAsSchema() {
+      _simplSchema.default.extendOptions(['helpText', 'sortBy', 'options', 'placeholder', 'hidden', 'customType', 'rows', 'store', 'bucket', 'serviceFilter', 'enumOptions', 'unique', 'restricted', 'customAutoValue', 'serviceDependency']);
+
       var schema = new _simplSchema.default(this.asJson, {
         requiredByDefault: false
       });

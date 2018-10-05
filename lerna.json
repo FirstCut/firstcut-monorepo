@@ -1,9 +1,5 @@
 {
   "lerna": "3.4.0",
-  "bootstrap": {
-    "ignore": "firstcut-filestore"
-  },
   "version": "independent",
-  "useWorkspaces": true,
-  "npmClient": "yarn"
+  "npmClient": "npm"
 }

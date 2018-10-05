@@ -2,11 +2,11 @@
 import schedule from 'node-schedule';
 import { Map } from 'immutable';
 import { PubSub } from 'pubsub-js';
+import { createFirstCutModel } from 'firstcut-model-base';
 import { JOBS } from './jobs.enum';
-import { createBaseModel } from 'firstcut-model-base';
 import JobSchema from './jobs.schema';
 
-const Base = createBaseModel(JobSchema);
+const Base = createFirstCutModel(JobSchema);
 
 class Job extends Base {
   static get collectionName() { return 'jobs'; }
@@ -65,21 +65,20 @@ class Tracker {
   }
 }
 
-if (Meteor.isServer) {
-  Meteor.startup(() => {
-    Job.collection.find({}).observe({
-      added(doc) {
-        const job = new Job(doc);
-        Tracker.scheduleJob(job);
-      },
-      changed(fields, prev_fields) {
-        Tracker.rescheduleJob({ id: fields._id, cron: fields.cron });
-      },
-      removed(id) {
-        Tracker.cancelJob(id);
-      },
-    });
+function subscribeToDatabaseChanges() {
+  Job.collection.find({}).observe({
+    added(doc) {
+      const job = new Job(doc);
+      Tracker.scheduleJob(job);
+    },
+    changed(fields, prev_fields) {
+      Tracker.rescheduleJob({ id: fields._id, cron: fields.cron });
+    },
+    removed(id) {
+      Tracker.cancelJob(id);
+    },
   });
 }
 
+Job.onInit = subscribeToDatabaseChanges;
 export default Job;

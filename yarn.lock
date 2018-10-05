@@ -4540,6 +4540,12 @@ first-chunk-stream@^2.0.0:
     firstcut-uploader "file:../../Library/Caches/Yarn/v1/firstcut-uploader"
     sanitize-filename "^1.6.1"
 
+"firstcut-aws@file:packages/firstcut-aws":
+  version "0.0.0"
+  dependencies:
+    "@babel/runtime" "^7.1.2"
+    aws-sdk "^2.327.0"
+
 "firstcut-billing@file:packages/firstcut-billing":
   version "0.0.0"
   dependencies:

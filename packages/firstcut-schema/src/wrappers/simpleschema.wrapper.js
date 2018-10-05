@@ -2,24 +2,6 @@ import SimpleSchema from 'simpl-schema';
 import { _ } from 'lodash';
 import SchemaParser from '../parser';
 
-SimpleSchema.extendOptions([
-  'helpText',
-  'sortBy',
-  'options',
-  'placeholder',
-  'hidden',
-  'customType',
-  'rows',
-  'store',
-  'bucket',
-  'serviceFilter',
-  'enumOptions',
-  'unique',
-  'restricted',
-  'customAutoValue',
-  'serviceDependency',
-]);
-
 export default class SimpleSchemaWrapper {
   static fromSubSchema(schema, f) {
     let field = f;
@@ -128,6 +110,23 @@ export default class SimpleSchemaWrapper {
   }
 
   _getAsSchema() {
+    SimpleSchema.extendOptions([
+      'helpText',
+      'sortBy',
+      'options',
+      'placeholder',
+      'hidden',
+      'customType',
+      'rows',
+      'store',
+      'bucket',
+      'serviceFilter',
+      'enumOptions',
+      'unique',
+      'restricted',
+      'customAutoValue',
+      'serviceDependency',
+    ]);
     const schema = new SimpleSchema(this.asJson, { requiredByDefault: false });
     schema.messageBox.messages(this.errorMessages);
     return schema;

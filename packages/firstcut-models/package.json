@@ -15,6 +15,7 @@
     "firstcut-jobs": "file:../firstcut-jobs",
     "firstcut-projects": "file:../firstcut-projects",
     "firstcut-shoots": "file:../firstcut-shoots",
-    "firstcut-tasks": "file:../firstcut-tasks"
+    "firstcut-tasks": "file:../firstcut-tasks",
+    "lodash": "^4.17.11"
   }
 }

@@ -7,30 +7,23 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.fileRefFromId = fileRefFromId;
 exports.getPathFromId = getPathFromId;
+exports.getSignedUrl = getSignedUrl;
+exports.getSignedUrlOfKey = getSignedUrlOfKey;
+exports.listObjects = listObjects;
+
+var _simplSchema = _interopRequireDefault(require("simpl-schema"));
 
 var _firstcutModels = _interopRequireDefault(require("firstcut-models"));
 
-var _config = require("./config.js");
-
-function enableAcceleration(bucket) {
-  _config.filestore.putBucketAccelerateConfiguration({
-    AccelerateConfiguration: {
-      /* required */
-      Status: 'Enabled'
-    },
-    Bucket: bucket
-  }, function (err, data) {
-    if (err) {
-      console.log(err, err.stack); // an error occurred
-    }
-  });
-}
-
-function executeAsyncWithCallback(func, cb) {}
+var _firstcutAws = require("firstcut-aws");
 
 function listObjects(args) {
+  if (!_firstcutAws.s3) {
+    throw new Error('not-initialized', 'filestore not initialized');
+  }
+
   return new Promise(function (resolve, reject) {
-    _config.filestore.listObjects(args, function (err, res) {
+    _firstcutAws.s3.listObjects(args, function (err, res) {
       if (err) {
         reject(err);
       } else {
@@ -41,6 +34,18 @@ function listObjects(args) {
 }
 
 function getSignedUrl(args) {
+  if (!_firstcutAws.s3) {
+    throw new Error('not-initialized', 'filestore not initialized');
+  }
+
+  new _simplSchema.default({
+    fileId: String,
+    version: {
+      type: String,
+      optional: true,
+      defaultValue: 'original'
+    }
+  }).validate(args);
   var fileId = args.fileId,
       version = args.version;
   var key = getPathFromId({
@@ -53,9 +58,20 @@ function getSignedUrl(args) {
 }
 
 function getSignedUrlOfKey(args) {
+  if (!_firstcutAws.s3) {
+    throw new Error('not-initialized', 'filestore not initialized');
+  }
+
   var _args$bucket = args.bucket,
-      bucket = _args$bucket === void 0 ? _config.conf.bucket : _args$bucket,
+      bucket = _args$bucket === void 0 ? _firstcutAws.awsConf.bucket : _args$bucket,
       key = args.key;
+  new _simplSchema.default({
+    key: String,
+    bucket: {
+      type: String,
+      optional: true
+    }
+  }).validate(args);
   return new Promise(function (resolve, reject) {
     if (!key) {
       resolve('');
@@ -67,7 +83,7 @@ function getSignedUrlOfKey(args) {
       Expires: 2592000
     };
 
-    _config.filestore.getSignedUrl('getObject', params, function (err, url) {
+    _firstcutAws.s3.getSignedUrl('getObject', params, function (err, url) {
       if (err) {
         reject(err);
       } else {

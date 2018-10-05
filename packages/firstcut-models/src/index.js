@@ -60,7 +60,7 @@ Object.keys(models).forEach((key) => {
 });
 
 export function initModels(ValidatedMethod) {
-  console.log('INITING MODELS');
+  console.log('INIT MODELING');
   if (Meteor.isServer) {
     initPublications(Models);
   }
@@ -68,6 +68,17 @@ export function initModels(ValidatedMethod) {
     const model = models[key];
     enableBasePublications(model);
     enableCrud(model, ValidatedMethod);
+    console.log('DOES MODEL HAVE COLLECTION?');
+    console.log(model.modelName);
+    if (!model.collection) {
+      console.log('MAKING COLLECTIONS');
+      const collection = new Mongo.Collection(model.collectionName);
+      collection.attachSchema(model.schema.asSchema);
+      model.collection = collection;
+    }
+    if (model.onInit) {
+      model.onInit();
+    }
   });
 
   // dependency injection solved by pulling this out into another object?
