@@ -1,10 +1,15 @@
 
-jest.mock('firstcut-aws');
 jest.mock('firstcut-models');
+jest.mock('aws-sdk/clients/s3');
 
-import { initAwsIntegration, s3 } from 'firstcut-aws';
+import S3 from 'aws-sdk/clients/s3';
 import Models from 'firstcut-models';
-import { getSignedUrl, getSignedUrlOfKey, listObjects } from '../src/filestore';
+import {
+  initFilestoreService, getSignedUrl, getSignedUrlOfKey, listObjects,
+} from '../src/filestore';
+
+const filestoreService = new S3({});
+filestoreService.conf = {};
 
 describe('uninitialized filestore', () => {
   test('listObjects should throw', () => {
@@ -22,12 +27,7 @@ describe('uninitialized filestore', () => {
 
 describe('initialized filestore', () => {
   beforeAll(() => {
-    initAwsIntegration({
-      key: 'key',
-      secret: 'secret',
-      bucket: 'bucket',
-      region: 'region',
-    });
+    initFilestoreService(filestoreService);
   });
 
   test('getSignedUrl should throw if fileId is not defined in args', () => {
@@ -40,10 +40,9 @@ describe('initialized filestore', () => {
 
   test('listObjects should call s3.listObjects', () => {
     const args = {};
-    expect.assertions(2);
-    return listObjects(args).then((url) => {
-      expect(url).toEqual([]);
-      expect(s3.listObjects).toHaveBeenCalled();
+    expect.assertions(1);
+    return listObjects(args).then(() => {
+      expect(filestoreService.listObjects).toHaveBeenCalled();
     });
   });
 
@@ -51,7 +50,7 @@ describe('initialized filestore', () => {
     const args = { key: 'testkey' };
     expect.assertions(1);
     return getSignedUrlOfKey(args).then((url) => {
-      expect(s3.getSignedUrl).toHaveBeenCalled();
+      expect(filestoreService.getSignedUrl).toHaveBeenCalled();
     });
   });
 
@@ -61,7 +60,7 @@ describe('initialized filestore', () => {
     expect.assertions(2);
     return getSignedUrl(args).then((url) => {
       expect(Models.Asset.fromId).toHaveBeenCalledWith(fileId);
-      expect(s3.getSignedUrl).toHaveBeenCalled();
+      expect(filestoreService.getSignedUrl).toHaveBeenCalled();
     });
   });
 });

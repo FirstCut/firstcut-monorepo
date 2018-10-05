@@ -1,7 +1,11 @@
 
 import SimpleSchema from 'simpl-schema';
 import Models from 'firstcut-models';
-import { s3 as filestore, awsConf as conf } from 'firstcut-aws';
+
+let filestore = null;
+export function initFilestoreService(service) {
+  filestore = service;
+}
 
 function listObjects(args) {
   if (!filestore) {
@@ -39,7 +43,7 @@ function getSignedUrlOfKey(args) {
   if (!filestore) {
     throw new Error('not-initialized', 'filestore not initialized');
   }
-  const { bucket = conf.bucket, key } = args;
+  const { bucket, key } = args;
   new SimpleSchema({
     key: String,
     bucket: {

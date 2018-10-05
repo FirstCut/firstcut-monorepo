@@ -1,17 +1,17 @@
 jest.mock('aws-sdk/clients/s3');
 
-import { awsConf, s3, initAwsIntegration } from '../src';
+import FirstcutAWS from '../src';
 
-test('initAwsIntegration should throw if params are missing', () => {
-  expect(() => initAwsIntegration({
+test('init should throw if params are missing', () => {
+  expect(() => new FirstcutAWS({
     secret: 'secret',
     bucket: 'bucket',
     region: 'region',
   })).toThrow();
 });
 
-test('initAwsIntegration should not throw if params are correct', () => {
-  expect(() => initAwsIntegration({
+test('init should not throw if params are correct', () => {
+  expect(() => new FirstcutAWS({
     secret: 'secret',
     bucket: 'bucket',
     region: 'region',
