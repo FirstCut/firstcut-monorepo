@@ -2,7 +2,7 @@
   "name": "firstcut-model-base",
   "private": true,
   "version": "0.0.0",
-  "main": "lib/index.js",
+  "main": "src/index.js",
   "dependencies": {
     "@babel/runtime": "^7.1.2",
     "firstcut-action-utils": "file:../firstcut-action-utils",

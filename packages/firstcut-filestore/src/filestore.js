@@ -1,7 +1,33 @@
 
 import SimpleSchema from 'simpl-schema';
 import Models from 'firstcut-models';
-import { s3 as filestore, awsConf as conf } from 'firstcut-aws';
+import S3 from 'aws-sdk/clients/s3';
+
+let filestore = null;
+let awsConf = null;
+
+function initFilestore(opts) {
+  new SimpleSchema({
+    key: String,
+    secret: String,
+    region: String,
+    bucket: String,
+  }).validate(opts);
+  awsConf = opts;
+
+  filestore = new S3({
+    secretAccessKey: awsConf.secret,
+    accessKeyId: awsConf.key,
+    region: awsConf.region,
+    // sslEnabled: true, // optional
+    useAccelerateEndpoint: true,
+    httpOptions: {
+      timeout: 12000,
+      agent: false,
+    },
+  });
+}
+
 
 function listObjects(args) {
   if (!filestore) {
@@ -39,7 +65,7 @@ function getSignedUrlOfKey(args) {
   if (!filestore) {
     throw new Error('not-initialized', 'filestore not initialized');
   }
-  const { bucket = conf.bucket, key } = args;
+  const { bucket = awsConf.bucket, key } = args;
   new SimpleSchema({
     key: String,
     bucket: {
@@ -78,4 +104,6 @@ export function getPathFromId({ fileId, version = 'original' }) {
   return asset.getPath(version);
 }
 
-export { getSignedUrl, getSignedUrlOfKey, listObjects };
+export {
+  initFilestore, getSignedUrl, getSignedUrlOfKey, listObjects,
+};

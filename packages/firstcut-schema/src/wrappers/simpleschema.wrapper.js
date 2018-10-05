@@ -30,6 +30,24 @@ export default class SimpleSchemaWrapper {
   }
 
   constructor(props) {
+    console.log('EXTENDING');
+    SimpleSchema.extendOptions([
+      'helpText',
+      'sortBy',
+      'options',
+      'placeholder',
+      'hidden',
+      'customType',
+      'rows',
+      'store',
+      'bucket',
+      'serviceFilter',
+      'enumOptions',
+      'unique',
+      'restricted',
+      'customAutoValue',
+      'serviceDependency',
+    ]);
     this.asJson = { ...props };
     this.errorMessages = {};
   }
@@ -110,23 +128,6 @@ export default class SimpleSchemaWrapper {
   }
 
   _getAsSchema() {
-    SimpleSchema.extendOptions([
-      'helpText',
-      'sortBy',
-      'options',
-      'placeholder',
-      'hidden',
-      'customType',
-      'rows',
-      'store',
-      'bucket',
-      'serviceFilter',
-      'enumOptions',
-      'unique',
-      'restricted',
-      'customAutoValue',
-      'serviceDependency',
-    ]);
     const schema = new SimpleSchema(this.asJson, { requiredByDefault: false });
     schema.messageBox.messages(this.errorMessages);
     return schema;

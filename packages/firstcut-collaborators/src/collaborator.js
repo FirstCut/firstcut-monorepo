@@ -1,9 +1,9 @@
 
 import { _ } from 'lodash';
-import { COLLABORATOR_TYPES, COLLABORATOR_SKILLS } from './collaborators.enum';
 import { COLLABORATOR_TYPES_TO_LABELS } from 'firstcut-pipeline-consts';
-import CollaboratorSchema from './collaborators.schema';
 import { createFirstCutModel } from 'firstcut-model-base';
+import { COLLABORATOR_TYPES, COLLABORATOR_SKILLS } from './collaborators.enum';
+import CollaboratorSchema from './collaborators.schema';
 
 const Base = createFirstCutModel(CollaboratorSchema);
 

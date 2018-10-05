@@ -17,6 +17,8 @@ test('should init models twice in a row without error', () => {
   initModels(ValidatedMethod);
 });
 
+beforeAll(() => initModels(ValidatedMethod));
+
 test('each model should have access to other models (icky design opps)', () => {
   const numModels = Models.allModels.length;
   expect.assertions(numModels);
@@ -35,9 +37,11 @@ test('each model should have a schema', () => {
 });
 
 test('each model should have a collection defined', () => {
-  const numModels = Models.allModels.length;
+  const numModels = Models.allModels.length * 3;
   expect.assertions(numModels);
   _.forEach(Models.allModels, (m) => {
-    expect(m.collection).toBeInstanceOf(Mongo.Collection);
+    expect(m.collection).toBeDefined();
+    expect(m.collection.attachSchema).toBeDefined();
+    expect(m.collection.find).toBeDefined();
   });
 });

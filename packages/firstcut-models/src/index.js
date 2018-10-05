@@ -15,6 +15,7 @@ import initPublications from './utils/publications';
 import enableCrud from './utils/crud';
 import enableBasePublications from './utils/publications.base';
 
+let Models = {};
 const models = Object.freeze({
   Collaborator,
   Task,
@@ -29,20 +30,6 @@ const models = Object.freeze({
   Cut,
 });
 
-const Models = {
-  allModels: Object.values(models),
-  ...models,
-  ...legacyModels,
-  getRecordFromId(type, id) {
-    const model = models[type];
-    return model.fromId(id);
-  },
-  getRecordFromQuery(type, query) {
-    const model = models[type];
-    return model.findOne(query);
-  },
-};
-
 const legacyModels = Object.freeze({
   COLLABORATOR: Collaborator,
   CLIENT: Client,
@@ -54,11 +41,14 @@ const legacyModels = Object.freeze({
   CUT: Cut,
 });
 
-Object.keys(models).forEach((key) => {
-  const model = models[key];
-  model.modelName = key;
+// dependency injection solved by pulling this out into another object?
+Object.keys(models).forEach((i) => {
+  const model = models[i];
+  model.models = models;
+  model.modelName = i;
 });
 
+// this needs to be pulled out
 export function initModels(ValidatedMethod) {
   if (Meteor.isServer) {
     initPublications(Models);
@@ -76,12 +66,20 @@ export function initModels(ValidatedMethod) {
       model.onInit();
     }
   });
-
-  // dependency injection solved by pulling this out into another object?
-  Object.keys(models).forEach((i) => {
-    const model = models[i];
-    model.models = models;
-  });
 }
+
+Models = {
+  allModels: Object.values(models),
+  ...models,
+  ...legacyModels,
+  getRecordFromId(type, id) {
+    const model = models[type];
+    return model.fromId(id);
+  },
+  getRecordFromQuery(type, query) {
+    const model = models[type];
+    return model.findOne(query);
+  },
+};
 
 export default Models;
