@@ -8,6 +8,7 @@
     "firstcut-model-base": "file:../firstcut-model-base",
     "firstcut-schema": "file:../firstcut-schema",
     "firstcut-uploader": "file:../firstcut-uploader",
+    "meteor-standalone-random": "^1.0.67",
     "sanitize-filename": "^1.6.1"
   }
 }

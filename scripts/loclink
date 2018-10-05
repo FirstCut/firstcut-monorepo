@@ -1,0 +1,9 @@
+PACKAGE_NAME=$1
+
+PACKAGES_TGT=/imports/packages
+PACKAGES_SRC=$HOME/FirstCut/firstcut-mono/packages/
+
+SRC="$PACKAGES_SRC$PACKAGE_NAME"
+TGT="$PWD$PACKAGES_TGT"
+
+ln -s $SRC $TGT

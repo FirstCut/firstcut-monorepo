@@ -66,6 +66,7 @@ class Tracker {
 }
 
 function subscribeToDatabaseChanges() {
+  console.log('SUBSCRIBING');
   Job.collection.find({}).observe({
     added(doc) {
       const job = new Job(doc);
