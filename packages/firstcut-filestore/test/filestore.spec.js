@@ -1,13 +1,10 @@
 
-jest.mock('aws-sdk');
-jest.mock('aws-sdk/clients/s3');
+jest.mock('firstcut-aws');
 jest.mock('firstcut-models');
 
+import { initAwsIntegration, s3 } from 'firstcut-aws';
 import Models from 'firstcut-models';
-import S3 from 'aws-sdk/clients/s3';
-import {
-  initFilestore, getSignedUrl, getSignedUrlOfKey, listObjects,
-} from '../src/filestore';
+import { getSignedUrl, getSignedUrlOfKey, listObjects } from '../src/filestore';
 
 describe('uninitialized filestore', () => {
   test('listObjects should throw', () => {
@@ -25,7 +22,7 @@ describe('uninitialized filestore', () => {
 
 describe('initialized filestore', () => {
   beforeAll(() => {
-    initFilestore({
+    initAwsIntegration({
       key: 'key',
       secret: 'secret',
       bucket: 'bucket',
