@@ -80,5 +80,5 @@ function subscribeToDatabaseChanges() {
   });
 }
 
-Job.onInit = subscribeToDatabaseChanges;
+Job.onInitCollection = subscribeToDatabaseChanges;
 export default Job;
