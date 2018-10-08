@@ -30,7 +30,6 @@ export default class SimpleSchemaWrapper {
   }
 
   constructor(props) {
-    console.log('EXTENDING');
     SimpleSchema.extendOptions([
       'helpText',
       'sortBy',

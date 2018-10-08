@@ -1,10 +1,10 @@
 
 import { EVENT_LABELS } from 'firstcut-pipeline-consts';
-import DELIVERABLE_BLUEPRINTS from './deliverables.blueprints';
 import { _ } from 'lodash';
 import { List } from 'immutable';
-import DeliverableSchema from './deliverables.schema';
 import { createFirstCutModel } from 'firstcut-model-base';
+import DeliverableSchema from './deliverables.schema';
+import DELIVERABLE_BLUEPRINTS from './deliverables.blueprints';
 
 const Base = createFirstCutModel(DeliverableSchema);
 
@@ -92,7 +92,7 @@ class Deliverable extends Base {
 
   get completeRecordAndChildrenHistory() {
     const cuts = this.getCuts().toArray();
-    const cutHistory = cuts.map(cut => cut.history.map((event) => {
+    const cutHistory = cuts.map(cut => cut.historyAsArray.map((event) => {
       let e = event;
       if (e.toJS) {
         e = e.toJS();

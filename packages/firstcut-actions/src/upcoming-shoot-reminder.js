@@ -4,7 +4,6 @@ import { RecordEvents } from 'firstcut-action-utils';
 import { ACTIONS } from 'firstcut-pipeline-consts';
 import { getEmailActions } from 'firstcut-action-utils';
 import { humanReadableDate } from 'firstcut-utils';
-import Models from 'firstcut-models';
 import { getInviteLink, getRecordUrl } from 'firstcut-retrieve-url';
 
 const UpcomingShootReminder = new Map({
@@ -14,7 +13,7 @@ const UpcomingShootReminder = new Map({
   schema: RecordEvents,
   fulfillsPrerequisites({ record, initiator }) {
   },
-  generateActions(eventData) {
+  generateActions(Models, eventData) {
     const { record_id } = eventData;
     const shoot = Models.Shoot.fromId(record_id);
     const scheduledDate = humanReadableDate({ date: shoot.date, timezone: shoot.timezone, format: 'clean' });

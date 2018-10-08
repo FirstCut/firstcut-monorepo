@@ -7,7 +7,7 @@
     "@babel/runtime": "^7.1.2",
     "firstcut-model-base": "file:../firstcut-model-base",
     "firstcut-schema": "file:../firstcut-schema",
-    "firstcut-uploader": "file:../firstcut-uploader",
+    "lodash": "^4.17.11",
     "meteor-standalone-random": "^1.0.67",
     "sanitize-filename": "^1.6.1"
   }

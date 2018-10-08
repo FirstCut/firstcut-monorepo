@@ -1,0 +1,12 @@
+{
+  "name": "firstcut-pipeline-utils",
+  "private": true,
+  "version": "0.0.0",
+  "main": "lib/index.js",
+  "dependencies": {
+    "@babel/runtime": "^7.1.2",
+    "firstcut-actions": "file:../firstcut-actions",
+    "firstcut-pipeline-consts": "file:../firstcut-pipeline-consts",
+    "firstcut-schema": "file:../firstcut-schema"
+  }
+}

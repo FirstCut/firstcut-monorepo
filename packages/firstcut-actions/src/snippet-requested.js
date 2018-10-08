@@ -1,6 +1,5 @@
 
 import { Map } from 'immutable';
-import Models from 'firstcut-models';
 import { ACTIONS } from 'firstcut-pipeline-consts';
 import { getPathFromId, fileRefFromId, buildSnippetRequestFilePath } from 'firstcut-filestore';
 import { invokeCreateSnippet } from 'firstcut-filestore';
@@ -18,7 +17,7 @@ const SnippetRequested = new Map({
   }).extend(EventSchema).extend(RecordEvents),
   fulfillsPrerequisites({ record, initiator }) {
   },
-  generateActions(event_data) {
+  generateActions(Models, event_data) {
     const { record_id, end, start } = event_data;
     const cut = Models.Cut.fromId(record_id);
     return [{

@@ -3,7 +3,6 @@ import { Map } from 'immutable';
 import { RecordEvents } from 'firstcut-action-utils';
 import { ACTIONS } from 'firstcut-pipeline-consts';
 import { getEmailActions } from 'firstcut-action-utils';
-import Models from 'firstcut-models';
 import { getRecordUrl } from 'firstcut-retrieve-url';
 
 const ProjectHandoff = new Map({
@@ -13,7 +12,7 @@ const ProjectHandoff = new Map({
   schema: RecordEvents,
   fulfillsPrerequisites({ record, initiator }) {
   },
-  generateActions(eventData) {
+  generateActions(Models, eventData) {
     const { record_id } = eventData;
     const project = Models.Project.fromId(record_id);
     const link = getRecordUrl(project);

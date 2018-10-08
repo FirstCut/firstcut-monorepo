@@ -2,7 +2,6 @@ import { Map } from 'immutable';
 import SimpleSchema from 'simpl-schema';
 import { RecordEvents, EventSchema } from 'firstcut-action-utils';
 import { ACTIONS } from 'firstcut-pipeline-consts';
-import Models from 'firstcut-models';
 import { getSignedUrlOfKey } from 'firstcut-filestore';
 import { getEmailActions } from 'firstcut-action-utils';
 
@@ -16,7 +15,7 @@ const SnippetCreated = new Map({
     end: String,
   }).extend(EventSchema).extend(RecordEvents),
   fulfillsPrerequisites({ record, initiator }) {},
-  generateActions(event_data) {
+  generateActions(Models, event_data) {
     const {
       record_id, start, end, snippet_key,
     } = event_data;

@@ -24,17 +24,17 @@ var _lodash = require("lodash");
 
 var _immutable = require("immutable");
 
-var _projects = require("./projects.enum");
-
 var _firstcutPipelineConsts = require("firstcut-pipeline-consts");
-
-var _projects2 = _interopRequireDefault(require("./projects.blueprints"));
-
-var _projects3 = _interopRequireDefault(require("./projects.schema"));
 
 var _firstcutActionUtils = require("firstcut-action-utils");
 
 var _firstcutModelBase = require("firstcut-model-base");
+
+var _projects = require("./projects.enum");
+
+var _projects2 = _interopRequireDefault(require("./projects.blueprints"));
+
+var _projects3 = _interopRequireDefault(require("./projects.schema"));
 
 var Base = (0, _firstcutModelBase.createFirstCutModel)(_projects3.default);
 

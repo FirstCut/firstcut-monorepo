@@ -5,6 +5,7 @@
   "main": "lib/index.js",
   "dependencies": {
     "@babel/runtime": "^7.1.2",
-    "firstcut-pipeline-consts": "file:../firstcut-pipeline-consts"
+    "firstcut-pipeline-consts": "file:../firstcut-pipeline-consts",
+    "lodash": "^4.17.11"
   }
 }

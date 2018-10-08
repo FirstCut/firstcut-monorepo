@@ -11,13 +11,11 @@ var _toConsumableArray2 = _interopRequireDefault(require("@babel/runtime/helpers
 
 var _immutable = require("immutable");
 
-var _firstcutModels = _interopRequireDefault(require("firstcut-models"));
-
 var _firstcutSchema = require("firstcut-schema");
 
-var _firstcutActionUtils = require("firstcut-action-utils");
-
 var _firstcutPipelineConsts = require("firstcut-pipeline-consts");
+
+var _firstcutActionUtils = require("firstcut-action-utils");
 
 var _firstcutRetrieveUrl = require("firstcut-retrieve-url");
 
@@ -50,19 +48,17 @@ var EditFeedback = new _immutable.Map({
         initiator = _ref.initiator;
     return !record.clientHasSubmittedFeedback;
   },
-  generateActions: function generateActions(eventData) {
+  generateActions: function generateActions(Models, eventData) {
     var record_id = eventData.record_id,
         initiator_player_id = eventData.initiator_player_id,
         name = eventData.name,
         email = eventData.email,
         feedback = eventData.feedback;
-
-    var cut = _firstcutModels.default.Cut.fromId(record_id);
-
+    var cut = Models.Cut.fromId(record_id);
     var link = (0, _firstcutRetrieveUrl.getRecordUrl)(cut);
     var emailActions = (0, _firstcutActionUtils.getEmailActions)({
       recipients: [cut.clientOwner],
-      cc: [new _firstcutModels.default.Client({
+      cc: [new Models.Client({
         email: email,
         firstName: name
       })],

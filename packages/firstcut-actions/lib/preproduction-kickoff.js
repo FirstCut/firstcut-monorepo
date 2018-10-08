@@ -13,8 +13,6 @@ var _firstcutSchema = require("firstcut-schema");
 
 var _immutable = require("immutable");
 
-var _firstcutModels = _interopRequireDefault(require("firstcut-models"));
-
 var _firstcutActionUtils = require("firstcut-action-utils");
 
 var _firstcutPipelineConsts = require("firstcut-pipeline-consts");
@@ -49,16 +47,12 @@ var PreproductionKickoff = new _immutable.Map({
       event: 'project_wrap'
     });
   },
-  generateActions: function generateActions(eventData) {
+  generateActions: function generateActions(Models, eventData) {
     var record_id = eventData.record_id,
         clientEmailContent = eventData.clientEmailContent;
-
-    var project = _firstcutModels.default.Project.fromId(record_id);
-
-    var robert = _firstcutModels.default.Collaborator.getRobertProfile();
-
-    var jorge = _firstcutModels.default.Collaborator.getJorgeProfile();
-
+    var project = Models.Project.fromId(record_id);
+    var robert = Models.Collaborator.getRobertProfile();
+    var jorge = Models.Collaborator.getJorgeProfile();
     var lines = clientEmailContent ? clientEmailContent.split(/\n/) : [];
     var emailActions = (0, _firstcutActionUtils.getEmailActions)({
       recipients: [project.clientOwner],

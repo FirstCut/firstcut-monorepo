@@ -1,8 +1,8 @@
 Arguments: 
-  /usr/local/lib/node_modules/node/bin/node /usr/local/Cellar/yarn/1.5.1_1/libexec/bin/yarn.js build:babel
+  /usr/local/lib/node_modules/node/bin/node /usr/local/Cellar/yarn/1.5.1_1/libexec/bin/yarn.js remove firstcut-google-api
 
 PATH: 
-  /usr/local/lib/node_modules/npm/node_modules/npm-lifecycle/node-gyp-bin:/Users/artichokes/FirstCut/firstcut-mono/node_modules/.bin:/Users/artichokes/google-cloud-sdk/bin:/Users/artichokes/.fastlane/bin:/Users/artichokes/.meteor:/Users/artichokes/Scripts:/usr/local/git/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/opt/local/bin:/opt/local/sbin:/usr/X11/bin:/Users/artichokes/Library/Android/sdk/tools:/Users/artichokes/Library/Android/sdk/platform-tools:/Users/artichokes/Library/Android/sdk/tools:/Applications/Postgres.app/Contents/Versions/latest/bin:/Users/artichokes/Library/Android/sdk/build-tools/27.0.2
+  /Users/artichokes/google-cloud-sdk/bin:/Users/artichokes/.fastlane/bin:/Users/artichokes/.meteor:/Users/artichokes/Scripts:/usr/local/git/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/opt/local/bin:/opt/local/sbin:/usr/X11/bin:/Users/artichokes/Library/Android/sdk/tools:/Users/artichokes/Library/Android/sdk/platform-tools:/Users/artichokes/Library/Android/sdk/tools:/Applications/Postgres.app/Contents/Versions/latest/bin:/Users/artichokes/Library/Android/sdk/build-tools/27.0.2
 
 Yarn version: 
   1.5.1
@@ -69,6 +69,7 @@ npm manifest:
   				"meteor-standalone-random": "^1.0.67",
   				"soap": "^0.24.0"
   		},
+  		"workspaces": ["packages/*"],
   		"jest": {
   				"moduleNameMapper": {
   						"meteor/meteor": "<rootDir>/jest/mocks/meteor.mock.js",
@@ -4609,27 +4610,33 @@ Lockfile:
     version "0.0.0"
     dependencies:
       "@babel/runtime" "^7.1.2"
+      firstcut-google-api "file:../../Library/Caches/Yarn/v1/firstcut-google-api"
       firstcut-pipeline-consts "file:../../Library/Caches/Yarn/v1/firstcut-pipeline-consts"
+      lodash "^4.17.11"
   
   "firstcut-actions@file:packages/firstcut-actions":
     version "0.0.0"
     dependencies:
       "@babel/runtime" "^7.1.2"
       firstcut-action-utils "file:../../Library/Caches/Yarn/v1/firstcut-action-utils"
+      firstcut-google-api "file:../../Library/Caches/Yarn/v1/firstcut-google-api"
       firstcut-models "file:../../Library/Caches/Yarn/v1/firstcut-models"
       firstcut-pipeline-consts "file:../../Library/Caches/Yarn/v1/firstcut-pipeline-consts"
       firstcut-players "file:../../Library/Caches/Yarn/v1/firstcut-players"
       firstcut-retrieve-url "file:../../Library/Caches/Yarn/v1/firstcut-retrieve-url"
       firstcut-schema "file:../../Library/Caches/Yarn/v1/firstcut-schema"
       firstcut-utils "file:../../Library/Caches/Yarn/v1/firstcut-utils"
+      lodash "^4.17.11"
   
   "firstcut-assets@file:packages/firstcut-assets":
     version "0.0.0"
     dependencies:
       "@babel/runtime" "^7.1.2"
+      firstcut-google-api "file:../../Library/Caches/Yarn/v1/firstcut-google-api"
       firstcut-model-base "file:../../Library/Caches/Yarn/v1/firstcut-model-base"
       firstcut-schema "file:../../Library/Caches/Yarn/v1/firstcut-schema"
-      firstcut-uploader "file:../../Library/Caches/Yarn/v1/firstcut-uploader"
+      lodash "^4.17.11"
+      meteor-standalone-random "^1.0.67"
       sanitize-filename "^1.6.1"
   
   "firstcut-aws@file:packages/firstcut-aws":
@@ -4637,37 +4644,39 @@ Lockfile:
     dependencies:
       "@babel/runtime" "^7.1.2"
       aws-sdk "^2.327.0"
-  
-  "firstcut-billing@file:packages/firstcut-billing":
-    version "0.0.0"
-    dependencies:
-      "@babel/runtime" "^7.1.2"
-      stripe "^6.12.1"
+      firstcut-google-api "file:../../Library/Caches/Yarn/v1/firstcut-google-api"
+      lodash "^4.17.11"
   
   "firstcut-blueprints@file:packages/firstcut-blueprints":
     version "0.0.0"
     dependencies:
       "@babel/runtime" "^7.1.2"
+      firstcut-google-api "file:../../Library/Caches/Yarn/v1/firstcut-google-api"
       firstcut-schema "file:../../Library/Caches/Yarn/v1/firstcut-schema"
+      lodash "^4.17.11"
   
   "firstcut-calendar@file:packages/firstcut-calendar":
     version "0.0.0"
     dependencies:
       "@babel/runtime" "^7.1.2"
       firstcut-google-api "file:../../Library/Caches/Yarn/v1/firstcut-google-api"
+      lodash "^4.17.11"
   
   "firstcut-clients@file:packages/firstcut-clients":
     version "0.0.0"
     dependencies:
       "@babel/runtime" "^7.1.2"
       firstcut-action-utils "file:../../Library/Caches/Yarn/v1/firstcut-action-utils"
+      firstcut-google-api "file:../../Library/Caches/Yarn/v1/firstcut-google-api"
       firstcut-model-base "file:../../Library/Caches/Yarn/v1/firstcut-model-base"
       firstcut-schema "file:../../Library/Caches/Yarn/v1/firstcut-schema"
+      lodash "^4.17.11"
   
   "firstcut-collaborators@file:packages/firstcut-collaborators":
     version "0.0.0"
     dependencies:
       "@babel/runtime" "^7.1.2"
+      firstcut-google-api "file:../../Library/Caches/Yarn/v1/firstcut-google-api"
       firstcut-model-base "file:../../Library/Caches/Yarn/v1/firstcut-model-base"
       firstcut-pipeline-consts "file:../../Library/Caches/Yarn/v1/firstcut-pipeline-consts"
       firstcut-schema "file:../../Library/Caches/Yarn/v1/firstcut-schema"
@@ -4678,51 +4687,64 @@ Lockfile:
     version "0.0.0"
     dependencies:
       "@babel/runtime" "^7.1.2"
+      firstcut-google-api "file:../../Library/Caches/Yarn/v1/firstcut-google-api"
       firstcut-model-base "file:../../Library/Caches/Yarn/v1/firstcut-model-base"
       firstcut-schema "file:../../Library/Caches/Yarn/v1/firstcut-schema"
+      lodash "^4.17.11"
   
   "firstcut-cuts@file:packages/firstcut-cuts":
     version "0.0.0"
     dependencies:
       "@babel/runtime" "^7.1.2"
+      firstcut-google-api "file:../../Library/Caches/Yarn/v1/firstcut-google-api"
       firstcut-model-base "file:../../Library/Caches/Yarn/v1/firstcut-model-base"
       firstcut-pipeline-consts "file:../../Library/Caches/Yarn/v1/firstcut-pipeline-consts"
       firstcut-schema "file:../../Library/Caches/Yarn/v1/firstcut-schema"
+      lodash "^4.17.11"
   
   "firstcut-deliverables@file:packages/firstcut-deliverables":
     version "0.0.0"
     dependencies:
       "@babel/runtime" "^7.1.2"
       firstcut-blueprints "file:../../Library/Caches/Yarn/v1/firstcut-blueprints"
+      firstcut-google-api "file:../../Library/Caches/Yarn/v1/firstcut-google-api"
       firstcut-model-base "file:../../Library/Caches/Yarn/v1/firstcut-model-base"
       firstcut-pipeline-consts "file:../../Library/Caches/Yarn/v1/firstcut-pipeline-consts"
       firstcut-schema "file:../../Library/Caches/Yarn/v1/firstcut-schema"
+      lodash "^4.17.11"
   
   "firstcut-google-api@file:packages/firstcut-google-api":
     version "0.0.0"
     dependencies:
       "@babel/runtime" "^7.1.2"
+      lodash "^4.17.11"
   
   "firstcut-invoices@file:packages/firstcut-invoices":
     version "0.0.0"
     dependencies:
       "@babel/runtime" "^7.1.2"
+      firstcut-google-api "file:../../Library/Caches/Yarn/v1/firstcut-google-api"
       firstcut-model-base "file:../../Library/Caches/Yarn/v1/firstcut-model-base"
       firstcut-pipeline-consts "file:../../Library/Caches/Yarn/v1/firstcut-pipeline-consts"
       firstcut-schema "file:../../Library/Caches/Yarn/v1/firstcut-schema"
+      lodash "^4.17.11"
   
   "firstcut-jobs@file:packages/firstcut-jobs":
     version "0.0.0"
     dependencies:
       "@babel/runtime" "^7.1.2"
+      firstcut-google-api "file:../../Library/Caches/Yarn/v1/firstcut-google-api"
       firstcut-model-base "file:../../Library/Caches/Yarn/v1/firstcut-model-base"
       firstcut-schema "file:../../Library/Caches/Yarn/v1/firstcut-schema"
+      lodash "^4.17.11"
       node-schedule "^1.3.0"
   
   "firstcut-mailer@file:packages/firstcut-mailer":
     version "0.0.0"
     dependencies:
       "@babel/runtime" "^7.1.2"
+      firstcut-google-api "file:../../Library/Caches/Yarn/v1/firstcut-google-api"
+      lodash "^4.17.11"
       sparkpost "^2.1.2"
   
   "firstcut-model-base@file:packages/firstcut-model-base":
@@ -4730,9 +4752,11 @@ Lockfile:
     dependencies:
       "@babel/runtime" "^7.1.2"
       firstcut-action-utils "file:../../Library/Caches/Yarn/v1/firstcut-action-utils"
+      firstcut-google-api "file:../../Library/Caches/Yarn/v1/firstcut-google-api"
       firstcut-retrieve-url "file:../../Library/Caches/Yarn/v1/firstcut-retrieve-url"
       firstcut-schema "file:../../Library/Caches/Yarn/v1/firstcut-schema"
       firstcut-utils "file:../../Library/Caches/Yarn/v1/firstcut-utils"
+      lodash "^4.17.11"
       pubsub-js "^1.7.0"
   
   "firstcut-models@file:packages/firstcut-models":
@@ -4745,11 +4769,13 @@ Lockfile:
       firstcut-companies "file:../../Library/Caches/Yarn/v1/firstcut-companies"
       firstcut-cuts "file:../../Library/Caches/Yarn/v1/firstcut-cuts"
       firstcut-deliverables "file:../../Library/Caches/Yarn/v1/firstcut-deliverables"
+      firstcut-google-api "file:../../Library/Caches/Yarn/v1/firstcut-google-api"
       firstcut-invoices "file:../../Library/Caches/Yarn/v1/firstcut-invoices"
       firstcut-jobs "file:../../Library/Caches/Yarn/v1/firstcut-jobs"
       firstcut-projects "file:../../Library/Caches/Yarn/v1/firstcut-projects"
       firstcut-shoots "file:../../Library/Caches/Yarn/v1/firstcut-shoots"
       firstcut-tasks "file:../../Library/Caches/Yarn/v1/firstcut-tasks"
+      lodash "^4.17.11"
   
   "firstcut-pipeline-consts@file:packages/firstcut-pipeline-consts":
     version "0.0.0"
@@ -4757,12 +4783,16 @@ Lockfile:
       "@babel/runtime" "^7.1.2"
       firstcut-google-api "file:../../Library/Caches/Yarn/v1/firstcut-google-api"
       immutable "^3.8.2"
+      lodash "^4.17.11"
   
   "firstcut-players@file:packages/firstcut-players":
     version "0.0.0"
     dependencies:
       "@babel/runtime" "^7.1.2"
+      firstcut-google-api "file:../../Library/Caches/Yarn/v1/firstcut-google-api"
       firstcut-models "file:../../Library/Caches/Yarn/v1/firstcut-models"
+      lodash "^4.17.11"
+      moment "^2.22.2"
   
   "firstcut-projects@file:packages/firstcut-projects":
     version "0.0.0"
@@ -4774,29 +4804,37 @@ Lockfile:
       firstcut-model-base "file:../../Library/Caches/Yarn/v1/firstcut-model-base"
       firstcut-pipeline-consts "file:../../Library/Caches/Yarn/v1/firstcut-pipeline-consts"
       firstcut-schema "file:../../Library/Caches/Yarn/v1/firstcut-schema"
+      lodash "^4.17.11"
   
   "firstcut-retrieve-url@file:packages/firstcut-retrieve-url":
     version "0.0.0"
     dependencies:
       "@babel/runtime" "^7.1.2"
+      firstcut-google-api "file:../../Library/Caches/Yarn/v1/firstcut-google-api"
       firstcut-utils "file:../../Library/Caches/Yarn/v1/firstcut-utils"
+      lodash "^4.17.11"
   
   "firstcut-schema@file:packages/firstcut-schema":
     version "0.0.0"
     dependencies:
       "@babel/runtime" "^7.1.2"
+      firstcut-google-api "file:../../Library/Caches/Yarn/v1/firstcut-google-api"
       firstcut-pipeline-consts "file:../../Library/Caches/Yarn/v1/firstcut-pipeline-consts"
+      lodash "^4.17.11"
+      moment-timezone "^0.5.21"
   
   "firstcut-shoots@file:packages/firstcut-shoots":
     version "0.0.0"
     dependencies:
       "@babel/runtime" "^7.1.2"
       firstcut-blueprints "file:../../Library/Caches/Yarn/v1/firstcut-blueprints"
+      firstcut-google-api "file:../../Library/Caches/Yarn/v1/firstcut-google-api"
       firstcut-model-base "file:../../Library/Caches/Yarn/v1/firstcut-model-base"
       firstcut-pipeline-consts "file:../../Library/Caches/Yarn/v1/firstcut-pipeline-consts"
       firstcut-retrieve-url "file:../../Library/Caches/Yarn/v1/firstcut-retrieve-url"
       firstcut-schema "file:../../Library/Caches/Yarn/v1/firstcut-schema"
       firstcut-utils "file:../../Library/Caches/Yarn/v1/firstcut-utils"
+      lodash "^4.17.11"
   
   "firstcut-slack@file:packages/firstcut-slack":
     version "0.0.0"
@@ -4804,35 +4842,35 @@ Lockfile:
       "@babel/runtime" "^7.1.2"
       "@slack/client" "^4.8.0"
       firstcut-google-api "file:../../Library/Caches/Yarn/v1/firstcut-google-api"
+      lodash "^4.17.11"
   
   "firstcut-tasks@file:packages/firstcut-tasks":
     version "0.0.0"
     dependencies:
       "@babel/runtime" "^7.1.2"
+      firstcut-google-api "file:../../Library/Caches/Yarn/v1/firstcut-google-api"
       firstcut-model-base "file:../../Library/Caches/Yarn/v1/firstcut-model-base"
       firstcut-pipeline-consts "file:../../Library/Caches/Yarn/v1/firstcut-pipeline-consts"
       firstcut-schema "file:../../Library/Caches/Yarn/v1/firstcut-schema"
+      lodash "^4.17.11"
   
   "firstcut-text-messaging@file:packages/firstcut-text-messaging":
     version "0.0.0"
     dependencies:
       "@babel/runtime" "^7.1.2"
+      firstcut-google-api "file:../../Library/Caches/Yarn/v1/firstcut-google-api"
       firstcut-utils "file:../../Library/Caches/Yarn/v1/firstcut-utils"
+      lodash "^4.17.11"
       simpl-schema "^1.5.3"
       twilio "^3.21.0"
-  
-  "firstcut-uploader@file:packages/firstcut-uploader":
-    version "0.0.0"
-    dependencies:
-      "@babel/runtime" "^7.1.2"
-      aws-sdk "^2.327.0"
-      crypto-js "^3.1.9-1"
-      evaporate "^2.1.4"
   
   "firstcut-utils@file:packages/firstcut-utils":
     version "0.0.0"
     dependencies:
       "@babel/runtime" "^7.1.2"
+      firstcut-google-api "file:../../Library/Caches/Yarn/v1/firstcut-google-api"
+      lodash "^4.17.11"
+      moment "^2.22.2"
   
   flat-cache@^1.2.1:
     version "1.3.0"
@@ -7376,7 +7414,7 @@ Lockfile:
     version "1.0.1"
     resolved "https://registry.yarnpkg.com/modify-values/-/modify-values-1.0.1.tgz#b3939fa605546474e3e3e3c63d64bd43b4ee6022"
   
-  moment-timezone@^0.5.0:
+  moment-timezone@^0.5.0, moment-timezone@^0.5.21:
     version "0.5.21"
     resolved "https://registry.yarnpkg.com/moment-timezone/-/moment-timezone-0.5.21.tgz#3cba247d84492174dbf71de2a9848fa13207b845"
     dependencies:
@@ -7386,7 +7424,7 @@ Lockfile:
     version "2.19.3"
     resolved "https://registry.yarnpkg.com/moment/-/moment-2.19.3.tgz#bdb99d270d6d7fda78cc0fbace855e27fe7da69f"
   
-  "moment@>= 2.9.0":
+  "moment@>= 2.9.0", moment@^2.22.2:
     version "2.22.2"
     resolved "https://registry.yarnpkg.com/moment/-/moment-2.22.2.tgz#3c257f9839fc0e93ff53149632239eb90783ff66"
   
@@ -10638,16 +10676,10 @@ Lockfile:
       yeoman-environment "^2.0.5"
 
 Trace: 
-  Error: Command failed.
-  Exit code: 2
-  Command: sh
-  Arguments: -c lerna exec --parallel -- babel src -d lib --config-file ../../babel.config.js --watch --copy-files --ignore '**/__mocks__/**'
-  Directory: /Users/artichokes/FirstCut/firstcut-mono
-  Output:
-  
-      at ProcessTermError.MessageError (/usr/local/Cellar/yarn/1.5.1_1/libexec/lib/cli.js:186:110)
-      at new ProcessTermError (/usr/local/Cellar/yarn/1.5.1_1/libexec/lib/cli.js:226:113)
-      at ChildProcess.<anonymous> (/usr/local/Cellar/yarn/1.5.1_1/libexec/lib/cli.js:30281:17)
-      at ChildProcess.emit (events.js:159:13)
-      at maybeClose (internal/child_process.js:943:16)
-      at Process.ChildProcess._handle.onexit (internal/child_process.js:220:5)
+  Error: This module isn't specified in a manifest.
+      at new MessageError (/usr/local/Cellar/yarn/1.5.1_1/libexec/lib/cli.js:186:110)
+      at Object.<anonymous> (/usr/local/Cellar/yarn/1.5.1_1/libexec/lib/cli.js:60445:15)
+      at Generator.next (<anonymous>)
+      at step (/usr/local/Cellar/yarn/1.5.1_1/libexec/lib/cli.js:98:30)
+      at /usr/local/Cellar/yarn/1.5.1_1/libexec/lib/cli.js:109:13
+      at <anonymous>

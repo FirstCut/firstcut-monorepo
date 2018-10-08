@@ -1,7 +1,6 @@
 import { Map } from 'immutable';
 import { RecordEvents } from 'firstcut-action-utils';
 import { ACTIONS } from 'firstcut-pipeline-consts';
-import Models from 'firstcut-models';
 import { getRecordUrl } from 'firstcut-retrieve-url';
 
 const SendFeedbackReminder = new Map({
@@ -11,7 +10,7 @@ const SendFeedbackReminder = new Map({
   schema: RecordEvents,
   fulfillsPrerequisites({ record, initiator }) {
   },
-  generateActions(event_data) {
+  generateActions(Models, event_data) {
     const { record_id } = event_data;
     const cut = Models.Cut.fromId(record_id);
     if (cut.hasVerifiedRevisions) {

@@ -2,18 +2,16 @@
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
-
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = void 0;
 
-var _firstcutSchema = _interopRequireWildcard(require("firstcut-schema"));
-
-var _cuts = require("./cuts.enum");
+var _firstcutSchema = require("firstcut-schema");
 
 var _simplSchema = _interopRequireDefault(require("simpl-schema"));
+
+var _cuts = require("./cuts.enum");
 
 var CutSchema = new _firstcutSchema.SimpleSchemaWrapper({
   fileId: {
@@ -66,6 +64,6 @@ var CutSchema = new _firstcutSchema.SimpleSchemaWrapper({
     customType: 'textarea'
   }
 });
-CutSchema.extend(_firstcutSchema.default);
+CutSchema.extend(_firstcutSchema.BaseSchema);
 var _default = CutSchema;
 exports.default = _default;

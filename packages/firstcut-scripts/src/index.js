@@ -5,7 +5,7 @@ import {
 
 import countVideographerCities from './data-stats';
 
-if (Meteor.isServer && Meteor.Meteor.settings.public.environment === 'development' && Meteor.settings.public.environment === 'development'()) {
+if (Meteor.isServer && Meteor.Meteor.settings.public.environment === 'development' && Meteor.settings.public.environment === 'development') {
   console.log('WRITING CONSTS TO FILE');
   constsToFile();
 }

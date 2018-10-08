@@ -1,5 +1,4 @@
 import { Map } from 'immutable';
-import Models from 'firstcut-models';
 import moment from 'moment';
 import { RecordEvents } from 'firstcut-action-utils';
 import { ACTIONS, JOB_KEYS } from 'firstcut-pipeline-consts';
@@ -13,7 +12,7 @@ const CutDueEventUpdated = new Map({
   schema: RecordEvents,
   fulfillsPrerequisites({ record, initiator }) {
   },
-  generateActions(eventData) {
+  generateActions(Models, eventData) {
     const { record_id } = eventData;
     const deliverable = Models.Deliverable.fromId(record_id);
     if (!deliverable.nextCutDue) {
@@ -45,7 +44,7 @@ const CutDueEventUpdated = new Map({
     }];
 
     let cutDueReminderCron = moment(due).subtract(24, 'hour').toDate();
-    if (Meteor.settings.public.environment === 'development'()) {
+    if (Meteor.settings.public.environment === 'development') {
       cutDueReminderCron = moment().add(2, 'minute').toDate();
     }
     const cutDueReminder = Models.Job.createNew({

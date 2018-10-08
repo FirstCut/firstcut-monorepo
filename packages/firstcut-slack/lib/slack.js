@@ -14,11 +14,6 @@ var _client = require("@slack/client");
 
 var _slack = require("./slack.schemas");
 
-var access_token = Meteor.settings.slack.api_token;
-var slack = new _client.WebClient(access_token);
-var client_id = Meteor.settings.slack.client_id;
-var client_secret = Meteor.settings.slack.client_secret;
-
 function getChannel() {
   if (Meteor.isTest) {
     return 'devtesting';
@@ -36,6 +31,11 @@ function getChannel() {
 }
 
 function postMessage(content, channel) {
+  var access_token = Meteor.settings.slack.api_token;
+  var slack = new _client.WebClient(access_token);
+  var client_id = Meteor.settings.slack.client_id;
+  var client_secret = Meteor.settings.slack.client_secret;
+
   if (!channel || Meteor.settings.public.environment == 'development') {
     channel = getChannel();
   }

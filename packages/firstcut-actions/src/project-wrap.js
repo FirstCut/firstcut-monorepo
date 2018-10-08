@@ -1,5 +1,4 @@
 import { Map } from 'immutable';
-import Models from 'firstcut-models';
 import { SimpleSchemaWrapper } from 'firstcut-schema';
 import { RecordEvents } from 'firstcut-action-utils';
 import { ACTIONS } from 'firstcut-pipeline-consts';
@@ -24,7 +23,7 @@ const ProjectWrap = new Map({
   fulfillsPrerequisites({ record, initiator }) {
     return !recordHistoryIncludesEvent({ record, event: key });
   },
-  generateActions(eventData) {
+  generateActions(Models, eventData) {
     const { record_id, clientEmailContent } = eventData;
     const project = Models.getRecordFromId('Project', record_id);
     const link = getRecordUrl(project);

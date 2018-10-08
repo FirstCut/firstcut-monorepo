@@ -5,6 +5,7 @@
   "main": "lib/index.js",
   "dependencies": {
     "@babel/runtime": "^7.1.2",
-    "firstcut-models": "file:../firstcut-models"
+    "lodash": "^4.17.11",
+    "moment": "^2.22.2"
   }
 }

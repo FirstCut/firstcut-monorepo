@@ -1,12 +1,10 @@
 
 import { Map } from 'immutable';
-import Models from 'firstcut-models';
 import { SimpleSchemaWrapper } from 'firstcut-schema';
 import moment from 'moment';
 import { RecordEvents } from 'firstcut-action-utils';
 import { ACTIONS } from 'firstcut-pipeline-consts';
 import { getRecordUrl } from 'firstcut-retrieve-url';
-import { getPlayer } from 'firstcut-players';
 
 const key = 'edit_shoot_script';
 
@@ -25,11 +23,11 @@ const EditShootScript = new Map({
   fulfillsPrerequisites({ record, initiator }) {
     return true;
   },
-  generateActions(eventData) {
+  generateActions(Models, eventData) {
     const { record_id, initiator_player_id, script } = eventData;
     let shoot = Models.Shoot.fromId(record_id);
     const link = getRecordUrl(shoot);
-    const player = getPlayer(initiator_player_id);
+    const player = Models.getPlayer(initiator_player_id);
 
     return [
       {

@@ -15,8 +15,6 @@ var _moment = _interopRequireDefault(require("moment"));
 
 var _firstcutSchema = require("firstcut-schema");
 
-var _firstcutModels = _interopRequireDefault(require("firstcut-models"));
-
 var _firstcutActionUtils = require("firstcut-action-utils");
 
 var _firstcutPipelineConsts = require("firstcut-pipeline-consts");
@@ -67,13 +65,11 @@ var SendCutToClient = new _immutable.Map({
       event: key
     });
   },
-  generateActions: function generateActions(eventData) {
+  generateActions: function generateActions(Models, eventData) {
     var record_id = eventData.record_id,
         _eventData$clientEmai = eventData.clientEmailContent,
         clientEmailContent = _eventData$clientEmai === void 0 ? null : _eventData$clientEmai;
-
-    var cut = _firstcutModels.default.Cut.fromId(record_id);
-
+    var cut = Models.Cut.fromId(record_id);
     var cutLink = (0, _firstcutRetrieveUrl.getRecordUrl)(cut);
     var lines = clientEmailContent !== 'undefined' && clientEmailContent ? clientEmailContent.split(/\n/) : [''];
     var clientEmails = (0, _firstcutActionUtils.getEmailActions)({
@@ -118,11 +114,11 @@ var SendCutToClient = new _immutable.Map({
 
     var cron = (0, _moment.default)().add(72, 'hour').toDate();
 
-    if (Meteor.settings.public.environment === 'development'()) {
+    if (Meteor.settings.public.environment === 'development') {
       cron = (0, _moment.default)().add(1, 'minute').toDate();
     }
 
-    var reminderToGetClientFeedback = _firstcutModels.default.Job.createNew({
+    var reminderToGetClientFeedback = Models.Job.createNew({
       jobName: 'scheduled_event',
       event_data: {
         record_id: record_id,
@@ -132,7 +128,6 @@ var SendCutToClient = new _immutable.Map({
       cron: cron,
       key: _firstcutPipelineConsts.JOB_KEYS.schedule_reminder_to_get_feedback
     });
-
     actions.push({
       type: _firstcutPipelineConsts.ACTIONS.schedule_job,
       title: 'schedule a reminder to get the feedback from the client for 72hrs from now',

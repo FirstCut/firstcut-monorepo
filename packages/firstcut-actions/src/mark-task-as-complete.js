@@ -1,6 +1,5 @@
 
 import { Map } from 'immutable';
-import Models from 'firstcut-models';
 import { RecordEvents } from 'firstcut-action-utils';
 import { ACTIONS } from 'firstcut-pipeline-consts';
 
@@ -11,7 +10,7 @@ const MarkTaskAsComplete = new Map({
   schema: RecordEvents,
   fulfillsPrerequisites({ record, initiator }) {
   },
-  generateActions(eventData) {
+  generateActions(Models, eventData) {
     const { record_id } = eventData;
     const task = Models.Task.fromId(record_id);
     return [

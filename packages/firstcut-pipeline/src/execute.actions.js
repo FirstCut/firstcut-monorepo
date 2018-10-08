@@ -1,60 +1,26 @@
 
-import { SimpleSchemaWrapper } from 'firstcut-schema';
-import { ACTIONS, EVENT_LABELS } from 'firstcut-pipeline-consts';
+import { ACTIONS } from 'firstcut-pipeline-consts';
 import Models from 'firstcut-models';
 import { Mailer } from 'firstcut-mailer';
 import { Slack } from 'firstcut-slack';
-import { Billing } from 'firstcut-billing';
+// import { Billing } from 'firstcut-billing';
+import { sendTextMessage } from 'firstcut-text-messaging';
+import { createEvent } from 'firstcut-calendar';
+import { PubSub } from 'pubsub-js';
+import { getActionsForEvent } from 'firstcut-pipeline-utils';
+import ActionTemplates from 'firstcut-actions';
+import { Random } from 'meteor-standalone-random';
 import {
   EmailActionSchema,
   CalendarActionSchema,
   SlackActionSchema,
   TextMessageActionSchema,
 } from './shared/pipeline.schemas';
-import { sendTextMessage } from 'firstcut-text-messaging';
-import { createEvent } from 'firstcut-calendar';
-import { PubSub } from 'pubsub-js';
-import ActionTemplates from 'firstcut-actions';
-import { Random } from 'meteor-standalone-random';
-import { userPlayerId, inSimulationMode } from 'firstcut-players';
 
 const slackTemplateDefaults = {
   username: 'firstcut',
   link_names: true,
 };
-
-export function emitPipelineEvent(args) {
-  if (inSimulationMode()) {
-    return;
-  }
-  const { record, ...rest } = args;
-  const params = _.mapValues({
-    ...rest,
-    record_id: record._id,
-    record_type: record.modelName,
-    initiator_player_id: userPlayerId(),
-  }, (val) => {
-    if (typeof val === 'object') {
-      return JSON.stringify(val);
-    }
-    return (val) ? val.toString() : '';
-  });
-
-  Analytics.trackAction(args);
-  // handleEvent.call(eventData);
-  HTTP.post(`${Meteor.settings.public.PIPELINE_ROOT}/handleEvent`, {
-    content: params, params, query: params, data: params,
-  }, (res) => {
-    console.log(res);
-  });
-}
-
-export function fulfillsPrerequisites({ event, record, initiator }) {
-  if (Meteor.settings.public.environment === 'development'()) {
-    return true;
-  }
-  return ActionTemplates[event].get('fulfillsPrerequisites')({ record, initiator });
-}
 
 export async function handleEvent(args) {
   if (Meteor.isServer) {
@@ -77,52 +43,6 @@ export async function handleEvent(args) {
 
 function getEventActionSchema(event) {
   return ActionTemplates[event].get('schema');
-}
-
-function getActionsForEvent(args) {
-  const { event } = args;
-  return ActionTemplates[event].get('generateActions')(args);
-}
-
-export function getEventActionsAsDescriptiveString(args) {
-  const actions = getActionsForEvent(args);
-  const label = EVENT_LABELS[args.event];
-  const result = actions.reduce((s, a) => {
-    let str = s;
-    str += '\t -- ';
-    str += actionAsDescriptiveString(a);
-    str += '\n';
-    return str;
-  }, `Triggering ${label} will: \n\n`);
-
-  return result;
-}
-
-export function getCustomFieldsSchema(event, record) {
-  let customSchema = ActionTemplates[event].get('customFieldsSchema');
-  if (!customSchema) {
-    customSchema = new SimpleSchemaWrapper();
-  }
-  if (typeof customSchema === 'function') {
-    customSchema = customSchema(record);
-  }
-  return customSchema;
-}
-
-
-function actionAsDescriptiveString(action) {
-  switch (action.type) {
-    case ACTIONS.send_email:
-      return `send an email to ${action.to.toString()}`;
-    case ACTIONS.slack_notify:
-      return 'emit a slack notification';
-    case ACTIONS.text_message:
-      return `send a text to ${action.phone}`;
-    case ACTIONS.calendar_event:
-      return `create a calendar event and invite ${action.attendees.toString()}`;
-    default:
-      return action.title;
-  }
 }
 
 function saveToHistory(args) {
@@ -214,7 +134,7 @@ function sendEmails(action) {
 
 function chargeInvoice(action) {
   const { invoice, token } = action;
-  return Billing.chargeInvoice(invoice, token);
+  // return Billing.chargeInvoice(invoice, token);
 }
 
 

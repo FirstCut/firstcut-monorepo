@@ -2,6 +2,8 @@
 import { isURL } from 'firstcut-utils';
 import { HEADSHOT_DIR, SCREENSHOT_DIR } from './url.enum';
 
+export const S3_URL = `https://${Meteor.settings.public.s3bucket}.s3-us-west-2.amazonaws.com/`;
+
 export function getBasepath(model) {
   return `/${model.collectionName}`;
 }

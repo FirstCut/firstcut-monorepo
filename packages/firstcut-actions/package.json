@@ -6,11 +6,10 @@
   "dependencies": {
     "@babel/runtime": "^7.1.2",
     "firstcut-action-utils": "file:../firstcut-action-utils",
-    "firstcut-models": "file:../firstcut-models",
     "firstcut-pipeline-consts": "file:../firstcut-pipeline-consts",
-    "firstcut-players": "file:../firstcut-players",
     "firstcut-retrieve-url": "file:../firstcut-retrieve-url",
     "firstcut-schema": "file:../firstcut-schema",
-    "firstcut-utils": "file:../firstcut-utils"
+    "firstcut-utils": "file:../firstcut-utils",
+    "lodash": "^4.17.11"
   }
 }

@@ -1,8 +1,6 @@
 import { Map } from 'immutable';
-import Models from 'firstcut-models';
-import { RecordEvents } from 'firstcut-action-utils';
 import { ACTIONS } from 'firstcut-pipeline-consts';
-import { getEmailActions, recordHistoryIncludesEvent } from 'firstcut-action-utils';
+import { RecordEvents, getEmailActions, recordHistoryIncludesEvent } from 'firstcut-action-utils';
 import { getRecordUrl } from 'firstcut-retrieve-url';
 
 const key = 'deliverable_kickoff';
@@ -14,7 +12,7 @@ const DeliverableKickoff = new Map({
   fulfillsPrerequisites({ record, initiator }) {
     return !recordHistoryIncludesEvent({ record, event: key });
   },
-  generateActions(eventData) {
+  generateActions(Models, eventData) {
     const { record_id } = eventData;
     const deliverable = Models.Deliverable.fromId(record_id);
     const link = getRecordUrl(deliverable);

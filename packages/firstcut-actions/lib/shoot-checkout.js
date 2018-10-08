@@ -9,8 +9,6 @@ exports.default = void 0;
 
 var _immutable = require("immutable");
 
-var _firstcutModels = _interopRequireDefault(require("firstcut-models"));
-
 var _firstcutPipelineConsts = require("firstcut-pipeline-consts");
 
 var _firstcutRetrieveUrl = require("firstcut-retrieve-url");
@@ -35,12 +33,10 @@ var ShootCheckout = new _immutable.Map({
     var record = _ref.record,
         initiator = _ref.initiator;
   },
-  generateActions: function generateActions(event_data) {
+  generateActions: function generateActions(Models, event_data) {
     var record_id = event_data.record_id,
         collaborator_key = event_data.collaborator_key;
-
-    var shoot = _firstcutModels.default.Shoot.fromId(record_id);
-
+    var shoot = Models.Shoot.fromId(record_id);
     var collaborator = shoot[collaborator_key];
 
     var _ref2 = _lodash._.last(shoot.ratings) || {},
@@ -81,7 +77,7 @@ var ShootCheckout = new _immutable.Map({
     }];
 
     if (!shoot.isDummy) {
-      var reminder_job = _firstcutModels.default.Job.createNew({
+      var reminder_job = Models.Job.createNew({
         jobName: 'scheduled_event',
         event_data: {
           record_id: record_id,
@@ -91,7 +87,6 @@ var ShootCheckout = new _immutable.Map({
         cron: (0, _moment.default)().add(1, 'day').toDate(),
         key: _firstcutPipelineConsts.JOB_KEYS.schedule_footage_verification
       });
-
       actions.push({
         type: _firstcutPipelineConsts.ACTIONS.schedule_job,
         title: 'schedule reminders that footage should be verified 24hrs after shoot checkout',

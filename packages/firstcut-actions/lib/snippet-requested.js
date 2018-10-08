@@ -13,8 +13,6 @@ var _objectWithoutProperties2 = _interopRequireDefault(require("@babel/runtime/h
 
 var _immutable = require("immutable");
 
-var _firstcutModels = _interopRequireDefault(require("firstcut-models"));
-
 var _firstcutPipelineConsts = require("firstcut-pipeline-consts");
 
 var _firstcutFilestore = require("firstcut-filestore");
@@ -37,13 +35,11 @@ var SnippetRequested = new _immutable.Map({
     var record = _ref.record,
         initiator = _ref.initiator;
   },
-  generateActions: function generateActions(event_data) {
+  generateActions: function generateActions(Models, event_data) {
     var record_id = event_data.record_id,
         end = event_data.end,
         start = event_data.start;
-
-    var cut = _firstcutModels.default.Cut.fromId(record_id);
-
+    var cut = Models.Cut.fromId(record_id);
     return [{
       type: _firstcutPipelineConsts.ACTIONS.slack_notify,
       content: {

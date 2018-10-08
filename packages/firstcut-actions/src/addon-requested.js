@@ -1,11 +1,8 @@
 
 import { Map } from 'immutable';
-import Models from 'firstcut-models';
-import { RecordEvents } from 'firstcut-action-utils';
+import { RecordEvents, getEmailActions } from 'firstcut-action-utils';
 import { getAddOnPrice, ACTIONS } from 'firstcut-pipeline-consts';
 import { getRecordUrl } from 'firstcut-retrieve-url';
-import { getPlayer } from 'firstcut-players';
-import { getEmailActions } from 'firstcut-action-utils';
 
 const AddOnRequested = new Map({
   key: 'add_on_requested',
@@ -14,11 +11,11 @@ const AddOnRequested = new Map({
   schema: RecordEvents,
   fulfillsPrerequisites({ record, initiator }) {
   },
-  generateActions(eventData) {
+  generateActions(Models, eventData) {
     const { record_id, initiator_player_id, addOn } = eventData;
     const cut = Models.Cut.fromId(record_id);
     const link = getRecordUrl(cut);
-    const player = getPlayer(initiator_player_id);
+    const player = Models.getPlayer(initiator_player_id);
 
     const internalEmails = getEmailActions({
       recipients: [cut.adminOwner],

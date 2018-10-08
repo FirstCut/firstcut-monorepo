@@ -6,6 +6,6 @@
   "dependencies": {
     "@babel/runtime": "^7.1.2",
     "firstcut-pipeline-consts": "file:../firstcut-pipeline-consts",
-    "firstcut-players": "file:../firstcut-players"
+    "lodash": "^4.17.11"
   }
 }

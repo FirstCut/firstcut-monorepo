@@ -11,8 +11,6 @@ var _toConsumableArray2 = _interopRequireDefault(require("@babel/runtime/helpers
 
 var _immutable = require("immutable");
 
-var _firstcutModels = _interopRequireDefault(require("firstcut-models"));
-
 var _firstcutPipelineConsts = require("firstcut-pipeline-consts");
 
 var _firstcutActionUtils = require("firstcut-action-utils");
@@ -33,11 +31,9 @@ var InvoicePaid = new _immutable.Map({
       event: key
     });
   },
-  generateActions: function generateActions(eventData) {
+  generateActions: function generateActions(Models, eventData) {
     var record_id = eventData.record_id;
-
-    var invoice = _firstcutModels.default.Invoice.fromId(record_id);
-
+    var invoice = Models.Invoice.fromId(record_id);
     var link = (0, _firstcutRetrieveUrl.getRecordUrl)(invoice);
     var emailActions = (0, _firstcutActionUtils.getEmailActions)({
       recipients: [invoice.payee],

@@ -1,12 +1,10 @@
 
 import { SimpleSchemaWrapper } from 'firstcut-schema';
 import { Map } from 'immutable';
-import Models from 'firstcut-models';
 import { RecordEvents } from 'firstcut-action-utils';
 import { ACTIONS } from 'firstcut-pipeline-consts';
 import { recordHistoryIncludesEvent } from 'firstcut-action-utils';
 import { getRecordUrl } from 'firstcut-retrieve-url';
-import { getPlayer } from 'firstcut-players';
 
 const key = 'preproduction_kickoff';
 
@@ -28,7 +26,7 @@ const ShootReady = new Map({
   fulfillsPrerequisites({ record, initiator }) {
     return !recordHistoryIncludesEvent({ record, event: key });
   },
-  generateActions(eventData) {
+  generateActions(Models, eventData) {
     const {
       record_id,
       generateVideographerHourlyInvoice,
@@ -36,7 +34,7 @@ const ShootReady = new Map({
       initiator_player_id,
     } = eventData;
     const shoot = Models.getRecordFromId('Shoot', record_id);
-    const player = getPlayer(initiator_player_id);
+    const player = Models.getPlayer(initiator_player_id);
 
     return [
       {

@@ -1,15 +1,11 @@
 "use strict";
 
-var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
-
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = void 0;
 
 var _immutable = require("immutable");
-
-var _firstcutModels = _interopRequireDefault(require("firstcut-models"));
 
 var _firstcutActionUtils = require("firstcut-action-utils");
 
@@ -31,15 +27,11 @@ var InvoiceSetToDue = new _immutable.Map({
       event: key
     });
   },
-  generateActions: function generateActions(eventData) {
+  generateActions: function generateActions(Models, eventData) {
     var record_id = eventData.record_id;
-
-    var invoice = _firstcutModels.default.Invoice.fromId(record_id);
-
+    var invoice = Models.Invoice.fromId(record_id);
     var link = (0, _firstcutRetrieveUrl.getRecordUrl)(invoice);
-
-    var nicole = _firstcutModels.default.Collaborator.getNicoleProfile();
-
+    var nicole = Models.Collaborator.getNicoleProfile();
     return [{
       type: _firstcutPipelineConsts.ACTIONS.slack_notify,
       content: {

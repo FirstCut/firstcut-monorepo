@@ -21,17 +21,17 @@ var _inherits2 = _interopRequireDefault(require("@babel/runtime/helpers/inherits
 
 var _firstcutPipelineConsts = require("firstcut-pipeline-consts");
 
-var _deliverables = _interopRequireDefault(require("./deliverables.blueprints"));
-
 var _lodash = require("lodash");
 
 var _immutable = require("immutable");
 
-var _deliverables2 = _interopRequireDefault(require("./deliverables.schema"));
-
 var _firstcutModelBase = require("firstcut-model-base");
 
-var Base = (0, _firstcutModelBase.createFirstCutModel)(_deliverables2.default);
+var _deliverables = _interopRequireDefault(require("./deliverables.schema"));
+
+var _deliverables2 = _interopRequireDefault(require("./deliverables.blueprints"));
+
+var Base = (0, _firstcutModelBase.createFirstCutModel)(_deliverables.default);
 
 var Deliverable =
 /*#__PURE__*/
@@ -186,7 +186,7 @@ function (_Base) {
     get: function get() {
       var cuts = this.getCuts().toArray();
       var cutHistory = cuts.map(function (cut) {
-        return cut.history.map(function (event) {
+        return cut.historyAsArray.map(function (event) {
           var e = event;
 
           if (e.toJS) {
@@ -214,12 +214,12 @@ function (_Base) {
   }, {
     key: "schema",
     get: function get() {
-      return _deliverables2.default;
+      return _deliverables.default;
     }
   }]);
   return Deliverable;
 }(Base);
 
-Deliverable.availableBlueprints = _deliverables.default;
+Deliverable.availableBlueprints = _deliverables2.default;
 var _default = Deliverable;
 exports.default = _default;

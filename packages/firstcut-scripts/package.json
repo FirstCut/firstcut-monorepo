@@ -5,6 +5,7 @@
   "main": "lib/index.js",
   "dependencies": {
     "@babel/runtime": "^7.1.2",
-    "firstcut-actions": "file:../firstcut-actions"
+    "firstcut-actions": "file:../firstcut-actions",
+    "lodash": "^4.17.11"
   }
 }

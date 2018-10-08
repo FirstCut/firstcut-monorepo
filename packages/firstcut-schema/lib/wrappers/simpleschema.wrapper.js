@@ -56,7 +56,6 @@ function () {
 
   function SimpleSchemaWrapper(props) {
     (0, _classCallCheck2.default)(this, SimpleSchemaWrapper);
-    console.log('EXTENDING');
 
     _simplSchema.default.extendOptions(['helpText', 'sortBy', 'options', 'placeholder', 'hidden', 'customType', 'rows', 'store', 'bucket', 'serviceFilter', 'enumOptions', 'unique', 'restricted', 'customAutoValue', 'serviceDependency']);
 

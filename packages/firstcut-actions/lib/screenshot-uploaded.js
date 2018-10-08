@@ -1,15 +1,11 @@
 "use strict";
 
-var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
-
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = void 0;
 
 var _immutable = require("immutable");
-
-var _firstcutModels = _interopRequireDefault(require("firstcut-models"));
 
 var _firstcutActionUtils = require("firstcut-action-utils");
 
@@ -27,12 +23,10 @@ var ScreenshotUploaded = new _immutable.Map({
         initiator = _ref.initiator;
     return true;
   },
-  generateActions: function generateActions(eventData) {
+  generateActions: function generateActions(Models, eventData) {
     var record_id = eventData.record_id,
         screenshot = eventData.screenshot;
-
-    var shoot = _firstcutModels.default.Shoot.fromId(record_id);
-
+    var shoot = Models.Shoot.fromId(record_id);
     var collaborator = shoot.screenshotCollaborator(screenshot);
     var link = (0, _firstcutRetrieveUrl.getRecordUrl)(shoot);
     var screenshotURL = shoot.screenshotURL(screenshot.filename);

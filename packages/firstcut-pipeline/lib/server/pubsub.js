@@ -13,21 +13,17 @@ var _pubsubJs = require("pubsub-js");
 
 var _firstcutPipelineConsts = require("firstcut-pipeline-consts");
 
-var _firstcutPlayers = require("firstcut-players");
-
-var _firstcutModels = _interopRequireDefault(require("firstcut-models"));
-
 var _lodash = require("lodash");
 
 var _moment = _interopRequireDefault(require("moment"));
 
 var _execute = require("../execute.actions");
 
-function initSubscriptions() {
-  var Cut = _firstcutModels.default.Cut,
-      Deliverable = _firstcutModels.default.Deliverable,
-      Shoot = _firstcutModels.default.Shoot,
-      Invoice = _firstcutModels.default.Invoice;
+function initSubscriptions(Models) {
+  var Cut = Models.Cut,
+      Deliverable = Models.Deliverable,
+      Shoot = Models.Shoot,
+      Invoice = Models.Invoice;
   /* Listens to all records for updates to all keys in COLLABORATOR_TYPES_TO_LABELS */
 
   /* Publishes a 'collaborator_added' event if a collaborator has changed */
@@ -75,7 +71,7 @@ function initSubscriptions() {
   }
 
   var initializing = true;
-  var query = Meteor.settings.public.environment === 'development'() ? {} : {
+  var query = Meteor.settings.public.environment === 'development' ? {} : {
     isDummy: {
       $ne: true
     }
@@ -175,7 +171,7 @@ function initSubscriptions() {
         });
       }
 
-      notifyCollaboratorsTheyWereAddedOrRemoved(_firstcutModels.default.Shoot, fields, prevFields);
+      notifyCollaboratorsTheyWereAddedOrRemoved(Models.Shoot, fields, prevFields);
     }
   });
   Cut.collection.find(query).observe({
@@ -274,15 +270,14 @@ function initSubscriptions() {
       }
     }
   });
-
-  _firstcutModels.default.allModels.forEach(function (model) {
+  Models.allModels.forEach(function (model) {
     if (model.modelName === 'Asset') {
       return;
     }
 
     var initializing = true;
 
-    if ([_firstcutModels.default.Job.modelName, _firstcutModels.default.Cut.modelName].includes(model.modelName)) {
+    if ([Models.Job.modelName, Models.Cut.modelName].includes(model.modelName)) {
       return;
     }
 
@@ -292,10 +287,9 @@ function initSubscriptions() {
           return;
         }
 
-        var record = _firstcutModels.default.getRecordFromId(model.modelName, doc._id);
-
+        var record = Models.getRecordFromId(model.modelName, doc._id);
         var user = Meteor.users.findOne(record.createdBy);
-        var initiator_player_id = (0, _firstcutPlayers.getPlayerIdFromUser)(user);
+        var initiator_player_id = Models.getPlayerIdFromUser(user);
 
         _pubsubJs.PubSub.publish('record_created', {
           record_id: doc._id,
@@ -311,7 +305,6 @@ function initSubscriptions() {
     });
     initializing = false;
   });
-
   Meteor.users.find({}).observe({
     added: function added(doc) {
       if (initializing) {
@@ -325,8 +318,8 @@ function initSubscriptions() {
         return;
       }
 
-      var newPlayerId = (0, _firstcutPlayers.getPlayerIdFromUser)(fields);
-      var oldPlayerId = (0, _firstcutPlayers.getPlayerIdFromUser)(prevFields);
+      var newPlayerId = Models.getPlayerIdFromUser(fields);
+      var oldPlayerId = Models.getPlayerIdFromUser(prevFields);
 
       if (newPlayerId && newPlayerId !== oldPlayerId) {
         handleNewUser(fields);
@@ -335,10 +328,10 @@ function initSubscriptions() {
   });
 
   function handleNewUser(user) {
-    var playerId = (0, _firstcutPlayers.getPlayerIdFromUser)(user);
+    var playerId = Models.getPlayerIdFromUser(user);
 
     if (playerId) {
-      var player = (0, _firstcutPlayers.getPlayerFromQuery)({
+      var player = Models.getPlayerFromQuery({
         _id: playerId
       });
 

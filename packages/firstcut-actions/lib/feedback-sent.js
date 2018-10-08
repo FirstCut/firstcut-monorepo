@@ -13,8 +13,6 @@ var _firstcutSchema = require("firstcut-schema");
 
 var _immutable = require("immutable");
 
-var _firstcutModels = _interopRequireDefault(require("firstcut-models"));
-
 var _moment = _interopRequireDefault(require("moment"));
 
 var _firstcutActionUtils = require("firstcut-action-utils");
@@ -50,12 +48,10 @@ var RevisionsSent = new _immutable.Map({
       event: key
     });
   },
-  generateActions: function generateActions(eventData) {
+  generateActions: function generateActions(Models, eventData) {
     var record_id = eventData.record_id,
         nextCutDue = eventData.nextCutDue;
-
-    var cut = _firstcutModels.default.getRecordFromId('Cut', record_id);
-
+    var cut = Models.getRecordFromId('Cut', record_id);
     var link = (0, _firstcutRetrieveUrl.getRecordUrl)(cut);
     var changes = cut.revisions ? cut.revisions.split(/\n/) : [];
     var emailActions = (0, _firstcutActionUtils.getEmailActions)({

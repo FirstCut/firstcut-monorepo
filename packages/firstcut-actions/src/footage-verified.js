@@ -1,6 +1,5 @@
 
 import { Map } from 'immutable';
-import Models from 'firstcut-models';
 import moment from 'moment';
 import { RecordEvents } from 'firstcut-action-utils';
 import { setAllRecordInvoicesToDue, recordHistoryIncludesEvent } from 'firstcut-action-utils';
@@ -18,7 +17,7 @@ const FootageVerified = new Map({
     const isAfterDayOfShoot = moment().isAfter(dayOfShoot);
     return isAfterDayOfShoot && !recordHistoryIncludesEvent({ record, event: key });
   },
-  generateActions(event_data) {
+  generateActions(Models, event_data) {
     const { record_id } = event_data;
     const shoot = Models.Shoot.fromId(record_id);
     return [{
@@ -31,7 +30,7 @@ const FootageVerified = new Map({
       title: 'set shoot invoices to due',
       execute: () => {
         setAllRecordInvoicesToDue(shoot);
-      }
+      },
     }];
   },
 });

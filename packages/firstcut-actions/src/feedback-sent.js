@@ -1,6 +1,5 @@
 import { SimpleSchemaWrapper } from 'firstcut-schema';
 import { Map } from 'immutable';
-import Models from 'firstcut-models';
 import moment from 'moment';
 import { RecordEvents } from 'firstcut-action-utils';
 import { ACTIONS } from 'firstcut-pipeline-consts';
@@ -31,7 +30,7 @@ const RevisionsSent = new Map({
       && !recordHistoryIncludesEvent({ record, event: key })
     );
   },
-  generateActions(eventData) {
+  generateActions(Models, eventData) {
     const { record_id, nextCutDue } = eventData;
     const cut = Models.getRecordFromId('Cut', record_id);
     const link = getRecordUrl(cut);

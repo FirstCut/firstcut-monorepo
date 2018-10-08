@@ -17,8 +17,6 @@ var _firstcutPipelineConsts = require("firstcut-pipeline-consts");
 
 var _firstcutUtils = require("firstcut-utils");
 
-var _firstcutModels = _interopRequireDefault(require("firstcut-models"));
-
 var _firstcutRetrieveUrl = require("firstcut-retrieve-url");
 
 var UpcomingShootReminder = new _immutable.Map({
@@ -30,11 +28,9 @@ var UpcomingShootReminder = new _immutable.Map({
     var record = _ref.record,
         initiator = _ref.initiator;
   },
-  generateActions: function generateActions(eventData) {
+  generateActions: function generateActions(Models, eventData) {
     var record_id = eventData.record_id;
-
-    var shoot = _firstcutModels.default.Shoot.fromId(record_id);
-
+    var shoot = Models.Shoot.fromId(record_id);
     var scheduledDate = (0, _firstcutUtils.humanReadableDate)({
       date: shoot.date,
       timezone: shoot.timezone,

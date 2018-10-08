@@ -5,7 +5,7 @@
   "main": "lib/index.js",
   "dependencies": {
     "@babel/runtime": "^7.1.2",
-    "firstcut-google-api": "file:../firstcut-google-api",
-    "immutable": "^3.8.2"
+    "immutable": "^3.8.2",
+    "lodash": "^4.17.11"
   }
 }

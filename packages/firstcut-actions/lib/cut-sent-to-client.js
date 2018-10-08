@@ -11,13 +11,11 @@ var _firstcutSchema = require("firstcut-schema");
 
 var _immutable = require("immutable");
 
-var _firstcutModels = _interopRequireDefault(require("firstcut-models"));
-
 var _moment = _interopRequireDefault(require("moment"));
 
-var _firstcutActionUtils = require("firstcut-action-utils");
-
 var _firstcutPipelineConsts = require("firstcut-pipeline-consts");
+
+var _firstcutActionUtils = require("firstcut-action-utils");
 
 var _firstcutRetrieveUrl = require("firstcut-retrieve-url");
 
@@ -31,7 +29,7 @@ var CutSentToClient = new _immutable.Map({
     var record = _ref.record,
         initiator = _ref.initiator;
   },
-  generateActions: function generateActions(event_data) {// No longer in use -- see send-cut-to-client
+  generateActions: function generateActions(Models, event_data) {// No longer in use -- see send-cut-to-client
   }
 });
 var _default = CutSentToClient;

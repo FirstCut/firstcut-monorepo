@@ -1,10 +1,8 @@
 
 import { Map } from 'immutable';
-import Models from 'firstcut-models';
 import { SimpleSchemaWrapper } from 'firstcut-schema';
-import { RecordEvents } from 'firstcut-action-utils';
 import { ACTIONS } from 'firstcut-pipeline-consts';
-import { getEmailActions, recordHistoryIncludesEvent } from 'firstcut-action-utils';
+import { RecordEvents, getEmailActions, recordHistoryIncludesEvent } from 'firstcut-action-utils';
 import { getRecordUrl } from 'firstcut-retrieve-url';
 
 const key = 'edit_feedback';
@@ -33,7 +31,7 @@ const EditFeedback = new Map({
   fulfillsPrerequisites({ record, initiator }) {
     return !record.clientHasSubmittedFeedback;
   },
-  generateActions(eventData) {
+  generateActions(Models, eventData) {
     const {
       record_id, initiator_player_id, name, email, feedback,
     } = eventData;

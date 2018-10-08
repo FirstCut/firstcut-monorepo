@@ -1,15 +1,11 @@
 "use strict";
 
-var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
-
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = void 0;
 
 var _immutable = require("immutable");
-
-var _firstcutModels = _interopRequireDefault(require("firstcut-models"));
 
 var _firstcutActionUtils = require("firstcut-action-utils");
 
@@ -30,15 +26,13 @@ var RecordCreated = new _immutable.Map({
     var record_id = event_data.record_id,
         record_type = event_data.record_type,
         initiator_player_id = event_data.initiator_player_id;
-
-    var record = _firstcutModels.default[record_type].fromId(record_id);
+    var record = Models[record_type].fromId(record_id);
 
     if (record.isDummy) {
       return [];
     }
 
-    var initiator = _firstcutModels.default.Collaborator.fromId(initiator_player_id);
-
+    var initiator = Models.Collaborator.fromId(initiator_player_id);
     var link = (0, _firstcutRetrieveUrl.getRecordUrl)(record);
     return [{
       type: _firstcutPipelineConsts.ACTIONS.slack_notify,

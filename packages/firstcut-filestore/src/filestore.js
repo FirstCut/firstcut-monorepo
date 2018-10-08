@@ -1,10 +1,12 @@
 
 import SimpleSchema from 'simpl-schema';
-import Models from 'firstcut-models';
 
 let filestore = null;
-export function initFilestoreService(service) {
+let Models = null;
+
+export function initFilestoreService(models, service) {
   filestore = service;
+  Models = models;
 }
 
 function listObjects(args) {

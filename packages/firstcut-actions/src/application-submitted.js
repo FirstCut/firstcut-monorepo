@@ -1,9 +1,7 @@
 import { Map } from 'immutable';
-import Models from 'firstcut-models';
-import { RecordEvents } from 'firstcut-action-utils';
+import { RecordEvents, getEmailActions } from 'firstcut-action-utils';
 import { ACTIONS } from 'firstcut-pipeline-consts';
 import { getRecordUrl } from 'firstcut-retrieve-url';
-import { getEmailActions } from 'firstcut-action-utils';
 
 const ApplicationSubmitted = new Map({
   key: 'application_submitted',
@@ -12,7 +10,7 @@ const ApplicationSubmitted = new Map({
   schema: RecordEvents,
   fulfillsPrerequisites({ record, initiator }) {
   },
-  generateActions(eventData) {
+  generateActions(Models, eventData) {
     const { record_id } = eventData;
     const collaborator = Models.Collaborator.fromId(record_id);
     const link = getRecordUrl(collaborator);

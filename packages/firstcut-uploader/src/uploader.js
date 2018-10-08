@@ -11,8 +11,8 @@ export function initUploader(config) {
   defaultBucket = config.assets_bucket;
   const evaporateConfig = {
     aws_key: config.key,
-    bucket: config3.assets_bucket,
-    awsRegion: config3.region,
+    bucket: config.assets_bucket,
+    awsRegion: config.region,
     logging: config.environment === 'development',
     computeContentMd5: true,
     s3FileCacheHoursAgo: 4,
@@ -28,6 +28,7 @@ export function initUploader(config) {
     .then((eva) => {
       evaporate = eva;
     });
+  return { upload };
 }
 
 let evaporate = null;

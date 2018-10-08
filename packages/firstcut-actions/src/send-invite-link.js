@@ -2,7 +2,6 @@ import { Map } from 'immutable';
 import { RecordEvents } from 'firstcut-action-utils';
 import { ACTIONS } from 'firstcut-pipeline-consts';
 import { getInviteLink } from 'firstcut-retrieve-url';
-import { getPlayer } from 'firstcut-players';
 import { getEmailActions } from 'firstcut-action-utils';
 
 const SendInviteLink = new Map({
@@ -13,10 +12,10 @@ const SendInviteLink = new Map({
   fulfillsPrerequisites({ record, initiator }) {
     return true;
   },
-  generateActions(eventData) {
+  generateActions(Models, eventData) {
     const { record_id, initiator_player_id } = eventData;
-    const player = getPlayer(record_id);
-    const initiator = getPlayer(initiator_player_id);
+    const player = Models.getPlayer(record_id);
+    const initiator = Models.getPlayer(initiator_player_id);
     const inviteLink = getInviteLink(player);
 
     const invites = getEmailActions({

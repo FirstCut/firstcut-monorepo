@@ -11,13 +11,11 @@ var _objectSpread2 = _interopRequireDefault(require("@babel/runtime/helpers/obje
 
 var _objectWithoutProperties2 = _interopRequireDefault(require("@babel/runtime/helpers/objectWithoutProperties"));
 
-var _firstcutPlayers = require("firstcut-players");
-
 var _firstcutPipelineConsts = require("firstcut-pipeline-consts");
 
 // import { getQualifiedSkills } from '/imports/ui/config';
 var Analytics = {
-  init: function init(options) {
+  init: function init(models, options) {
     if (options.development) {
       var _analytics = {
         load: function load() {
@@ -40,9 +38,11 @@ var Analytics = {
 
     analytics.load('q7fljn00pJH2VTzpOAv08t2AH5d2tfFy');
 
-    if ((0, _firstcutPlayers.userId)()) {
+    if (models.userId()) {
       this.identifyCurrentUser();
     }
+
+    this.models = models;
   },
   trackError: function trackError(data) {
     this.track('Error', data);
@@ -85,22 +85,22 @@ var Analytics = {
   },
   track: function track(name, d) {
     var data = (0, _objectSpread2.default)({}, d, {
-      userId: (0, _firstcutPlayers.userId)()
+      userId: this.models.userId()
     });
     analytics.track(name, data);
   },
   identifyCurrentUser: function identifyCurrentUser() {
-    if ((0, _firstcutPlayers.inSimulationMode)()) {
+    if (this.models.inSimulationMode()) {
       analytics.identify('Simulation', {
-        _id: (0, _firstcutPlayers.userId)(),
-        playerId: (0, _firstcutPlayers.getPlayerIdFromUser)(Meteor.user()),
-        simulationPlayerId: (0, _firstcutPlayers.userPlayerId)()
+        _id: this.models.userId(),
+        playerId: this.models.getPlayerIdFromUser(Meteor.user()),
+        simulationPlayerId: this.models.userPlayerId()
       });
       analytics.group('Simulation');
       return;
     }
 
-    var player = (0, _firstcutPlayers.userPlayer)();
+    var player = this.models.userPlayer();
 
     if (!player) {
       analytics.identify('Anonymous', {});
@@ -109,7 +109,7 @@ var Analytics = {
     }
 
     var traits = {
-      _id: (0, _firstcutPlayers.userId)(),
+      _id: this.models.userId(),
       email: player.email,
       playerId: player._id,
       name: player.displayName

@@ -6,6 +6,7 @@
   "dependencies": {
     "@babel/runtime": "^7.1.2",
     "firstcut-aws": "file:../firstcut-aws",
+    "lodash": "^4.17.11",
     "simpl-schema": "^1.5.3"
   }
 }

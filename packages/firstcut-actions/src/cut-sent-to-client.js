@@ -1,11 +1,9 @@
 
 import { SimpleSchemaWrapper } from 'firstcut-schema';
 import { Map } from 'immutable';
-import Models from 'firstcut-models';
 import moment from 'moment';
-import { RecordEvents } from 'firstcut-action-utils';
 import { ACTIONS } from 'firstcut-pipeline-consts';
-import { getEmailActions } from 'firstcut-action-utils';
+import { RecordEvents, getEmailActions } from 'firstcut-action-utils';
 import { getRecordUrl, getCutViewLink } from 'firstcut-retrieve-url';
 
 const CutSentToClient = new Map({
@@ -17,7 +15,7 @@ const CutSentToClient = new Map({
   }),
   fulfillsPrerequisites({ record, initiator }) {
   },
-  generateActions(event_data) {
+  generateActions(Models, event_data) {
     // No longer in use -- see send-cut-to-client
   },
 });

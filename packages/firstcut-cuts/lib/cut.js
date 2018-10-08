@@ -19,13 +19,13 @@ var _inherits2 = _interopRequireDefault(require("@babel/runtime/helpers/inherits
 
 var _lodash = require("lodash");
 
-var _cuts = require("./cuts.enum");
-
 var _firstcutPipelineConsts = require("firstcut-pipeline-consts");
 
-var _cuts2 = _interopRequireDefault(require("./cuts.schema"));
-
 var _firstcutModelBase = require("firstcut-model-base");
+
+var _cuts = require("./cuts.enum");
+
+var _cuts2 = _interopRequireDefault(require("./cuts.schema"));
 
 var Base = (0, _firstcutModelBase.createFirstCutModel)(_cuts2.default);
 

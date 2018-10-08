@@ -47,7 +47,7 @@ var CompanySchema = new _firstcutSchema.SimpleSchemaWrapper({
     blackbox: true
   })
 });
-CompanySchema.extend(_firstcutSchema.default);
+CompanySchema.extend(_firstcutSchema.BaseSchema);
 CompanySchema.extend(_firstcutSchema.default);
 var _default = CompanySchema;
 exports.default = _default;

@@ -1,5 +1,4 @@
 
-import Models from 'firstcut-models';
 import { List } from 'immutable';
 import { SchemaParser } from 'firstcut-schema';
 import { _ } from 'lodash';
@@ -18,7 +17,7 @@ export default function getAutoformSchema(record, field, options) {
   };
   result.defaultValue = _getDefaultValue(fieldSchema, record);
   result.error = _getError(errors, field);
-  result.options = _getOptions(fieldSchema);
+  result.options = _getOptions(record.models, fieldSchema);
   if (result.options && result.options.toArray) {
     result.options = result.options.toArray(); // if an immutable list is returned
   }
@@ -65,13 +64,13 @@ function _fieldHasOptions(field, fieldSchema) {
   return fieldSchema.options || fieldSchema.serviceDependency || fieldSchema.enumOptions;
 }
 
-function _getOptions(fieldSchema) {
+function _getOptions(models, fieldSchema) {
   if (_hasPredefinedOptions(fieldSchema)) {
     return _predefinedOptions(fieldSchema);
   } if (_hasEnum(fieldSchema)) {
     return _generateEnumOptions(fieldSchema);
   } if (_hasExternalServiceOptions(fieldSchema)) {
-    return _externalServiceOptions(fieldSchema);
+    return _externalServiceOptions(models, fieldSchema);
   }
   return null;
 }
@@ -96,9 +95,9 @@ function _hasExternalServiceOptions(fieldSchema) {
   return fieldSchema.serviceDependency != null;
 }
 
-function _externalServiceOptions(fieldSchema) {
+function _externalServiceOptions(models, fieldSchema) {
   const service = fieldSchema.serviceDependency;
-  return (service) ? _toDropDownOptions(service, fieldSchema.serviceFilter) : null;
+  return (service) ? _toDropDownOptions(models, service, fieldSchema.serviceFilter) : null;
 }
 
 function _getPlaceholder(fieldSchema) {
@@ -113,7 +112,7 @@ function _getHelpText(fieldSchema) {
   return (fieldSchema.helpText) ? fieldSchema.helpText : null;
 }
 
-function _toDropDownOptions(serviceKey, filter = {}) {
+function _toDropDownOptions(models, serviceKey, filter = {}) {
   if (Array.isArray(serviceKey)) {
     const options = serviceKey.reduce((res, key) => res.concat(_toDropDownOptions(key, filter)), new List());
     return options;

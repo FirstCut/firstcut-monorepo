@@ -1,6 +1,5 @@
 
 import { Map } from 'immutable';
-import Models from 'firstcut-models';
 import { RecordEvents } from 'firstcut-action-utils';
 import { ACTIONS } from 'firstcut-pipeline-consts';
 import { getEmailActions } from 'firstcut-action-utils';
@@ -13,7 +12,7 @@ const ShootWrap = new Map({
   schema: RecordEvents,
   fulfillsPrerequisites({ record, initiator }) {
   },
-  generateActions(eventData) {
+  generateActions(Models, eventData) {
     const { record_id } = eventData;
     const shoot = Models.Shoot.fromId(record_id);
     const behindTheScenesShots = shoot.getBehindTheScenesShots();

@@ -1,13 +1,11 @@
 
 import { PubSub } from 'pubsub-js';
 import { COLLABORATOR_TYPES_TO_LABELS, SUPPORTED_EVENTS } from 'firstcut-pipeline-consts';
-import { getPlayerIdFromUser, getPlayerFromQuery } from 'firstcut-players';
-import Models from 'firstcut-models';
 import { _ } from 'lodash';
 import moment from 'moment';
 import { handleEvent } from '../execute.actions';
 
-export default function initSubscriptions() {
+export default function initSubscriptions(Models) {
   const {
     Cut, Deliverable, Shoot, Invoice,
   } = Models;
@@ -53,7 +51,7 @@ export default function initSubscriptions() {
   }
 
   let initializing = true;
-  const query = (Meteor.settings.public.environment === 'development'()) ? {} : { isDummy: { $ne: true } };
+  const query = (Meteor.settings.public.environment === 'development') ? {} : { isDummy: { $ne: true } };
   Shoot.collection.find({}).observe({ // allow actions on dummy shoots for videographer training purposes
     added: (doc) => {
       if (initializing) {
@@ -192,7 +190,7 @@ export default function initSubscriptions() {
         }
         const record = Models.getRecordFromId(model.modelName, doc._id);
         const user = Meteor.users.findOne(record.createdBy);
-        const initiator_player_id = getPlayerIdFromUser(user);
+        const initiator_player_id = Models.getPlayerIdFromUser(user);
         PubSub.publish('record_created', { record_id: doc._id, initiator_player_id, record_type: model.modelName });
 
         const dependentRecords = record.generateDependentRecords(doc.createdBy);
@@ -215,8 +213,8 @@ export default function initSubscriptions() {
       if (initializing) {
         return;
       }
-      const newPlayerId = getPlayerIdFromUser(fields);
-      const oldPlayerId = getPlayerIdFromUser(prevFields);
+      const newPlayerId = Models.getPlayerIdFromUser(fields);
+      const oldPlayerId = Models.getPlayerIdFromUser(prevFields);
       if (newPlayerId && newPlayerId !== oldPlayerId) {
         handleNewUser(fields);
       }
@@ -224,9 +222,9 @@ export default function initSubscriptions() {
   });
 
   function handleNewUser(user) {
-    const playerId = getPlayerIdFromUser(user);
+    const playerId = Models.getPlayerIdFromUser(user);
     if (playerId) {
-      let player = getPlayerFromQuery({ _id: playerId });
+      let player = Models.getPlayerFromQuery({ _id: playerId });
       if (player && !player.hasUserProfile) {
         player = player.set('hasUserProfile', true);
         player.save();

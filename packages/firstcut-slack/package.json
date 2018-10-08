@@ -6,6 +6,6 @@
   "dependencies": {
     "@babel/runtime": "^7.1.2",
     "@slack/client": "^4.8.0",
-    "firstcut-google-api": "file:../firstcut-google-api"
+    "lodash": "^4.17.11"
   }
 }

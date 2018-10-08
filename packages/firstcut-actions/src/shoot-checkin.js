@@ -1,6 +1,5 @@
 
 import { Map } from 'immutable';
-import Models from 'firstcut-models';
 import SimpleSchema from 'simpl-schema';
 import { EventSchema } from 'firstcut-action-utils';
 import { ACTIONS, COLLABORATOR_TYPES_TO_LABELS } from 'firstcut-pipeline-consts';
@@ -15,7 +14,7 @@ const ShootCheckin = new Map({
   }).extend(EventSchema),
   fulfillsPrerequisites({ record, initiator }) {
   },
-  generateActions(event_data) {
+  generateActions(Models, event_data) {
     const { record_id, collaborator_key } = event_data;
     const shoot = Models.Shoot.fromId(record_id);
     const collaborator = shoot[collaborator_key];

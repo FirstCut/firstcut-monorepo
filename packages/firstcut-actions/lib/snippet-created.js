@@ -17,8 +17,6 @@ var _firstcutActionUtils = require("firstcut-action-utils");
 
 var _firstcutPipelineConsts = require("firstcut-pipeline-consts");
 
-var _firstcutModels = _interopRequireDefault(require("firstcut-models"));
-
 var _firstcutFilestore = require("firstcut-filestore");
 
 var SnippetCreated = new _immutable.Map({
@@ -34,13 +32,12 @@ var SnippetCreated = new _immutable.Map({
     var record = _ref.record,
         initiator = _ref.initiator;
   },
-  generateActions: function generateActions(event_data) {
+  generateActions: function generateActions(Models, event_data) {
     var record_id = event_data.record_id,
         start = event_data.start,
         end = event_data.end,
         snippet_key = event_data.snippet_key;
-
-    var cut = _firstcutModels.default.Cut.fromId(record_id);
+    var cut = Models.Cut.fromId(record_id);
 
     var snippet_link = _firstcutFilestore.getSignedUrlOfKey.call({
       key: snippet_key

@@ -1,8 +1,6 @@
 import { Map } from 'immutable';
-import Models from 'firstcut-models';
-import { RecordEvents } from 'firstcut-action-utils';
 import { ACTIONS } from 'firstcut-pipeline-consts';
-import { getEmailActions } from 'firstcut-action-utils';
+import { RecordEvents, getEmailActions } from 'firstcut-action-utils';
 import { getCutViewLink, getRecordUrl } from 'firstcut-retrieve-url';
 
 const CutUploaded = new Map({
@@ -12,7 +10,7 @@ const CutUploaded = new Map({
   schema: RecordEvents,
   fulfillsPrerequisites({ record, initiator }) {
   },
-  generateActions(eventData) {
+  generateActions(Models, eventData) {
     const { record_id } = eventData;
     const cut = Models.Cut.fromId(record_id);
     const deliverable = cut.deliverable;

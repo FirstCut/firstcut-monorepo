@@ -1,7 +1,6 @@
 import { Map } from 'immutable';
 import moment from 'moment';
 import { SimpleSchemaWrapper } from 'firstcut-schema';
-import Models from 'firstcut-models';
 import { RecordEvents } from 'firstcut-action-utils';
 import { ACTIONS, JOB_KEYS } from 'firstcut-pipeline-consts';
 import { getEmailActions, recordHistoryIncludesEvent } from 'firstcut-action-utils';
@@ -41,7 +40,7 @@ const SendCutToClient = new Map({
   fulfillsPrerequisites({ record, initiator }) {
     return !recordHistoryIncludesEvent({ record, event: key });
   },
-  generateActions(eventData) {
+  generateActions(Models, eventData) {
     const { record_id, clientEmailContent = null } = eventData;
     const cut = Models.Cut.fromId(record_id);
     const cutLink = getRecordUrl(cut);
@@ -89,7 +88,7 @@ const SendCutToClient = new Map({
 
     /* UPCOMING SHOOT REMINDER JOB */
     let cron = moment().add(72, 'hour').toDate();
-    if (Meteor.settings.public.environment === 'development'()) {
+    if (Meteor.settings.public.environment === 'development') {
       cron = moment().add(1, 'minute').toDate();
     }
     const reminderToGetClientFeedback = Models.Job.createNew({

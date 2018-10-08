@@ -1,5 +1,4 @@
 import { Map } from 'immutable';
-import Models from 'firstcut-models';
 import moment from 'moment';
 import { RecordEvents } from 'firstcut-action-utils';
 import { ACTIONS, JOB_KEYS } from 'firstcut-pipeline-consts';
@@ -13,7 +12,7 @@ const FeedbackSubmittedByClient = new Map({
   schema: RecordEvents,
   fulfillsPrerequisites({ record, initiator }) {
   },
-  generateActions(event_data) {
+  generateActions(Models, event_data) {
     const { record_id } = event_data;
     const cut = Models.Cut.fromId(record_id);
     const link = getRecordUrl(cut);
@@ -41,7 +40,7 @@ const FeedbackSubmittedByClient = new Map({
     ];
 
     let feedbackSentReminderCron = moment().add(12, 'hour').toDate();
-    if (Meteor.settings.public.environment === 'development'()) {
+    if (Meteor.settings.public.environment === 'development') {
       feedbackSentReminderCron = moment().add(2, 'minute').toDate();
     }
     const feedbackSentReminder = Models.Job.createNew({

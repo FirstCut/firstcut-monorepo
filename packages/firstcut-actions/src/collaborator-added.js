@@ -1,5 +1,4 @@
 import { Map } from 'immutable';
-import Models from 'firstcut-models';
 import SimpleSchema from 'simpl-schema';
 import { EventSchema } from 'firstcut-action-utils';
 import { ACTIONS, FALLBACK_PHONE_NUMBER, COLLABORATOR_TYPES_TO_LABELS } from 'firstcut-pipeline-consts';
@@ -16,7 +15,7 @@ const CollaboratorAdded = new Map({
   }).extend(EventSchema),
   fulfillsPrerequisites({ record, initiator }) {
   },
-  generateActions(event_data) {
+  generateActions(Models, event_data) {
     const {
       record_id, gig_id, gig_type, collaborator_key,
     } = event_data;

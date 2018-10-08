@@ -16,13 +16,15 @@ var _createClass2 = _interopRequireDefault(require("@babel/runtime/helpers/creat
 var _sparkpost = _interopRequireDefault(require("sparkpost"));
 
 var FROM_DOMAIN = 'email@firstcut.io';
-var API_KEY = Meteor.settings.email.api_key;
+console.log('In the mailer');
+console.log(Meteor.settings);
 
 var Mailer =
 /*#__PURE__*/
 function () {
   function Mailer() {
     (0, _classCallCheck2.default)(this, Mailer);
+    var API_KEY = Meteor.settings.email.api_key;
     this.client = new _sparkpost.default(API_KEY);
   }
 

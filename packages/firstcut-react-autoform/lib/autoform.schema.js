@@ -9,8 +9,6 @@ exports.default = getAutoformSchema;
 
 var _objectSpread2 = _interopRequireDefault(require("@babel/runtime/helpers/objectSpread"));
 
-var _firstcutModels = _interopRequireDefault(require("firstcut-models"));
-
 var _immutable = require("immutable");
 
 var _firstcutSchema = require("firstcut-schema");
@@ -34,7 +32,7 @@ function getAutoformSchema(record, field, options) {
   };
   result.defaultValue = _getDefaultValue(fieldSchema, record);
   result.error = _getError(errors, field);
-  result.options = _getOptions(fieldSchema);
+  result.options = _getOptions(record.models, fieldSchema);
 
   if (result.options && result.options.toArray) {
     result.options = result.options.toArray(); // if an immutable list is returned
@@ -88,7 +86,7 @@ function _fieldHasOptions(field, fieldSchema) {
   return fieldSchema.options || fieldSchema.serviceDependency || fieldSchema.enumOptions;
 }
 
-function _getOptions(fieldSchema) {
+function _getOptions(models, fieldSchema) {
   if (_hasPredefinedOptions(fieldSchema)) {
     return _predefinedOptions(fieldSchema);
   }
@@ -98,7 +96,7 @@ function _getOptions(fieldSchema) {
   }
 
   if (_hasExternalServiceOptions(fieldSchema)) {
-    return _externalServiceOptions(fieldSchema);
+    return _externalServiceOptions(models, fieldSchema);
   }
 
   return null;
@@ -130,9 +128,9 @@ function _hasExternalServiceOptions(fieldSchema) {
   return fieldSchema.serviceDependency != null;
 }
 
-function _externalServiceOptions(fieldSchema) {
+function _externalServiceOptions(models, fieldSchema) {
   var service = fieldSchema.serviceDependency;
-  return service ? _toDropDownOptions(service, fieldSchema.serviceFilter) : null;
+  return service ? _toDropDownOptions(models, service, fieldSchema.serviceFilter) : null;
 }
 
 function _getPlaceholder(fieldSchema) {
@@ -147,8 +145,8 @@ function _getHelpText(fieldSchema) {
   return fieldSchema.helpText ? fieldSchema.helpText : null;
 }
 
-function _toDropDownOptions(serviceKey) {
-  var filter = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+function _toDropDownOptions(models, serviceKey) {
+  var filter = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
 
   if (Array.isArray(serviceKey)) {
     var options = serviceKey.reduce(function (res, key) {
@@ -157,7 +155,7 @@ function _toDropDownOptions(serviceKey) {
     return options;
   }
 
-  return _firstcutModels.default[serviceKey].find(filter).map(function (p) {
+  return Models[serviceKey].find(filter).map(function (p) {
     return {
       key: p._id,
       value: p._id,

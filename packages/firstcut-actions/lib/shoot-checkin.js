@@ -9,8 +9,6 @@ exports.default = void 0;
 
 var _immutable = require("immutable");
 
-var _firstcutModels = _interopRequireDefault(require("firstcut-models"));
-
 var _simplSchema = _interopRequireDefault(require("simpl-schema"));
 
 var _firstcutActionUtils = require("firstcut-action-utils");
@@ -29,12 +27,10 @@ var ShootCheckin = new _immutable.Map({
     var record = _ref.record,
         initiator = _ref.initiator;
   },
-  generateActions: function generateActions(event_data) {
+  generateActions: function generateActions(Models, event_data) {
     var record_id = event_data.record_id,
         collaborator_key = event_data.collaborator_key;
-
-    var shoot = _firstcutModels.default.Shoot.fromId(record_id);
-
+    var shoot = Models.Shoot.fromId(record_id);
     var collaborator = shoot[collaborator_key];
     var actions = [{
       type: _firstcutPipelineConsts.ACTIONS.slack_notify,

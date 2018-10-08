@@ -11,17 +11,13 @@ var _toConsumableArray2 = _interopRequireDefault(require("@babel/runtime/helpers
 
 var _immutable = require("immutable");
 
-var _firstcutModels = _interopRequireDefault(require("firstcut-models"));
-
 var _moment = _interopRequireDefault(require("moment"));
-
-var _firstcutActionUtils = require("firstcut-action-utils");
 
 var _firstcutPipelineConsts = require("firstcut-pipeline-consts");
 
-var _firstcutRetrieveUrl = require("firstcut-retrieve-url");
+var _firstcutActionUtils = require("firstcut-action-utils");
 
-var _firstcutPlayers = require("firstcut-players");
+var _firstcutRetrieveUrl = require("firstcut-retrieve-url");
 
 var key = 'confirm_footage_uploaded';
 var ConfirmFootageUpload = new _immutable.Map({
@@ -43,13 +39,11 @@ var ConfirmFootageUpload = new _immutable.Map({
       event: 'footage_verified'
     });
   },
-  generateActions: function generateActions(event_data) {
+  generateActions: function generateActions(Models, event_data) {
     var record_id = event_data.record_id,
         initiator_player_id = event_data.initiator_player_id;
-
-    var shoot = _firstcutModels.default.Shoot.fromId(record_id);
-
-    var collaborator = (0, _firstcutPlayers.getPlayer)(initiator_player_id);
+    var shoot = Models.Shoot.fromId(record_id);
+    var collaborator = Models.getPlayer(initiator_player_id);
     var internal_emails = (0, _firstcutActionUtils.getEmailActions)({
       recipients: [shoot.adminOwner],
       template: 'footage-confirmed-uploaded',

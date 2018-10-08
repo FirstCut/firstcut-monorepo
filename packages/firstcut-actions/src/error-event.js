@@ -8,7 +8,7 @@ const ErrorEvent = new Map({
   completed_title: 'Error',
   fulfillsPrerequisites({ record, initiator }) {
   },
-  generateActions(event_data) {
+  generateActions(Models, event_data) {
     console.log('ERROROROROR');
     console.trace();
     return [{

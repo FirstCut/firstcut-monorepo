@@ -5,23 +5,15 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.emitPipelineEvent = emitPipelineEvent;
-exports.fulfillsPrerequisites = fulfillsPrerequisites;
 exports.handleEvent = handleEvent;
-exports.getEventActionsAsDescriptiveString = getEventActionsAsDescriptiveString;
-exports.getCustomFieldsSchema = getCustomFieldsSchema;
 
 var _regenerator = _interopRequireDefault(require("@babel/runtime/regenerator"));
-
-var _asyncToGenerator2 = _interopRequireDefault(require("@babel/runtime/helpers/asyncToGenerator"));
-
-var _typeof2 = _interopRequireDefault(require("@babel/runtime/helpers/typeof"));
 
 var _objectSpread2 = _interopRequireDefault(require("@babel/runtime/helpers/objectSpread"));
 
 var _objectWithoutProperties2 = _interopRequireDefault(require("@babel/runtime/helpers/objectWithoutProperties"));
 
-var _firstcutSchema = require("firstcut-schema");
+var _asyncToGenerator2 = _interopRequireDefault(require("@babel/runtime/helpers/asyncToGenerator"));
 
 var _firstcutPipelineConsts = require("firstcut-pipeline-consts");
 
@@ -31,73 +23,25 @@ var _firstcutMailer = require("firstcut-mailer");
 
 var _firstcutSlack = require("firstcut-slack");
 
-var _firstcutBilling = require("firstcut-billing");
-
-var _pipeline = require("./shared/pipeline.schemas");
-
 var _firstcutTextMessaging = require("firstcut-text-messaging");
 
 var _firstcutCalendar = require("firstcut-calendar");
 
 var _pubsubJs = require("pubsub-js");
 
+var _firstcutPipelineUtils = require("firstcut-pipeline-utils");
+
 var _firstcutActions = _interopRequireDefault(require("firstcut-actions"));
 
 var _meteorStandaloneRandom = require("meteor-standalone-random");
 
-var _firstcutPlayers = require("firstcut-players");
+var _pipeline = require("./shared/pipeline.schemas");
 
+// import { Billing } from 'firstcut-billing';
 var slackTemplateDefaults = {
   username: 'firstcut',
   link_names: true
 };
-
-function emitPipelineEvent(args) {
-  if ((0, _firstcutPlayers.inSimulationMode)()) {
-    return;
-  }
-
-  var record = args.record,
-      rest = (0, _objectWithoutProperties2.default)(args, ["record"]);
-
-  var params = _.mapValues((0, _objectSpread2.default)({}, rest, {
-    record_id: record._id,
-    record_type: record.modelName,
-    initiator_player_id: (0, _firstcutPlayers.userPlayerId)()
-  }), function (val) {
-    if ((0, _typeof2.default)(val) === 'object') {
-      return JSON.stringify(val);
-    }
-
-    return val ? val.toString() : '';
-  });
-
-  Analytics.trackAction(args); // handleEvent.call(eventData);
-
-  HTTP.post("".concat(Meteor.settings.public.PIPELINE_ROOT, "/handleEvent"), {
-    content: params,
-    params: params,
-    query: params,
-    data: params
-  }, function (res) {
-    console.log(res);
-  });
-}
-
-function fulfillsPrerequisites(_ref) {
-  var event = _ref.event,
-      record = _ref.record,
-      initiator = _ref.initiator;
-
-  if (Meteor.settings.public.environment === 'development'()) {
-    return true;
-  }
-
-  return _firstcutActions.default[event].get('fulfillsPrerequisites')({
-    record: record,
-    initiator: initiator
-  });
-}
 
 function handleEvent(_x) {
   return _handleEvent.apply(this, arguments);
@@ -118,7 +62,7 @@ function _handleEvent() {
             }
 
             _context.prev = 1;
-            actions = getActionsForEvent(args);
+            actions = (0, _firstcutPipelineUtils.getActionsForEvent)(args);
             _context.next = 5;
             return execute(actions);
 
@@ -158,57 +102,6 @@ function getEventActionSchema(event) {
   return _firstcutActions.default[event].get('schema');
 }
 
-function getActionsForEvent(args) {
-  var event = args.event;
-  return _firstcutActions.default[event].get('generateActions')(args);
-}
-
-function getEventActionsAsDescriptiveString(args) {
-  var actions = getActionsForEvent(args);
-  var label = _firstcutPipelineConsts.EVENT_LABELS[args.event];
-  var result = actions.reduce(function (s, a) {
-    var str = s;
-    str += '\t -- ';
-    str += actionAsDescriptiveString(a);
-    str += '\n';
-    return str;
-  }, "Triggering ".concat(label, " will: \n\n"));
-  return result;
-}
-
-function getCustomFieldsSchema(event, record) {
-  var customSchema = _firstcutActions.default[event].get('customFieldsSchema');
-
-  if (!customSchema) {
-    customSchema = new _firstcutSchema.SimpleSchemaWrapper();
-  }
-
-  if (typeof customSchema === 'function') {
-    customSchema = customSchema(record);
-  }
-
-  return customSchema;
-}
-
-function actionAsDescriptiveString(action) {
-  switch (action.type) {
-    case _firstcutPipelineConsts.ACTIONS.send_email:
-      return "send an email to ".concat(action.to.toString());
-
-    case _firstcutPipelineConsts.ACTIONS.slack_notify:
-      return 'emit a slack notification';
-
-    case _firstcutPipelineConsts.ACTIONS.text_message:
-      return "send a text to ".concat(action.phone);
-
-    case _firstcutPipelineConsts.ACTIONS.calendar_event:
-      return "create a calendar event and invite ".concat(action.attendees.toString());
-
-    default:
-      return action.title;
-  }
-}
-
 function saveToHistory(args) {
   var record = args.record,
       event_data = (0, _objectWithoutProperties2.default)(args, ["record"]);
@@ -236,7 +129,7 @@ function _execute() {
             return _context3.abrupt("return", actions.reduce(
             /*#__PURE__*/
             function () {
-              var _ref2 = (0, _asyncToGenerator2.default)(
+              var _ref = (0, _asyncToGenerator2.default)(
               /*#__PURE__*/
               _regenerator.default.mark(function _callee2(r, action) {
                 var result, actionResult;
@@ -281,7 +174,7 @@ function _execute() {
               }));
 
               return function (_x3, _x4) {
-                return _ref2.apply(this, arguments);
+                return _ref.apply(this, arguments);
               };
             }(), {}));
 
@@ -374,8 +267,7 @@ function sendEmails(action) {
 
 function chargeInvoice(action) {
   var invoice = action.invoice,
-      token = action.token;
-  return _firstcutBilling.Billing.chargeInvoice(invoice, token);
+      token = action.token; // return Billing.chargeInvoice(invoice, token);
 }
 
 function sendSlackNotification(action) {

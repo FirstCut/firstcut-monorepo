@@ -7,9 +7,9 @@
     "@babel/runtime": "^7.1.2",
     "firstcut-action-utils": "file:../firstcut-action-utils",
     "firstcut-blueprints": "file:../firstcut-blueprints",
-    "firstcut-google-api": "file:../firstcut-google-api",
     "firstcut-model-base": "file:../firstcut-model-base",
     "firstcut-pipeline-consts": "file:../firstcut-pipeline-consts",
-    "firstcut-schema": "file:../firstcut-schema"
+    "firstcut-schema": "file:../firstcut-schema",
+    "lodash": "^4.17.11"
   }
 }

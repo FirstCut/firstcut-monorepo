@@ -1,15 +1,11 @@
 "use strict";
 
-var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
-
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = void 0;
 
 var _immutable = require("immutable");
-
-var _firstcutModels = _interopRequireDefault(require("firstcut-models"));
 
 var _firstcutActionUtils = require("firstcut-action-utils");
 
@@ -24,11 +20,9 @@ var CheckinCheckoutReminder = new _immutable.Map({
     var record = _ref.record,
         initiator = _ref.initiator;
   },
-  generateActions: function generateActions(eventData) {
+  generateActions: function generateActions(Models, eventData) {
     var record_id = eventData.record_id;
-
-    var shoot = _firstcutModels.default.Shoot.fromId(record_id);
-
+    var shoot = Models.Shoot.fromId(record_id);
     var collaborator = shoot.videographer;
     var phone = collaborator ? collaborator.phone : _firstcutPipelineConsts.FALLBACK_PHONE_NUMBER;
     return [{

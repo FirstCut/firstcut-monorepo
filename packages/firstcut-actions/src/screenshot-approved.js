@@ -1,6 +1,5 @@
 
 import { Map } from 'immutable';
-import Models from 'firstcut-models';
 import { ScreenshotEvents } from 'firstcut-action-utils';
 import { ACTIONS, FALLBACK_PHONE_NUMBER } from 'firstcut-pipeline-consts';
 
@@ -11,7 +10,7 @@ const ScreenshotApproved = new Map({
   schema: ScreenshotEvents,
   fulfillsPrerequisites({ record, initiator }) {
   },
-  generateActions(eventData) {
+  generateActions(Models, eventData) {
     const { record_id, screenshot } = eventData;
     const shoot = Models.Shoot.fromId(record_id);
     const collaborator = shoot.screenshotCollaborator(screenshot);

@@ -15,8 +15,6 @@ var _firstcutActionUtils = require("firstcut-action-utils");
 
 var _firstcutPipelineConsts = require("firstcut-pipeline-consts");
 
-var _firstcutModels = _interopRequireDefault(require("firstcut-models"));
-
 var _firstcutRetrieveUrl = require("firstcut-retrieve-url");
 
 var ProjectHandoff = new _immutable.Map({
@@ -28,21 +26,14 @@ var ProjectHandoff = new _immutable.Map({
     var record = _ref.record,
         initiator = _ref.initiator;
   },
-  generateActions: function generateActions(eventData) {
+  generateActions: function generateActions(Models, eventData) {
     var record_id = eventData.record_id;
-
-    var project = _firstcutModels.default.Project.fromId(record_id);
-
+    var project = Models.Project.fromId(record_id);
     var link = (0, _firstcutRetrieveUrl.getRecordUrl)(project);
-
-    var kriza = _firstcutModels.default.Collaborator.getKrizaProfile();
-
-    var nicole = _firstcutModels.default.Collaborator.getNicoleProfile();
-
-    var robert = _firstcutModels.default.Collaborator.getRobertProfile();
-
-    var billing = _firstcutModels.default.Collaborator.getBillingProfile();
-
+    var kriza = Models.Collaborator.getKrizaProfile();
+    var nicole = Models.Collaborator.getNicoleProfile();
+    var robert = Models.Collaborator.getRobertProfile();
+    var billing = Models.Collaborator.getBillingProfile();
     var emailActions = (0, _firstcutActionUtils.getEmailActions)({
       recipients: [project.adminOwner],
       template: 'project-handoff',

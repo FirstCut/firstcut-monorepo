@@ -1,7 +1,5 @@
 "use strict";
 
-var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
-
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
@@ -11,15 +9,11 @@ var _firstcutSchema = require("firstcut-schema");
 
 var _immutable = require("immutable");
 
-var _firstcutModels = _interopRequireDefault(require("firstcut-models"));
-
 var _firstcutActionUtils = require("firstcut-action-utils");
 
 var _firstcutPipelineConsts = require("firstcut-pipeline-consts");
 
 var _firstcutRetrieveUrl = require("firstcut-retrieve-url");
-
-var _firstcutPlayers = require("firstcut-players");
 
 var key = 'preproduction_kickoff';
 var ShootReady = new _immutable.Map({
@@ -45,15 +39,13 @@ var ShootReady = new _immutable.Map({
       event: key
     });
   },
-  generateActions: function generateActions(eventData) {
+  generateActions: function generateActions(Models, eventData) {
     var record_id = eventData.record_id,
         generateVideographerHourlyInvoice = eventData.generateVideographerHourlyInvoice,
         generateInterviewerHourlyInvoice = eventData.generateInterviewerHourlyInvoice,
         initiator_player_id = eventData.initiator_player_id;
-
-    var shoot = _firstcutModels.default.getRecordFromId('Shoot', record_id);
-
-    var player = (0, _firstcutPlayers.getPlayer)(initiator_player_id);
+    var shoot = Models.getRecordFromId('Shoot', record_id);
+    var player = Models.getPlayer(initiator_player_id);
     return [{
       type: _firstcutPipelineConsts.ACTIONS.slack_notify,
       content: {

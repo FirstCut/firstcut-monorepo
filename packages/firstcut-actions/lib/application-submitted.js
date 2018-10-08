@@ -11,8 +11,6 @@ var _toConsumableArray2 = _interopRequireDefault(require("@babel/runtime/helpers
 
 var _immutable = require("immutable");
 
-var _firstcutModels = _interopRequireDefault(require("firstcut-models"));
-
 var _firstcutActionUtils = require("firstcut-action-utils");
 
 var _firstcutPipelineConsts = require("firstcut-pipeline-consts");
@@ -28,11 +26,9 @@ var ApplicationSubmitted = new _immutable.Map({
     var record = _ref.record,
         initiator = _ref.initiator;
   },
-  generateActions: function generateActions(eventData) {
+  generateActions: function generateActions(Models, eventData) {
     var record_id = eventData.record_id;
-
-    var collaborator = _firstcutModels.default.Collaborator.fromId(record_id);
-
+    var collaborator = Models.Collaborator.fromId(record_id);
     var link = (0, _firstcutRetrieveUrl.getRecordUrl)(collaborator);
     var emailActions = (0, _firstcutActionUtils.getEmailActions)({
       recipients: [collaborator],

@@ -9,8 +9,6 @@ exports.default = void 0;
 
 var _immutable = require("immutable");
 
-var _firstcutModels = _interopRequireDefault(require("firstcut-models"));
-
 var _moment = _interopRequireDefault(require("moment"));
 
 var _firstcutActionUtils = require("firstcut-action-utils");
@@ -33,11 +31,9 @@ var FootageVerified = new _immutable.Map({
       event: key
     });
   },
-  generateActions: function generateActions(event_data) {
+  generateActions: function generateActions(Models, event_data) {
     var record_id = event_data.record_id;
-
-    var shoot = _firstcutModels.default.Shoot.fromId(record_id);
-
+    var shoot = Models.Shoot.fromId(record_id);
     return [{
       type: _firstcutPipelineConsts.ACTIONS.slack_notify,
       content: {

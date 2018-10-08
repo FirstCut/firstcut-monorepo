@@ -9,8 +9,6 @@ exports.default = void 0;
 
 var _immutable = require("immutable");
 
-var _firstcutModels = _interopRequireDefault(require("firstcut-models"));
-
 var _simplSchema = _interopRequireDefault(require("simpl-schema"));
 
 var _firstcutActionUtils = require("firstcut-action-utils");
@@ -31,16 +29,13 @@ var CollaboratorAdded = new _immutable.Map({
     var record = _ref.record,
         initiator = _ref.initiator;
   },
-  generateActions: function generateActions(event_data) {
+  generateActions: function generateActions(Models, event_data) {
     var record_id = event_data.record_id,
         gig_id = event_data.gig_id,
         gig_type = event_data.gig_type,
         collaborator_key = event_data.collaborator_key;
-
-    var gig = _firstcutModels.default.getRecordFromId(gig_type, gig_id);
-
-    var collaborator = _firstcutModels.default.Collaborator.fromId(record_id);
-
+    var gig = Models.getRecordFromId(gig_type, gig_id);
+    var collaborator = Models.Collaborator.fromId(record_id);
     var collaboratorType = _firstcutPipelineConsts.COLLABORATOR_TYPES_TO_LABELS[collaborator_key];
     var phone = collaborator.phone;
     var messageText = "You have been added to ".concat(gig.displayName, " as a ").concat(collaboratorType, " \n Do not respond to this text message. If you need to contact us, contact Alex at 4157103903");

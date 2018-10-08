@@ -10,6 +10,7 @@
     "firstcut-pipeline-consts": "file:../firstcut-pipeline-consts",
     "firstcut-retrieve-url": "file:../firstcut-retrieve-url",
     "firstcut-schema": "file:../firstcut-schema",
-    "firstcut-utils": "file:../firstcut-utils"
+    "firstcut-utils": "file:../firstcut-utils",
+    "lodash": "^4.17.11"
   }
 }

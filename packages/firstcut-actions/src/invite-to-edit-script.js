@@ -1,12 +1,10 @@
 
 import { SimpleSchemaWrapper } from 'firstcut-schema';
 import { Map } from 'immutable';
-import Models from 'firstcut-models';
 import { RecordEvents } from 'firstcut-action-utils';
 import { ACTIONS } from 'firstcut-pipeline-consts';
 import { getEmailActions, recordHistoryIncludesEvent } from 'firstcut-action-utils';
 import { getRecordUrl, getInviteLink } from 'firstcut-retrieve-url';
-import { getPlayer } from 'firstcut-players';
 import moment from 'moment';
 
 const key = 'invite_to_edit_script';
@@ -36,14 +34,14 @@ const InviteToEditScript = new Map({
       && !recordHistoryIncludesEvent({ record, event: 'shoot_wrap' })
     );
   },
-  generateActions(eventData) {
+  generateActions(Models, eventData) {
     const {
       record_id,
       initiator_player_id,
       clientEmailContent,
     } = eventData;
     const shoot = Models.Shoot.fromId(record_id);
-    const initiator = getPlayer(initiator_player_id);
+    const initiator = Models.getPlayer(initiator_player_id);
     const lines = (clientEmailContent) ? clientEmailContent.split(/\n/) : [];
     const emailActions = getEmailActions({
       recipients: [shoot.clientOwner],

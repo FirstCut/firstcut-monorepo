@@ -1,12 +1,9 @@
 
 import { Map } from 'immutable';
-import Models from 'firstcut-models';
 import moment from 'moment';
-import { RecordEvents } from 'firstcut-action-utils';
 import { ACTIONS } from 'firstcut-pipeline-consts';
-import { getEmailActions, recordHistoryIncludesEvent } from 'firstcut-action-utils';
+import { RecordEvents, getEmailActions, recordHistoryIncludesEvent } from 'firstcut-action-utils';
 import { getRecordUrl, getInviteLink } from 'firstcut-retrieve-url';
-import { getPlayer } from 'firstcut-players';
 
 const key = 'confirm_footage_uploaded';
 const ConfirmFootageUpload = new Map({
@@ -24,10 +21,10 @@ const ConfirmFootageUpload = new Map({
       && !recordHistoryIncludesEvent({ record, event: 'footage_verified' })
     );
   },
-  generateActions(event_data) {
+  generateActions(Models, event_data) {
     const { record_id, initiator_player_id } = event_data;
     const shoot = Models.Shoot.fromId(record_id);
-    const collaborator = getPlayer(initiator_player_id);
+    const collaborator = Models.getPlayer(initiator_player_id);
     const internal_emails = getEmailActions({
       recipients: [shoot.adminOwner],
       template: 'footage-confirmed-uploaded',

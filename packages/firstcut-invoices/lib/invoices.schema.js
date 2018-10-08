@@ -1,13 +1,11 @@
 "use strict";
 
-var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
-
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = void 0;
 
-var _firstcutSchema = _interopRequireWildcard(require("firstcut-schema"));
+var _firstcutSchema = require("firstcut-schema");
 
 var _invoices = require("./invoices.enum");
 
@@ -76,6 +74,6 @@ var InvoiceSchema = new _firstcutSchema.SimpleSchemaWrapper({
     label: 'Note'
   }
 });
-InvoiceSchema.extend(_firstcutSchema.default);
+InvoiceSchema.extend(_firstcutSchema.BaseSchema);
 var _default = InvoiceSchema;
 exports.default = _default;

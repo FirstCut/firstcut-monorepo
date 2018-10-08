@@ -33,12 +33,12 @@ export function setInvoicesToDue(invoices) {
 export function getEmailActions({
   recipients, template, getSubstitutionData, cc = [],
 }) {
-  cc = cc.map(recipient => ((Meteor.settings.public.environment === 'development'() || !recipient) ? 'lucy@firstcut.io' : recipient.email));
+  cc = cc.map(recipient => ((Meteor.settings.public.environment === 'development' || !recipient) ? 'lucy@firstcut.io' : recipient.email));
   const emailActions = recipients.map((recipient) => {
     if (!recipient) {
       return null;
     }
-    const email = (Meteor.settings.public.environment === 'development'()) ? 'lucyannerichards@gmail.com' : recipient.email;
+    const email = (Meteor.settings.public.environment === 'development') ? 'lucyannerichards@gmail.com' : recipient.email;
     const args = {
       type: ACTIONS.send_email,
       to: [email],

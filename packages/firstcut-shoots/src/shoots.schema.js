@@ -2,8 +2,8 @@ import SimpleSchema from 'simpl-schema';
 import { BlueprintableSchema as Schema } from 'firstcut-blueprints';
 import { COLLABORATOR_TYPES_TO_LABELS } from 'firstcut-pipeline-consts';
 import { LocationSchema, BaseSchema } from 'firstcut-schema';
-import { STAGES, CAMERAS, RATINGS } from './shoots.enum';
 import { isEmpty } from 'firstcut-utils';
+import { STAGES, CAMERAS, RATINGS } from './shoots.enum';
 
 const ShootsSchema = new Schema({
   isDummy: {

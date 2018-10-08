@@ -1,13 +1,11 @@
 "use strict";
 
-var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
-
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = void 0;
 
-var _firstcutSchema = _interopRequireWildcard(require("firstcut-schema"));
+var _firstcutSchema = require("firstcut-schema");
 
 var FileSchema = new _firstcutSchema.SimpleSchemaWrapper({
   fileSize: {
@@ -40,6 +38,6 @@ var FileSchema = new _firstcutSchema.SimpleSchemaWrapper({
     blackbox: true
   }
 });
-FileSchema.extend(_firstcutSchema.default);
+FileSchema.extend(_firstcutSchema.BaseSchema);
 var _default = FileSchema;
 exports.default = _default;

@@ -1,6 +1,5 @@
 
 import { Map } from 'immutable';
-import Models from 'firstcut-models';
 import { ACTIONS } from 'firstcut-pipeline-consts';
 import { getEmailActions, recordHistoryIncludesEvent, RecordEvents } from 'firstcut-action-utils';
 import { getRecordUrl } from 'firstcut-retrieve-url';
@@ -14,7 +13,7 @@ const InvoicePaid = new Map({
   fulfillsPrerequisites({ record, initiator }) {
     return !recordHistoryIncludesEvent({ record, event: key });
   },
-  generateActions(eventData) {
+  generateActions(Models, eventData) {
     const { record_id } = eventData;
     const invoice = Models.Invoice.fromId(record_id);
     const link = getRecordUrl(invoice);

@@ -11,15 +11,11 @@ var _toConsumableArray2 = _interopRequireDefault(require("@babel/runtime/helpers
 
 var _immutable = require("immutable");
 
-var _firstcutModels = _interopRequireDefault(require("firstcut-models"));
-
 var _firstcutActionUtils = require("firstcut-action-utils");
 
 var _firstcutPipelineConsts = require("firstcut-pipeline-consts");
 
 var _firstcutRetrieveUrl = require("firstcut-retrieve-url");
-
-var _firstcutPlayers = require("firstcut-players");
 
 var AddOnRequested = new _immutable.Map({
   key: 'add_on_requested',
@@ -30,15 +26,13 @@ var AddOnRequested = new _immutable.Map({
     var record = _ref.record,
         initiator = _ref.initiator;
   },
-  generateActions: function generateActions(eventData) {
+  generateActions: function generateActions(Models, eventData) {
     var record_id = eventData.record_id,
         initiator_player_id = eventData.initiator_player_id,
         addOn = eventData.addOn;
-
-    var cut = _firstcutModels.default.Cut.fromId(record_id);
-
+    var cut = Models.Cut.fromId(record_id);
     var link = (0, _firstcutRetrieveUrl.getRecordUrl)(cut);
-    var player = (0, _firstcutPlayers.getPlayer)(initiator_player_id);
+    var player = Models.getPlayer(initiator_player_id);
     var internalEmails = (0, _firstcutActionUtils.getEmailActions)({
       recipients: [cut.adminOwner],
       template: 'add-on-requested',

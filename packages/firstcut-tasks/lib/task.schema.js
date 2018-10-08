@@ -1,13 +1,11 @@
 "use strict";
 
-var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
-
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = void 0;
 
-var _firstcutSchema = _interopRequireWildcard(require("firstcut-schema"));
+var _firstcutSchema = require("firstcut-schema");
 
 var TaskSchema = new _firstcutSchema.SimpleSchemaWrapper({
   assignedToPlayerType: {
@@ -56,6 +54,6 @@ var TaskSchema = new _firstcutSchema.SimpleSchemaWrapper({
     required: true
   }
 });
-TaskSchema.extend(_firstcutSchema.default);
+TaskSchema.extend(_firstcutSchema.BaseSchema);
 var _default = TaskSchema;
 exports.default = _default;

@@ -1,16 +1,15 @@
 
-import { SimpleSchemaWrapper as Schema } from 'firstcut-schema';
-import BaseSchema from 'firstcut-schema';
+import { BaseSchema, SimpleSchemaWrapper as Schema } from 'firstcut-schema';
 
 const FileSchema = new Schema({
   fileSize: {
-    type: Number
+    type: Number,
   },
   name: {
-    type: String
+    type: String,
   },
   type: {
-    type: String
+    type: String,
   },
   extension: {
     type: String,
@@ -19,18 +18,18 @@ const FileSchema = new Schema({
     type: String,
   },
   isVideo: {
-    type: Boolean
+    type: Boolean,
   },
   mime: {
-    type: String
+    type: String,
   },
   meta: {
     type: Object,
-    blackbox: true
+    blackbox: true,
   },
   versions: {
     type: Object,
-    blackbox: true
+    blackbox: true,
   },
 });
 

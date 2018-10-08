@@ -11,8 +11,6 @@ var _toConsumableArray2 = _interopRequireDefault(require("@babel/runtime/helpers
 
 var _immutable = require("immutable");
 
-var _firstcutModels = _interopRequireDefault(require("firstcut-models"));
-
 var _firstcutSchema = require("firstcut-schema");
 
 var _firstcutActionUtils = require("firstcut-action-utils");
@@ -46,12 +44,10 @@ var ProjectWrap = new _immutable.Map({
       event: key
     });
   },
-  generateActions: function generateActions(eventData) {
+  generateActions: function generateActions(Models, eventData) {
     var record_id = eventData.record_id,
         clientEmailContent = eventData.clientEmailContent;
-
-    var project = _firstcutModels.default.getRecordFromId('Project', record_id);
-
+    var project = Models.getRecordFromId('Project', record_id);
     var link = (0, _firstcutRetrieveUrl.getRecordUrl)(project);
     var lines = clientEmailContent !== 'undefined' && clientEmailContent ? clientEmailContent.split(/\n/) : [''];
     var clientEmailActions = (0, _firstcutActionUtils.getEmailActions)({

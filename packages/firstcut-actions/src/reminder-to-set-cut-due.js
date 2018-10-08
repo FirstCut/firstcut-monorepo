@@ -2,7 +2,6 @@
 import { Map } from 'immutable';
 import { RecordEvents } from 'firstcut-action-utils';
 import { ACTIONS } from 'firstcut-pipeline-consts';
-import Models from 'firstcut-models';
 import { getRecordUrl } from 'firstcut-retrieve-url';
 
 const ReminderToSetCutDue = new Map({
@@ -12,7 +11,7 @@ const ReminderToSetCutDue = new Map({
   schema: RecordEvents,
   fulfillsPrerequisites({ record, initiator }) {
   },
-  generateActions(event_data) {
+  generateActions(Models, event_data) {
     const { record_id } = event_data;
     const deliverable = Models.Deliverable.fromId(record_id);
     const link = getRecordUrl(deliverable);

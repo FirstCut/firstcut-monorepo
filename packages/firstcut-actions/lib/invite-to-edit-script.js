@@ -13,15 +13,11 @@ var _firstcutSchema = require("firstcut-schema");
 
 var _immutable = require("immutable");
 
-var _firstcutModels = _interopRequireDefault(require("firstcut-models"));
-
 var _firstcutActionUtils = require("firstcut-action-utils");
 
 var _firstcutPipelineConsts = require("firstcut-pipeline-consts");
 
 var _firstcutRetrieveUrl = require("firstcut-retrieve-url");
-
-var _firstcutPlayers = require("firstcut-players");
 
 var _moment = _interopRequireDefault(require("moment"));
 
@@ -60,14 +56,12 @@ var InviteToEditScript = new _immutable.Map({
       event: 'shoot_wrap'
     });
   },
-  generateActions: function generateActions(eventData) {
+  generateActions: function generateActions(Models, eventData) {
     var record_id = eventData.record_id,
         initiator_player_id = eventData.initiator_player_id,
         clientEmailContent = eventData.clientEmailContent;
-
-    var shoot = _firstcutModels.default.Shoot.fromId(record_id);
-
-    var initiator = (0, _firstcutPlayers.getPlayer)(initiator_player_id);
+    var shoot = Models.Shoot.fromId(record_id);
+    var initiator = Models.getPlayer(initiator_player_id);
     var lines = clientEmailContent ? clientEmailContent.split(/\n/) : [];
     var emailActions = (0, _firstcutActionUtils.getEmailActions)({
       recipients: [shoot.clientOwner],

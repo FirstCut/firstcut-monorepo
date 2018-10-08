@@ -17,8 +17,6 @@ var _firstcutPipelineConsts = require("firstcut-pipeline-consts");
 
 var _firstcutRetrieveUrl = require("firstcut-retrieve-url");
 
-var _firstcutPlayers = require("firstcut-players");
-
 var SendInviteLink = new _immutable.Map({
   key: 'send_invite_link',
   action_title: 'Send invite link',
@@ -29,11 +27,11 @@ var SendInviteLink = new _immutable.Map({
         initiator = _ref.initiator;
     return true;
   },
-  generateActions: function generateActions(eventData) {
+  generateActions: function generateActions(Models, eventData) {
     var record_id = eventData.record_id,
         initiator_player_id = eventData.initiator_player_id;
-    var player = (0, _firstcutPlayers.getPlayer)(record_id);
-    var initiator = (0, _firstcutPlayers.getPlayer)(initiator_player_id);
+    var player = Models.getPlayer(record_id);
+    var initiator = Models.getPlayer(initiator_player_id);
     var inviteLink = (0, _firstcutRetrieveUrl.getInviteLink)(player);
     var invites = (0, _firstcutActionUtils.getEmailActions)({
       recipients: [player],

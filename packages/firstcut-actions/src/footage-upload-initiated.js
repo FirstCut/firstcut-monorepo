@@ -1,12 +1,10 @@
 
 
 import { Map } from 'immutable';
-import Models from 'firstcut-models';
 import { _ } from 'lodash';
 import { RecordEvents } from 'firstcut-action-utils';
 import { ACTIONS } from 'firstcut-pipeline-consts';
 import { getRecordUrl } from 'firstcut-retrieve-url';
-import { getPlayer } from 'firstcut-players';
 
 const key = 'footage_upload_initiated';
 const FootageUploadInitiated = new Map({
@@ -15,10 +13,10 @@ const FootageUploadInitiated = new Map({
   completed_title: 'Footage upload initiated',
   schema: RecordEvents,
   fulfillsPrerequisites({ record, initiator }) {},
-  generateActions(eventData) {
+  generateActions(Models, eventData) {
     const { record_id, initiator_player_id } = eventData;
     const shoot = Models.Shoot.fromId(record_id);
-    const collaborator = getPlayer(initiator_player_id);
+    const collaborator = Models.getPlayer(initiator_player_id);
 
     return [{
       type: ACTIONS.slack_notify,

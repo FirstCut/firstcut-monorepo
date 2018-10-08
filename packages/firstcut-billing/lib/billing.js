@@ -22,7 +22,7 @@ var Billing =
 function () {
   function Billing() {
     (0, _classCallCheck2.default)(this, Billing);
-    this.stripe = (0, _stripe.default)(METEOR.settings.stripe.SECRET);
+    this.stripe = (0, _stripe.default)(Meteor.settings.stripe.SECRET);
   }
 
   (0, _createClass2.default)(Billing, [{

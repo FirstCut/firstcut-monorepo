@@ -7,6 +7,7 @@
     "@babel/runtime": "^7.1.2",
     "firstcut-action-utils": "file:../firstcut-action-utils",
     "firstcut-model-base": "file:../firstcut-model-base",
-    "firstcut-schema": "file:../firstcut-schema"
+    "firstcut-schema": "file:../firstcut-schema",
+    "lodash": "^4.17.11"
   }
 }

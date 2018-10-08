@@ -19,7 +19,7 @@ var ErrorEvent = new _immutable.Map({
     var record = _ref.record,
         initiator = _ref.initiator;
   },
-  generateActions: function generateActions(event_data) {
+  generateActions: function generateActions(Models, event_data) {
     console.log('ERROROROROR');
     console.trace();
     return [{

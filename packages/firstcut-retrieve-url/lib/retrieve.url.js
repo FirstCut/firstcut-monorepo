@@ -14,10 +14,14 @@ exports.getRecordUrl = getRecordUrl;
 exports.getRecordPath = getRecordPath;
 exports.getRelatedRecordPath = getRelatedRecordPath;
 exports.getProjectSalesforceLink = getProjectSalesforceLink;
+exports.S3_URL = void 0;
 
 var _firstcutUtils = require("firstcut-utils");
 
 var _url = require("./url.enum");
+
+var S3_URL = "https://".concat(Meteor.settings.public.s3bucket, ".s3-us-west-2.amazonaws.com/");
+exports.S3_URL = S3_URL;
 
 function getBasepath(model) {
   return "/".concat(model.collectionName);

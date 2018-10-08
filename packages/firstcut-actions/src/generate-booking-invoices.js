@@ -1,7 +1,6 @@
 
 import { SimpleSchemaWrapper } from 'firstcut-schema';
 import { Map } from 'immutable';
-import Models from 'firstcut-models';
 import { RecordEvents } from 'firstcut-action-utils';
 import { ACTIONS } from 'firstcut-pipeline-consts';
 import { getRecordUrl } from 'firstcut-retrieve-url';
@@ -32,7 +31,7 @@ const GenerateBookingInvoices = new Map({
     const dayOfShoot = moment.tz(record.date, record.timezone);
     return moment().isBefore(dayOfShoot);
   },
-  generateActions(eventData) {
+  generateActions(Models, eventData) {
     const {
       record_id,
       generateVideographerBookingInvoice,

@@ -1,32 +1,28 @@
 
-import SimpleSchema from 'simpl-schema';
-import Models from 'firstcut-models';
-import moment from 'moment';
-
 const SIMULATE_PLAYER_ID = 'simulatePlayerId';
 
-export function getSimulationPlayerId() {
+export function getSimulationPlayerId(models) {
   if (Meteor.isServer) {
     return '';
   }
   return Session.get(SIMULATE_PLAYER_ID);
 }
 
-export function setSimulationPlayerId(playerId) {
+export function setSimulationPlayerId(models, playerId) {
   if (Meteor.isServer) {
     return null;
   }
   return Session.set(SIMULATE_PLAYER_ID, playerId);
 }
 
-export function inSimulationMode() {
+export function inSimulationMode(models) {
   if (Meteor.isServer) {
     return false;
   }
   return getSimulationPlayerId() != null;
 }
 
-export function getUserEmails(user) {
+export function getUserEmails(models, user) {
   let emails = [];
   if (user.emails && user.emails[0]) {
     const userEmails = user.emails.map(email => email.address);
@@ -41,26 +37,26 @@ export function getUserEmails(user) {
   return emails;
 }
 
-export function getPendingPlayerTasks(player) {
+export function getPendingPlayerTasks(models, player) {
   if (!player) {
     return [];
   }
-  return Models.Task.find({ assignedToPlayerId: player._id, completed: { $ne: true } }).toArray();
+  return models.Task.find({ assignedToPlayerId: player._id, completed: { $ne: true } }).toArray();
 }
 
-export function numPendingTasks(player) {
-  const tasks = getPendingPlayerTasks(player);
+export function numPendingTasks(models, player) {
+  const tasks = models.getPendingPlayerTasks(player);
   return (tasks) ? tasks.length : 0;
 }
 
-export function getPlayerIdFromUser(user) {
+export function getPlayerIdFromUser(models, user) {
   if (user && user.profile) {
     return user.profile.playerId;
   }
   return '';
 }
 
-export function userPlayerId() {
+export function userPlayerId(models) {
   if (getSimulationPlayerId()) {
     return getSimulationPlayerId();
   }
@@ -68,54 +64,54 @@ export function userPlayerId() {
     return Meteor.settings.public.playerIdOverride;
   }
   if (Meteor.user()) {
-    return getPlayerIdFromUser(Meteor.user());
+    return getPlayerIdFromUser(models, Meteor.user());
   }
   return '';
 }
 
-export function userId() {
+export function userId(models) {
   return (Meteor.user()) ? Meteor.user()._id : '';
 }
 
-export function userPlayer() {
-  const playerId = userPlayerId();
+export function userPlayer(models) {
+  const playerId = models.userPlayerId();
   if (!playerId) {
     return null;
   }
-  return getPlayer(playerId);
+  return getPlayer(models, playerId);
 }
 
-export function getPlayerFromEmails(emails) {
+export function getPlayerFromEmails(models, emails) {
   const query = { email: { $in: emails } };
-  return getPlayerFromQuery(query);
+  return getPlayerFromQuery(models, query);
 }
 
-export function getPlayer(id) {
+export function getPlayer(models, id) {
   if (!id) {
     return null;
   }
   const query = { _id: id };
-  return getPlayerFromQuery(query);
+  return getPlayerFromQuery(models, query);
 }
 
-export function getPlayerFromQuery(query) {
+export function getPlayerFromQuery(models, query) {
   let player = null;
-  const collab = Models.Collaborator.findOne(query);
+  const collab = models.Collaborator.findOne(query);
   if (collab) {
     player = collab;
   }
-  const client = Models.Client.findOne(query);
+  const client = models.Client.findOne(query);
   if (client) {
     player = client;
   }
   return player;
 }
 
-export function playerIsClient(player) {
-  return player && player.modelName === Models.Client.modelName;
+export function playerIsClient(models, player) {
+  return player && player.modelName === models.Client.modelName;
 }
 
-export function initializeCollaboratorFromUser(user) {
+export function initializeCollaboratorFromUser(models, user) {
   let lastName = '';
   let firstName = '';
   let thumbnail = '';
@@ -124,9 +120,9 @@ export function initializeCollaboratorFromUser(user) {
     lastName = user.services.google.family_name;
     thumbnail = user.services.google.picture;
   }
-  const emails = getUserEmails(user);
+  const emails = models.getUserEmails(user);
   const email = (emails.length > 0) ? emails[0] : '';
-  return Models.Collaborator.createNew({
+  return models.Collaborator.createNew({
     firstName,
     lastName,
     thumbnail,

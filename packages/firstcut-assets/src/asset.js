@@ -1,11 +1,10 @@
 
 import sanitize from 'sanitize-filename';
 import { Random } from 'meteor-standalone-random';
-import { upload } from 'firstcut-uploader';
 import { _ } from 'lodash';
 import EventEmitter from 'events';
-import AssetSchema from './assets.schema';
 import { createBaseModel } from 'firstcut-model-base';
+import AssetSchema from './assets.schema';
 
 const Base = createBaseModel(AssetSchema);
 
@@ -13,6 +12,10 @@ const snippetExtension = 'mp4';
 const VIDEO_MIME_TYPES = ['video/x-flv', 'video/mp4', 'video/webm', 'video/ogg'];
 
 class Asset extends Base {
+  static setUploader(uploader) {
+    this.uploader = uploader;
+  }
+
   static get collectionName() {
     return 'assets';
   }
@@ -70,7 +73,7 @@ class Asset extends Base {
     const emitter = new EventEmitter();
     const promise = record.save();
     promise.catch(err => emitter.emit('error', err));
-    upload({
+    this.uploader.upload({
       file, path, emitter, bucket: record.bucket,
     });
     return { emitter, record };

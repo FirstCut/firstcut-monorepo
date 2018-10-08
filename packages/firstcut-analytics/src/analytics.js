@@ -1,14 +1,11 @@
 
-import {
-  userPlayer, userId, getPlayerIdFromUser, inSimulationMode, userPlayerId,
-} from 'firstcut-players';
 import { EVENT_LABELS } from 'firstcut-pipeline-consts';
 // import { getQualifiedSkills } from '/imports/ui/config';
 
 const Analytics = {
-  init(options) {
+  init(models, options) {
     if (options.development) {
-      let analytics = {
+      const analytics = {
         load() { console.log('Analytics load'); },
         page() { console.log('Analytics page'); },
         track() { console.log('Analytics track'); },
@@ -17,9 +14,10 @@ const Analytics = {
       };
     }
     analytics.load('q7fljn00pJH2VTzpOAv08t2AH5d2tfFy');
-    if (userId()) {
+    if (models.userId()) {
       this.identifyCurrentUser();
     }
+    this.models = models;
   },
 
   trackError(data) {
@@ -61,23 +59,23 @@ const Analytics = {
   },
 
   track(name, d) {
-    const data = { ...d, userId: userId() };
+    const data = { ...d, userId: this.models.userId() };
     analytics.track(name, data);
   },
 
   identifyCurrentUser() {
-    if (inSimulationMode()) {
+    if (this.models.inSimulationMode()) {
       analytics.identify('Simulation', {
-        _id: userId(),
-        playerId: getPlayerIdFromUser(Meteor.user()),
+        _id: this.models.userId(),
+        playerId: this.models.getPlayerIdFromUser(Meteor.user()),
         simulationPlayerId:
-        userPlayerId(),
+        this.models.userPlayerId(),
       });
       analytics.group('Simulation');
       return;
     }
 
-    const player = userPlayer();
+    const player = this.models.userPlayer();
     if (!player) {
       analytics.identify('Anonymous', {});
       analytics.group('Anonymous');
@@ -85,7 +83,7 @@ const Analytics = {
     }
 
     const traits = {
-      _id: userId(),
+      _id: this.models.userId(),
       email: player.email,
       playerId: player._id,
       name: player.displayName,

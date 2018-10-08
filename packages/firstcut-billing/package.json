@@ -5,6 +5,7 @@
   "main": "lib/index.js",
   "dependencies": {
     "@babel/runtime": "^7.1.2",
+    "lodash": "^4.17.11",
     "stripe": "^6.12.1"
   }
 }

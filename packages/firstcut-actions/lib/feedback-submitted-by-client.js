@@ -11,8 +11,6 @@ var _toConsumableArray2 = _interopRequireDefault(require("@babel/runtime/helpers
 
 var _immutable = require("immutable");
 
-var _firstcutModels = _interopRequireDefault(require("firstcut-models"));
-
 var _moment = _interopRequireDefault(require("moment"));
 
 var _firstcutActionUtils = require("firstcut-action-utils");
@@ -30,11 +28,9 @@ var FeedbackSubmittedByClient = new _immutable.Map({
     var record = _ref.record,
         initiator = _ref.initiator;
   },
-  generateActions: function generateActions(event_data) {
+  generateActions: function generateActions(Models, event_data) {
     var record_id = event_data.record_id;
-
-    var cut = _firstcutModels.default.Cut.fromId(record_id);
-
+    var cut = Models.Cut.fromId(record_id);
     var link = (0, _firstcutRetrieveUrl.getRecordUrl)(cut);
     var changes = cut.revisions ? cut.revisions.split(/\n/) : [];
     var emailActions = (0, _firstcutActionUtils.getEmailActions)({
@@ -58,21 +54,20 @@ var FeedbackSubmittedByClient = new _immutable.Map({
     }]);
     var feedbackSentReminderCron = (0, _moment.default)().add(12, 'hour').toDate();
 
-    if (Meteor.settings.public.environment === 'development'()) {
+    if (Meteor.settings.public.environment === 'development') {
       feedbackSentReminderCron = (0, _moment.default)().add(2, 'minute').toDate();
     }
 
-    var feedbackSentReminder = _firstcutModels.default.Job.createNew({
+    var feedbackSentReminder = Models.Job.createNew({
       jobName: 'scheduled_event',
       event_data: {
         record_id: record_id,
         event: 'send_feedback_reminder',
-        record_type: _firstcutModels.default.Cut.modelName
+        record_type: Models.Cut.modelName
       },
       key: _firstcutPipelineConsts.JOB_KEYS.schedule_feedback_reminder,
       cron: feedbackSentReminderCron
     });
-
     actions.push({
       type: _firstcutPipelineConsts.ACTIONS.schedule_job,
       title: 'schedule a reminder to send feedback to the editor',

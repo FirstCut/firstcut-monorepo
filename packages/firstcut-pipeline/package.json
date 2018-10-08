@@ -6,17 +6,16 @@
   "dependencies": {
     "@babel/runtime": "^7.1.2",
     "firstcut-actions": "file:../firstcut-actions",
-    "firstcut-billing": "file:../firstcut-billing",
     "firstcut-calendar": "file:../firstcut-calendar",
+    "firstcut-google-api": "file:../firstcut-google-api",
     "firstcut-mailer": "file:../firstcut-mailer",
-    "firstcut-models": "file:../firstcut-models",
     "firstcut-pipeline-consts": "file:../firstcut-pipeline-consts",
-    "firstcut-players": "file:../firstcut-players",
     "firstcut-retrieve-url": "file:../firstcut-retrieve-url",
     "firstcut-schema": "file:../firstcut-schema",
     "firstcut-slack": "file:../firstcut-slack",
     "firstcut-text-messaging": "file:../firstcut-text-messaging",
     "firstcut-utils": "file:../firstcut-utils",
+    "lodash": "^4.17.11",
     "meteor-standalone-random": "^1.0.67"
   }
 }

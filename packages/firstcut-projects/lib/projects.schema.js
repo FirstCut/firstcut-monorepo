@@ -9,11 +9,11 @@ exports.default = void 0;
 
 var _firstcutBlueprints = require("firstcut-blueprints");
 
-var _projects = require("./projects.enum");
-
-var _firstcutSchema = _interopRequireDefault(require("firstcut-schema"));
+var _firstcutSchema = require("firstcut-schema");
 
 var _simplSchema = _interopRequireDefault(require("simpl-schema"));
+
+var _projects = require("./projects.enum");
 
 var ProjectSchema = new _firstcutBlueprints.BlueprintableSchema({
   isDummy: {
@@ -105,6 +105,6 @@ var ProjectSchema = new _firstcutBlueprints.BlueprintableSchema({
     blackbox: true
   })
 });
-ProjectSchema.extend(_firstcutSchema.default);
+ProjectSchema.extend(_firstcutSchema.BaseSchema);
 var _default = ProjectSchema;
 exports.default = _default;

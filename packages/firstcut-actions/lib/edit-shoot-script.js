@@ -9,8 +9,6 @@ exports.default = void 0;
 
 var _immutable = require("immutable");
 
-var _firstcutModels = _interopRequireDefault(require("firstcut-models"));
-
 var _firstcutSchema = require("firstcut-schema");
 
 var _moment = _interopRequireDefault(require("moment"));
@@ -20,8 +18,6 @@ var _firstcutActionUtils = require("firstcut-action-utils");
 var _firstcutPipelineConsts = require("firstcut-pipeline-consts");
 
 var _firstcutRetrieveUrl = require("firstcut-retrieve-url");
-
-var _firstcutPlayers = require("firstcut-players");
 
 var key = 'edit_shoot_script';
 var EditShootScript = new _immutable.Map({
@@ -43,15 +39,13 @@ var EditShootScript = new _immutable.Map({
         initiator = _ref.initiator;
     return true;
   },
-  generateActions: function generateActions(eventData) {
+  generateActions: function generateActions(Models, eventData) {
     var record_id = eventData.record_id,
         initiator_player_id = eventData.initiator_player_id,
         script = eventData.script;
-
-    var shoot = _firstcutModels.default.Shoot.fromId(record_id);
-
+    var shoot = Models.Shoot.fromId(record_id);
     var link = (0, _firstcutRetrieveUrl.getRecordUrl)(shoot);
-    var player = (0, _firstcutPlayers.getPlayer)(initiator_player_id);
+    var player = Models.getPlayer(initiator_player_id);
     return [{
       type: _firstcutPipelineConsts.ACTIONS.custom_function,
       title: 'set the shoot script to the newly edited version',

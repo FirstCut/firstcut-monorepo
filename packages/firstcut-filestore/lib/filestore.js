@@ -14,12 +14,12 @@ exports.listObjects = listObjects;
 
 var _simplSchema = _interopRequireDefault(require("simpl-schema"));
 
-var _firstcutModels = _interopRequireDefault(require("firstcut-models"));
-
 var filestore = null;
+var Models = null;
 
-function initFilestoreService(service) {
+function initFilestoreService(models, service) {
   filestore = service;
+  Models = models;
 }
 
 function listObjects(args) {
@@ -100,7 +100,7 @@ function fileRefFromId(_ref) {
   var fileId = _ref.fileId,
       _ref$version = _ref.version,
       version = _ref$version === void 0 ? 'original' : _ref$version;
-  return _firstcutModels.default.Asset.fromId(fileId);
+  return Models.Asset.fromId(fileId);
 }
 
 function getPathFromId(_ref2) {

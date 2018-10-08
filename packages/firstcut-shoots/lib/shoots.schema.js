@@ -15,9 +15,9 @@ var _firstcutPipelineConsts = require("firstcut-pipeline-consts");
 
 var _firstcutSchema = require("firstcut-schema");
 
-var _shoots = require("./shoots.enum");
-
 var _firstcutUtils = require("firstcut-utils");
+
+var _shoots = require("./shoots.enum");
 
 var ShootsSchema = new _firstcutBlueprints.BlueprintableSchema({
   isDummy: {

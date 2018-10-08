@@ -3,7 +3,7 @@ import Stripe from 'stripe';
 
 class Billing {
   constructor() {
-    this.stripe = Stripe(METEOR.settings.stripe.SECRET);
+    this.stripe = Stripe(Meteor.settings.stripe.SECRET);
   }
 
   async chargeInvoice(invoice, token) {

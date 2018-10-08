@@ -1,15 +1,11 @@
 "use strict";
 
-var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
-
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = void 0;
 
 var _immutable = require("immutable");
-
-var _firstcutModels = _interopRequireDefault(require("firstcut-models"));
 
 var _firstcutActionUtils = require("firstcut-action-utils");
 
@@ -26,10 +22,9 @@ var FootageVerificationReminder = new _immutable.Map({
     var record = _ref.record,
         initiator = _ref.initiator;
   },
-  generateActions: function generateActions(event_data) {
+  generateActions: function generateActions(Models, event_data) {
     var record_id = event_data.record_id;
-
-    var shoot = _firstcutModels.default.Shoot.fromId(record_id);
+    var shoot = Models.Shoot.fromId(record_id);
 
     if (shoot.isDummy || shoot.hasVerifiedFootage) {
       return [];

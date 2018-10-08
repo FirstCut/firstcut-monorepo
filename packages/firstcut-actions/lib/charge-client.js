@@ -11,8 +11,6 @@ var _toConsumableArray2 = _interopRequireDefault(require("@babel/runtime/helpers
 
 var _immutable = require("immutable");
 
-var _firstcutModels = _interopRequireDefault(require("firstcut-models"));
-
 var _firstcutActionUtils = require("firstcut-action-utils");
 
 var _firstcutPipelineConsts = require("firstcut-pipeline-consts");
@@ -27,13 +25,11 @@ var ChargeClient = new _immutable.Map({
         initiator = _ref.initiator;
     return record.isClientBill();
   },
-  generateActions: function generateActions(eventData) {
+  generateActions: function generateActions(Models, eventData) {
     var record_id = eventData.record_id,
         token = eventData.token,
         initiator_player_id = eventData.initiator_player_id;
-
-    var invoice = _firstcutModels.default.Invoice.fromId(record_id);
-
+    var invoice = Models.Invoice.fromId(record_id);
     var client = invoice.getClientPayer();
     var emailActions = (0, _firstcutActionUtils.getEmailActions)({
       recipients: [client],

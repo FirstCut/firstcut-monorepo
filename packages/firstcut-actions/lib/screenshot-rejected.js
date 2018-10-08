@@ -1,15 +1,11 @@
 "use strict";
 
-var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
-
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = void 0;
 
 var _immutable = require("immutable");
-
-var _firstcutModels = _interopRequireDefault(require("firstcut-models"));
 
 var _firstcutActionUtils = require("firstcut-action-utils");
 
@@ -24,12 +20,10 @@ var ScreenshotRejected = new _immutable.Map({
     var record = _ref.record,
         initiator = _ref.initiator;
   },
-  generateActions: function generateActions(eventData) {
+  generateActions: function generateActions(Models, eventData) {
     var record_id = eventData.record_id,
         screenshot = eventData.screenshot;
-
-    var shoot = _firstcutModels.default.Shoot.fromId(record_id);
-
+    var shoot = Models.Shoot.fromId(record_id);
     var collaborator = shoot.screenshotCollaborator(screenshot);
     var slackText = "A screenshot was rejected for ".concat(shoot.displayName, ". Reasons: ").concat(screenshot.notes);
     var phone = collaborator ? collaborator.phone : _firstcutPipelineConsts.FALLBACK_PHONE_NUMBER;
@@ -39,8 +33,7 @@ var ScreenshotRejected = new _immutable.Map({
       phone = _firstcutPipelineConsts.FALLBACK_PHONE_NUMBER;
     }
 
-    var screenshotDisplayString = _firstcutModels.default.Shoot.getScreenshotDisplayString(screenshot);
-
+    var screenshotDisplayString = Models.Shoot.getScreenshotDisplayString(screenshot);
     return [{
       type: _firstcutPipelineConsts.ACTIONS.slack_notify,
       channel: 'shoot-notifications',

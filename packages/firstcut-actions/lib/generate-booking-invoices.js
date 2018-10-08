@@ -11,8 +11,6 @@ var _firstcutSchema = require("firstcut-schema");
 
 var _immutable = require("immutable");
 
-var _firstcutModels = _interopRequireDefault(require("firstcut-models"));
-
 var _firstcutActionUtils = require("firstcut-action-utils");
 
 var _firstcutPipelineConsts = require("firstcut-pipeline-consts");
@@ -50,14 +48,12 @@ var GenerateBookingInvoices = new _immutable.Map({
 
     return (0, _moment.default)().isBefore(dayOfShoot);
   },
-  generateActions: function generateActions(eventData) {
+  generateActions: function generateActions(Models, eventData) {
     var record_id = eventData.record_id,
         generateVideographerBookingInvoice = eventData.generateVideographerBookingInvoice,
         generateInterviewerBookingInvoice = eventData.generateInterviewerBookingInvoice,
         initiator_player_id = eventData.initiator_player_id;
-
-    var shoot = _firstcutModels.default.getRecordFromId('Shoot', record_id);
-
+    var shoot = Models.getRecordFromId('Shoot', record_id);
     return [{
       type: _firstcutPipelineConsts.ACTIONS.slack_notify,
       content: {

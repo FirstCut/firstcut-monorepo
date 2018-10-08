@@ -100,7 +100,7 @@ export const TEST_PROJECT = {
 export function insertTestData() {
   Mongo.Collection.prototype.attachSchema = function () {};
 
-  if (Meteor.isServer && Meteor.settings.public.environment === 'development'()) {
+  if (Meteor.isServer && Meteor.settings.public.environment === 'development') {
     Deliverable.createNew(TEST_DELIVERABLE).save();
     Project.createNew(TEST_PROJECT).save();
     Client.createNew(TEST_CLIENT_OWNER_OF_DELIVERABLE).save();

@@ -18,7 +18,7 @@ var SUPPORTED_COUNTRIES = ['United States', 'United Kingdom'];
 exports.SUPPORTED_COUNTRIES = SUPPORTED_COUNTRIES;
 
 function getFromNumber(country) {
-  if (Meteor.settings.public.environment === 'development'()) {
+  if (Meteor.settings.public.environment === 'development') {
     return '+15005550006';
   }
 

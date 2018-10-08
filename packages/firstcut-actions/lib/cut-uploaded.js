@@ -11,11 +11,9 @@ var _toConsumableArray2 = _interopRequireDefault(require("@babel/runtime/helpers
 
 var _immutable = require("immutable");
 
-var _firstcutModels = _interopRequireDefault(require("firstcut-models"));
+var _firstcutPipelineConsts = require("firstcut-pipeline-consts");
 
 var _firstcutActionUtils = require("firstcut-action-utils");
-
-var _firstcutPipelineConsts = require("firstcut-pipeline-consts");
 
 var _firstcutRetrieveUrl = require("firstcut-retrieve-url");
 
@@ -28,11 +26,9 @@ var CutUploaded = new _immutable.Map({
     var record = _ref.record,
         initiator = _ref.initiator;
   },
-  generateActions: function generateActions(eventData) {
+  generateActions: function generateActions(Models, eventData) {
     var record_id = eventData.record_id;
-
-    var cut = _firstcutModels.default.Cut.fromId(record_id);
-
+    var cut = Models.Cut.fromId(record_id);
     var deliverable = cut.deliverable;
     var link = (0, _firstcutRetrieveUrl.getRecordUrl)(cut);
     var viewLink = (0, _firstcutRetrieveUrl.getCutViewLink)(cut);

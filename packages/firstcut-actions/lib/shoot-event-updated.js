@@ -11,8 +11,6 @@ var _toConsumableArray2 = _interopRequireDefault(require("@babel/runtime/helpers
 
 var _immutable = require("immutable");
 
-var _firstcutModels = _interopRequireDefault(require("firstcut-models"));
-
 var _moment = _interopRequireDefault(require("moment"));
 
 var _firstcutActionUtils = require("firstcut-action-utils");
@@ -32,11 +30,10 @@ var UpdatedShootEvent = new _immutable.Map({
     var record = _ref.record,
         initiator = _ref.initiator;
   },
-  generateActions: function generateActions(event_data) {
+  generateActions: function generateActions(Models, event_data) {
     var SHOOT_WRAP_NOTIFICATION_PADDING = 3;
     var record_id = event_data.record_id;
-
-    var shoot = _firstcutModels.default.Shoot.fromId(record_id);
+    var shoot = Models.Shoot.fromId(record_id);
 
     if (!shoot.date || shoot.isDummy && Meteor.settings.public.environment !== 'development') {
       return [];
@@ -85,11 +82,11 @@ var UpdatedShootEvent = new _immutable.Map({
 
     var shoot_wrap_cron = (0, _moment.default)(shoot.date).add(shoot.duration, 'hour').add(SHOOT_WRAP_NOTIFICATION_PADDING, 'hour').toDate();
 
-    if (Meteor.settings.public.environment === 'development'()) {
+    if (Meteor.settings.public.environment === 'development') {
       shoot_wrap_cron = (0, _moment.default)().add(2, 'minute').toDate();
     }
 
-    var shoot_wrap = _firstcutModels.default.Job.createNew({
+    var shoot_wrap = Models.Job.createNew({
       jobName: 'scheduled_event',
       event_data: {
         record_id: record_id,
@@ -99,7 +96,6 @@ var UpdatedShootEvent = new _immutable.Map({
       key: _firstcutPipelineConsts.JOB_KEYS.schedule_shoot_wrap,
       cron: shoot_wrap_cron
     });
-
     actions.push({
       type: _firstcutPipelineConsts.ACTIONS.schedule_job,
       title: 'schedule a shoot wrap event for this time + shoot duration',
@@ -113,7 +109,7 @@ var UpdatedShootEvent = new _immutable.Map({
       shoot_reminder_cron = (0, _moment.default)().add(2, 'minute').toDate();
     }
 
-    var upcoming_shoot_reminder = _firstcutModels.default.Job.createNew({
+    var upcoming_shoot_reminder = Models.Job.createNew({
       jobName: 'scheduled_event',
       event_data: {
         record_id: record_id,
@@ -123,7 +119,6 @@ var UpdatedShootEvent = new _immutable.Map({
       cron: shoot_reminder_cron,
       key: _firstcutPipelineConsts.JOB_KEYS.schedule_shoot_reminder
     });
-
     actions.push({
       type: _firstcutPipelineConsts.ACTIONS.schedule_job,
       title: 'schedule an upcoming shoot reminder for 24hrs before the shoot start',
@@ -137,7 +132,7 @@ var UpdatedShootEvent = new _immutable.Map({
       checkin_reminder_cron = (0, _moment.default)().add(3, 'minute').toDate();
     }
 
-    var checkin_reminder_job = _firstcutModels.default.Job.createNew({
+    var checkin_reminder_job = Models.Job.createNew({
       jobName: 'scheduled_event',
       event_data: {
         record_id: record_id,
@@ -147,7 +142,6 @@ var UpdatedShootEvent = new _immutable.Map({
       key: _firstcutPipelineConsts.JOB_KEYS.schedule_checkin_checkout_reminder,
       cron: checkin_reminder_cron
     });
-
     actions.push({
       type: _firstcutPipelineConsts.ACTIONS.schedule_job,
       title: 'schedule a reminder to the videographer to checkin and checkout of the shoot',

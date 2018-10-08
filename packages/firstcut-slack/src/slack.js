@@ -2,10 +2,6 @@
 import { WebClient } from '@slack/client';
 import { SlackContentSchema } from './slack.schemas';
 
-const access_token = Meteor.settings.slack.api_token;
-const slack = new WebClient(access_token);
-const client_id = Meteor.settings.slack.client_id;
-const client_secret = Meteor.settings.slack.client_secret;
 
 export function getChannel() {
   if (Meteor.isTest) {
@@ -19,6 +15,10 @@ export function getChannel() {
 }
 
 export function postMessage(content, channel) {
+  const access_token = Meteor.settings.slack.api_token;
+  const slack = new WebClient(access_token);
+  const client_id = Meteor.settings.slack.client_id;
+  const client_secret = Meteor.settings.slack.client_secret;
   if (!channel || Meteor.settings.public.environment == 'development') {
     channel = getChannel();
   }

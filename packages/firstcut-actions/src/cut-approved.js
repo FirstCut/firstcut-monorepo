@@ -1,8 +1,8 @@
 import { Map } from 'immutable';
-import Models from 'firstcut-models';
-import { RecordEvents } from 'firstcut-action-utils';
 import { ACTIONS } from 'firstcut-pipeline-consts';
-import { getEmailActions, setAllRecordInvoicesToDue, recordHistoryIncludesEvent } from 'firstcut-action-utils';
+import {
+  RecordEvents, getEmailActions, setAllRecordInvoicesToDue, recordHistoryIncludesEvent,
+} from 'firstcut-action-utils';
 import { getRecordUrl } from 'firstcut-retrieve-url';
 
 const key = 'cut_approved_by_client';
@@ -14,7 +14,7 @@ const CutApprovedByClient = new Map({
   fulfillsPrerequisites({ record, initiator }) {
     return !recordHistoryIncludesEvent({ record, event: key });
   },
-  generateActions(eventData) {
+  generateActions(Models, eventData) {
     const { record_id } = eventData;
     const cut = Models.getRecordFromId('Cut', record_id);
     let deliverable = cut.deliverable;

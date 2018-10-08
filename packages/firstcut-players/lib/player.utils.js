@@ -23,15 +23,9 @@ exports.initializeCollaboratorFromUser = initializeCollaboratorFromUser;
 
 var _toConsumableArray2 = _interopRequireDefault(require("@babel/runtime/helpers/toConsumableArray"));
 
-var _simplSchema = _interopRequireDefault(require("simpl-schema"));
-
-var _firstcutModels = _interopRequireDefault(require("firstcut-models"));
-
-var _moment = _interopRequireDefault(require("moment"));
-
 var SIMULATE_PLAYER_ID = 'simulatePlayerId';
 
-function getSimulationPlayerId() {
+function getSimulationPlayerId(models) {
   if (Meteor.isServer) {
     return '';
   }
@@ -39,7 +33,7 @@ function getSimulationPlayerId() {
   return Session.get(SIMULATE_PLAYER_ID);
 }
 
-function setSimulationPlayerId(playerId) {
+function setSimulationPlayerId(models, playerId) {
   if (Meteor.isServer) {
     return null;
   }
@@ -47,7 +41,7 @@ function setSimulationPlayerId(playerId) {
   return Session.set(SIMULATE_PLAYER_ID, playerId);
 }
 
-function inSimulationMode() {
+function inSimulationMode(models) {
   if (Meteor.isServer) {
     return false;
   }
@@ -55,7 +49,7 @@ function inSimulationMode() {
   return getSimulationPlayerId() != null;
 }
 
-function getUserEmails(user) {
+function getUserEmails(models, user) {
   var emails = [];
 
   if (user.emails && user.emails[0]) {
@@ -79,12 +73,12 @@ function getUserEmails(user) {
   return emails;
 }
 
-function getPendingPlayerTasks(player) {
+function getPendingPlayerTasks(models, player) {
   if (!player) {
     return [];
   }
 
-  return _firstcutModels.default.Task.find({
+  return models.Task.find({
     assignedToPlayerId: player._id,
     completed: {
       $ne: true
@@ -92,12 +86,12 @@ function getPendingPlayerTasks(player) {
   }).toArray();
 }
 
-function numPendingTasks(player) {
-  var tasks = getPendingPlayerTasks(player);
+function numPendingTasks(models, player) {
+  var tasks = models.getPendingPlayerTasks(player);
   return tasks ? tasks.length : 0;
 }
 
-function getPlayerIdFromUser(user) {
+function getPlayerIdFromUser(models, user) {
   if (user && user.profile) {
     return user.profile.playerId;
   }
@@ -105,7 +99,7 @@ function getPlayerIdFromUser(user) {
   return '';
 }
 
-function userPlayerId() {
+function userPlayerId(models) {
   if (getSimulationPlayerId()) {
     return getSimulationPlayerId();
   }
@@ -115,36 +109,36 @@ function userPlayerId() {
   }
 
   if (Meteor.user()) {
-    return getPlayerIdFromUser(Meteor.user());
+    return getPlayerIdFromUser(models, Meteor.user());
   }
 
   return '';
 }
 
-function userId() {
+function userId(models) {
   return Meteor.user() ? Meteor.user()._id : '';
 }
 
-function userPlayer() {
-  var playerId = userPlayerId();
+function userPlayer(models) {
+  var playerId = models.userPlayerId();
 
   if (!playerId) {
     return null;
   }
 
-  return getPlayer(playerId);
+  return getPlayer(models, playerId);
 }
 
-function getPlayerFromEmails(emails) {
+function getPlayerFromEmails(models, emails) {
   var query = {
     email: {
       $in: emails
     }
   };
-  return getPlayerFromQuery(query);
+  return getPlayerFromQuery(models, query);
 }
 
-function getPlayer(id) {
+function getPlayer(models, id) {
   if (!id) {
     return null;
   }
@@ -152,19 +146,18 @@ function getPlayer(id) {
   var query = {
     _id: id
   };
-  return getPlayerFromQuery(query);
+  return getPlayerFromQuery(models, query);
 }
 
-function getPlayerFromQuery(query) {
+function getPlayerFromQuery(models, query) {
   var player = null;
-
-  var collab = _firstcutModels.default.Collaborator.findOne(query);
+  var collab = models.Collaborator.findOne(query);
 
   if (collab) {
     player = collab;
   }
 
-  var client = _firstcutModels.default.Client.findOne(query);
+  var client = models.Client.findOne(query);
 
   if (client) {
     player = client;
@@ -173,11 +166,11 @@ function getPlayerFromQuery(query) {
   return player;
 }
 
-function playerIsClient(player) {
-  return player && player.modelName === _firstcutModels.default.Client.modelName;
+function playerIsClient(models, player) {
+  return player && player.modelName === models.Client.modelName;
 }
 
-function initializeCollaboratorFromUser(user) {
+function initializeCollaboratorFromUser(models, user) {
   var lastName = '';
   var firstName = '';
   var thumbnail = '';
@@ -188,9 +181,9 @@ function initializeCollaboratorFromUser(user) {
     thumbnail = user.services.google.picture;
   }
 
-  var emails = getUserEmails(user);
+  var emails = models.getUserEmails(user);
   var email = emails.length > 0 ? emails[0] : '';
-  return _firstcutModels.default.Collaborator.createNew({
+  return models.Collaborator.createNew({
     firstName: firstName,
     lastName: lastName,
     thumbnail: thumbnail,

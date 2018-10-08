@@ -1,7 +1,6 @@
 
 import { SimpleSchemaWrapper } from 'firstcut-schema';
 import { Map } from 'immutable';
-import Models from 'firstcut-models';
 import { RecordEvents } from 'firstcut-action-utils';
 import { ACTIONS } from 'firstcut-pipeline-consts';
 import { getEmailActions, recordHistoryIncludesEvent } from 'firstcut-action-utils';
@@ -26,7 +25,7 @@ const PreproductionKickoff = new Map({
   fulfillsPrerequisites({ record, initiator }) {
     return !recordHistoryIncludesEvent({ record, event: key }) && !recordHistoryIncludesEvent({ record, event: 'project_wrap' });
   },
-  generateActions(eventData) {
+  generateActions(Models, eventData) {
     const {
       record_id,
       clientEmailContent,

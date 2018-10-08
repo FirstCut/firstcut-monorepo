@@ -89,8 +89,8 @@ function (_Base) {
     value: function createNew(props) {
       if (Meteor.isClient) {
         return new this((0, _objectSpread2.default)({
-          assignedToPlayerId: userPlayerId(),
-          assignedByPlayerId: userPlayerId(),
+          assignedToPlayerId: Models.userPlayerId(),
+          assignedByPlayerId: Models.userPlayerId(),
           assignedToPlayerType: 'Collaborator'
         }, props));
       }

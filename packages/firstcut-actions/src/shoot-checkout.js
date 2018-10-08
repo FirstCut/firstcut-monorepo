@@ -1,5 +1,4 @@
 import { Map } from 'immutable';
-import Models from 'firstcut-models';
 import { ACTIONS, COLLABORATOR_TYPES_TO_LABELS, JOB_KEYS } from 'firstcut-pipeline-consts';
 import { getRecordUrl } from 'firstcut-retrieve-url';
 import moment from 'moment';
@@ -17,7 +16,7 @@ const ShootCheckout = new Map({
   }).extend(EventSchema),
   fulfillsPrerequisites({ record, initiator }) {
   },
-  generateActions(event_data) {
+  generateActions(Models, event_data) {
     const { record_id, collaborator_key } = event_data;
     const shoot = Models.Shoot.fromId(record_id);
     const collaborator = shoot[collaborator_key];

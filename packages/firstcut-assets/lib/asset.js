@@ -23,15 +23,13 @@ var _sanitizeFilename = _interopRequireDefault(require("sanitize-filename"));
 
 var _meteorStandaloneRandom = require("meteor-standalone-random");
 
-var _firstcutUploader = require("firstcut-uploader");
-
 var _lodash = require("lodash");
 
 var _events = _interopRequireDefault(require("events"));
 
-var _assets = _interopRequireDefault(require("./assets.schema"));
-
 var _firstcutModelBase = require("firstcut-model-base");
+
+var _assets = _interopRequireDefault(require("./assets.schema"));
 
 var Base = (0, _firstcutModelBase.createBaseModel)(_assets.default);
 var snippetExtension = 'mp4';
@@ -102,6 +100,11 @@ function (_Base) {
       return VIDEO_MIME_TYPES.includes(this.type);
     }
   }], [{
+    key: "setUploader",
+    value: function setUploader(uploader) {
+      this.uploader = uploader;
+    }
+  }, {
     key: "footageFilesFolder",
     value: function footageFilesFolder(bucket) {
       return "".concat(bucket, "/footage-folders/");
@@ -164,7 +167,7 @@ function (_Base) {
       promise.catch(function (err) {
         return emitter.emit('error', err);
       });
-      (0, _firstcutUploader.upload)({
+      this.uploader.upload({
         file: file,
         path: path,
         emitter: emitter,

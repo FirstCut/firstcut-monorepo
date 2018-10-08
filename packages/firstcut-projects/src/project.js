@@ -1,11 +1,11 @@
 import { _ } from 'lodash';
 import { List } from 'immutable';
-import { STAGES } from './projects.enum';
 import { EVENT_LABELS } from 'firstcut-pipeline-consts';
-import PROJECT_BLUEPRINTS from './projects.blueprints';
-import ProjectSchema from './projects.schema';
 import { eventsInHistory } from 'firstcut-action-utils';
 import { createFirstCutModel } from 'firstcut-model-base';
+import { STAGES } from './projects.enum';
+import PROJECT_BLUEPRINTS from './projects.blueprints';
+import ProjectSchema from './projects.schema';
 
 const Base = createFirstCutModel(ProjectSchema);
 

@@ -9,7 +9,7 @@ exports.default = void 0;
 
 var _firstcutBlueprints = require("firstcut-blueprints");
 
-var _firstcutSchema = _interopRequireDefault(require("firstcut-schema"));
+var _firstcutSchema = require("firstcut-schema");
 
 var _simplSchema = _interopRequireDefault(require("simpl-schema"));
 
@@ -116,6 +116,6 @@ var DeliverableSchema = new _firstcutBlueprints.BlueprintableSchema({
     type: String
   }
 });
-DeliverableSchema.extend(_firstcutSchema.default);
+DeliverableSchema.extend(_firstcutSchema.BaseSchema);
 var _default = DeliverableSchema;
 exports.default = _default;

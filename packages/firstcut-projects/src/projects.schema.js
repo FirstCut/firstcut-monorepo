@@ -1,7 +1,7 @@
 import { BlueprintableSchema as Schema } from 'firstcut-blueprints';
-import { STAGES } from './projects.enum';
-import BaseSchema from 'firstcut-schema';
+import { BaseSchema } from 'firstcut-schema';
 import SimpleSchema from 'simpl-schema';
+import { STAGES } from './projects.enum';
 
 const ProjectSchema = new Schema({
   isDummy: {

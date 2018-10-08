@@ -1,9 +1,11 @@
 
-jest.mock('firstcut-models');
 jest.mock('aws-sdk/clients/s3');
 
+const Models = {
+  Asset: { fromId: jest.fn() },
+};
+
 import S3 from 'aws-sdk/clients/s3';
-import Models from 'firstcut-models';
 import {
   initFilestoreService, getSignedUrl, getSignedUrlOfKey, listObjects,
 } from '../src/filestore';
@@ -27,7 +29,7 @@ describe('uninitialized filestore', () => {
 
 describe('initialized filestore', () => {
   beforeAll(() => {
-    initFilestoreService(filestoreService);
+    initFilestoreService(Models, filestoreService);
   });
 
   test('getSignedUrl should throw if fileId is not defined in args', () => {

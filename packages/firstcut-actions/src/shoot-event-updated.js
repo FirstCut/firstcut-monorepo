@@ -1,6 +1,5 @@
 
 import { Map } from 'immutable';
-import Models from 'firstcut-models';
 import moment from 'moment';
 import { RecordEvents } from 'firstcut-action-utils';
 import { ACTIONS, JOB_KEYS } from 'firstcut-pipeline-consts';
@@ -14,7 +13,7 @@ const UpdatedShootEvent = new Map({
   schema: RecordEvents,
   fulfillsPrerequisites({ record, initiator }) {
   },
-  generateActions(event_data) {
+  generateActions(Models, event_data) {
     const SHOOT_WRAP_NOTIFICATION_PADDING = 3;
     const { record_id } = event_data;
     const shoot = Models.Shoot.fromId(record_id);
@@ -49,7 +48,7 @@ const UpdatedShootEvent = new Map({
 
     /* SHOOT WRAP JOB */
     let shoot_wrap_cron = moment(shoot.date).add(shoot.duration, 'hour').add(SHOOT_WRAP_NOTIFICATION_PADDING, 'hour').toDate();
-    if (Meteor.settings.public.environment === 'development'()) {
+    if (Meteor.settings.public.environment === 'development') {
       shoot_wrap_cron = moment().add(2, 'minute').toDate();
     }
     const shoot_wrap = Models.Job.createNew({

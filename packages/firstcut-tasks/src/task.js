@@ -10,8 +10,8 @@ class Task extends Base {
   static createNew(props) {
     if (Meteor.isClient) {
       return new this({
-        assignedToPlayerId: userPlayerId(),
-        assignedByPlayerId: userPlayerId(),
+        assignedToPlayerId: Models.userPlayerId(),
+        assignedByPlayerId: Models.userPlayerId(),
         assignedToPlayerType: 'Collaborator',
         ...props,
       });

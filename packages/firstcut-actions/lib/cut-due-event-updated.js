@@ -9,8 +9,6 @@ exports.default = void 0;
 
 var _immutable = require("immutable");
 
-var _firstcutModels = _interopRequireDefault(require("firstcut-models"));
-
 var _moment = _interopRequireDefault(require("moment"));
 
 var _firstcutActionUtils = require("firstcut-action-utils");
@@ -30,10 +28,9 @@ var CutDueEventUpdated = new _immutable.Map({
     var record = _ref.record,
         initiator = _ref.initiator;
   },
-  generateActions: function generateActions(eventData) {
+  generateActions: function generateActions(Models, eventData) {
     var record_id = eventData.record_id;
-
-    var deliverable = _firstcutModels.default.Deliverable.fromId(record_id);
+    var deliverable = Models.Deliverable.fromId(record_id);
 
     if (!deliverable.nextCutDue) {
       return [];
@@ -76,22 +73,21 @@ var CutDueEventUpdated = new _immutable.Map({
     }];
     var cutDueReminderCron = (0, _moment.default)(due).subtract(24, 'hour').toDate();
 
-    if (Meteor.settings.public.environment === 'development'()) {
+    if (Meteor.settings.public.environment === 'development') {
       cutDueReminderCron = (0, _moment.default)().add(2, 'minute').toDate();
     }
 
-    var cutDueReminder = _firstcutModels.default.Job.createNew({
+    var cutDueReminder = Models.Job.createNew({
       jobName: 'scheduled_event',
       event_data: {
         record_id: record_id,
         event: 'cutDueReminder',
         cut_type_due: deliverable.getNextCutTypeDue(),
-        record_type: _firstcutModels.default.Deliverable.modelName
+        record_type: Models.Deliverable.modelName
       },
       key: _firstcutPipelineConsts.JOB_KEYS.schedule_cut_due_reminder,
       cron: cutDueReminderCron
     });
-
     actions.push({
       type: _firstcutPipelineConsts.ACTIONS.schedule_job,
       title: 'schedule a reminder to upload a cut 24hrs before cut due',
