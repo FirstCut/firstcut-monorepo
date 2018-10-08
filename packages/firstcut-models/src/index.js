@@ -10,10 +10,6 @@ import Invoice from 'firstcut-invoices';
 import Job from 'firstcut-jobs';
 import Asset from 'firstcut-assets';
 import Task from 'firstcut-tasks';
-import initPublications from './utils/publications';
-
-import enableCrud from './utils/crud';
-import enableBasePublications from './utils/publications.base';
 
 let Models = {};
 const models = Object.freeze({
@@ -47,26 +43,6 @@ Object.keys(models).forEach((i) => {
   model.models = models;
   model.modelName = i;
 });
-
-// this needs to be pulled out
-export function initModels(ValidatedMethod) {
-  if (Meteor.isServer) {
-    initPublications(Models);
-  }
-  Object.keys(models).forEach((key) => {
-    const model = models[key];
-    enableBasePublications(model);
-    enableCrud(model, ValidatedMethod);
-    if (!model.collection) {
-      const collection = new Mongo.Collection(model.collectionName);
-      collection.attachSchema(model.schema.asSchema);
-      model.collection = collection;
-    }
-    if (model.onInit) {
-      model.onInit();
-    }
-  });
-}
 
 Models = {
   allModels: Object.values(models),

@@ -2,8 +2,10 @@
   "name": "firstcut-analytics",
   "private": true,
   "version": "0.0.0",
-  "main": "src/index.js",
+  "main": "lib/index.js",
   "dependencies": {
-    "@babel/runtime": "^7.1.2"
+    "@babel/runtime": "^7.1.2",
+    "firstcut-pipeline-consts": "file:../firstcut-pipeline-consts",
+    "firstcut-players": "file:../firstcut-players"
   }
 }

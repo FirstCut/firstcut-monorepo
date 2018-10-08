@@ -2,7 +2,7 @@
   "name": "firstcut-mailer",
   "private": true,
   "version": "0.0.0",
-  "main": "src/index.js",
+  "main": "lib/index.js",
   "dependencies": {
     "@babel/runtime": "^7.1.2",
     "sparkpost": "^2.1.2"

@@ -3,7 +3,9 @@ import { ValidatedMethod } from 'mdg:validated-method';
 import Random from 'meteor-standalone-random';
 
 let Models = null;
+
 export function initCollections(models) {
+  //should also ensure that models have the features required -- validate schema and modelName
   Object.keys(models).forEach((key) => {
     const model = models[key];
     if (!model.collection) {
@@ -18,14 +20,27 @@ export function initCollections(models) {
   Models = models;
 }
 
+export function cleanRecord(record) {
+  if (!models) {
+    throw new Error('models not yet initialized. call initCollections with the models to enable');
+  }
+  return record.schema.clean(record.toJS());
+}
+
+export function validateRecord(record) {
+  if (!models) {
+    throw new Error('models not yet initialized. call initCollections with the models to enable');
+  }
+  record.schema.validate(record.toJS());
+}
+
 export function saveRecord(record) {
   if (!models) {
     throw new Error('models not yet initialized. call initCollections with the models to enable');
   }
   return new Promise((resolve, reject) => {
-    const cleaned = this.clean(record);
-    this.validate(cleaned);
-    this.onSave(cleaned).then(resolve).catch(reject);
+    const cleaned = cleanRecord(record);
+    validateRecord(cleaned);
     save.call({ record: cleaned, modelName: record.modelName }, (err, savedRecord) => {
       if (err) {
         reject(err);
