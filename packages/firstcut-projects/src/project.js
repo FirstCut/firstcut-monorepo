@@ -46,14 +46,17 @@ class Project extends Base {
   getCompleteRecordAndChildrenTasks(options) {
     const deliverables = this.getDeliverables().toArray();
     let deliverableTasks = deliverables.map(d => d.getRelatedTasks(options).toArray());
+    let cutTasks = this.getAllCuts().toArray().map(c => c.getRelatedTasks(options).toArray());
     const shoots = this.getShoots().toArray();
     let shootsTasks = shoots.map(s => s.getRelatedTasks(options).toArray());
     shootsTasks = _.flatten(shootsTasks);
     deliverableTasks = _.flatten(deliverableTasks);
+    cutTasks = _.flatten(cutTasks);
     const allTasks = [
       ...this.getRelatedTasks(options).toArray(),
       ...shootsTasks,
       ...deliverableTasks,
+      ...cutTasks,
     ];
     return new List(allTasks);
   }

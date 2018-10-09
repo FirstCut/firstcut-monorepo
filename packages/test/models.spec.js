@@ -77,8 +77,6 @@ describe('all models that extend the location schema', () => {
     expect.assertions(WithLocations.length);
     _.forEach(WithLocations, (model) => {
       const obj = new model({ location: { name: 'Name', street_address: 'Street', locality: 'locality' } });
-      console.log(obj.toJS());
-      console.log(obj.locationDisplayName);
       expect(obj.locationDisplayName).toBeDefined();
       // expect(obj.schema.asJson._id).toBeDefined();
     });
@@ -105,6 +103,17 @@ describe('all models that extend the base schema', () => {
     _.forEach(BaseModels, (model) => {
       const obj = new model({});
       expect(obj.historyAsArray).toBeDefined();
+    });
+  });
+});
+
+describe('model tasks', () => {
+  test('should have getRelatedTasks defined', () => {
+    const baseKeys = _.keys(BaseSchema);
+    expect.assertions(BaseModels.length);
+    _.forEach(BaseModels, (model) => {
+      const obj = new model({});
+      expect(obj.getRelatedTasks).toBeDefined();
     });
   });
 });

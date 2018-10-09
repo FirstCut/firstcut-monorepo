@@ -95,13 +95,17 @@ function (_Base) {
       var deliverableTasks = deliverables.map(function (d) {
         return d.getRelatedTasks(options).toArray();
       });
+      var cutTasks = this.getAllCuts().toArray().map(function (c) {
+        return c.getRelatedTasks(options).toArray();
+      });
       var shoots = this.getShoots().toArray();
       var shootsTasks = shoots.map(function (s) {
         return s.getRelatedTasks(options).toArray();
       });
       shootsTasks = _lodash._.flatten(shootsTasks);
       deliverableTasks = _lodash._.flatten(deliverableTasks);
-      var allTasks = (0, _toConsumableArray2.default)(this.getRelatedTasks(options).toArray()).concat((0, _toConsumableArray2.default)(shootsTasks), (0, _toConsumableArray2.default)(deliverableTasks));
+      cutTasks = _lodash._.flatten(cutTasks);
+      var allTasks = (0, _toConsumableArray2.default)(this.getRelatedTasks(options).toArray()).concat((0, _toConsumableArray2.default)(shootsTasks), (0, _toConsumableArray2.default)(deliverableTasks), (0, _toConsumableArray2.default)(cutTasks));
       return new _immutable.List(allTasks);
     }
   }, {
