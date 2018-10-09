@@ -8,6 +8,7 @@
     "firstcut-model-base": "file:../firstcut-model-base",
     "firstcut-pipeline-consts": "file:../firstcut-pipeline-consts",
     "firstcut-schema": "file:../firstcut-schema",
+    "firstcut-user-session": "file:../firstcut-user-session",
     "lodash": "^4.17.11"
   }
 }

@@ -1,11 +1,11 @@
 
 import { ValidatedMethod } from 'mdg:validated-method';
-import Random from 'meteor-standalone-random';
+import oid from 'mdbid';
 
 let Models = null;
 
 export function initCollections(models) {
-  //should also ensure that models have the features required -- validate schema and modelName
+  // should also ensure that models have the features required -- validate schema and modelName
   Object.keys(models).forEach((key) => {
     const model = models[key];
     if (!model.collection) {
@@ -56,7 +56,7 @@ const save = new ValidatedMethod({
   validate: () => true, // yes bad
   run({ record, modelName }) {
     if (!record._id) {
-      record._id = Random.id();
+      record._id = oid();
     }
     // this.unblock();
     const collection = Models[modelName].collection;

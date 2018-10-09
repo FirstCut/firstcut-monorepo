@@ -23,8 +23,8 @@ var _firstcutSchema = require("firstcut-schema");
 
 var _firstcutActions = _interopRequireDefault(require("firstcut-actions"));
 
-console.log('THE ACTON TEMPLATES');
-console.log(_firstcutActions.default);
+var _firstcutUserSession = require("firstcut-user-session");
+
 var Models = null;
 
 function initModelsForPipeline(models) {
@@ -52,7 +52,7 @@ function getActionsForEvent(args) {
 }
 
 function emitPipelineEvent(args) {
-  if (Models.inSimulationMode()) {
+  if ((0, _firstcutUserSession.inSimulationMode)()) {
     return;
   }
 
@@ -62,7 +62,7 @@ function emitPipelineEvent(args) {
   var params = _.mapValues((0, _objectSpread2.default)({}, rest, {
     record_id: record._id,
     record_type: record.modelName,
-    initiator_player_id: Models.userPlayerId()
+    initiator_player_id: (0, _firstcutUserSession.userPlayerId)()
   }), function (val) {
     if ((0, _typeof2.default)(val) === 'object') {
       return JSON.stringify(val);

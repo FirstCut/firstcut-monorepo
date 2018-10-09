@@ -1,9 +1,8 @@
 import { EVENT_LABELS, ACTIONS } from 'firstcut-pipeline-consts';
 import { SimpleSchemaWrapper } from 'firstcut-schema';
 import ActionTemplates from 'firstcut-actions';
+import { inSimulationMode, userPlayerId } from 'firstcut-user-session';
 
-console.log('THE ACTON TEMPLATES');
-console.log(ActionTemplates);
 let Models = null;
 export function initModelsForPipeline(models) {
   Models = models;
@@ -22,7 +21,7 @@ function getActionsForEvent(args) {
 }
 
 export function emitPipelineEvent(args) {
-  if (Models.inSimulationMode()) {
+  if (inSimulationMode()) {
     return;
   }
   const { record, ...rest } = args;
@@ -30,7 +29,7 @@ export function emitPipelineEvent(args) {
     ...rest,
     record_id: record._id,
     record_type: record.modelName,
-    initiator_player_id: Models.userPlayerId(),
+    initiator_player_id: userPlayerId(),
   }, (val) => {
     if (typeof val === 'object') {
       return JSON.stringify(val);

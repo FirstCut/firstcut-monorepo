@@ -21,15 +21,15 @@ var _inherits2 = _interopRequireDefault(require("@babel/runtime/helpers/inherits
 
 var _lodash = require("lodash");
 
-var _base = require("./base.model");
-
 var _firstcutSchema = require("firstcut-schema");
 
 var _firstcutRetrieveUrl = require("firstcut-retrieve-url");
 
+var _firstcutActionUtils = require("firstcut-action-utils");
+
 var _generateDefaults = _interopRequireDefault(require("./utils/generate-defaults"));
 
-var _firstcutActionUtils = require("firstcut-action-utils");
+var _base = require("./base.model");
 
 function createFirstCutModel(schema) {
   return FirstCutModel((0, _generateDefaults.default)(schema));

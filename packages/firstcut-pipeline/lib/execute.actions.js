@@ -33,7 +33,7 @@ var _firstcutPipelineUtils = require("firstcut-pipeline-utils");
 
 var _firstcutActions = _interopRequireDefault(require("firstcut-actions"));
 
-var _meteorStandaloneRandom = require("meteor-standalone-random");
+var _mdbid = _interopRequireDefault(require("mdbid"));
 
 var _pipeline = require("./shared/pipeline.schemas");
 
@@ -234,7 +234,7 @@ function scheduleJob(action) {
   if (existingJobId) {
     job = job.set('_id', existingJobId);
   } else if (!job._id) {
-    job = job.set('_id', _meteorStandaloneRandom.Random.id());
+    job = job.set('_id', (0, _mdbid.default)());
   }
 
   job.save();

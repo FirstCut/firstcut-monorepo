@@ -117,5 +117,5 @@ function _toDropDownOptions(models, serviceKey, filter = {}) {
     const options = serviceKey.reduce((res, key) => res.concat(_toDropDownOptions(key, filter)), new List());
     return options;
   }
-  return Models[serviceKey].find(filter).map(p => ({ key: p._id, value: p._id, text: p.displayName }));
+  return models[serviceKey].find(filter).map(p => ({ key: p._id, value: p._id, text: p.displayName }));
 }

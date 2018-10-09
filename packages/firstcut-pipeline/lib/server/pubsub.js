@@ -17,6 +17,8 @@ var _lodash = require("lodash");
 
 var _moment = _interopRequireDefault(require("moment"));
 
+var _firstcutUserSession = require("firstcut-user-session");
+
 var _execute = require("../execute.actions");
 
 function initSubscriptions(Models) {
@@ -289,7 +291,7 @@ function initSubscriptions(Models) {
 
         var record = Models.getRecordFromId(model.modelName, doc._id);
         var user = Meteor.users.findOne(record.createdBy);
-        var initiator_player_id = Models.getPlayerIdFromUser(user);
+        var initiator_player_id = (0, _firstcutUserSession.getPlayerIdFromUser)(user);
 
         _pubsubJs.PubSub.publish('record_created', {
           record_id: doc._id,
@@ -318,8 +320,8 @@ function initSubscriptions(Models) {
         return;
       }
 
-      var newPlayerId = Models.getPlayerIdFromUser(fields);
-      var oldPlayerId = Models.getPlayerIdFromUser(prevFields);
+      var newPlayerId = (0, _firstcutUserSession.getPlayerIdFromUser)(fields);
+      var oldPlayerId = (0, _firstcutUserSession.getPlayerIdFromUser)(prevFields);
 
       if (newPlayerId && newPlayerId !== oldPlayerId) {
         handleNewUser(fields);
@@ -328,7 +330,7 @@ function initSubscriptions(Models) {
   });
 
   function handleNewUser(user) {
-    var playerId = Models.getPlayerIdFromUser(user);
+    var playerId = (0, _firstcutUserSession.getPlayerIdFromUser)(user);
 
     if (playerId) {
       var player = Models.getPlayerFromQuery({

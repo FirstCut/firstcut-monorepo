@@ -13,6 +13,8 @@ var _objectWithoutProperties2 = _interopRequireDefault(require("@babel/runtime/h
 
 var _firstcutPipelineConsts = require("firstcut-pipeline-consts");
 
+var _firstcutUserSession = require("firstcut-user-session");
+
 // import { getQualifiedSkills } from '/imports/ui/config';
 var Analytics = {
   init: function init(models, options) {
@@ -38,7 +40,7 @@ var Analytics = {
 
     analytics.load('q7fljn00pJH2VTzpOAv08t2AH5d2tfFy');
 
-    if (models.userId()) {
+    if ((0, _firstcutUserSession.userId)()) {
       this.identifyCurrentUser();
     }
 
@@ -85,16 +87,16 @@ var Analytics = {
   },
   track: function track(name, d) {
     var data = (0, _objectSpread2.default)({}, d, {
-      userId: this.models.userId()
+      userId: (0, _firstcutUserSession.userId)()
     });
     analytics.track(name, data);
   },
   identifyCurrentUser: function identifyCurrentUser() {
-    if (this.models.inSimulationMode()) {
+    if ((0, _firstcutUserSession.inSimulationMode)()) {
       analytics.identify('Simulation', {
-        _id: this.models.userId(),
-        playerId: this.models.getPlayerIdFromUser(Meteor.user()),
-        simulationPlayerId: this.models.userPlayerId()
+        _id: (0, _firstcutUserSession.userId)(),
+        playerId: (0, _firstcutUserSession.getPlayerIdFromUser)(Meteor.user()),
+        simulationPlayerId: (0, _firstcutUserSession.userPlayerId)()
       });
       analytics.group('Simulation');
       return;
@@ -109,7 +111,7 @@ var Analytics = {
     }
 
     var traits = {
-      _id: this.models.userId(),
+      _id: (0, _firstcutUserSession.userId)(),
       email: player.email,
       playerId: player._id,
       name: player.displayName

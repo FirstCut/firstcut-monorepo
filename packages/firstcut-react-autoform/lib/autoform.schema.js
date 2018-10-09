@@ -155,7 +155,7 @@ function _toDropDownOptions(models, serviceKey) {
     return options;
   }
 
-  return Models[serviceKey].find(filter).map(function (p) {
+  return models[serviceKey].find(filter).map(function (p) {
     return {
       key: p._id,
       value: p._id,

@@ -1,26 +1,11 @@
 
-const SIMULATE_PLAYER_ID = 'simulatePlayerId';
-
-export function getSimulationPlayerId(models) {
-  if (Meteor.isServer) {
-    return '';
-  }
-  return Session.get(SIMULATE_PLAYER_ID);
-}
-
-export function setSimulationPlayerId(models, playerId) {
-  if (Meteor.isServer) {
-    return null;
-  }
-  return Session.set(SIMULATE_PLAYER_ID, playerId);
-}
-
-export function inSimulationMode(models) {
-  if (Meteor.isServer) {
-    return false;
-  }
-  return getSimulationPlayerId() != null;
-}
+import {
+  setSimulationPlayerId,
+  inSimulationMode,
+  userPlayerId,
+  getPlayerIdFromUser,
+  userId,
+} from 'firstcut-user-session';
 
 export function getUserEmails(models, user) {
   let emails = [];
@@ -49,32 +34,8 @@ export function numPendingTasks(models, player) {
   return (tasks) ? tasks.length : 0;
 }
 
-export function getPlayerIdFromUser(models, user) {
-  if (user && user.profile) {
-    return user.profile.playerId;
-  }
-  return '';
-}
-
-export function userPlayerId(models) {
-  if (getSimulationPlayerId()) {
-    return getSimulationPlayerId();
-  }
-  if (Meteor.settings.public.playerIdOverride) {
-    return Meteor.settings.public.playerIdOverride;
-  }
-  if (Meteor.user()) {
-    return getPlayerIdFromUser(models, Meteor.user());
-  }
-  return '';
-}
-
-export function userId(models) {
-  return (Meteor.user()) ? Meteor.user()._id : '';
-}
-
 export function userPlayer(models) {
-  const playerId = models.userPlayerId();
+  const playerId = userPlayerId();
   if (!playerId) {
     return null;
   }

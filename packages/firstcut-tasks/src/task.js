@@ -1,7 +1,8 @@
 
 import moment from 'moment';
-import TaskSchema from './task.schema';
 import { createFirstCutModel } from 'firstcut-model-base';
+import { userPlayerId } from 'firstcut-user-session';
+import TaskSchema from './task.schema';
 import { UPCOMING_THRESHOLD_IN_HOURS } from './tasks.enum';
 
 const Base = createFirstCutModel(TaskSchema);
@@ -10,8 +11,8 @@ class Task extends Base {
   static createNew(props) {
     if (Meteor.isClient) {
       return new this({
-        assignedToPlayerId: Models.userPlayerId(),
-        assignedByPlayerId: Models.userPlayerId(),
+        assignedToPlayerId: userPlayerId(),
+        assignedByPlayerId: userPlayerId(),
         assignedToPlayerType: 'Collaborator',
         ...props,
       });

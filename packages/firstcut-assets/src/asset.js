@@ -1,6 +1,6 @@
 
 import sanitize from 'sanitize-filename';
-import { Random } from 'meteor-standalone-random';
+import oid from 'mdbid';
 import { _ } from 'lodash';
 import EventEmitter from 'events';
 import { createBaseModel } from 'firstcut-model-base';
@@ -44,7 +44,7 @@ class Asset extends Base {
   static getSnippetRequestFilename({ cutFileRef, start, end }) {
     const snippetRequestPrefix = 'snippet';
     const name = getAssetnameWithoutExtension(cutFileRef);
-    return `${snippetRequestPrefix}_${name}_${start}_${end}_${Random.id()}.${snippetExtension}`;
+    return `${snippetRequestPrefix}_${name}_${start}_${end}_${oid()}.${snippetExtension}`;
   }
 
   static insert(options) {
@@ -56,7 +56,7 @@ class Asset extends Base {
       extension,
     } = properties;
 
-    record = record.set('_id', Random.id());
+    record = record.set('_id', oid());
     record = record.set('name', file.name);
     record = record.set('mime', file.type);
     record = record.set('type', file.type);

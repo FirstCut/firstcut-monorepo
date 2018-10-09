@@ -21,9 +21,11 @@ var _inherits2 = _interopRequireDefault(require("@babel/runtime/helpers/inherits
 
 var _moment = _interopRequireDefault(require("moment"));
 
-var _task = _interopRequireDefault(require("./task.schema"));
-
 var _firstcutModelBase = require("firstcut-model-base");
+
+var _firstcutUserSession = require("firstcut-user-session");
+
+var _task = _interopRequireDefault(require("./task.schema"));
 
 var _tasks = require("./tasks.enum");
 
@@ -89,8 +91,8 @@ function (_Base) {
     value: function createNew(props) {
       if (Meteor.isClient) {
         return new this((0, _objectSpread2.default)({
-          assignedToPlayerId: Models.userPlayerId(),
-          assignedByPlayerId: Models.userPlayerId(),
+          assignedToPlayerId: (0, _firstcutUserSession.userPlayerId)(),
+          assignedByPlayerId: (0, _firstcutUserSession.userPlayerId)(),
           assignedToPlayerType: 'Collaborator'
         }, props));
       }

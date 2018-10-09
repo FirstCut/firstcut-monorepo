@@ -3,6 +3,7 @@ import { PubSub } from 'pubsub-js';
 import { COLLABORATOR_TYPES_TO_LABELS, SUPPORTED_EVENTS } from 'firstcut-pipeline-consts';
 import { _ } from 'lodash';
 import moment from 'moment';
+import { getPlayerIdFromUser } from 'firstcut-user-session';
 import { handleEvent } from '../execute.actions';
 
 export default function initSubscriptions(Models) {
@@ -190,7 +191,7 @@ export default function initSubscriptions(Models) {
         }
         const record = Models.getRecordFromId(model.modelName, doc._id);
         const user = Meteor.users.findOne(record.createdBy);
-        const initiator_player_id = Models.getPlayerIdFromUser(user);
+        const initiator_player_id = getPlayerIdFromUser(user);
         PubSub.publish('record_created', { record_id: doc._id, initiator_player_id, record_type: model.modelName });
 
         const dependentRecords = record.generateDependentRecords(doc.createdBy);
@@ -213,8 +214,8 @@ export default function initSubscriptions(Models) {
       if (initializing) {
         return;
       }
-      const newPlayerId = Models.getPlayerIdFromUser(fields);
-      const oldPlayerId = Models.getPlayerIdFromUser(prevFields);
+      const newPlayerId = getPlayerIdFromUser(fields);
+      const oldPlayerId = getPlayerIdFromUser(prevFields);
       if (newPlayerId && newPlayerId !== oldPlayerId) {
         handleNewUser(fields);
       }
@@ -222,7 +223,7 @@ export default function initSubscriptions(Models) {
   });
 
   function handleNewUser(user) {
-    const playerId = Models.getPlayerIdFromUser(user);
+    const playerId = getPlayerIdFromUser(user);
     if (playerId) {
       let player = Models.getPlayerFromQuery({ _id: playerId });
       if (player && !player.hasUserProfile) {

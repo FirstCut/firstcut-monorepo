@@ -14,8 +14,8 @@
     "firstcut-schema": "file:../firstcut-schema",
     "firstcut-slack": "file:../firstcut-slack",
     "firstcut-text-messaging": "file:../firstcut-text-messaging",
+    "firstcut-user-session": "file:../firstcut-user-session",
     "firstcut-utils": "file:../firstcut-utils",
-    "lodash": "^4.17.11",
-    "meteor-standalone-random": "^1.0.67"
+    "lodash": "^4.17.11"
   }
 }

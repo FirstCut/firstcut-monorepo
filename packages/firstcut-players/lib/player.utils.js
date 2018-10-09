@@ -5,15 +5,9 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.getSimulationPlayerId = getSimulationPlayerId;
-exports.setSimulationPlayerId = setSimulationPlayerId;
-exports.inSimulationMode = inSimulationMode;
 exports.getUserEmails = getUserEmails;
 exports.getPendingPlayerTasks = getPendingPlayerTasks;
 exports.numPendingTasks = numPendingTasks;
-exports.getPlayerIdFromUser = getPlayerIdFromUser;
-exports.userPlayerId = userPlayerId;
-exports.userId = userId;
 exports.userPlayer = userPlayer;
 exports.getPlayerFromEmails = getPlayerFromEmails;
 exports.getPlayer = getPlayer;
@@ -23,31 +17,7 @@ exports.initializeCollaboratorFromUser = initializeCollaboratorFromUser;
 
 var _toConsumableArray2 = _interopRequireDefault(require("@babel/runtime/helpers/toConsumableArray"));
 
-var SIMULATE_PLAYER_ID = 'simulatePlayerId';
-
-function getSimulationPlayerId(models) {
-  if (Meteor.isServer) {
-    return '';
-  }
-
-  return Session.get(SIMULATE_PLAYER_ID);
-}
-
-function setSimulationPlayerId(models, playerId) {
-  if (Meteor.isServer) {
-    return null;
-  }
-
-  return Session.set(SIMULATE_PLAYER_ID, playerId);
-}
-
-function inSimulationMode(models) {
-  if (Meteor.isServer) {
-    return false;
-  }
-
-  return getSimulationPlayerId() != null;
-}
+var _firstcutUserSession = require("firstcut-user-session");
 
 function getUserEmails(models, user) {
   var emails = [];
@@ -91,36 +61,8 @@ function numPendingTasks(models, player) {
   return tasks ? tasks.length : 0;
 }
 
-function getPlayerIdFromUser(models, user) {
-  if (user && user.profile) {
-    return user.profile.playerId;
-  }
-
-  return '';
-}
-
-function userPlayerId(models) {
-  if (getSimulationPlayerId()) {
-    return getSimulationPlayerId();
-  }
-
-  if (Meteor.settings.public.playerIdOverride) {
-    return Meteor.settings.public.playerIdOverride;
-  }
-
-  if (Meteor.user()) {
-    return getPlayerIdFromUser(models, Meteor.user());
-  }
-
-  return '';
-}
-
-function userId(models) {
-  return Meteor.user() ? Meteor.user()._id : '';
-}
-
 function userPlayer(models) {
-  var playerId = models.userPlayerId();
+  var playerId = (0, _firstcutUserSession.userPlayerId)();
 
   if (!playerId) {
     return null;

@@ -12,12 +12,12 @@ exports.saveRecord = saveRecord;
 
 var _mdgValidatedMethod = require("mdg:validated-method");
 
-var _meteorStandaloneRandom = _interopRequireDefault(require("meteor-standalone-random"));
+var _mdbid = _interopRequireDefault(require("mdbid"));
 
 var Models = null;
 
 function initCollections(models) {
-  //should also ensure that models have the features required -- validate schema and modelName
+  // should also ensure that models have the features required -- validate schema and modelName
   Object.keys(models).forEach(function (key) {
     var model = models[key];
 
@@ -83,7 +83,7 @@ var save = new _mdgValidatedMethod.ValidatedMethod({
         modelName = _ref.modelName;
 
     if (!record._id) {
-      record._id = _meteorStandaloneRandom.default.id();
+      record._id = (0, _mdbid.default)();
     } // this.unblock();
 
 

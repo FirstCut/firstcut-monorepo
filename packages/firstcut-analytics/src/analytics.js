@@ -1,5 +1,8 @@
 
 import { EVENT_LABELS } from 'firstcut-pipeline-consts';
+import {
+  userId, inSimulationMode, getPlayerIdFromUser, userPlayerId,
+} from 'firstcut-user-session';
 // import { getQualifiedSkills } from '/imports/ui/config';
 
 const Analytics = {
@@ -14,7 +17,7 @@ const Analytics = {
       };
     }
     analytics.load('q7fljn00pJH2VTzpOAv08t2AH5d2tfFy');
-    if (models.userId()) {
+    if (userId()) {
       this.identifyCurrentUser();
     }
     this.models = models;
@@ -59,17 +62,17 @@ const Analytics = {
   },
 
   track(name, d) {
-    const data = { ...d, userId: this.models.userId() };
+    const data = { ...d, userId: userId() };
     analytics.track(name, data);
   },
 
   identifyCurrentUser() {
-    if (this.models.inSimulationMode()) {
+    if (inSimulationMode()) {
       analytics.identify('Simulation', {
-        _id: this.models.userId(),
-        playerId: this.models.getPlayerIdFromUser(Meteor.user()),
+        _id: userId(),
+        playerId: getPlayerIdFromUser(Meteor.user()),
         simulationPlayerId:
-        this.models.userPlayerId(),
+        userPlayerId(),
       });
       analytics.group('Simulation');
       return;
@@ -83,7 +86,7 @@ const Analytics = {
     }
 
     const traits = {
-      _id: this.models.userId(),
+      _id: userId(),
       email: player.email,
       playerId: player._id,
       name: player.displayName,

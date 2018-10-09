@@ -33,8 +33,6 @@ var _firstcutUtils = require("firstcut-utils");
 
 var _firstcutActionUtils = require("firstcut-action-utils");
 
-var _pubsubJs = require("pubsub-js");
-
 var _factories = _interopRequireDefault(require("./utils/factories"));
 
 var _generateDefaults = _interopRequireDefault(require("./utils/generate-defaults"));

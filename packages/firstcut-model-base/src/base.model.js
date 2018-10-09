@@ -4,7 +4,6 @@ import { Record, List } from 'immutable';
 import { _ } from 'lodash';
 import { isEmpty } from 'firstcut-utils';
 import { eventsInHistory } from 'firstcut-action-utils';
-import { PubSub } from 'pubsub-js';
 import RecordWithSchemaFactory from './utils/factories';
 
 import generateImmutableDefaults from './utils/generate-defaults';

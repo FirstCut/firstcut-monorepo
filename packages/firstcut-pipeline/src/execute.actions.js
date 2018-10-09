@@ -9,7 +9,7 @@ import { createEvent } from 'firstcut-calendar';
 import { PubSub } from 'pubsub-js';
 import { getActionsForEvent } from 'firstcut-pipeline-utils';
 import ActionTemplates from 'firstcut-actions';
-import { Random } from 'meteor-standalone-random';
+import oid from 'mdbid';
 import {
   EmailActionSchema,
   CalendarActionSchema,
@@ -110,7 +110,7 @@ function scheduleJob(action) {
   if (existingJobId) {
     job = job.set('_id', existingJobId);
   } else if (!job._id) {
-    job = job.set('_id', Random.id());
+    job = job.set('_id', oid());
   }
   job.save();
   return { scheduled_job_id: job._id };

@@ -21,7 +21,7 @@ var _inherits2 = _interopRequireDefault(require("@babel/runtime/helpers/inherits
 
 var _sanitizeFilename = _interopRequireDefault(require("sanitize-filename"));
 
-var _meteorStandaloneRandom = require("meteor-standalone-random");
+var _mdbid = _interopRequireDefault(require("mdbid"));
 
 var _lodash = require("lodash");
 
@@ -139,7 +139,7 @@ function (_Base) {
           end = _ref2.end;
       var snippetRequestPrefix = 'snippet';
       var name = getAssetnameWithoutExtension(cutFileRef);
-      return "".concat(snippetRequestPrefix, "_").concat(name, "_").concat(start, "_").concat(end, "_").concat(_meteorStandaloneRandom.Random.id(), ".").concat(snippetExtension);
+      return "".concat(snippetRequestPrefix, "_").concat(name, "_").concat(start, "_").concat(end, "_").concat((0, _mdbid.default)(), ".").concat(snippetExtension);
     }
   }, {
     key: "insert",
@@ -150,7 +150,7 @@ function (_Base) {
       var version = 'original';
       var properties = extractPropertiesOfFile(file);
       var extension = properties.extension;
-      record = record.set('_id', _meteorStandaloneRandom.Random.id());
+      record = record.set('_id', (0, _mdbid.default)());
       record = record.set('name', file.name);
       record = record.set('mime', file.type);
       record = record.set('type', file.type);
