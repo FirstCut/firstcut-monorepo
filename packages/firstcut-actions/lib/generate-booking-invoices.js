@@ -25,10 +25,6 @@ var GenerateBookingInvoices = new _immutable.Map({
   action_title: 'Generate Booking Invoices',
   completed_title: 'Generated booking invoices',
   customFieldsSchema: new _firstcutSchema.SimpleSchemaWrapper({
-    generateInterviewerBookingInvoice: {
-      type: Boolean,
-      defaultValue: true
-    },
     generateVideographerBookingInvoice: {
       type: Boolean,
       defaultValue: true
@@ -67,10 +63,6 @@ var GenerateBookingInvoices = new _immutable.Map({
 
         if (shoot.videographer && generateVideographerBookingInvoice === 'true') {
           bookingInvoices.push(shoot.generateBookingInvoice(shoot.videographer));
-        }
-
-        if (shoot.interviewer && generateInterviewerBookingInvoice === 'true') {
-          bookingInvoices.push(shoot.generateBookingInvoice(shoot.interviewer));
         }
 
         bookingInvoices.forEach(function (i) {

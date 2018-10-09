@@ -89,7 +89,7 @@ export default function initSubscriptions(Models) {
         PubSub.publish('screenshot_uploaded', { record_id: shoot._id, screenshot: uploaded, record_type: 'Shoot' });
       }
       const approvalChanged = _.last(_.differenceBy(screenshots, prevScreenshots, s => s.filename + s.notes + s.approved));
-      if (approvalChanged && shoot.screenshotApproved(approvalChanged)) {
+      if (approvalChanged && Shoot.screenshotApproved(approvalChanged)) {
         PubSub.publish('screenshot_approved', { record_id: shoot._id, screenshot: approvalChanged, record_type: 'Shoot' });
       }
       if (approvalChanged && Shoot.screenshotRejected(approvalChanged)) {

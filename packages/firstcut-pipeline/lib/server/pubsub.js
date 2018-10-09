@@ -137,7 +137,7 @@ function initSubscriptions(Models) {
         return s.filename + s.notes + s.approved;
       }));
 
-      if (approvalChanged && shoot.screenshotApproved(approvalChanged)) {
+      if (approvalChanged && Shoot.screenshotApproved(approvalChanged)) {
         _pubsubJs.PubSub.publish('screenshot_approved', {
           record_id: shoot._id,
           screenshot: approvalChanged,

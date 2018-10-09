@@ -13,10 +13,6 @@ const GenerateBookingInvoices = new Map({
   action_title: 'Generate Booking Invoices',
   completed_title: 'Generated booking invoices',
   customFieldsSchema: new SimpleSchemaWrapper({
-    generateInterviewerBookingInvoice: {
-      type: Boolean,
-      defaultValue: true,
-    },
     generateVideographerBookingInvoice: {
       type: Boolean,
       defaultValue: true,
@@ -53,9 +49,6 @@ const GenerateBookingInvoices = new Map({
           const bookingInvoices = [];
           if (shoot.videographer && generateVideographerBookingInvoice === 'true') {
             bookingInvoices.push(shoot.generateBookingInvoice(shoot.videographer));
-          }
-          if (shoot.interviewer && generateInterviewerBookingInvoice === 'true') {
-            bookingInvoices.push(shoot.generateBookingInvoice(shoot.interviewer));
           }
           bookingInvoices.forEach((i) => {
             let invoice = i;
