@@ -26,7 +26,7 @@ const UpdatedShootEvent = new Map({
     const enddatetime = humanReadableDate({ date: shoot.endDatetime, timezone: shoot.timezone, format: 'google' });
     let attendees = [shoot.adminOwner, shoot.interviewer, shoot.videographer, shoot.clientOwner, ...shoot.extraCalendarEventAttendees].filter(recipient => recipient != null);
     attendees = attendees.map(recipient => ({ email: recipient.email }));
-    const description = `${getRecordUrl(shoot)}\n${(shoot.agenda) ? shoot.agenda : ''}`;
+    const description = `${getRecordUrl(shoot)}${' '}\n${(shoot.agenda) ? shoot.agenda : ''}`;
     const actions = [{
       type: ACTIONS.calendar_event,
       event_id: shoot.getEventId('shoot_event_updated'),

@@ -2,7 +2,9 @@
 jest.mock('aws-sdk/clients/s3');
 
 const Models = {
-  Asset: { fromId: jest.fn() },
+  Asset: {
+    fromId: jest.fn().mockImplementation(() => ({ bucket: 'bucket', getPath: jest.fn().mockImplementation(() => 'path') })),
+  },
 };
 
 import S3 from 'aws-sdk/clients/s3';

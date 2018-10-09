@@ -48,7 +48,7 @@ const InviteToEditScript = new Map({
       cc: [shoot.adminOwner],
       template: 'invite-client-to-edit-script',
       getSubstitutionData: (recipient) => {
-        const shootLink = getInviteLink(recipient, getRecordUrl(shoot));
+        const shootLink = getRecordUrl(shoot);
         return {
           name: recipient.firstName,
           shoot_name: shoot.displayName,

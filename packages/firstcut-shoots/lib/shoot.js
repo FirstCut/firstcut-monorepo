@@ -23,17 +23,17 @@ var _moment = _interopRequireDefault(require("moment"));
 
 var _lodash = require("lodash");
 
-var _shoots = require("./shoots.enum");
-
 var _firstcutPipelineConsts = require("firstcut-pipeline-consts");
 
 var _firstcutRetrieveUrl = require("firstcut-retrieve-url");
 
+var _firstcutModelBase = require("firstcut-model-base");
+
+var _shoots = require("./shoots.enum");
+
 var _shoots2 = _interopRequireDefault(require("./shoots.blueprints"));
 
 var _shoots3 = _interopRequireDefault(require("./shoots.schema"));
-
-var _firstcutModelBase = require("firstcut-model-base");
 
 var Base = (0, _firstcutModelBase.createFirstCutModel)(_shoots3.default);
 
@@ -48,6 +48,12 @@ function (_Base) {
   }
 
   (0, _createClass2.default)(Shoot, [{
+    key: "getFootageFolder",
+    value: function getFootageFolder() {
+      var folderName = this.footageFolderName || this.generateFootageFolderName();
+      return "".concat(Meteor.settings.public.footage_folder, "/").concat(folderName);
+    }
+  }, {
     key: "filesRoot",
     value: function filesRoot(field) {
       if (field === 'footageFiles') {

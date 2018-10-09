@@ -33,6 +33,9 @@ export async function handleEvent(args) {
     console.log(args);
     console.log(getActionsForEvent);
     try {
+      if (!Models) {
+        throw new Error('pipeline-not-initialized', 'models not defined for pipeline. initialization required');
+      }
       const actions = getActionsForEvent(args);
       const result = await execute(actions);
       const eventData = {
@@ -44,7 +47,7 @@ export async function handleEvent(args) {
         saveToHistory({ ...eventData, record });
       }
     } catch (e) {
-      PubSub.publish('error', { message: e.toString() });
+      PubSub.publish('error', { message: e.toString(), args, trace: console.trace() });
     }
   }
 }

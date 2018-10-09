@@ -21,7 +21,11 @@ const EditShootScript = new Map({
     },
   }),
   fulfillsPrerequisites({ record, initiator }) {
-    return true;
+    if (!record) {
+      return true;
+    }
+    const dayAfterShoot = moment(record.date).add(1, 'day');
+    return moment().isAfter(dayAfterShoot);
   },
   generateActions(Models, eventData) {
     const { record_id, initiator_player_id, script } = eventData;

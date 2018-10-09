@@ -57,8 +57,13 @@ function getSignedUrl(args) {
     fileId: fileId,
     version: version
   });
+  var bucket = fileRefFromId({
+    fileId: fileId,
+    version: version
+  }).bucket;
   return getSignedUrlOfKey({
-    key: key
+    key: key,
+    bucket: bucket
   });
 }
 

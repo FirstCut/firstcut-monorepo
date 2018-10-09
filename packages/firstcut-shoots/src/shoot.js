@@ -1,12 +1,12 @@
 
 import moment from 'moment';
 import { _ } from 'lodash';
-import { STAGES, CAMERAS } from './shoots.enum';
 import { EVENTS } from 'firstcut-pipeline-consts';
 import { getHeadshotURL, getScreenshotURL } from 'firstcut-retrieve-url';
+import { createFirstCutModel } from 'firstcut-model-base';
+import { STAGES, CAMERAS } from './shoots.enum';
 import SHOOT_BLUEPRINTS from './shoots.blueprints';
 import ShootSchema from './shoots.schema';
-import { createFirstCutModel } from 'firstcut-model-base';
 
 const Base = createFirstCutModel(ShootSchema);
 
@@ -25,6 +25,11 @@ class Shoot extends Base {
 
   static screenshotURL(filename) {
     return getScreenshotURL(filename);
+  }
+
+  getFootageFolder() {
+    const folderName = this.footageFolderName || this.generateFootageFolderName();
+    return `${Meteor.settings.public.footage_folder}/${folderName}`;
   }
 
   filesRoot(field) {

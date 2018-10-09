@@ -16,8 +16,6 @@ var _createClass2 = _interopRequireDefault(require("@babel/runtime/helpers/creat
 var _sparkpost = _interopRequireDefault(require("sparkpost"));
 
 var FROM_DOMAIN = 'email@firstcut.io';
-console.log('In the mailer');
-console.log(Meteor.settings);
 
 var Mailer =
 /*#__PURE__*/

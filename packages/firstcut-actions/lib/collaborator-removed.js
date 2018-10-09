@@ -22,7 +22,7 @@ var CollaboratorRemoved = new _immutable.Map({
     var record = _ref.record,
         initiator = _ref.initiator;
   },
-  generateActions: function generateActions(event_data) {
+  generateActions: function generateActions(Models, event_data) {
     (0, _objectDestructuringEmpty2.default)(event_data);
     return [];
   }

@@ -3,9 +3,6 @@ import SparkPost from 'sparkpost';
 
 const FROM_DOMAIN = 'email@firstcut.io';
 
-console.log('In the mailer');
-console.log(Meteor.settings);
-
 class Mailer {
   constructor() {
     const API_KEY = Meteor.settings.email.api_key;

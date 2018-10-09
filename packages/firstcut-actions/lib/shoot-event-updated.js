@@ -59,7 +59,7 @@ var UpdatedShootEvent = new _immutable.Map({
         email: recipient.email
       };
     });
-    var description = "".concat((0, _firstcutRetrieveUrl.getRecordUrl)(shoot), "\n").concat(shoot.agenda ? shoot.agenda : '');
+    var description = "".concat((0, _firstcutRetrieveUrl.getRecordUrl)(shoot), ' ', "\n").concat(shoot.agenda ? shoot.agenda : '');
     var actions = [{
       type: _firstcutPipelineConsts.ACTIONS.calendar_event,
       event_id: shoot.getEventId('shoot_event_updated'),

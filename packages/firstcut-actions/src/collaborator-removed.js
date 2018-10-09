@@ -1,17 +1,17 @@
-import {Map} from "immutable";
-import {RecordEvents} from 'firstcut-action-utils';
+import { Map } from 'immutable';
+import { RecordEvents } from 'firstcut-action-utils';
 
 const CollaboratorRemoved = new Map({
   key: 'collaborator_removed',
   action_title: 'Remove Collaborator',
   completed_title: 'Collaborator removed',
   schema: RecordEvents,
-  fulfillsPrerequisites: function({record, initiator}) {
+  fulfillsPrerequisites({ record, initiator }) {
   },
-  generateActions: function(event_data) {
+  generateActions(Models, event_data) {
     const {} = event_data;
     return [];
-  }
+  },
 });
 
 export default CollaboratorRemoved;

@@ -68,7 +68,7 @@ var InviteToEditScript = new _immutable.Map({
       cc: [shoot.adminOwner],
       template: 'invite-client-to-edit-script',
       getSubstitutionData: function getSubstitutionData(recipient) {
-        var shootLink = (0, _firstcutRetrieveUrl.getInviteLink)(recipient, (0, _firstcutRetrieveUrl.getRecordUrl)(shoot));
+        var shootLink = (0, _firstcutRetrieveUrl.getRecordUrl)(shoot);
         return {
           name: recipient.firstName,
           shoot_name: shoot.displayName,

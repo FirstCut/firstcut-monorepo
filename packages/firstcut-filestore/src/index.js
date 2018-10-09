@@ -1,3 +1,7 @@
-import { listObjects, getSignedUrl, getSignedUrlOfKey } from './filestore';
+import {
+  initFilestoreService, listObjects, getSignedUrl, getSignedUrlOfKey,
+} from './filestore';
 
-export { listObjects, getSignedUrl, getSignedUrlOfKey };
+export {
+  initFilestoreService, listObjects, getSignedUrl, getSignedUrlOfKey,
+};

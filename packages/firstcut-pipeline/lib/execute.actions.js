@@ -61,7 +61,7 @@ function _handleEvent() {
         switch (_context.prev = _context.next) {
           case 0:
             if (!Meteor.isServer) {
-              _context.next = 16;
+              _context.next = 18;
               break;
             }
 
@@ -69,11 +69,20 @@ function _handleEvent() {
             console.log(args);
             console.log(_firstcutPipelineUtils.getActionsForEvent);
             _context.prev = 4;
+
+            if (Models) {
+              _context.next = 7;
+              break;
+            }
+
+            throw new Error('pipeline-not-initialized', 'models not defined for pipeline. initialization required');
+
+          case 7:
             actions = (0, _firstcutPipelineUtils.getActionsForEvent)(args);
-            _context.next = 8;
+            _context.next = 10;
             return execute(actions);
 
-          case 8:
+          case 10:
             result = _context.sent;
             eventData = (0, _objectSpread2.default)({}, args, result);
 
@@ -84,23 +93,25 @@ function _handleEvent() {
               }));
             }
 
-            _context.next = 16;
+            _context.next = 18;
             break;
 
-          case 13:
-            _context.prev = 13;
+          case 15:
+            _context.prev = 15;
             _context.t0 = _context["catch"](4);
 
             _pubsubJs.PubSub.publish('error', {
-              message: _context.t0.toString()
+              message: _context.t0.toString(),
+              args: args,
+              trace: console.trace()
             });
 
-          case 16:
+          case 18:
           case "end":
             return _context.stop();
         }
       }
-    }, _callee, this, [[4, 13]]);
+    }, _callee, this, [[4, 15]]);
   }));
   return _handleEvent.apply(this, arguments);
 }

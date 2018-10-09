@@ -3,6 +3,12 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+Object.defineProperty(exports, "initFilestoreService", {
+  enumerable: true,
+  get: function get() {
+    return _filestore.initFilestoreService;
+  }
+});
 Object.defineProperty(exports, "listObjects", {
   enumerable: true,
   get: function get() {

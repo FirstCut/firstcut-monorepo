@@ -37,7 +37,13 @@ var EditShootScript = new _immutable.Map({
   fulfillsPrerequisites: function fulfillsPrerequisites(_ref) {
     var record = _ref.record,
         initiator = _ref.initiator;
-    return true;
+
+    if (!record) {
+      return true;
+    }
+
+    var dayAfterShoot = (0, _moment.default)(record.date).add(1, 'day');
+    return (0, _moment.default)().isAfter(dayAfterShoot);
   },
   generateActions: function generateActions(Models, eventData) {
     var record_id = eventData.record_id,
