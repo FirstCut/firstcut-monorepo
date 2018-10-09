@@ -5,6 +5,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+exports.initExecutor = initExecutor;
 exports.handleEvent = handleEvent;
 
 var _regenerator = _interopRequireDefault(require("@babel/runtime/regenerator"));
@@ -16,8 +17,6 @@ var _objectWithoutProperties2 = _interopRequireDefault(require("@babel/runtime/h
 var _asyncToGenerator2 = _interopRequireDefault(require("@babel/runtime/helpers/asyncToGenerator"));
 
 var _firstcutPipelineConsts = require("firstcut-pipeline-consts");
-
-var _firstcutModels = _interopRequireDefault(require("firstcut-models"));
 
 var _firstcutMailer = require("firstcut-mailer");
 
@@ -42,6 +41,11 @@ var slackTemplateDefaults = {
   username: 'firstcut',
   link_names: true
 };
+var Models = null;
+
+function initExecutor(models) {
+  Models = models;
+}
 
 function handleEvent(_x) {
   return _handleEvent.apply(this, arguments);
@@ -57,43 +61,46 @@ function _handleEvent() {
         switch (_context.prev = _context.next) {
           case 0:
             if (!Meteor.isServer) {
-              _context.next = 13;
+              _context.next = 16;
               break;
             }
 
-            _context.prev = 1;
+            console.log('EXECUTION');
+            console.log(args);
+            console.log(_firstcutPipelineUtils.getActionsForEvent);
+            _context.prev = 4;
             actions = (0, _firstcutPipelineUtils.getActionsForEvent)(args);
-            _context.next = 5;
+            _context.next = 8;
             return execute(actions);
 
-          case 5:
+          case 8:
             result = _context.sent;
             eventData = (0, _objectSpread2.default)({}, args, result);
 
             if (eventData.record_type) {
-              record = _firstcutModels.default.getRecordFromId(eventData.record_type, eventData.record_id);
+              record = Models.getRecordFromId(eventData.record_type, eventData.record_id);
               saveToHistory((0, _objectSpread2.default)({}, eventData, {
                 record: record
               }));
             }
 
-            _context.next = 13;
+            _context.next = 16;
             break;
 
-          case 10:
-            _context.prev = 10;
-            _context.t0 = _context["catch"](1);
+          case 13:
+            _context.prev = 13;
+            _context.t0 = _context["catch"](4);
 
             _pubsubJs.PubSub.publish('error', {
               message: _context.t0.toString()
             });
 
-          case 13:
+          case 16:
           case "end":
             return _context.stop();
         }
       }
-    }, _callee, this, [[1, 10]]);
+    }, _callee, this, [[4, 13]]);
   }));
   return _handleEvent.apply(this, arguments);
 }
@@ -225,8 +232,7 @@ function executeCustomFunction(action) {
 
 function scheduleJob(action) {
   var job = action.job;
-
-  var existingJobId = _firstcutModels.default.Job.getExistingJobId({
+  var existingJobId = Models.Job.getExistingJobId({
     record_id: job.event_data.record_id,
     key: job.key
   });

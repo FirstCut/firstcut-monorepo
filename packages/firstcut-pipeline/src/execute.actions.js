@@ -1,6 +1,5 @@
 
 import { ACTIONS } from 'firstcut-pipeline-consts';
-import Models from 'firstcut-models';
 import { Mailer } from 'firstcut-mailer';
 import { Slack } from 'firstcut-slack';
 // import { Billing } from 'firstcut-billing';
@@ -22,8 +21,17 @@ const slackTemplateDefaults = {
   link_names: true,
 };
 
+let Models = null;
+
+export function initExecutor(models) {
+  Models = models;
+}
+
 export async function handleEvent(args) {
   if (Meteor.isServer) {
+    console.log('EXECUTION');
+    console.log(args);
+    console.log(getActionsForEvent);
     try {
       const actions = getActionsForEvent(args);
       const result = await execute(actions);

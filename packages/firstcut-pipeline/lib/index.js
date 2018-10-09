@@ -5,7 +5,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.init = init;
+exports.initPipeline = initPipeline;
 Object.defineProperty(exports, "handleEvent", {
   enumerable: true,
   get: function get() {
@@ -19,6 +19,7 @@ var _pubsub = _interopRequireDefault(require("./server/pubsub"));
 
 // import {Meteor} from 'meteor/meteor';
 // this is silly. why
-function init(Models) {
+function initPipeline(Models) {
   (0, _pubsub.default)(Models);
+  (0, _execute.initExecutor)(Models);
 }

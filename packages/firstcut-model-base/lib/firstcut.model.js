@@ -180,7 +180,6 @@ var FirstCutModel = function FirstCutModel(defaultValues) {
       }, {
         key: "locationDisplayName",
         get: function get() {
-          console.log(this);
           return _firstcutSchema.LocationParser.locationDisplayName(this);
         }
       }, {

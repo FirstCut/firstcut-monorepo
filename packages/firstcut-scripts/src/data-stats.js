@@ -1,4 +1,4 @@
-import Models from 'firstcut-models';
+// import Models from 'firstcut-models';
 import fs from 'fs';
 
 export default function countVideographerCities() {

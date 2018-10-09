@@ -7,14 +7,12 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = countVideographerCities;
 
-var _firstcutModels = _interopRequireDefault(require("firstcut-models"));
-
 var _fs = _interopRequireDefault(require("fs"));
 
+// import Models from 'firstcut-models';
 function countVideographerCities() {
   // a very innefficient count
-  var players = _firstcutModels.default.Collaborator.find({});
-
+  var players = Models.Collaborator.find({});
   var counts = players.reduce(function (result, player) {
     var cities = result;
 

@@ -25,7 +25,7 @@ const BaseModels = [
 ];
 
 const WithLocations = [
-  // Shoot,
+  Shoot,
   Company,
 ];
 

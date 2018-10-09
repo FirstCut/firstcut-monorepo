@@ -7,6 +7,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.initModelsForPipeline = initModelsForPipeline;
 exports.fulfillsPrerequisites = fulfillsPrerequisites;
+exports.getActionsForEvent = getActionsForEvent;
 exports.emitPipelineEvent = emitPipelineEvent;
 exports.getEventActionsAsDescriptiveString = getEventActionsAsDescriptiveString;
 exports.getCustomFieldsSchema = getCustomFieldsSchema;
@@ -24,6 +25,8 @@ var _firstcutSchema = require("firstcut-schema");
 var _firstcutActions = _interopRequireDefault(require("firstcut-actions"));
 
 var _firstcutUserSession = require("firstcut-user-session");
+
+var _lodash = require("lodash");
 
 var Models = null;
 
@@ -59,7 +62,7 @@ function emitPipelineEvent(args) {
   var record = args.record,
       rest = (0, _objectWithoutProperties2.default)(args, ["record"]);
 
-  var params = _.mapValues((0, _objectSpread2.default)({}, rest, {
+  var params = _lodash._.mapValues((0, _objectSpread2.default)({}, rest, {
     record_id: record._id,
     record_type: record.modelName,
     initiator_player_id: (0, _firstcutUserSession.userPlayerId)()
@@ -69,9 +72,8 @@ function emitPipelineEvent(args) {
     }
 
     return val ? val.toString() : '';
-  });
+  }); // handleEvent.call(eventData);
 
-  Analytics.trackAction(args); // handleEvent.call(eventData);
 
   HTTP.post("".concat(Meteor.settings.public.PIPELINE_ROOT, "/handleEvent"), {
     content: params,
