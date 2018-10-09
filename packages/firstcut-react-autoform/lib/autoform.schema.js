@@ -150,12 +150,18 @@ function _toDropDownOptions(models, serviceKey) {
 
   if (Array.isArray(serviceKey)) {
     var options = serviceKey.reduce(function (res, key) {
-      return res.concat(_toDropDownOptions(key, filter));
+      return res.concat(_toDropDownOptions(models, key, filter));
     }, new _immutable.List());
     return options;
   }
 
-  return models[serviceKey].find(filter).map(function (p) {
+  console.log(models);
+  console.log(serviceKey);
+  console.log(models[serviceKey]);
+  var formattedKey = serviceKey.charAt(0).toUpperCase() + serviceKey.slice(1).toLowerCase();
+  console.log(formattedKey);
+  console.log(models[formattedKey]);
+  return models[formattedKey].find(filter).map(function (p) {
     return {
       key: p._id,
       value: p._id,

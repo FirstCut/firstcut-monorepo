@@ -114,8 +114,14 @@ function _getHelpText(fieldSchema) {
 
 function _toDropDownOptions(models, serviceKey, filter = {}) {
   if (Array.isArray(serviceKey)) {
-    const options = serviceKey.reduce((res, key) => res.concat(_toDropDownOptions(key, filter)), new List());
+    const options = serviceKey.reduce((res, key) => res.concat(_toDropDownOptions(models, key, filter)), new List());
     return options;
   }
-  return models[serviceKey].find(filter).map(p => ({ key: p._id, value: p._id, text: p.displayName }));
+  console.log(models);
+  console.log(serviceKey);
+  console.log(models[serviceKey]);
+  const formattedKey = serviceKey.charAt(0).toUpperCase() + serviceKey.slice(1).toLowerCase();
+  console.log(formattedKey);
+  console.log(models[formattedKey]);
+  return models[formattedKey].find(filter).map(p => ({ key: p._id, value: p._id, text: p.displayName }));
 }

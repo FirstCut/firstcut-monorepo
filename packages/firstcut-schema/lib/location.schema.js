@@ -88,9 +88,9 @@ function getRecordLocation(record) {
   return record.location;
 }
 
-function buildDisplayString(record, first_field, second_field) {
-  var first = getFieldValue(record, first_field);
-  var second = getFieldValue(record, second_field);
+function buildDisplayString(record, firstField, secondField) {
+  var first = getFieldValue(record, firstField);
+  var second = getFieldValue(record, secondField);
   if (first && second) return format(first, second);
   if (first) return first;
   if (second) return second;

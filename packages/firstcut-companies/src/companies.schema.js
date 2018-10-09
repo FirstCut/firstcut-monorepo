@@ -1,6 +1,5 @@
 
-import { BaseSchema, SimpleSchemaWrapper as Schema } from 'firstcut-schema';
-import LocationSchema from 'firstcut-schema';
+import { LocationSchema, BaseSchema, SimpleSchemaWrapper as Schema } from 'firstcut-schema';
 import SimpleSchema from 'simpl-schema';
 
 const CompanySchema = new Schema({

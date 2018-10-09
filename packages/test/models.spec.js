@@ -10,7 +10,7 @@ import Deliverable from '../firstcut-deliverables';
 import Cut from '../firstcut-cuts';
 import Shoot from '../firstcut-shoots';
 import Asset from '../firstcut-assets';
-import { BaseSchema } from '../firstcut-schema';
+import { BaseSchema, LocationSchema } from '../firstcut-schema';
 
 const BaseModels = [
   Client,
@@ -22,6 +22,11 @@ const BaseModels = [
   Invoice,
   Company,
   Deliverable,
+];
+
+const WithLocations = [
+  // Shoot,
+  Company,
 ];
 
 const allModels = [...BaseModels, Job, Asset];
@@ -54,6 +59,32 @@ describe('all models', () => {
     });
   });
 });
+
+describe('all models that extend the location schema', () => {
+  test('should have all location schema keys in their schema', () => {
+    const baseKeys = _.keys(LocationSchema);
+    expect.assertions(WithLocations.length * baseKeys.length);
+    _.forEach(WithLocations, (model) => {
+      const obj = new model({});
+      const jsonSchema = obj.schema.asJson;
+      _.forEach(baseKeys, (k) => {
+        expect(jsonSchema[k]).toBeDefined();
+      });
+    });
+  });
+
+  test('should have defined locationDisplayName', () => {
+    expect.assertions(WithLocations.length);
+    _.forEach(WithLocations, (model) => {
+      const obj = new model({ location: { name: 'Name', street_address: 'Street', locality: 'locality' } });
+      console.log(obj.toJS());
+      console.log(obj.locationDisplayName);
+      expect(obj.locationDisplayName).toBeDefined();
+      // expect(obj.schema.asJson._id).toBeDefined();
+    });
+  });
+});
+
 
 describe('all models that extend the base schema', () => {
   test('should have all base schema keys in their schema', () => {
