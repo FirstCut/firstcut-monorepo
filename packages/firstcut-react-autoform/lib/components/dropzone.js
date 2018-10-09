@@ -25,8 +25,6 @@ var _firstcutUtils = require("firstcut-utils");
 
 var _semanticUiReact = require("semantic-ui-react");
 
-var _managers = require("/imports/ui/components/managers");
-
 var _immutable = require("immutable");
 
 var _detectBrowser = require("detect-browser");
@@ -60,7 +58,8 @@ function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      var Enabled = (0, _managers.withFileManager)(PrivateDropzoneComponent);
+      var withFileManager = this.props.withFileManager;
+      var Enabled = withFileManager(PrivateDropzoneComponent);
       return _react.default.createElement(Enabled, this.props);
     }
   }]);

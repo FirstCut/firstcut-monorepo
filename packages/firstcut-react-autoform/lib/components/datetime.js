@@ -132,8 +132,6 @@ function replaceTimezone(date) {
   var newTimezone = arguments.length > 2 ? arguments[2] : undefined;
   var asMoment = (0, _moment.default)(date);
   var strippedDate = asMoment.tz(old_tz).format('YYYY-MM-DD HH:mm');
-  console.log('STRIPEd');
-  console.log(strippedDate);
 
   var replaced = _moment.default.tz(strippedDate, newTimezone);
 

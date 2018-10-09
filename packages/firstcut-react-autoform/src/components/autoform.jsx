@@ -64,11 +64,15 @@ class Field extends React.PureComponent {
     const {
       onChange, record, field, errors, overrides, disableDefaults,
     } = this.props;
+    let models = this.props.models;
     const options = {
       errors,
       overrides,
     };
-    const fieldSchema = getAutoformSchema(record, field, options);
+    if (!models) {
+      models = record.models;
+    }
+    const fieldSchema = getAutoformSchema(models, record, field, options);
     if (!disableDefaults && !record.get(field) && fieldSchema.defaultValue) {
       // save the default value to the record
       onChange(null, { name: field, value: fieldSchema.defaultValue });
@@ -77,13 +81,17 @@ class Field extends React.PureComponent {
 
   render() {
     const {
-      record, field, onChange, errors, overrides, disableDefaults,
+      record, field, onChange, errors, overrides, disableDefaults, withFileManager,
     } = this.props;
     const options = {
       errors,
       overrides,
     };
-    const fieldSchema = getAutoformSchema(record, field, options);
+    let models = this.props.models;
+    if (!models) {
+      models = record.models;
+    }
+    const fieldSchema = getAutoformSchema(models, record, field, options);
     const { type, defaultValue, ...fieldProps } = fieldSchema;
     if (fieldProps.hidden) {
       return <div />;
@@ -132,9 +140,9 @@ class Field extends React.PureComponent {
       case 'location':
         return <LocationField {...fieldProps} />;
       case 'file':
-        return <Dropzone {...fieldProps} />;
+        return <Dropzone {...fieldProps} withFileManager={withFileManager} />;
       case 'fileArray':
-        return <Dropzone {...fieldProps} />;
+        return <Dropzone {...fieldProps} withFileManager={withFileManager} />;
       case 'objectArray':
         return <ObjectArrayForm errors={errors} {...fieldProps} renderFields={<AutoformFields />} />;
       default:

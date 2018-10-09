@@ -24,14 +24,14 @@ function NumberInput(props) {
       onChange = _props.onChange,
       rest = (0, _objectWithoutProperties2.default)(_props, ["onChange"]);
 
-  onNumberChange = function onNumberChange(onChange) {
+  var onNumberChange = function onNumberChange(onChange) {
     return function (e, _ref) {
       var name = _ref.name,
           value = _ref.value;
-      var as_float = parseFloat(value);
+      var asFloat = parseFloat(value);
       onChange(null, {
         name: name,
-        value: as_float
+        value: asFloat
       });
     };
   };

@@ -144,11 +144,17 @@ function (_React$PureComponent) {
           errors = _this$props.errors,
           overrides = _this$props.overrides,
           disableDefaults = _this$props.disableDefaults;
+      var models = this.props.models;
       var options = {
         errors: errors,
         overrides: overrides
       };
-      var fieldSchema = (0, _autoform.default)(record, field, options);
+
+      if (!models) {
+        models = record.models;
+      }
+
+      var fieldSchema = (0, _autoform.default)(models, record, field, options);
 
       if (!disableDefaults && !record.get(field) && fieldSchema.defaultValue) {
         // save the default value to the record
@@ -167,12 +173,19 @@ function (_React$PureComponent) {
           onChange = _this$props2.onChange,
           errors = _this$props2.errors,
           overrides = _this$props2.overrides,
-          disableDefaults = _this$props2.disableDefaults;
+          disableDefaults = _this$props2.disableDefaults,
+          withFileManager = _this$props2.withFileManager;
       var options = {
         errors: errors,
         overrides: overrides
       };
-      var fieldSchema = (0, _autoform.default)(record, field, options);
+      var models = this.props.models;
+
+      if (!models) {
+        models = record.models;
+      }
+
+      var fieldSchema = (0, _autoform.default)(models, record, field, options);
       var type = fieldSchema.type,
           defaultValue = fieldSchema.defaultValue,
           fieldProps = (0, _objectWithoutProperties2.default)(fieldSchema, ["type", "defaultValue"]);
@@ -259,10 +272,14 @@ function (_React$PureComponent) {
           return _react.default.createElement(_location.default, fieldProps);
 
         case 'file':
-          return _react.default.createElement(_dropzone.default, fieldProps);
+          return _react.default.createElement(_dropzone.default, (0, _extends2.default)({}, fieldProps, {
+            withFileManager: withFileManager
+          }));
 
         case 'fileArray':
-          return _react.default.createElement(_dropzone.default, fieldProps);
+          return _react.default.createElement(_dropzone.default, (0, _extends2.default)({}, fieldProps, {
+            withFileManager: withFileManager
+          }));
 
         case 'objectArray':
           return _react.default.createElement(_objectarray.default, (0, _extends2.default)({

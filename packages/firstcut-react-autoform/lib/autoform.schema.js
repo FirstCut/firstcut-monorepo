@@ -17,7 +17,7 @@ var _lodash = require("lodash");
 
 var DEFAULT_SORT_METHOD = 'text';
 
-function getAutoformSchema(record, field, options) {
+function getAutoformSchema(models, record, field, options) {
   var schema = record.schema;
   var _options$errors = options.errors,
       errors = _options$errors === void 0 ? {} : _options$errors,
@@ -32,7 +32,7 @@ function getAutoformSchema(record, field, options) {
   };
   result.defaultValue = _getDefaultValue(fieldSchema, record);
   result.error = _getError(errors, field);
-  result.options = _getOptions(record.models, fieldSchema);
+  result.options = _getOptions(models, fieldSchema);
 
   if (result.options && result.options.toArray) {
     result.options = result.options.toArray(); // if an immutable list is returned
@@ -155,12 +155,7 @@ function _toDropDownOptions(models, serviceKey) {
     return options;
   }
 
-  console.log(models);
-  console.log(serviceKey);
-  console.log(models[serviceKey]);
   var formattedKey = serviceKey.charAt(0).toUpperCase() + serviceKey.slice(1).toLowerCase();
-  console.log(formattedKey);
-  console.log(models[formattedKey]);
   return models[formattedKey].find(filter).map(function (p) {
     return {
       key: p._id,

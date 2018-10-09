@@ -4,12 +4,12 @@ import PropTypes from 'prop-types';
 import { Form, Input } from 'semantic-ui-react';
 
 export default function NumberInput(props) {
-  const { onChange, ...rest} = {...props};
-  onNumberChange = (onChange)=> (e, {name, value})=> {
-    let as_float = parseFloat(value);
-    onChange(null, {name: name, value: as_float});
-  }
+  const { onChange, ...rest } = { ...props };
+  const onNumberChange = onChange => (e, { name, value }) => {
+    const asFloat = parseFloat(value);
+    onChange(null, { name, value: asFloat });
+  };
 
   rest.onChange = onNumberChange(onChange);
-  return <Form.Field control={Input} type='number' {...rest} />
+  return <Form.Field control={Input} type="number" {...rest} />;
 }

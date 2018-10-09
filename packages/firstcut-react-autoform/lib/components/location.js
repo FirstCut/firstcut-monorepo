@@ -24,20 +24,16 @@ var _reactGoogleAutocomplete = _interopRequireDefault(require("react-google-auto
 
 var _firstcutGoogleApi = _interopRequireDefault(require("firstcut-google-api"));
 
-var _meteor = require("meteor/meteor");
-
-var _qs = _interopRequireDefault(require("qs"));
+var _http = require("meteor/http");
 
 // import timezone from 'node-google-timezone';
 function LocationField(props) {
-  var _this = this;
-
   var _props = (0, _objectSpread2.default)({}, props),
       record = _props.record,
       onChange = _props.onChange,
       fieldProps = (0, _objectWithoutProperties2.default)(_props, ["record", "onChange"]);
 
-  onPlaceSelected = function onPlaceSelected(onChange, name) {
+  var onPlaceSelected = function onPlaceSelected(onChange, name) {
     return function (location) {
       googleLocationToSchema(location, function (err, loc_schema) {
         onChange(null, {
@@ -48,11 +44,11 @@ function LocationField(props) {
     };
   };
 
-  clearLocation = function clearLocation() {
-    return _this.onPlaceSelected(onChange, fieldProps.name)(null);
+  var clearLocation = function clearLocation() {
+    return onPlaceSelected(onChange, fieldProps.name)(null);
   };
 
-  locationDisplayName = record.locationDisplayName;
+  var locationDisplayName = record.locationDisplayName;
 
   if (locationDisplayName) {
     fieldProps.placeholder = locationDisplayName;
@@ -125,8 +121,6 @@ function _fetchComponents(location) {
   return result;
 }
 
-var GOOGLE_TIMEZONE_API_URL = 'https://maps.googleapis.com/maps/api/timezone/json?';
-
 function getTimezone(lat, lng, timestamp, cb) {
   if (arguments.length < 4) {
     throw new Error('Invalid number of arguments');
@@ -145,13 +139,21 @@ function getTimezone(lat, lng, timestamp, cb) {
     language: 'en'
   };
 
-  var requestURL = GOOGLE_TIMEZONE_API_URL + _qs.default.stringify(options);
+  _http.HTTP.get('/getTimezone', {
+    query: options,
+    params: options,
+    data: options,
+    content: options
+  }, function (err, data) {
+    var response = JSON.parse(data.content);
+    console.log(response);
 
-  _meteor.HTTP.call('get', requestURL, function (err, response, data) {
-    if (err || response.statusCode != 200) {
-      return callback(new Error("Google API request error: ".concat(data)));
+    if (response.statusCode !== 200) {
+      return callback(new Error("Google API request error: ".concat(response)));
     }
 
+    console.log(response);
+    console.log(response.data);
     callback(null, response.data.timeZoneId);
   });
 }

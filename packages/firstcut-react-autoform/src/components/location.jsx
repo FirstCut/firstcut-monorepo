@@ -5,21 +5,20 @@ import { Form, Button } from 'semantic-ui-react';
 import Autocomplete from 'react-google-autocomplete';
 // import timezone from 'node-google-timezone';
 import GoogleApi from 'firstcut-google-api';
-import { HTTP } from 'meteor/meteor';
-import qs from 'qs';
+import { HTTP } from 'meteor/http';
 
 export default function LocationField(props) {
   const { record, onChange, ...fieldProps } = { ...props };
 
-  onPlaceSelected = (onChange, name) => (location) => {
+  const onPlaceSelected = (onChange, name) => (location) => {
     googleLocationToSchema(location, (err, loc_schema) => {
       onChange(null, { name, value: loc_schema });
     });
   };
 
-  clearLocation = () => this.onPlaceSelected(onChange, fieldProps.name)(null);
+  const clearLocation = () => onPlaceSelected(onChange, fieldProps.name)(null);
+  const locationDisplayName = record.locationDisplayName;
 
-  locationDisplayName = record.locationDisplayName;
   if (locationDisplayName) {
     fieldProps.placeholder = locationDisplayName;
   }
@@ -35,7 +34,7 @@ export default function LocationField(props) {
     <div>
       <Form.Field types={types} control={Autocomplete} {...fieldProps} />
       <Button attached="bottom" onClick={clearLocation}>
-CLEAR LOCATION
+      CLEAR LOCATION
       </Button>
     </div>
   );
@@ -80,8 +79,6 @@ function _fetchComponents(location) {
 }
 
 
-const GOOGLE_TIMEZONE_API_URL = 'https://maps.googleapis.com/maps/api/timezone/json?';
-
 function getTimezone(lat, lng, timestamp, cb) {
   if (arguments.length < 4) {
     throw new Error('Invalid number of arguments');
@@ -98,11 +95,16 @@ function getTimezone(lat, lng, timestamp, cb) {
     language: 'en',
   };
 
-  const requestURL = GOOGLE_TIMEZONE_API_URL + qs.stringify(options);
-  HTTP.call('get', requestURL, (err, response, data) => {
-    if (err || response.statusCode != 200) {
-      return callback(new Error(`Google API request error: ${data}`));
+  HTTP.get('/getTimezone', {
+    query: options, params: options, data: options, content: options,
+  }, (err, data) => {
+    const response = JSON.parse(data.content);
+    console.log(response);
+    if (response.statusCode !== 200) {
+      return callback(new Error(`Google API request error: ${response}`));
     }
+    console.log(response);
+    console.log(response.data);
     callback(null, response.data.timeZoneId);
   });
 }

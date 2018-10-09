@@ -5,7 +5,6 @@ import { formatBytes } from 'firstcut-utils';
 import {
   Progress, Image, Header, Card,
 } from 'semantic-ui-react';
-import { withFileManager } from '/imports/ui/components/managers';
 import { List, Map } from 'immutable';
 import { detect } from 'detect-browser';
 import Dropzone from 'react-dropzone';
@@ -22,6 +21,7 @@ class Drop extends React.Component {
   }
 
   render() {
+    const { withFileManager } = this.props;
     const Enabled = withFileManager(PrivateDropzoneComponent);
     return <Enabled {...this.props} />;
   }

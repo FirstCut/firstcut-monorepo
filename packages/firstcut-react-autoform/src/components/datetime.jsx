@@ -49,8 +49,6 @@ export default class AutoformDatetime extends React.Component {
 function replaceTimezone(date, old_tz = COMPONENT_DEFAULT_TZ, newTimezone) {
   const asMoment = moment(date);
   const strippedDate = asMoment.tz(old_tz).format('YYYY-MM-DD HH:mm');
-  console.log('STRIPEd');
-  console.log(strippedDate);
   const replaced = moment.tz(strippedDate, newTimezone);
   return replaced;
 }

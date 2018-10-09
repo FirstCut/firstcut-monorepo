@@ -22,7 +22,7 @@ var RecordCreated = new _immutable.Map({
     var record = _ref.record,
         initiator = _ref.initiator;
   },
-  generateActions: function generateActions(event_data) {
+  generateActions: function generateActions(Models, event_data) {
     var record_id = event_data.record_id,
         record_type = event_data.record_type,
         initiator_player_id = event_data.initiator_player_id;

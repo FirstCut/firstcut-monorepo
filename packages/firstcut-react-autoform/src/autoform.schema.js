@@ -5,7 +5,7 @@ import { _ } from 'lodash';
 
 const DEFAULT_SORT_METHOD = 'text';
 
-export default function getAutoformSchema(record, field, options) {
+export default function getAutoformSchema(models, record, field, options) {
   const { schema } = record;
   const { errors = {}, overrides = {} } = options;
   const fieldSchema = { ...overrides[field], ...schema.getFieldSchema(field) };
@@ -17,7 +17,7 @@ export default function getAutoformSchema(record, field, options) {
   };
   result.defaultValue = _getDefaultValue(fieldSchema, record);
   result.error = _getError(errors, field);
-  result.options = _getOptions(record.models, fieldSchema);
+  result.options = _getOptions(models, fieldSchema);
   if (result.options && result.options.toArray) {
     result.options = result.options.toArray(); // if an immutable list is returned
   }
@@ -117,11 +117,6 @@ function _toDropDownOptions(models, serviceKey, filter = {}) {
     const options = serviceKey.reduce((res, key) => res.concat(_toDropDownOptions(models, key, filter)), new List());
     return options;
   }
-  console.log(models);
-  console.log(serviceKey);
-  console.log(models[serviceKey]);
   const formattedKey = serviceKey.charAt(0).toUpperCase() + serviceKey.slice(1).toLowerCase();
-  console.log(formattedKey);
-  console.log(models[formattedKey]);
   return models[formattedKey].find(filter).map(p => ({ key: p._id, value: p._id, text: p.displayName }));
 }

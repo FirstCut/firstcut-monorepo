@@ -60,7 +60,7 @@ var BaseModel = function BaseModel(defaultValues) {
           return this.constructor.createNew(properties);
         } // /* TODO: hide this better */
         // static get collection() {
-        //   console.log('GETTING THE COLLECTION');
+        //   .log('GETTING THE COLLECTION');
         //   let collection = this._collection;
         //   console.log(this._collection);
         //   if (!collection) {

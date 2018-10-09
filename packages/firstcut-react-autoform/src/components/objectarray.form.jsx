@@ -2,9 +2,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {
-  Divider, Segment,
+  Divider, Segment, Button,
 } from 'semantic-ui-react';
-import Buttons from '/imports/ui/components/utils/buttons';
 import { SchemaParser } from 'firstcut-schema';
 import { _ } from 'lodash';
 
@@ -21,9 +20,7 @@ export default function ObjectArrayForm(props) {
     updateField(e, newRecord[field]);
   };
 
-  const addNewButton = () => (<Buttons.AddNew type="button" onClick={addSubobjectToSubarray} />);
-
-  const removeButton = index => () => (<Buttons.Delete type="button" onClick={removeSubobjectFromSubarray(index)} />);
+  const removeButton = index => () => (<Button type="button" onClick={removeSubobjectFromSubarray(index)} icon="trash" color="red" />);
 
   const onInputChange = (index, onChange) => (e, { name, value }) => {
     const newValue = props.value.setIn([index, name], value);
@@ -60,7 +57,7 @@ export default function ObjectArrayForm(props) {
       {
         props.value && props.value.map((o, index) => subobject(o, index, props))
       }
-      {addNewButton()}
+      <Button type="button" onClick={addSubobjectToSubarray} icon="plus" color="green" />
     </div>
   );
 }

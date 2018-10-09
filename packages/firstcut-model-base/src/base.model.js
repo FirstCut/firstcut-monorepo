@@ -96,7 +96,7 @@ export const BaseModel = defaultValues => class extends Record({
 
   // /* TODO: hide this better */
   // static get collection() {
-  //   console.log('GETTING THE COLLECTION');
+  //   .log('GETTING THE COLLECTION');
   //   let collection = this._collection;
   //   console.log(this._collection);
   //   if (!collection) {

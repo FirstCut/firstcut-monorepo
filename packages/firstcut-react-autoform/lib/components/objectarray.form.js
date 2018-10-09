@@ -17,8 +17,6 @@ var _propTypes = _interopRequireDefault(require("prop-types"));
 
 var _semanticUiReact = require("semantic-ui-react");
 
-var _buttons = _interopRequireDefault(require("/imports/ui/components/utils/buttons"));
-
 var _firstcutSchema = require("firstcut-schema");
 
 var _lodash = require("lodash");
@@ -38,18 +36,13 @@ function ObjectArrayForm(props) {
     };
   };
 
-  var addNewButton = function addNewButton() {
-    return _react.default.createElement(_buttons.default.AddNew, {
-      type: "button",
-      onClick: addSubobjectToSubarray
-    });
-  };
-
   var removeButton = function removeButton(index) {
     return function () {
-      return _react.default.createElement(_buttons.default.Delete, {
+      return _react.default.createElement(_semanticUiReact.Button, {
         type: "button",
-        onClick: removeSubobjectFromSubarray(index)
+        onClick: removeSubobjectFromSubarray(index),
+        icon: "trash",
+        color: "red"
       });
     };
   };
@@ -92,7 +85,12 @@ function ObjectArrayForm(props) {
     horizontal: true
   }, props.label, ' '), props.value && props.value.map(function (o, index) {
     return subobject(o, index, props);
-  }), addNewButton());
+  }), _react.default.createElement(_semanticUiReact.Button, {
+    type: "button",
+    onClick: addSubobjectToSubarray,
+    icon: "plus",
+    color: "green"
+  }));
 }
 
 function getNestedErrors(fieldname, index, errors) {

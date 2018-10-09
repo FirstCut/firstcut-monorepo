@@ -11,7 +11,7 @@ const RecordCreated = new Map({
   schema: RecordEvents,
   fulfillsPrerequisites({ record, initiator }) {
   },
-  generateActions(event_data) {
+  generateActions(Models, event_data) {
     const { record_id, record_type, initiator_player_id } = event_data;
     const record = Models[record_type].fromId(record_id);
     if (record.isDummy) {
