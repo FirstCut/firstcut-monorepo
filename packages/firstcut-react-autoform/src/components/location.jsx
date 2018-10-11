@@ -3,8 +3,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Form, Button } from 'semantic-ui-react';
 import Autocomplete from 'react-google-autocomplete';
-// import timezone from 'node-google-timezone';
-import GoogleApi from 'firstcut-google-api';
 import { HTTP } from 'meteor/http';
 
 export default function LocationField(props) {
@@ -16,7 +14,10 @@ export default function LocationField(props) {
     });
   };
 
-  const clearLocation = () => onPlaceSelected(onChange, fieldProps.name)(null);
+  const clearLocation = () => {
+    onPlaceSelected(onChange, fieldProps.name)(null);
+  };
+
   const locationDisplayName = record.locationDisplayName;
 
   if (locationDisplayName) {
@@ -32,7 +33,7 @@ export default function LocationField(props) {
   delete fieldProps.serviceDependency; // autocomplete location doesn't work well as a controlled component
   return (
     <div>
-      <Form.Field types={types} control={Autocomplete} {...fieldProps} />
+      <Form.Field types={types} control={Autocomplete} {...fieldProps} onChange={e => console.log(e)} />
       <Button attached="bottom" onClick={clearLocation}>
       CLEAR LOCATION
       </Button>

@@ -266,8 +266,6 @@ function triggerAction(action) {
 }
 
 function sendEmails(action) {
-  _pipeline.EmailActionSchema.validate(action);
-
   var to = action.to,
       template = action.template,
       substitution_data = action.substitution_data,
@@ -288,8 +286,6 @@ function chargeInvoice(action) {
 }
 
 function sendSlackNotification(action) {
-  _pipeline.SlackActionSchema.validate(action);
-
   var content = action.content;
   var channel = action.channel;
   content = (0, _objectSpread2.default)({}, slackTemplateDefaults, content);
@@ -297,14 +293,10 @@ function sendSlackNotification(action) {
 }
 
 function text(action) {
-  _pipeline.TextMessageActionSchema.validate(action);
-
   return (0, _firstcutTextMessaging.sendTextMessage)(action);
 }
 
 function createCalendarEvent(action) {
-  _pipeline.CalendarActionSchema.validate(action);
-
   var event = action.event,
       user_id = action.user_id,
       event_id = action.event_id;

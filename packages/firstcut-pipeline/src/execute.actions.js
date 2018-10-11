@@ -133,7 +133,6 @@ function triggerAction(action) {
 }
 
 function sendEmails(action) {
-  EmailActionSchema.validate(action);
   const {
     to, template, substitution_data, cc = [],
   } = action;
@@ -150,7 +149,6 @@ function chargeInvoice(action) {
 
 
 function sendSlackNotification(action) {
-  SlackActionSchema.validate(action);
   let { content } = action;
   const { channel } = action;
   content = {
@@ -161,12 +159,10 @@ function sendSlackNotification(action) {
 }
 
 function text(action) {
-  TextMessageActionSchema.validate(action);
   return sendTextMessage(action);
 }
 
 function createCalendarEvent(action) {
-  CalendarActionSchema.validate(action);
   const { event, user_id, event_id } = action;
   return createEvent({ event_id, event, user_id });
 }

@@ -58,10 +58,12 @@
 				"moduleNameMapper": {
 						"meteor/meteor": "<rootDir>/jest/mocks/meteor.mock.js",
 						"meteor/mongo": "<rootDir>/jest/mocks/mongo.mock.js",
+						"meteor/http": "<rootDir>/jest/mocks/http.mock.js",
+						"semantic-ui-react": "<rootDir>/jest/mocks/semantic-ui.mock.js",
 						"meteor/mdg:validated-method": "<rootDir>/jest/mocks/validatedmethod.mock.js"
 				},
 				"setupFiles": [
-						"<rootDir>/jest/globals.js"
+						"<rootDir>/jest/setup.js"
 				],
 				"testPathIgnorePatterns": [
 						"/node_modules/",

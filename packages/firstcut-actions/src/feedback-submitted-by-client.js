@@ -1,8 +1,7 @@
 import { Map } from 'immutable';
 import moment from 'moment';
-import { RecordEvents } from 'firstcut-action-utils';
+import { RecordEvents, getEmailActions } from 'firstcut-action-utils';
 import { ACTIONS, JOB_KEYS } from 'firstcut-pipeline-consts';
-import { getEmailActions } from 'firstcut-action-utils';
 import { getRecordUrl } from 'firstcut-retrieve-url';
 
 const FeedbackSubmittedByClient = new Map({
@@ -29,8 +28,22 @@ const FeedbackSubmittedByClient = new Map({
       }),
     });
 
+    const clientEmails = getEmailActions({
+      recipients: [cut.clientOwner],
+      cc: [cut.adminOwner],
+      template: 'feedback-submitted-by-client-confirmation',
+      getSubstitutionData: recipient => ({
+        name: recipient.firstName,
+        cut_name: cut.displayName,
+        deliverable_name: cut.deliverableDisplayName,
+        reply_to: cut.adminOwnerEmail,
+        link,
+      }),
+    });
+
     const actions = [
       ...emailActions,
+      ...clientEmails,
       {
         type: ACTIONS.slack_notify,
         content: {

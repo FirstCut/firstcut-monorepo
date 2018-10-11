@@ -46,7 +46,21 @@ var FeedbackSubmittedByClient = new _immutable.Map({
         };
       }
     });
-    var actions = (0, _toConsumableArray2.default)(emailActions).concat([{
+    var clientEmails = (0, _firstcutActionUtils.getEmailActions)({
+      recipients: [cut.clientOwner],
+      cc: [cut.adminOwner],
+      template: 'feedback-submitted-by-client-confirmation',
+      getSubstitutionData: function getSubstitutionData(recipient) {
+        return {
+          name: recipient.firstName,
+          cut_name: cut.displayName,
+          deliverable_name: cut.deliverableDisplayName,
+          reply_to: cut.adminOwnerEmail,
+          link: link
+        };
+      }
+    });
+    var actions = (0, _toConsumableArray2.default)(emailActions).concat((0, _toConsumableArray2.default)(clientEmails), [{
       type: _firstcutPipelineConsts.ACTIONS.slack_notify,
       content: {
         text: "Cut ".concat(cut.displayName, " feedback has been submitted by the client through the dashboard -- ").concat(link, " ").concat(cut.adminOwnerSlackHandle)

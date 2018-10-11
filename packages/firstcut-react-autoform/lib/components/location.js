@@ -22,11 +22,8 @@ var _semanticUiReact = require("semantic-ui-react");
 
 var _reactGoogleAutocomplete = _interopRequireDefault(require("react-google-autocomplete"));
 
-var _firstcutGoogleApi = _interopRequireDefault(require("firstcut-google-api"));
-
 var _http = require("meteor/http");
 
-// import timezone from 'node-google-timezone';
 function LocationField(props) {
   var _props = (0, _objectSpread2.default)({}, props),
       record = _props.record,
@@ -45,7 +42,7 @@ function LocationField(props) {
   };
 
   var clearLocation = function clearLocation() {
-    return onPlaceSelected(onChange, fieldProps.name)(null);
+    onPlaceSelected(onChange, fieldProps.name)(null);
   };
 
   var locationDisplayName = record.locationDisplayName;
@@ -71,7 +68,11 @@ function LocationField(props) {
   return _react.default.createElement("div", null, _react.default.createElement(_semanticUiReact.Form.Field, (0, _extends2.default)({
     types: types,
     control: _reactGoogleAutocomplete.default
-  }, fieldProps)), _react.default.createElement(_semanticUiReact.Button, {
+  }, fieldProps, {
+    onChange: function onChange(e) {
+      return console.log(e);
+    }
+  })), _react.default.createElement(_semanticUiReact.Button, {
     attached: "bottom",
     onClick: clearLocation
   }, "CLEAR LOCATION")); // return (<div><Autocomplete types={['(cities)']} {...fieldProps}/><Button attached='bottom' onClick={clearLocation} attached>CLEAR LOCATION</Button></div>);
