@@ -175,7 +175,19 @@ function (_Base) {
   }, {
     key: "isWrapped",
     value: function isWrapped() {
-      return this.latestKeyEvent === 'PROJECT_WRAPPED';
+      return this.getLatestKeyEvent() === 'PROJECT_WRAPPED';
+    }
+  }, {
+    key: "getLatestKeyEvent",
+    value: function getLatestKeyEvent() {
+      var history = this.completeRecordAndChildrenHistory.toArray();
+
+      if (history && history.length === 0) {
+        return this.get('stage');
+      }
+
+      var stage = calculateStage(history);
+      return stage;
     }
   }, {
     key: "completeRecordAndChildrenHistory",
@@ -242,18 +254,6 @@ function (_Base) {
       return this.collaboratorService.fromId(this.adminOwnerId);
     }
   }, {
-    key: "latestKeyEvent",
-    get: function get() {
-      var history = this.completeRecordAndChildrenHistory.toArray();
-
-      if (history && history.length === 0) {
-        return this.get('stage');
-      }
-
-      var stage = calculateStage(history);
-      return stage;
-    }
-  }, {
     key: "company",
     get: function get() {
       return this.companyService.fromId(this.companyId);
@@ -261,7 +261,7 @@ function (_Base) {
   }, {
     key: "latestKeyEventLabel",
     get: function get() {
-      return _projects.STAGES[this.latestKeyEvent];
+      return _projects.STAGES[this.getLatestKeyEvent()];
     }
   }], [{
     key: "collectionName",

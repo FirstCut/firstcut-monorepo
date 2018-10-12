@@ -52,8 +52,7 @@ function LocationField(props) {
   }
 
   fieldProps.onPlaceSelected = onPlaceSelected(onChange, fieldProps.name);
-  var types = fieldProps.locationTypes || [];
-  delete fieldProps.value; // autocomplete location doesn't work well as a controlled component
+  var types = fieldProps.locationTypes || []; // delete fieldProps.value; // autocomplete location doesn't work well as a controlled component
 
   delete fieldProps.locationTypes; // autocomplete location doesn't work well as a controlled component
 
@@ -68,11 +67,7 @@ function LocationField(props) {
   return _react.default.createElement("div", null, _react.default.createElement(_semanticUiReact.Form.Field, (0, _extends2.default)({
     types: types,
     control: _reactGoogleAutocomplete.default
-  }, fieldProps, {
-    onChange: function onChange(e) {
-      return console.log(e);
-    }
-  })), _react.default.createElement(_semanticUiReact.Button, {
+  }, fieldProps)), _react.default.createElement(_semanticUiReact.Button, {
     attached: "bottom",
     onClick: clearLocation
   }, "CLEAR LOCATION")); // return (<div><Autocomplete types={['(cities)']} {...fieldProps}/><Button attached='bottom' onClick={clearLocation} attached>CLEAR LOCATION</Button></div>);

@@ -47,7 +47,6 @@ const FirstCutModel = defaultValues => class extends BaseModel({
     if (assignedTo) {
       query.assignedToPlayerId = assignedTo._id;
     }
-    console.log(query);
     return this.taskService.find(query);
   }
 

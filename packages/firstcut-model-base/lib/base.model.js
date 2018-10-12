@@ -431,7 +431,9 @@ var BaseModel = function BaseModel(defaultValues) {
                 var value = v;
                 var fitsQuery = false;
 
-                if (typeof value === 'function') {
+                if (typeof value === 'function' && typeof doc[key] === 'function') {
+                  fitsQuery = value(doc[key]());
+                } else if (typeof value === 'function') {
                   fitsQuery = value(doc[key]);
                 } else if (typeof doc[key] === 'function') {
                   fitsQuery = doc[key]() === value;

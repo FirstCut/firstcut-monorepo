@@ -88,7 +88,6 @@ var FirstCutModel = function FirstCutModel(defaultValues) {
             query.assignedToPlayerId = assignedTo._id;
           }
 
-          console.log(query);
           return this.taskService.find(query);
         }
       }, {

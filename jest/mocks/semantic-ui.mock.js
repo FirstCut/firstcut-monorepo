@@ -1,7 +1,7 @@
 
 import React from 'react';
 
-const Button = () => <button {...props} />;
+const Button = props => <button {...props} />;
 const Form = {
   Field: props => <input {...props} />,
 };

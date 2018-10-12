@@ -25,7 +25,7 @@ export default function LocationField(props) {
   }
   fieldProps.onPlaceSelected = onPlaceSelected(onChange, fieldProps.name);
   const types = fieldProps.locationTypes || [];
-  delete fieldProps.value; // autocomplete location doesn't work well as a controlled component
+  // delete fieldProps.value; // autocomplete location doesn't work well as a controlled component
   delete fieldProps.locationTypes; // autocomplete location doesn't work well as a controlled component
   delete fieldProps.customType; // autocomplete location doesn't work well as a controlled component
   delete fieldProps.singleFile; // autocomplete location doesn't work well as a controlled component
@@ -33,7 +33,7 @@ export default function LocationField(props) {
   delete fieldProps.serviceDependency; // autocomplete location doesn't work well as a controlled component
   return (
     <div>
-      <Form.Field types={types} control={Autocomplete} {...fieldProps} onChange={e => console.log(e)} />
+      <Form.Field types={types} control={Autocomplete} {...fieldProps} />
       <Button attached="bottom" onClick={clearLocation}>
       CLEAR LOCATION
       </Button>

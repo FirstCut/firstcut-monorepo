@@ -8,6 +8,8 @@ var _enzyme = require("enzyme");
 
 var _semanticUiReact = require("semantic-ui-react");
 
+var _reactTestRenderer = _interopRequireDefault(require("react-test-renderer"));
+
 var _location = _interopRequireDefault(require("../components/location"));
 
 jest.mock('semantic-ui-react');
@@ -15,14 +17,17 @@ describe('<LocationField />', function () {
   var onChange = jest.fn();
   var locationDisplayName = 'Location Display Name';
   var fieldName = 'Field Name';
-  var wrapper = (0, _enzyme.shallow)(_react.default.createElement(_location.default, {
-    record: {
-      locationDisplayName: locationDisplayName,
-      location: ''
-    },
+  var testRecord = {
+    locationDisplayName: locationDisplayName
+  };
+
+  var locationComponent = _react.default.createElement(_location.default, {
+    record: testRecord,
     name: fieldName,
     onChange: onChange
-  }));
+  });
+
+  var wrapper = (0, _enzyme.shallow)(locationComponent);
   test('should contain a clear location button', function () {
     expect(wrapper.find(_semanticUiReact.Button)).toHaveLength(1);
   });
@@ -32,5 +37,11 @@ describe('<LocationField />', function () {
       name: fieldName,
       value: {}
     });
+  });
+  test('should match snapshots', function () {
+    var component = _reactTestRenderer.default.create(locationComponent);
+
+    var tree = component.toJSON();
+    expect(tree).toMatchSnapshot();
   });
 });

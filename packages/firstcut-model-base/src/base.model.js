@@ -49,7 +49,9 @@ export const BaseModel = defaultValues => class extends Record({
         _.forEach(notInSchemaQuery, (v, key) => {
           const value = v;
           let fitsQuery = false;
-          if (typeof value === 'function') {
+          if (typeof value === 'function' && typeof doc[key] === 'function') {
+            fitsQuery = value(doc[key]());
+          } else if (typeof value === 'function') {
             fitsQuery = value(doc[key]);
           } else if (typeof doc[key] === 'function') {
             fitsQuery = (doc[key]() === value);

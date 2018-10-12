@@ -48,13 +48,11 @@ Object.defineProperty(exports, "SUPPORTED_ACTIONS", {
     return _pipeline.SUPPORTED_ACTIONS;
   }
 });
-exports.ActionSchemas = exports.SUPPORTED_EVENTS = exports.EVENT_LABELS = exports.EVENTS = exports.EVENT_ACTION_TITLES = void 0;
+exports.SUPPORTED_EVENTS = exports.EVENT_LABELS = exports.EVENTS = exports.EVENT_ACTION_TITLES = void 0;
 
 var _addons = require("./addons");
 
 var _pipeline = require("./pipeline.enum");
-
-var _pipeline2 = require("./pipeline.schemas");
 
 var EVENT_ACTION_TITLES = require('./event_action_titles.json');
 
@@ -137,17 +135,3 @@ function actionAsDescriptiveString(action) {
       return action.title;
   }
 }
-
-console.log('ACTION SCHEMAS');
-console.log(ActionSchemas);
-var ActionSchemas = {
-  slack_notify: _pipeline2.SlackActionSchema,
-  calendar_event: _pipeline2.CalendarActionSchema,
-  text_message: _pipeline2.TextMessageActionSchema,
-  send_email: _pipeline2.EmailActionSchema,
-  charge_invoice: _pipeline2.ChargeInvoiceSchema,
-  trigger_action: _pipeline2.TriggerActionSchema,
-  schedule_job: _pipeline2.ScheduleJobSchema,
-  custom_function: _pipeline2.CustomFunctionSchema
-};
-exports.ActionSchemas = ActionSchemas;

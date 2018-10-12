@@ -127,7 +127,7 @@ class Project extends Base {
     return new List(cuts);
   }
 
-  isWrapped() { return this.latestKeyEvent === 'PROJECT_WRAPPED'; }
+  isWrapped() { return this.getLatestKeyEvent() === 'PROJECT_WRAPPED'; }
 
   get displayName() {
     let isDummy = '';
@@ -147,7 +147,7 @@ class Project extends Base {
     return this.collaboratorService.fromId(this.adminOwnerId);
   }
 
-  get latestKeyEvent() {
+  getLatestKeyEvent() {
     const history = this.completeRecordAndChildrenHistory.toArray();
     if (history && history.length === 0) {
       return this.get('stage');
@@ -161,7 +161,7 @@ class Project extends Base {
   }
 
   get latestKeyEventLabel() {
-    return STAGES[this.latestKeyEvent];
+    return STAGES[this.getLatestKeyEvent()];
   }
 }
 

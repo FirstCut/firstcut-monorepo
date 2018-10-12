@@ -5,7 +5,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.TriggerActionSchema = exports.CustomFunctionSchema = exports.ScheduleJobSchema = exports.ChargeInvoiceSchema = exports.SlackActionSchema = exports.CalendarActionSchema = exports.TextMessageActionSchema = exports.EmailActionSchema = void 0;
+exports.default = exports.TriggerActionSchema = exports.CustomFunctionSchema = exports.ScheduleJobSchema = exports.ChargeInvoiceSchema = exports.SlackActionSchema = exports.CalendarActionSchema = exports.TextMessageActionSchema = exports.EmailActionSchema = void 0;
 
 var _simplSchema = _interopRequireDefault(require("simpl-schema"));
 
@@ -14,8 +14,6 @@ var _firstcutSlack = require("firstcut-slack");
 var _firstcutCalendar = require("firstcut-calendar");
 
 var _pipeline = require("./pipeline.enum");
-
-var _this = void 0;
 
 var EmailActionSchema = new _simplSchema.default({
   substitution_data: {
@@ -100,8 +98,9 @@ var ScheduleJobSchema = new _simplSchema.default({
   title: String,
   job: {
     type: Object,
+    blackbox: true,
     custom: function custom() {
-      var job = _this.value;
+      var job = this.value;
 
       try {
         job.schema.validate(job.toJS());
@@ -123,7 +122,7 @@ var CustomFunctionSchema = new _simplSchema.default({
   execute: {
     type: Object,
     custom: function custom() {
-      var func = _this.value;
+      var func = this.value;
 
       if (typeof func !== 'function') {
         return 'Execute must be a function';
@@ -149,3 +148,15 @@ var TriggerActionSchema = new _simplSchema.default({
   'event_data.record_type': String
 });
 exports.TriggerActionSchema = TriggerActionSchema;
+var ActionSchemas = {
+  slack_notify: SlackActionSchema,
+  calendar_event: CalendarActionSchema,
+  text_message: TextMessageActionSchema,
+  send_email: EmailActionSchema,
+  charge_invoice: ChargeInvoiceSchema,
+  trigger_action: TriggerActionSchema,
+  schedule_job: ScheduleJobSchema,
+  custom_function: CustomFunctionSchema
+};
+var _default = ActionSchemas;
+exports.default = _default;
