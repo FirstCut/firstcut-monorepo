@@ -34,8 +34,6 @@ var _firstcutActions = _interopRequireDefault(require("firstcut-actions"));
 
 var _mdbid = _interopRequireDefault(require("mdbid"));
 
-var _pipeline = require("./shared/pipeline.schemas");
-
 // import { Billing } from 'firstcut-billing';
 var slackTemplateDefaults = {
   username: 'firstcut',

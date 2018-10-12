@@ -9,12 +9,6 @@ import { PubSub } from 'pubsub-js';
 import { getActionsForEvent } from 'firstcut-pipeline-utils';
 import ActionTemplates from 'firstcut-actions';
 import oid from 'mdbid';
-import {
-  EmailActionSchema,
-  CalendarActionSchema,
-  SlackActionSchema,
-  TextMessageActionSchema,
-} from './shared/pipeline.schemas';
 
 const slackTemplateDefaults = {
   username: 'firstcut',

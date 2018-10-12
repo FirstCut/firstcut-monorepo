@@ -53,7 +53,7 @@
 				"meteor-standalone-random": "^1.0.67",
 				"soap": "^0.24.0"
 		},
-		"workspaces": ["packages/*"],
+		"workspaces": ["packages/firstcut-*"],
 		"jest": {
 				"moduleNameMapper": {
 						"meteor/meteor": "<rootDir>/jest/mocks/meteor.mock.js",

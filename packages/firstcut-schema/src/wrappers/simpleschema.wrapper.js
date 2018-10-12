@@ -2,6 +2,24 @@ import SimpleSchema from 'simpl-schema';
 import { _ } from 'lodash';
 import SchemaParser from '../parser';
 
+SimpleSchema.extendOptions([
+  'helpText',
+  'sortBy',
+  'options',
+  'placeholder',
+  'hidden',
+  'customType',
+  'rows',
+  'store',
+  'bucket',
+  'serviceFilter',
+  'enumOptions',
+  'unique',
+  'restricted',
+  'customAutoValue',
+  'serviceDependency',
+]);
+
 export default class SimpleSchemaWrapper {
   static fromSubSchema(schema, f) {
     let field = f;
