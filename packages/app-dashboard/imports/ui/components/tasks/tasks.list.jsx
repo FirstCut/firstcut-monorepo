@@ -25,8 +25,6 @@ export function getTaskInfo(props) {
   };
   const tasks = (record.getCompleteRecordAndChildrenTasks)
     ? record.getCompleteRecordAndChildrenTasks(options) : record.getRelatedTasks(options);
-  console.log('getting the task info');
-  console.log(tasks);
   const subsections = [{ subtitle: '', body: <TasksListComponent records={tasks} editRecord={editRecord} /> }];
   return { title: '', record, subsections };
 }
@@ -45,8 +43,6 @@ export default function TasksList(props) {
 function TasksListComponent(props) {
   const { records, editRecord } = props;
   // const canCreateNewTask = editRecord && userHasPermission({ verb: 'CREATE', target: Task.modelName });
-  console.log('THE TASKs');
-  console.log(records);
   return (
     <div>
       <Divider horizontal>

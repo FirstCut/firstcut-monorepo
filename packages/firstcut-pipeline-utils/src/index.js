@@ -1,15 +1,22 @@
 import { EVENT_LABELS, ACTIONS } from 'firstcut-pipeline-consts';
 import { SimpleSchemaWrapper } from 'firstcut-schema';
-import ActionTemplates from 'firstcut-actions';
+// import ActionTemplates from 'firstcut-actions';
 import { inSimulationMode, userPlayerId } from 'firstcut-user-session';
 import { _ } from 'lodash';
 
 let Models = null;
-export function initModelsForPipeline(models) {
+let ActionTemplates = null;
+export function initModelsForPipeline(models, templates) {
   Models = models;
+  ActionTemplates = templates;
 }
 
 export function fulfillsPrerequisites({ event, record, initiator }) {
+  verifyModuleInitialized();
+  console.log(ActionTemplates);
+  if (!ActionTemplates) {
+    throw new Error('ActionTemplates not initialized');
+  }
   if (Meteor.settings.public.environment === 'development') {
     return true;
   }
@@ -17,11 +24,13 @@ export function fulfillsPrerequisites({ event, record, initiator }) {
 }
 
 export function getActionsForEvent(args) {
+  verifyModuleInitialized();
   const { event } = args;
   return ActionTemplates[event].get('generateActions')(Models, args);
 }
 
 export function emitPipelineEvent(args) {
+  verifyModuleInitialized();
   if (inSimulationMode()) {
     return;
   }
@@ -47,6 +56,7 @@ export function emitPipelineEvent(args) {
 }
 
 export function getEventActionsAsDescriptiveString(args) {
+  verifyModuleInitialized();
   const actions = getActionsForEvent(args);
   const label = EVENT_LABELS[args.event];
   const result = actions.reduce((s, a) => {
@@ -61,6 +71,7 @@ export function getEventActionsAsDescriptiveString(args) {
 }
 
 export function getCustomFieldsSchema(event, record) {
+  verifyModuleInitialized();
   let customSchema = ActionTemplates[event].get('customFieldsSchema');
   if (!customSchema) {
     customSchema = new SimpleSchemaWrapper();
@@ -73,6 +84,7 @@ export function getCustomFieldsSchema(event, record) {
 
 
 function actionAsDescriptiveString(action) {
+  verifyModuleInitialized();
   switch (action.type) {
     case ACTIONS.send_email:
       return `send an email to ${action.to.toString()}`;
@@ -84,5 +96,11 @@ function actionAsDescriptiveString(action) {
       return `create a calendar event and invite ${action.attendees.toString()}`;
     default:
       return action.title;
+  }
+}
+
+function verifyModuleInitialized() {
+  if (!Models || !ActionTemplates) {
+    throw new Error('pipeline-utils module not initialized with Models and Templates');
   }
 }

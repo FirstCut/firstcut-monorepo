@@ -102,8 +102,11 @@ export default function withFileManager(WrappedComponent) {
       console.log(error);
     };
 
-    fileUploadSuccess = (r, awsKey) => {
-      const record = r.setPath('original', awsKey);
+    fileUploadSuccess = (record, awsKey) => {
+      console.log('on upload success');
+      console.log(r.getPath());
+      console.log(awsKey);
+      // const record = r.setPath('original', awsKey);
       let { records, nameToId } = this.state;
 
       records = records.push(record);
@@ -181,7 +184,8 @@ export default function withFileManager(WrappedComponent) {
 
 function getFileDocuments(record, fieldname) {
   const ids = getFileIds(record, fieldname);
-  const promises = ids.map(async id => new Promise((resolve, reject) => {
+  let file = null;
+  const promises = ids.map(id => new Promise((resolve, reject) => {
     getSignedUrl.call({
       fileId: id,
       version: record.fileVersion,
@@ -189,7 +193,7 @@ function getFileDocuments(record, fieldname) {
       if (err) {
         reject(err);
       } else {
-        const file = Models.Asset.fromId(id);
+        file = Models.Asset.fromId(id);
         if (file) {
           file.url = url;
         }

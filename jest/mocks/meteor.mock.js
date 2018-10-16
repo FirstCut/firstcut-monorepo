@@ -11,7 +11,6 @@ exports.Meteor = {
     public: {
       PLATFORM_ROOT_URL: 'http://82c2f41d.ngrok.io',
       PIPELINE_ROOT: 'http://82c2f41d.ngrok.io',
-      environment: 'development',
       isPipelineDeployment: true,
       DEFAULT_TIMEZONE: 'America/Los_Angeles',
       s3bucket: 'firstcut-app-dev',

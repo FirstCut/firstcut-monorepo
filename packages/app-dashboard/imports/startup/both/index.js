@@ -1,7 +1,7 @@
 
 // import 'firstcut-calendar';
 import 'firstcut-blueprints';
-import 'firstcut-actions';
+import ActionTemplates from 'firstcut-actions';
 import 'firstcut-action-utils';
 import 'firstcut-pipeline-consts';
 import '/imports/api/player.api';
@@ -15,7 +15,6 @@ import SimpleSchema from 'simpl-schema';
 import initPublications from './publications/publications';
 
 import enableBasePublications from './publications/publications.base';
-
 
 Meteor.startup(() => {
   SimpleSchema.extendOptions([
@@ -37,7 +36,7 @@ Meteor.startup(() => {
   ]);
 
   initApiMethods();
-  initModelsForPipeline(Models);
+  initModelsForPipeline(Models, ActionTemplates);
 
   if (Meteor.isServer) {
     initPublications(Models);

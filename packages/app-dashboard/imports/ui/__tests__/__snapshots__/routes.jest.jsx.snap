@@ -1,7 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`invalid path should redirect to 404 1`] = `<div />`;
-
 exports[`tree should render for client 1`] = `
 <div
   className="pushable"

@@ -22,16 +22,17 @@ var _firstcutPipelineConsts = require("firstcut-pipeline-consts");
 
 var _firstcutSchema = require("firstcut-schema");
 
-var _firstcutActions = _interopRequireDefault(require("firstcut-actions"));
-
 var _firstcutUserSession = require("firstcut-user-session");
 
 var _lodash = require("lodash");
 
+// import ActionTemplates from 'firstcut-actions';
 var Models = null;
+var ActionTemplates = null;
 
-function initModelsForPipeline(models) {
+function initModelsForPipeline(models, templates) {
   Models = models;
+  ActionTemplates = templates;
 }
 
 function fulfillsPrerequisites(_ref) {
@@ -43,7 +44,7 @@ function fulfillsPrerequisites(_ref) {
     return true;
   }
 
-  return _firstcutActions.default[event].get('fulfillsPrerequisites')({
+  return ActionTemplates[event].get('fulfillsPrerequisites')({
     record: record,
     initiator: initiator
   });
@@ -51,7 +52,7 @@ function fulfillsPrerequisites(_ref) {
 
 function getActionsForEvent(args) {
   var event = args.event;
-  return _firstcutActions.default[event].get('generateActions')(Models, args);
+  return ActionTemplates[event].get('generateActions')(Models, args);
 }
 
 function emitPipelineEvent(args) {
@@ -99,7 +100,7 @@ function getEventActionsAsDescriptiveString(args) {
 }
 
 function getCustomFieldsSchema(event, record) {
-  var customSchema = _firstcutActions.default[event].get('customFieldsSchema');
+  var customSchema = ActionTemplates[event].get('customFieldsSchema');
 
   if (!customSchema) {
     customSchema = new _firstcutSchema.SimpleSchemaWrapper();
