@@ -11,7 +11,7 @@ exports.fromNowDate = fromNowDate;
 exports.userTimezone = userTimezone;
 exports.DATE_FORMATS = void 0;
 
-var _moment = _interopRequireDefault(require("moment"));
+var _momentTimezone = _interopRequireDefault(require("moment-timezone"));
 
 var DATE_FORMATS = Object.freeze({
   verbose: 'dddd, MMMM Do YYYY, h:mm:ss a z',
@@ -29,7 +29,7 @@ exports.DATE_FORMATS = DATE_FORMATS;
 var DEFAULT_FORMAT = 'verbose';
 
 function isUTC(date) {
-  return (0, _moment.default)(date).isUTC();
+  return (0, _momentTimezone.default)(date).isUTC();
 }
 
 function humanReadableDate(_ref) {
@@ -67,16 +67,16 @@ function fromNowDate(_ref2) {
   var date = _ref2.date,
       timezone = _ref2.timezone;
   timezone = timezone || userTimezone();
-  return (0, _moment.default)(date).fromNow();
+  return (0, _momentTimezone.default)(date).fromNow();
 }
 
 function userTimezone() {
-  return _moment.default.tz.guess();
+  return _momentTimezone.default.tz.guess();
 }
 
 function _formattedDate(_ref3) {
   var date = _ref3.date,
       timezone = _ref3.timezone,
       format = _ref3.format;
-  return (0, _moment.default)(date).tz(timezone).format(DATE_FORMATS[format]);
+  return (0, _momentTimezone.default)(date).tz(timezone).format(DATE_FORMATS[format]);
 }

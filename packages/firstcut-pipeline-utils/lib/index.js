@@ -39,6 +39,12 @@ function fulfillsPrerequisites(_ref) {
   var event = _ref.event,
       record = _ref.record,
       initiator = _ref.initiator;
+  verifyModuleInitialized();
+  console.log(ActionTemplates);
+
+  if (!ActionTemplates) {
+    throw new Error('ActionTemplates not initialized');
+  }
 
   if (Meteor.settings.public.environment === 'development') {
     return true;
@@ -51,11 +57,14 @@ function fulfillsPrerequisites(_ref) {
 }
 
 function getActionsForEvent(args) {
+  verifyModuleInitialized();
   var event = args.event;
   return ActionTemplates[event].get('generateActions')(Models, args);
 }
 
 function emitPipelineEvent(args) {
+  verifyModuleInitialized();
+
   if ((0, _firstcutUserSession.inSimulationMode)()) {
     return;
   }
@@ -87,6 +96,7 @@ function emitPipelineEvent(args) {
 }
 
 function getEventActionsAsDescriptiveString(args) {
+  verifyModuleInitialized();
   var actions = getActionsForEvent(args);
   var label = _firstcutPipelineConsts.EVENT_LABELS[args.event];
   var result = actions.reduce(function (s, a) {
@@ -100,6 +110,7 @@ function getEventActionsAsDescriptiveString(args) {
 }
 
 function getCustomFieldsSchema(event, record) {
+  verifyModuleInitialized();
   var customSchema = ActionTemplates[event].get('customFieldsSchema');
 
   if (!customSchema) {
@@ -114,6 +125,8 @@ function getCustomFieldsSchema(event, record) {
 }
 
 function actionAsDescriptiveString(action) {
+  verifyModuleInitialized();
+
   switch (action.type) {
     case _firstcutPipelineConsts.ACTIONS.send_email:
       return "send an email to ".concat(action.to.toString());
@@ -129,5 +142,11 @@ function actionAsDescriptiveString(action) {
 
     default:
       return action.title;
+  }
+}
+
+function verifyModuleInitialized() {
+  if (!Models || !ActionTemplates) {
+    throw new Error('pipeline-utils module not initialized with Models and Templates');
   }
 }

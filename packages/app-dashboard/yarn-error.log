@@ -1,8 +1,8 @@
 Arguments: 
-  /usr/local/lib/node_modules/node/bin/node /usr/local/Cellar/yarn/1.5.1_1/libexec/bin/yarn.js add immutable
+  /usr/local/lib/node_modules/node/bin/node /usr/local/Cellar/yarn/1.5.1_1/libexec/bin/yarn.js install
 
 PATH: 
-  /Users/artichokes/google-cloud-sdk/bin:/Users/artichokes/.fastlane/bin:/Users/artichokes/.meteor:/Users/artichokes/Scripts:/usr/local/git/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/opt/local/bin:/opt/local/sbin:/usr/X11/bin:/Users/artichokes/Library/Android/sdk/tools:/Users/artichokes/Library/Android/sdk/platform-tools:/Users/artichokes/Library/Android/sdk/tools:/Applications/Postgres.app/Contents/Versions/latest/bin:/Users/artichokes/Library/Android/sdk/build-tools/27.0.2://Users/artichokes/FirstCut/firstcut-mono/scripts
+  /usr/local/lib/node_modules/npm/node_modules/npm-lifecycle/node-gyp-bin:/Users/artichokes/FirstCut/firstcut-mono/packages/app-dashboard/node_modules/.bin:/Users/artichokes/google-cloud-sdk/bin:/Users/artichokes/.fastlane/bin:/Users/artichokes/.meteor:/Users/artichokes/Scripts:/usr/local/git/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/opt/local/bin:/opt/local/sbin:/usr/X11/bin:/Users/artichokes/Library/Android/sdk/tools:/Users/artichokes/Library/Android/sdk/platform-tools:/Users/artichokes/Library/Android/sdk/tools:/Applications/Postgres.app/Contents/Versions/latest/bin:/Users/artichokes/Library/Android/sdk/build-tools/27.0.2://Users/artichokes/FirstCut/firstcut-mono/scripts
 
 Yarn version: 
   1.5.1
@@ -18,7 +18,10 @@ npm manifest:
     "name": "firstcut-dashboard",
     "private": true,
     "scripts": {
-      "start": "meteor run --settings settings-dev.json",
+      "start": "./linkfirstcut.sh && meteor run --settings settings-dev.json",
+      "start-prod": "./linkfirstcut.sh && meteor run --settings settings.json",
+      "test": "./installfirstcut.sh && meteor test --driver-package meteortesting:mocha --settings settings-dev.json SERVER_TEST_REPORTER='dot'",
+      "test-prod": "./installfirstcut.sh && meteor test --driver-package meteortesting:mocha --settings settings.json SERVER_TEST_REPORTER='dot'",
       "deploy-prod": "meteor deploy firstcut.meteorapp.com",
       "deploy-dev": "meteor deploy firstcut-dev.meteorapp.com"
     },
@@ -38,6 +41,7 @@ npm manifest:
       "firstcut-analytics": "^0.0.0",
       "firstcut-assets": "^0.0.0",
       "firstcut-aws": "^0.0.0",
+      "firstcut-blueprints": "^0.0.0",
       "firstcut-clients": "^0.0.0",
       "firstcut-collaborators": "^0.0.0",
       "firstcut-companies": "^0.0.0",
@@ -46,20 +50,21 @@ npm manifest:
       "firstcut-filestore": "^0.0.0",
       "firstcut-google-api": "^0.0.0",
       "firstcut-invoices": "^0.0.0",
-      "firstcut-aws": "^0.0.0",
-      "firstcut-schema": "^0.0.0",
-      "firstcut-model-base": "^0.0.0",
       "firstcut-jobs": "^0.0.0",
+      "firstcut-model-base": "^0.0.0",
       "firstcut-pipeline": "^0.0.0",
       "firstcut-pipeline-consts": "^0.0.0",
       "firstcut-pipeline-utils": "^0.0.0",
       "firstcut-players": "^0.0.0",
       "firstcut-projects": "^0.0.0",
       "firstcut-react-autoform": "^0.0.0",
+      "firstcut-retrieve-url": "^0.0.0",
+      "firstcut-schema": "^0.0.0",
       "firstcut-shoots": "^0.0.0",
       "firstcut-tasks": "^0.0.0",
       "firstcut-uploader": "^0.0.0",
       "firstcut-user-session": "^0.0.0",
+      "firstcut-utils": "^0.0.0",
       "github": "^14.0.0",
       "history": "^4.7.2",
       "immutable": "^3.8.2",
@@ -107,7 +112,8 @@ npm manifest:
       "gulp-concat-filenames": "^1.2.0",
       "gulp-debug": "^4.0.0",
       "gulp-git": "^2.7.0",
-      "gulp-tap": "^1.0.1"
+      "gulp-tap": "^1.0.1",
+      "jest-meteor-stubs": "^1.5.1"
     },
     "postcss": {
       "plugins": {
@@ -2351,6 +2357,10 @@ Lockfile:
     dependencies:
       has-to-string-tag-x "^1.2.0"
       is-object "^1.0.1"
+  
+  jest-meteor-stubs@^1.5.1:
+    version "1.5.1"
+    resolved "https://registry.yarnpkg.com/jest-meteor-stubs/-/jest-meteor-stubs-1.5.1.tgz#aff8adfa262077783a48cecebc4115e6b60f7338"
   
   jmespath@0.15.0:
     version "0.15.0"
@@ -4680,7 +4690,7 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/zerop/-/zerop-1.0.1.tgz#edf8917f4bc9772cebc5066b5fe4b8a78a2c6fa3"
 
 Trace: 
-  Error: https://registry.yarnpkg.com/firstcut-action-utils: Not found
+  Error: https://registry.npmjs.org/firstcut-action-utils: Not found
       at Request.params.callback [as _callback] (/usr/local/Cellar/yarn/1.5.1_1/libexec/lib/cli.js:65019:18)
       at Request.self.callback (/usr/local/Cellar/yarn/1.5.1_1/libexec/lib/cli.js:132430:22)
       at Request.emit (events.js:159:13)

@@ -6,7 +6,7 @@
 		},
     "PLATFORM_ROOT_URL": "http://62d11ecb.ngrok.io",
     "PIPELINE_ROOT": "http://62d11ecb.ngrok.io",
-    "environment": "develment",
+    "environment": "development",
     "skillsOverride": "DASHBOARD_SUPERUSER",
     "isPipelineDeployment": true,
     "DEFAULT_TIMEZONE": "America/Los_Angeles",
