@@ -4657,7 +4657,22 @@ tweetnacl@^0.14.3, tweetnacl@~0.14.0:
   version "0.14.5"
   resolved "https://registry.yarnpkg.com/tweetnacl/-/tweetnacl-0.14.5.tgz#5ae68177f192d4456269d108afa93ff8743f4f64"
 
-twilio@^3.21.0, twilio@^3.22.0:
+twilio@^3.21.0:
+  version "3.23.1"
+  resolved "https://registry.yarnpkg.com/twilio/-/twilio-3.23.1.tgz#a5d6847e084776d060de375b08c07d859da4e5b1"
+  dependencies:
+    "@types/express" "^4.11.1"
+    deprecate "1.0.0"
+    jsonwebtoken "^8.1.0"
+    lodash "^4.17.10"
+    moment "2.19.3"
+    q "2.0.x"
+    request "^2.87.0"
+    rootpath "0.1.2"
+    scmp "0.0.3"
+    xmlbuilder "9.0.1"
+
+twilio@^3.22.0:
   version "3.22.0"
   resolved "https://registry.yarnpkg.com/twilio/-/twilio-3.22.0.tgz#77d53b7bac8943a8f67a2e580224057cb729603d"
   dependencies:

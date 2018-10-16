@@ -3,6 +3,7 @@ firstcut-actions
 firstcut-analytics
 firstcut-assets
 firstcut-aws
+firstcut-blueprints
 firstcut-clients
 firstcut-collaborators
 firstcut-companies
@@ -19,8 +20,10 @@ firstcut-pipeline-utils
 firstcut-players
 firstcut-projects
 firstcut-react-autoform
+firstcut-retrieve-url
 firstcut-schema
 firstcut-shoots
 firstcut-tasks
 firstcut-uploader
+firstcut-utils
 firstcut-user-session
