@@ -1,4 +1,5 @@
 exports.Meteor = {
+  user: jest.fn(),
   loginWithPassword: jest.fn(),
   loginWithFacebook: jest.fn(),
   methods: jest.fn(),

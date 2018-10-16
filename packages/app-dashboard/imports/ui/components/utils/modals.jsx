@@ -7,7 +7,6 @@ import {
 import { withRecordManager } from '/imports/ui/components/managers';
 import { Autoform } from 'firstcut-react-autoform';
 import { PubSub } from 'pubsub-js';
-import Models from '/imports/api/models';
 import { inSimulationMode } from 'firstcut-user-session';
 
 export class ConfirmationModal extends React.PureComponent {
@@ -114,7 +113,9 @@ function UpdateFieldModal(props) {
   );
 }
 
-export default Modals = {
+const Modals = {
   UpdateField: UpdateFieldModal,
   Confirmation: ConfirmationModal,
 };
+
+export default Modals;

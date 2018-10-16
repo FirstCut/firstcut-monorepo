@@ -122,10 +122,4 @@ const Cells = Object.freeze({
   Actions: ActionsCell,
 });
 
-Cells.propTypes = {
-  record: PropTypes.instanceOf(Record),
-  field: PropTypes.string,
-  getPath: PropTypes.func,
-};
-
 export default Cells;

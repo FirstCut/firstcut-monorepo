@@ -1,9 +1,1 @@
 node_modules/
-prix_meteor.pem
-mup.js
-settings*
-yarn-error.log
-**/*/yarn-error.log*
-**/*/settings*
-**/GoogleService*
-**/*.pem

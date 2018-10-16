@@ -7,6 +7,7 @@ import {
 } from 'firstcut-filestore';
 import Models from '/imports/api/models';
 import FirstcutAWS from 'firstcut-aws';
+import { ValidatedMethod } from 'meteor/mdg:validated-method';
 
 Meteor.startup(() => {
   if (Meteor.isServer) {

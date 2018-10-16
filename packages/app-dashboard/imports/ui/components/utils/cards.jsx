@@ -1,19 +1,14 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Record } from 'immutable';
 import {
-  Card, Header, Segment, Image, Icon,
+  Card, Header, Segment, Icon,
 } from 'semantic-ui-react';
 
 const Cards = Object.freeze({
   Deliverable: DeliverableCard,
   Cut: CutCard,
 });
-
-Cards.propTypes = {
-  record: PropTypes.instanceOf(Record),
-};
 
 function DeliverableCard(props) {
   const { record } = props;

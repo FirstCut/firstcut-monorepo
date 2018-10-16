@@ -2,9 +2,8 @@
 import React from 'react';
 import { Button, Icon } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
-import Models from '/imports/api/models';
 
-export default Buttons = {
+const Buttons = {
   Download: DownloadButton,
   Delete: DeleteButton,
   AddNew: AddNewButton,
@@ -13,12 +12,8 @@ export default Buttons = {
 };
 
 function DownloadButton(props) {
-  const onClick = (e) => {
-    console.log(props.href);
-    console.log(e);
-  };
   return (
-    <Button animated="vertical" {...props} positive onClick={onClick}>
+    <Button animated="vertical" {...props} positive>
       <Button.Content hidden>
         Download
       </Button.Content>
@@ -78,3 +73,5 @@ function LinkButton(props) {
   const { path, ...rest } = props;
   return <Button as={Link} to={path} {...rest} />;
 }
+
+export default Buttons;

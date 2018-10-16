@@ -158,7 +158,7 @@ EditRecordModal.propTypes = {
   onClose: PropTypes.func,
 };
 
-EditRecordItem = Record({
+const EditRecordItem = Record({
   element: undefined,
   _id: undefined,
   title: undefined,

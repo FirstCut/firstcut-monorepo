@@ -1,5 +1,6 @@
 jest.mock('meteor/meteor');
 jest.mock('meteor/mongo');
+
 import { Meteor } from 'meteor/meteor';
 import { Mongo } from 'meteor/mongo';
 import Adapter from 'enzyme-adapter-react-16';

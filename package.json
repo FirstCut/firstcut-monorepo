@@ -53,13 +53,19 @@
 				"meteor-standalone-random": "^1.0.67",
 				"soap": "^0.24.0"
 		},
-		"workspaces": ["packages/firstcut-*"],
+		"workspaces": [
+				"packages/firstcut-*"
+		],
 		"jest": {
 				"moduleNameMapper": {
 						"meteor/meteor": "<rootDir>/jest/mocks/meteor.mock.js",
 						"meteor/mongo": "<rootDir>/jest/mocks/mongo.mock.js",
 						"meteor/http": "<rootDir>/jest/mocks/http.mock.js",
+						"meteor/accounts-base": "<rootDir>/jest/mocks/accounts-base.mock.js",
+						"meteor/universe:i18n": "<rootDir>/jest/mocks/i18n.mock.js",
+						"meteor/react-meteor-data": "<rootDir>/jest/mocks/meteordata.mock.js",
 						"semantic-ui-react": "<rootDir>/jest/mocks/semantic-ui.mock.js",
+						"/imports/(.*)$": "<rootDir>/packages/app-dashboard/imports/$1",
 						"meteor/mdg:validated-method": "<rootDir>/jest/mocks/validatedmethod.mock.js"
 				},
 				"setupFiles": [
@@ -67,6 +73,8 @@
 				],
 				"testPathIgnorePatterns": [
 						"/node_modules/",
+						"/apps/",
+						"/test_meteor/",
 						"/lib/"
 				]
 		}

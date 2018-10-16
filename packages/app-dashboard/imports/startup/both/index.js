@@ -3,6 +3,7 @@
 import 'firstcut-blueprints';
 import 'firstcut-actions';
 import 'firstcut-action-utils';
+import 'firstcut-pipeline-consts';
 import '/imports/api/player.api';
 import '/imports/api/filestore';
 import Models from '/imports/api/models';

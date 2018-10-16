@@ -1,5 +1,6 @@
 
 import SimpleSchema from 'simpl-schema';
+import { ValidatedMethod } from 'meteor/mdg:validated-method';
 import LoginBox from './components/LoginBox';
 import RegisterBox from './components/RegisterBox';
 import ResetPasswordBox from './components/ResetPasswordBox';
