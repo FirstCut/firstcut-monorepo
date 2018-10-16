@@ -15,6 +15,8 @@ import enablePlayerUtils from 'firstcut-players';
 import SimpleSchema from 'simpl-schema';
 import enableCrud from './crud';
 
+console.log(Collaborator);
+
 let Models = {};
 
 SimpleSchema.extendOptions([

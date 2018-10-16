@@ -27,6 +27,7 @@ export default function enableCrud(cls) {
     }),
   });
 
+  console.log(cls);
   let name = `${cls.collectionName}.upsert`;
   cls._persist_save = new ValidatedMethod({
     name,
