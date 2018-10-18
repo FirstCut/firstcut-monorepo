@@ -86,14 +86,12 @@ _.forEach(Models.allModels, (model) => {
   enableCrud(model);
   if (!model.collection) {
     const collection = new Mongo.Collection(model.collectionName);
-    collection.attachSchema(model.schema.asSchema);
     model.collection = collection;
   }
   if (model.onInit) {
     model.onInit();
   }
 });
-
 
 enablePlayerUtils(Models);
 

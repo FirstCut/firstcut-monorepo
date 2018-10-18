@@ -46,15 +46,51 @@ function (_Base) {
   }
 
   (0, _createClass2.default)(Asset, [{
-    key: "addToVersionReference",
-    value: function addToVersionReference(versionName) {
-      var data = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
-      var self = this;
-      var existingData = self.versions[versionName] || {};
-      var combinedData = (0, _objectSpread2.default)({}, existingData, data);
-      self.versions[versionName] = combinedData;
-      self = self.set('versions', self.versions);
-      return self;
+    key: "buildS3AssetPath",
+    value: function buildS3AssetPath(version) {
+      var name = getAssetnameWithoutExtension(this);
+      name = (0, _sanitizeFilename.default)(name);
+      var path = "".concat(this.root, "/").concat(name, "-").concat(version, "-").concat(this._id, ".").concat(this.extension);
+      path = path.replace(/\/\//g, '/');
+      return path;
+    }
+  }, {
+    key: "upload",
+    value: function upload(options) {
+      var asset = this;
+      asset = asset.set('versions', {});
+      var file = options.file,
+          meta = options.meta;
+      var version = 'original';
+      var properties = extractPropertiesOfFile(file);
+      var extension = properties.extension;
+      asset = asset.set('_id', (0, _mdbid.default)());
+      asset = asset.set('name', file.name);
+      asset = asset.set('mime', file.type);
+      asset = asset.set('type', file.type);
+      asset = asset.set('fileSize', file.size);
+      asset = asset.set('meta', meta);
+      asset = asset.set('extension', extension);
+      asset = asset.set('ext', extension);
+      asset = asset.set('isVideo', asset.isVideo);
+      asset = asset.addToVersionReference(version, properties);
+      var path = options.path ? options.path : asset.buildS3AssetPath(version);
+      asset = asset.setPath(version, path);
+      var emitter = new _events.default();
+      var promise = asset.save();
+      promise.catch(function (err) {
+        return emitter.emit('error', err);
+      });
+      asset.constructor.uploader.upload({
+        file: file,
+        path: path,
+        emitter: emitter,
+        bucket: asset.bucket
+      });
+      return {
+        emitter: emitter,
+        asset: asset
+      };
     }
   }, {
     key: "setPath",
@@ -75,6 +111,17 @@ function (_Base) {
       }
 
       return this.versions[version].meta.pipePath;
+    }
+  }, {
+    key: "addToVersionReference",
+    value: function addToVersionReference(versionName) {
+      var data = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+      var self = this;
+      var existingData = (0, _objectSpread2.default)({}, self.versions[versionName]) || {};
+      var combinedData = (0, _objectSpread2.default)({}, existingData, data);
+      self.versions[versionName] = combinedData;
+      self = self.set('versions', self.versions);
+      return self;
     }
   }, {
     key: "displayName",
@@ -110,15 +157,6 @@ function (_Base) {
       return "".concat(bucket, "/footage-folders/");
     }
   }, {
-    key: "buildS3AssetPath",
-    value: function buildS3AssetPath(fileRef, version) {
-      var name = getAssetnameWithoutExtension(fileRef);
-      name = (0, _sanitizeFilename.default)(name);
-      var path = "".concat(fileRef.root, "/").concat(name, "-").concat(version, "-").concat(fileRef._id, ".").concat(fileRef.extension);
-      path = path.replace(/\/\//g, '/');
-      return path;
-    }
-  }, {
     key: "buildSnippetRequestFilePath",
     value: function buildSnippetRequestFilePath(_ref) {
       var cutFileRef = _ref.cutFileRef,
@@ -140,43 +178,6 @@ function (_Base) {
       var snippetRequestPrefix = 'snippet';
       var name = getAssetnameWithoutExtension(cutFileRef);
       return "".concat(snippetRequestPrefix, "_").concat(name, "_").concat(start, "_").concat(end, "_").concat((0, _mdbid.default)(), ".").concat(snippetExtension);
-    }
-  }, {
-    key: "insert",
-    value: function insert(options) {
-      var record = this.createNew({});
-      var file = options.file,
-          meta = options.meta;
-      var version = 'original';
-      var properties = extractPropertiesOfFile(file);
-      var extension = properties.extension;
-      record = record.set('_id', (0, _mdbid.default)());
-      record = record.set('name', file.name);
-      record = record.set('mime', file.type);
-      record = record.set('type', file.type);
-      record = record.set('fileSize', file.size);
-      record = record.set('meta', meta);
-      record = record.set('extension', extension);
-      record = record.set('ext', extension);
-      record = record.set('isVideo', record.isVideo);
-      record = record.addToVersionReference(version, properties);
-      var path = options.path ? options.path : this.buildS3AssetPath(record, version);
-      record = record.setPath(version, path);
-      var emitter = new _events.default();
-      var promise = record.save();
-      promise.catch(function (err) {
-        return emitter.emit('error', err);
-      });
-      this.uploader.upload({
-        file: file,
-        path: path,
-        emitter: emitter,
-        bucket: record.bucket
-      });
-      return {
-        emitter: emitter,
-        record: record
-      };
     }
   }, {
     key: "collectionName",

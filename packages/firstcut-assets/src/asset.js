@@ -26,10 +26,10 @@ class Asset extends Base {
     return `${bucket}/footage-folders/`;
   }
 
-  static buildS3AssetPath(fileRef, version) {
-    let name = getAssetnameWithoutExtension(fileRef);
+  buildS3AssetPath(version) {
+    let name = getAssetnameWithoutExtension(this);
     name = sanitize(name);
-    let path = `${fileRef.root}/${name}-${version}-${fileRef._id}.${fileRef.extension}`;
+    let path = `${this.root}/${name}-${version}-${this._id}.${this.extension}`;
     path = path.replace(/\/\//g, '/');
     return path;
   }
@@ -47,8 +47,9 @@ class Asset extends Base {
     return `${snippetRequestPrefix}_${name}_${start}_${end}_${oid()}.${snippetExtension}`;
   }
 
-  static insert(options) {
-    let record = this.createNew({});
+  upload(options) {
+    let asset = this;
+    asset = asset.set('versions', {});
     const { file, meta } = options;
     const version = 'original';
     const properties = extractPropertiesOfFile(file);
@@ -56,36 +57,26 @@ class Asset extends Base {
       extension,
     } = properties;
 
-    record = record.set('_id', oid());
-    record = record.set('name', file.name);
-    record = record.set('mime', file.type);
-    record = record.set('type', file.type);
-    record = record.set('fileSize', file.size);
-    record = record.set('meta', meta);
-    record = record.set('extension', extension);
-    record = record.set('ext', extension);
-    record = record.set('isVideo', record.isVideo);
-    record = record.addToVersionReference(version, properties);
-
-    const path = (options.path) ? options.path : this.buildS3AssetPath(record, version);
-    record = record.setPath(version, path);
+    asset = asset.set('_id', oid());
+    asset = asset.set('name', file.name);
+    asset = asset.set('mime', file.type);
+    asset = asset.set('type', file.type);
+    asset = asset.set('fileSize', file.size);
+    asset = asset.set('meta', meta);
+    asset = asset.set('extension', extension);
+    asset = asset.set('ext', extension);
+    asset = asset.set('isVideo', asset.isVideo);
+    asset = asset.addToVersionReference(version, properties);
+    const path = (options.path) ? options.path : asset.buildS3AssetPath(version);
+    asset = asset.setPath(version, path);
 
     const emitter = new EventEmitter();
-    const promise = record.save();
+    const promise = asset.save();
     promise.catch(err => emitter.emit('error', err));
-    this.uploader.upload({
-      file, path, emitter, bucket: record.bucket,
+    asset.constructor.uploader.upload({
+      file, path, emitter, bucket: asset.bucket,
     });
-    return { emitter, record };
-  }
-
-  addToVersionReference(versionName, data = {}) {
-    let self = this;
-    const existingData = self.versions[versionName] || {};
-    const combinedData = { ...existingData, ...data };
-    self.versions[versionName] = combinedData;
-    self = self.set('versions', self.versions);
-    return self;
+    return { emitter, asset };
   }
 
   setPath(version, path) {
@@ -97,6 +88,15 @@ class Asset extends Base {
       return '';
     }
     return this.versions[version].meta.pipePath;
+  }
+
+  addToVersionReference(versionName, data = {}) {
+    let self = this;
+    const existingData = { ...self.versions[versionName] } || {};
+    const combinedData = { ...existingData, ...data };
+    self.versions[versionName] = combinedData;
+    self = self.set('versions', self.versions);
+    return self;
   }
 
   get displayName() { return this.name; }

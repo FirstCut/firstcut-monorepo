@@ -15,6 +15,12 @@ link_firstcut_packages()
   while read in; do meteor npm link ../$in; done < firstcut.packages.txt
 }
 
+clean_packages()
+{
+  cd ../../
+  lerna clean
+}
+
 add_packages_to_packagesJSON()
 {
   while read in
@@ -29,3 +35,4 @@ clean
 install_external_packages
 link_firstcut_packages
 add_packages_to_packagesJSON
+clean_packages

@@ -66,24 +66,51 @@ export default function withFileManager(WrappedComponent) {
         },
         allowWebWorkers: true,
       };
-      Models.Asset.createNew({}); // stub asset to ensure the collection is initialized
-      const result = Models.Asset.insert(fileOptions);
-      const { emitter } = result;
+      // Models.Asset.createNew({}); // stub asset to ensure the collection is initialized
+      const assetRecord = Models.Asset.createNew({});
+      console.log(assetRecord.versions);
+      console.log(assetRecord.getPath());
+      if (this.state.records.size > 0) {
+        console.log('THE OTHERs path');
+        console.log(this.state.records.get(0).getPath());
+      }
+      const { emitter, asset } = assetRecord.upload(fileOptions);
       emitter.on('error', this.fileError);
-      emitter.on('uploaded', this.fileUploadSuccess.bind(this, result.record));
+      emitter.on('uploaded', this.fileUploadSuccess(asset));
       emitter.on('progress', (progress, stats) => {
-        this.setProgress(progress, file.name, stats);
+        this.setState((state, props) => {
+          const fileStats = this.setFileStats(state, file.name, { progress, ...stats });
+          return { fileStats };
+        });
       });
 
-      this.setState({ uploadComplete: false });
-      this.setProgress(0, file.name, {});
+      this.setState((state, props) => {
+        const fileStats = this.setFileStats(state, file.name, { progress: 0 });
+        return { uploadComplete: false, fileStats, records: this.state.records.push(asset) };
+      });
     };
 
-    setProgress = (progress, filename, stats) => {
+    setFileStats = (state, filename, stats) => {
+      let { fileStats } = state;
+      fileStats = fileStats.set(filename, { fileStats, ...stats });
+      return fileStats;
+    };
+
+    fileError = (error) => {
+      console.log(error);
+    };
+
+    fileUploadSuccess = asset => (awsKey) => {
       this.setState((state, props) => {
-        let { fileStats, records, uploadComplete } = state;
-        fileStats = fileStats.set(filename, { progress, ...stats });
-        if (this.allFilesUploaded(fileStats)) {
+        let {
+          records, nameToId, uploadComplete,
+        } = state;
+        asset = asset.setPath('original', awsKey);
+        records = records.push(asset);
+        nameToId = nameToId.set(asset.name, asset._id);
+        this.notifyFileAdded(asset);
+        const fileStats = this.setFileStats(state, asset.name, { progress: 1 });
+        if (this.allFilesUploaded(fileStats) && !uploadComplete) {
           if (userExperience().isVideographer) {
             Meteor.reconnect();
           }
@@ -94,27 +121,10 @@ export default function withFileManager(WrappedComponent) {
           }
           uploadComplete = true;
         }
-        return { fileStats, uploadComplete };
+        return {
+          records, nameToId, fileStats, uploadComplete,
+        };
       });
-    };
-
-    fileError = (error) => {
-      console.log(error);
-    };
-
-    fileUploadSuccess = (record, awsKey) => {
-      console.log('on upload success');
-      console.log(r.getPath());
-      console.log(awsKey);
-      // const record = r.setPath('original', awsKey);
-      let { records, nameToId } = this.state;
-
-      records = records.push(record);
-      nameToId = nameToId.set(record.name, record._id);
-      this.setState({ records, nameToId });
-      this.notifyFileAdded(record);
-      this.setProgress(1, record.name);
-      // record.save();
     };
 
     allFilesUploaded = progress => _.reduce(progress.toJS(), (res, val) => res && val.progress === 1, true)
@@ -131,11 +141,6 @@ export default function withFileManager(WrappedComponent) {
         newFieldValue.push(fileObj._id);
         this.onValueChange(newFieldValue);
       } else {
-        // const previous_id = getFileIds(record, fieldname)[0];
-        // if (previous_id) {
-        //   const store = getFileStore(record, fieldname);
-        //   removeFileWithId(previous_id, store);
-        // }
         this.onValueChange(fileObj._id);
       }
     };
@@ -158,8 +163,6 @@ export default function withFileManager(WrappedComponent) {
 
     render() {
       const { docs, fileStats, uploadComplete } = this.state;
-      console.log('THE DOCS');
-      console.log(docs);
       return (
         <WrappedComponent
           onFileAdded={this.onFileAdded}

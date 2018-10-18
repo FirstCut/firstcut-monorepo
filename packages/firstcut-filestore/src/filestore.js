@@ -38,7 +38,8 @@ function getSignedUrl(args) {
   }).validate(args);
   const { fileId, version } = args;
   const key = getPathFromId({ fileId, version });
-  const bucket = fileRefFromId({ fileId, version }).bucket;
+  const file = fileRefFromId({ fileId, version });
+  const bucket = (file && file.bucket) ? file.bucket : filestore.bucket;
   return getSignedUrlOfKey({ key, bucket });
 }
 

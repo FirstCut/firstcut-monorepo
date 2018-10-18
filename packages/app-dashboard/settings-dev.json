@@ -4,8 +4,8 @@
 			"id": "ircrn02d",
 			"allowAnonymous": true
 		},
-    "PLATFORM_ROOT_URL": "http://62d11ecb.ngrok.io",
-    "PIPELINE_ROOT": "http://62d11ecb.ngrok.io",
+    "PLATFORM_ROOT_URL": "http://17c21a4d.ngrok.io",
+    "PIPELINE_ROOT": "http://17c21a4d.ngrok.io",
     "environment": "development",
     "skillsOverride": "DASHBOARD_SUPERUSER",
     "isPipelineDeployment": true,

@@ -29,7 +29,7 @@ var _semanticUiReact = require("semantic-ui-react");
 
 var _reactDatetime = _interopRequireDefault(require("react-datetime"));
 
-var _moment = _interopRequireDefault(require("moment"));
+var _momentTimezone = _interopRequireDefault(require("moment-timezone"));
 
 // import { isUTC } from 'firstcut-utils/datetime';
 var COMPONENT_DEFAULT_TZ = 'Etc/UTC';
@@ -130,10 +130,10 @@ exports.default = AutoformDatetime;
 function replaceTimezone(date) {
   var old_tz = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : COMPONENT_DEFAULT_TZ;
   var newTimezone = arguments.length > 2 ? arguments[2] : undefined;
-  var asMoment = (0, _moment.default)(date);
+  var asMoment = (0, _momentTimezone.default)(date);
   var strippedDate = asMoment.tz(old_tz).format('YYYY-MM-DD HH:mm');
 
-  var replaced = _moment.default.tz(strippedDate, newTimezone);
+  var replaced = _momentTimezone.default.tz(strippedDate, newTimezone);
 
   return replaced;
 }

@@ -3,7 +3,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Form } from 'semantic-ui-react';
 import Datetime from 'react-datetime';
-import moment from 'moment';
+import moment from 'moment-timezone';
 // import { isUTC } from 'firstcut-utils/datetime';
 const COMPONENT_DEFAULT_TZ = 'Etc/UTC';
 

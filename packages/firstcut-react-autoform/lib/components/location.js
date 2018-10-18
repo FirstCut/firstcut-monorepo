@@ -52,7 +52,8 @@ function LocationField(props) {
   }
 
   fieldProps.onPlaceSelected = onPlaceSelected(onChange, fieldProps.name);
-  var types = fieldProps.locationTypes || []; // delete fieldProps.value; // autocomplete location doesn't work well as a controlled component
+  var types = fieldProps.locationTypes || [];
+  delete fieldProps.value; // autocomplete location doesn't work well as a controlled component
 
   delete fieldProps.locationTypes; // autocomplete location doesn't work well as a controlled component
 
@@ -64,6 +65,7 @@ function LocationField(props) {
 
   delete fieldProps.serviceDependency; // autocomplete location doesn't work well as a controlled component
 
+  console.log(_reactGoogleAutocomplete.default);
   return _react.default.createElement("div", null, _react.default.createElement(_semanticUiReact.Form.Field, (0, _extends2.default)({
     types: types,
     control: _reactGoogleAutocomplete.default

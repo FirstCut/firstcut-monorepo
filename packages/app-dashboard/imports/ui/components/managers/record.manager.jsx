@@ -34,7 +34,6 @@ export default function withRecordManager(WrappedComponent) {
     onChange = (e, { name, value } = {}) => {
       this.setState((prevState, props) => {
         const record = prevState.record.set(name, value);
-        console.log(record);
         return { record };
       });
     }

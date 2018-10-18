@@ -27,7 +27,6 @@ export default function enableCrud(cls) {
     }),
   });
 
-  console.log(cls);
   let name = `${cls.collectionName}.upsert`;
   cls._persist_save = new ValidatedMethod({
     name,
@@ -36,7 +35,6 @@ export default function enableCrud(cls) {
       if (!record._id) {
         record._id = oid();
       }
-      this.unblock();
       cls.collection.upsert(record._id, { $set: record });
       return record;
     },

@@ -38,7 +38,6 @@ export const getSignedUrl = new ValidatedMethod({
   name: 'get-s3-signed-url',
   validate({ file_ref, version }) {},
   run({ fileId, version = 'original' }) {
-    console.log(`Getting signed url for fileId ${fileId}`);
     if (Meteor.isServer) {
       return signedUrl({ fileId, version });
     }

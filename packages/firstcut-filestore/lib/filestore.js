@@ -57,10 +57,11 @@ function getSignedUrl(args) {
     fileId: fileId,
     version: version
   });
-  var bucket = fileRefFromId({
+  var file = fileRefFromId({
     fileId: fileId,
     version: version
-  }).bucket;
+  });
+  var bucket = file && file.bucket ? file.bucket : filestore.bucket;
   return getSignedUrlOfKey({
     key: key,
     bucket: bucket
