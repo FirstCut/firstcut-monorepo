@@ -46,10 +46,6 @@ export async function handleEvent(args) {
   }
 }
 
-function getEventActionSchema(event) {
-  return ActionTemplates[event].get('schema');
-}
-
 function saveToHistory(args) {
   const { record, ...event_data } = args;
   if (!record) {
