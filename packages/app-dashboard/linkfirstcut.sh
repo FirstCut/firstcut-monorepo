@@ -36,3 +36,4 @@ install_external_packages
 link_firstcut_packages
 add_packages_to_packagesJSON
 clean_packages
+meteor npm link firstcut-actions

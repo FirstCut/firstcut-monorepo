@@ -26,25 +26,9 @@ export default function ProjectsList(props) {
   ];
 
   const filterOverrides = {
-    // getLatestKeyEvent: { hidden: true },
-    isDummy: {
-      sortBy: 'off',
-      defaultValue: { $ne: true },
-      options: () => List([
-        {
-          key: 'true',
-          value: true,
-          text: 'True',
-        }, {
-          key: 'false',
-          value: {
-            $ne: true,
-          },
-          text: 'False',
-        },
-      ]),
-    },
+    isDummy: { hidden: true },
   };
+
 
   if (userHasPermission('LIST', 'Client')) {
     filterFields[1].push('clientOwnerId');
@@ -102,7 +86,7 @@ export default function ProjectsList(props) {
         const Page = createListViewPage();
         return (
           <Page
-            initialFilter={{ isWrapped: false }}
+            initialFilter={{ isWrapped: false, isDummy: { $ne: true } }}
             {...pageProps}
             {...props}
           />
@@ -115,7 +99,20 @@ export default function ProjectsList(props) {
         const Page = createListViewPage();
         return (
           <Page
-            initialFilter={{ isWrapped: true }}
+            initialFilter={{ isWrapped: true, isDummy: { $ne: true } }}
+            {...pageProps}
+            {...props}
+          />
+        );
+      },
+    },
+    {
+      menuItem: 'Dummy Projects',
+      render: () => {
+        const Page = createListViewPage();
+        return (
+          <Page
+            initialFilter={{ isDummy: true }}
             {...pageProps}
             {...props}
           />

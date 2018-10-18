@@ -9,6 +9,8 @@ export default function withFilters(WrappedComponent) {
       super(props);
       const { model } = props;
       this.state = { filter: getFreshFilter(props) };
+      console.log('FILTER');
+      console.log(this.state.filter.toJS());
     }
 
     setFilter = (filter) => {

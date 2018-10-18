@@ -6,8 +6,8 @@ import { Button, Container, Header } from 'semantic-ui-react';
 import { getRecordPath } from 'firstcut-retrieve-url';
 
 import { userHasPermission, userExperience } from '/imports/ui/config';
-import Buttons from '../components/utils/buttons';
 import { Autoform } from 'firstcut-react-autoform';
+import Buttons from '../components/utils/buttons';
 
 export default function asListPage(WrappedComponent) {
   return function ListView(props) {

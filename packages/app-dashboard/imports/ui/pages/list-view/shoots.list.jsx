@@ -20,14 +20,7 @@ export default function ShootsPage(props) {
   const filterFields = [['projectId', 'isDummy', 'date']];
   const filterOverrides = {
     date: { hidden: true },
-    isDummy: {
-      sortBy: 'off',
-      defaultValue: { $ne: true },
-      options: () => List([
-        { key: 'true', value: true, text: 'True' },
-        { key: 'false', value: { $ne: true }, text: 'False' },
-      ]),
-    },
+    isDummy: { hidden: true },
   };
 
   const CellComponent = (userExperience().isVideographer) ? Cells.PlainValue : Cells.Link;
@@ -63,7 +56,7 @@ export default function ShootsPage(props) {
         const Page = createListViewPage();
         return (
           <Page
-            initialFilter={{ date: { $gte: moment().subtract(1, 'day').toDate() } }}
+            initialFilter={{ date: { $gte: moment().subtract(1, 'day').toDate() }, isDummy: { $ne: true } }}
             {...pageProps}
             {...props}
           />
@@ -76,7 +69,20 @@ export default function ShootsPage(props) {
         const Page = createListViewPage();
         return (
           <Page
-            initialFilter={{ date: { $lt: today } }}
+            initialFilter={{ date: { $lt: today }, isDummy: { $ne: true } }}
+            {...pageProps}
+            {...props}
+          />
+        );
+      },
+    },
+    {
+      menuItem: 'Dummy Shoots',
+      render: () => {
+        const Page = createListViewPage();
+        return (
+          <Page
+            initialFilter={{ isDummy: true }}
             {...pageProps}
             {...props}
           />
