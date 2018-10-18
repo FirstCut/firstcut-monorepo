@@ -49,6 +49,10 @@ class Asset extends Base {
 
   upload(options) {
     let asset = this;
+    // this is a hack to fix a weird bug when assets are created in quick succession
+    // they somehow share the same versions object. I don't have time to figure this
+    // out right now but remember this weirdness for nest mutable objects inside
+    // immutables in case it causes issues somewhere else
     asset = asset.set('versions', {});
     const { file, meta } = options;
     const version = 'original';

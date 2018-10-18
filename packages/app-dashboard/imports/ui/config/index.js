@@ -3,7 +3,7 @@ import { Meteor } from 'meteor/meteor';
 import Models from '/imports/api/models';
 import { userPlayerId } from 'firstcut-user-session';
 import { _ } from 'lodash';
-import { fulfillsPrerequisites } from 'firstcut-pipeline-consts';
+import { fulfillsPrerequisites } from 'firstcut-pipeline-utils';
 import VideoEditorConfig from './editor.config';
 import { SuperuserConfig, VideoProjectManagerConfig } from './projectmanager.config';
 import ClientConfig from './client.config';

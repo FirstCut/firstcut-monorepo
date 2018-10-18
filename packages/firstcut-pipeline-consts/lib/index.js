@@ -3,9 +3,6 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.fulfillsPrerequisites = fulfillsPrerequisites;
-exports.getEventActionsAsDescriptiveString = getEventActionsAsDescriptiveString;
-exports.getCustomFieldsSchema = getCustomFieldsSchema;
 Object.defineProperty(exports, "getAddOnPrice", {
   enumerable: true,
   get: function get() {
@@ -69,69 +66,3 @@ exports.SUPPORTED_EVENTS = SUPPORTED_EVENTS;
 var EVENTS = require('./events.json');
 
 exports.EVENTS = EVENTS;
-
-function fulfillsPrerequisites(_ref) {
-  var event = _ref.event,
-      record = _ref.record,
-      initiator = _ref.initiator;
-
-  if (Meteor.settings.public.environment === 'development') {
-    return true;
-  }
-
-  return ActionTemplates[event].get('fulfillsPrerequisites')({
-    record: record,
-    initiator: initiator
-  });
-}
-
-function getActionsForEvent(args) {
-  var event = args.event;
-  return ActionTemplates[event].get('generateActions')(args);
-}
-
-function getEventActionsAsDescriptiveString(args) {
-  var actions = getActionsForEvent(args);
-  var label = EVENT_LABELS[args.event];
-  var result = actions.reduce(function (s, a) {
-    var str = s;
-    str += '\t -- ';
-    str += actionAsDescriptiveString(a);
-    str += '\n';
-    return str;
-  }, "Triggering ".concat(label, " will: \n\n"));
-  return result;
-}
-
-function getCustomFieldsSchema(event, record) {
-  var customSchema = ActionTemplates[event].get('customFieldsSchema');
-
-  if (!customSchema) {
-    customSchema = new SimpleSchemaWrapper();
-  }
-
-  if (typeof customSchema === 'function') {
-    customSchema = customSchema(record);
-  }
-
-  return customSchema;
-}
-
-function actionAsDescriptiveString(action) {
-  switch (action.type) {
-    case _pipeline.ACTIONS.send_email:
-      return "send an email to ".concat(action.to.toString());
-
-    case _pipeline.ACTIONS.slack_notify:
-      return 'emit a slack notification';
-
-    case _pipeline.ACTIONS.text_message:
-      return "send a text to ".concat(action.phone);
-
-    case _pipeline.ACTIONS.calendar_event:
-      return "create a calendar event and invite ".concat(action.attendees.toString());
-
-    default:
-      return action.title;
-  }
-}

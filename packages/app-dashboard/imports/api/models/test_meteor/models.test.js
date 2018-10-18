@@ -48,7 +48,6 @@ const projectSamples = [
   {
     _id: oid(),
     blueprint: 'PROJECTWRAPPED',
-    isDummy: true,
     name: 'Project Wrapped',
     clientOwnerId: 'nXeHiqdrn4a6nNjM4',
     adminOwnerId: 'p3eGR6CjEbzPS3uZr',
@@ -142,6 +141,22 @@ describe('base model', () => {
       expect(Project.count(query)).to.equal(projects.size);
       expect(Project.findOne(query).blueprint).to.be.a('string');
     });
+
+
+    it('should filter by record fields using mongo queries', () => {
+      let query = {
+        isDummy: true,
+      };
+      let result = Project.find(query);
+      expect(result.size).to.equal(2);
+
+      query = {
+        isDummy: { $ne: true },
+      };
+      result = Project.find(query);
+      expect(result.size).to.equal(1);
+    });
+
 
     it('should know who created the record', () => {
       const project = Project.createNew(projectSamples[0]);

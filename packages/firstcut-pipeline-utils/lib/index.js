@@ -40,11 +40,6 @@ function fulfillsPrerequisites(_ref) {
       record = _ref.record,
       initiator = _ref.initiator;
   verifyModuleInitialized();
-  console.log(ActionTemplates);
-
-  if (!ActionTemplates) {
-    throw new Error('ActionTemplates not initialized');
-  }
 
   if (Meteor.settings.public.environment === 'development') {
     return true;

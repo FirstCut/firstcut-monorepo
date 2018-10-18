@@ -3,7 +3,6 @@ import React from 'react';
 import { EVENT_ACTION_TITLES } from 'firstcut-pipeline-consts';
 import { emitPipelineEvent, getEventActionsAsDescriptiveString, getCustomFieldsSchema } from 'firstcut-pipeline-utils';
 import Modals from '/imports/ui/components/utils/modals';
-import Models from '/imports/api/models';
 import { userPlayerId } from 'firstcut-user-session';
 import { Button } from 'semantic-ui-react';
 import { Record } from 'immutable';

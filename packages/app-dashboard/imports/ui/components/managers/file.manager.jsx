@@ -68,12 +68,6 @@ export default function withFileManager(WrappedComponent) {
       };
       // Models.Asset.createNew({}); // stub asset to ensure the collection is initialized
       const assetRecord = Models.Asset.createNew({});
-      console.log(assetRecord.versions);
-      console.log(assetRecord.getPath());
-      if (this.state.records.size > 0) {
-        console.log('THE OTHERs path');
-        console.log(this.state.records.get(0).getPath());
-      }
       const { emitter, asset } = assetRecord.upload(fileOptions);
       emitter.on('error', this.fileError);
       emitter.on('uploaded', this.fileUploadSuccess(asset));
@@ -86,7 +80,7 @@ export default function withFileManager(WrappedComponent) {
 
       this.setState((state, props) => {
         const fileStats = this.setFileStats(state, file.name, { progress: 0 });
-        return { uploadComplete: false, fileStats, records: this.state.records.push(asset) };
+        return { uploadComplete: false, fileStats };
       });
     };
 

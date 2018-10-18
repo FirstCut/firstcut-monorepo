@@ -13,10 +13,6 @@ export function initModelsForPipeline(models, templates) {
 
 export function fulfillsPrerequisites({ event, record, initiator }) {
   verifyModuleInitialized();
-  console.log(ActionTemplates);
-  if (!ActionTemplates) {
-    throw new Error('ActionTemplates not initialized');
-  }
   if (Meteor.settings.public.environment === 'development') {
     return true;
   }

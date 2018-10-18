@@ -64,6 +64,7 @@ describe('all models', () => {
 describe('model filtering', () => {
   const projects = [
     Project.createNew({
+      isDummy: true,
       history: [
         { event: 'project_wrap', timestamp: '2001-05-01T08:00:00.000Z' },
         { event: 'record_created', timestamp: '2001-05-01T08:00:00.000Z' },
