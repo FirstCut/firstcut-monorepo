@@ -114,10 +114,6 @@ function _handleEvent() {
   return _handleEvent.apply(this, arguments);
 }
 
-function getEventActionSchema(event) {
-  return _firstcutActions.default[event].get('schema');
-}
-
 function saveToHistory(args) {
   var record = args.record,
       event_data = (0, _objectWithoutProperties2.default)(args, ["record"]);

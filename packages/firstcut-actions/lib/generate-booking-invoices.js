@@ -28,6 +28,10 @@ var GenerateBookingInvoices = new _immutable.Map({
     generateVideographerBookingInvoice: {
       type: Boolean,
       defaultValue: true
+    },
+    generateInterviewerBookingInvoice: {
+      type: Boolean,
+      defaultValue: false
     }
   }),
   schema: _firstcutActionUtils.RecordEvents,
@@ -63,6 +67,10 @@ var GenerateBookingInvoices = new _immutable.Map({
 
         if (shoot.videographer && generateVideographerBookingInvoice === 'true') {
           bookingInvoices.push(shoot.generateBookingInvoice(shoot.videographer));
+        }
+
+        if (shoot.interviewer && generateInterviewerBookingInvoice === 'true') {
+          bookingInvoices.push(shoot.generateBookingInvoice(shoot.interviewer));
         }
 
         bookingInvoices.forEach(function (i) {

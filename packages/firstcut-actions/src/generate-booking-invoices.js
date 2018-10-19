@@ -17,6 +17,10 @@ const GenerateBookingInvoices = new Map({
       type: Boolean,
       defaultValue: true,
     },
+    generateInterviewerBookingInvoice: {
+      type: Boolean,
+      defaultValue: false,
+    },
   }),
   schema: RecordEvents,
   fulfillsPrerequisites({ record, initiator }) {
@@ -49,6 +53,9 @@ const GenerateBookingInvoices = new Map({
           const bookingInvoices = [];
           if (shoot.videographer && generateVideographerBookingInvoice === 'true') {
             bookingInvoices.push(shoot.generateBookingInvoice(shoot.videographer));
+          }
+          if (shoot.interviewer && generateInterviewerBookingInvoice === 'true') {
+            bookingInvoices.push(shoot.generateBookingInvoice(shoot.interviewer));
           }
           bookingInvoices.forEach((i) => {
             let invoice = i;

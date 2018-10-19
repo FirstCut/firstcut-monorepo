@@ -18,7 +18,7 @@ link_firstcut_packages()
 clean_packages()
 {
   cd ../../
-  lerna clean
+  lerna clean | yes
 }
 
 add_packages_to_packagesJSON()
@@ -35,5 +35,5 @@ clean
 install_external_packages
 link_firstcut_packages
 add_packages_to_packagesJSON
-clean_packages
 meteor npm link firstcut-actions
+clean_packages
