@@ -7,7 +7,7 @@
     "test": "./installfirstcut.sh && meteor test --driver-package meteortesting:mocha --settings settings-dev.json SERVER_TEST_REPORTER='dot'",
     "test-prod": "./installfirstcut.sh && meteor test --driver-package meteortesting:mocha --settings settings.json SERVER_TEST_REPORTER='dot'",
     "deploy-prod": "meteor deploy firstcut.meteorapp.com",
-    "deploy-dev": "meteor deploy firstcut-dev.meteorapp.com"
+    "deploy-dev": "./installfirstcut.sh && meteor deploy firstcut-dev.meteorapp.com"
   },
   "dependencies": {
     "@babel/runtime": "^7.1.2",
@@ -66,6 +66,8 @@
     "firstcut-filestore": "^0.0.0",
     "firstcut-google-api": "^0.0.0",
     "firstcut-invoices": "^0.0.0",
+    "firstcut-mailer": "^0.0.0",
+    "firstcut-calendar": "^0.0.0",
     "firstcut-jobs": "^0.0.0",
     "firstcut-model-base": "^0.0.0",
     "firstcut-pipeline": "^0.0.0",

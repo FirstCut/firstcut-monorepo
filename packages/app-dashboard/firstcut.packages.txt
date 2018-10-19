@@ -12,6 +12,8 @@ firstcut-deliverables
 firstcut-filestore
 firstcut-google-api
 firstcut-invoices
+firstcut-mailer
+firstcut-calendar
 firstcut-jobs
 firstcut-model-base
 firstcut-pipeline
