@@ -15,7 +15,8 @@ export default class TableLayout extends React.Component {
 
   handleSort = clickedColumn => () => {
     const { sortByColumn } = this.state;
-    console.log(sortByColumn);
+    console.log('Setting the clickedColumn');
+    console.log(clickedColumn);
     if (sortByColumn !== clickedColumn) {
       this._setSortByColumn(clickedColumn);
     } else {
@@ -40,10 +41,10 @@ export default class TableLayout extends React.Component {
     const { rows } = this.props;
     const { sortByColumn, ascending } = this.state;
     const getSortByValue = (r) => {
-      if (typeof r.getSortByValue === 'function') {
-        return r.getSortByValue();
+      if (typeof r[sortByColumn] === 'function') {
+        return r[sortByColumn]();
       }
-      return r.getSortByValue;
+      return r[sortByColumn];
     };
     let sorted = (sortByColumn) ? _.sortBy(rows.toArray(), [getSortByValue]) : rows;
     if (!ascending) {

@@ -18,7 +18,7 @@ link_firstcut_packages()
 clean_packages()
 {
   cd ../../
-  lerna clean | yes
+  lerna clean
 }
 
 add_packages_to_packagesJSON()
