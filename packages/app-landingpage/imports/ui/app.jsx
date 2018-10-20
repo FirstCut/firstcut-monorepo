@@ -18,7 +18,7 @@ export default class App extends React.PureComponent {
               name="landingPage"
               render={(props) => {
                 const { id } = props.match.params;
-                return <LandingPage id={id} />;
+                return <LandingPage adId={id} />;
               }}
             />
           </div>

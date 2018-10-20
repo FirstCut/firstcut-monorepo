@@ -2,7 +2,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {
-  Image, Header, Grid, Button, Form, Responsive, Modal, Icon,
+  Image, Header, Grid, Button, Form, Responsive, Modal, Icon, Embed,
 } from 'semantic-ui-react';
 import { HTTP } from 'meteor/http';
 
@@ -18,7 +18,7 @@ class LandingPage extends React.Component {
   hideModal = () => { this.setState({ confirm: false }); }
 
   handleSubmit = () => {
-    const data = { event: 'landing_page_submit', ...this.state, adId: this.props.id };
+    const data = { event: 'landing_page_submit', ...this.state, adId: this.props.adId };
     Meteor.call('postRequest', data, (err) => {
       if (err) {
         this.setState({ error: err });
@@ -52,16 +52,27 @@ class LandingPage extends React.Component {
             width={8}
           >
             <Grid stackable>
+              <Grid.Row style={{ height: '100px', padding: '20px !important' }}>
+                <Grid.Column
+                  width={16}
+                  align="center"
+                  verticalAlign="middle"
+                >
+                  <Image style={{ height: '100%' }} fluid src="/firstcut_logo.png" className="signup__header" href="https://www.firstcut.io" />
+                </Grid.Column>
+              </Grid.Row>
+
               <Grid.Row>
                 <Grid.Column
                   width={16}
                   align="center"
-                  style={{ paddingTop: '50px' }}
+                  verticalAlign="middle"
                 >
-                  <Image src="/firstcut_logo.png" fluid className="signup__header" />
+                  <Header align="center" as="h4">
+                      Need help with your b2b video?
+                  </Header>
                 </Grid.Column>
               </Grid.Row>
-
               <Grid.Row>
                 <Grid.Column
                   width={16}
@@ -136,17 +147,18 @@ class LandingPage extends React.Component {
           </Grid.Column>
           <Grid.Column
             width={8}
-            color="green"
-            style={{ height: '100%' }}
+            style={{ height: '100%', padding: 0 }}
             align="center"
+            verticalAlign="middle"
           >
-            <Header as="h4" align="center" className="signup__tagline"> This is a tag line about the ad you selected. Maybe we can put an image here in the background... </Header>
+            <Image src="/sidebar4.png" style={{ height: '100%' }} />
           </Grid.Column>
         </Grid>
         <Responsive
           as={Button}
           minWidth={1086}
           content="SUBMIT"
+          color="green"
           className="signup__centered signup__raised"
           onClick={this.handleSubmit}
         />

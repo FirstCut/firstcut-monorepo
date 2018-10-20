@@ -277,6 +277,10 @@ function initSubscriptions(Models) {
       return;
     }
 
+    if (model.modelName === 'LandingPageRequest') {
+      return;
+    }
+
     var initializing = true;
 
     if ([Models.Job.modelName, Models.Cut.modelName].includes(model.modelName)) {

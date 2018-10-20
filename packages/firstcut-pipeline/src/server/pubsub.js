@@ -180,6 +180,9 @@ export default function initSubscriptions(Models) {
     if (model.modelName === 'Asset') {
       return;
     }
+    if (model.modelName === 'LandingPageRequest') {
+      return;
+    }
     let initializing = true;
     if ([Models.Job.modelName, Models.Cut.modelName].includes(model.modelName)) {
       return;

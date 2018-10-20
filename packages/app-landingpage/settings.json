@@ -1,6 +1,6 @@
 {
   "public": {
-    "PIPELINE_ROOT": "http://firstcut-dev.meteorapp.com"
+    "PIPELINE_ROOT": "https://firstcut.meteorapp.com"
   },
 	"galaxy.meteor.com": {
     	"env": {
