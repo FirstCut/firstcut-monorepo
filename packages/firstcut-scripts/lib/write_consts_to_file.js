@@ -40,5 +40,5 @@ function constsToFile() {
 function writeFile(obj, filename) {
   var json = JSON.stringify(obj);
 
-  _fs.default.writeFileSync("/Users/artichokes/FirstCut/firstcutfirstcut-pipeline-consts/".concat(filename), json);
+  _fs.default.writeFileSync("/Users/artichokes/FirstCut/firstcut-mono/packages/firstcut-pipeline-consts/src/".concat(filename), json);
 }

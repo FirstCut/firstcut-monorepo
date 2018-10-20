@@ -1,5 +1,5 @@
 import { userPlayerId } from 'firstcut-user-session';
-import { HTTP } from 'meteor/http';
+// import { HTTP } from 'meteor/http';
 import { _ } from 'lodash';
 
 export function emitPipelineEvent(args) {

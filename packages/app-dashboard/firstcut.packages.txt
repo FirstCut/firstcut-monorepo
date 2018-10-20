@@ -29,3 +29,5 @@ firstcut-tasks
 firstcut-uploader
 firstcut-utils
 firstcut-user-session
+firstcut-landingpage-requests
+firstcut-event-emitter

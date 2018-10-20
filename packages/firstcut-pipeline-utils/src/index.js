@@ -2,10 +2,12 @@ import { EVENT_LABELS, ACTIONS } from 'firstcut-pipeline-consts';
 import { SimpleSchemaWrapper } from 'firstcut-schema';
 import { emitPipelineEvent } from 'firstcut-event-emitter';
 // import ActionTemplates from 'firstcut-actions';
-import { inSimulationMode, userPlayerId } from 'firstcut-user-session';
 import { _ } from 'lodash';
 
 export { emitPipelineEvent };
+
+console.log('LANDING PAGE SUBMIT');
+console.log(EVENT_LABELS.landing_page_submit);
 
 let Models = null;
 let ActionTemplates = null;

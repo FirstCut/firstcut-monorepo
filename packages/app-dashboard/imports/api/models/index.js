@@ -10,6 +10,7 @@ import Invoice from 'firstcut-invoices';
 import Job from 'firstcut-jobs';
 import Asset from 'firstcut-assets';
 import Task from 'firstcut-tasks';
+import LandingPageRequest from 'firstcut-landingpage-requests';
 import { _ } from 'lodash';
 import enablePlayerUtils from 'firstcut-players';
 import SimpleSchema from 'simpl-schema';
@@ -47,6 +48,7 @@ const models = ({
   Job,
   Asset,
   Cut,
+  LandingPageRequest,
 });
 
 const legacyModels = Object.freeze({

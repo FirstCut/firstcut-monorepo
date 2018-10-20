@@ -5,7 +5,6 @@ import {
   BrowserRouter as Router, Switch, Route,
 } from 'react-router-dom';
 
-import { Container } from 'semantic-ui-react';
 import LandingPage from './landing.page';
 
 export default class App extends React.PureComponent {

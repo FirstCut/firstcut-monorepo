@@ -44,9 +44,11 @@ import ReminderToGetClientFeedback from './reminder-to-get-client-feedback';
 import EditFeedback from './edit-feedback';
 import AddOnRequested from './addon-requested';
 import ProjectHandoff from './project-handoff';
+import LandingPageSubmit from './landing-page-submit';
 
 const templates = [
   ErrorEvent,
+  LandingPageSubmit,
   EditFeedback,
   ChargeClient,
   EditShootScript,

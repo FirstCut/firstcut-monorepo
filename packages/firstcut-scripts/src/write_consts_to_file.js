@@ -28,5 +28,5 @@ export function constsToFile() {
 
 export function writeFile(obj, filename) {
   const json = JSON.stringify(obj);
-  fs.writeFileSync(`/Users/artichokes/FirstCut/firstcutfirstcut-pipeline-consts/${filename}`, json);
+  fs.writeFileSync(`/Users/artichokes/FirstCut/firstcut-mono/packages/firstcut-pipeline-consts/src/${filename}`, json);
 }

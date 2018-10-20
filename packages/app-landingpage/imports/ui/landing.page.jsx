@@ -2,25 +2,52 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {
-  Image, Header, Grid, Button, Form, Responsive,
+  Image, Header, Grid, Button, Form, Responsive, Modal, Icon,
 } from 'semantic-ui-react';
-import { emitPipelineEvent } from 'firstcut-event-emitter';
+import { HTTP } from 'meteor/http';
 
 const TAGLINES = {
   1: 'This is the number1 tagline',
 };
 
 class LandingPage extends React.Component {
+  state = { confirm: false, error: null }
+
   handleChange = (e, { name, value }) => this.setState({ [name]: value });
 
+  hideModal = () => { this.setState({ confirm: false }); }
+
   handleSubmit = () => {
-    emitPipelineEvent({ event: 'landing_page_submit', ...this.state, adId: this.props.id });
+    const data = { event: 'landing_page_submit', ...this.state, adId: this.props.id };
+    // HTTP.post('/postRequest', { data }, (err, res) => {
+    Meteor.call('postRequest', data, (err, res) => {
+      console.log(err);
+      console.log('POSTED');
+      console.log(res);
+      if (err) {
+        this.setState({ error: err });
+      } else {
+        this.setState({ confirm: true });
+      }
+    });
   }
 
   render() {
+    const { confirm } = this.state;
     return (
-      <div className="signup" style={{ height: '100%' }}>
-        <Grid stackable style={{ height: '100%' }}>
+      <div className="signup" style={{ height: '100%' }} onClick={this.hideSidebar}>
+        <Modal open={confirm} basic size="small" onClick={this.hideModal}>
+          <Header icon="checkmark" content="Thank you for your request" />
+          <Modal.Content>
+            We will be in touch soon!
+          </Modal.Content>
+          <Modal.Actions>
+            <Button color="green" inverted onClick={this.hideModal}>
+              CONFIRM
+            </Button>
+          </Modal.Actions>
+        </Modal>
+        <Grid stackable style={{ height: '100%' }} onClick={this.hideModal}>
           <Grid.Column
             width={8}
           >
@@ -29,7 +56,7 @@ class LandingPage extends React.Component {
                 <Grid.Column
                   width={16}
                   align="center"
-                  style={{ 'padding-top': '50px' }}
+                  style={{ paddingTop: '50px' }}
                 >
                   <Image src="/firstcut_logo.png" fluid className="signup__header" />
                 </Grid.Column>
@@ -91,6 +118,7 @@ class LandingPage extends React.Component {
                       <Responsive
                         as={Form.Button}
                         fluid
+                        color="green"
                         maxWidth={1085}
                         content="SUBMIT"
                         onClick={this.handleSubmit}
@@ -105,8 +133,10 @@ class LandingPage extends React.Component {
             width={8}
             color="green"
             style={{ height: '100%' }}
-          />
-
+            align="center"
+          >
+            <Header as="h4" align="center" className="signup__tagline"> This is a tag line about the ad you selected. Maybe we can put an image here in the background... </Header>
+          </Grid.Column>
         </Grid>
         <Responsive
           as={Button}

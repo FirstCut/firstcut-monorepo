@@ -15,10 +15,9 @@ var _objectWithoutProperties2 = _interopRequireDefault(require("@babel/runtime/h
 
 var _firstcutUserSession = require("firstcut-user-session");
 
-var _http = require("meteor/http");
-
 var _lodash = require("lodash");
 
+// import { HTTP } from 'meteor/http';
 function emitPipelineEvent(args) {
   var _args$record = args.record,
       record = _args$record === void 0 ? {} : _args$record,
@@ -37,7 +36,7 @@ function emitPipelineEvent(args) {
   }); // handleEvent.call(eventData);
 
 
-  _http.HTTP.post("".concat(Meteor.settings.public.PIPELINE_ROOT, "/handleEvent"), {
+  HTTP.post("".concat(Meteor.settings.public.PIPELINE_ROOT, "/handleEvent"), {
     content: params,
     params: params,
     query: params,

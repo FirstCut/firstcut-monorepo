@@ -1,5 +1,10 @@
 {
   "public": {
-    "PIPELINE_ROOT": "https://firstcut.meteorapp.com"
-  }
+    "PIPELINE_ROOT": "http://firstcut-dev.meteorapp.com"
+  },
+	"galaxy.meteor.com": {
+    	"env": {
+     		"MONGO_URL": "mongodb://firstcut:mate@ds137149.mlab.com:37149/firstcut-dev"
+     	}
+   	}
 }

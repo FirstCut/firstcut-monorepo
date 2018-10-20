@@ -44,6 +44,11 @@ body {
   padding-top: calc(20%) !important;
 }
 
+.signup__tagline {
+  padding-top: calc(50%) !important;
+  max-width: 400px;
+}
+
 .ui.button.signup__centered {
   position: absolute;
   top: calc(47% - 25px);

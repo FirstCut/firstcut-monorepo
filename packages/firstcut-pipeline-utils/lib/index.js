@@ -21,11 +21,11 @@ var _firstcutSchema = require("firstcut-schema");
 
 var _firstcutEventEmitter = require("firstcut-event-emitter");
 
-var _firstcutUserSession = require("firstcut-user-session");
-
 var _lodash = require("lodash");
 
 // import ActionTemplates from 'firstcut-actions';
+console.log('LANDING PAGE SUBMIT');
+console.log(_firstcutPipelineConsts.EVENT_LABELS.landing_page_submit);
 var Models = null;
 var ActionTemplates = null;
 

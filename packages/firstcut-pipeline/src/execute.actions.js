@@ -7,7 +7,6 @@ import { sendTextMessage } from 'firstcut-text-messaging';
 import { createEvent } from 'firstcut-calendar';
 import { PubSub } from 'pubsub-js';
 import { getActionsForEvent } from 'firstcut-pipeline-utils';
-import ActionTemplates from 'firstcut-actions';
 import oid from 'mdbid';
 
 const slackTemplateDefaults = {

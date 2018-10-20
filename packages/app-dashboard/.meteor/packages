@@ -46,3 +46,4 @@ simple:rest
 ground:db
 session
 universe:i18n
+http

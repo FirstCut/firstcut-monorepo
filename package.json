@@ -65,7 +65,6 @@
 						"meteor/universe:i18n": "<rootDir>/jest/mocks/i18n.mock.js",
 						"meteor/react-meteor-data": "<rootDir>/jest/mocks/meteordata.mock.js",
 						"semantic-ui-react": "<rootDir>/jest/mocks/semantic-ui.mock.js",
-						"/imports/(.*)$": "<rootDir>/packages/app-dashboard/imports/$1",
 						"meteor/mdg:validated-method": "<rootDir>/jest/mocks/validatedmethod.mock.js"
 				},
 				"setupFiles": [
