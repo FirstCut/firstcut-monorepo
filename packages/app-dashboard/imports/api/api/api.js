@@ -30,14 +30,17 @@ HTTP.methods({
   },
   '/getTimezone': {
     get(data) {
-      const GOOGLE_TIMEZONE_API_URL = 'https://maps.googleapis.com/maps/api/timezone/json?';
-      const query = this.query;
-      const options = {
-        ...this.query,
-        key: Meteor.settings.google.API_KEY,
-      };
-      const requestURL = GOOGLE_TIMEZONE_API_URL + qs.stringify(options);
-      return HTTP.get(requestURL, {});
+      if (Meteor.isServer) {
+        const GOOGLE_TIMEZONE_API_URL = 'https://maps.googleapis.com/maps/api/timezone/json?';
+        console.log(Meteor.settings);
+        const query = this.query;
+        const options = {
+          ...this.query,
+          key: Meteor.settings.google.API_KEY,
+        };
+        const requestURL = GOOGLE_TIMEZONE_API_URL + qs.stringify(options);
+        return HTTP.get(requestURL, {});
+      }
     },
   },
   projectHandoff() {

@@ -55,6 +55,9 @@
     "snippet_creator": "videobot-serverless-dev-create_snippet",
     "copy_footage": "moveFootage"
   },
+  "google": {
+    "API_KEY": "AIzaSyD1SRs2XcSRRzu-OJqMQNENg--WTwA1mTo"
+  },
   "cf_access_key": "APKAJHM5KLOESP5FPPWA",
   "fckey": "qhZiAAeItj2c75VMnmJcGuCzW2XEo08j",
 	"galaxy.meteor.com": {
