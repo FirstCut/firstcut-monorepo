@@ -19,21 +19,21 @@ class LandingPage extends React.Component {
 
   handleSubmit = () => {
     const data = { event: 'landing_page_submit', ...this.state, adId: this.props.id };
-    // HTTP.post('/postRequest', { data }, (err, res) => {
-    Meteor.call('postRequest', data, (err, res) => {
-      console.log(err);
-      console.log('POSTED');
-      console.log(res);
+    Meteor.call('postRequest', data, (err) => {
       if (err) {
         this.setState({ error: err });
       } else {
-        this.setState({ confirm: true });
+        this.setState({
+          confirm: true, first: '', last: '', company: '', email: '', about: '',
+        });
       }
     });
   }
 
   render() {
-    const { confirm } = this.state;
+    const {
+      confirm, first, last, email, about, company,
+    } = this.state;
     return (
       <div className="signup" style={{ height: '100%' }} onClick={this.hideSidebar}>
         <Modal open={confirm} basic size="small" onClick={this.hideModal}>
@@ -79,6 +79,7 @@ class LandingPage extends React.Component {
                             onChange={this.handleChange}
                             placeholder="First Name"
                             name="first"
+                            value={first}
                             required
                           />
                         </Form.Field>
@@ -87,6 +88,7 @@ class LandingPage extends React.Component {
                             onChange={this.handleChange}
                             placeholder="Last Name"
                             name="last"
+                            value={last}
                             required
                           />
                         </Form.Field>
@@ -96,6 +98,7 @@ class LandingPage extends React.Component {
                           onChange={this.handleChange}
                           placeholder="Email"
                           name="email"
+                          value={email}
                           required
                         />
                       </Form.Field>
@@ -104,6 +107,7 @@ class LandingPage extends React.Component {
                           onChange={this.handleChange}
                           placeholder="Company Name"
                           name="company"
+                          value={company}
                           required
                         />
                       </Form.Field>
@@ -112,6 +116,7 @@ class LandingPage extends React.Component {
                           onChange={this.handleChange}
                           placeholder="Tell us about your needs"
                           name="about"
+                          value={about}
                           required
                         />
                       </Form.Field>

@@ -16,5 +16,6 @@ var RequestSchema = new _firstcutSchema.SimpleSchemaWrapper({
   about: String,
   company: String
 });
+RequestSchema.extends(_firstcutSchema.BaseSchema);
 var _default = RequestSchema;
 exports.default = _default;

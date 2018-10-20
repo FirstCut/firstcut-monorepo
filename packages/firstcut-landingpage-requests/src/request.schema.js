@@ -1,5 +1,5 @@
 
-import { SimpleSchemaWrapper as Schema } from 'firstcut-schema';
+import { BaseSchema, SimpleSchemaWrapper as Schema } from 'firstcut-schema';
 
 const RequestSchema = new Schema({
   _id: String,
@@ -11,4 +11,5 @@ const RequestSchema = new Schema({
   company: String,
 });
 
+RequestSchema.extends(BaseSchema);
 export default RequestSchema;
