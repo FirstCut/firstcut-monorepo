@@ -1,0 +1,30 @@
+
+import React from 'react';
+import PropTypes from 'prop-types';
+import {
+  BrowserRouter as Router, Switch, Route,
+} from 'react-router-dom';
+
+import { Container } from 'semantic-ui-react';
+import LandingPage from './landing.page';
+
+export default class App extends React.PureComponent {
+  render() {
+    return (
+      <Router>
+        <Switch>
+          <div style={{ height: '100%' }}>
+            <Route
+              path="/:id?"
+              name="landingPage"
+              render={(props) => {
+                const { id } = props.match.params;
+                return <LandingPage id={id} />;
+              }}
+            />
+          </div>
+        </Switch>
+      </Router>
+    );
+  }
+}

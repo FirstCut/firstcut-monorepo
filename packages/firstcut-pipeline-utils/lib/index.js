@@ -1,26 +1,25 @@
 "use strict";
 
-var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
-
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.initModelsForPipeline = initModelsForPipeline;
 exports.fulfillsPrerequisites = fulfillsPrerequisites;
 exports.getActionsForEvent = getActionsForEvent;
-exports.emitPipelineEvent = emitPipelineEvent;
 exports.getEventActionsAsDescriptiveString = getEventActionsAsDescriptiveString;
 exports.getCustomFieldsSchema = getCustomFieldsSchema;
-
-var _typeof2 = _interopRequireDefault(require("@babel/runtime/helpers/typeof"));
-
-var _objectSpread2 = _interopRequireDefault(require("@babel/runtime/helpers/objectSpread"));
-
-var _objectWithoutProperties2 = _interopRequireDefault(require("@babel/runtime/helpers/objectWithoutProperties"));
+Object.defineProperty(exports, "emitPipelineEvent", {
+  enumerable: true,
+  get: function get() {
+    return _firstcutEventEmitter.emitPipelineEvent;
+  }
+});
 
 var _firstcutPipelineConsts = require("firstcut-pipeline-consts");
 
 var _firstcutSchema = require("firstcut-schema");
+
+var _firstcutEventEmitter = require("firstcut-event-emitter");
 
 var _firstcutUserSession = require("firstcut-user-session");
 
@@ -55,39 +54,6 @@ function getActionsForEvent(args) {
   verifyModuleInitialized();
   var event = args.event;
   return ActionTemplates[event].get('generateActions')(Models, args);
-}
-
-function emitPipelineEvent(args) {
-  verifyModuleInitialized();
-
-  if ((0, _firstcutUserSession.inSimulationMode)()) {
-    return;
-  }
-
-  var record = args.record,
-      rest = (0, _objectWithoutProperties2.default)(args, ["record"]);
-
-  var params = _lodash._.mapValues((0, _objectSpread2.default)({}, rest, {
-    record_id: record._id,
-    record_type: record.modelName,
-    initiator_player_id: (0, _firstcutUserSession.userPlayerId)()
-  }), function (val) {
-    if ((0, _typeof2.default)(val) === 'object') {
-      return JSON.stringify(val);
-    }
-
-    return val ? val.toString() : '';
-  }); // handleEvent.call(eventData);
-
-
-  HTTP.post("".concat(Meteor.settings.public.PIPELINE_ROOT, "/handleEvent"), {
-    content: params,
-    params: params,
-    query: params,
-    data: params
-  }, function (res) {
-    console.log(res);
-  });
 }
 
 function getEventActionsAsDescriptiveString(args) {

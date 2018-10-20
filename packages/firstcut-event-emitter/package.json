@@ -1,0 +1,11 @@
+{
+  "name": "firstcut-event-emitter",
+  "private": true,
+  "version": "0.0.0",
+  "main": "lib/index.js",
+  "dependencies": {
+    "@babel/runtime": "^7.1.2",
+    "firstcut-user-session": "file:../firstcut-user-session",
+    "lodash": "^4.17.11"
+  }
+}

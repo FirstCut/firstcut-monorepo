@@ -1,8 +1,11 @@
 import { EVENT_LABELS, ACTIONS } from 'firstcut-pipeline-consts';
 import { SimpleSchemaWrapper } from 'firstcut-schema';
+import { emitPipelineEvent } from 'firstcut-event-emitter';
 // import ActionTemplates from 'firstcut-actions';
 import { inSimulationMode, userPlayerId } from 'firstcut-user-session';
 import { _ } from 'lodash';
+
+export { emitPipelineEvent };
 
 let Models = null;
 let ActionTemplates = null;
@@ -23,32 +26,6 @@ export function getActionsForEvent(args) {
   verifyModuleInitialized();
   const { event } = args;
   return ActionTemplates[event].get('generateActions')(Models, args);
-}
-
-export function emitPipelineEvent(args) {
-  verifyModuleInitialized();
-  if (inSimulationMode()) {
-    return;
-  }
-  const { record, ...rest } = args;
-  const params = _.mapValues({
-    ...rest,
-    record_id: record._id,
-    record_type: record.modelName,
-    initiator_player_id: userPlayerId(),
-  }, (val) => {
-    if (typeof val === 'object') {
-      return JSON.stringify(val);
-    }
-    return (val) ? val.toString() : '';
-  });
-
-  // handleEvent.call(eventData);
-  HTTP.post(`${Meteor.settings.public.PIPELINE_ROOT}/handleEvent`, {
-    content: params, params, query: params, data: params,
-  }, (res) => {
-    console.log(res);
-  });
 }
 
 export function getEventActionsAsDescriptiveString(args) {
