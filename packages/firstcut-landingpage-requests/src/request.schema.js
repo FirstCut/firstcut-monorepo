@@ -11,5 +11,5 @@ const RequestSchema = new Schema({
   company: String,
 });
 
-RequestSchema.extends(BaseSchema);
+RequestSchema.extend(BaseSchema);
 export default RequestSchema;

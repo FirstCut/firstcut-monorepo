@@ -9,7 +9,7 @@ class Request extends Base {
 
   static get schema() { return RequestSchema; }
 
-  displayName() { return `${this.first} ${this.last} at ${this.company} (email: ${this.email})`; }
+  get displayName() { return `${this.first} ${this.last} at ${this.company} (email: ${this.email})`; }
 }
 
 export default Request;

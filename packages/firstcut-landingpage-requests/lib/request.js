@@ -35,7 +35,7 @@ function (_Base) {
 
   (0, _createClass2.default)(Request, [{
     key: "displayName",
-    value: function displayName() {
+    get: function get() {
       return "".concat(this.first, " ").concat(this.last, " at ").concat(this.company, " (email: ").concat(this.email, ")");
     }
   }], [{
