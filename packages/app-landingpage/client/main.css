@@ -8,6 +8,10 @@ body {
 }
 /* PLEASE PUT CUSTOM CSS CLASSES HERE*/
 
+.signup {
+  padding-top: 50px;
+}
+
 .signup__container{
   max-width: 400px !important;
 }
@@ -41,7 +45,7 @@ body {
 
 .signup__form {
   max-width: 400px !important;
-  padding-top: calc(15%) !important;
+  padding-top: calc(10%) !important;
 }
 
 .signup__tagline {
