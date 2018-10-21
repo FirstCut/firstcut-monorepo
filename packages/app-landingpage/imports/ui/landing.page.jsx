@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import {
   Image, Header, Grid, Button, Form, Responsive, Modal, Icon, Embed,
 } from 'semantic-ui-react';
-import { HTTP } from 'meteor/http';
 
 const TAGLINES = {
   1: 'This is the number1 tagline',
@@ -19,6 +18,7 @@ class LandingPage extends React.Component {
 
   handleSubmit = () => {
     const data = { event: 'landing_page_submit', ...this.state, adId: this.props.adId };
+    console.log(this.props.adId);
     Meteor.call('postRequest', data, (err) => {
       if (err) {
         this.setState({ error: err });
@@ -36,6 +36,14 @@ class LandingPage extends React.Component {
     } = this.state;
     return (
       <div className="signup" style={{ height: '100%' }} onClick={this.hideSidebar}>
+        <Responsive
+          as={Image}
+          maxWidth={1064}
+          style={{
+            position: 'absolute', top: 0, left: 0, height: '100%', opacity: '.1',
+          }}
+          src="/mobile2.png"
+        />
         <Modal open={confirm} basic size="small" onClick={this.hideModal}>
           <Header icon="checkmark" content="Thank you for your request" />
           <Modal.Content>

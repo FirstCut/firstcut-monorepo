@@ -19,7 +19,7 @@ const LandingPageSubmit = new Map({
         type: ACTIONS.slack_notify,
         channel: 'landingpage',
         content: {
-          text: `*Name*: ${first} ${last}\n *Company*: ${company} \n *adId*: ${adId}\n *Email*: ${email}\n *About*: ${about}`,
+          text: `*Name*: ${first} ${last}\n *Company*: ${company} \n *Ad id*: ${adId}\n *Email*: ${email}\n *About*: ${about}`,
           mrkdwn: true,
         },
       }, {

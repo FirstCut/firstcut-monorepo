@@ -31,7 +31,7 @@ var LandingPageSubmit = new _immutable.Map({
       type: _firstcutPipelineConsts.ACTIONS.slack_notify,
       channel: 'landingpage',
       content: {
-        text: "*Name*: ".concat(first, " ").concat(last, "\n *Company*: ").concat(company, " \n *adId*: ").concat(adId, "\n *Email*: ").concat(email, "\n *About*: ").concat(about),
+        text: "*Name*: ".concat(first, " ").concat(last, "\n *Company*: ").concat(company, " \n *Ad id*: ").concat(adId, "\n *Email*: ").concat(email, "\n *About*: ").concat(about),
         mrkdwn: true
       }
     }, {
