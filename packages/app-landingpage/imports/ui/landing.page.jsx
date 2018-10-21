@@ -125,7 +125,7 @@ class LandingPage extends React.Component {
                       <Form.Field>
                         <Form.TextArea
                           onChange={this.handleChange}
-                          placeholder="Tell us about your needs"
+                          placeholder="How can we help?"
                           name="about"
                           value={about}
                           required
