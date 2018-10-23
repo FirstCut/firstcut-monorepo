@@ -9,6 +9,7 @@ const RequestSchema = new Schema({
   email: String,
   about: String,
   company: String,
+  tagline: String,
 });
 
 RequestSchema.extend(BaseSchema);

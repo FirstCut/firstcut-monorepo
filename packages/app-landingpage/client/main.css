@@ -9,7 +9,7 @@ body {
 /* PLEASE PUT CUSTOM CSS CLASSES HERE*/
 
 .signup {
-  padding-top: 50px;
+  padding-top: 50px !important;
 }
 
 .signup__container{
@@ -30,7 +30,7 @@ body {
   margin: 0 !important;
 }
 
-.signup .ui.button.signup__raised {
+.ui.button.signup__raised {
   box-shadow: 0px 5px 23px -1px rgba(0,0,0,0.5);
   border: none;
 }
@@ -51,6 +51,12 @@ body {
 .signup__tagline {
   padding-top: calc(50%) !important;
   max-width: 400px;
+}
+
+.copyright {
+  position: absolute;
+  left: calc(40%);
+  bottom: 0;
 }
 
 .ui.button.signup__centered {

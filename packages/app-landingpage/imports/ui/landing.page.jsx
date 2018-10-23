@@ -2,15 +2,47 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {
-  Image, Header, Grid, Button, Form, Responsive, Modal, Icon, Embed,
+  Image, Header, Grid, Button, Form, Responsive, Modal, Container, Embed,
 } from 'semantic-ui-react';
 
-const TAGLINES = {
-  1: 'This is the number1 tagline',
+const IDEAS_TAGLINES = [
+  'Need help generating great content?',
+  'Generating great content shouldn\'t be hard. We can help!',
+  'Need help building your content playbook?',
+  'We make generating great content easy.',
+];
+
+const ANALYTICS_TAGLINES = [
+  'Optimize your editorial calendar using the power of data',
+  'Need help maximizing your content\'s impact?',
+  'Maximize your content\'s impact using the power of data',
+  'We can unlock your content',
+];
+
+const ASSETS_TAGLINES = [
+  'Managing your content doesn\'t need to be a pain. We can help.',
+  'Repackage, reuse, republish. We make your content go farther.',
+  'We turn hours of footage into a content strategy',
+];
+
+const DEFAULT_TAGLINE = 'Need help with your b2b video?';
+
+const ADS_TO_TAGLINES = {
+  1: IDEAS_TAGLINES,
+  2: ANALYTICS_TAGLINES,
+  3: ASSETS_TAGLINES,
 };
 
 class LandingPage extends React.Component {
-  state = { confirm: false, error: null }
+  constructor(props) {
+    super();
+    const { adId } = props;
+    let tagline = DEFAULT_TAGLINE;
+    if (adId) {
+      tagline = getRandomTagline(ADS_TO_TAGLINES[adId]);
+    }
+    this.state = { confirm: false, error: null, tagline };
+  }
 
   handleChange = (e, { name, value }) => this.setState({ [name]: value });
 
@@ -18,7 +50,6 @@ class LandingPage extends React.Component {
 
   handleSubmit = () => {
     const data = { event: 'landing_page_submit', ...this.state, adId: this.props.adId };
-    console.log(this.props.adId);
     Meteor.call('postRequest', data, (err) => {
       if (err) {
         this.setState({ error: err });
@@ -32,18 +63,20 @@ class LandingPage extends React.Component {
 
   render() {
     const {
-      confirm, first, last, email, about, company,
+      confirm, first, last, email, about, company, tagline,
     } = this.state;
     return (
-      <div className="signup" style={{ height: '100%' }} onClick={this.hideSidebar}>
+      <div style={{ height: '100%' }} onClick={this.hideSidebar}>
         <Responsive
-          as={Image}
+          as={Container}
           maxWidth={1064}
           style={{
             position: 'absolute', top: 0, left: 0, height: '100%', opacity: '.1',
           }}
           src="/mobile2.png"
-        />
+        >
+          <Image src="/mobile2.png" />
+        </Responsive>
         <Modal open={confirm} basic size="small" onClick={this.hideModal}>
           <Header icon="checkmark" content="Thank you for your request" />
           <Modal.Content>
@@ -58,6 +91,7 @@ class LandingPage extends React.Component {
         <Grid stackable style={{ height: '100%' }} onClick={this.hideModal}>
           <Grid.Column
             width={8}
+            className="signup"
           >
             <Grid stackable>
               <Grid.Row style={{ height: '100px', padding: '20px !important' }}>
@@ -77,7 +111,7 @@ class LandingPage extends React.Component {
                   verticalAlign="middle"
                 >
                   <Header align="center" as="h4">
-                      Need help with your b2b video?
+                    { tagline }
                   </Header>
                 </Grid.Column>
               </Grid.Row>
@@ -159,7 +193,7 @@ class LandingPage extends React.Component {
             align="center"
             verticalAlign="middle"
           >
-            <Image src="/sidebar4.png" style={{ height: '100%' }} />
+            <Image src="/sidebar4.png" style={{ height: '100%', opacity: 0.7, width: '100%' }} />
           </Grid.Column>
         </Grid>
         <Responsive
@@ -170,9 +204,19 @@ class LandingPage extends React.Component {
           className="signup__centered signup__raised"
           onClick={this.handleSubmit}
         />
+        <span className="copyright"> Copyright Freedeo Corporation Inc. 2018-2019 </span>
       </div>
     );
   }
+}
+
+function getRandomTagline(taglines) {
+  const min = 0;
+  const max = taglines.length;
+  // shamelessly copied from https://www.geeksforgeeks.org/javascript-math-random-function/
+  const random = Math.random() * (+max - +min) + +min;
+  const index = Math.floor(random);
+  return taglines[index];
 }
 
 export default LandingPage;
