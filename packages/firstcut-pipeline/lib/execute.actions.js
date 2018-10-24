@@ -32,6 +32,8 @@ var _firstcutPipelineUtils = require("firstcut-pipeline-utils");
 
 var _mdbid = _interopRequireDefault(require("mdbid"));
 
+var _lodash = require("lodash");
+
 // import { Billing } from 'firstcut-billing';
 var slackTemplateDefaults = {
   username: 'firstcut',
@@ -57,7 +59,7 @@ function _handleEvent() {
         switch (_context.prev = _context.next) {
           case 0:
             if (!Meteor.isServer) {
-              _context.next = 18;
+              _context.next = 20;
               break;
             }
 
@@ -80,6 +82,8 @@ function _handleEvent() {
 
           case 10:
             result = _context.sent;
+            console.log('THE TOTAL result');
+            console.log(result);
             eventData = (0, _objectSpread2.default)({}, args, result);
 
             if (eventData.record_type) {
@@ -89,11 +93,11 @@ function _handleEvent() {
               }));
             }
 
-            _context.next = 18;
+            _context.next = 20;
             break;
 
-          case 15:
-            _context.prev = 15;
+          case 17:
+            _context.prev = 17;
             _context.t0 = _context["catch"](4);
 
             _pubsubJs.PubSub.publish('error', {
@@ -102,12 +106,12 @@ function _handleEvent() {
               trace: console.trace()
             });
 
-          case 18:
+          case 20:
           case "end":
             return _context.stop();
         }
       }
-    }, _callee, this, [[4, 15]]);
+    }, _callee, this, [[4, 17]]);
   }));
   return _handleEvent.apply(this, arguments);
 }
@@ -124,78 +128,37 @@ function saveToHistory(args) {
   withHistory.save();
 }
 
-function execute(_x2) {
-  return _execute.apply(this, arguments);
-}
-
-function _execute() {
-  _execute = (0, _asyncToGenerator2.default)(
-  /*#__PURE__*/
-  _regenerator.default.mark(function _callee3(actions) {
-    return _regenerator.default.wrap(function _callee3$(_context3) {
-      while (1) {
-        switch (_context3.prev = _context3.next) {
-          case 0:
-            return _context3.abrupt("return", actions.reduce(
-            /*#__PURE__*/
-            function () {
-              var _ref = (0, _asyncToGenerator2.default)(
-              /*#__PURE__*/
-              _regenerator.default.mark(function _callee2(r, action) {
-                var result, actionResult;
-                return _regenerator.default.wrap(function _callee2$(_context2) {
-                  while (1) {
-                    switch (_context2.prev = _context2.next) {
-                      case 0:
-                        result = r;
-                        _context2.prev = 1;
-                        _context2.next = 4;
-                        return executeAction(action);
-
-                      case 4:
-                        actionResult = _context2.sent;
-
-                        if (result) {
-                          result = (0, _objectSpread2.default)({}, actionResult, result);
-                        }
-
-                        _context2.next = 13;
-                        break;
-
-                      case 8:
-                        _context2.prev = 8;
-                        _context2.t0 = _context2["catch"](1);
-                        console.log('Error executing');
-                        console.log(action);
-
-                        _pubsubJs.PubSub.publish('error', {
-                          message: _context2.t0.toString()
-                        });
-
-                      case 13:
-                        return _context2.abrupt("return", result);
-
-                      case 14:
-                      case "end":
-                        return _context2.stop();
-                    }
-                  }
-                }, _callee2, this, [[1, 8]]);
-              }));
-
-              return function (_x3, _x4) {
-                return _ref.apply(this, arguments);
-              };
-            }(), {}));
-
-          case 1:
-          case "end":
-            return _context3.stop();
-        }
-      }
-    }, _callee3, this);
-  }));
-  return _execute.apply(this, arguments);
+function execute(actions) {
+  return new Promise(function (resolve, reject) {
+    var promises = actions.map(function (a) {
+      return executeAction(a);
+    });
+    Promise.all(promises).then(function (res) {
+      var result = res.reduce(function (results, r) {
+        return (0, _objectSpread2.default)({}, r, results);
+      }, {});
+      resolve(result);
+    }).catch(reject); // let result = r;
+    // try {
+    //   const actionResult = await executeAction(action);
+    //   if (actionResult) {
+    //     console.log('Before adding');
+    //     console.log(result);
+    //     result = {
+    //       ...actionResult,
+    //       ...result,
+    //     };
+    //     console.log('The total result');
+    //     console.log(result);
+    //   }
+    //   return result;
+    // } catch (e) {
+    //   console.log('Error executing');
+    //   console.log(action);
+    //   PubSub.publish('error', { message: e.toString() });
+    //   return result;
+    // }
+  });
 }
 
 function executeAction(action) {
@@ -247,9 +210,11 @@ function scheduleJob(action) {
   }
 
   job.save();
-  return {
-    scheduled_job_id: job._id
-  };
+  return new Promise(function (resolve, reject) {
+    return resolve({
+      scheduled_job_id: job._id
+    });
+  });
 }
 
 function triggerAction(action) {

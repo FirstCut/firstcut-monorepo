@@ -11,9 +11,9 @@ var _objectSpread2 = _interopRequireDefault(require("@babel/runtime/helpers/obje
 
 var _moment = _interopRequireDefault(require("moment"));
 
-var _calendar = require("./calendar.schemas");
-
 var _firstcutGoogleApi = _interopRequireDefault(require("firstcut-google-api"));
+
+var _calendar = require("./calendar.schemas");
 
 function getOrganizerId() {
   return Meteor.settings.oauth_credentials_user;

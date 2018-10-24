@@ -1,13 +1,13 @@
 import moment from 'moment';
-import { CalendarEventContentSchema } from './calendar.schemas';
 import GoogleApi from 'firstcut-google-api';
+import { CalendarEventContentSchema } from './calendar.schemas';
 
 function getOrganizerId() {
   return Meteor.settings.oauth_credentials_user;
 }
 
 export function createEvent(args) {
-  return new Promise(((resolve, reject) => {
+  return new Promise((resolve, reject) => {
     CalendarEventContentSchema.validate(args.event);
     let { event, event_id } = args;
     event.attendees = event.attendees.filter(a => a.email != null);
@@ -42,5 +42,5 @@ export function createEvent(args) {
       }
       resolve({ event_id: result.id });
     });
-  }));
+  });
 }

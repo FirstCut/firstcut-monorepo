@@ -8,6 +8,7 @@ import { createEvent } from 'firstcut-calendar';
 import { PubSub } from 'pubsub-js';
 import { getActionsForEvent } from 'firstcut-pipeline-utils';
 import oid from 'mdbid';
+import { _ } from 'lodash';
 
 const slackTemplateDefaults = {
   username: 'firstcut',
@@ -31,6 +32,8 @@ export async function handleEvent(args) {
       }
       const actions = getActionsForEvent(args);
       const result = await execute(actions);
+      console.log('THE TOTAL result');
+      console.log(result);
       const eventData = {
         ...args,
         ...result,
@@ -54,24 +57,34 @@ function saveToHistory(args) {
   withHistory.save();
 }
 
-async function execute(actions) {
-  return actions.reduce(async (r, action) => {
-    let result = r;
-    try {
-      const actionResult = await executeAction(action);
-      if (result) {
-        result = {
-          ...actionResult,
-          ...result,
-        };
-      }
-    } catch (e) {
-      console.log('Error executing');
-      console.log(action);
-      PubSub.publish('error', { message: e.toString() });
-    }
-    return result;
-  }, {});
+function execute(actions) {
+  return new Promise((resolve, reject) => {
+    const promises = actions.map(a => executeAction(a));
+    Promise.all(promises).then((res) => {
+      const result = res.reduce((results, r) => ({ ...r, ...results }), {});
+      resolve(result);
+    }).catch(reject);
+    // let result = r;
+    // try {
+    //   const actionResult = await executeAction(action);
+    //   if (actionResult) {
+    //     console.log('Before adding');
+    //     console.log(result);
+    //     result = {
+    //       ...actionResult,
+    //       ...result,
+    //     };
+    //     console.log('The total result');
+    //     console.log(result);
+    //   }
+    //   return result;
+    // } catch (e) {
+    //   console.log('Error executing');
+    //   console.log(action);
+    //   PubSub.publish('error', { message: e.toString() });
+    //   return result;
+    // }
+  });
 }
 
 function executeAction(action) {
@@ -113,7 +126,7 @@ function scheduleJob(action) {
     job = job.set('_id', oid());
   }
   job.save();
-  return { scheduled_job_id: job._id };
+  return new Promise((resolve, reject) => resolve({ scheduled_job_id: job._id }));
 }
 
 function triggerAction(action) {

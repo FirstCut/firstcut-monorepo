@@ -58,33 +58,7 @@ var BaseModel = function BaseModel(defaultValues) {
         key: "createNew",
         value: function createNew(properties) {
           return this.constructor.createNew(properties);
-        } // /* TODO: hide this better */
-        // static get collection() {
-        //   .log('GETTING THE COLLECTION');
-        //   let collection = this._collection;
-        //   console.log(this._collection);
-        //   if (!collection) {
-        //     try {
-        //       collection = new Mongo.Collection(this.collectionName);
-        //       collection.attachSchema(this.schema.asSchema);
-        //       this._collection = collection;
-        //     } catch (e) {
-        //       console.log('ERROR');
-        //       console.log(e);
-        //       PubSub.publish('error', e);
-        //     }
-        //   }
-        //   return collection;
-        // }
-        //
-        // static set models(models) {
-        //   this._models = models;
-        // }
-        //
-        // static get models() {
-        //   return this._models;
-        // }
-
+        }
       }, {
         key: "isOfType",
         value: function isOfType(model) {
@@ -521,15 +495,7 @@ var BaseModel = function BaseModel(defaultValues) {
         key: "basepath",
         get: function get() {
           return "/".concat(this.collectionName);
-        } // static get schema() {
-        //   return this._schema;
-        // }
-        //
-        // static set schema(schema) {
-        //   this._schema = schema;
-        // }
-        //
-
+        }
       }, {
         key: "availableBlueprints",
         get: function get() {
