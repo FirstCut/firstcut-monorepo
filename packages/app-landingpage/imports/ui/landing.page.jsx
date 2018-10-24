@@ -69,7 +69,7 @@ class LandingPage extends React.Component {
       <div style={{ height: '100%' }} onClick={this.hideSidebar}>
         <Responsive
           as={Container}
-          maxWidth={1064}
+          maxWidth={1085}
           style={{
             position: 'absolute', top: 0, left: 0, height: '100%', opacity: '.1',
           }}
@@ -90,8 +90,10 @@ class LandingPage extends React.Component {
         </Modal>
         <Grid stackable style={{ height: '100%' }} onClick={this.hideModal}>
           <Grid.Column
-            width={8}
             className="signup"
+            mobile={16}
+            tablet={16}
+            computer={8}
           >
             <Grid stackable>
               <Grid.Row style={{ height: '100px', padding: '20px !important' }}>
@@ -188,12 +190,14 @@ class LandingPage extends React.Component {
             </Grid>
           </Grid.Column>
           <Grid.Column
-            width={8}
             style={{ height: '100%', padding: 0 }}
             align="center"
             verticalAlign="middle"
+            mobile={16}
+            tablet={16}
+            computer={8}
           >
-            <Image src="/sidebar4.png" style={{ height: '100%', opacity: 0.7, width: '100%' }} />
+            <Responsive as={Image} minWidth={1086} src="/sidebar4.png" style={{ height: '100%', opacity: 0.7, width: '100%' }} />
           </Grid.Column>
         </Grid>
         <Responsive

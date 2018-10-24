@@ -4678,7 +4678,6 @@ first-chunk-stream@^2.0.0:
   dependencies:
     "@babel/runtime" "^7.1.2"
     firstcut-calendar "file:../../Library/Caches/Yarn/v1/firstcut-calendar"
-    firstcut-scripts "file:../../Library/Caches/Yarn/v1/firstcut-scripts"
     firstcut-slack "file:../../Library/Caches/Yarn/v1/firstcut-slack"
     immutable "^3.8.2"
     lodash "^4.17.11"
@@ -4698,13 +4697,6 @@ first-chunk-stream@^2.0.0:
     firstcut-pipeline-consts "file:../../Library/Caches/Yarn/v1/firstcut-pipeline-consts"
     lodash "^4.17.11"
     moment-timezone "^0.5.21"
-
-"firstcut-scripts@file:packages/firstcut-scripts":
-  version "0.0.0"
-  dependencies:
-    "@babel/runtime" "^7.1.2"
-    firstcut-actions "file:../../Library/Caches/Yarn/v1/firstcut-actions"
-    lodash "^4.17.11"
 
 "firstcut-slack@file:packages/firstcut-slack":
   version "0.0.0"

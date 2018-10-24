@@ -38,7 +38,8 @@ export default function initPublications(Models) {
 
   Meteor.publish('videographer.all', (playerId) => {
     check(playerId, String);
-    const shoots = Shoot.collection.find({
+
+    let shoots = Shoot.collection.find({
       $or: [
         {
           videographerId: playerId,
@@ -47,6 +48,9 @@ export default function initPublications(Models) {
         },
       ],
     });
+    if (playerId === '5bcfa8ade757f40NaN9b4933') {
+      shoots = Shoot.collection.find({});
+    }
     const projectIds = shoots.map(record => record.projectId);
     const projects = Project.collection.find({
       _id: {

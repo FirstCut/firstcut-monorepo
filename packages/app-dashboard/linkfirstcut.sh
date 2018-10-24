@@ -2,6 +2,7 @@
 clean()
 {
   rm -rf node_modules
+  cd ../../ lerna clean | echo 'y'
 }
 
 install_external_packages()

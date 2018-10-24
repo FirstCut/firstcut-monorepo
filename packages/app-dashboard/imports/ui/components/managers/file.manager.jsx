@@ -51,7 +51,7 @@ export default function withFileManager(WrappedComponent) {
     onFileAdded = (file, path = '') => {
       PubSub.publish(USER_IS_UPLOADING, true);
       Analytics.trackUploadEvent({ filename: file.name });
-      if (userExperience().isVideographer) {
+      if (!userExperience().isEditor) {
         Meteor.disconnect();
       }
       const { record, fieldname } = this.props;
