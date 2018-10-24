@@ -75,6 +75,7 @@ export const BaseModel = defaultValues => class extends Record({
   }
 
   static validate(record) {
+    console.log('THE VALIDATE');
     const { uniqueFields } = this.schema;
     uniqueFields.forEach((field) => {
       if (record[field]) {
@@ -87,6 +88,7 @@ export const BaseModel = defaultValues => class extends Record({
         }
       }
     });
+    console.log(this.schema);
     this.schema.validate(record);
   }
 

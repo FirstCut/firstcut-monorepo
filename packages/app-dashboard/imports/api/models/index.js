@@ -14,7 +14,9 @@ import LandingPageRequest from 'firstcut-landingpage-requests';
 import { _ } from 'lodash';
 import enablePlayerUtils from 'firstcut-players';
 import SimpleSchema from 'simpl-schema';
-import enableCrud from './crud';
+import oid from 'mdbid';
+import { ValidatedMethod } from 'meteor/mdg:validated-method';
+// import enableCrud from './crud';
 
 let Models = {};
 
@@ -84,12 +86,57 @@ Models = {
   },
 };
 
+class RecordPersister {
+  static save(record) {
+    return new Promise((resolve, reject) => {
+      const cleaned = this.clean(record);
+      this.validate(record.modelName, cleaned);
+      // this.onSave(cleaned).then(resolve).catch(reject);
+      console.log('CAlling save record');
+      saveRecord.call({ record: cleaned, modelName: record.modelName }, (err, updatedRecord) => {
+        console.log('CALLING SAVE');
+        if (err) reject(err);
+        console.log('The new record has been returned');
+        const newRecord = record.constructor.createNew(updatedRecord);
+        resolve(newRecord);
+      });
+    });
+  }
+
+  static validate(modelName, record) {
+    Models[modelName].validate(record);
+  }
+
+  static getClean(record) {
+    return record.schema.clean;
+  }
+
+  static clean(record) {
+    return record.schema.clean(record.toJS());
+  }
+}
+
+const saveRecord = new ValidatedMethod({
+  name: 'save_record',
+  validate: () => {},
+  run({ record, modelName }) {
+    console.log('SAVE RECORD');
+    console.log(modelName);
+    if (!record._id) {
+      record._id = oid();
+    }
+    const collection = Models[modelName].collection;
+    collection.upsert(record._id, { $set: record });
+    return record;
+  },
+});
+
 _.forEach(Models.allModels, (model) => {
-  enableCrud(model);
   if (!model.collection) {
     const collection = new Mongo.Collection(model.collectionName);
     model.collection = collection;
   }
+  model.persister = RecordPersister;
   if (model.onInit) {
     model.onInit();
   }
