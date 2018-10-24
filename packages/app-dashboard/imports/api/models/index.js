@@ -92,11 +92,8 @@ class RecordPersister {
       const cleaned = this.clean(record);
       this.validate(record.modelName, cleaned);
       // this.onSave(cleaned).then(resolve).catch(reject);
-      console.log('CAlling save record');
       saveRecord.call({ record: cleaned, modelName: record.modelName }, (err, updatedRecord) => {
-        console.log('CALLING SAVE');
         if (err) reject(err);
-        console.log('The new record has been returned');
         const newRecord = record.constructor.createNew(updatedRecord);
         resolve(newRecord);
       });
@@ -120,8 +117,6 @@ const saveRecord = new ValidatedMethod({
   name: 'save_record',
   validate: () => {},
   run({ record, modelName }) {
-    console.log('SAVE RECORD');
-    console.log(modelName);
     if (!record._id) {
       record._id = oid();
     }
