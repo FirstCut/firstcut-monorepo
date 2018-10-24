@@ -29,8 +29,12 @@ const DEFAULT_TAGLINE = 'Need help with your b2b video?';
 
 const ADS_TO_TAGLINES = {
   1: IDEAS_TAGLINES,
-  2: ANALYTICS_TAGLINES,
-  3: ASSETS_TAGLINES,
+  2: IDEAS_TAGLINES,
+  3: IDEAS_TAGLINES,
+  4: ANALYTICS_TAGLINES,
+  5: ANALYTICS_TAGLINES,
+  6: ASSETS_TAGLINES,
+  7: ASSETS_TAGLINES,
 };
 
 class LandingPage extends React.Component {
@@ -38,7 +42,7 @@ class LandingPage extends React.Component {
     super();
     const { adId } = props;
     let tagline = DEFAULT_TAGLINE;
-    if (adId) {
+    if (adId && ADS_TO_TAGLINES[adId]) {
       tagline = getRandomTagline(ADS_TO_TAGLINES[adId]);
     }
     this.state = { confirm: false, error: null, tagline };

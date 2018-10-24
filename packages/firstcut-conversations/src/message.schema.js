@@ -6,6 +6,7 @@ const MessageSchema = new Schema({
   content: String,
   readBy: Array,
   'readBy.$': String,
+  projectId: String,
 });
 
 MessageSchema.extends(BaseSchema);
