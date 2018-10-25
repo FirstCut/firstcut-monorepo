@@ -19,11 +19,11 @@ function getChannel() {
     return 'devtesting';
   }
 
-  if (Meteor.settings.public.environment == 'development') {
+  if (Meteor.settings.public.environment === 'development') {
     return 'devtesting';
   }
 
-  if (Meteor.settings.public.environment == 'production') {
+  if (Meteor.settings.public.environment === 'production') {
     return 'postproduction';
   }
 
@@ -36,7 +36,7 @@ function postMessage(content, channel) {
   var client_id = Meteor.settings.slack.client_id;
   var client_secret = Meteor.settings.slack.client_secret;
 
-  if (!channel || Meteor.settings.public.environment == 'development') {
+  if (!channel || Meteor.settings.public.environment === 'development') {
     channel = getChannel();
   }
 

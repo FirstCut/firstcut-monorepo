@@ -138,26 +138,7 @@ function execute(actions) {
         return (0, _objectSpread2.default)({}, r, results);
       }, {});
       resolve(result);
-    }).catch(reject); // let result = r;
-    // try {
-    //   const actionResult = await executeAction(action);
-    //   if (actionResult) {
-    //     console.log('Before adding');
-    //     console.log(result);
-    //     result = {
-    //       ...actionResult,
-    //       ...result,
-    //     };
-    //     console.log('The total result');
-    //     console.log(result);
-    //   }
-    //   return result;
-    // } catch (e) {
-    //   console.log('Error executing');
-    //   console.log(action);
-    //   PubSub.publish('error', { message: e.toString() });
-    //   return result;
-    // }
+    }).catch(reject);
   });
 }
 
@@ -223,17 +204,21 @@ function triggerAction(action) {
 }
 
 function sendEmails(action) {
-  var to = action.to,
-      template = action.template,
-      substitution_data = action.substitution_data,
-      _action$cc = action.cc,
-      cc = _action$cc === void 0 ? [] : _action$cc;
-  var mailer = new _firstcutMailer.Mailer();
-  return mailer.send({
-    template: template,
-    to: to,
-    cc: cc,
-    substitution_data: substitution_data
+  return new Promise(function (resolve, reject) {
+    var to = action.to,
+        template = action.template,
+        substitution_data = action.substitution_data,
+        _action$cc = action.cc,
+        cc = _action$cc === void 0 ? [] : _action$cc;
+    var mailer = new _firstcutMailer.Mailer();
+    mailer.send({
+      template: template,
+      to: to,
+      cc: cc,
+      substitution_data: substitution_data
+    }).then(function (res) {
+      return resolve({});
+    }).catch(reject);
   });
 }
 
@@ -243,14 +228,23 @@ function chargeInvoice(action) {
 }
 
 function sendSlackNotification(action) {
-  var content = action.content;
-  var channel = action.channel;
-  content = (0, _objectSpread2.default)({}, slackTemplateDefaults, content);
-  return _firstcutSlack.Slack.postMessage(content, channel);
+  return new Promise(function (resolve, reject) {
+    var content = action.content;
+    var channel = action.channel;
+    content = (0, _objectSpread2.default)({}, slackTemplateDefaults, content);
+
+    _firstcutSlack.Slack.postMessage(content, channel).then(function (res) {
+      return resolve({});
+    }).catch(reject);
+  });
 }
 
 function text(action) {
-  return (0, _firstcutTextMessaging.sendTextMessage)(action);
+  return new Promise(function (resolve, reject) {
+    return (0, _firstcutTextMessaging.sendTextMessage)(action).then(function (res) {
+      return resolve();
+    }).catch(reject);
+  });
 }
 
 function createCalendarEvent(action) {

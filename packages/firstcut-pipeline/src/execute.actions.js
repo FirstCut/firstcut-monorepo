@@ -64,26 +64,6 @@ function execute(actions) {
       const result = res.reduce((results, r) => ({ ...r, ...results }), {});
       resolve(result);
     }).catch(reject);
-    // let result = r;
-    // try {
-    //   const actionResult = await executeAction(action);
-    //   if (actionResult) {
-    //     console.log('Before adding');
-    //     console.log(result);
-    //     result = {
-    //       ...actionResult,
-    //       ...result,
-    //     };
-    //     console.log('The total result');
-    //     console.log(result);
-    //   }
-    //   return result;
-    // } catch (e) {
-    //   console.log('Error executing');
-    //   console.log(action);
-    //   PubSub.publish('error', { message: e.toString() });
-    //   return result;
-    // }
   });
 }
 
@@ -135,12 +115,14 @@ function triggerAction(action) {
 }
 
 function sendEmails(action) {
-  const {
-    to, template, substitution_data, cc = [],
-  } = action;
-  const mailer = new Mailer();
-  return mailer.send({
-    template, to, cc, substitution_data,
+  return new Promise((resolve, reject) => {
+    const {
+      to, template, substitution_data, cc = [],
+    } = action;
+    const mailer = new Mailer();
+    mailer.send({
+      template, to, cc, substitution_data,
+    }).then(res => resolve({})).catch(reject);
   });
 }
 
@@ -151,17 +133,19 @@ function chargeInvoice(action) {
 
 
 function sendSlackNotification(action) {
-  let { content } = action;
-  const { channel } = action;
-  content = {
-    ...slackTemplateDefaults,
-    ...content,
-  };
-  return Slack.postMessage(content, channel);
+  return new Promise((resolve, reject) => {
+    let { content } = action;
+    const { channel } = action;
+    content = {
+      ...slackTemplateDefaults,
+      ...content,
+    };
+    Slack.postMessage(content, channel).then(res => resolve({})).catch(reject);
+  });
 }
 
 function text(action) {
-  return sendTextMessage(action);
+  return new Promise((resolve, reject) => sendTextMessage(action).then(res => resolve()).catch(reject));
 }
 
 function createCalendarEvent(action) {
