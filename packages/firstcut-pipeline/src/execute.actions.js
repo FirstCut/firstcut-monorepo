@@ -99,7 +99,6 @@ function scheduleJob(action) {
     key: job.key,
   });
   if (existingJobId) {
-    console.log('EXISTING JOBID');
     job = job.set('_id', existingJobId);
   } else if (!job._id) {
     job = job.set('_id', oid());

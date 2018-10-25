@@ -45,6 +45,8 @@ class Tracker {
 
   static rescheduleJob({ id, cron }) {
     const job = this.getRunningJob(id);
+    console.log('THE RUNNING JOB');
+    console.log(job);
     if (job) {
       job.reschedule(cron);
     }
@@ -66,12 +68,16 @@ class Tracker {
 }
 
 function subscribeToDatabaseChanges() {
+  console.log('JOB IS SUBSCRIBING');
   Job.collection.find({}).observe({
     added(doc) {
+      console.log('adding job');
       const job = new Job(doc);
       Tracker.scheduleJob(job);
     },
     changed(fields, prev_fields) {
+      console.log('CHANGED');
+      console.log(fields.cron);
       Tracker.rescheduleJob({ id: fields._id, cron: fields.cron });
     },
     removed(id) {

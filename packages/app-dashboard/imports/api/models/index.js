@@ -100,6 +100,15 @@ class RecordPersister {
     });
   }
 
+  static remove(record) {
+    removeRecord.call({ record: record.toJS(), modelName: record.modelName }, (err) => {
+      console.log('REMOVING RECORD');
+      if (err) {
+        console.log(err);
+      }
+    });
+  }
+
   static validate(modelName, record) {
     Models[modelName].validate(record);
   }
@@ -126,14 +135,26 @@ const saveRecord = new ValidatedMethod({
   },
 });
 
+const removeRecord = new ValidatedMethod({
+  name: 'removeRecord',
+  validate: () => {},
+  run({ record, modelName }) {
+    if (Meteor.isServer) {
+      const collection = Models[modelName].collection;
+      collection.remove(record._id);
+    }
+  },
+});
+
+
 _.forEach(Models.allModels, (model) => {
   if (!model.collection) {
     const collection = new Mongo.Collection(model.collectionName);
     model.collection = collection;
   }
   model.persister = RecordPersister;
-  if (model.onInit) {
-    model.onInit();
+  if (model.onInitCollection) {
+    model.onInitCollection();
   }
 });
 

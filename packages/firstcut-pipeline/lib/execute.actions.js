@@ -185,7 +185,6 @@ function scheduleJob(action) {
   });
 
   if (existingJobId) {
-    console.log('EXISTING JOBID');
     job = job.set('_id', existingJobId);
   } else if (!job._id) {
     job = job.set('_id', (0, _mdbid.default)());

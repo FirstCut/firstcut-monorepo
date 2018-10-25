@@ -28,5 +28,6 @@ var JobSchema = new _firstcutSchema.SimpleSchemaWrapper({
   'event_data.record_type': String,
   cron: _simplSchema.default.oneOf(String, Date)
 });
+JobSchema.extend(_firstcutSchema.BaseSchema);
 var _default = JobSchema;
 exports.default = _default;
