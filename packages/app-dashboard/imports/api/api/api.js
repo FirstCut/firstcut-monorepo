@@ -32,7 +32,6 @@ HTTP.methods({
     get(data) {
       if (Meteor.isServer) {
         const GOOGLE_TIMEZONE_API_URL = 'https://maps.googleapis.com/maps/api/timezone/json?';
-        console.log(Meteor.settings);
         const query = this.query;
         const options = {
           ...this.query,
@@ -77,9 +76,11 @@ HTTP.methods({
           primaryContactId = record._id;
         }
         record = record.set('companyId', companyRecord._id);
+        console.log(record.toJS());
         return record;
       });
 
+      console.log(primaryContactId);
       projectRecord = Models.Project.createNew({
         _id: oid(),
         adminOwnerId: producer._id,

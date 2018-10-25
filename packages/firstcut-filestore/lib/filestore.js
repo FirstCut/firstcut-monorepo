@@ -18,6 +18,7 @@ var filestore = null;
 var Models = null;
 
 function initFilestoreService(models, service) {
+  console.log('INIT FILESTORE');
   filestore = service;
   Models = models;
 }

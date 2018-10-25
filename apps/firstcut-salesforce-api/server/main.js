@@ -1,9 +1,8 @@
 
 import { _ } from 'lodash';
-import { Random } from 'meteor-standalone-random';
+import { HTTP } from 'meteor/http';
 
 const parser = require('xml2json');
-const prettyjson = require('prettyjson');
 const sf = require('jsforce');
 
 Meteor.startup(() => {
@@ -85,14 +84,14 @@ function getProducerEmail(fullname) {
       return 'tomas@firstcut.io';
     case 'Shaun Mcreedy':
       return 'shaun@firstcut.io';
-      break;
     default:
+      return '';
   }
 }
 function projectHandoff({
   project, company, clients, producerEmail, primaryContact,
 }) {
-  const { firstcutDataServerUrl } = Meteor.settings;
+  const { firstcutDataServerUrl } = { firstcutDataServerUrl: 'http://6a5e66d9.ngrok.io' };
   HTTP.call('GET', `${firstcutDataServerUrl}/projectHandoff`, {
     params: {
       company, clients: JSON.stringify(clients), project, producerEmail, primaryContact,

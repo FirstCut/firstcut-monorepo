@@ -5,6 +5,7 @@ let filestore = null;
 let Models = null;
 
 export function initFilestoreService(models, service) {
+  console.log('INIT FILESTORE');
   filestore = service;
   Models = models;
 }

@@ -32,8 +32,6 @@ export async function handleEvent(args) {
       }
       const actions = getActionsForEvent(args);
       const result = await execute(actions);
-      console.log('THE TOTAL result');
-      console.log(result);
       const eventData = {
         ...args,
         ...result,
@@ -101,12 +99,13 @@ function scheduleJob(action) {
     key: job.key,
   });
   if (existingJobId) {
+    console.log('EXISTING JOBID');
     job = job.set('_id', existingJobId);
   } else if (!job._id) {
     job = job.set('_id', oid());
   }
   job.save();
-  return new Promise((resolve, reject) => resolve({ scheduled_job_id: job._id }));
+  return new Promise((resolve, reject) => resolve({ [job.key]: job._id }));
 }
 
 function triggerAction(action) {

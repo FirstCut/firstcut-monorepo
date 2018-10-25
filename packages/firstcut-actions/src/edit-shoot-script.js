@@ -25,7 +25,7 @@ const EditShootScript = new Map({
       return true;
     }
     const dayAfterShoot = moment(record.date).add(1, 'day');
-    return moment().isAfter(dayAfterShoot);
+    return moment().isBefore(dayAfterShoot);
   },
   generateActions(Models, eventData) {
     const { record_id, initiator_player_id, script } = eventData;

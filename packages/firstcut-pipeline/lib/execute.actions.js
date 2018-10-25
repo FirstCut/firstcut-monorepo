@@ -10,6 +10,8 @@ exports.handleEvent = handleEvent;
 
 var _regenerator = _interopRequireDefault(require("@babel/runtime/regenerator"));
 
+var _defineProperty2 = _interopRequireDefault(require("@babel/runtime/helpers/defineProperty"));
+
 var _objectSpread2 = _interopRequireDefault(require("@babel/runtime/helpers/objectSpread"));
 
 var _objectWithoutProperties2 = _interopRequireDefault(require("@babel/runtime/helpers/objectWithoutProperties"));
@@ -59,7 +61,7 @@ function _handleEvent() {
         switch (_context.prev = _context.next) {
           case 0:
             if (!Meteor.isServer) {
-              _context.next = 20;
+              _context.next = 18;
               break;
             }
 
@@ -82,8 +84,6 @@ function _handleEvent() {
 
           case 10:
             result = _context.sent;
-            console.log('THE TOTAL result');
-            console.log(result);
             eventData = (0, _objectSpread2.default)({}, args, result);
 
             if (eventData.record_type) {
@@ -93,11 +93,11 @@ function _handleEvent() {
               }));
             }
 
-            _context.next = 20;
+            _context.next = 18;
             break;
 
-          case 17:
-            _context.prev = 17;
+          case 15:
+            _context.prev = 15;
             _context.t0 = _context["catch"](4);
 
             _pubsubJs.PubSub.publish('error', {
@@ -106,12 +106,12 @@ function _handleEvent() {
               trace: console.trace()
             });
 
-          case 20:
+          case 18:
           case "end":
             return _context.stop();
         }
       }
-    }, _callee, this, [[4, 17]]);
+    }, _callee, this, [[4, 15]]);
   }));
   return _handleEvent.apply(this, arguments);
 }
@@ -185,6 +185,7 @@ function scheduleJob(action) {
   });
 
   if (existingJobId) {
+    console.log('EXISTING JOBID');
     job = job.set('_id', existingJobId);
   } else if (!job._id) {
     job = job.set('_id', (0, _mdbid.default)());
@@ -192,9 +193,7 @@ function scheduleJob(action) {
 
   job.save();
   return new Promise(function (resolve, reject) {
-    return resolve({
-      scheduled_job_id: job._id
-    });
+    return resolve((0, _defineProperty2.default)({}, job.key, job._id));
   });
 }
 
