@@ -116,8 +116,6 @@ function () {
       var id = _ref3.id,
           cron = _ref3.cron;
       var job = this.getRunningJob(id);
-      console.log('THE RUNNING JOB');
-      console.log(job);
 
       if (job) {
         job.reschedule(cron);
@@ -148,16 +146,12 @@ function () {
 }();
 
 function subscribeToDatabaseChanges() {
-  console.log('JOB IS SUBSCRIBING');
   Job.collection.find({}).observe({
     added: function added(doc) {
-      console.log('adding job');
       var job = new Job(doc);
       Tracker.scheduleJob(job);
     },
     changed: function changed(fields, prev_fields) {
-      console.log('CHANGED');
-      console.log(fields.cron);
       Tracker.rescheduleJob({
         id: fields._id,
         cron: fields.cron

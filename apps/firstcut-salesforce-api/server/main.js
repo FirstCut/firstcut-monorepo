@@ -84,6 +84,8 @@ function getProducerEmail(fullname) {
       return 'tomas@firstcut.io';
     case 'Shaun Mcreedy':
       return 'shaun@firstcut.io';
+    case 'Jorge Soto':
+      return 'jorge@firstcut.io';
     default:
       return '';
   }
@@ -91,7 +93,7 @@ function getProducerEmail(fullname) {
 function projectHandoff({
   project, company, clients, producerEmail, primaryContact,
 }) {
-  const { firstcutDataServerUrl } = { firstcutDataServerUrl: 'http://6a5e66d9.ngrok.io' };
+  const { firstcutDataServerUrl } = { firstcutDataServerUrl: 'https://firstcut.meteorapp.com' };
   HTTP.call('GET', `${firstcutDataServerUrl}/projectHandoff`, {
     params: {
       company, clients: JSON.stringify(clients), project, producerEmail, primaryContact,

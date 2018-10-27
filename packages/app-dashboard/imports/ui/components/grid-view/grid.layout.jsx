@@ -19,7 +19,7 @@ export default function GridView(props) {
 
 function Row(props) {
   const { columns, rowProps } = props;
-  const body = columns.map(col => <Col {...col} />);
+  const body = columns.map((col, i) => <Col key={`col${i}`} {...col} />);
   return (
     <Grid.Row {...rowProps}>
       {body}

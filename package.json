@@ -70,6 +70,10 @@
 				"setupFiles": [
 						"<rootDir>/jest/setup.js"
 				],
+				"testMatch": [
+					"**/__tests__/**/*.js?(x)",
+					"**/?(*.)+(spec|test|jest).js?(x)"
+				],
 				"testPathIgnorePatterns": [
 						"/node_modules/",
 						"/apps/",

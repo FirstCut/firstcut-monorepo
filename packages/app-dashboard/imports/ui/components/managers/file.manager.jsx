@@ -174,9 +174,9 @@ export default function withFileManager(WrappedComponent) {
 
   WithFileManager.propTypes = {
     fieldname: PropTypes.string.isRequired,
-    record: PropTypes.string.isRequired,
+    record: PropTypes.object.isRequired,
     onChange: PropTypes.func.isRequired,
-    saveEvent: PropTypes.string.isRequired,
+    saveEvent: PropTypes.string,
   };
   return WithFileManager;
 }
@@ -203,14 +203,6 @@ function getFileDocuments(record, fieldname) {
 
   return Promise.all(promises);
 }
-
-// function removeFileWithId(id, store) {
-//   Assets.remove(id, (err) => {
-//     if (err) {
-//       alert(err);
-//     }
-//   });
-// }
 
 function getAcceptsMultipleFiles(record, fieldname) {
   const fieldtype = getFieldCustomType(record, fieldname);

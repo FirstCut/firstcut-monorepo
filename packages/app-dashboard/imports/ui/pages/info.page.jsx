@@ -41,25 +41,6 @@ export default class InfoPage extends React.PureComponent {
   }
 }
 
-
-const subsectionProps = PropTypes.arrayOf(
-  PropTypes.shape({
-    subtitle: PropTypes.string,
-    body: PropTypes.node,
-  }),
-);
-
-const sectionProps = PropTypes.arrayOf(PropTypes.shape({
-  title: PropTypes.string,
-  record: PropTypes.instanceOf(Record),
-  subsections: subsectionProps,
-}));
-
-InfoPage.propTypes = {
-  sections: sectionProps,
-};
-
-
 function InfoSidebar(props) {
   const { record } = props;
   const Actions = withEditRecordModal(SidebarActions);
@@ -167,7 +148,7 @@ function SectionBody(props) {
 
 function Subsection(props) {
   return (
-    <Container style={{ 'margin-top': '10px' }}>
+    <Container style={{ marginTop: '10px' }}>
       <SubsectionTitle {...props} />
       <SubsectionBody {...props} />
     </Container>

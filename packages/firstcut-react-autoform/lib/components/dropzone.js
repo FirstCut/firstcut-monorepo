@@ -144,12 +144,12 @@ function (_React$Component2) {
       var files = this.state.files; // const drop_props = removeNonDomFields(field_options);
 
       var dropzoneStyles = {
-        'text-align': 'center',
+        textAlign: 'center',
         width: '100%',
         margin: 'auto',
         padding: '10px',
         border: '4px dashed red',
-        'border-radius': '10px'
+        borderRadius: '10px'
       };
 
       if (uploadComplete) {
@@ -163,7 +163,8 @@ function (_React$Component2) {
         style: dropzoneStyles
       }, _react.default.createElement(_semanticUiReact.Header, null, ' ', label, ' ', uploadComplete && _react.default.createElement("span", null, "UPLOAD COMPLETE!")), _react.default.createElement(_semanticUiReact.Card.Group, null, files.map(function (f) {
         var _ref = fileStats.get(f.name) || {},
-            progress = _ref.progress,
+            _ref$progress = _ref.progress,
+            progress = _ref$progress === void 0 ? 0 : _ref$progress,
             secondsLeft = _ref.secondsLeft,
             readableSpeed = _ref.readableSpeed;
 
@@ -172,6 +173,7 @@ function (_React$Component2) {
         }
 
         return _react.default.createElement(_semanticUiReact.Card, {
+          key: f.name,
           color: progress === 100 ? 'green' : 'yellow'
         }, _react.default.createElement(_semanticUiReact.Image, {
           src: f.preview,
@@ -226,9 +228,8 @@ function humanReadableSeconds(seconds) {
 
 PrivateDropzoneComponent.propTypes = {
   onFileAdded: _propTypes.default.func.isRequired,
-  onFileRemoved: _propTypes.default.func.isRequired,
-  progress: _propTypes.default.instanceOf(_immutable.Map).isRequired,
-  label: _propTypes.default.string
+  progress: _propTypes.default.instanceOf(_immutable.Map),
+  label: _propTypes.default.node
 };
 var _default = Drop;
 exports.default = _default;

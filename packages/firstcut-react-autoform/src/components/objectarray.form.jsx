@@ -39,7 +39,7 @@ export default function ObjectArrayForm(props) {
     const errors = getNestedErrors(fieldname, index, props.errors);
     const fieldProps = { ...rest, errors };
     return (
-      <Segment>
+      <Segment key={fieldname + index}>
         {React.cloneElement(renderFields, {
           record: obj, key: fieldname, fields: obj.schema.objectKeys(), ...fieldProps,
         })}

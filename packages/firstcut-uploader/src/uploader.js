@@ -18,6 +18,7 @@ export function initUploader(config) {
     computeContentMd5: true,
     s3FileCacheHoursAgo: 4,
     awsSignatureVersion: '4',
+    // sendCanonicalRequestToSignerUrl: true,
     // partSize: 18874368, // aws mentioned 72 as ideal part size, this requires experimentation
     s3Acceleration: true,
     signerUrl: `${config.PLATFORM_ROOT_URL}/computeSignature`,
@@ -25,7 +26,6 @@ export function initUploader(config) {
     cryptoHexEncodedHash256(data) { return AWS.util.crypto.sha256(data, 'hex'); }, // cryptoMd5Method: function (data) { return crypto.createHash('md5').update(data).digest('base64'); },
   };
 
-  console.log('CREATING AN EVAPORATE');
   Evaporate.create(evaporateConfig)
     .then((eva) => {
       evaporate = eva;

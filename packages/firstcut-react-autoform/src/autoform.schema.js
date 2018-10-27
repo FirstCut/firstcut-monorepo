@@ -1,7 +1,6 @@
 
 import { List } from 'immutable';
 import { SchemaParser } from 'firstcut-schema';
-import { _ } from 'lodash';
 
 const DEFAULT_SORT_METHOD = 'text';
 
