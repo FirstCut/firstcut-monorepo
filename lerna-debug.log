@@ -1,12 +1,403 @@
-0 silly argv { _: [ 'add' ],
-0 silly argv   scope: 'firstcut-utils',
-0 silly argv   globs: [],
+0 silly argv { _: [ 'exec' ],
+0 silly argv   parallel: true,
+0 silly argv   args: [],
+0 silly argv   '--':
+0 silly argv    [ 'babel',
+0 silly argv      'src',
+0 silly argv      '-d',
+0 silly argv      'lib',
+0 silly argv      '--config-file',
+0 silly argv      '../../babel.config.js',
+0 silly argv      '--watch',
+0 silly argv      '--copy-files',
+0 silly argv      '--ignore',
+0 silly argv      '**/__mocks__/**' ],
 0 silly argv   lernaVersion: '3.4.1',
-0 silly argv   '$0': '/usr/local/bin/lerna',
-0 silly argv   pkg: 'moment-tz' }
+0 silly argv   '$0': '/Users/artichokes/FirstCut/firstcut-mono/node_modules/.bin/lerna' }
 1 notice cli v3.4.1
 2 verbose rootPath /Users/artichokes/FirstCut/firstcut-mono
 3 info versioning independent
-4 error Error: 404 Not Found - GET https://registry.npmjs.org/moment-tz - Not found
-4 error     at res.buffer.catch.then.body (/Users/artichokes/FirstCut/firstcut-mono/node_modules/npm-registry-fetch/check-response.js:104:15)
-4 error     at <anonymous>
+4 silly batched [ PackageGraphNode {
+4 silly batched     name: 'firstcut-api',
+4 silly batched     externalDependencies: Map { '@babel/runtime' => [Object], 'lodash' => [Object] },
+4 silly batched     localDependencies: Map {},
+4 silly batched     localDependents: Map {} },
+4 silly batched   PackageGraphNode {
+4 silly batched     name: 'firstcut-aws',
+4 silly batched     externalDependencies: Map { '@babel/runtime' => [Object], 'aws-sdk' => [Object] },
+4 silly batched     localDependencies: Map {},
+4 silly batched     localDependents: Map { 'firstcut-filestore' => [PackageGraphNode] } },
+4 silly batched   PackageGraphNode {
+4 silly batched     name: 'firstcut-billing',
+4 silly batched     externalDependencies:
+4 silly batched      Map {
+4 silly batched        '@babel/runtime' => [Object],
+4 silly batched        'lodash' => [Object],
+4 silly batched        'stripe' => [Object] },
+4 silly batched     localDependencies: Map {},
+4 silly batched     localDependents: Map {} },
+4 silly batched   PackageGraphNode {
+4 silly batched     name: 'firstcut-calendar',
+4 silly batched     externalDependencies: Map { '@babel/runtime' => [Object], 'lodash' => [Object] },
+4 silly batched     localDependencies: Map {},
+4 silly batched     localDependents:
+4 silly batched      Map {
+4 silly batched        'firstcut-pipeline-consts' => [PackageGraphNode],
+4 silly batched        'firstcut-pipeline' => [PackageGraphNode] } },
+4 silly batched   PackageGraphNode {
+4 silly batched     name: 'firstcut-crud',
+4 silly batched     externalDependencies: Map { '@babel/runtime' => [Object], 'lodash' => [Object] },
+4 silly batched     localDependencies: Map {},
+4 silly batched     localDependents: Map {} },
+4 silly batched   PackageGraphNode {
+4 silly batched     name: 'firstcut-google-api',
+4 silly batched     externalDependencies: Map { '@babel/runtime' => [Object], 'lodash' => [Object] },
+4 silly batched     localDependencies: Map {},
+4 silly batched     localDependents: Map { 'firstcut-pipeline' => [PackageGraphNode] } },
+4 silly batched   PackageGraphNode {
+4 silly batched     name: 'firstcut-mailer',
+4 silly batched     externalDependencies:
+4 silly batched      Map {
+4 silly batched        '@babel/runtime' => [Object],
+4 silly batched        'lodash' => [Object],
+4 silly batched        'sparkpost' => [Object] },
+4 silly batched     localDependencies: Map {},
+4 silly batched     localDependents: Map { 'firstcut-pipeline' => [PackageGraphNode] } },
+4 silly batched   PackageGraphNode {
+4 silly batched     name: 'firstcut-messenger',
+4 silly batched     externalDependencies: Map { '@babel/runtime' => [Object], 'lodash' => [Object] },
+4 silly batched     localDependencies: Map {},
+4 silly batched     localDependents: Map {} },
+4 silly batched   PackageGraphNode {
+4 silly batched     name: 'firstcut-players',
+4 silly batched     externalDependencies:
+4 silly batched      Map {
+4 silly batched        '@babel/runtime' => [Object],
+4 silly batched        'lodash' => [Object],
+4 silly batched        'moment' => [Object] },
+4 silly batched     localDependencies: Map {},
+4 silly batched     localDependents: Map {} },
+4 silly batched   PackageGraphNode {
+4 silly batched     name: 'firstcut-slack',
+4 silly batched     externalDependencies:
+4 silly batched      Map {
+4 silly batched        '@babel/runtime' => [Object],
+4 silly batched        '@slack/client' => [Object],
+4 silly batched        'lodash' => [Object] },
+4 silly batched     localDependencies: Map {},
+4 silly batched     localDependents:
+4 silly batched      Map {
+4 silly batched        'firstcut-pipeline-consts' => [PackageGraphNode],
+4 silly batched        'firstcut-pipeline' => [PackageGraphNode] } },
+4 silly batched   PackageGraphNode {
+4 silly batched     name: 'firstcut-testing-utils',
+4 silly batched     externalDependencies: Map { '@babel/runtime' => [Object], 'lodash' => [Object] },
+4 silly batched     localDependencies: Map {},
+4 silly batched     localDependents: Map {} },
+4 silly batched   PackageGraphNode {
+4 silly batched     name: 'firstcut-uploader',
+4 silly batched     externalDependencies:
+4 silly batched      Map {
+4 silly batched        '@babel/runtime' => [Object],
+4 silly batched        'aws-sdk' => [Object],
+4 silly batched        'crypto-js' => [Object],
+4 silly batched        'evaporate' => [Object],
+4 silly batched        'lodash' => [Object] },
+4 silly batched     localDependencies: Map {},
+4 silly batched     localDependents: Map {} },
+4 silly batched   PackageGraphNode {
+4 silly batched     name: 'firstcut-user-session',
+4 silly batched     externalDependencies:
+4 silly batched      Map {
+4 silly batched        '@babel/runtime' => [Object],
+4 silly batched        'lodash' => [Object],
+4 silly batched        'moment' => [Object] },
+4 silly batched     localDependencies: Map {},
+4 silly batched     localDependents:
+4 silly batched      Map {
+4 silly batched        'firstcut-analytics' => [PackageGraphNode],
+4 silly batched        'firstcut-event-emitter' => [PackageGraphNode],
+4 silly batched        'firstcut-pipeline-utils' => [PackageGraphNode],
+4 silly batched        'firstcut-pipeline' => [PackageGraphNode],
+4 silly batched        'firstcut-tasks' => [PackageGraphNode] } },
+4 silly batched   PackageGraphNode {
+4 silly batched     name: 'firstcut-utils',
+4 silly batched     externalDependencies:
+4 silly batched      Map {
+4 silly batched        '@babel/runtime' => [Object],
+4 silly batched        'lodash' => [Object],
+4 silly batched        'moment-timezone' => [Object] },
+4 silly batched     localDependencies: Map {},
+4 silly batched     localDependents:
+4 silly batched      Map {
+4 silly batched        'firstcut-actions' => [PackageGraphNode],
+4 silly batched        'firstcut-model-base' => [PackageGraphNode],
+4 silly batched        'firstcut-pipeline' => [PackageGraphNode],
+4 silly batched        'firstcut-retrieve-url' => [PackageGraphNode],
+4 silly batched        'firstcut-shoots' => [PackageGraphNode],
+4 silly batched        'firstcut-text-messaging' => [PackageGraphNode] } } ]
+5 silly batched [ PackageGraphNode {
+5 silly batched     name: 'firstcut-event-emitter',
+5 silly batched     externalDependencies: Map { '@babel/runtime' => [Object], 'lodash' => [Object] },
+5 silly batched     localDependencies: Map {},
+5 silly batched     localDependents: Map {} },
+5 silly batched   PackageGraphNode {
+5 silly batched     name: 'firstcut-filestore',
+5 silly batched     externalDependencies:
+5 silly batched      Map {
+5 silly batched        '@babel/runtime' => [Object],
+5 silly batched        'lodash' => [Object],
+5 silly batched        'simpl-schema' => [Object] },
+5 silly batched     localDependencies: Map {},
+5 silly batched     localDependents: Map {} },
+5 silly batched   PackageGraphNode {
+5 silly batched     name: 'firstcut-pipeline-consts',
+5 silly batched     externalDependencies:
+5 silly batched      Map {
+5 silly batched        '@babel/runtime' => [Object],
+5 silly batched        'immutable' => [Object],
+5 silly batched        'lodash' => [Object],
+5 silly batched        'simpl-schema' => [Object] },
+5 silly batched     localDependencies: Map {},
+5 silly batched     localDependents:
+5 silly batched      Map {
+5 silly batched        'firstcut-action-utils' => [PackageGraphNode],
+5 silly batched        'firstcut-actions' => [PackageGraphNode],
+5 silly batched        'firstcut-analytics' => [PackageGraphNode],
+5 silly batched        'firstcut-collaborators' => [PackageGraphNode],
+5 silly batched        'firstcut-cuts' => [PackageGraphNode],
+5 silly batched        'firstcut-deliverables' => [PackageGraphNode],
+5 silly batched        'firstcut-invoices' => [PackageGraphNode],
+5 silly batched        'firstcut-pipeline-utils' => [PackageGraphNode],
+5 silly batched        'firstcut-pipeline' => [PackageGraphNode],
+5 silly batched        'firstcut-projects' => [PackageGraphNode],
+5 silly batched        'firstcut-schema' => [PackageGraphNode],
+5 silly batched        'firstcut-shoots' => [PackageGraphNode],
+5 silly batched        'firstcut-tasks' => [PackageGraphNode] } },
+5 silly batched   PackageGraphNode {
+5 silly batched     name: 'firstcut-retrieve-url',
+5 silly batched     externalDependencies: Map { '@babel/runtime' => [Object], 'lodash' => [Object] },
+5 silly batched     localDependencies: Map {},
+5 silly batched     localDependents:
+5 silly batched      Map {
+5 silly batched        'firstcut-actions' => [PackageGraphNode],
+5 silly batched        'firstcut-model-base' => [PackageGraphNode],
+5 silly batched        'firstcut-pipeline' => [PackageGraphNode],
+5 silly batched        'firstcut-shoots' => [PackageGraphNode] } },
+5 silly batched   PackageGraphNode {
+5 silly batched     name: 'firstcut-text-messaging',
+5 silly batched     externalDependencies:
+5 silly batched      Map {
+5 silly batched        '@babel/runtime' => [Object],
+5 silly batched        'lodash' => [Object],
+5 silly batched        'simpl-schema' => [Object],
+5 silly batched        'twilio' => [Object] },
+5 silly batched     localDependencies: Map {},
+5 silly batched     localDependents: Map { 'firstcut-pipeline' => [PackageGraphNode] } } ]
+6 silly batched [ PackageGraphNode {
+6 silly batched     name: 'firstcut-action-utils',
+6 silly batched     externalDependencies: Map { '@babel/runtime' => [Object], 'lodash' => [Object] },
+6 silly batched     localDependencies: Map {},
+6 silly batched     localDependents:
+6 silly batched      Map {
+6 silly batched        'firstcut-actions' => [PackageGraphNode],
+6 silly batched        'firstcut-clients' => [PackageGraphNode],
+6 silly batched        'firstcut-model-base' => [PackageGraphNode],
+6 silly batched        'firstcut-projects' => [PackageGraphNode] } },
+6 silly batched   PackageGraphNode {
+6 silly batched     name: 'firstcut-analytics',
+6 silly batched     externalDependencies: Map { '@babel/runtime' => [Object], 'lodash' => [Object] },
+6 silly batched     localDependencies: Map {},
+6 silly batched     localDependents: Map {} },
+6 silly batched   PackageGraphNode {
+6 silly batched     name: 'firstcut-schema',
+6 silly batched     externalDependencies:
+6 silly batched      Map {
+6 silly batched        '@babel/runtime' => [Object],
+6 silly batched        'lodash' => [Object],
+6 silly batched        'moment-timezone' => [Object] },
+6 silly batched     localDependencies: Map {},
+6 silly batched     localDependents:
+6 silly batched      Map {
+6 silly batched        'firstcut-actions' => [PackageGraphNode],
+6 silly batched        'firstcut-assets' => [PackageGraphNode],
+6 silly batched        'firstcut-blueprints' => [PackageGraphNode],
+6 silly batched        'firstcut-clients' => [PackageGraphNode],
+6 silly batched        'firstcut-collaborators' => [PackageGraphNode],
+6 silly batched        'firstcut-companies' => [PackageGraphNode],
+6 silly batched        'firstcut-conversations' => [PackageGraphNode],
+6 silly batched        'firstcut-cuts' => [PackageGraphNode],
+6 silly batched        'firstcut-deliverables' => [PackageGraphNode],
+6 silly batched        'firstcut-invoices' => [PackageGraphNode],
+6 silly batched        'firstcut-jobs' => [PackageGraphNode],
+6 silly batched        'firstcut-landingpage-requests' => [PackageGraphNode],
+6 silly batched        'firstcut-model-base' => [PackageGraphNode],
+6 silly batched        'firstcut-pipeline-utils' => [PackageGraphNode],
+6 silly batched        'firstcut-pipeline' => [PackageGraphNode],
+6 silly batched        'firstcut-projects' => [PackageGraphNode],
+6 silly batched        'firstcut-react-autoform' => [PackageGraphNode],
+6 silly batched        'firstcut-shoots' => [PackageGraphNode],
+6 silly batched        'firstcut-tasks' => [PackageGraphNode] } } ]
+7 silly batched [ PackageGraphNode {
+7 silly batched     name: 'firstcut-actions',
+7 silly batched     externalDependencies: Map { '@babel/runtime' => [Object], 'lodash' => [Object] },
+7 silly batched     localDependencies: Map {},
+7 silly batched     localDependents:
+7 silly batched      Map {
+7 silly batched        'firstcut-pipeline-utils' => [PackageGraphNode],
+7 silly batched        'firstcut-pipeline' => [PackageGraphNode],
+7 silly batched        'firstcut-scripts' => [PackageGraphNode] } },
+7 silly batched   PackageGraphNode {
+7 silly batched     name: 'firstcut-blueprints',
+7 silly batched     externalDependencies: Map { '@babel/runtime' => [Object], 'lodash' => [Object] },
+7 silly batched     localDependencies: Map {},
+7 silly batched     localDependents:
+7 silly batched      Map {
+7 silly batched        'firstcut-deliverables' => [PackageGraphNode],
+7 silly batched        'firstcut-projects' => [PackageGraphNode],
+7 silly batched        'firstcut-shoots' => [PackageGraphNode] } },
+7 silly batched   PackageGraphNode {
+7 silly batched     name: 'firstcut-model-base',
+7 silly batched     externalDependencies:
+7 silly batched      Map {
+7 silly batched        '@babel/runtime' => [Object],
+7 silly batched        'lodash' => [Object],
+7 silly batched        'pubsub-js' => [Object] },
+7 silly batched     localDependencies: Map {},
+7 silly batched     localDependents:
+7 silly batched      Map {
+7 silly batched        'firstcut-assets' => [PackageGraphNode],
+7 silly batched        'firstcut-clients' => [PackageGraphNode],
+7 silly batched        'firstcut-collaborators' => [PackageGraphNode],
+7 silly batched        'firstcut-companies' => [PackageGraphNode],
+7 silly batched        'firstcut-conversations' => [PackageGraphNode],
+7 silly batched        'firstcut-cuts' => [PackageGraphNode],
+7 silly batched        'firstcut-deliverables' => [PackageGraphNode],
+7 silly batched        'firstcut-invoices' => [PackageGraphNode],
+7 silly batched        'firstcut-jobs' => [PackageGraphNode],
+7 silly batched        'firstcut-landingpage-requests' => [PackageGraphNode],
+7 silly batched        'firstcut-projects' => [PackageGraphNode],
+7 silly batched        'firstcut-shoots' => [PackageGraphNode],
+7 silly batched        'firstcut-tasks' => [PackageGraphNode] } },
+7 silly batched   PackageGraphNode {
+7 silly batched     name: 'firstcut-react-autoform',
+7 silly batched     externalDependencies:
+7 silly batched      Map {
+7 silly batched        'enzyme' => [Object],
+7 silly batched        'enzyme-adapter-react-16' => [Object],
+7 silly batched        '@babel/runtime' => [Object],
+7 silly batched        'lodash' => [Object],
+7 silly batched        'moment-timezone' => [Object],
+7 silly batched        'prop-types' => [Object],
+7 silly batched        'react' => [Object],
+7 silly batched        'react-dom' => [Object],
+7 silly batched        'react-google-autocomplete' => [Object],
+7 silly batched        'react-test-renderer' => [Object],
+7 silly batched        'semantic-ui-react' => [Object] },
+7 silly batched     localDependencies: Map {},
+7 silly batched     localDependents: Map {} } ]
+8 silly batched [ PackageGraphNode {
+8 silly batched     name: 'firstcut-assets',
+8 silly batched     externalDependencies:
+8 silly batched      Map {
+8 silly batched        '@babel/runtime' => [Object],
+8 silly batched        'lodash' => [Object],
+8 silly batched        'mdbid' => [Object],
+8 silly batched        'sanitize-filename' => [Object] },
+8 silly batched     localDependencies: Map {},
+8 silly batched     localDependents: Map {} },
+8 silly batched   PackageGraphNode {
+8 silly batched     name: 'firstcut-clients',
+8 silly batched     externalDependencies: Map { '@babel/runtime' => [Object], 'lodash' => [Object] },
+8 silly batched     localDependencies: Map {},
+8 silly batched     localDependents: Map {} },
+8 silly batched   PackageGraphNode {
+8 silly batched     name: 'firstcut-collaborators',
+8 silly batched     externalDependencies:
+8 silly batched      Map {
+8 silly batched        '@babel/runtime' => [Object],
+8 silly batched        'lodash' => [Object],
+8 silly batched        'simpl-schema' => [Object] },
+8 silly batched     localDependencies: Map {},
+8 silly batched     localDependents: Map {} },
+8 silly batched   PackageGraphNode {
+8 silly batched     name: 'firstcut-companies',
+8 silly batched     externalDependencies: Map { '@babel/runtime' => [Object], 'lodash' => [Object] },
+8 silly batched     localDependencies: Map {},
+8 silly batched     localDependents: Map {} },
+8 silly batched   PackageGraphNode {
+8 silly batched     name: 'firstcut-conversations',
+8 silly batched     externalDependencies:
+8 silly batched      Map {
+8 silly batched        '@babel/runtime' => [Object],
+8 silly batched        'immutable' => [Object],
+8 silly batched        'lodash' => [Object] },
+8 silly batched     localDependencies: Map {},
+8 silly batched     localDependents: Map {} },
+8 silly batched   PackageGraphNode {
+8 silly batched     name: 'firstcut-cuts',
+8 silly batched     externalDependencies: Map { '@babel/runtime' => [Object], 'lodash' => [Object] },
+8 silly batched     localDependencies: Map {},
+8 silly batched     localDependents: Map {} },
+8 silly batched   PackageGraphNode {
+8 silly batched     name: 'firstcut-deliverables',
+8 silly batched     externalDependencies: Map { '@babel/runtime' => [Object], 'lodash' => [Object] },
+8 silly batched     localDependencies: Map {},
+8 silly batched     localDependents: Map {} },
+8 silly batched   PackageGraphNode {
+8 silly batched     name: 'firstcut-invoices',
+8 silly batched     externalDependencies: Map { '@babel/runtime' => [Object], 'lodash' => [Object] },
+8 silly batched     localDependencies: Map {},
+8 silly batched     localDependents: Map {} },
+8 silly batched   PackageGraphNode {
+8 silly batched     name: 'firstcut-jobs',
+8 silly batched     externalDependencies:
+8 silly batched      Map {
+8 silly batched        '@babel/runtime' => [Object],
+8 silly batched        'lodash' => [Object],
+8 silly batched        'node-schedule' => [Object] },
+8 silly batched     localDependencies: Map {},
+8 silly batched     localDependents: Map {} },
+8 silly batched   PackageGraphNode {
+8 silly batched     name: 'firstcut-landingpage-requests',
+8 silly batched     externalDependencies: Map { '@babel/runtime' => [Object] },
+8 silly batched     localDependencies: Map {},
+8 silly batched     localDependents: Map {} },
+8 silly batched   PackageGraphNode {
+8 silly batched     name: 'firstcut-pipeline-utils',
+8 silly batched     externalDependencies: Map { '@babel/runtime' => [Object], 'lodash' => [Object] },
+8 silly batched     localDependencies: Map {},
+8 silly batched     localDependents: Map {} },
+8 silly batched   PackageGraphNode {
+8 silly batched     name: 'firstcut-pipeline',
+8 silly batched     externalDependencies: Map { '@babel/runtime' => [Object], 'lodash' => [Object] },
+8 silly batched     localDependencies: Map {},
+8 silly batched     localDependents: Map {} },
+8 silly batched   PackageGraphNode {
+8 silly batched     name: 'firstcut-projects',
+8 silly batched     externalDependencies: Map { '@babel/runtime' => [Object], 'lodash' => [Object] },
+8 silly batched     localDependencies: Map {},
+8 silly batched     localDependents: Map {} },
+8 silly batched   PackageGraphNode {
+8 silly batched     name: 'firstcut-scripts',
+8 silly batched     externalDependencies: Map { '@babel/runtime' => [Object], 'lodash' => [Object] },
+8 silly batched     localDependencies: Map {},
+8 silly batched     localDependents: Map {} },
+8 silly batched   PackageGraphNode {
+8 silly batched     name: 'firstcut-shoots',
+8 silly batched     externalDependencies: Map { '@babel/runtime' => [Object], 'lodash' => [Object] },
+8 silly batched     localDependencies: Map {},
+8 silly batched     localDependents: Map {} },
+8 silly batched   PackageGraphNode {
+8 silly batched     name: 'firstcut-tasks',
+8 silly batched     externalDependencies: Map { '@babel/runtime' => [Object], 'lodash' => [Object] },
+8 silly batched     localDependencies: Map {},
+8 silly batched     localDependents: Map {} } ]
+9 info Executing command in 42 packages: "babel src -d lib --config-file ../../babel.config.js --watch --copy-files --ignore **/__mocks__/**"
+10 error Error: Command failed: babel src -d lib --config-file ../../babel.config.js --watch --copy-files --ignore **/__mocks__/**
+10 error
+10 error Successfully compiled 2 files with Babel.
+10 error
+10 error     at makeError (/Users/artichokes/FirstCut/firstcut-mono/node_modules/@lerna/child-process/node_modules/execa/index.js:174:9)
+10 error     at Promise.all.then.arr (/Users/artichokes/FirstCut/firstcut-mono/node_modules/@lerna/child-process/node_modules/execa/index.js:278:16)
+10 error     at <anonymous>

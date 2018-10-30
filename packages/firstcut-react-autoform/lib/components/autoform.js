@@ -159,6 +159,7 @@ function (_React$PureComponent) {
           overrides = _this$props2.overrides,
           disableDefaults = _this$props2.disableDefaults,
           withFileManager = _this$props2.withFileManager;
+      console.log(field);
       var options = {
         errors: errors,
         overrides: overrides
@@ -233,6 +234,7 @@ function (_React$PureComponent) {
           }));
 
         case 'string':
+          console.log('Input');
           return _react.default.createElement(_semanticUiReact.Form.Input, (0, _extends2.default)({}, domProps, {
             value: fieldProps.value || ''
           }));
@@ -250,6 +252,7 @@ function (_React$PureComponent) {
           }));
 
         case 'textarea':
+          console.log('TEXT ALEA');
           return _react.default.createElement(_semanticUiReact.Form.TextArea, domProps);
 
         case 'location':

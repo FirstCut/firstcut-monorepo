@@ -81,6 +81,7 @@ class Field extends React.PureComponent {
     const {
       record, field, onChange, errors, overrides, disableDefaults, withFileManager,
     } = this.props;
+    console.log(field);
     const options = {
       errors,
       overrides,
@@ -125,6 +126,7 @@ class Field extends React.PureComponent {
       case 'multiselect':
         return <Select {...fieldProps} multiple />;
       case 'string':
+        console.log('Input');
         return <Form.Input {...domProps} value={fieldProps.value || ''} />;
       case 'boolean':
         return <Checkbox {...fieldProps} />;
@@ -134,6 +136,7 @@ class Field extends React.PureComponent {
         // const timezone = record.timezone || getTimezoneFromDate(fieldProps.value);
         return <Datetime {...fieldProps} timezone={fieldProps.timezone || record.timezone} />;
       case 'textarea':
+        console.log('TEXT ALEA');
         return <Form.TextArea {...domProps} />;
       case 'location':
         return <LocationField {...fieldProps} />;

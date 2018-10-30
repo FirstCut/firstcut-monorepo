@@ -13,6 +13,7 @@ var _simplSchema = _interopRequireDefault(require("simpl-schema"));
 
 var _cuts = require("./cuts.enum");
 
+console.log('CUt schema');
 var CutSchema = new _firstcutSchema.SimpleSchemaWrapper({
   fileId: {
     type: _simplSchema.default.oneOf(String, {
@@ -55,7 +56,6 @@ var CutSchema = new _firstcutSchema.SimpleSchemaWrapper({
   editorNotes: {
     type: String,
     label: 'Editor Notes',
-    helpText: 'Anything about this CUT that you want to communicate to the project manager or the client.',
     customType: 'textarea'
   },
   revisions: {

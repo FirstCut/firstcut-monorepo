@@ -80,7 +80,6 @@ HTTP.methods({
         return record;
       });
 
-      console.log(primaryContactId);
       projectRecord = Models.Project.createNew({
         _id: oid(),
         adminOwnerId: producer._id,

@@ -1,9 +1,8 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Form, Icon, Button } from 'semantic-ui-react';
 import { Autoform } from 'firstcut-react-autoform';
-import { List, Record } from 'immutable';
+import { Record } from 'immutable';
 
 export default class CutForm extends React.Component {
   render() {
@@ -18,6 +17,7 @@ export default class CutForm extends React.Component {
       'revisions',
     ];
 
+    // const fields = [];
     if (record.project) {
       fields.push('fileId');
     }

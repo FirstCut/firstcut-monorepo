@@ -2,6 +2,7 @@ import { BaseSchema, SimpleSchemaWrapper as Schema } from 'firstcut-schema';
 import SimpleSchema from 'simpl-schema';
 import { CUT_TYPES } from './cuts.enum';
 
+console.log('CUt schema');
 const CutSchema = new Schema({
   fileId: {
     type: SimpleSchema.oneOf(String, {
@@ -44,7 +45,6 @@ const CutSchema = new Schema({
   editorNotes: {
     type: String,
     label: 'Editor Notes',
-    helpText: 'Anything about this CUT that you want to communicate to the project manager or the client.',
     customType: 'textarea',
   },
   revisions: {
