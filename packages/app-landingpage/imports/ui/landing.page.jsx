@@ -5,32 +5,24 @@ import {
   Image, Header, Grid, Button, Form, Responsive, Modal, Container, Embed,
 } from 'semantic-ui-react';
 
-const IDEAS_TAGLINES = [
+const ANALYTICS_OF_STRATEGY = [
   'Need help generating great content?',
-  'Generating great content shouldn\'t be hard. We can help!',
-  'Need help building your content playbook?',
-  'We make generating great content easy.',
 ];
 
-const ANALYTICS_TAGLINES = [
+const CUSTOM_CONTENT_STRATEGY = [
   'Optimize your editorial calendar using the power of data',
-  'Need help maximizing your content\'s impact?',
-  'Maximize your content\'s impact using the power of data',
-  'We can unlock your content',
 ];
 
-const ASSETS_TAGLINES = [
+const SPECIFIC_VIDEO_IDEAS = [
   'Managing your content doesn\'t need to be a pain. We can help.',
-  'Repackage, reuse, republish. We make your content go farther.',
-  'We turn hours of footage into a content strategy',
 ];
 
 const DEFAULT_TAGLINE = 'Need help with your b2b video?';
 
 const ADS_TO_TAGLINES = {
-  1: IDEAS_TAGLINES,
-  2: ANALYTICS_TAGLINES,
-  3: ASSETS_TAGLINES,
+  1: ANALYTICS_OF_STRATEGY,
+  2: CUSTOM_CONTENT_STRATEGY,
+  3: SPECIFIC_VIDEO_IDEAS,
 };
 
 class LandingPage extends React.Component {
