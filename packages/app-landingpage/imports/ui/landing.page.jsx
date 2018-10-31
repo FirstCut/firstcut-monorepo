@@ -6,23 +6,29 @@ import {
 } from 'semantic-ui-react';
 
 const ANALYTICS_OF_STRATEGY = [
-  'Need help generating great content?',
+  'Our experts would like to offer you a free data-backed analysis of your content strategy. Contact us to request your consultation. (Limited time only)',
+  'Our experts are here to help! Contact us to request a free, data-backed analysis of your company\'s content strategy. (Limited time only)',
 ];
 
 const CUSTOM_CONTENT_STRATEGY = [
-  'Optimize your editorial calendar using the power of data',
+  'Our experts can help you develop a content strategy that is optimized to your business. Request your free consultation below. (Limited time only)',
+  'We can help you maximize the power of your editorial calendar. We are offering free consultations for a limited time.',
 ];
 
 const SPECIFIC_VIDEO_IDEAS = [
-  'Managing your content doesn\'t need to be a pain. We can help.',
+  'Wondering what your company\'s next video should be? Our experts can help you identify marketing videos that are optimized to achieve your company goals. Request your free consultation below.',
 ];
 
 const DEFAULT_TAGLINE = 'Need help with your b2b video?';
 
 const ADS_TO_TAGLINES = {
-  1: ANALYTICS_OF_STRATEGY,
+  1: CUSTOM_CONTENT_STRATEGY,
   2: CUSTOM_CONTENT_STRATEGY,
-  3: SPECIFIC_VIDEO_IDEAS,
+  3: ANALYTICS_OF_STRATEGY,
+  4: ANALYTICS_OF_STRATEGY,
+  5: SPECIFIC_VIDEO_IDEAS,
+  6: SPECIFIC_VIDEO_IDEAS,
+  7: SPECIFIC_VIDEO_IDEAS,
 };
 
 class LandingPage extends React.Component {
@@ -47,7 +53,7 @@ class LandingPage extends React.Component {
         this.setState({ error: err });
       } else {
         this.setState({
-          confirm: true, first: '', last: '', company: '', email: '', about: '',
+          confirm: true, first: '', last: '', company: '', email: '', website: '', about: '',
         });
       }
     });
@@ -55,7 +61,7 @@ class LandingPage extends React.Component {
 
   render() {
     const {
-      confirm, first, last, email, about, company, tagline,
+      confirm, first, last, email, about, company, website, tagline,
     } = this.state;
     return (
       <div style={{ height: '100%' }} onClick={this.hideSidebar}>
@@ -100,7 +106,12 @@ class LandingPage extends React.Component {
 
               <Grid.Row>
                 <Grid.Column
-                  width={16}
+                  width={2}
+                  align="center"
+                  verticalAlign="middle"
+                />
+                <Grid.Column
+                  width={12}
                   align="center"
                   verticalAlign="middle"
                 >
@@ -108,6 +119,11 @@ class LandingPage extends React.Component {
                     { tagline }
                   </Header>
                 </Grid.Column>
+                <Grid.Column
+                  width={2}
+                  align="center"
+                  verticalAlign="middle"
+                />
               </Grid.Row>
               <Grid.Row>
                 <Grid.Column
@@ -159,9 +175,18 @@ class LandingPage extends React.Component {
                         />
                       </Form.Field>
                       <Form.Field>
+                        <Form.Input
+                          onChange={this.handleChange}
+                          placeholder="Company Website"
+                          name="website"
+                          value={website}
+                          required
+                        />
+                      </Form.Field>
+                      <Form.Field>
                         <Form.TextArea
                           onChange={this.handleChange}
-                          placeholder="How can we help?"
+                          placeholder="Anything else you would like to add?"
                           name="about"
                           value={about}
                           required

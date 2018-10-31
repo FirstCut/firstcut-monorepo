@@ -19,14 +19,31 @@ function getOrganizerId() {
   return Meteor.settings.oauth_credentials_user;
 }
 
+function getUniversalEventCalendarEmail() {
+  if (Meteor.settings.public.environment === 'development') {
+    return 'lucy@firstcut.io';
+  }
+
+  return 'jorge.soto@firstcut.io';
+}
+
 function createEvent(args) {
   return new Promise(function (resolve, reject) {
     _calendar.CalendarEventContentSchema.validate(args.event);
 
     var event = args.event,
-        event_id = args.event_id;
+        event_id = args.event_id,
+        owner_email = args.owner_email;
+
+    if (Meteor.settings.public.environment === 'development') {
+      owner_email = 'lucyannerichards@gmail.com';
+    }
+
     event.attendees = event.attendees.filter(function (a) {
       return a.email != null;
+    });
+    event.attendees.push({
+      email: getUniversalEventCalendarEmail()
     });
     event = (0, _objectSpread2.default)({}, event, {
       reminders: {
@@ -36,11 +53,15 @@ function createEvent(args) {
           minutes: 24 * 60
         }]
       }
+    }); // const user_id = getOrganizerId();
+
+    var user = Meteor.users.findOne({
+      'services.google.email': owner_email
     });
-    var user_id = getOrganizerId();
-    var user = Meteor.users.findOne(user_id);
-    var cal_id = user.services.google.email;
-    var url = "calendar/v3/calendars/".concat(cal_id, "/events");
+    console.log('USEr');
+    console.log(user); // const cal_id = user.services.google.email;
+
+    var url = "calendar/v3/calendars/".concat(owner_email, "/events");
     var method = 'post';
 
     if (event_id) {

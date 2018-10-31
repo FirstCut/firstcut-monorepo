@@ -30,6 +30,7 @@ const CutDueEventUpdated = new Map({
     const actions = [{
       type: ACTIONS.calendar_event,
       event_id: eventId,
+      owner_email: deliverable.adminOwnerEmail,
       event: {
         summary: `Next cut due for ${deliverable.displayName}`,
         description,
