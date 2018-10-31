@@ -27,7 +27,6 @@ const CompanySchema = new Schema({
     customType: 'fileArray',
     store: 'assets',
     label: 'Brand Asset',
-    helpText: 'Logo file, Font File, Style Guidelines, etc',
   },
   'branding.$': SimpleSchema.oneOf({
     type: String,
