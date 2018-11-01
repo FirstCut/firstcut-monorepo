@@ -147,6 +147,10 @@ function text(action) {
 }
 
 function createCalendarEvent(action) {
-  const { event, user_id, event_id } = action;
-  return createEvent({ event_id, event, user_id });
+  const {
+    event, user_id, event_id, owner_email,
+  } = action;
+  return createEvent({
+    event_id, event, user_id, owner_email,
+  });
 }

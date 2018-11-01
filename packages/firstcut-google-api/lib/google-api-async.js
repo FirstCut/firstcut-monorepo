@@ -46,9 +46,13 @@ var GoogleApi = {
     delete options.user;
 
     if (user && user.services && user.services.google && user.services.google.accessToken) {
+      console.log('ACCESS TOKEN');
       options.headers = options.headers || {};
       options.headers.Authorization = "Bearer ".concat(user.services.google.accessToken);
       HTTP.call(method, "".concat(this._host, "/").concat(path), options, function (error, result) {
+        console.log('called the method');
+        console.log('HERE IS THE ERRROr');
+        console.log(error);
         callback(error, result && result.data);
       });
     } else {
@@ -57,7 +61,10 @@ var GoogleApi = {
   },
   _refresh: function _refresh(user, callback) {
     Log('GoogleApi._refresh');
+    console.log('About to refresh');
     Meteor.call('exchangeRefreshToken', user && user._id, function (error, result) {
+      console.log('Exchaning refresh token');
+      console.log(error);
       callback(error, result && result.access_token);
     });
   }

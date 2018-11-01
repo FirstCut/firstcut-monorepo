@@ -44,10 +44,14 @@ export const GoogleApi = {
 
     if (user && user.services && user.services.google
         && user.services.google.accessToken) {
+      console.log('ACCESS TOKEN');
       options.headers = options.headers || {};
       options.headers.Authorization = `Bearer ${user.services.google.accessToken}`;
 
       HTTP.call(method, `${this._host}/${path}`, options, (error, result) => {
+        console.log('called the method');
+        console.log('HERE IS THE ERRROr');
+        console.log(error);
         callback(error, result && result.data);
       });
     } else {
@@ -58,8 +62,11 @@ export const GoogleApi = {
 
   _refresh(user, callback) {
     Log('GoogleApi._refresh');
+    console.log('About to refresh');
 
     Meteor.call('exchangeRefreshToken', user && user._id, (error, result) => {
+      console.log('Exchaning refresh token');
+      console.log(error);
       callback(error, result && result.access_token);
     });
   },

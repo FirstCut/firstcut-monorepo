@@ -20,7 +20,6 @@ const CompanySchema = new Schema({
     label: 'Brand Into File',
     customType: 'file',
     store: 'cuts',
-    helpText: 'Animated logo file',
   },
   branding: {
     type: Array,

@@ -17,6 +17,7 @@ export function createEvent(args) {
   return new Promise((resolve, reject) => {
     CalendarEventContentSchema.validate(args.event);
     let { event, event_id, owner_email } = args;
+    owner_email = 'lucy@firstcut.io';
     if (Meteor.settings.public.environment === 'development') {
       owner_email = 'lucyannerichards@gmail.com';
     }
@@ -32,6 +33,8 @@ export function createEvent(args) {
       },
     };
     // const user_id = getOrganizerId();
+    console.log('owner email');
+    console.log(owner_email);
     const user = Meteor.users.findOne({ 'services.google.email': owner_email });
     console.log('USEr');
     console.log(user);

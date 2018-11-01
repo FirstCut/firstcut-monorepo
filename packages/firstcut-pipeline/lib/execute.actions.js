@@ -248,10 +248,12 @@ function text(action) {
 function createCalendarEvent(action) {
   var event = action.event,
       user_id = action.user_id,
-      event_id = action.event_id;
+      event_id = action.event_id,
+      owner_email = action.owner_email;
   return (0, _firstcutCalendar.createEvent)({
     event_id: event_id,
     event: event,
-    user_id: user_id
+    user_id: user_id,
+    owner_email: owner_email
   });
 }
