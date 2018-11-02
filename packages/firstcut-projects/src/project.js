@@ -43,6 +43,20 @@ class Project extends Base {
     return this.invoiceService.createNew({ gigId: this._id, type: 'PROJECT' });
   }
 
+  getProjectMessages() {
+    return this.messageService.find({ projectId: this._id });
+  }
+
+  addNewMessage(text) {
+    const message = this.messageService.createNew({
+      text,
+      projectId: this._id,
+      authorId: Meteor.userId(),
+      readBy: [Meteor.userId()],
+    });
+    message.save();
+  }
+
   getCompleteRecordAndChildrenTasks(options) {
     const deliverables = this.getDeliverables().toArray();
     let deliverableTasks = deliverables.map(d => d.getRelatedTasks(options).toArray());

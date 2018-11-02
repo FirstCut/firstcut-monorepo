@@ -5,8 +5,9 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = getNextTask;
+exports.default = void 0;
 
-var _firstcutModels = _interopRequireDefault(require("firstcut-models"));
+var _message = _interopRequireDefault(require("./message"));
 
-function getNextTask(record, player) {}
+var _default = _message.default;
+exports.default = _default;

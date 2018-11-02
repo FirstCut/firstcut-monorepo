@@ -2,13 +2,13 @@
 import { SimpleSchemaWrapper as Schema, BaseSchema } from 'firstcut-schema';
 
 const MessageSchema = new Schema({
-  author: String,
-  content: String,
+  authorId: String,
+  text: String,
   readBy: Array,
   'readBy.$': String,
   projectId: String,
 });
 
-MessageSchema.extends(BaseSchema);
+MessageSchema.extend(BaseSchema);
 
 export default MessageSchema;

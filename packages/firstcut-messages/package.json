@@ -1,5 +1,5 @@
 {
-  "name": "firstcut-conversations",
+  "name": "firstcut-messages",
   "private": true,
   "version": "0.0.0",
   "main": "lib/index.js",

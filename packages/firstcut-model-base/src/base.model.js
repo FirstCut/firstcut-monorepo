@@ -96,33 +96,6 @@ export const BaseModel = defaultValues => class extends Record({
     return this.constructor.createNew(properties);
   }
 
-  // /* TODO: hide this better */
-  // static get collection() {
-  //   .log('GETTING THE COLLECTION');
-  //   let collection = this._collection;
-  //   console.log(this._collection);
-  //   if (!collection) {
-  //     try {
-  //       collection = new Mongo.Collection(this.collectionName);
-  //       collection.attachSchema(this.schema.asSchema);
-  //       this._collection = collection;
-  //     } catch (e) {
-  //       console.log('ERROR');
-  //       console.log(e);
-  //       PubSub.publish('error', e);
-  //     }
-  //   }
-  //   return collection;
-  // }
-  //
-  // static set models(models) {
-  //   this._models = models;
-  // }
-  //
-  // static get models() {
-  //   return this._models;
-  // }
-
   static get legacyModelName() {
     return this.modelName.toUpperCase();
   }
@@ -131,14 +104,6 @@ export const BaseModel = defaultValues => class extends Record({
     return `/${this.collectionName}`;
   }
 
-  // static get schema() {
-  //   return this._schema;
-  // }
-  //
-  // static set schema(schema) {
-  //   this._schema = schema;
-  // }
-  //
   static get availableBlueprints() {
     return this._blueprints;
   }
@@ -312,6 +277,23 @@ export const BaseModel = defaultValues => class extends Record({
 
   get taskService() {
     return this.getServiceOfType('Task');
+  }
+
+  get messageService() {
+    return this.getServiceOfType('Message');
+  }
+
+  getPlayerFromQuery(query) {
+    let player = null;
+    const collab = this.collaboratorService.findOne(query);
+    if (collab) {
+      player = collab;
+    }
+    const client = this.clientService.findOne(query);
+    if (client) {
+      player = client;
+    }
+    return player;
   }
 
   getServiceOfType(modelName) {

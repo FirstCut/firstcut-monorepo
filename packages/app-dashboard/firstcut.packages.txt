@@ -4,6 +4,7 @@ firstcut-analytics
 firstcut-assets
 firstcut-aws
 firstcut-blueprints
+firstcut-chat-widget
 firstcut-clients
 firstcut-collaborators
 firstcut-companies
@@ -13,6 +14,7 @@ firstcut-filestore
 firstcut-google-api
 firstcut-invoices
 firstcut-mailer
+firstcut-messages
 firstcut-calendar
 firstcut-jobs
 firstcut-model-base

@@ -89,6 +89,24 @@ function (_Base) {
       });
     }
   }, {
+    key: "getProjectMessages",
+    value: function getProjectMessages() {
+      return this.messageService.find({
+        projectId: this._id
+      });
+    }
+  }, {
+    key: "addNewMessage",
+    value: function addNewMessage(text) {
+      var message = this.messageService.createNew({
+        text: text,
+        projectId: this._id,
+        authorId: Meteor.userId(),
+        readBy: [Meteor.userId()]
+      });
+      message.save();
+    }
+  }, {
     key: "getCompleteRecordAndChildrenTasks",
     value: function getCompleteRecordAndChildrenTasks(options) {
       var deliverables = this.getDeliverables().toArray();

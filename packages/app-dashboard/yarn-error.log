@@ -1,8 +1,8 @@
 Arguments: 
-  /usr/local/lib/node_modules/node/bin/node /usr/local/Cellar/yarn/1.5.1_1/libexec/bin/yarn.js add file:../firstcut-event-emitter
+  /usr/local/lib/node_modules/node/bin/node /usr/local/Cellar/yarn/1.5.1_1/libexec/bin/yarn.js add react-chat-widget
 
 PATH: 
-  /usr/local/lib/node_modules/npm/node_modules/npm-lifecycle/node-gyp-bin:/Users/artichokes/FirstCut/firstcut-mono/packages/app-dashboard/node_modules/.bin:/Users/artichokes/google-cloud-sdk/bin:/Users/artichokes/.fastlane/bin:/Users/artichokes/.meteor:/Users/artichokes/Scripts:/usr/local/git/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/opt/local/bin:/opt/local/sbin:/usr/X11/bin:/Users/artichokes/Library/Android/sdk/tools:/Users/artichokes/Library/Android/sdk/platform-tools:/Users/artichokes/Library/Android/sdk/tools:/Applications/Postgres.app/Contents/Versions/latest/bin:/Users/artichokes/Library/Android/sdk/build-tools/27.0.2://Users/artichokes/FirstCut/firstcut-mono/scripts
+  /Users/artichokes/google-cloud-sdk/bin:/Users/artichokes/.fastlane/bin:/Users/artichokes/.meteor:/Users/artichokes/Scripts:/usr/local/git/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/opt/local/bin:/opt/local/sbin:/usr/X11/bin:/Users/artichokes/Library/Android/sdk/tools:/Users/artichokes/Library/Android/sdk/platform-tools:/Users/artichokes/Library/Android/sdk/tools:/Applications/Postgres.app/Contents/Versions/latest/bin:/Users/artichokes/Library/Android/sdk/build-tools/27.0.2://Users/artichokes/FirstCut/firstcut-mono/scripts
 
 Yarn version: 
   1.5.1
@@ -74,6 +74,7 @@ npm manifest:
       "firstcut-assets": "^0.0.0",
       "firstcut-aws": "^0.0.0",
       "firstcut-blueprints": "^0.0.0",
+      "firstcut-chat-widget": "^0.0.0",
       "firstcut-clients": "^0.0.0",
       "firstcut-collaborators": "^0.0.0",
       "firstcut-companies": "^0.0.0",
@@ -83,6 +84,7 @@ npm manifest:
       "firstcut-google-api": "^0.0.0",
       "firstcut-invoices": "^0.0.0",
       "firstcut-mailer": "^0.0.0",
+      "firstcut-messages": "^0.0.0",
       "firstcut-calendar": "^0.0.0",
       "firstcut-jobs": "^0.0.0",
       "firstcut-model-base": "^0.0.0",
@@ -5063,7 +5065,7 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/zerop/-/zerop-1.0.1.tgz#edf8917f4bc9772cebc5066b5fe4b8a78a2c6fa3"
 
 Trace: 
-  Error: https://registry.npmjs.org/firstcut-action-utils: Not found
+  Error: https://registry.yarnpkg.com/firstcut-action-utils: Not found
       at Request.params.callback [as _callback] (/usr/local/Cellar/yarn/1.5.1_1/libexec/lib/cli.js:65019:18)
       at Request.self.callback (/usr/local/Cellar/yarn/1.5.1_1/libexec/lib/cli.js:132430:22)
       at Request.emit (events.js:159:13)

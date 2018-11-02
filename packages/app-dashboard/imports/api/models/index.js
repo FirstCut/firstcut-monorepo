@@ -10,6 +10,7 @@ import Invoice from 'firstcut-invoices';
 import Job from 'firstcut-jobs';
 import Asset from 'firstcut-assets';
 import Task from 'firstcut-tasks';
+import Message from 'firstcut-messages';
 import LandingPageRequest from 'firstcut-landingpage-requests';
 import { _ } from 'lodash';
 import enablePlayerUtils from 'firstcut-players';
@@ -48,6 +49,7 @@ const models = ({
   Job,
   Asset,
   Cut,
+  Message,
   LandingPageRequest,
 });
 

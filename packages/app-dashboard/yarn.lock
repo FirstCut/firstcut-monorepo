@@ -46,7 +46,7 @@
     esutils "^2.0.2"
     js-tokens "^3.0.0"
 
-"@babel/runtime@^7.0.0", "@babel/runtime@^7.1.2":
+"@babel/runtime@^7.1.2":
   version "7.1.2"
   resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.1.2.tgz#81c89935f4647706fc54541145e6b4ecfef4b8e3"
   dependencies:
@@ -83,13 +83,6 @@
     esutils "^2.0.2"
     lodash "^4.2.0"
     to-fast-properties "^2.0.0"
-
-"@semantic-ui-react/event-stack@^2.0.0":
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/@semantic-ui-react/event-stack/-/event-stack-2.0.0.tgz#d2d568a9fb0ee204b0e40d6b73ac2a2403c08451"
-  dependencies:
-    exenv "^1.2.2"
-    prop-types "^15.6.2"
 
 "@sindresorhus/is@^0.7.0":
   version "0.7.0"
@@ -760,7 +753,7 @@ circular-json@^0.3.1:
   version "0.3.3"
   resolved "https://registry.yarnpkg.com/circular-json/-/circular-json-0.3.3.tgz#815c99ea84f6809529d2f45791bdf82711352d66"
 
-classnames@^2.2.5, classnames@^2.2.6:
+classnames@^2.2.5:
   version "2.2.6"
   resolved "https://registry.yarnpkg.com/classnames/-/classnames-2.2.6.tgz#43935bffdd291f326dad0a205309b38d00f650ce"
 
@@ -1498,10 +1491,6 @@ evp_bytestokey@^1.0.0, evp_bytestokey@^1.0.3:
     md5.js "^1.3.4"
     safe-buffer "^5.1.1"
 
-exenv@^1.2.2:
-  version "1.2.2"
-  resolved "https://registry.yarnpkg.com/exenv/-/exenv-1.2.2.tgz#2ae78e85d9894158670b03d47bec1f03bd91bb9d"
-
 expand-template@^1.0.2:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/expand-template/-/expand-template-1.1.1.tgz#981f188c0c3a87d2e28f559bc541426ff94f21dd"
@@ -1614,316 +1603,6 @@ first-chunk-stream@^2.0.0:
   resolved "https://registry.yarnpkg.com/first-chunk-stream/-/first-chunk-stream-2.0.0.tgz#1bdecdb8e083c0664b91945581577a43a9f31d70"
   dependencies:
     readable-stream "^2.0.2"
-
-"firstcut-action-utils@file:../firstcut-action-utils":
-  version "0.0.0"
-  dependencies:
-    "@babel/runtime" "^7.1.2"
-    firstcut-pipeline-consts "file:../../../../Library/Caches/Yarn/v1/firstcut-pipeline-consts"
-    lodash "^4.17.11"
-
-"firstcut-actions@file:../firstcut-actions":
-  version "0.0.0"
-  dependencies:
-    "@babel/runtime" "^7.1.2"
-    firstcut-action-utils "file:../../../../Library/Caches/Yarn/v1/firstcut-action-utils"
-    firstcut-pipeline-consts "file:../../../../Library/Caches/Yarn/v1/firstcut-pipeline-consts"
-    firstcut-retrieve-url "file:../../../../Library/Caches/Yarn/v1/firstcut-retrieve-url"
-    firstcut-schema "file:../../../../Library/Caches/Yarn/v1/firstcut-schema"
-    firstcut-utils "file:../../../../Library/Caches/Yarn/v1/firstcut-utils"
-    lodash "^4.17.11"
-
-"firstcut-analytics@file:../firstcut-analytics":
-  version "0.0.0"
-  dependencies:
-    "@babel/runtime" "^7.1.2"
-    firstcut-pipeline-consts "file:../../../../Library/Caches/Yarn/v1/firstcut-pipeline-consts"
-    firstcut-user-session "file:../../../../Library/Caches/Yarn/v1/firstcut-user-session"
-    lodash "^4.17.11"
-
-"firstcut-assets@file:../firstcut-assets":
-  version "0.0.0"
-  dependencies:
-    "@babel/runtime" "^7.1.2"
-    firstcut-model-base "file:../../../../Library/Caches/Yarn/v1/firstcut-model-base"
-    firstcut-schema "file:../../../../Library/Caches/Yarn/v1/firstcut-schema"
-    lodash "^4.17.11"
-    mdbid "^1.0.0"
-    sanitize-filename "^1.6.1"
-
-"firstcut-aws@file:../firstcut-aws":
-  version "0.0.0"
-  dependencies:
-    "@babel/runtime" "^7.1.2"
-    aws-sdk "^2.327.0"
-
-"firstcut-blueprints@file:../firstcut-blueprints":
-  version "0.0.0"
-  dependencies:
-    "@babel/runtime" "^7.1.2"
-    firstcut-schema "file:../../../../Library/Caches/Yarn/v1/firstcut-schema"
-    lodash "^4.17.11"
-
-"firstcut-calendar@file:../firstcut-calendar":
-  version "0.0.0"
-  dependencies:
-    "@babel/runtime" "^7.1.2"
-    lodash "^4.17.11"
-
-"firstcut-clients@file:../firstcut-clients":
-  version "0.0.0"
-  dependencies:
-    "@babel/runtime" "^7.1.2"
-    firstcut-action-utils "file:../../../../Library/Caches/Yarn/v1/firstcut-action-utils"
-    firstcut-model-base "file:../../../../Library/Caches/Yarn/v1/firstcut-model-base"
-    firstcut-schema "file:../../../../Library/Caches/Yarn/v1/firstcut-schema"
-    lodash "^4.17.11"
-
-"firstcut-collaborators@file:../firstcut-collaborators":
-  version "0.0.0"
-  dependencies:
-    "@babel/runtime" "^7.1.2"
-    firstcut-model-base "file:../../../../Library/Caches/Yarn/v1/firstcut-model-base"
-    firstcut-pipeline-consts "file:../../../../Library/Caches/Yarn/v1/firstcut-pipeline-consts"
-    firstcut-schema "file:../../../../Library/Caches/Yarn/v1/firstcut-schema"
-    lodash "^4.17.11"
-    simpl-schema "^1.5.3"
-
-"firstcut-companies@file:../firstcut-companies":
-  version "0.0.0"
-  dependencies:
-    "@babel/runtime" "^7.1.2"
-    firstcut-model-base "file:../../../../Library/Caches/Yarn/v1/firstcut-model-base"
-    firstcut-schema "file:../../../../Library/Caches/Yarn/v1/firstcut-schema"
-    lodash "^4.17.11"
-
-"firstcut-cuts@file:../firstcut-cuts":
-  version "0.0.0"
-  dependencies:
-    "@babel/runtime" "^7.1.2"
-    firstcut-model-base "file:../../../../Library/Caches/Yarn/v1/firstcut-model-base"
-    firstcut-pipeline-consts "file:../../../../Library/Caches/Yarn/v1/firstcut-pipeline-consts"
-    firstcut-schema "file:../../../../Library/Caches/Yarn/v1/firstcut-schema"
-    lodash "^4.17.11"
-
-"firstcut-deliverables@file:../firstcut-deliverables":
-  version "0.0.0"
-  dependencies:
-    "@babel/runtime" "^7.1.2"
-    firstcut-blueprints "file:../../../../Library/Caches/Yarn/v1/firstcut-blueprints"
-    firstcut-model-base "file:../../../../Library/Caches/Yarn/v1/firstcut-model-base"
-    firstcut-pipeline-consts "file:../../../../Library/Caches/Yarn/v1/firstcut-pipeline-consts"
-    firstcut-schema "file:../../../../Library/Caches/Yarn/v1/firstcut-schema"
-    lodash "^4.17.11"
-
-"firstcut-event-emitter@file:../firstcut-event-emitter":
-  version "0.0.0"
-  dependencies:
-    "@babel/runtime" "^7.1.2"
-    firstcut-user-session "file:../../../../Library/Caches/Yarn/v1/firstcut-user-session"
-    lodash "^4.17.11"
-
-"firstcut-filestore@file:../firstcut-filestore":
-  version "0.0.0"
-  dependencies:
-    "@babel/runtime" "^7.1.2"
-    firstcut-aws "file:../../../../Library/Caches/Yarn/v1/firstcut-aws"
-    lodash "^4.17.11"
-    simpl-schema "^1.5.3"
-
-"firstcut-google-api@file:../firstcut-google-api":
-  version "0.0.0"
-  dependencies:
-    "@babel/runtime" "^7.1.2"
-    lodash "^4.17.11"
-
-"firstcut-invoices@file:../firstcut-invoices":
-  version "0.0.0"
-  dependencies:
-    "@babel/runtime" "^7.1.2"
-    firstcut-model-base "file:../../../../Library/Caches/Yarn/v1/firstcut-model-base"
-    firstcut-pipeline-consts "file:../../../../Library/Caches/Yarn/v1/firstcut-pipeline-consts"
-    firstcut-schema "file:../../../../Library/Caches/Yarn/v1/firstcut-schema"
-    lodash "^4.17.11"
-
-"firstcut-jobs@file:../firstcut-jobs":
-  version "0.0.0"
-  dependencies:
-    "@babel/runtime" "^7.1.2"
-    firstcut-model-base "file:../../../../Library/Caches/Yarn/v1/firstcut-model-base"
-    firstcut-schema "file:../../../../Library/Caches/Yarn/v1/firstcut-schema"
-    lodash "^4.17.11"
-    node-schedule "^1.3.0"
-
-"firstcut-landingpage-requests@file:../firstcut-landingpage-requests":
-  version "0.0.0"
-  dependencies:
-    "@babel/runtime" "^7.1.2"
-    firstcut-model-base "file:../../../../Library/Caches/Yarn/v1/firstcut-model-base"
-    firstcut-schema "file:../../../../Library/Caches/Yarn/v1/firstcut-schema"
-
-"firstcut-mailer@file:../firstcut-mailer":
-  version "0.0.0"
-  dependencies:
-    "@babel/runtime" "^7.1.2"
-    lodash "^4.17.11"
-    sparkpost "^2.1.2"
-
-"firstcut-model-base@file:../firstcut-model-base":
-  version "0.0.0"
-  dependencies:
-    "@babel/runtime" "^7.1.2"
-    firstcut-action-utils "file:../../../../Library/Caches/Yarn/v1/firstcut-action-utils"
-    firstcut-retrieve-url "file:../../../../Library/Caches/Yarn/v1/firstcut-retrieve-url"
-    firstcut-schema "file:../../../../Library/Caches/Yarn/v1/firstcut-schema"
-    firstcut-utils "file:../../../../Library/Caches/Yarn/v1/firstcut-utils"
-    lodash "^4.17.11"
-    pubsub-js "^1.7.0"
-
-"firstcut-pipeline-consts@file:../firstcut-pipeline-consts":
-  version "0.0.0"
-  dependencies:
-    "@babel/runtime" "^7.1.2"
-    firstcut-calendar "file:../../../../Library/Caches/Yarn/v1/firstcut-calendar"
-    firstcut-slack "file:../../../../Library/Caches/Yarn/v1/firstcut-slack"
-    immutable "^3.8.2"
-    lodash "^4.17.11"
-    simpl-schema "^1.5.3"
-
-"firstcut-pipeline-utils@file:../firstcut-pipeline-utils":
-  version "0.0.0"
-  dependencies:
-    "@babel/runtime" "^7.1.2"
-    firstcut-actions "file:../../../../Library/Caches/Yarn/v1/firstcut-actions"
-    firstcut-pipeline-consts "file:../../../../Library/Caches/Yarn/v1/firstcut-pipeline-consts"
-    firstcut-schema "file:../../../../Library/Caches/Yarn/v1/firstcut-schema"
-    firstcut-user-session "file:../../../../Library/Caches/Yarn/v1/firstcut-user-session"
-    lodash "^4.17.11"
-
-"firstcut-pipeline@file:../firstcut-pipeline":
-  version "0.0.0"
-  dependencies:
-    "@babel/runtime" "^7.1.2"
-    firstcut-actions "file:../../../../Library/Caches/Yarn/v1/firstcut-actions"
-    firstcut-calendar "file:../../../../Library/Caches/Yarn/v1/firstcut-calendar"
-    firstcut-google-api "file:../../../../Library/Caches/Yarn/v1/firstcut-google-api"
-    firstcut-mailer "file:../../../../Library/Caches/Yarn/v1/firstcut-mailer"
-    firstcut-pipeline-consts "file:../../../../Library/Caches/Yarn/v1/firstcut-pipeline-consts"
-    firstcut-retrieve-url "file:../../../../Library/Caches/Yarn/v1/firstcut-retrieve-url"
-    firstcut-schema "file:../../../../Library/Caches/Yarn/v1/firstcut-schema"
-    firstcut-slack "file:../../../../Library/Caches/Yarn/v1/firstcut-slack"
-    firstcut-text-messaging "file:../../../../Library/Caches/Yarn/v1/firstcut-text-messaging"
-    firstcut-user-session "file:../../../../Library/Caches/Yarn/v1/firstcut-user-session"
-    firstcut-utils "file:../../../../Library/Caches/Yarn/v1/firstcut-utils"
-    lodash "^4.17.11"
-
-"firstcut-players@file:../firstcut-players":
-  version "0.0.0"
-  dependencies:
-    "@babel/runtime" "^7.1.2"
-    lodash "^4.17.11"
-    moment "^2.22.2"
-
-"firstcut-projects@file:../firstcut-projects":
-  version "0.0.0"
-  dependencies:
-    "@babel/runtime" "^7.1.2"
-    firstcut-action-utils "file:../../../../Library/Caches/Yarn/v1/firstcut-action-utils"
-    firstcut-blueprints "file:../../../../Library/Caches/Yarn/v1/firstcut-blueprints"
-    firstcut-model-base "file:../../../../Library/Caches/Yarn/v1/firstcut-model-base"
-    firstcut-pipeline-consts "file:../../../../Library/Caches/Yarn/v1/firstcut-pipeline-consts"
-    firstcut-schema "file:../../../../Library/Caches/Yarn/v1/firstcut-schema"
-    lodash "^4.17.11"
-
-"firstcut-react-autoform@file:../firstcut-react-autoform":
-  version "0.0.0"
-  dependencies:
-    "@babel/runtime" "^7.1.2"
-    firstcut-schema "file:../../../../Library/Caches/Yarn/v1/firstcut-schema"
-    lodash "^4.17.11"
-    moment-timezone "^0.5.21"
-    prop-types "^15.6.2"
-    react "^16.5.2"
-    react-dom "^16.5.2"
-    react-google-autocomplete "^1.0.16"
-    react-test-renderer "^16.5.2"
-    semantic-ui-react "^0.82.5"
-
-"firstcut-retrieve-url@file:../firstcut-retrieve-url":
-  version "0.0.0"
-  dependencies:
-    "@babel/runtime" "^7.1.2"
-    firstcut-utils "file:../../../../Library/Caches/Yarn/v1/firstcut-utils"
-    lodash "^4.17.11"
-
-"firstcut-schema@file:../firstcut-schema":
-  version "0.0.0"
-  dependencies:
-    "@babel/runtime" "^7.1.2"
-    firstcut-pipeline-consts "file:../../../../Library/Caches/Yarn/v1/firstcut-pipeline-consts"
-    lodash "^4.17.11"
-    moment-timezone "^0.5.21"
-
-"firstcut-shoots@file:../firstcut-shoots":
-  version "0.0.0"
-  dependencies:
-    "@babel/runtime" "^7.1.2"
-    firstcut-blueprints "file:../../../../Library/Caches/Yarn/v1/firstcut-blueprints"
-    firstcut-model-base "file:../../../../Library/Caches/Yarn/v1/firstcut-model-base"
-    firstcut-pipeline-consts "file:../../../../Library/Caches/Yarn/v1/firstcut-pipeline-consts"
-    firstcut-retrieve-url "file:../../../../Library/Caches/Yarn/v1/firstcut-retrieve-url"
-    firstcut-schema "file:../../../../Library/Caches/Yarn/v1/firstcut-schema"
-    firstcut-utils "file:../../../../Library/Caches/Yarn/v1/firstcut-utils"
-    lodash "^4.17.11"
-
-"firstcut-slack@file:../firstcut-slack":
-  version "0.0.0"
-  dependencies:
-    "@babel/runtime" "^7.1.2"
-    "@slack/client" "^4.8.0"
-    lodash "^4.17.11"
-
-"firstcut-tasks@file:../firstcut-tasks":
-  version "0.0.0"
-  dependencies:
-    "@babel/runtime" "^7.1.2"
-    firstcut-model-base "file:../../../../Library/Caches/Yarn/v1/firstcut-model-base"
-    firstcut-pipeline-consts "file:../../../../Library/Caches/Yarn/v1/firstcut-pipeline-consts"
-    firstcut-schema "file:../../../../Library/Caches/Yarn/v1/firstcut-schema"
-    firstcut-user-session "file:../../../../Library/Caches/Yarn/v1/firstcut-user-session"
-    lodash "^4.17.11"
-
-"firstcut-text-messaging@file:../firstcut-text-messaging":
-  version "0.0.0"
-  dependencies:
-    "@babel/runtime" "^7.1.2"
-    firstcut-utils "file:../../../../Library/Caches/Yarn/v1/firstcut-utils"
-    lodash "^4.17.11"
-    simpl-schema "^1.5.3"
-    twilio "^3.21.0"
-
-"firstcut-uploader@file:../firstcut-uploader":
-  version "0.0.0"
-  dependencies:
-    "@babel/runtime" "^7.1.2"
-    aws-sdk "^2.327.0"
-    crypto-js "^3.1.9-1"
-    evaporate "^2.1.4"
-    lodash "^4.17.11"
-
-"firstcut-user-session@file:../firstcut-user-session":
-  version "0.0.0"
-  dependencies:
-    "@babel/runtime" "^7.1.2"
-    lodash "^4.17.11"
-    moment "^2.22.2"
-
-"firstcut-utils@file:../firstcut-utils":
-  version "0.0.0"
-  dependencies:
-    "@babel/runtime" "^7.1.2"
-    lodash "^4.17.11"
-    moment-timezone "^0.5.21"
 
 flat-cache@^1.2.1:
   version "1.3.0"
@@ -2253,6 +1932,12 @@ hoist-non-react-statics@^2.5.0:
   version "2.5.5"
   resolved "https://registry.yarnpkg.com/hoist-non-react-statics/-/hoist-non-react-statics-2.5.5.tgz#c5903cf409c0dfd908f388e619d86b9c1174cb47"
 
+hoist-non-react-statics@^3.0.0:
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/hoist-non-react-statics/-/hoist-non-react-statics-3.1.0.tgz#42414ccdfff019cd2168168be998c7b3bd5245c0"
+  dependencies:
+    react-is "^16.3.2"
+
 home-path@^1.0.1:
   version "1.0.6"
   resolved "https://registry.yarnpkg.com/home-path/-/home-path-1.0.6.tgz#d549dc2465388a7f8667242c5b31588d29af29fc"
@@ -2312,7 +1997,7 @@ ignore@^3.3.3:
   version "3.3.10"
   resolved "https://registry.yarnpkg.com/ignore/-/ignore-3.3.10.tgz#0a97fb876986e8081c631160f8f9f389157f0043"
 
-immutable@^3.8.2:
+immutable@^3.8.1, immutable@^3.8.2:
   version "3.8.2"
   resolved "https://registry.yarnpkg.com/immutable/-/immutable-3.8.2.tgz#c2439951455bb39913daf281376f1530e104adf3"
 
@@ -2652,10 +2337,6 @@ jws@^3.1.5:
     jwa "^1.1.5"
     safe-buffer "^5.0.1"
 
-keyboard-key@^1.0.2:
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/keyboard-key/-/keyboard-key-1.0.2.tgz#212e14dde4c2059814336159bbc5acd0a348ca6b"
-
 keyv@3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/keyv/-/keyv-3.0.0.tgz#44923ba39e68b12a7cec7df6c3268c031f2ef373"
@@ -2685,6 +2366,12 @@ levn@^0.3.0, levn@~0.3.0:
     prelude-ls "~1.1.2"
     type-check "~0.3.2"
 
+linkify-it@^2.0.0:
+  version "2.0.3"
+  resolved "https://registry.yarnpkg.com/linkify-it/-/linkify-it-2.0.3.tgz#d94a4648f9b1c179d64fa97291268bdb6ce9434f"
+  dependencies:
+    uc.micro "^1.0.1"
+
 load-json-file@^1.0.0:
   version "1.1.0"
   resolved "http://registry.npmjs.org/load-json-file/-/load-json-file-1.1.0.tgz#956905708d58b4bab4c2261b04f59f31c99374c0"
@@ -2710,6 +2397,10 @@ locate-path@^2.0.0:
   dependencies:
     p-locate "^2.0.0"
     path-exists "^3.0.0"
+
+lodash-es@^4.2.1:
+  version "4.17.11"
+  resolved "https://registry.yarnpkg.com/lodash-es/-/lodash-es-4.17.11.tgz#145ab4a7ac5c5e52a3531fb4f310255a152b4be0"
 
 lodash._basecallback@^3.0.0:
   version "3.3.1"
@@ -2967,7 +2658,7 @@ lodash.without@^4.4.0:
   version "4.4.0"
   resolved "https://registry.yarnpkg.com/lodash.without/-/lodash.without-4.4.0.tgz#3cd4574a00b67bae373a94b748772640507b7aac"
 
-lodash@^4.15.0, lodash@^4.17.10, lodash@^4.17.11, lodash@^4.17.2, lodash@^4.17.4, lodash@^4.2.0, lodash@^4.3.0:
+lodash@^4.15.0, lodash@^4.17.10, lodash@^4.17.11, lodash@^4.17.2, lodash@^4.17.4, lodash@^4.2.0, lodash@^4.2.1, lodash@^4.3.0:
   version "4.17.11"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.11.tgz#b39ea6229ef607ecd89e2c8df12536891cac9b8d"
 
@@ -3011,6 +2702,28 @@ map-obj@^1.0.0, map-obj@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/map-obj/-/map-obj-1.0.1.tgz#d933ceb9205d82bdcf4886f6742bdc2b4dea146d"
 
+markdown-it-link-attributes@^2.1.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/markdown-it-link-attributes/-/markdown-it-link-attributes-2.1.0.tgz#32a74c94f7c5cdfd08868d2bee29c6fa70a08324"
+
+markdown-it-sanitizer@^0.4.3:
+  version "0.4.3"
+  resolved "https://registry.yarnpkg.com/markdown-it-sanitizer/-/markdown-it-sanitizer-0.4.3.tgz#2ba34e9fe16e6372ce7192fb50b37d9dfbff0102"
+
+markdown-it-sup@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/markdown-it-sup/-/markdown-it-sup-1.0.0.tgz#cb9c9ff91a5255ac08f3fd3d63286e15df0a1fc3"
+
+markdown-it@^8.4.1:
+  version "8.4.2"
+  resolved "https://registry.yarnpkg.com/markdown-it/-/markdown-it-8.4.2.tgz#386f98998dc15a37722aa7722084f4020bdd9b54"
+  dependencies:
+    argparse "^1.0.7"
+    entities "~1.1.1"
+    linkify-it "^2.0.0"
+    mdurl "^1.0.1"
+    uc.micro "^1.0.5"
+
 md5.js@^1.3.4:
   version "1.3.5"
   resolved "https://registry.yarnpkg.com/md5.js/-/md5.js-1.3.5.tgz#b5d07b8e3216e3e27cd728d72f70d1e6a342005f"
@@ -3024,6 +2737,10 @@ mdbid@^1.0.0:
   resolved "https://registry.yarnpkg.com/mdbid/-/mdbid-1.0.0.tgz#c85179ffc066c0868a8e33eb5fba28845156d8a7"
   dependencies:
     zerop "^1.0.1"
+
+mdurl@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/mdurl/-/mdurl-1.0.1.tgz#fe85b2ec75a59037f2adfec100fd6c601761152e"
 
 meow@^3.1.0:
   version "3.7.0"
@@ -3770,7 +3487,7 @@ public-encrypt@^4.0.0:
     randombytes "^2.0.1"
     safe-buffer "^5.1.2"
 
-pubsub-js@^1.6.0, pubsub-js@^1.7.0:
+pubsub-js@^1.6.0:
   version "1.7.0"
   resolved "https://registry.yarnpkg.com/pubsub-js/-/pubsub-js-1.7.0.tgz#eca97f9a4217bef62b2d3aaa1552005260cc2e49"
 
@@ -3863,6 +3580,20 @@ rc@^1.0.1, rc@^1.1.2, rc@^1.1.6, rc@^1.2.7:
     minimist "^1.2.0"
     strip-json-comments "~2.0.1"
 
+react-chat-widget@^2.1.4-1:
+  version "2.1.4-1"
+  resolved "https://registry.yarnpkg.com/react-chat-widget/-/react-chat-widget-2.1.4-1.tgz#7097a39b45f0232bc2e25fc0ba5ae5939c93e103"
+  dependencies:
+    immutable "^3.8.1"
+    markdown-it "^8.4.1"
+    markdown-it-link-attributes "^2.1.0"
+    markdown-it-sanitizer "^0.4.3"
+    markdown-it-sup "^1.0.0"
+    prop-types "^15.5.10"
+    react-immutable-proptypes "^2.1.0"
+    react-redux "^5.0.6"
+    redux "^3.7.2"
+
 react-copy-to-clipboard@^5.0.1:
   version "5.0.1"
   resolved "https://registry.yarnpkg.com/react-copy-to-clipboard/-/react-copy-to-clipboard-5.0.1.tgz#8eae107bb400be73132ed3b6a7b4fb156090208e"
@@ -3879,7 +3610,7 @@ react-datetime@^2.14.0:
     prop-types "^15.5.7"
     react-onclickoutside "^6.5.0"
 
-react-dom@^16.4.1, react-dom@^16.5.2:
+react-dom@^16.4.1:
   version "16.5.2"
   resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-16.5.2.tgz#b69ee47aa20bab5327b2b9d7c1fe2a30f2cfa9d7"
   dependencies:
@@ -3901,13 +3632,33 @@ react-google-autocomplete@^1.0.16:
   dependencies:
     prop-types "^15.5.0"
 
-react-is@^16.5.2:
-  version "16.5.2"
-  resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.5.2.tgz#e2a7b7c3f5d48062eb769fcb123505eb928722e3"
+react-immutable-proptypes@^2.1.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/react-immutable-proptypes/-/react-immutable-proptypes-2.1.0.tgz#023d6f39bb15c97c071e9e60d00d136eac5fa0b4"
+
+react-is@^16.3.2, react-is@^16.6.0:
+  version "16.6.0"
+  resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.6.0.tgz#456645144581a6e99f6816ae2bd24ee94bdd0c01"
+
+react-lifecycles-compat@^3.0.0:
+  version "3.0.4"
+  resolved "https://registry.yarnpkg.com/react-lifecycles-compat/-/react-lifecycles-compat-3.0.4.tgz#4f1a273afdfc8f3488a8c516bfda78f872352362"
 
 react-onclickoutside@^6.5.0:
   version "6.7.1"
   resolved "https://registry.yarnpkg.com/react-onclickoutside/-/react-onclickoutside-6.7.1.tgz#6a5b5b8b4eae6b776259712c89c8a2b36b17be93"
+
+react-redux@^5.0.6:
+  version "5.1.0"
+  resolved "https://registry.yarnpkg.com/react-redux/-/react-redux-5.1.0.tgz#948b1e2686473d1999092bcfb32d0dc43d33f667"
+  dependencies:
+    "@babel/runtime" "^7.1.2"
+    hoist-non-react-statics "^3.0.0"
+    invariant "^2.2.4"
+    loose-envify "^1.1.0"
+    prop-types "^15.6.1"
+    react-is "^16.6.0"
+    react-lifecycles-compat "^3.0.0"
 
 react-router-dom@^4.3.1:
   version "4.3.1"
@@ -3938,16 +3689,7 @@ react-stripe-elements@^2.0.1:
   dependencies:
     prop-types "^15.5.10"
 
-react-test-renderer@^16.5.2:
-  version "16.5.2"
-  resolved "https://registry.yarnpkg.com/react-test-renderer/-/react-test-renderer-16.5.2.tgz#92e9d2c6f763b9821b2e0b22f994ee675068b5ae"
-  dependencies:
-    object-assign "^4.1.1"
-    prop-types "^15.6.2"
-    react-is "^16.5.2"
-    schedule "^0.5.0"
-
-react@^16.4.0, react@^16.5.2:
+react@^16.4.0:
   version "16.5.2"
   resolved "https://registry.yarnpkg.com/react/-/react-16.5.2.tgz#19f6b444ed139baa45609eee6dc3d318b3895d42"
   dependencies:
@@ -4013,6 +3755,15 @@ redent@^1.0.0:
   dependencies:
     indent-string "^2.1.0"
     strip-indent "^1.0.1"
+
+redux@^3.7.2:
+  version "3.7.2"
+  resolved "https://registry.yarnpkg.com/redux/-/redux-3.7.2.tgz#06b73123215901d25d065be342eb026bc1c8537b"
+  dependencies:
+    lodash "^4.2.1"
+    lodash-es "^4.2.1"
+    loose-envify "^1.1.0"
+    symbol-observable "^1.0.3"
 
 regenerator-runtime@^0.11.0:
   version "0.11.1"
@@ -4214,18 +3965,6 @@ semantic-ui-react@^0.79.1:
     lodash "^4.17.4"
     prop-types "^15.5.10"
 
-semantic-ui-react@^0.82.5:
-  version "0.82.5"
-  resolved "https://registry.yarnpkg.com/semantic-ui-react/-/semantic-ui-react-0.82.5.tgz#3bc098a0b22d3a76d8d7fb020dee07311bc2784f"
-  dependencies:
-    "@babel/runtime" "^7.0.0"
-    "@semantic-ui-react/event-stack" "^2.0.0"
-    classnames "^2.2.6"
-    keyboard-key "^1.0.2"
-    lodash "^4.17.10"
-    prop-types "^15.6.2"
-    shallowequal "^1.1.0"
-
 "semver@2 || 3 || 4 || 5", semver@^5.3.0, semver@^5.4.1, semver@^5.5.0:
   version "5.5.1"
   resolved "https://registry.yarnpkg.com/semver/-/semver-5.5.1.tgz#7dfdd8814bdb7cabc7be0fb1d734cfb66c940477"
@@ -4244,10 +3983,6 @@ sha.js@^2.4.0, sha.js@^2.4.8:
   dependencies:
     inherits "^2.0.1"
     safe-buffer "^5.0.1"
-
-shallowequal@^1.1.0:
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/shallowequal/-/shallowequal-1.1.0.tgz#188d521de95b9087404fd4dcb68b13df0ae4e7f8"
 
 shebang-command@^1.2.0:
   version "1.2.0"
@@ -4269,7 +4004,7 @@ signal-exit@^3.0.0, signal-exit@^3.0.2:
   version "3.0.2"
   resolved "https://registry.yarnpkg.com/signal-exit/-/signal-exit-3.0.2.tgz#b5fdc08f1287ea1178628e415e25132b73646c6d"
 
-simpl-schema@^1.5.0, simpl-schema@^1.5.3:
+simpl-schema@^1.5.0:
   version "1.5.3"
   resolved "https://registry.yarnpkg.com/simpl-schema/-/simpl-schema-1.5.3.tgz#c1d12ebddd7ff6dd32ace5e6364824ae506d4a9a"
   dependencies:
@@ -4524,6 +4259,10 @@ supports-color@^5.3.0, supports-color@^5.4.0:
   dependencies:
     has-flag "^3.0.0"
 
+symbol-observable@^1.0.3:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/symbol-observable/-/symbol-observable-1.2.0.tgz#c22688aed4eab3cdc2dfeacbb561660560a00804"
+
 table@4.0.2:
   version "4.0.2"
   resolved "https://registry.yarnpkg.com/table/-/table-4.0.2.tgz#a33447375391e766ad34d3486e6e2aedc84d2e36"
@@ -4671,21 +4410,6 @@ tweetnacl@^0.14.3, tweetnacl@~0.14.0:
   version "0.14.5"
   resolved "https://registry.yarnpkg.com/tweetnacl/-/tweetnacl-0.14.5.tgz#5ae68177f192d4456269d108afa93ff8743f4f64"
 
-twilio@^3.21.0:
-  version "3.23.1"
-  resolved "https://registry.yarnpkg.com/twilio/-/twilio-3.23.1.tgz#a5d6847e084776d060de375b08c07d859da4e5b1"
-  dependencies:
-    "@types/express" "^4.11.1"
-    deprecate "1.0.0"
-    jsonwebtoken "^8.1.0"
-    lodash "^4.17.10"
-    moment "2.19.3"
-    q "2.0.x"
-    request "^2.87.0"
-    rootpath "0.1.2"
-    scmp "0.0.3"
-    xmlbuilder "9.0.1"
-
 twilio@^3.22.0:
   version "3.22.0"
   resolved "https://registry.yarnpkg.com/twilio/-/twilio-3.22.0.tgz#77d53b7bac8943a8f67a2e580224057cb729603d"
@@ -4714,6 +4438,10 @@ typedarray@^0.0.6:
 ua-parser-js@^0.7.18:
   version "0.7.18"
   resolved "https://registry.yarnpkg.com/ua-parser-js/-/ua-parser-js-0.7.18.tgz#a7bfd92f56edfb117083b69e31d2aa8882d4b1ed"
+
+uc.micro@^1.0.1, uc.micro@^1.0.5:
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/uc.micro/-/uc.micro-1.0.5.tgz#0c65f15f815aa08b560a61ce8b4db7ffc3f45376"
 
 underscore@~1.4.4:
   version "1.4.4"
