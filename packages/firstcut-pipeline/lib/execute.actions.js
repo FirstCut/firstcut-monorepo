@@ -10,6 +10,8 @@ exports.handleEvent = handleEvent;
 
 var _regenerator = _interopRequireDefault(require("@babel/runtime/regenerator"));
 
+var _defineProperty2 = _interopRequireDefault(require("@babel/runtime/helpers/defineProperty"));
+
 var _objectSpread2 = _interopRequireDefault(require("@babel/runtime/helpers/objectSpread"));
 
 var _objectWithoutProperties2 = _interopRequireDefault(require("@babel/runtime/helpers/objectWithoutProperties"));
@@ -31,6 +33,8 @@ var _pubsubJs = require("pubsub-js");
 var _firstcutPipelineUtils = require("firstcut-pipeline-utils");
 
 var _mdbid = _interopRequireDefault(require("mdbid"));
+
+var _lodash = require("lodash");
 
 // import { Billing } from 'firstcut-billing';
 var slackTemplateDefaults = {
@@ -124,78 +128,18 @@ function saveToHistory(args) {
   withHistory.save();
 }
 
-function execute(_x2) {
-  return _execute.apply(this, arguments);
-}
-
-function _execute() {
-  _execute = (0, _asyncToGenerator2.default)(
-  /*#__PURE__*/
-  _regenerator.default.mark(function _callee3(actions) {
-    return _regenerator.default.wrap(function _callee3$(_context3) {
-      while (1) {
-        switch (_context3.prev = _context3.next) {
-          case 0:
-            return _context3.abrupt("return", actions.reduce(
-            /*#__PURE__*/
-            function () {
-              var _ref = (0, _asyncToGenerator2.default)(
-              /*#__PURE__*/
-              _regenerator.default.mark(function _callee2(r, action) {
-                var result, actionResult;
-                return _regenerator.default.wrap(function _callee2$(_context2) {
-                  while (1) {
-                    switch (_context2.prev = _context2.next) {
-                      case 0:
-                        result = r;
-                        _context2.prev = 1;
-                        _context2.next = 4;
-                        return executeAction(action);
-
-                      case 4:
-                        actionResult = _context2.sent;
-
-                        if (result) {
-                          result = (0, _objectSpread2.default)({}, actionResult, result);
-                        }
-
-                        _context2.next = 13;
-                        break;
-
-                      case 8:
-                        _context2.prev = 8;
-                        _context2.t0 = _context2["catch"](1);
-                        console.log('Error executing');
-                        console.log(action);
-
-                        _pubsubJs.PubSub.publish('error', {
-                          message: _context2.t0.toString()
-                        });
-
-                      case 13:
-                        return _context2.abrupt("return", result);
-
-                      case 14:
-                      case "end":
-                        return _context2.stop();
-                    }
-                  }
-                }, _callee2, this, [[1, 8]]);
-              }));
-
-              return function (_x3, _x4) {
-                return _ref.apply(this, arguments);
-              };
-            }(), {}));
-
-          case 1:
-          case "end":
-            return _context3.stop();
-        }
-      }
-    }, _callee3, this);
-  }));
-  return _execute.apply(this, arguments);
+function execute(actions) {
+  return new Promise(function (resolve, reject) {
+    var promises = actions.map(function (a) {
+      return executeAction(a);
+    });
+    Promise.all(promises).then(function (res) {
+      var result = res.reduce(function (results, r) {
+        return (0, _objectSpread2.default)({}, r, results);
+      }, {});
+      resolve(result);
+    }).catch(reject);
+  });
 }
 
 function executeAction(action) {
@@ -247,9 +191,9 @@ function scheduleJob(action) {
   }
 
   job.save();
-  return {
-    scheduled_job_id: job._id
-  };
+  return new Promise(function (resolve, reject) {
+    return resolve((0, _defineProperty2.default)({}, job.key, job._id));
+  });
 }
 
 function triggerAction(action) {
@@ -258,17 +202,21 @@ function triggerAction(action) {
 }
 
 function sendEmails(action) {
-  var to = action.to,
-      template = action.template,
-      substitution_data = action.substitution_data,
-      _action$cc = action.cc,
-      cc = _action$cc === void 0 ? [] : _action$cc;
-  var mailer = new _firstcutMailer.Mailer();
-  return mailer.send({
-    template: template,
-    to: to,
-    cc: cc,
-    substitution_data: substitution_data
+  return new Promise(function (resolve, reject) {
+    var to = action.to,
+        template = action.template,
+        substitution_data = action.substitution_data,
+        _action$cc = action.cc,
+        cc = _action$cc === void 0 ? [] : _action$cc;
+    var mailer = new _firstcutMailer.Mailer();
+    mailer.send({
+      template: template,
+      to: to,
+      cc: cc,
+      substitution_data: substitution_data
+    }).then(function (res) {
+      return resolve({});
+    }).catch(reject);
   });
 }
 
@@ -278,23 +226,34 @@ function chargeInvoice(action) {
 }
 
 function sendSlackNotification(action) {
-  var content = action.content;
-  var channel = action.channel;
-  content = (0, _objectSpread2.default)({}, slackTemplateDefaults, content);
-  return _firstcutSlack.Slack.postMessage(content, channel);
+  return new Promise(function (resolve, reject) {
+    var content = action.content;
+    var channel = action.channel;
+    content = (0, _objectSpread2.default)({}, slackTemplateDefaults, content);
+
+    _firstcutSlack.Slack.postMessage(content, channel).then(function (res) {
+      return resolve({});
+    }).catch(reject);
+  });
 }
 
 function text(action) {
-  return (0, _firstcutTextMessaging.sendTextMessage)(action);
+  return new Promise(function (resolve, reject) {
+    return (0, _firstcutTextMessaging.sendTextMessage)(action).then(function (res) {
+      return resolve();
+    }).catch(reject);
+  });
 }
 
 function createCalendarEvent(action) {
   var event = action.event,
       user_id = action.user_id,
-      event_id = action.event_id;
+      event_id = action.event_id,
+      owner_email = action.owner_email;
   return (0, _firstcutCalendar.createEvent)({
     event_id: event_id,
     event: event,
-    user_id: user_id
+    user_id: user_id,
+    owner_email: owner_email
   });
 }

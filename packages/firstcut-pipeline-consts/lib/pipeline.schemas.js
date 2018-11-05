@@ -61,6 +61,10 @@ var TextMessageActionSchema = new _simplSchema.default({
 exports.TextMessageActionSchema = TextMessageActionSchema;
 var CalendarActionSchema = new _simplSchema.default({
   event: _firstcutCalendar.CalendarEventContentSchema,
+  owner_email: {
+    type: String,
+    optional: true
+  },
   event_id: {
     type: String,
     optional: true

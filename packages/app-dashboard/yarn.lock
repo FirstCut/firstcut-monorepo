@@ -3619,6 +3619,15 @@ react-dom@^16.4.1:
     prop-types "^15.6.2"
     schedule "^0.5.0"
 
+react-dom@^16.5.2:
+  version "16.6.0"
+  resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-16.6.0.tgz#6375b8391e019a632a89a0988bce85f0cc87a92f"
+  dependencies:
+    loose-envify "^1.1.0"
+    object-assign "^4.1.1"
+    prop-types "^15.6.2"
+    scheduler "^0.10.0"
+
 react-dropzone@^5.0.1:
   version "5.1.1"
   resolved "https://registry.yarnpkg.com/react-dropzone/-/react-dropzone-5.1.1.tgz#b05613ea22f1ab71aa1f7cf5367df7b19468a2f3"
@@ -3632,6 +3641,7 @@ react-google-autocomplete@^1.0.16:
   dependencies:
     prop-types "^15.5.0"
 
+<<<<<<< HEAD
 react-immutable-proptypes@^2.1.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/react-immutable-proptypes/-/react-immutable-proptypes-2.1.0.tgz#023d6f39bb15c97c071e9e60d00d136eac5fa0b4"
@@ -3643,6 +3653,11 @@ react-is@^16.3.2, react-is@^16.6.0:
 react-lifecycles-compat@^3.0.0:
   version "3.0.4"
   resolved "https://registry.yarnpkg.com/react-lifecycles-compat/-/react-lifecycles-compat-3.0.4.tgz#4f1a273afdfc8f3488a8c516bfda78f872352362"
+=======
+react-is@^16.6.0:
+  version "16.6.0"
+  resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.6.0.tgz#456645144581a6e99f6816ae2bd24ee94bdd0c01"
+>>>>>>> master
 
 react-onclickoutside@^6.5.0:
   version "6.7.1"
@@ -3689,6 +3704,18 @@ react-stripe-elements@^2.0.1:
   dependencies:
     prop-types "^15.5.10"
 
+<<<<<<< HEAD
+=======
+react-test-renderer@^16.5.2:
+  version "16.6.0"
+  resolved "https://registry.yarnpkg.com/react-test-renderer/-/react-test-renderer-16.6.0.tgz#fe490096bed55c3f4e92c023da3b89f9d03fceb3"
+  dependencies:
+    object-assign "^4.1.1"
+    prop-types "^15.6.2"
+    react-is "^16.6.0"
+    scheduler "^0.10.0"
+
+>>>>>>> master
 react@^16.4.0:
   version "16.5.2"
   resolved "https://registry.yarnpkg.com/react/-/react-16.5.2.tgz#19f6b444ed139baa45609eee6dc3d318b3895d42"
@@ -3697,6 +3724,15 @@ react@^16.4.0:
     object-assign "^4.1.1"
     prop-types "^15.6.2"
     schedule "^0.5.0"
+
+react@^16.5.2:
+  version "16.6.0"
+  resolved "https://registry.yarnpkg.com/react/-/react-16.6.0.tgz#b34761cfaf3e30f5508bc732fb4736730b7da246"
+  dependencies:
+    loose-envify "^1.1.0"
+    object-assign "^4.1.1"
+    prop-types "^15.6.2"
+    scheduler "^0.10.0"
 
 read-pkg-up@^1.0.1:
   version "1.0.1"
@@ -3949,6 +3985,13 @@ schedule@^0.5.0:
   version "0.5.0"
   resolved "https://registry.yarnpkg.com/schedule/-/schedule-0.5.0.tgz#c128fffa0b402488b08b55ae74bb9df55cc29cc8"
   dependencies:
+    object-assign "^4.1.1"
+
+scheduler@^0.10.0:
+  version "0.10.0"
+  resolved "https://registry.yarnpkg.com/scheduler/-/scheduler-0.10.0.tgz#7988de90fe7edccc774ea175a783e69c40c521e1"
+  dependencies:
+    loose-envify "^1.1.0"
     object-assign "^4.1.1"
 
 scmp@0.0.3:
@@ -4410,6 +4453,24 @@ tweetnacl@^0.14.3, tweetnacl@~0.14.0:
   version "0.14.5"
   resolved "https://registry.yarnpkg.com/tweetnacl/-/tweetnacl-0.14.5.tgz#5ae68177f192d4456269d108afa93ff8743f4f64"
 
+<<<<<<< HEAD
+=======
+twilio@^3.21.0:
+  version "3.23.2"
+  resolved "https://registry.yarnpkg.com/twilio/-/twilio-3.23.2.tgz#60eea1e85e29680e0e05af6c0c4d0631bba4c775"
+  dependencies:
+    "@types/express" "^4.11.1"
+    deprecate "1.0.0"
+    jsonwebtoken "^8.1.0"
+    lodash "^4.17.10"
+    moment "2.19.3"
+    q "2.0.x"
+    request "^2.87.0"
+    rootpath "0.1.2"
+    scmp "0.0.3"
+    xmlbuilder "9.0.1"
+
+>>>>>>> master
 twilio@^3.22.0:
   version "3.22.0"
   resolved "https://registry.yarnpkg.com/twilio/-/twilio-3.22.0.tgz#77d53b7bac8943a8f67a2e580224057cb729603d"

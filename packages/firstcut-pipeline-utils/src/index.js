@@ -6,9 +6,6 @@ import { _ } from 'lodash';
 
 export { emitPipelineEvent };
 
-console.log('LANDING PAGE SUBMIT');
-console.log(EVENT_LABELS.landing_page_submit);
-
 let Models = null;
 let ActionTemplates = null;
 export function initModelsForPipeline(models, templates) {

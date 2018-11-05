@@ -10,7 +10,7 @@ class Message extends Base {
   static get schema() { return MessageSchema; }
 
   getAuthor() {
-    this.getPlayerFromQuery({ _id: this.authorId });
+    return this.getPlayerFromQuery({ _id: this.authorId });
   }
 
   getText() {

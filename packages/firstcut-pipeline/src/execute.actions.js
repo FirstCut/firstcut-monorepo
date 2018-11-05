@@ -8,6 +8,7 @@ import { createEvent } from 'firstcut-calendar';
 import { PubSub } from 'pubsub-js';
 import { getActionsForEvent } from 'firstcut-pipeline-utils';
 import oid from 'mdbid';
+import { _ } from 'lodash';
 
 const slackTemplateDefaults = {
   username: 'firstcut',
@@ -54,24 +55,14 @@ function saveToHistory(args) {
   withHistory.save();
 }
 
-async function execute(actions) {
-  return actions.reduce(async (r, action) => {
-    let result = r;
-    try {
-      const actionResult = await executeAction(action);
-      if (result) {
-        result = {
-          ...actionResult,
-          ...result,
-        };
-      }
-    } catch (e) {
-      console.log('Error executing');
-      console.log(action);
-      PubSub.publish('error', { message: e.toString() });
-    }
-    return result;
-  }, {});
+function execute(actions) {
+  return new Promise((resolve, reject) => {
+    const promises = actions.map(a => executeAction(a));
+    Promise.all(promises).then((res) => {
+      const result = res.reduce((results, r) => ({ ...r, ...results }), {});
+      resolve(result);
+    }).catch(reject);
+  });
 }
 
 function executeAction(action) {
@@ -113,7 +104,7 @@ function scheduleJob(action) {
     job = job.set('_id', oid());
   }
   job.save();
-  return { scheduled_job_id: job._id };
+  return new Promise((resolve, reject) => resolve({ [job.key]: job._id }));
 }
 
 function triggerAction(action) {
@@ -122,12 +113,14 @@ function triggerAction(action) {
 }
 
 function sendEmails(action) {
-  const {
-    to, template, substitution_data, cc = [],
-  } = action;
-  const mailer = new Mailer();
-  return mailer.send({
-    template, to, cc, substitution_data,
+  return new Promise((resolve, reject) => {
+    const {
+      to, template, substitution_data, cc = [],
+    } = action;
+    const mailer = new Mailer();
+    mailer.send({
+      template, to, cc, substitution_data,
+    }).then(res => resolve({})).catch(reject);
   });
 }
 
@@ -138,20 +131,26 @@ function chargeInvoice(action) {
 
 
 function sendSlackNotification(action) {
-  let { content } = action;
-  const { channel } = action;
-  content = {
-    ...slackTemplateDefaults,
-    ...content,
-  };
-  return Slack.postMessage(content, channel);
+  return new Promise((resolve, reject) => {
+    let { content } = action;
+    const { channel } = action;
+    content = {
+      ...slackTemplateDefaults,
+      ...content,
+    };
+    Slack.postMessage(content, channel).then(res => resolve({})).catch(reject);
+  });
 }
 
 function text(action) {
-  return sendTextMessage(action);
+  return new Promise((resolve, reject) => sendTextMessage(action).then(res => resolve()).catch(reject));
 }
 
 function createCalendarEvent(action) {
-  const { event, user_id, event_id } = action;
-  return createEvent({ event_id, event, user_id });
+  const {
+    event, user_id, event_id, owner_email,
+  } = action;
+  return createEvent({
+    event_id, event, user_id, owner_email,
+  });
 }

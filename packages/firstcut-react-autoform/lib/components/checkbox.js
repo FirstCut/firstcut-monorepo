@@ -9,8 +9,6 @@ exports.default = Checkbox;
 
 var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
 
-var _objectSpread2 = _interopRequireDefault(require("@babel/runtime/helpers/objectSpread"));
-
 var _objectWithoutProperties2 = _interopRequireDefault(require("@babel/runtime/helpers/objectWithoutProperties"));
 
 var _react = _interopRequireDefault(require("react"));
@@ -21,18 +19,22 @@ var _immutable = require("immutable");
 
 var _semanticUiReact = require("semantic-ui-react");
 
-function Checkbox(props) {
-  var _props = (0, _objectSpread2.default)({}, props),
-      value = _props.value,
-      onChange = _props.onChange,
-      fieldProps = (0, _objectWithoutProperties2.default)(_props, ["value", "onChange"]);
+var _autoform = require("../autoform.utils");
 
-  var onCheckboxChange = function onCheckboxChange(onChange, name, prev_value) {
+function Checkbox(props) {
+  var onChange = props.onChange,
+      name = props.name;
+
+  var _removeNonDomFields = (0, _autoform.removeNonDomFields)(props),
+      value = _removeNonDomFields.value,
+      fieldProps = (0, _objectWithoutProperties2.default)(_removeNonDomFields, ["value"]);
+
+  var onCheckboxChange = function onCheckboxChange(prevValue) {
     return function (e) {
-      var new_value = !prev_value;
+      var newValue = !prevValue;
       onChange(e, {
         name: name,
-        value: new_value
+        value: newValue
       });
     };
   };
@@ -41,8 +43,10 @@ function Checkbox(props) {
     fieldProps.checked = true;
   }
 
-  fieldProps.onChange = onCheckboxChange(onChange, props.name, value);
+  fieldProps.onChange = onCheckboxChange(value);
   return _react.default.createElement(_semanticUiReact.Form.Field, (0, _extends2.default)({
     control: _semanticUiReact.Checkbox
-  }, fieldProps));
+  }, fieldProps, {
+    name: name
+  }));
 }

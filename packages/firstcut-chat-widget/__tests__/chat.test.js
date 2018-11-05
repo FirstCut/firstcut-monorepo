@@ -3,6 +3,7 @@ jest.mock('react-chat-widget', () => ({
   Widget() {},
   addResponseMessage: jest.fn(),
   addUserMessage: jest.fn(),
+  dropMessages: jest.fn(),
 }));
 
 import React from 'react';
@@ -63,19 +64,12 @@ describe('<ChatWidget />', () => {
     expect(widget.props().badge).toBe(numMessagesFromUser + numResponseMessages);
   });
 
-  test('should have the number of unread messages as the badge', () => {
-    expect(widget.props().badge).toBe(numMessagesFromUser + numResponseMessages);
-  });
-
   test('should have called addUserMessage', () => {
     expect(addUserMessage).toHaveBeenCalledTimes(numMessagesFromUser);
   });
 
   test('should have called addResponseMessage', () => {
     expect(addResponseMessage).toHaveBeenCalledTimes(numResponseMessages);
-  });
-
-  test('should call addUserMessage once when a new user message is added to the conversation', () => {
   });
 
   test('should call onMessagesRead once the launcher is clicked', () => {
@@ -97,5 +91,20 @@ describe('<ChatWidget />', () => {
       messages: newMessages, title, handleNewUserMessage, userId: user._id,
     });
     expect(addResponseMessage).toHaveBeenCalledTimes(1);
+  });
+
+  test('should lower the badge number when messages are marked as readBy', () => {
+    const newMessages = [...messages];
+    newMessages[0].readBy.push(user._id);
+    const newWidget = shallow((
+      <ChatWidget
+        messages={newMessages}
+        handleNewUserMessage={handleNewUserMessage}
+        onMessagesRead={onMessagesRead}
+        title={title}
+        userId={user._id}
+      />
+    ));
+    expect(newWidget.find(Widget).props().badge).toBe(numMessagesFromUser + numResponseMessages - 1);
   });
 });

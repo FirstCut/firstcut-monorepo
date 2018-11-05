@@ -12,9 +12,11 @@ export default function enableCrud(cls) {
       if (!record._id) {
         record._id = oid();
       }
+      console.log(cls._persist_save);
       cls._persist_save.call(record, (err, updatedRecord) => {
+        console.log('CALLING SAVE');
         if (err) reject(err);
-        // console.log('The new record has been returned');
+        console.log('The new record has been returned');
         const newRecord = new cls(updatedRecord);
         resolve(newRecord);
       });
@@ -30,12 +32,15 @@ export default function enableCrud(cls) {
   let name = `${cls.collectionName}.upsert`;
   cls._persist_save = new ValidatedMethod({
     name,
-    validate: cls.schema.validator(),
+    validate: () => {},
     run(record) {
       if (!record._id) {
         record._id = oid();
       }
-      cls.collection.upsert(record._id, { $set: record });
+      console.log(cls.collectionName);
+      console.log('upeset');
+      cls.collection.remove(record._id);
+      cls.collection.insert(record);
       return record;
     },
   });

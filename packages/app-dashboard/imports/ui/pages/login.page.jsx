@@ -78,7 +78,7 @@ export default class LoginPage extends React.Component {
         </Grid.Row>
         <Grid.Row>
           <Grid.Column>
-            <div style={{ padding: '30px', 'max-width': '700px', margin: 'auto' }}>
+            <div style={{ padding: '30px', maxWidth: '700px', margin: 'auto' }}>
               {component}
             </div>
           </Grid.Column>

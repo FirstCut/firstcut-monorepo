@@ -20,14 +20,12 @@ const CompanySchema = new Schema({
     label: 'Brand Into File',
     customType: 'file',
     store: 'cuts',
-    helpText: 'Animated logo file',
   },
   branding: {
     type: Array,
     customType: 'fileArray',
     store: 'assets',
     label: 'Brand Asset',
-    helpText: 'Logo file, Font File, Style Guidelines, etc',
   },
   'branding.$': SimpleSchema.oneOf({
     type: String,

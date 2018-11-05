@@ -118,7 +118,7 @@ export function userExperience() {
 }
 
 export function routesForUser() {
-  return Object.values(Routes.toArray()).map(r => r.route);
+  return Object.values(Routes.toArray());
 }
 
 function homePageForSkill(skill) {

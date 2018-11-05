@@ -24,6 +24,8 @@ var _reactGoogleAutocomplete = _interopRequireDefault(require("react-google-auto
 
 var _http = require("meteor/http");
 
+var _autoform = require("../autoform.utils");
+
 function LocationField(props) {
   var _props = (0, _objectSpread2.default)({}, props),
       record = _props.record,
@@ -46,30 +48,20 @@ function LocationField(props) {
   };
 
   var locationDisplayName = record.locationDisplayName;
+  var types = fieldProps.locationTypes || [];
 
   if (locationDisplayName) {
     fieldProps.placeholder = locationDisplayName;
   }
 
-  fieldProps.onPlaceSelected = onPlaceSelected(onChange, fieldProps.name);
-  var types = fieldProps.locationTypes || [];
-  delete fieldProps.value; // autocomplete location doesn't work well as a controlled component
+  var domProps = (0, _autoform.removeNonDomFields)(fieldProps);
+  delete domProps.value; // autocomplete location doesn't work well as a controlled component
 
-  delete fieldProps.locationTypes; // autocomplete location doesn't work well as a controlled component
-
-  delete fieldProps.customType; // autocomplete location doesn't work well as a controlled component
-
-  delete fieldProps.singleFile; // autocomplete location doesn't work well as a controlled component
-
-  delete fieldProps.custom; // autocomplete location doesn't work well as a controlled component
-
-  delete fieldProps.serviceDependency; // autocomplete location doesn't work well as a controlled component
-
-  console.log(_reactGoogleAutocomplete.default);
   return _react.default.createElement("div", null, _react.default.createElement(_semanticUiReact.Form.Field, (0, _extends2.default)({
     types: types,
-    control: _reactGoogleAutocomplete.default
-  }, fieldProps)), _react.default.createElement(_semanticUiReact.Button, {
+    control: _reactGoogleAutocomplete.default,
+    onPlaceSelected: onPlaceSelected(onChange, fieldProps.name)
+  }, domProps)), _react.default.createElement(_semanticUiReact.Button, {
     attached: "bottom",
     onClick: clearLocation
   }, "CLEAR LOCATION")); // return (<div><Autocomplete types={['(cities)']} {...fieldProps}/><Button attached='bottom' onClick={clearLocation} attached>CLEAR LOCATION</Button></div>);
@@ -144,14 +136,11 @@ function getTimezone(lat, lng, timestamp, cb) {
     content: options
   }, function (err, data) {
     var response = JSON.parse(data.content);
-    console.log(response);
 
     if (response.statusCode !== 200) {
       return callback(new Error("Google API request error: ".concat(response)));
     }
 
-    console.log(response);
-    console.log(response.data);
     callback(null, response.data.timeZoneId);
   });
 }

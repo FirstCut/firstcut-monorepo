@@ -2,7 +2,7 @@ import twilio from 'twilio';
 import SimpleSchema from 'simpl-schema';
 import { removePunctuation } from 'firstcut-utils';
 
-export const SUPPORTED_COUNTRIES = ['United States', 'United Kingdom'];
+export const SUPPORTED_COUNTRIES = ['Canada', 'United States', 'United Kingdom'];
 
 function getFromNumber(country) {
   if (Meteor.settings.public.environment === 'development') {

@@ -5,9 +5,9 @@ import PropTypes from 'prop-types';
 import {
   Image, List, Grid, Button, Header, Segment,
 } from 'semantic-ui-react';
+import { getRecordPath } from 'firstcut-retrieve-url';
 import InfoPage from '../../pages/info.page';
 import { ProfileItem } from './utils/profile.card';
-import { getRecordPath } from 'firstcut-retrieve-url';
 
 export function CollaboratorInfoPage(props) {
   const { record } = props;
@@ -97,7 +97,7 @@ function _skills(props) {
   const body = record.skills.map((m) => {
     const qualified = (m.isQualified) ? 'Verified' : 'Verification pending';
     return (
-      <List>
+      <List key={m.toString()}>
         <Header>
           {record.getSkillLabel(m.type)}
           {' '}

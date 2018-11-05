@@ -137,7 +137,7 @@ const Routes = new Record({
 })();
 
 function asListPageRoute(Page, model, name) {
-  return function ListPageComponent(props) {
+  return (props) => {
     const basepath = getBasepath(model);
     const RouteComponent = (isPublicAccess(name))
       ? Route
@@ -145,6 +145,7 @@ function asListPageRoute(Page, model, name) {
     return (
       <RouteComponent
         exact
+        key={name}
         name={name}
         path={basepath}
         render={(props) => {
@@ -157,13 +158,14 @@ function asListPageRoute(Page, model, name) {
 }
 
 function asInfoPageRoute(Component, model, name) {
-  return function InfoPageComponent(props) {
+  return (props) => {
     const basepath = getBasepath(model);
     const RouteComponent = (isPublicAccess(name))
       ? Route
       : PrivateRoute;
     return (
       <RouteComponent
+        key={name}
         exact
         path={`${basepath}/:_id`}
         name={name}
@@ -238,15 +240,14 @@ function PlayerPermissionsRequiredRoute(props) {
 }
 
 function PrivateRoute(props) {
-  const { name } = props;
+  const { name, component, ...rest } = props;
   if (!Meteor.user()) {
-    const { component, ...rest } = props;
     return <Route {...rest} render={props => <LoginPage {...props} />} />;
   } if (!Meteor.settings.public.skillsOverride && (!Models.userPlayer() || !userHasAccess(name))) {
     const homePagePath = userHomePage();
-    return <Route {...props} render={props => <Redirect to={homePagePath} />} />;
+    return <Route {...rest} render={props => <Redirect to={homePagePath} />} />;
   }
-  return <Route {...props} />;
+  return <Route {...rest} />;
 }
 
 export default Routes;

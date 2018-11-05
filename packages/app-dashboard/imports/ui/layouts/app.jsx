@@ -62,10 +62,13 @@ class AppBody extends React.Component {
     const {
       doneLoading, onSelectTab, activeItem, onSelectTasks, playersDoneLoading, hideSidebar,
     } = this.props;
-    const routes = routesForUser().map(R => <R />);
+    const routes = routesForUser().map(({ name, route }) => {
+      const R = route;
+      return <R key={name} />;
+    });
     if (!Meteor.user()) {
       return (
-        <Container style={{ 'padding-top': '15px' }}>
+        <Container style={{ paddingTop: '15px' }}>
           <LoginButton />
           {' '}
           { !doneLoading && <div /> }
@@ -81,6 +84,7 @@ class AppBody extends React.Component {
       vertical: true,
       tabular: true,
     };
+    const onClickTab = () => onSelectTab(activeItem);
     return (
       <Grid padded>
         <Grid.Column width={2} textAlign="right">
@@ -101,7 +105,7 @@ class AppBody extends React.Component {
                 return (
                   <Tab
                     key={reactKey}
-                    onClick={() => onSelectTab(activeItem)}
+                    onClick={onClickTab}
                     activeItem={activeItem}
                   />
                 );
@@ -140,6 +144,7 @@ class AppBody extends React.Component {
           { doneLoading && routes }
           { doneLoading && !Models.userPlayer() && <NoProfileFoundAlert /> }
           { !doneLoading && <Loading /> }
+
         </Grid.Column>
       </Grid>
     );
@@ -153,7 +158,7 @@ function LoginButton(props) {
     right: '10px',
   };
   return (
-    <Button style={loginStyle} basic color="blue" className="right aligned" as={Link} to="/login" header>
+    <Button style={loginStyle} basic color="blue" className="right aligned" as={Link} to="/login">
       Login
     </Button>
   );
@@ -224,7 +229,7 @@ function DevEnvAlert(props) {
 }
 
 function TasksSidebar(props) {
-  const { visible, onHide, tasks } = props;
+  const { visible, tasks } = props;
   return (
     <Sidebar
       as={Menu}
@@ -232,7 +237,6 @@ function TasksSidebar(props) {
       direction="right"
       icon="labeled"
       vertical
-      onHide={onHide}
       width="wide"
       visible={visible}
     >

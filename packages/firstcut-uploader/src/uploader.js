@@ -18,7 +18,8 @@ export function initUploader(config) {
     computeContentMd5: true,
     s3FileCacheHoursAgo: 4,
     awsSignatureVersion: '4',
-    // partSize: 37748736, // aws mentioned 72 as ideal part size, this requires experimentation
+    // sendCanonicalRequestToSignerUrl: true,
+    // partSize: 18874368, // aws mentioned 72 as ideal part size, this requires experimentation
     s3Acceleration: true,
     signerUrl: `${config.PLATFORM_ROOT_URL}/computeSignature`,
     cryptoMd5Method(data) { return AWS.util.crypto.md5(data, 'base64'); },

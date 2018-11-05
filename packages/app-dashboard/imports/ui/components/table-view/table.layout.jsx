@@ -15,8 +15,6 @@ export default class TableLayout extends React.Component {
 
   handleSort = clickedColumn => () => {
     const { sortByColumn } = this.state;
-    console.log('Setting the clickedColumn');
-    console.log(clickedColumn);
     if (sortByColumn !== clickedColumn) {
       this._setSortByColumn(clickedColumn);
     } else {

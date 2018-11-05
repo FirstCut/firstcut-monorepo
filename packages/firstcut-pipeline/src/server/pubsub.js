@@ -180,6 +180,9 @@ export default function initSubscriptions(Models) {
     if (model.modelName === 'Asset') {
       return;
     }
+    if (model.modelName === 'Message') {
+      return;
+    }
     if (model.modelName === 'LandingPageRequest') {
       return;
     }

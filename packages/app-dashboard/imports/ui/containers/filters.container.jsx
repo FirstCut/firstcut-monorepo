@@ -9,8 +9,6 @@ export default function withFilters(WrappedComponent) {
       super(props);
       const { model } = props;
       this.state = { filter: getFreshFilter(props) };
-      console.log('FILTER');
-      console.log(this.state.filter.toJS());
     }
 
     setFilter = (filter) => {
@@ -18,9 +16,9 @@ export default function withFilters(WrappedComponent) {
     }
 
     applyFilter = (e, { name, value }) => {
-      const old_filter = this.state.filter;
-      const new_filter = old_filter.set(name, value);
-      this.setFilter(new_filter);
+      const oldFilter = this.state.filter;
+      const newFilter = oldFilter.set(name, value);
+      this.setFilter(newFilter);
     }
 
     clearFilters = () => {

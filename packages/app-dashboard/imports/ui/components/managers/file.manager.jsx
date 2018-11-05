@@ -51,7 +51,7 @@ export default function withFileManager(WrappedComponent) {
     onFileAdded = (file, path = '') => {
       PubSub.publish(USER_IS_UPLOADING, true);
       Analytics.trackUploadEvent({ filename: file.name });
-      if (!userExperience().isEditor) {
+      if (userExperience().isVideographer) {
         Meteor.disconnect();
       }
       const { record, fieldname } = this.props;
@@ -108,7 +108,9 @@ export default function withFileManager(WrappedComponent) {
           if (userExperience().isVideographer) {
             Meteor.reconnect();
           }
-          records.forEach(r => r.save());
+          records.forEach((r) => {
+            r.save();
+          });
           PubSub.publish(USER_IS_UPLOADING, false);
           if (!uploadComplete) { // if state has not already been set to complete
             PubSub.publish(UPLOAD_SUCCESSFUL, fileStats.toJS());
@@ -172,9 +174,9 @@ export default function withFileManager(WrappedComponent) {
 
   WithFileManager.propTypes = {
     fieldname: PropTypes.string.isRequired,
-    record: PropTypes.string.isRequired,
+    record: PropTypes.object.isRequired,
     onChange: PropTypes.func.isRequired,
-    saveEvent: PropTypes.string.isRequired,
+    saveEvent: PropTypes.string,
   };
   return WithFileManager;
 }
@@ -201,14 +203,6 @@ function getFileDocuments(record, fieldname) {
 
   return Promise.all(promises);
 }
-
-// function removeFileWithId(id, store) {
-//   Assets.remove(id, (err) => {
-//     if (err) {
-//       alert(err);
-//     }
-//   });
-// }
 
 function getAcceptsMultipleFiles(record, fieldname) {
   const fieldtype = getFieldCustomType(record, fieldname);

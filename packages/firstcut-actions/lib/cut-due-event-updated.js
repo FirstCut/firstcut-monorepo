@@ -59,6 +59,7 @@ var CutDueEventUpdated = new _immutable.Map({
     var actions = [{
       type: _firstcutPipelineConsts.ACTIONS.calendar_event,
       event_id: eventId,
+      owner_email: deliverable.adminOwnerEmail,
       event: {
         summary: "Next cut due for ".concat(deliverable.displayName),
         description: description,

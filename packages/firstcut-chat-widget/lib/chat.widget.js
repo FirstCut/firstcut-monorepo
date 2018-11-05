@@ -23,12 +23,10 @@ var _react = _interopRequireWildcard(require("react"));
 
 var _propTypes = _interopRequireDefault(require("prop-types"));
 
-var _reactChatWidget = require("react-chat-widget");
-
 var _lodash = require("lodash");
 
-// import { PubSub } from 'pubsub-js';
-// import 'react-chat-widget/lib/styles.css';
+var _reactChatWidget = require("react-chat-widget");
+
 var ChatWidget =
 /*#__PURE__*/
 function (_Component) {
@@ -57,6 +55,7 @@ function (_Component) {
       (0, _reactChatWidget.addResponseMessage)("".concat(prefix, " ").concat(message.getText()));
     }, _this.addUserMessage = function (message) {
       var prefix = getMessagePrefix(message);
+      (0, _reactChatWidget.renderCustomComponent)(MessageComponent, {}, true);
       (0, _reactChatWidget.addUserMessage)("".concat(prefix, " ").concat(message.getText()));
     }, _this.populateMessages = function (messages) {
       var userId = _this.props.userId;
@@ -79,6 +78,7 @@ function (_Component) {
     key: "componentDidMount",
     value: function componentDidMount() {
       var messages = this.props.messages;
+      (0, _reactChatWidget.dropMessages)();
       this.populateMessages(messages);
     }
   }, {
@@ -99,15 +99,13 @@ function (_Component) {
           title = _this$props2.title,
           handleNewUserMessage = _this$props2.handleNewUserMessage;
       var unread = this.getUnreadMessages().length;
-      return _react.default.createElement(_reactChatWidget.Widget, {
-        title: title,
-        profileAvatar: "/firstcut_logo.png",
-        badge: unread,
-        handleNewUserMessage: handleNewUserMessage,
-        fullScreenMode: true,
-        showCloseButton: true,
+      return _react.default.createElement("div", {
         onClick: this.onToggleLauncher
-      });
+      }, _react.default.createElement(_reactChatWidget.Widget, {
+        title: title,
+        badge: unread,
+        handleNewUserMessage: handleNewUserMessage
+      }));
     }
   }]);
   return ChatWidget;
@@ -117,6 +115,10 @@ ChatWidget.defaultProps = {
   title: '',
   onMessagesRead: function onMessagesRead() {}
 };
+
+function MessageComponent(props) {
+  return _react.default.createElement("div", null, "HELLO");
+}
 
 function getMessagePrefix(message) {
   return "<b>".concat(message.getAuthor().displayName, "</b>:");

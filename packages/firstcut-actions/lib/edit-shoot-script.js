@@ -43,7 +43,7 @@ var EditShootScript = new _immutable.Map({
     }
 
     var dayAfterShoot = (0, _moment.default)(record.date).add(1, 'day');
-    return (0, _moment.default)().isAfter(dayAfterShoot);
+    return (0, _moment.default)().isBefore(dayAfterShoot);
   },
   generateActions: function generateActions(Models, eventData) {
     var record_id = eventData.record_id,

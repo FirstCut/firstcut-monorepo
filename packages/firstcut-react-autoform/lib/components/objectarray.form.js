@@ -74,7 +74,9 @@ function ObjectArrayForm(props) {
     var fieldProps = (0, _objectSpread2.default)({}, rest, {
       errors: errors
     });
-    return _react.default.createElement(_semanticUiReact.Segment, null, _react.default.cloneElement(renderFields, (0, _objectSpread2.default)({
+    return _react.default.createElement(_semanticUiReact.Segment, {
+      key: fieldname + index
+    }, _react.default.cloneElement(renderFields, (0, _objectSpread2.default)({
       record: obj,
       key: fieldname,
       fields: obj.schema.objectKeys()

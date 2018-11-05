@@ -1,11 +1,12 @@
 import React from 'react';
-import { Item, Message, Button } from 'semantic-ui-react';
+import {
+  Item, Message, Button,
+} from 'semantic-ui-react';
 
 import InfoPage from '/imports/ui/pages/info.page';
 import { FilePortal, FileView } from '/imports/ui/components/utils/file.portal';
 import { isEmpty } from 'firstcut-utils';
 import { getRecordPath } from 'firstcut-retrieve-url';
-import ChatWidget from 'firstcut-chat-widget';
 import ClientProjectInfoPage from './project.client';
 import { asLinkToRecord } from '/imports/ui/components/utils/utils';
 import { getTaskInfo } from '/imports/ui/components/tasks';
@@ -16,6 +17,7 @@ import { getInvoiceInfo } from '../invoice.info';
 import { getShootInfo } from '../shoot';
 import { InfoPageProps } from '../utils/shared.props';
 import { userExperience } from '/imports/ui/config';
+import ProjectChatWindow from './project.chat';
 
 export function ProjectInfoPage(props) {
   const { record } = props;
@@ -58,8 +60,6 @@ export function ProjectInfoPage(props) {
   }
 
   const clientsNotYetInvited = record.getClientTeamMembersNotYetInvited();
-  const messages = record.getProjectMessages().toArray();
-  console.log(messages);
   return (
     <div>
       { clientsNotYetInvited.length > 0
@@ -70,13 +70,7 @@ export function ProjectInfoPage(props) {
         sections={sections}
         record={record}
       />
-      <ChatWidget
-        messages={messages}
-        handleNewUserMessage={record.addNewMessage}
-        onMessagesRead={record.markMessagesAsRead}
-        title="Project Conversation"
-        userId={Meteor.userId()}
-      />
+      <ProjectChatWindow project={record} />
     </div>
   );
 }

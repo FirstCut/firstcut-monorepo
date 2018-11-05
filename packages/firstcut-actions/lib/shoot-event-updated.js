@@ -63,6 +63,7 @@ var UpdatedShootEvent = new _immutable.Map({
     var actions = [{
       type: _firstcutPipelineConsts.ACTIONS.calendar_event,
       event_id: shoot.getEventId('shoot_event_updated'),
+      owner_email: shoot.adminOwnerEmail,
       event: {
         summary: "".concat(shoot.displayName),
         description: description,

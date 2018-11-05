@@ -78,7 +78,7 @@ ConfirmationModal.propTypes = {
   rejectText: PropTypes.string,
   headerIcon: PropTypes.string,
   headerText: PropTypes.string,
-  content: PropTypes.oneOf(PropTypes.string, PropTypes.object),
+  content: PropTypes.object,
   onConfirm: PropTypes.func,
   onReject: PropTypes.func,
   preventCloseOnConfirm: PropTypes.bool,
@@ -87,7 +87,7 @@ ConfirmationModal.propTypes = {
 
 function UpdateFieldModal(props) {
   const {
-    record, fields, onSaveSuccess, preventCloseOnConfirm = true, ...modal_props
+    record, fields, onSaveSuccess, preventCloseOnConfirm = true, ...modalProps
   } = props;
   const saveEvent = `save.${record.displayName}`;
   const EditForm = withRecordManager(Autoform);
@@ -105,7 +105,7 @@ function UpdateFieldModal(props) {
   };
   return (
     <ConfirmationModal
-      {...modal_props}
+      {...modalProps}
       content={content}
       onConfirm={onConfirm}
       preventCloseOnConfirm={preventCloseOnConfirm}

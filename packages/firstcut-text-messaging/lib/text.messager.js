@@ -14,7 +14,7 @@ var _simplSchema = _interopRequireDefault(require("simpl-schema"));
 
 var _firstcutUtils = require("firstcut-utils");
 
-var SUPPORTED_COUNTRIES = ['United States', 'United Kingdom'];
+var SUPPORTED_COUNTRIES = ['Canada', 'United States', 'United Kingdom'];
 exports.SUPPORTED_COUNTRIES = SUPPORTED_COUNTRIES;
 
 function getFromNumber(country) {

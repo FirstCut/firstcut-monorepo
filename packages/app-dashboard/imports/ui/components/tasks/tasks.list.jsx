@@ -59,30 +59,25 @@ function TaskCards(props) {
   const sorted = _.sortBy(tasks.toArray(), ['dateDue']);
   const cardProps = {
     style: {
-      'margin-right': 'auto',
-      'margin-left': 'auto',
-      'margin-bottom': '10px',
+      marginRight: 'auto',
+      marginLeft: 'auto',
+      marginBottom: '10px',
     },
   };
   const CardComponent = withEditRecordModal(TaskCard);
   return (
     <Container>
-      { sorted.map(task => <CardComponent cardProps={cardProps} task={task} />)}
+      { sorted.map(task => <CardComponent key={task._id} cardProps={cardProps} task={task} />)}
     </Container>
   );
 }
 
-function NewTaskButton(props) {
-  const { editRecord } = props;
-  return <Buttons.AddNew key="new" onClick={editRecord(Task.createNew({}))} />;
-}
-
 const CARD_LABELS = new Map({
   PAST_DUE: (
-    <Label as="a" color="red" corner="left" icon="warning" />
+    <Label color="red" corner="left" icon="warning" />
   ),
   UPCOMING: (
-    <Label as="a" color="yellow" corner="left" icon="clock outline" />
+    <Label color="yellow" corner="left" icon="clock outline" />
   ),
   DEFAULT: (<div />),
 });
@@ -109,7 +104,6 @@ class TaskCard extends React.PureComponent {
       label = CARD_LABELS.get('UPCOMING');
     }
     const ContentWrapper = asLink(Card.Content);
-    const LinkToRecord = asLinkToRecord(Button);
     return (
       <Sidebar.Pushable
         as={Card}
@@ -120,7 +114,6 @@ class TaskCard extends React.PureComponent {
         <Sidebar
           animation="push"
           direction="right"
-          icon="labeled"
           as={Button.Group}
           vertical
           visible={this.state.visible}

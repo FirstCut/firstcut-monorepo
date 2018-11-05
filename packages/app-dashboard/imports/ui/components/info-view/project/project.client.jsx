@@ -3,9 +3,10 @@ import React from 'react';
 import { Item, Container } from 'semantic-ui-react';
 import Cards from '/imports/ui/components/utils/cards';
 import { asLinkToRecord } from '/imports/ui/components/utils/utils';
-import { ShootInfo } from '../shoot';
 import { isEmpty } from 'firstcut-utils';
+import { ShootInfo } from '../shoot';
 import InfoPage from '/imports/ui/pages/info.page';
+import ProjectChatWindow from './project.chat';
 
 export default function ClientProjectInfoPage(props) {
   const { record } = props;
@@ -56,10 +57,14 @@ export default function ClientProjectInfoPage(props) {
 
 
   return (
-    <InfoPage
-      sections={sections}
-      record={record}
-    />);
+    <div>
+      <InfoPage
+        sections={sections}
+        record={record}
+      />
+      <ProjectChatWindow project={record} />
+    </div>
+  );
 }
 
 function getClientProjectInfo(props) {

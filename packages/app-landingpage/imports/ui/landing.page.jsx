@@ -5,36 +5,30 @@ import {
   Image, Header, Grid, Button, Form, Responsive, Modal, Container, Embed,
 } from 'semantic-ui-react';
 
-const IDEAS_TAGLINES = [
-  'Need help generating great content?',
-  'Generating great content shouldn\'t be hard. We can help!',
-  'Need help building your content playbook?',
-  'We make generating great content easy.',
+const ANALYTICS_OF_STRATEGY = [
+  'Our experts would like to offer you a free data-backed analysis of your content strategy. Contact us to request your consultation. (Limited time only)',
+  'Our experts are here to help! Contact us to request a free, data-backed analysis of your company\'s content strategy. (Limited time only)',
 ];
 
-const ANALYTICS_TAGLINES = [
-  'Optimize your editorial calendar using the power of data',
-  'Need help maximizing your content\'s impact?',
-  'Maximize your content\'s impact using the power of data',
-  'We can unlock your content',
+const CUSTOM_CONTENT_STRATEGY = [
+  'Our experts can help you develop a content strategy that is optimized to your business. Request your free consultation below. (Limited time only)',
+  'We can help you maximize the power of your editorial calendar. We are offering free consultations for a limited time.',
 ];
 
-const ASSETS_TAGLINES = [
-  'Managing your content doesn\'t need to be a pain. We can help.',
-  'Repackage, reuse, republish. We make your content go farther.',
-  'We turn hours of footage into a content strategy',
+const SPECIFIC_VIDEO_IDEAS = [
+  'Wondering what your company\'s next video should be? Our experts can help you identify marketing videos that are optimized to achieve your company goals. Request your free consultation below.',
 ];
 
 const DEFAULT_TAGLINE = 'Need help with your b2b video?';
 
 const ADS_TO_TAGLINES = {
-  1: IDEAS_TAGLINES,
-  2: IDEAS_TAGLINES,
-  3: IDEAS_TAGLINES,
-  4: ANALYTICS_TAGLINES,
-  5: ANALYTICS_TAGLINES,
-  6: ASSETS_TAGLINES,
-  7: ASSETS_TAGLINES,
+  1: CUSTOM_CONTENT_STRATEGY,
+  2: CUSTOM_CONTENT_STRATEGY,
+  3: ANALYTICS_OF_STRATEGY,
+  4: ANALYTICS_OF_STRATEGY,
+  5: SPECIFIC_VIDEO_IDEAS,
+  6: SPECIFIC_VIDEO_IDEAS,
+  7: SPECIFIC_VIDEO_IDEAS,
 };
 
 class LandingPage extends React.Component {
@@ -59,7 +53,7 @@ class LandingPage extends React.Component {
         this.setState({ error: err });
       } else {
         this.setState({
-          confirm: true, first: '', last: '', company: '', email: '', about: '',
+          confirm: true, first: '', last: '', company: '', email: '', website: '', about: '',
         });
       }
     });
@@ -67,7 +61,7 @@ class LandingPage extends React.Component {
 
   render() {
     const {
-      confirm, first, last, email, about, company, tagline,
+      confirm, first, last, email, about, company, website, tagline,
     } = this.state;
     return (
       <div style={{ height: '100%' }} onClick={this.hideSidebar}>
@@ -112,7 +106,12 @@ class LandingPage extends React.Component {
 
               <Grid.Row>
                 <Grid.Column
-                  width={16}
+                  width={2}
+                  align="center"
+                  verticalAlign="middle"
+                />
+                <Grid.Column
+                  width={12}
                   align="center"
                   verticalAlign="middle"
                 >
@@ -120,6 +119,11 @@ class LandingPage extends React.Component {
                     { tagline }
                   </Header>
                 </Grid.Column>
+                <Grid.Column
+                  width={2}
+                  align="center"
+                  verticalAlign="middle"
+                />
               </Grid.Row>
               <Grid.Row>
                 <Grid.Column
@@ -171,9 +175,18 @@ class LandingPage extends React.Component {
                         />
                       </Form.Field>
                       <Form.Field>
+                        <Form.Input
+                          onChange={this.handleChange}
+                          placeholder="Company Website"
+                          name="website"
+                          value={website}
+                          required
+                        />
+                      </Form.Field>
+                      <Form.Field>
                         <Form.TextArea
                           onChange={this.handleChange}
-                          placeholder="How can we help?"
+                          placeholder="Anything else you would like to add?"
                           name="about"
                           value={about}
                           required

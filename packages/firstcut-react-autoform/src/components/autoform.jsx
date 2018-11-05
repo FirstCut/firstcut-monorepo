@@ -3,7 +3,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { _ } from 'lodash';
 import { Record } from 'immutable';
-import { Form, Input } from 'semantic-ui-react';
+import { Form } from 'semantic-ui-react';
 import moment from 'moment';
 import getAutoformSchema from '../autoform.schema';
 import { removeNonDomFields } from '../autoform.utils';
@@ -17,15 +17,13 @@ import Dropzone from './dropzone';
 import Select from './select';
 import NumberInput from './number';
 
-export default class Autoform extends React.Component {
-  render() {
-    const disableDefaults = (this.props.disableDefaults === undefined) ? false : this.props.disableDefaults;
-    return (
-      <Form>
-        <AutoformFields disableDefaults={disableDefaults} {...this.props} />
-      </Form>
-    );
-  }
+export default function Autoform(props) {
+  const { disableDefaults = false } = props;
+  return (
+    <Form>
+      <AutoformFields disableDefaults={disableDefaults} {...props} />
+    </Form>
+  );
 }
 
 function AutoformFields(props) {
@@ -87,7 +85,7 @@ class Field extends React.PureComponent {
       errors,
       overrides,
     };
-    let models = this.props.models;
+    let { models } = this.props;
     if (!models) {
       models = record.models;
     }
@@ -120,14 +118,15 @@ class Field extends React.PureComponent {
     fieldProps.name = field;
     fieldProps.onChange = onChange;
     fieldProps.key = `${field}`;
+    const domProps = removeNonDomFields(fieldProps);
     switch (type) {
       case 'options':
         return <Select {...fieldProps} />;
       case 'multiselect':
         return <Select {...fieldProps} multiple />;
       case 'string':
-        const domProps = removeNonDomFields(fieldProps);
-        return <Form.Field control={Input} {...domProps} />;
+        console.log('Input');
+        return <Form.Input {...domProps} value={fieldProps.value || ''} />;
       case 'boolean':
         return <Checkbox {...fieldProps} />;
       case 'number':
@@ -136,7 +135,8 @@ class Field extends React.PureComponent {
         // const timezone = record.timezone || getTimezoneFromDate(fieldProps.value);
         return <Datetime {...fieldProps} timezone={fieldProps.timezone || record.timezone} />;
       case 'textarea':
-        return <Form.TextArea {...fieldProps} />;
+        console.log('TEXT ALEA');
+        return <Form.TextArea {...domProps} />;
       case 'location':
         return <LocationField {...fieldProps} />;
       case 'file':
@@ -154,8 +154,8 @@ class Field extends React.PureComponent {
 }
 
 AutoformFields.propTypes = {
-  record: PropTypes.instanceOf(Record).isRequired,
-  onChange: PropTypes.func.isRequired,
+  record: PropTypes.instanceOf(Record),
+  onChange: PropTypes.func,
   errors: PropTypes.object,
   overrides: PropTypes.object,
   fields: PropTypes.arrayOf(

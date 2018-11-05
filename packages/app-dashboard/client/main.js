@@ -2,6 +2,7 @@
 import '/imports/startup/client';
 import './main.html';
 import './main.css';
+import './chat.css';
 import './datetime-picker.css';
 import './basic.min.css';
 import './dropzone.min.css';

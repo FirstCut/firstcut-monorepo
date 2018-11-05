@@ -15,6 +15,7 @@ var RequestSchema = new _firstcutSchema.SimpleSchemaWrapper({
   email: String,
   about: String,
   company: String,
+  website: String,
   tagline: String
 });
 RequestSchema.extend(_firstcutSchema.BaseSchema);

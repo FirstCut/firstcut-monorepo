@@ -30,6 +30,7 @@ const UpdatedShootEvent = new Map({
     const actions = [{
       type: ACTIONS.calendar_event,
       event_id: shoot.getEventId('shoot_event_updated'),
+      owner_email: shoot.adminOwnerEmail,
       event: {
         summary: `${shoot.displayName}`,
         description,

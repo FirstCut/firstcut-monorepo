@@ -49,6 +49,10 @@ export const TextMessageActionSchema = new SimpleSchema({
 
 export const CalendarActionSchema = new SimpleSchema({
   event: CalendarEventContentSchema,
+  owner_email: {
+    type: String,
+    optional: true,
+  },
   event_id: {
     type: String,
     optional: true,

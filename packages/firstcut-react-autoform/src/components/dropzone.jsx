@@ -84,12 +84,12 @@ class PrivateDropzoneComponent extends React.Component {
 
     // const drop_props = removeNonDomFields(field_options);
     const dropzoneStyles = {
-      'text-align': 'center',
+      textAlign: 'center',
       width: '100%',
       margin: 'auto',
       padding: '10px',
       border: '4px dashed red',
-      'border-radius': '10px',
+      borderRadius: '10px',
     };
     if (uploadComplete) {
       dropzoneStyles.border = '4px dashed green';
@@ -117,12 +117,12 @@ class PrivateDropzoneComponent extends React.Component {
         <Card.Group>
           {
           files.map((f) => {
-            let { progress, secondsLeft, readableSpeed } = fileStats.get(f.name) || {};
+            let { progress = 0, secondsLeft, readableSpeed } = fileStats.get(f.name) || {};
             if (progress <= 1) {
               progress *= 100;
             }
             return (
-              <Card color={(progress === 100) ? 'green' : 'yellow'}>
+              <Card key={f.name} color={(progress === 100) ? 'green' : 'yellow'}>
                 <Image src={f.preview} size="small" style={{ margin: 'auto' }} />
                 <Card.Content>
                   <Card.Header>
@@ -195,9 +195,8 @@ function humanReadableSeconds(seconds) {
 
 PrivateDropzoneComponent.propTypes = {
   onFileAdded: PropTypes.func.isRequired,
-  onFileRemoved: PropTypes.func.isRequired,
-  progress: PropTypes.instanceOf(Map).isRequired,
-  label: PropTypes.string,
+  progress: PropTypes.instanceOf(Map),
+  label: PropTypes.node,
 };
 
 export default Drop;

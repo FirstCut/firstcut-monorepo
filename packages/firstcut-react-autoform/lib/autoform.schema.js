@@ -13,8 +13,6 @@ var _immutable = require("immutable");
 
 var _firstcutSchema = require("firstcut-schema");
 
-var _lodash = require("lodash");
-
 var DEFAULT_SORT_METHOD = 'text';
 
 function getAutoformSchema(models, record, field, options) {

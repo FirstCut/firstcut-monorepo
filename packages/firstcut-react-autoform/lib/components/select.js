@@ -9,8 +9,6 @@ exports.default = Select;
 
 var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
 
-var _objectSpread2 = _interopRequireDefault(require("@babel/runtime/helpers/objectSpread"));
-
 var _objectWithoutProperties2 = _interopRequireDefault(require("@babel/runtime/helpers/objectWithoutProperties"));
 
 var _react = _interopRequireDefault(require("react"));
@@ -21,18 +19,22 @@ var _semanticUiReact = require("semantic-ui-react");
 
 var _lodash = require("lodash");
 
+var _autoform = require("../autoform.utils");
+
 function Select(props) {
-  var _props = (0, _objectSpread2.default)({}, props),
-      options = _props.options,
-      additionLabel = _props.additionLabel,
-      fieldProps = (0, _objectWithoutProperties2.default)(_props, ["options", "additionLabel"]);
+  var options = props.options,
+      additionLabel = props.additionLabel,
+      sortBy = props.sortBy,
+      rest = (0, _objectWithoutProperties2.default)(props, ["options", "additionLabel", "sortBy"]);
 
   if (!options) {
     return _react.default.createElement("div", null);
   }
 
+  var fieldProps = (0, _autoform.removeNonDomFields)(rest);
+
   var sorted = _lodash._.sortBy(options, function (item) {
-    return item[props.sortBy] ? item[props.sortBy].toLowerCase() : null;
+    return item[sortBy] ? item[sortBy].toLowerCase() : null;
   });
 
   sorted.unshift({

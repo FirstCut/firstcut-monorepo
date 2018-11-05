@@ -13,7 +13,16 @@ export default function initPublications(Models) {
     Shoot,
     Task,
     Invoice,
+    Message,
   } = Models;
+
+  console.log('init publications');
+  Meteor.publish('project.messages', (projectId) => {
+    console.log('subscribing');
+    check(projectId, String);
+    console.log(Message.collection.find({ projectId }).count());
+    return Message.collection.find({ projectId });
+  });
 
   Meteor.publish('editor.all', (playerId) => {
     check(playerId, String);
@@ -27,6 +36,7 @@ export default function initPublications(Models) {
       subscribeToPublicFields(Company, {}),
       subscribeToPublicFields(Client, {}),
       subscribeToPublicFields(Collaborator, {}),
+      // subscribeToProjectMessages(projectIds),
       // Collaborator.collection.find({_id: playerId}),
       deliverables,
       cuts,
@@ -93,6 +103,7 @@ export default function initPublications(Models) {
     return [
       projects,
       deliverables,
+      // subscribeToProjectMessages(projectIds),
       Asset.collection.find({}),
       Company.collection.find({}),
       Client.collection.find({}),
@@ -168,6 +179,7 @@ export default function initPublications(Models) {
       deliverables,
       Company.collection.find({}),
       Client.collection.find({ _id: playerId }),
+      // subscribeToProjectMessages(projectIds),
       subscribeToPublicFields(Collaborator, {}),
     ];
   });
@@ -203,6 +215,7 @@ export default function initPublications(Models) {
 
   Meteor.publish('records.all', () => [
     Project.collection.find({}),
+    // Message.collection.find({}),
     Deliverable.collection.find({}),
     Asset.collection.find({}),
     Company.collection.find({}),
@@ -220,6 +233,10 @@ export default function initPublications(Models) {
     subscribeToPublicFields(Client, {}),
   ]);
   Meteor.publish('clients.public', () => [subscribeToPublicFields(Client, {})]);
+
+  function subscribeToProjectMessages(ids) {
+    return Message.collection.find({ projectId: { $in: ids } });
+  }
 }
 
 function getRelatedRecordsById({ sourceRecords, targetCollection, idField }) {

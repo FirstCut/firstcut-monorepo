@@ -2,14 +2,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Form, Input } from 'semantic-ui-react';
+import { removeNonDomFields } from '../autoform.utils';
 
 export default function NumberInput(props) {
-  const { onChange, ...rest } = { ...props };
-  const onNumberChange = onChange => (e, { name, value }) => {
+  const { onChange, value = undefined, ...rest } = props;
+  const domProps = removeNonDomFields(rest);
+  const onNumberChange = (e, { name, value }) => {
     const asFloat = parseFloat(value);
     onChange(null, { name, value: asFloat });
   };
 
-  rest.onChange = onNumberChange(onChange);
-  return <Form.Field control={Input} type="number" {...rest} />;
+  return <Form.Field control={Input} onChange={onNumberChange} type="number" {...domProps} value={value} />;
 }

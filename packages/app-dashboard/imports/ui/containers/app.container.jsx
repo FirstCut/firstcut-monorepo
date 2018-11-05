@@ -18,15 +18,16 @@ const AppContainer = withTracker((props) => {
   }
 
   const playerId = userPlayerId();
-  const playersHandle = PlayerSubs.subscribe('players.public');
+  const playersHandle = Meteor.subscribe('players.public');
   const subscriptions = getSubscriptions().filter(s => s !== 'players.public');
-  const handles = subscriptions.map(name => Subs.subscribe(name, playerId));
+  const handles = subscriptions.map(name => Meteor.subscribe(name, playerId));
   const doneLoading = handles.reduce((ready, handle) => ready && handle.ready(), true);
 
   if (doneLoading && !this.hasIdentifiedCurrentUser) {
     Analytics.identifyCurrentUser();
     this.hasIdentifiedCurrentUser = true;
   }
+  console.log('redo');
   return {
     doneLoading,
     playersDoneLoading: playersHandle.ready(),

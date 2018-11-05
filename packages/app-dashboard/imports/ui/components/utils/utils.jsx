@@ -14,7 +14,7 @@ import { getRecordPath } from 'firstcut-retrieve-url';
 
 export function asLink(WrappedComponent) {
   function Wrapped(props) {
-    const { record, getPath } = props;
+    const { record, getPath, ...rest } = props;
     let { path } = props;
     path = (getPath) ? getPath(record) : path;
 
@@ -22,7 +22,7 @@ export function asLink(WrappedComponent) {
       e.stopPropagation();
     };
 
-    return (<WrappedComponent as={Link} to={path} {...props} onClick={onClick} />);
+    return (<WrappedComponent as={Link} to={path} {...rest} onClick={onClick} />);
   }
   return Wrapped;
 }

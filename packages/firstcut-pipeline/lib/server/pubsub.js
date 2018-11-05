@@ -277,6 +277,10 @@ function initSubscriptions(Models) {
       return;
     }
 
+    if (model.modelName === 'Message') {
+      return;
+    }
+
     if (model.modelName === 'LandingPageRequest') {
       return;
     }

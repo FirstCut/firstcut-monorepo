@@ -1,5 +1,5 @@
 
-import { SimpleSchemaWrapper as Schema } from 'firstcut-schema';
+import { SimpleSchemaWrapper as Schema, BaseSchema } from 'firstcut-schema';
 import SimpleSchema from 'simpl-schema';
 import { JOBS } from './jobs.enum';
 
@@ -18,5 +18,7 @@ const JobSchema = new Schema({
   'event_data.record_type': String,
   cron: SimpleSchema.oneOf(String, Date),
 });
+
+JobSchema.extend(BaseSchema);
 
 export default JobSchema;

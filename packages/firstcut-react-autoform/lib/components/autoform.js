@@ -5,13 +5,9 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = void 0;
+exports.default = Autoform;
 
 var _objectSpread2 = _interopRequireDefault(require("@babel/runtime/helpers/objectSpread"));
-
-var _objectWithoutProperties2 = _interopRequireDefault(require("@babel/runtime/helpers/objectWithoutProperties"));
-
-var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
 
 var _classCallCheck2 = _interopRequireDefault(require("@babel/runtime/helpers/classCallCheck"));
 
@@ -22,6 +18,10 @@ var _possibleConstructorReturn2 = _interopRequireDefault(require("@babel/runtime
 var _getPrototypeOf2 = _interopRequireDefault(require("@babel/runtime/helpers/getPrototypeOf"));
 
 var _inherits2 = _interopRequireDefault(require("@babel/runtime/helpers/inherits"));
+
+var _objectWithoutProperties2 = _interopRequireDefault(require("@babel/runtime/helpers/objectWithoutProperties"));
+
+var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
 
 var _react = _interopRequireDefault(require("react"));
 
@@ -55,29 +55,13 @@ var _select = _interopRequireDefault(require("./select"));
 
 var _number = _interopRequireDefault(require("./number"));
 
-var Autoform =
-/*#__PURE__*/
-function (_React$Component) {
-  (0, _inherits2.default)(Autoform, _React$Component);
-
-  function Autoform() {
-    (0, _classCallCheck2.default)(this, Autoform);
-    return (0, _possibleConstructorReturn2.default)(this, (0, _getPrototypeOf2.default)(Autoform).apply(this, arguments));
-  }
-
-  (0, _createClass2.default)(Autoform, [{
-    key: "render",
-    value: function render() {
-      var disableDefaults = this.props.disableDefaults === undefined ? false : this.props.disableDefaults;
-      return _react.default.createElement(_semanticUiReact.Form, null, _react.default.createElement(AutoformFields, (0, _extends2.default)({
-        disableDefaults: disableDefaults
-      }, this.props)));
-    }
-  }]);
-  return Autoform;
-}(_react.default.Component);
-
-exports.default = Autoform;
+function Autoform(props) {
+  var _props$disableDefault = props.disableDefaults,
+      disableDefaults = _props$disableDefault === void 0 ? false : _props$disableDefault;
+  return _react.default.createElement(_semanticUiReact.Form, null, _react.default.createElement(AutoformFields, (0, _extends2.default)({
+    disableDefaults: disableDefaults
+  }, props)));
+}
 
 function AutoformFields(props) {
   var fields = props.fields,
@@ -237,6 +221,7 @@ function (_React$PureComponent) {
       fieldProps.name = field;
       fieldProps.onChange = onChange;
       fieldProps.key = "".concat(field);
+      var domProps = (0, _autoform2.removeNonDomFields)(fieldProps);
 
       switch (type) {
         case 'options':
@@ -248,10 +233,10 @@ function (_React$PureComponent) {
           }));
 
         case 'string':
-          var domProps = (0, _autoform2.removeNonDomFields)(fieldProps);
-          return _react.default.createElement(_semanticUiReact.Form.Field, (0, _extends2.default)({
-            control: _semanticUiReact.Input
-          }, domProps));
+          console.log('Input');
+          return _react.default.createElement(_semanticUiReact.Form.Input, (0, _extends2.default)({}, domProps, {
+            value: fieldProps.value || ''
+          }));
 
         case 'boolean':
           return _react.default.createElement(_checkbox.default, fieldProps);
@@ -266,7 +251,8 @@ function (_React$PureComponent) {
           }));
 
         case 'textarea':
-          return _react.default.createElement(_semanticUiReact.Form.TextArea, fieldProps);
+          console.log('TEXT ALEA');
+          return _react.default.createElement(_semanticUiReact.Form.TextArea, domProps);
 
         case 'location':
           return _react.default.createElement(_location.default, fieldProps);
@@ -299,8 +285,8 @@ function (_React$PureComponent) {
 }(_react.default.PureComponent);
 
 AutoformFields.propTypes = {
-  record: _propTypes.default.instanceOf(_immutable.Record).isRequired,
-  onChange: _propTypes.default.func.isRequired,
+  record: _propTypes.default.instanceOf(_immutable.Record),
+  onChange: _propTypes.default.func,
   errors: _propTypes.default.object,
   overrides: _propTypes.default.object,
   fields: _propTypes.default.arrayOf(_propTypes.default.oneOfType([_propTypes.default.arrayOf(_propTypes.default.string), _propTypes.default.string]))

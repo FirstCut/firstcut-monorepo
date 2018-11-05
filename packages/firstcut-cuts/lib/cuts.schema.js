@@ -55,7 +55,6 @@ var CutSchema = new _firstcutSchema.SimpleSchemaWrapper({
   editorNotes: {
     type: String,
     label: 'Editor Notes',
-    helpText: 'Anything about this CUT that you want to communicate to the project manager or the client.',
     customType: 'textarea'
   },
   revisions: {

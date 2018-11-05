@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { Form, Button } from 'semantic-ui-react';
 import Autocomplete from 'react-google-autocomplete';
 import { HTTP } from 'meteor/http';
+import { removeNonDomFields } from '../autoform.utils';
 
 export default function LocationField(props) {
   const { record, onChange, ...fieldProps } = { ...props };
@@ -19,22 +20,21 @@ export default function LocationField(props) {
   };
 
   const locationDisplayName = record.locationDisplayName;
+  const types = fieldProps.locationTypes || [];
 
   if (locationDisplayName) {
     fieldProps.placeholder = locationDisplayName;
   }
-  fieldProps.onPlaceSelected = onPlaceSelected(onChange, fieldProps.name);
-  const types = fieldProps.locationTypes || [];
-  delete fieldProps.value; // autocomplete location doesn't work well as a controlled component
-  delete fieldProps.locationTypes; // autocomplete location doesn't work well as a controlled component
-  delete fieldProps.customType; // autocomplete location doesn't work well as a controlled component
-  delete fieldProps.singleFile; // autocomplete location doesn't work well as a controlled component
-  delete fieldProps.custom; // autocomplete location doesn't work well as a controlled component
-  delete fieldProps.serviceDependency; // autocomplete location doesn't work well as a controlled component
-  console.log(Autocomplete);
+  const domProps = removeNonDomFields(fieldProps);
+  delete domProps.value; // autocomplete location doesn't work well as a controlled component
   return (
     <div>
-      <Form.Field types={types} control={Autocomplete} {...fieldProps} />
+      <Form.Field
+        types={types}
+        control={Autocomplete}
+        onPlaceSelected={onPlaceSelected(onChange, fieldProps.name)}
+        {...domProps}
+      />
       <Button attached="bottom" onClick={clearLocation}>
       CLEAR LOCATION
       </Button>
@@ -101,12 +101,9 @@ function getTimezone(lat, lng, timestamp, cb) {
     query: options, params: options, data: options, content: options,
   }, (err, data) => {
     const response = JSON.parse(data.content);
-    console.log(response);
     if (response.statusCode !== 200) {
       return callback(new Error(`Google API request error: ${response}`));
     }
-    console.log(response);
-    console.log(response.data);
     callback(null, response.data.timeZoneId);
   });
 }

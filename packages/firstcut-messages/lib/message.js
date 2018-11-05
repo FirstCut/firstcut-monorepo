@@ -36,7 +36,7 @@ function (_Base) {
   (0, _createClass2.default)(Message, [{
     key: "getAuthor",
     value: function getAuthor() {
-      this.getPlayerFromQuery({
+      return this.getPlayerFromQuery({
         _id: this.authorId
       });
     }

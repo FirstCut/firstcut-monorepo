@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Widget, addResponseMessage, addUserMessage } from 'react-chat-widget';
-// import { PubSub } from 'pubsub-js';
 import { _ } from 'lodash';
-
-// import 'react-chat-widget/lib/styles.css';
+import {
+  Widget, addResponseMessage, addUserMessage, dropMessages, renderCustomComponent,
+} from 'react-chat-widget';
 
 class ChatWidget extends Component {
   static defaultProps = {
@@ -14,6 +13,7 @@ class ChatWidget extends Component {
 
   componentDidMount() {
     const { messages } = this.props;
+    dropMessages();
     this.populateMessages(messages);
   }
 
@@ -37,6 +37,7 @@ class ChatWidget extends Component {
 
    addUserMessage = (message) => {
      const prefix = getMessagePrefix(message);
+     renderCustomComponent(MessageComponent, {}, true);
      addUserMessage(`${prefix} ${message.getText()}`);
    }
 
@@ -60,17 +61,19 @@ class ChatWidget extends Component {
      const { title, handleNewUserMessage } = this.props;
      const unread = this.getUnreadMessages().length;
      return (
-       <Widget
-         title={title}
-         profileAvatar="/firstcut_logo.png"
-         badge={unread}
-         handleNewUserMessage={handleNewUserMessage}
-         fullScreenMode
-         showCloseButton
-         onClick={this.onToggleLauncher}
-       />
+       <div onClick={this.onToggleLauncher}>
+         <Widget
+           title={title}
+           badge={unread}
+           handleNewUserMessage={handleNewUserMessage}
+         />
+       </div>
      );
    }
+}
+
+function MessageComponent(props) {
+  return <div>HELLO</div>;
 }
 
 function getMessagePrefix(message) {
