@@ -17,7 +17,7 @@ const CompanySchema = new Schema({
   },
   brandIntroId: {
     type: String,
-    label: 'Brand Into File',
+    label: 'Brand Intro File',
     customType: 'file',
     store: 'cuts',
   },
@@ -25,7 +25,7 @@ const CompanySchema = new Schema({
     type: Array,
     customType: 'fileArray',
     store: 'assets',
-    label: 'Brand Asset',
+    label: 'Brand Assets',
   },
   'branding.$': SimpleSchema.oneOf({
     type: String,

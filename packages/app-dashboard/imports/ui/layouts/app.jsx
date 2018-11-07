@@ -111,6 +111,13 @@ class AppBody extends React.Component {
                 );
               })
             }
+            { userExperience().isClient && playersDoneLoading
+            && (
+              <Menu.Item direction="right" as={Link} to={getRecordPath(Models.userPlayer().company)} header>
+                My Company
+              </Menu.Item>
+            )
+            }
             <Menu.Item direction="right" as={Link} to={getRecordPath(Models.userPlayer())} header>
               My Account
             </Menu.Item>

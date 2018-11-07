@@ -87,6 +87,7 @@ class PrivateDropzoneComponent extends React.Component {
       textAlign: 'center',
       width: '100%',
       margin: 'auto',
+      marginTop: '10px',
       padding: '10px',
       border: '4px dashed red',
       borderRadius: '10px',

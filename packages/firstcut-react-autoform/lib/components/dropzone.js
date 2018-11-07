@@ -147,6 +147,7 @@ function (_React$Component2) {
         textAlign: 'center',
         width: '100%',
         margin: 'auto',
+        marginTop: '10px',
         padding: '10px',
         border: '4px dashed red',
         borderRadius: '10px'

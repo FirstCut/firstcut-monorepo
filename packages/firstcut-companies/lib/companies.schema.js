@@ -26,7 +26,7 @@ var CompanySchema = new _firstcutSchema.SimpleSchemaWrapper({
   },
   brandIntroId: {
     type: String,
-    label: 'Brand Into File',
+    label: 'Brand Intro File',
     customType: 'file',
     store: 'cuts'
   },
@@ -34,7 +34,7 @@ var CompanySchema = new _firstcutSchema.SimpleSchemaWrapper({
     type: Array,
     customType: 'fileArray',
     store: 'assets',
-    label: 'Brand Asset'
+    label: 'Brand Assets'
   },
   'branding.$': _simplSchema.default.oneOf({
     type: String

@@ -68,10 +68,6 @@ export default function ProjectsList(props) {
       label: Project.getFieldLabel('adminOwnerId'),
       display: <Cells.Link getPath={record => getRelatedRecordPath('adminOwner', record)} />,
     }, {
-      key: 'invoiceCount',
-      label: 'Invoice Count (should be > 0)',
-      display: <Cells.PlainValue />,
-    }, {
       key: 'numUnreadMessages',
       label: 'Unread Messages',
       display: <Cells.UnreadMessages />,

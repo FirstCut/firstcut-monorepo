@@ -100,6 +100,8 @@ function _basicClientInfo(props) {
           {' '}
           {record.adminOwnerEmail}
         </Item.Header>
+        { record.assets.length > 0
+        && (
         <Item.Header>
           <b>
             Project Assets
@@ -107,6 +109,8 @@ function _basicClientInfo(props) {
           {' '}
           <FilePortal record={record} fieldname="assets" view={FileView} />
         </Item.Header>
+        )
+      }
       </Item.Content>
     </Item>
   );

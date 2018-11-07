@@ -12,6 +12,7 @@ const ClientConfig = new Record({
   routes: new List([
     Routes.ProjectList,
     Routes.ProjectInfo,
+    Routes.CompanyInfo,
     Routes.ShootInfo,
     Routes.CutInfo,
     Routes.ViewCut,
@@ -32,7 +33,7 @@ const ClientConfig = new Record({
   homePage: '/projects',
   userExperience: 'CLIENT',
   hasPermission: generatePermissions({
-    WRITE: [Models.Project.modelName],
+    WRITE: [Models.Project.modelName, Models.Company.modelName, Models.Client.modelName],
   }),
   getActions: generateActions({
     [Models.Shoot.modelName]: new List(['edit_shoot_script']),
