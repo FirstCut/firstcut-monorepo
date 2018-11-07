@@ -18,9 +18,7 @@ export default function initPublications(Models) {
 
   console.log('init publications');
   Meteor.publish('project.messages', (projectId) => {
-    console.log('subscribing');
     check(projectId, String);
-    console.log(Message.collection.find({ projectId }).count());
     return Message.collection.find({ projectId });
   });
 

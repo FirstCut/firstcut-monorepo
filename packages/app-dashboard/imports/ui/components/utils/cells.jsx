@@ -2,13 +2,39 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Models from '/imports/api/models';
-import { Button } from 'semantic-ui-react';
-import { Record } from 'immutable';
+import { Button, Label } from 'semantic-ui-react';
+import { userPlayerId } from 'firstcut-user-session';
+import { withTracker } from 'meteor/react-meteor-data';
 import { HumanReadableDate } from './dates';
 import { asLink, USDollars, asLinkToRecord } from './utils';
 import withEditRecordModal from '/imports/ui/containers/editrecord.container';
 import { ActionButtons } from '/imports/ui/components/pipeline-actions/actions';
 import { userHasPermission } from '/imports/ui/config';
+
+const UnreadMessages = withTracker((props) => {
+  const { record } = props;
+  const handle = Meteor.subscribe('project.messages', record._id);
+  const messages = record.getUnreadMessages(userPlayerId());
+  return { messages };
+})(UnreadMessagesCell);
+
+function UnreadMessagesCell(props) {
+  const { messages } = props;
+  // const handle = Meteor.subscribe('project.messages', record._id);
+  // const messages = record.getUnreadMessages(userPlayerId());
+  const val = messages.length;
+  let color = 'green';
+  if (val > 0) {
+    color = 'red';
+  }
+  return (
+    <Label color={color}>
+      {' '}
+      {val}
+      {' '}
+    </Label>
+  );
+}
 
 function LinkCell(props) {
   const { record, field, ...rest } = props;
@@ -120,6 +146,7 @@ const Cells = Object.freeze({
   FetchAsync,
   USDollars: USDollarsCell,
   Actions: ActionsCell,
+  UnreadMessages,
 });
 
 export default Cells;

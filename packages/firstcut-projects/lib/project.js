@@ -89,6 +89,19 @@ function (_Base) {
       });
     }
   }, {
+    key: "numUnreadMessages",
+    value: function numUnreadMessages(playerId) {
+      return this.getUnreadMessages(playerId).length;
+    }
+  }, {
+    key: "getUnreadMessages",
+    value: function getUnreadMessages(playerId) {
+      var messages = this.getProjectMessages();
+      return _lodash._.filter(messages.toArray(), function (m) {
+        return !m.getReadBy().includes(playerId);
+      });
+    }
+  }, {
     key: "getProjectMessages",
     value: function getProjectMessages() {
       return this.messageService.find({

@@ -1,9 +1,0 @@
-PACKAGE_NAME=$1
-
-PACKAGES_TGT=/node_modules
-PACKAGES_SRC=$HOME/FirstCut/firstcut-mono/packages/
-
-SRC="$PACKAGES_SRC$PACKAGE_NAME"
-TGT="$PWD$PACKAGES_TGT"
-
-ln -s $SRC $TGT

@@ -27,7 +27,6 @@ const AppContainer = withTracker((props) => {
     Analytics.identifyCurrentUser();
     this.hasIdentifiedCurrentUser = true;
   }
-  console.log('redo');
   return {
     doneLoading,
     playersDoneLoading: playersHandle.ready(),

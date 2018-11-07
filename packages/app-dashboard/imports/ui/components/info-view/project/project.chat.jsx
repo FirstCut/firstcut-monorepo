@@ -18,6 +18,7 @@ export default withTracker((props) => {
 
 function ProjectChatWindow(props) {
   const { project, messages } = props;
+  // const messages = project.getProjectMessages().toArray();
   return (
     <Portal open>
       <ChatWidget
@@ -25,6 +26,7 @@ function ProjectChatWindow(props) {
         handleNewUserMessage={addNewMessage(project)}
         onMessagesRead={markMessagesAsRead}
         title="Project Chat"
+        subtitle="Chat with your producer here"
         userId={userPlayerId()}
       />
     </Portal>);

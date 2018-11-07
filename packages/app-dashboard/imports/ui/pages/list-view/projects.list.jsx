@@ -71,6 +71,10 @@ export default function ProjectsList(props) {
       key: 'invoiceCount',
       label: 'Invoice Count (should be > 0)',
       display: <Cells.PlainValue />,
+    }, {
+      key: 'numUnreadMessages',
+      label: 'Unread Messages',
+      display: <Cells.UnreadMessages />,
     },
   ];
 

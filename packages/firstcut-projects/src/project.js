@@ -43,6 +43,15 @@ class Project extends Base {
     return this.invoiceService.createNew({ gigId: this._id, type: 'PROJECT' });
   }
 
+  numUnreadMessages(playerId) {
+    return this.getUnreadMessages(playerId).length;
+  }
+
+  getUnreadMessages(playerId) {
+    const messages = this.getProjectMessages();
+    return _.filter(messages.toArray(), m => !m.getReadBy().includes(playerId));
+  }
+
   getProjectMessages() {
     return this.messageService.find({ projectId: this._id });
   }

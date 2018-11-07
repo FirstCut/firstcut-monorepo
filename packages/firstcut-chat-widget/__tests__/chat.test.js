@@ -4,6 +4,7 @@ jest.mock('react-chat-widget', () => ({
   addResponseMessage: jest.fn(),
   addUserMessage: jest.fn(),
   dropMessages: jest.fn(),
+  renderCustomComponent: jest.fn(),
 }));
 
 import React from 'react';
@@ -77,8 +78,9 @@ describe('<ChatWidget />', () => {
     expect(onMessagesRead).toHaveBeenCalledWith(messages);
   });
 
-  test('should call addResponseMessage once when a new response message is added to the conversation', () => {
+  test('should repopulate the messages when a new response message is added to the conversation', () => {
     addResponseMessage.mockReset();
+    addUserMessage.mockReset();
     const newMessages = _.concat(messages, [{
       getAuthor() { return responder; },
       getAuthorId() { return this.authorId; },
@@ -90,7 +92,8 @@ describe('<ChatWidget />', () => {
     wrapper.setProps({
       messages: newMessages, title, handleNewUserMessage, userId: user._id,
     });
-    expect(addResponseMessage).toHaveBeenCalledTimes(1);
+    expect(addResponseMessage).toHaveBeenCalledTimes(1 + numResponseMessages);
+    expect(addUserMessage).toHaveBeenCalledTimes(numMessagesFromUser);
   });
 
   test('should lower the badge number when messages are marked as readBy', () => {

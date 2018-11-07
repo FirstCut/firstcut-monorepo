@@ -128,7 +128,6 @@ const saveRecord = new ValidatedMethod({
   name: 'save_record',
   validate: () => {},
   run({ record, modelName }) {
-    console.log('SAVING');
     if (!record._id) {
       record._id = oid();
     }

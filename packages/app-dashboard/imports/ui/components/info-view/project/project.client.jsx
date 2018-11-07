@@ -7,6 +7,7 @@ import { isEmpty } from 'firstcut-utils';
 import { ShootInfo } from '../shoot';
 import InfoPage from '/imports/ui/pages/info.page';
 import ProjectChatWindow from './project.chat';
+import { FilePortal, FileView } from '/imports/ui/components/utils/file.portal';
 
 export default function ClientProjectInfoPage(props) {
   const { record } = props;
@@ -98,6 +99,13 @@ function _basicClientInfo(props) {
           </b>
           {' '}
           {record.adminOwnerEmail}
+        </Item.Header>
+        <Item.Header>
+          <b>
+            Project Assets
+          </b>
+          {' '}
+          <FilePortal record={record} fieldname="assets" view={FileView} />
         </Item.Header>
       </Item.Content>
     </Item>

@@ -36,6 +36,12 @@ export default class ProjectForm extends React.Component {
       ];
     }
 
+    if (userExperience().isClient) {
+      fields = [
+        'assets',
+      ];
+    }
+
     if (record.companyId) {
       overrides.clientOwnerId.serviceFilter = { companyId: record.companyId };
       overrides.additionalClientTeamMemberIds.serviceFilter = { companyId: record.companyId };

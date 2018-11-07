@@ -96,3 +96,25 @@ body {
 .ui.modal.active {
   margin-top: 0em !important;
 }
+
+.rcw-launcher {
+  background-color: #8ED137;
+}
+
+.rcw-conversation-container > .rcw-header {
+  background-color: #8ED137;
+}
+
+.rcw-message > .rcw-response {
+  background-color: light grey;
+  color: black;
+}
+
+.rcw-message > .rcw-client {
+  background-color: #8ED137;
+  color: white;
+}
+
+.rcw-close-button {
+  background-color: #8ED137 !important;
+}

@@ -7,7 +7,7 @@ import Models from '/imports/api/models';
 
 const universalActions = {
   [Models.Deliverable.modelName]: new List(['deliverable_kickoff']),
-  [Models.Project.modelName]: new List(['project_wrap', 'project_preproduction_kickoff']),
+  [Models.Project.modelName]: new List(['project_wrap', 'project_preproduction_kickoff', 'notify_client_of_messages']),
   [Models.Shoot.modelName]: new List(['invite_to_edit_script', 'generate_booking_invoices', 'preproduction_kickoff', 'footage_verified']),
   [Models.Client.modelName]: new List(['send_invite_link']),
   [Models.Cut.modelName]: new List(['send_cut_to_client', 'cut_approved_by_client', 'revisions_sent']),

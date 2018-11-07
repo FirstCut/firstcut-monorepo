@@ -3,7 +3,7 @@ import { Record, List } from 'immutable';
 import Routes from '../components/routing/routes';
 import Tabs from '../components/routing/tabs';
 import Models from '/imports/api/models';
-import { generateActions } from './permissions';
+import { generatePermissions, generateActions } from './permissions';
 
 const ClientConfig = new Record({
   tabs: new List([Tabs.ProjectList]),
@@ -31,7 +31,9 @@ const ClientConfig = new Record({
   ]),
   homePage: '/projects',
   userExperience: 'CLIENT',
-  hasPermission: () => false,
+  hasPermission: generatePermissions({
+    WRITE: [Models.Project.modelName],
+  }),
   getActions: generateActions({
     [Models.Shoot.modelName]: new List(['edit_shoot_script']),
   }),

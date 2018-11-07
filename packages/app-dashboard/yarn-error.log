@@ -1,5 +1,5 @@
 Arguments: 
-  /usr/local/lib/node_modules/node/bin/node /usr/local/Cellar/yarn/1.5.1_1/libexec/bin/yarn.js add file:../firstcut-collaborators
+  /usr/local/lib/node_modules/node/bin/node /usr/local/Cellar/yarn/1.5.1_1/libexec/bin/yarn.js add file:../firstcut-event-emitter
 
 PATH: 
   /usr/local/lib/node_modules/npm/node_modules/npm-lifecycle/node-gyp-bin:/Users/artichokes/FirstCut/firstcut-mono/packages/app-dashboard/node_modules/.bin:/Users/artichokes/google-cloud-sdk/bin:/Users/artichokes/.fastlane/bin:/Users/artichokes/.meteor:/Users/artichokes/Scripts:/usr/local/git/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/opt/local/bin:/opt/local/sbin:/usr/X11/bin:/Users/artichokes/Library/Android/sdk/tools:/Users/artichokes/Library/Android/sdk/platform-tools:/Users/artichokes/Library/Android/sdk/tools:/Applications/Postgres.app/Contents/Versions/latest/bin:/Users/artichokes/Library/Android/sdk/build-tools/27.0.2://Users/artichokes/FirstCut/firstcut-mono/scripts
@@ -26,7 +26,7 @@ npm manifest:
       "deploy-dev": "./installfirstcut.sh && meteor deploy firstcut-dev.meteorapp.com"
     },
     "dependencies": {
-      "@babel/runtime": "^7.1.2",
+      "@babel/runtime": "7.0.0-beta.55",
       "@slack/client": "^4.8.0",
       "aws-sdk": "^2.327.0",
       "bcrypt": "^3.0.2",
@@ -46,7 +46,7 @@ npm manifest:
       "moment": "^2.22.2",
       "moment-timezone": "^0.5.21",
       "node-schedule": "^1.3.0",
-      "postcss": "^6.0.22",
+      "postcss": "^6.0.23",
       "postcss-load-config": "^1.2.0",
       "prop-types": "^15.6.2",
       "pubsub-js": "^1.6.0",
