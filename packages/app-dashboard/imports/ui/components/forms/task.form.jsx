@@ -3,6 +3,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Autoform } from 'firstcut-react-autoform';
 import { userTimezone } from 'firstcut-utils';
+import { userExperience } from '/imports/ui/config';
 
 export default function TaskForm(props) {
   const {
@@ -13,13 +14,14 @@ export default function TaskForm(props) {
     relatedRecordId: {},
     dateDue: { timezone: userTimezone() },
   };
-  const fields = [
+  let fields = [
     'description',
     'dateDue',
     'relatedRecordType',
   ];
   if (record.relatedRecordType) {
     fields.push('relatedRecordId');
+    fields.push('assignedToPlayerType');
     overrides.relatedRecordId.serviceDependency = record.relatedRecordType;
   }
   if (record.assignedToPlayerType) {
@@ -27,6 +29,9 @@ export default function TaskForm(props) {
     overrides.assignedToPlayerId.serviceDependency = record.assignedToPlayerType;
   }
 
+  if (userExperience().isClient) {
+    fields = ['description', 'dateDue'];
+  }
   return (
     <Autoform
       record={record}

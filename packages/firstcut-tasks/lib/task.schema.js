@@ -12,7 +12,8 @@ var TaskSchema = new _firstcutSchema.SimpleSchemaWrapper({
     type: String,
     label: 'Assign to',
     enumOptions: {
-      Collaborator: 'Collaborator'
+      Collaborator: 'Collaborator',
+      Client: 'Client'
     },
     required: true
   },

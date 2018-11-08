@@ -1,7 +1,6 @@
 body {
   padding-bottom: 50px;
 }
-
 .ui.feed > .event {
   margin-top: 2em;
 }
@@ -27,6 +26,7 @@ body {
 #react-root {
   white-space: pre-wrap !important;
   padding-bottom: 50px;
+  height: 100%;
 }
 
 .dropzone {

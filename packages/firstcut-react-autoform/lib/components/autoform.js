@@ -233,7 +233,6 @@ function (_React$PureComponent) {
           }));
 
         case 'string':
-          console.log('Input');
           return _react.default.createElement(_semanticUiReact.Form.Input, (0, _extends2.default)({}, domProps, {
             value: fieldProps.value || ''
           }));

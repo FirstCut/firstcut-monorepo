@@ -5,7 +5,7 @@ const TaskSchema = new Schema({
   assignedToPlayerType: {
     type: String,
     label: 'Assign to',
-    enumOptions: { Collaborator: 'Collaborator' },
+    enumOptions: { Collaborator: 'Collaborator', Client: 'Client' },
     required: true,
   },
   assignedByPlayerId: {

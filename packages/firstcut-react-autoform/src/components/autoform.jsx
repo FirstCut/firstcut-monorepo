@@ -125,7 +125,6 @@ class Field extends React.PureComponent {
       case 'multiselect':
         return <Select {...fieldProps} multiple />;
       case 'string':
-        console.log('Input');
         return <Form.Input {...domProps} value={fieldProps.value || ''} />;
       case 'boolean':
         return <Checkbox {...fieldProps} />;

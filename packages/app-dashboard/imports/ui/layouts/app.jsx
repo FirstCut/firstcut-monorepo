@@ -32,7 +32,7 @@ export default class App extends React.PureComponent {
       <Router>
         <Switch>
           <Sidebar.Pushable>
-            { userExperience().isInternal && <TasksSidebar visible={sidebarVisible} tasks={Models.getPendingPlayerTasks(Models.userPlayer())} /> }
+            <TasksSidebar visible={sidebarVisible} tasks={Models.getPendingPlayerTasks(Models.userPlayer())} />
             <Sidebar.Pusher>
               <AppBody
                 playersDoneLoading={playersDoneLoading}
@@ -92,13 +92,9 @@ class AppBody extends React.Component {
             <Menu.Item header>
               <Image src="/firstcut_logo.png" />
             </Menu.Item>
-            { userExperience().isInternal
-              && (
-              <Menu.Item header onClick={onSelectTasks} as="a">
+            <Menu.Item header onClick={onSelectTasks} as="a">
               My Tasks
-              </Menu.Item>
-              )
-            }
+            </Menu.Item>
             {
               userTabs().map((Tab, i) => {
                 const reactKey = `menuitem-${i}`;
@@ -114,12 +110,12 @@ class AppBody extends React.Component {
             { userExperience().isClient && playersDoneLoading
             && (
               <Menu.Item direction="right" as={Link} to={getRecordPath(Models.userPlayer().company)} header>
-                My Company
+                Company
               </Menu.Item>
             )
             }
             <Menu.Item direction="right" as={Link} to={getRecordPath(Models.userPlayer())} header>
-              My Account
+              Account
             </Menu.Item>
             <LoginOrLogoutItem />
             { userHasPermission('EMULATE_OTHER_USERS')
@@ -179,7 +175,7 @@ function LoginOrLogoutItem(props) {
   );
   if (Meteor.user()) {
     item = (
-      <Menu.Item className="right aligned" onClick={() => Meteor.logout()} header>
+      <Menu.Item as={Link} to="/login" className="right aligned" onClick={() => Meteor.logout()} header>
       Logout
       </Menu.Item>
     );
@@ -210,7 +206,7 @@ function NoProfileFoundAlert(props) {
 
 function SimulationEnvAlert(props) {
   return (
-    <Message color="yellow">
+    <Message color="yellow" style={{ maxHeight: '100px' }}>
       <Message.Header>
         SIMULATION ENVIRONMENT
       </Message.Header>
@@ -223,7 +219,7 @@ function SimulationEnvAlert(props) {
 
 function DevEnvAlert(props) {
   return (
-    <Message color="green">
+    <Message color="green" style={{ maxHeight: '100px' }}>
       <Message.Header>
       DEVELOPMENT ENVIRONMENT
       </Message.Header>
