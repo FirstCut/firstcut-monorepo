@@ -13,6 +13,7 @@ const typeDefs = gql`
     title: String
     description: String
     creatorId: String
+    exampleUrl: String
     _id: ID
   }
 

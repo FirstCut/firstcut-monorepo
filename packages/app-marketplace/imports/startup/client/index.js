@@ -51,14 +51,6 @@ const client = new ApolloClient({
 
 Meteor.startup(() => {
   const rootEl = document.querySelector('#react-root');
-  console.log(client.query({
-    query: gql`{
-      projects {
-        title,
-        description
-      }
-    }`,
-  }));
   render(
     <ApolloProvider client={client}>
       <App />

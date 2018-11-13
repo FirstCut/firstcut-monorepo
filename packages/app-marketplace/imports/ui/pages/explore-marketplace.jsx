@@ -1,7 +1,7 @@
 import React from 'react';
 import { Query } from 'react-apollo';
 import gql from 'graphql-tag';
-
+import ProjectCard from '../components/project.card';
 
 const ExploreMarketplacePage = () => (
   <Query
@@ -10,6 +10,7 @@ const ExploreMarketplacePage = () => (
         projects {
           title
           description
+          exampleUrl
         }
       }
     `}
@@ -18,10 +19,8 @@ const ExploreMarketplacePage = () => (
       if (loading) return <p>Loading...</p>;
       if (error) return <p>Error :(</p>;
 
-      return data.projects.map(({ title, description }) => (
-        <div key={title}>
-          <p>{`${title}: ${description}`}</p>
-        </div>
+      return data.projects.map(project => (
+        <ProjectCard key={project.title} {...project} />
       ));
     }}
   </Query>
