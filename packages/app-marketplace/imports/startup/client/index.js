@@ -11,6 +11,7 @@ import { HttpLink } from 'apollo-link-http';
 import { MeteorAccountsLink } from 'meteor/apollo';
 import { withClientState } from 'apollo-link-state';
 import App from '../../ui/app';
+import Analytics from '../../api/analytics';
 
 const cache = new InMemoryCache();
 
@@ -50,6 +51,7 @@ const client = new ApolloClient({
 });
 
 Meteor.startup(() => {
+  Analytics.init({ development: Meteor.isDevelopment });
   const rootEl = document.querySelector('#react-root');
   render(
     <ApolloProvider client={client}>

@@ -10,18 +10,23 @@ function Header(props) {
     fluid: true,
   };
   const logoStyle = {
-    width: '100px',
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    height: '25px',
+    marginLeft: '20px',
+    marginTop: '20px',
   };
   return (
-    <Menu {...menuProps}>
-      <Menu.Item>
-        <Image src="/firstcut_logo.png" style={logoStyle} />
-      </Menu.Item>
-      <Menu.Item header>
-        <i>MARKETPLACE</i>
-      </Menu.Item>
-    </Menu>
+    <Image src="/marketplace.png" style={logoStyle} />
   );
 }
 
+// <Menu {...menuProps}>
+//   <Menu.Item>
+//   </Menu.Item>
+//   <Menu.Item header>
+//     <i>MARKETPLACE</i>
+//   </Menu.Item>
+// </Menu>
 export default Header;

@@ -8,44 +8,40 @@ import {
 import { Container } from 'semantic-ui-react';
 import { ExploreMarketplacePage, ProjectDetails, Contact } from './pages';
 import { Header } from './components/header';
+import Analytics from '../api/analytics';
 
 function App(props) {
   const pageContainerStyle = {
-    padding: '20px',
+    height: '100%',
   };
   return (
-    <div>
+    <div style={{ height: '100%' }}>
       <Header />
-      <Container style={pageContainerStyle}>
-        <Router>
-          <Switch>
-            <Route
-              path="/"
-              exact
-              name="marketplace"
-              component={ExploreMarketplacePage}
-            />
-            <Route
-              path="/details/:_id"
-              exact
-              name="details"
-              render={(props) => {
-                const { _id } = props.match.params;
-                return <ProjectDetails projectId={_id} />;
-              }}
-            />
-            <Route
-              path="/contact/:_id"
-              exact
-              name="contact"
-              render={(props) => {
-                const { _id } = props.match.params;
-                return <Contact projectId={_id} />;
-              }}
-            />
-          </Switch>
-        </Router>
-      </Container>
+      <Router>
+        <Switch>
+          <Route
+            path="/"
+            exact
+            name="marketplace"
+            render={() => {
+              Analytics.trackNavigationEvent('marketplace');
+              return <ExploreMarketplacePage />;
+            }
+              }
+            component={ExploreMarketplacePage}
+          />
+          <Route
+            path="/contact/:_id"
+            exact
+            name="contact"
+            render={(props) => {
+              const { _id } = props.match.params;
+              Analytics.trackNavigationEvent(`/contact/${_id}`);
+              return <Contact projectId={_id} />;
+            }}
+          />
+        </Switch>
+      </Router>
     </div>
   );
 }
