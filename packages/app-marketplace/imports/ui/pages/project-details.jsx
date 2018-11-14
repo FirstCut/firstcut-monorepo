@@ -3,11 +3,11 @@ import { Query } from 'react-apollo';
 import gql from 'graphql-tag';
 import ProjectList from '../components/projects';
 
-const ExploreMarketplacePage = () => (
+const ProjectDetails = ({ projectId }) => (
   <Query
     query={gql`
       {
-        projects {
+        project(_id: ${projectId}) {
           title
           description
           exampleUrl
@@ -20,9 +20,19 @@ const ExploreMarketplacePage = () => (
       if (loading) return <p>Loading...</p>;
       if (error) return <p>Error :(</p>;
 
-      return <ProjectList projects={data.projects} />;
+      const { project } = data;
+      const { creatorOfProject } = data;
+      return (
+        <ProjectDetailsComponent
+          creator={creatorOfProject}
+          project={project}
+        />
+      );
     }}
   </Query>
 );
 
-export default ExploreMarketplacePage;
+function ProjectDetailsComponent(props) {
+  return <div> project details </div>;
+}
+export default ProjectDetails;

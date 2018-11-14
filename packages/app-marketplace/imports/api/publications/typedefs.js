@@ -12,7 +12,6 @@ const typeDefs = gql`
   type Project {
     title: String
     description: String
-    creatorId: String
     exampleUrl: String
     _id: ID
   }
@@ -22,6 +21,8 @@ const typeDefs = gql`
   type Query {
     creators: [Creator]
     projects: [Project]
+    project(_id: ID!): Project
+    creatorOfProject(projectId: ID!): Creator
   }
 
 `;

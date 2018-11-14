@@ -1,11 +1,12 @@
 
 import React from 'react';
 import { Embed, Item, Responsive } from 'semantic-ui-react';
+import { Link } from 'react-router-dom';
 
 function ProjectList(props) {
   const { projects } = props;
   const cards = projects.map(project => (
-    <ProjectCard key={project.title} {...project} />
+    <ProjectCard key={project._id} {...project} />
   ));
   return (
     <Item.Group>
@@ -15,17 +16,21 @@ function ProjectList(props) {
 }
 
 function ProjectCard(props) {
-  const { title, description, exampleUrl } = props;
+  const {
+    _id, title, description, exampleUrl, onClick,
+  } = props;
   const desktopVideoStyle = {
-    width: '300px',
+    width: '400px',
     marginRight: '15px',
   };
   const mobileVideoStyle = {
     paddingBottom: '15px',
   };
+  const itemStyle = {
+    marginBottom: '4em',
+  };
   return (
-    <Item>
-
+    <Item as={Link} to={`/contact/${_id}`} style={itemStyle}>
       <Responsive minWidth={768}>
         <div style={desktopVideoStyle}>
           <Embed url={exampleUrl} />
