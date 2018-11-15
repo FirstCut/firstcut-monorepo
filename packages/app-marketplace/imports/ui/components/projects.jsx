@@ -34,7 +34,7 @@ function ProjectCard(props) {
       <Image src={exampleThumb} />
       <Card.Content>
         <Card.Header color="green">
-          <Header color="green">{ title }</Header>
+          { title }
         </Card.Header>
       </Card.Content>
     </Card>
