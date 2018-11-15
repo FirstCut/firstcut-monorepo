@@ -234,35 +234,16 @@ function ContactForm(props) {
 
 function ProjectDetails(props) {
   const { title, description, exampleUrl } = props;
-  console.log(Responsive.onlyComputer);
   return (
-    <Grid stackable>
-      <Grid.Row>
-        <Grid.Column
-          computer={16}
-          mobile={16}
-          tablet={16}
-          align="center"
-          verticalAlign="middle"
-          style={{ paddingLeft: '40px', paddingRight: '40px' }}
-        >
-          <Header align="center">
-            { title }
-          </Header>
-          <Embed url={exampleUrl} style={{ marginBottom: '20px' }} />
-          <i>
-            { description }
-          </i>
-        </Grid.Column>
-      </Grid.Row>
-      <Grid.Row>
-        <Grid.Column
-          width={16}
-          align="center"
-        >
-        </Grid.Column>
-      </Grid.Row>
-    </Grid>
+    <div style={{ maxWidth: '500px' }}>
+      <Header align="center">
+        { title }
+      </Header>
+      <Embed url={exampleUrl} style={{ marginBottom: '20px' }} />
+      <i>
+        { description }
+      </i>
+    </div>
   );
 }
 export default Contact;
