@@ -2,7 +2,7 @@
 const Analytics = {
   init(options) {
     if (options.development) {
-      const analytics = {
+      analytics = {
         load() { console.log('Analytics load'); },
         page() { console.log('Analytics page'); },
         track() { console.log('Analytics track'); },
