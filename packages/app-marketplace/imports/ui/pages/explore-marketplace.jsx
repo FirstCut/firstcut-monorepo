@@ -11,6 +11,7 @@ const ExploreMarketplacePage = () => (
         projects {
           title
           description
+          exampleThumb
           exampleUrl
           _id
         }
