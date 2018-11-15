@@ -141,7 +141,7 @@ function ContactForm(props) {
   } = formFields;
   return (
     <div className="signup__form">
-      <Header align="center">
+      <Header color="green" align="left">
         Contact us
       </Header>
       <Form onSubmit={handleSubmit}>
@@ -236,7 +236,7 @@ function ProjectDetails(props) {
   const { title, description, exampleUrl } = props;
   return (
     <div style={{ maxWidth: '500px' }}>
-      <Header align="center">
+      <Header color="green" align="left">
         { title }
       </Header>
       <Embed url={exampleUrl} style={{ marginBottom: '20px' }} />
