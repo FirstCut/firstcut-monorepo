@@ -56,19 +56,9 @@ class ContactFormPage extends React.PureComponent {
     const {
       confirm, error, ...fields
     } = this.state;
-    const columnStyle = { height: '100%', paddingTop: '100px' };
+    const columnStyle = { paddingTop: '100px' };
     return (
       <div style={{ height: '100%' }}>
-
-        <Responsive
-          as={Container}
-          maxWidth={1085}
-          style={{
-            position: 'absolute', top: 0, left: 0, height: '100%', opacity: '.1',
-          }}
-        >
-          <Image src="mobile2.png" />
-        </Responsive>
         <Modal open={confirm} basic size="small" onClick={this.hideModal}>
           <Header icon="checkmark" content="Thank you for your request" />
           <Modal.Content>
@@ -81,13 +71,48 @@ class ContactFormPage extends React.PureComponent {
           </Modal.Actions>
         </Modal>
 
-        <Grid stackable style={{ height: '100%' }} onClick={this.hideModal}>
+        <Grid
+          stackable
+          style={{ height: '100%' }}
+          onClick={this.hideModal}
+          reversed="computer"
+        >
           <Grid.Column
             mobile={16}
             tablet={16}
             computer={8}
             style={columnStyle}
             align="center"
+          >
+            <Responsive
+              as={Container}
+              maxWidth={770}
+              style={{
+                height: '75px',
+              }}
+            />
+            <ProjectDetails {...this.props} />
+            <Responsive
+              as={Image}
+              minWidth={1085}
+              src="/desktop.png"
+              style={{
+                position: 'absolute',
+                top: 0,
+                right: 0,
+                height: '100%',
+                width: '100%',
+                opacity: 0.1,
+                zIndex: -1000,
+              }}
+            />
+          </Grid.Column>
+          <Grid.Column
+            style={columnStyle}
+            align="center"
+            mobile={16}
+            tablet={16}
+            computer={8}
           >
             <ContactForm
               formFields={fields}
@@ -95,39 +120,15 @@ class ContactFormPage extends React.PureComponent {
               onChange={this.onChange}
             />
           </Grid.Column>
-          <Grid.Column
-            style={columnStyle}
-            align="center"
-            mobile={16}
-            tablet={16}
-            computer={8}
-          >
-            <ProjectDetails {...this.props} />
-            <Responsive
-              as={Image}
-              minWidth={1086}
-              src="/desktop.png"
-              style={{
-                position: 'absolute',
-                top: 0,
-                right: 0,
-                height: '100%',
-                opacity: 0.1,
-                width: '100%',
-                zIndex: -1000,
-              }}
-            />
-          </Grid.Column>
         </Grid>
         <Responsive
           as={Button}
-          minWidth={1086}
+          minWidth={100000000}
           content="SUBMIT"
           color="green"
           className="signup__centered signup__raised"
           onClick={this.handleSubmit}
         />
-        <span className="copyright"> Copyright Freedeo Corporation Inc. 2018-2019 </span>
       </div>
     );
   }
@@ -140,8 +141,8 @@ function ContactForm(props) {
   } = formFields;
   return (
     <div className="signup__form">
-      <Header align="left">
-        Lets Make It Happen
+      <Header align="center">
+        Contact us
       </Header>
       <Form onSubmit={handleSubmit}>
         <Form.Group widths="equal">
@@ -202,7 +203,7 @@ function ContactForm(props) {
         <Form.Field>
           <Form.Input
             onChange={handleChange}
-            placeholder="What is your estimated budget?"
+            placeholder="What is your estimated budget range?"
             name="budget"
             value={budget}
             required
@@ -211,7 +212,7 @@ function ContactForm(props) {
         <Form.Field>
           <Form.TextArea
             onChange={handleChange}
-            placeholder="Anything about this project you would like us to know?"
+            placeholder="Anything about this project you would like us to know before we contact you?"
             name="about"
             value={about}
             required
@@ -221,7 +222,7 @@ function ContactForm(props) {
           as={Form.Button}
           fluid
           color="green"
-          maxWidth={1085}
+          maxWidth={100000}
           content="SUBMIT"
           onClick={handleSubmit}
         />
@@ -233,18 +234,17 @@ function ContactForm(props) {
 
 function ProjectDetails(props) {
   const { title, description, exampleUrl } = props;
+  console.log(Responsive.onlyComputer);
   return (
     <Grid stackable>
       <Grid.Row>
         <Grid.Column
-          width={1}
+          computer={16}
+          mobile={16}
+          tablet={16}
           align="center"
           verticalAlign="middle"
-        />
-        <Grid.Column
-          width={14}
-          align="center"
-          verticalAlign="middle"
+          style={{ paddingLeft: '40px', paddingRight: '40px' }}
         >
           <Header align="center">
             { title }
@@ -254,13 +254,7 @@ function ProjectDetails(props) {
             { description }
           </i>
         </Grid.Column>
-        <Grid.Column
-          width={1}
-          align="center"
-          verticalAlign="middle"
-        />
       </Grid.Row>
-
       <Grid.Row>
         <Grid.Column
           width={16}

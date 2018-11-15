@@ -1,6 +1,7 @@
 import React from 'react';
 import { Query } from 'react-apollo';
 import gql from 'graphql-tag';
+import { Container } from 'semantic-ui-react';
 import ProjectList from '../components/projects';
 
 const ExploreMarketplacePage = () => (
@@ -20,7 +21,11 @@ const ExploreMarketplacePage = () => (
       if (loading) return <p>Loading...</p>;
       if (error) return <p>Error :(</p>;
 
-      return <ProjectList projects={data.projects} />;
+      return (
+        <Container style={{ paddingTop: '100px' }}>
+          <ProjectList projects={data.projects} />
+        </Container>
+      );
     }}
   </Query>
 );

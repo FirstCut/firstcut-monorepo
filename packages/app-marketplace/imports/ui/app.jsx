@@ -26,9 +26,7 @@ function App(props) {
             render={() => {
               Analytics.trackNavigationEvent('marketplace');
               return <ExploreMarketplacePage />;
-            }
-              }
-            component={ExploreMarketplacePage}
+            }}
           />
           <Route
             path="/contact/:_id"
