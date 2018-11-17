@@ -44,12 +44,12 @@ import ReminderToGetClientFeedback from './reminder-to-get-client-feedback';
 import EditFeedback from './edit-feedback';
 import AddOnRequested from './addon-requested';
 import ProjectHandoff from './project-handoff';
-import LandingPageSubmit from './landing-page-submit';
+import ProjectRequestSubmission from './project-request-submission';
 import NotifyClientOfNewMessages from './notify-client-of-messages';
 
 const templates = [
   ErrorEvent,
-  LandingPageSubmit,
+  ProjectRequestSubmission,
   EditFeedback,
   ChargeClient,
   NotifyClientOfNewMessages,

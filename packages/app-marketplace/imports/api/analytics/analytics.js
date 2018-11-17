@@ -18,7 +18,7 @@ const Analytics = {
   },
 
   trackFormSubmission(data) {
-    const { projectName, ...rest } = data;
+    const { projectId, projectTitle, ...rest } = data;
     const eventName = `Submitted form for project ${projectTitle}`;
     this.track(eventName, rest);
   },
@@ -32,6 +32,11 @@ const Analytics = {
   trackNavigationEvent(name) {
     analytics.page(name);
   },
+
+  track(name, data) {
+    analytics.track(name, data);
+  },
+
 };
 
 export default Analytics;

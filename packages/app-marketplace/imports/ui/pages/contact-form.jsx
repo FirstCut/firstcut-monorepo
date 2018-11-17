@@ -4,6 +4,7 @@ import {
 } from 'semantic-ui-react';
 import { Query } from 'react-apollo';
 import gql from 'graphql-tag';
+import Analytics from '../../api/analytics';
 
 function Contact(props) {
   const { projectId } = props;
@@ -31,21 +32,36 @@ function Contact(props) {
 }
 
 class ContactFormPage extends React.PureComponent {
-  state = { confirm: false, error: null }
+  state = {
+    confirm: false,
+    error: null,
+    website: '',
+    company: '',
+    first: '',
+    last: '',
+    budget: '',
+    location: '',
+    email: '',
+    about: '',
+  }
+
+  hideModal = () => this.setState({ confirm: false });
 
   handleChange = (e, { name, value }) => this.setState({ [name]: value });
 
   handleSubmit = () => {
-    const { projectId } = this.props;
+    const { title, _id } = this.props;
     const { confirm, error, ...fields } = this.state;
-    const data = { event: 'project_contact_submission', ...fields, projectId };
-    Analytics.trackFormSubmission({ projectId, ...fields });
+    const data = {
+      event: 'project_request_submission', ...fields, projectId: _id, projectTitle: title,
+    };
+    Analytics.trackFormSubmission({ projectId: _id, projectTitle: title, ...fields });
     Meteor.call('postRequest', data, (err) => {
       if (err) {
         this.setState({ error: err });
       } else {
         this.setState({
-          confirm: true, first: '', last: '', company: '', email: '', budget: '', location: '', about: '',
+          confirm: true, first: '', last: '', website: '', company: '', email: '', budget: '', location: '', about: '',
         });
       }
     });
@@ -116,19 +132,11 @@ class ContactFormPage extends React.PureComponent {
           >
             <ContactForm
               formFields={fields}
-              onSubmit={this.onSubmit}
-              onChange={this.onChange}
+              handleSubmit={this.handleSubmit}
+              handleChange={this.handleChange}
             />
           </Grid.Column>
         </Grid>
-        <Responsive
-          as={Button}
-          minWidth={100000000}
-          content="SUBMIT"
-          color="green"
-          className="signup__centered signup__raised"
-          onClick={this.handleSubmit}
-        />
       </div>
     );
   }
@@ -144,7 +152,7 @@ function ContactForm(props) {
       <Header color="green" align="left">
         Contact us
       </Header>
-      <Form onSubmit={handleSubmit}>
+      <Form>
         <Form.Group widths="equal">
           <Form.Field>
             <Form.Input
@@ -197,7 +205,6 @@ function ContactForm(props) {
             placeholder="Where would you like to shoot your video?"
             name="location"
             value={location}
-            required
           />
         </Form.Field>
         <Form.Field>
@@ -206,7 +213,6 @@ function ContactForm(props) {
             placeholder="What is your estimated budget range?"
             name="budget"
             value={budget}
-            required
           />
         </Form.Field>
         <Form.Field>
@@ -215,7 +221,6 @@ function ContactForm(props) {
             placeholder="Anything about this project you would like us to know before we contact you?"
             name="about"
             value={about}
-            required
           />
         </Form.Field>
         <Responsive

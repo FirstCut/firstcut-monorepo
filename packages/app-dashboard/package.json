@@ -2,15 +2,15 @@
   "name": "firstcut-dashboard",
   "private": true,
   "scripts": {
-    "start": "./linkfirstcut.sh && meteor run --settings settings-dev.json",
+    "start": "../../scripts/linkfirstcut.sh && meteor run --settings settings-dev.json",
     "start-prod": "./linkfirstcut.sh && meteor run --settings settings.json",
     "test": "./installfirstcut.sh && meteor test --driver-package meteortesting:mocha --settings settings-dev.json SERVER_TEST_REPORTER='dot'",
     "test-prod": "./installfirstcut.sh && meteor test --driver-package meteortesting:mocha --settings settings.json SERVER_TEST_REPORTER='dot'",
-    "deploy-prod": "./installfirstcut.sh && meteor deploy firstcut.meteorapp.com --settings settings.json",
+    "deploy-prod": "../../scripts/installfirstcut.sh && cd .deploy && mup deploy --settings settings.json",
     "deploy-dev": "./installfirstcut.sh && meteor deploy firstcut-dev.meteorapp.com"
   },
   "dependencies": {
-    "@babel/runtime": "7.0.0-beta.55",
+    "@babel/runtime": "^7.1.5",
     "@slack/client": "^4.8.0",
     "aws-sdk": "^2.327.0",
     "bcrypt": "^3.0.2",

@@ -91,6 +91,7 @@ class ConfirmEmitAction extends React.Component {
 export function ActionButtons(props) {
   const { as, record } = props;
   const actions = getUserActions(record);
+  console.log(actions);
   const components = [];
   return [...components, ...actions.map(a => (
     <PipelineActionComponent

@@ -91,11 +91,11 @@ export function getUserActions(record) {
   let actions = mapSkills(getActionsForSkill.bind(null, record));
   actions = _.flatten(actions);
   actions = _.uniqBy(actions, a => a);
-  actions = actions.filter(a => fulfillsPrerequisites({
-    record,
-    event: a,
-    initiator: userPlayerId(),
-  }));
+  // actions = actions.filter(a => fulfillsPrerequisites({
+  //   record,
+  //   event: a,
+  //   initiator: userPlayerId(),
+  // }));
   return actions;
 }
 
