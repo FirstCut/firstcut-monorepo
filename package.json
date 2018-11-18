@@ -5,20 +5,19 @@
 				"access": "private"
 		},
 		"devDependencies": {
-				"@babel/runtime": "^7.1.2",
 				"@babel/cli": "^7.0.0-beta.51",
 				"@babel/core": "^7.0.0-beta.51",
 				"@babel/plugin-syntax-dynamic-import": "^7.0.0-beta.51",
 				"@babel/plugin-transform-runtime": "^7.0.0-beta.51",
 				"@babel/preset-env": "^7.0.0-beta.51",
 				"@babel/preset-react": "^7.0.0-beta.51",
+				"@babel/runtime": "^7.1.2",
 				"babel-core": "^7.0.0-beta.51",
-				"babel-eslint": "^8.2.2",
+				"babel-eslint": "9.0.0",
 				"babel-jest": "^23.0.0-alpha.0",
 				"babel-loader": "^8.0.0-beta",
 				"babel-polyfill": "^6.26.0",
 				"concurrently": "^3.5.1",
-				"eslint": "^4.19.1",
 				"eslint-config-airbnb": "^17.0.0",
 				"eslint-plugin-import": "^2.13.0",
 				"eslint-plugin-jest": "^21.15.0",
@@ -29,9 +28,8 @@
 				"jest": "^23.6.0",
 				"lerna": "^3.4.0",
 				"source-map-loader": "^0.2.3",
-				"webpack": "^4.1.1",
 				"webpack-cli": "^2.0.12",
-				"webpack-dev-server": "^3.1.1"
+				"webpack-dev-server": "3.1.9"
 		},
 		"scripts": {
 				"prebuild": "git clean -fdx packages -e packages/*/node_modules",
@@ -50,7 +48,9 @@
 				"deploy": "gh-pages -d packages/orchestra/dist"
 		},
 		"dependencies": {
+				"eslint": "5.6.0",
 				"meteor-standalone-random": "^1.0.67",
+				"react-scripts": "^2.1.1",
 				"soap": "^0.24.0"
 		},
 		"workspaces": [
@@ -71,8 +71,8 @@
 						"<rootDir>/jest/setup.js"
 				],
 				"testMatch": [
-					"**/__tests__/**/*.js?(x)",
-					"**/?(*.)+(spec|test|jest).js?(x)"
+						"**/__tests__/**/*.js?(x)",
+						"**/?(*.)+(spec|test|jest).js?(x)"
 				],
 				"testPathIgnorePatterns": [
 						"/node_modules/",
