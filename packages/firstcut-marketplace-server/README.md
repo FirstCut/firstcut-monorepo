@@ -1,11 +1,11 @@
-# `firstcut-marketplace`
+# `firstcut-marketplace-server`
 
 > TODO: description
 
 ## Usage
 
 ```
-const firstcutMarketplace = require('firstcut-marketplace');
+const firstcutMarketplaceServer = require('firstcut-marketplace-server');
 
 // TODO: DEMONSTRATE API
 ```

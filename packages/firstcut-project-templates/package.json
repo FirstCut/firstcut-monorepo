@@ -1,9 +1,9 @@
 {
-  "name": "firstcut-marketplace-server",
+  "name": "firstcut-project-templates",
   "version": "1.0.0",
   "description": "> TODO: description",
   "author": "Lucy Richards <lucyannerichards@gmail.com>",
-  "homepage": "https://dmk255.github.io/lerna-webpack-example/tree/master/packages/firstcut-marketplace-server#readme",
+  "homepage": "https://dmk255.github.io/lerna-webpack-example/tree/master/packages/firstcut-project-templates#readme",
   "license": "ISC",
   "main": "lib/index.js",
   "directories": {
@@ -18,13 +18,13 @@
     "url": "git+https://github.com/FirstCut/firstcut-monorepo.git"
   },
   "scripts": {
-    "start": "node lib/index.js",
     "test": "echo \"Error: run tests from root\" && exit 1"
   },
   "bugs": {
     "url": "https://github.com/FirstCut/firstcut-monorepo/issues"
   },
   "dependencies": {
-    "firstcut-project-templates": "^1.0.0"
+    "apollo-server-express": "^2.2.2",
+    "lodash": "^4.17.11"
   }
 }

@@ -17,7 +17,6 @@ const resolvers = {
 };
 
 function getProject(query) {
-  console.log('getting project');
   return _.find(projects, query);
 }
 
