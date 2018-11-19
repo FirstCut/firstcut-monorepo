@@ -1,0 +1,19 @@
+version: '2'
+services:
+  client:
+    build: .
+    volumes:
+      - .:/usr/app/
+      - /usr/app/node_modules
+    command: npm --prefix packages/firstcut-marketplace-client/ run start
+    ports:
+      - "3000:3000"
+  # server:
+  #   build: .
+  #   command: meteor run --settings settings.json
+  #   volumes:
+  #     - .:/usr/app/
+  #     - /usr/app/node_modules
+  #     - /usr/app/packages/firstcut-marketplace-server
+  #   ports:
+  #     - "3000:3000"
