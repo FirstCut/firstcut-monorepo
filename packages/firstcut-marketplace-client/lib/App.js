@@ -1,7 +1,5 @@
 "use strict";
 
-var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
-
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 Object.defineProperty(exports, "__esModule", {
@@ -9,53 +7,47 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 
-var _classCallCheck2 = _interopRequireDefault(require("@babel/runtime/helpers/classCallCheck"));
+var _react = _interopRequireDefault(require("react"));
 
-var _createClass2 = _interopRequireDefault(require("@babel/runtime/helpers/createClass"));
+var _propTypes = _interopRequireDefault(require("prop-types"));
 
-var _possibleConstructorReturn2 = _interopRequireDefault(require("@babel/runtime/helpers/possibleConstructorReturn"));
+var _reactRouterDom = require("react-router-dom");
 
-var _getPrototypeOf2 = _interopRequireDefault(require("@babel/runtime/helpers/getPrototypeOf"));
+var _pages = require("./pages");
 
-var _inherits2 = _interopRequireDefault(require("@babel/runtime/helpers/inherits"));
+var _header = require("./components/header");
 
-var _react = _interopRequireWildcard(require("react"));
+var _firstcutAnalytics = _interopRequireDefault(require("firstcut-analytics"));
 
-var _logo = _interopRequireDefault(require("./logo.svg"));
-
-require("./App.css");
-
-var App =
-/*#__PURE__*/
-function (_Component) {
-  (0, _inherits2.default)(App, _Component);
-
-  function App() {
-    (0, _classCallCheck2.default)(this, App);
-    return (0, _possibleConstructorReturn2.default)(this, (0, _getPrototypeOf2.default)(App).apply(this, arguments));
-  }
-
-  (0, _createClass2.default)(App, [{
-    key: "render",
-    value: function render() {
-      return _react.default.createElement("div", {
-        className: "App"
-      }, _react.default.createElement("header", {
-        className: "App-header"
-      }, _react.default.createElement("img", {
-        src: _logo.default,
-        className: "App-logo",
-        alt: "logo"
-      }), _react.default.createElement("p", null, "Edit ", _react.default.createElement("code", null, "src/App.js"), " and save to reload."), _react.default.createElement("a", {
-        className: "App-link",
-        href: "https://reactjs.org",
-        target: "_blank",
-        rel: "noopener noreferrer"
-      }, "Learn React Again and Again")));
+function App(props) {
+  return _react.default.createElement("div", {
+    style: {
+      height: '100%'
     }
-  }]);
-  return App;
-}(_react.Component);
+  }, _react.default.createElement(_header.Header, null), _react.default.createElement(_reactRouterDom.BrowserRouter, null, _react.default.createElement(_reactRouterDom.Switch, null, _react.default.createElement(_reactRouterDom.Route, {
+    path: "/",
+    exact: true,
+    name: "marketplace",
+    render: function render() {
+      _firstcutAnalytics.default.trackNavigationEvent('marketplace');
+
+      return _react.default.createElement(_pages.ExploreMarketplacePage, null);
+    }
+  }), _react.default.createElement(_reactRouterDom.Route, {
+    path: "/contact/:_id",
+    exact: true,
+    name: "contact",
+    render: function render(props) {
+      var _id = props.match.params._id;
+
+      _firstcutAnalytics.default.trackNavigationEvent("/contact/".concat(_id));
+
+      return _react.default.createElement(_pages.Contact, {
+        projectId: _id
+      });
+    }
+  }))));
+}
 
 var _default = App;
 exports.default = _default;

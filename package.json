@@ -44,7 +44,7 @@
 				"build:webpack": "lerna run build:webpack",
 				"build": "yarn build:babel && yarn build:webpack",
 				"release": "yarn lint && yarn build && lerna publish",
-				"watch": "yarn clean:babel | yarn build:babel",
+				"watch": "yarn clean:babel | lerna run build | yarn build:babel",
 				"predeploy": "yarn build",
 				"clean:babel": "rm -rf packages/*/lib",
 				"deploy": "gh-pages -d packages/orchestra/dist"

@@ -1,28 +1,41 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import PropTypes from 'prop-types';
+import {
+  BrowserRouter as Router, Switch, Route,
+} from 'react-router-dom';
+import { ExploreMarketplacePage, Contact } from './pages';
+import { Header } from './components/header';
+import Analytics from 'firstcut-analytics';
 
-class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React Again and Again
-          </a>
-        </header>
-      </div>
-    );
-  }
+function App(props) {
+  return (
+    <div style={{ height: '100%' }}>
+      <Header />
+      <Router>
+        <Switch>
+          <Route
+            path="/"
+            exact
+            name="marketplace"
+            render={() => {
+              Analytics.trackNavigationEvent('marketplace');
+              return <ExploreMarketplacePage />;
+            }}
+          />
+          <Route
+            path="/contact/:_id"
+            exact
+            name="contact"
+            render={(props) => {
+              const { _id } = props.match.params;
+              Analytics.trackNavigationEvent(`/contact/${_id}`);
+              return <Contact projectId={_id} />;
+            }}
+          />
+        </Switch>
+      </Router>
+    </div>
+  );
 }
 
 export default App;
