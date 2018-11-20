@@ -46,7 +46,7 @@ function _templateObject2() {
 }
 
 function _templateObject() {
-  var data = (0, _taggedTemplateLiteral2.default)(["\n  mutation addRequest($firstName: String!) {\n    addRequest(firstName: $firstName) {\n      _id\n      firstName\n      lastName\n    }\n  }\n"]);
+  var data = (0, _taggedTemplateLiteral2.default)(["\n  mutation addRequest(\n    $firstName: String!,\n    $lastName: String!,\n    $email: String!,\n    $company: String,\n    $website: String,\n    $location: String,\n    $budget: String\n    $about: String\n  ) {\n    addRequest(\n      firstName: $firstName,\n      lastName: $lastName,\n      email: $email,\n      company: $company,\n      website: $website,\n      location: $location,\n      budget: $budget,\n      about: $about\n    ) {\n      _id\n    }\n  }\n"]);
 
   _templateObject = function _templateObject() {
     return data;
@@ -92,8 +92,8 @@ function (_React$PureComponent) {
       error: null,
       website: '',
       company: '',
-      first: '',
-      last: '',
+      firstName: '',
+      lastName: '',
       budget: '',
       location: '',
       email: '',
@@ -114,29 +114,23 @@ function (_React$PureComponent) {
       var _this$state = _this.state,
           confirm = _this$state.confirm,
           error = _this$state.error,
-          first = _this$state.first,
-          fields = (0, _objectWithoutProperties2.default)(_this$state, ["confirm", "error", "first"]);
-      var data = (0, _objectSpread2.default)({
-        event: 'project_request_submission'
-      }, fields, {
-        projectId: _id,
-        projectTitle: title
-      });
+          request = (0, _objectWithoutProperties2.default)(_this$state, ["confirm", "error"]); // const data = {
+      //   event: 'project_request_submission', ...request, projectId: _id, projectTitle: title,
+      // };
+
       mutate({
-        variables: {
-          firstName: first
-        }
+        variables: (0, _objectSpread2.default)({}, request)
       });
 
       _firstcutAnalytics.default.trackFormSubmission((0, _objectSpread2.default)({
         projectId: _id,
         projectTitle: title
-      }, fields)); // Meteor.call('postRequest', data, (err) => {
+      }, request)); // Meteor.call('postRequest', data, (err) => {
       //   if (err) {
       //     this.setState({ error: err });
       //   } else {
       //     this.setState({
-      //       confirm: true, first: '', last: '', website: '', company: '', email: '', budget: '', location: '', about: '',
+      //       confirm: true, firstName: '', lastName: '', website: '', company: '', email: '', budget: '', location: '', about: '',
       //     });
       //   }
       // });
@@ -228,8 +222,8 @@ function ContactForm(props) {
   var handleChange = props.handleChange,
       handleSubmit = props.handleSubmit,
       formFields = props.formFields;
-  var first = formFields.first,
-      last = formFields.last,
+  var firstName = formFields.firstName,
+      lastName = formFields.lastName,
       website = formFields.website,
       company = formFields.company,
       email = formFields.email,
@@ -246,14 +240,14 @@ function ContactForm(props) {
   }, _react.default.createElement(_firstcutUi.Form.Field, null, _react.default.createElement(_firstcutUi.Form.Input, {
     onChange: handleChange,
     placeholder: "First Name",
-    name: "first",
-    value: first,
+    name: "firstName",
+    value: firstName,
     required: true
   })), _react.default.createElement(_firstcutUi.Form.Field, null, _react.default.createElement(_firstcutUi.Form.Input, {
     onChange: handleChange,
     placeholder: "Last Name",
-    name: "last",
-    value: last,
+    name: "lastName",
+    value: lastName,
     required: true
   }))), _react.default.createElement(_firstcutUi.Form.Field, null, _react.default.createElement(_firstcutUi.Form.Input, {
     onChange: handleChange,

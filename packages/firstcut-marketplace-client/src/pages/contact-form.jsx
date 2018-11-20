@@ -7,11 +7,27 @@ import gql from 'graphql-tag';
 import Analytics from 'firstcut-analytics';
 
 const addRequestMutation = gql`
-  mutation addRequest($firstName: String!) {
-    addRequest(firstName: $firstName) {
+  mutation addRequest(
+    $firstName: String!,
+    $lastName: String!,
+    $email: String!,
+    $company: String,
+    $website: String,
+    $location: String,
+    $budget: String
+    $about: String
+  ) {
+    addRequest(
+      firstName: $firstName,
+      lastName: $lastName,
+      email: $email,
+      company: $company,
+      website: $website,
+      location: $location,
+      budget: $budget,
+      about: $about
+    ) {
       _id
-      firstName
-      lastName
     }
   }
 `;
@@ -47,8 +63,8 @@ class ContactFormPageComponent extends React.PureComponent {
     error: null,
     website: '',
     company: '',
-    first: '',
-    last: '',
+    firstName: '',
+    lastName: '',
     budget: '',
     location: '',
     email: '',
@@ -61,18 +77,18 @@ class ContactFormPageComponent extends React.PureComponent {
 
   handleSubmit = () => {
     const { mutate, title, _id } = this.props;
-    const { confirm, error, first, ...fields } = this.state;
-    const data = {
-      event: 'project_request_submission', ...fields, projectId: _id, projectTitle: title,
-    };
-    mutate({ variables: { firstName: first }});
-    Analytics.trackFormSubmission({ projectId: _id, projectTitle: title, ...fields });
+    const { confirm, error, ...request } = this.state;
+    // const data = {
+    //   event: 'project_request_submission', ...request, projectId: _id, projectTitle: title,
+    // };
+    mutate({ variables: {...request} });
+    Analytics.trackFormSubmission({ projectId: _id, projectTitle: title, ...request });
     // Meteor.call('postRequest', data, (err) => {
     //   if (err) {
     //     this.setState({ error: err });
     //   } else {
     //     this.setState({
-    //       confirm: true, first: '', last: '', website: '', company: '', email: '', budget: '', location: '', about: '',
+    //       confirm: true, firstName: '', lastName: '', website: '', company: '', email: '', budget: '', location: '', about: '',
     //     });
     //   }
     // });
@@ -160,7 +176,7 @@ const ContactFormPage = graphql(
 function ContactForm(props) {
   const { handleChange, handleSubmit, formFields } = props;
   const {
-    first, last, website, company, email, budget, location, about,
+    firstName, lastName, website, company, email, budget, location, about,
   } = formFields;
   return (
     <div className="signup__form">
@@ -173,8 +189,8 @@ function ContactForm(props) {
             <Form.Input
               onChange={handleChange}
               placeholder="First Name"
-              name="first"
-              value={first}
+              name="firstName"
+              value={firstName}
               required
             />
           </Form.Field>
@@ -182,8 +198,8 @@ function ContactForm(props) {
             <Form.Input
               onChange={handleChange}
               placeholder="Last Name"
-              name="last"
-              value={last}
+              name="lastName"
+              value={lastName}
               required
             />
           </Form.Field>

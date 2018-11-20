@@ -27,7 +27,16 @@ const typeDefs = gql`
   }
 
   type Mutation {
-    addRequest(firstName: String): ProjectRequest
+    addRequest(
+      firstName: String!,
+      lastName: String!,
+      email: String!,
+      company: String,
+      website: String,
+      location: String,
+      budget: String
+      about: String
+    ): ProjectRequest
   }
 `;
 
