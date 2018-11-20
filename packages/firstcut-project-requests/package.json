@@ -1,9 +1,9 @@
 {
-  "name": "firstcut-project-templates",
+  "name": "firstcut-project-requests",
   "version": "1.0.0",
   "description": "> TODO: description",
   "author": "Lucy Richards <lucyannerichards@gmail.com>",
-  "homepage": "https://dmk255.github.io/lerna-webpack-example/tree/master/packages/firstcut-project-templates#readme",
+  "homepage": "https://dmk255.github.io/lerna-webpack-example/tree/master/packages/firstcut-project-requests#readme",
   "license": "ISC",
   "main": "lib/index.js",
   "directories": {
@@ -24,6 +24,5 @@
     "url": "https://github.com/FirstCut/firstcut-monorepo/issues"
   },
   "dependencies": {
-    "lodash": "^4.17.11"
   }
 }

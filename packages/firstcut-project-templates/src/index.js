@@ -1,7 +1,12 @@
 
-import { gql } from 'apollo-server-express';
+import { gql } from 'apollo-server';
 import { _ } from 'lodash';
 import projectTemplates from './project-templates';
+
+let collection = null;
+function init(c) {
+  collection = c;
+}
 
 const typeDefs = gql`
   type ProjectTemplate {
@@ -12,9 +17,7 @@ const typeDefs = gql`
     _id: ID
   }
 
-  # The "Query" type is the root of all GraphQL queries.
-  # (A "Mutation" type will be covered later on.)
-  type Query {
+  extend type Query {
     projectTemplates: [ProjectTemplate]
     projectTemplate(_id: ID!): ProjectTemplate
   }
@@ -23,12 +26,12 @@ const typeDefs = gql`
 const resolvers = {
   Query: {
     projectTemplates: () => projectTemplates,
-    projectTemplate: (obj, args, context, info) => getProject({ _id: args._id }),
+    projectTemplate: (obj, args, context, info) => getTemplate({ _id: args._id }),
   },
 };
 
-function getProject(query) {
+function getTemplate(query) {
   return _.find(projectTemplates, query);
 }
 
-export { typeDefs, resolvers };
+export { typeDefs, resolvers, init };

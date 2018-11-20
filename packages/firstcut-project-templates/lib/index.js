@@ -5,18 +5,19 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+exports.init = init;
 exports.resolvers = exports.typeDefs = void 0;
 
 var _taggedTemplateLiteral2 = _interopRequireDefault(require("@babel/runtime/helpers/taggedTemplateLiteral"));
 
-var _apolloServerExpress = require("apollo-server-express");
+var _apolloServer = require("apollo-server");
 
 var _lodash = require("lodash");
 
 var _projectTemplates2 = _interopRequireDefault(require("./project-templates"));
 
 function _templateObject() {
-  var data = (0, _taggedTemplateLiteral2.default)(["\n  type ProjectTemplate {\n    title: String\n    description: String\n    exampleUrl: String\n    exampleThumb: String\n    _id: ID\n  }\n\n  # The \"Query\" type is the root of all GraphQL queries.\n  # (A \"Mutation\" type will be covered later on.)\n  type Query {\n    projectTemplates: [ProjectTemplate]\n    projectTemplate(_id: ID!): ProjectTemplate\n  }\n"]);
+  var data = (0, _taggedTemplateLiteral2.default)(["\n  type ProjectTemplate {\n    title: String\n    description: String\n    exampleUrl: String\n    exampleThumb: String\n    _id: ID\n  }\n\n  extend type Query {\n    projectTemplates: [ProjectTemplate]\n    projectTemplate(_id: ID!): ProjectTemplate\n  }\n"]);
 
   _templateObject = function _templateObject() {
     return data;
@@ -25,7 +26,13 @@ function _templateObject() {
   return data;
 }
 
-var typeDefs = (0, _apolloServerExpress.gql)(_templateObject());
+var collection = null;
+
+function init(c) {
+  collection = c;
+}
+
+var typeDefs = (0, _apolloServer.gql)(_templateObject());
 exports.typeDefs = typeDefs;
 var resolvers = {
   Query: {
@@ -33,7 +40,7 @@ var resolvers = {
       return _projectTemplates2.default;
     },
     projectTemplate: function projectTemplate(obj, args, context, info) {
-      return getProject({
+      return getTemplate({
         _id: args._id
       });
     }
@@ -41,6 +48,6 @@ var resolvers = {
 };
 exports.resolvers = resolvers;
 
-function getProject(query) {
+function getTemplate(query) {
   return _lodash._.find(_projectTemplates2.default, query);
 }

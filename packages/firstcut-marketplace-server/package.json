@@ -25,6 +25,10 @@
     "url": "https://github.com/FirstCut/firstcut-monorepo/issues"
   },
   "dependencies": {
-    "firstcut-project-templates": "^1.0.0"
+    "apollo-server": "^2.2.2",
+    "firstcut-project-requests": "^1.0.0",
+    "firstcut-project-templates": "^1.0.0",
+    "lodash": "^4.17.11",
+    "mongodb": "^3.1.10"
   }
 }

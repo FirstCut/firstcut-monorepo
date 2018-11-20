@@ -2,9 +2,19 @@ import React from 'react';
 import {
   Grid, Modal, Header, Form, Responsive, Button, Embed, Container, Image,
 } from 'firstcut-ui';
-import { Query } from 'react-apollo';
+import { Query, graphql } from 'react-apollo';
 import gql from 'graphql-tag';
 import Analytics from 'firstcut-analytics';
+
+const addRequestMutation = gql`
+  mutation addRequest($firstName: String!) {
+    addRequest(firstName: $firstName) {
+      _id
+      firstName
+      lastName
+    }
+  }
+`;
 
 function Contact(props) {
   const { projectId } = props;
@@ -31,7 +41,7 @@ function Contact(props) {
   );
 }
 
-class ContactFormPage extends React.PureComponent {
+class ContactFormPageComponent extends React.PureComponent {
   state = {
     confirm: false,
     error: null,
@@ -50,11 +60,12 @@ class ContactFormPage extends React.PureComponent {
   handleChange = (e, { name, value }) => this.setState({ [name]: value });
 
   handleSubmit = () => {
-    const { title, _id } = this.props;
-    const { confirm, error, ...fields } = this.state;
+    const { mutate, title, _id } = this.props;
+    const { confirm, error, first, ...fields } = this.state;
     const data = {
       event: 'project_request_submission', ...fields, projectId: _id, projectTitle: title,
     };
+    mutate({ variables: { firstName: first }});
     Analytics.trackFormSubmission({ projectId: _id, projectTitle: title, ...fields });
     // Meteor.call('postRequest', data, (err) => {
     //   if (err) {
@@ -141,6 +152,10 @@ class ContactFormPage extends React.PureComponent {
     );
   }
 }
+
+const ContactFormPage = graphql(
+  addRequestMutation
+)(ContactFormPageComponent);
 
 function ContactForm(props) {
   const { handleChange, handleSubmit, formFields } = props;
