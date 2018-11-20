@@ -16,6 +16,8 @@ services:
     command: npm --prefix packages/firstcut-marketplace-server/ run start
     ports:
       - "4000:4000"
+    env_file:
+      - dev.env
   # server:
   #   build: .
   #   command: meteor run --settings settings.json
