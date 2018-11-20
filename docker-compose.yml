@@ -8,6 +8,14 @@ services:
     command: npm --prefix packages/firstcut-marketplace-client/ run start
     ports:
       - "3000:3000"
+  server:
+    build: .
+    volumes:
+      - .:/usr/app/
+      - /usr/app/node_modules
+    command: npm --prefix packages/firstcut-marketplace-server/ run start
+    ports:
+      - "4000:4000"
   # server:
   #   build: .
   #   command: meteor run --settings settings.json

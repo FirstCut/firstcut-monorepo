@@ -1,14 +1,14 @@
 import React from 'react';
 import { Query } from 'react-apollo';
 import gql from 'graphql-tag';
-import { Container } from 'semantic-ui-react';
+import { Container } from 'firstcut-ui';
 import ProjectList from '../components/projects';
 
 const ExploreMarketplacePage = () => (
   <Query
     query={gql`
       {
-        projects {
+        projectTemplates {
           title
           description
           exampleThumb
@@ -24,7 +24,7 @@ const ExploreMarketplacePage = () => (
 
       return (
         <Container style={{ paddingTop: '100px' }}>
-          <ProjectList projects={data.projects} />
+          <ProjectList projects={data.projectTemplates} />
         </Container>
       );
     }}

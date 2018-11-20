@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Image, Card, Header } from 'semantic-ui-react';
+import { Image, Card } from 'firstcut-ui';
 import { Link } from 'react-router-dom';
 
 function ProjectList(props) {
@@ -17,15 +17,8 @@ function ProjectList(props) {
 
 function ProjectCard(props) {
   const {
-    _id, title, description, exampleThumb, onClick,
+    _id, title, exampleThumb,
   } = props;
-  // const desktopVideoStyle = {
-  //   width: '400px',
-  //   marginRight: '15px',
-  // };
-  // const mobileVideoStyle = {
-  //   paddingBottom: '15px',
-  // };
   const itemStyle = {
     marginBottom: '4em',
   };

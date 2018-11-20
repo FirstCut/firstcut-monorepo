@@ -1,14 +1,8 @@
 
 import React from 'react';
-import { Image } from 'semantic-ui-react';
+import { Image } from 'firstcut-ui';
 
 function Header(props) {
-  const menuProps = {
-    style: { padding: '10px' },
-    text: true,
-    tabular: true,
-    fluid: true,
-  };
   const logoStyle = {
     position: 'absolute',
     top: 0,
@@ -22,11 +16,4 @@ function Header(props) {
   );
 }
 
-// <Menu {...menuProps}>
-//   <Menu.Item>
-//   </Menu.Item>
-//   <Menu.Item header>
-//     <i>MARKETPLACE</i>
-//   </Menu.Item>
-// </Menu>
 export default Header;

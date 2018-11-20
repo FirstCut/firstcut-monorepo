@@ -161,8 +161,8 @@ ol.ui.list ol li,
 .ui.list > .item .header {
   display: block;
   margin: 0em;
-  font-family: 'Lato', 'Helvetica Neue', Arial, Helvetica, sans-serif;
-  font-weight: bold;
+  font-family: 'Avenir Next', 'Helvetica Neue', Arial, Helvetica, sans-serif;
+  font-weight: 500;
   color: rgba(0, 0, 0, 0.87);
 }
 

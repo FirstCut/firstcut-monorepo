@@ -1,10 +1,10 @@
 import React from 'react';
 import {
   Grid, Modal, Header, Form, Responsive, Button, Embed, Container, Image,
-} from 'semantic-ui-react';
+} from 'firstcut-ui';
 import { Query } from 'react-apollo';
 import gql from 'graphql-tag';
-import Analytics from '../../api/analytics';
+import Analytics from 'firstcut-analytics';
 
 function Contact(props) {
   const { projectId } = props;
@@ -12,7 +12,7 @@ function Contact(props) {
     <Query
       query={gql`
       {
-        project(_id: "${projectId}") {
+        projectTemplate(_id: "${projectId}") {
           title
           description
           exampleUrl
@@ -25,7 +25,7 @@ function Contact(props) {
         if (loading) return <p>Loading...</p>;
         if (error) return <p>Error :(</p>;
 
-        return <ContactFormPage {...data.project} />;
+        return <ContactFormPage {...data.projectTemplate} />;
       }}
     </Query>
   );
@@ -56,15 +56,15 @@ class ContactFormPage extends React.PureComponent {
       event: 'project_request_submission', ...fields, projectId: _id, projectTitle: title,
     };
     Analytics.trackFormSubmission({ projectId: _id, projectTitle: title, ...fields });
-    Meteor.call('postRequest', data, (err) => {
-      if (err) {
-        this.setState({ error: err });
-      } else {
-        this.setState({
-          confirm: true, first: '', last: '', website: '', company: '', email: '', budget: '', location: '', about: '',
-        });
-      }
-    });
+    // Meteor.call('postRequest', data, (err) => {
+    //   if (err) {
+    //     this.setState({ error: err });
+    //   } else {
+    //     this.setState({
+    //       confirm: true, first: '', last: '', website: '', company: '', email: '', budget: '', location: '', about: '',
+    //     });
+    //   }
+    // });
   }
 
   render() {

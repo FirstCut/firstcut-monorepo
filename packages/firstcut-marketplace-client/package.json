@@ -15,14 +15,12 @@
     "react": "^16.6.3",
     "react-apollo": "^2.3.1",
     "react-dom": "^16.6.3",
-    "react-scripts": "2.1.1",
-    "semantic-ui": "^2.4.2"
+    "react-helmet": "^5.2.0",
+    "react-router-dom": "^4.3.1",
+    "react-scripts": "2.1.1"
   },
   "scripts": {
-    "start": "npm-run-all --parallel watch:server start:web",
-    "start:web": "react-scripts start",
-    "start:server": "node src/server",
-    "watch:server": "nodemon --watch src/server src/server",
+    "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
