@@ -10,6 +10,7 @@ const addRequestMutation = gql`
   mutation addRequest(
     $firstName: String!,
     $lastName: String!,
+    $projectId: String!,
     $email: String!,
     $company: String,
     $website: String,
@@ -20,6 +21,7 @@ const addRequestMutation = gql`
     addRequest(
       firstName: $firstName,
       lastName: $lastName,
+      projectId: $projectId,
       email: $email,
       company: $company,
       website: $website,
@@ -81,7 +83,7 @@ class ContactFormPageComponent extends React.PureComponent {
     // const data = {
     //   event: 'project_request_submission', ...request, projectId: _id, projectTitle: title,
     // };
-    mutate({ variables: {...request} });
+    mutate({ variables: { ...request, projectId: _id }});
     Analytics.trackFormSubmission({ projectId: _id, projectTitle: title, ...request });
     // Meteor.call('postRequest', data, (err) => {
     //   if (err) {

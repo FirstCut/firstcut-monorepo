@@ -30,6 +30,7 @@ const typeDefs = gql`
     addRequest(
       firstName: String!,
       lastName: String!,
+      projectId: String!,
       email: String!,
       company: String,
       website: String,

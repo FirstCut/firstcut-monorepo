@@ -9,7 +9,7 @@ function ProjectList(props) {
     <ProjectCard key={project._id} {...project} />
   ));
   return (
-    <Card.Group>
+    <Card.Group centered>
       { cards }
     </Card.Group>
   );

@@ -22,7 +22,9 @@ function ProjectList(props) {
       key: project._id
     }, project));
   });
-  return _react.default.createElement(_firstcutUi.Card.Group, null, cards);
+  return _react.default.createElement(_firstcutUi.Card.Group, {
+    centered: true
+  }, cards);
 }
 
 function ProjectCard(props) {
