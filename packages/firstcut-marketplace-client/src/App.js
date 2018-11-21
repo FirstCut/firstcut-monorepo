@@ -1,12 +1,19 @@
 import React from 'react';
 import {
-  BrowserRouter as Router, Switch, Route,
+  Router, Switch, Route,
 } from 'react-router-dom';
-import { ExploreMarketplacePage, Contact } from './pages';
-import { Header } from './components/header';
+import { ExploreMarketplacePage, ContactPage } from './pages';
+import Header from './components/header';
 import Analytics from 'firstcut-analytics';
-class App extends React.PureComponent {
+import { createBrowserHistory } from 'history';
 
+// track navigation events
+const history = createBrowserHistory();
+history.listen((location) => {
+   Analytics.trackNavigationEvent(location.pathname);
+ });
+
+class App extends React.PureComponent {
   constructor(props) {
     super(props);
     Analytics.init();
@@ -16,26 +23,19 @@ class App extends React.PureComponent {
     return (
         <div style={{ height: '100%' }}>
           <Header />
-          <Router>
+          <Router history={history}>
             <Switch>
               <Route
                 path="/"
                 exact
                 name="marketplace"
-                render={() => {
-                  Analytics.trackNavigationEvent('marketplace');
-                  return <ExploreMarketplacePage />;
-                }}
+                component={ExploreMarketplacePage}
               />
               <Route
                 path="/contact/:_id"
                 exact
                 name="contact"
-                render={(props) => {
-                  const { _id } = props.match.params;
-                  Analytics.trackNavigationEvent(`/contact/${_id}`);
-                  return <Contact projectId={_id} />;
-                }}
+                component={ContactPage}
               />
             </Switch>
           </Router>

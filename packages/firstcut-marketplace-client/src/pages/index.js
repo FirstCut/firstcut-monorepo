@@ -1,4 +1,4 @@
 import ExploreMarketplacePage from './explore-marketplace';
-import Contact from './contact-form';
+import ContactPage from './contact-form';
 
-export { ExploreMarketplacePage, Contact };
+export { ExploreMarketplacePage, ContactPage };

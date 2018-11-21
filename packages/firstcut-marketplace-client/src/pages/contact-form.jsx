@@ -2,11 +2,39 @@ import React from 'react';
 import {
   Grid, Modal, Header, Form, Responsive, Button, Embed, Container, Image,
 } from 'firstcut-ui';
-import { Query, graphql } from 'react-apollo';
+import { Query, Mutation } from 'react-apollo';
 import gql from 'graphql-tag';
 import Analytics from 'firstcut-analytics';
+import Loading from '../components/loading';
+import Alert from '../components/alert';
 
-const addRequestMutation = gql`
+function ContactPage(props) {
+  const projectId = props.match.params._id;
+  return (
+    <Query
+      query={gql`
+        query projectTemplate($projectId: ID!) {
+          projectTemplate(_id: $projectId) {
+            title
+            description
+            exampleUrl
+            _id
+          }
+        }
+      `}
+    variables={{ projectId }}
+    >
+      {({ loading, error, data }) => {
+        if (loading) return <Loading />;
+        if (error) return <Alert message={error.message} />;
+
+        return <ContactFormPage {...data.projectTemplate} />;
+      }}
+    </Query>
+  );
+}
+
+const ADD_REQUEST = gql`
   mutation addRequest(
     $firstName: String!,
     $lastName: String!,
@@ -34,33 +62,18 @@ const addRequestMutation = gql`
   }
 `;
 
-function Contact(props) {
-  const { projectId } = props;
+function ContactFormPage(props) {
   return (
-    <Query
-      query={gql`
-      {
-        projectTemplate(_id: "${projectId}") {
-          title
-          description
-          exampleUrl
-          _id
-        }
-      }
-    `}
-    >
-      {({ loading, error, data }) => {
-        if (loading) return <p>Loading...</p>;
-        if (error) return <p>Error :(</p>;
-
-        return <ContactFormPage {...data.projectTemplate} />;
-      }}
-    </Query>
-  );
+    <Mutation mutation={ADD_REQUEST}>
+    {(addRequest, mutationState) => (
+      <ContactFormPageComponent mutationState={mutationState} addRequest={addRequest} {...props} />
+    )}
+  </Mutation>
+  )
 }
 
 class ContactFormPageComponent extends React.PureComponent {
-  state = {
+  initialState = {
     confirm: false,
     error: null,
     website: '',
@@ -73,53 +86,43 @@ class ContactFormPageComponent extends React.PureComponent {
     about: '',
   }
 
-  hideModal = () => this.setState({ confirm: false });
+  constructor(props) {
+    super(props);
+    this.state = this.initialState;
+  }
+
+  restoreState = ()=>  this.setState(this.initialState)
 
   handleChange = (e, { name, value }) => this.setState({ [name]: value });
 
   handleSubmit = () => {
-    const { mutate, title, _id } = this.props;
+    const { addRequest, title, _id } = this.props;
     const { confirm, error, ...request } = this.state;
-    // const data = {
-    //   event: 'project_request_submission', ...request, projectId: _id, projectTitle: title,
-    // };
-    mutate({ variables: { ...request, projectId: _id }});
-    Analytics.trackFormSubmission({ projectId: _id, projectTitle: title, ...request });
-    // Meteor.call('postRequest', data, (err) => {
-    //   if (err) {
-    //     this.setState({ error: err });
-    //   } else {
-    //     this.setState({
-    //       confirm: true, firstName: '', lastName: '', website: '', company: '', email: '', budget: '', location: '', about: '',
-    //     });
-    //   }
-    // });
+    addRequest({ variables: { ...request, projectId: _id }});
+    Analytics.trackFormSubmission({ name: 'CONTACT_FORM', projectId: _id, projectTitle: title, ...request });
+    this.setState({confirm: true});
   }
 
   render() {
-    const { title, description, exampleUrl } = this.props;
     const {
       confirm, error, ...fields
     } = this.state;
+
+    const { mutationState } = this.props;
     const columnStyle = { paddingTop: '100px' };
     return (
       <div style={{ height: '100%' }}>
-        <Modal open={confirm} basic size="small" onClick={this.hideModal}>
-          <Header icon="checkmark" content="Thank you for your request" />
-          <Modal.Content>
-            We will be in touch soon!
-          </Modal.Content>
-          <Modal.Actions>
-            <Button color="green" inverted onClick={this.hideModal}>
-              CONFIRM
-            </Button>
-          </Modal.Actions>
-        </Modal>
-
+        { mutationState.error &&
+          <Alert visible={mutationState.error} type='error' message={mutationState.error.message} />
+        }
+        <ConfirmationModal
+          open={confirm}
+          onClick={this.restoreState}
+          onConfirm={this.restoreState}
+        />
         <Grid
           stackable
           style={{ height: '100%' }}
-          onClick={this.hideModal}
           reversed="computer"
         >
           <Grid.Column
@@ -160,7 +163,7 @@ class ContactFormPageComponent extends React.PureComponent {
             computer={8}
           >
             <ContactForm
-              formFields={fields}
+              fieldValues={fields}
               handleSubmit={this.handleSubmit}
               handleChange={this.handleChange}
             />
@@ -171,17 +174,13 @@ class ContactFormPageComponent extends React.PureComponent {
   }
 }
 
-const ContactFormPage = graphql(
-  addRequestMutation
-)(ContactFormPageComponent);
-
 function ContactForm(props) {
-  const { handleChange, handleSubmit, formFields } = props;
+  const { handleChange, handleSubmit, fieldValues } = props;
   const {
     firstName, lastName, website, company, email, budget, location, about,
-  } = formFields;
+  } = fieldValues;
   return (
-    <div className="signup__form">
+    <div style={{ maxWidth: '400px' }}>
       <Header color="green" align="left">
         Contact us
       </Header>
@@ -256,11 +255,9 @@ function ContactForm(props) {
             value={about}
           />
         </Form.Field>
-        <Responsive
-          as={Form.Button}
+        <Form.Button
           fluid
           color="green"
-          maxWidth={100000}
           content="SUBMIT"
           onClick={handleSubmit}
         />
@@ -269,6 +266,22 @@ function ContactForm(props) {
   );
 }
 
+function ConfirmationModal(props) {
+  const { open, onConfirm, onClick } = props;
+  return (
+    <Modal open={open} basic size="small" onClick={onClick}>
+      <Header icon="checkmark" content="Thank you for your request" />
+      <Modal.Content>
+        We will be in touch soon!
+      </Modal.Content>
+      <Modal.Actions>
+        <Button color="green" inverted onClick={onConfirm}>
+          CONFIRM
+        </Button>
+      </Modal.Actions>
+    </Modal>
+  )
+}
 
 function ProjectDetails(props) {
   const { title, description, exampleUrl } = props;
@@ -284,4 +297,5 @@ function ProjectDetails(props) {
     </div>
   );
 }
-export default Contact;
+
+export default ContactPage;
