@@ -8,6 +8,7 @@ services:
     command: npm run run:marketplace
     ports:
       - "3000:3000"
+      - "4000:4000"
     env_file:
       - dev.env
   # server:
