@@ -1,21 +1,13 @@
 version: '2'
 services:
-  client:
+  marketplace:
     build: .
     volumes:
-      - .:/usr/app/
+      - .:/usr/app
       - /usr/app/node_modules
-    command: npm --prefix packages/firstcut-marketplace-client/ run start
+    command: npm run run:marketplace
     ports:
       - "3000:3000"
-  server:
-    build: .
-    volumes:
-      - .:/usr/app/
-      - /usr/app/node_modules
-    command: npm --prefix packages/firstcut-marketplace-server/ run start
-    ports:
-      - "4000:4000"
     env_file:
       - dev.env
   # server:
