@@ -1,19 +1,20 @@
 
 import React from 'react';
 import renderer from 'react-test-renderer';
+import { mount } from 'enzyme';
 import { MockedProvider } from 'react-apollo/test-utils';
-import Enzyme, { configure, shallow, mount, render } from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
 import wait from 'waait';
+import App from '../src/App';
 import {
   ContactPage,
-  GET_PROJECT_QUERY,
   ExploreMarketplacePage,
-  GET_PROJECTS_QUERY,
+  GET_PROJECT_TEMPLATES_QUERY,
+  GET_TEMPLATE_QUERY
 } from '../src/pages';
 import Loading from '../src/components/loading';
 
-configure({ adapter: new Adapter() });
+jest.mock('firstcut-analytics');
+jest.mock('react-router-dom');
 
 const testProject = {
   _id: '1',
@@ -26,28 +27,50 @@ const testProject = {
 const mocks = [
   {
     request: {
-      query: GET_PROJECTS_QUERY,
+      query: GET_PROJECT_TEMPLATES_QUERY,
     },
     result: {
       data: {
-        projects: [testProject],
+        projectTemplates: [testProject],
       },
     },
   },
   {
     request: {
-      query: GET_PROJECT_QUERY,
+      query: GET_TEMPLATE_QUERY,
       variables: {
         projectId: testProject._id,
       },
     },
     result: {
       data: {
-        project: testProject,
+        projectTemplate: testProject,
       },
     },
   },
 ];
+
+describe('app', ()=>{
+  test('renders loading state initially', () => {
+    const wrapper = mount(
+      <MockedProvider mocks={mocks} addTypename={false}>
+        <App />
+      </MockedProvider>,
+    );
+    expect(wrapper.find(Loading)).toBeDefined();
+  });
+
+  test('should match snapshot after query load', async () => {
+    const component = renderer.create(
+      <MockedProvider mocks={mocks} addTypename={false}>
+        <App />
+      </MockedProvider>,
+    );
+    await wait(0);
+    const tree = component.toJSON();
+    expect(tree).toMatchSnapshot();
+  });
+});
 
 describe('explore marketplace page', () => {
   test('should render loading state initially', () => {
@@ -65,8 +88,8 @@ describe('explore marketplace page', () => {
         <ExploreMarketplacePage />
       </MockedProvider>,
     );
-    const tree = component.toJSON();
     await wait(0);
+    const tree = component.toJSON();
     expect(tree).toMatchSnapshot();
   });
 });
@@ -87,8 +110,8 @@ describe('contact page', () => {
         <ContactPage projectId={testProject._id} />
       </MockedProvider>,
     );
-    const tree = component.toJSON();
     await wait(0);
+    const tree = component.toJSON();
     expect(tree).toMatchSnapshot();
   });
 });

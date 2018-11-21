@@ -1,7 +1,7 @@
-'use strict';
 
-const firstcutAnalytics = require('..');
+
+import Analytics, { initMixpanel } from '../src';
 
 describe('firstcut-analytics', () => {
-    it('needs tests');
+  test('should be able to handle being loaded multiple times', () => {});
 });

@@ -5,7 +5,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = void 0;
+exports.default = exports.GET_TEMPLATE_QUERY = void 0;
 
 var _objectSpread2 = _interopRequireDefault(require("@babel/runtime/helpers/objectSpread"));
 
@@ -19,9 +19,11 @@ var _createClass2 = _interopRequireDefault(require("@babel/runtime/helpers/creat
 
 var _possibleConstructorReturn2 = _interopRequireDefault(require("@babel/runtime/helpers/possibleConstructorReturn"));
 
-var _getPrototypeOf3 = _interopRequireDefault(require("@babel/runtime/helpers/getPrototypeOf"));
+var _getPrototypeOf2 = _interopRequireDefault(require("@babel/runtime/helpers/getPrototypeOf"));
 
 var _inherits2 = _interopRequireDefault(require("@babel/runtime/helpers/inherits"));
+
+var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
 
 var _taggedTemplateLiteral2 = _interopRequireDefault(require("@babel/runtime/helpers/taggedTemplateLiteral"));
 
@@ -35,8 +37,12 @@ var _graphqlTag = _interopRequireDefault(require("graphql-tag"));
 
 var _firstcutAnalytics = _interopRequireDefault(require("firstcut-analytics"));
 
+var _loading = _interopRequireDefault(require("../components/loading"));
+
+var _alert = _interopRequireDefault(require("../components/alert"));
+
 function _templateObject2() {
-  var data = (0, _taggedTemplateLiteral2.default)(["\n      {\n        projectTemplate(_id: \"", "\") {\n          title\n          description\n          exampleUrl\n          _id\n        }\n      }\n    "]);
+  var data = (0, _taggedTemplateLiteral2.default)(["\n  mutation addRequest(\n    $firstName: String!,\n    $lastName: String!,\n    $projectId: String!,\n    $email: String!,\n    $company: String,\n    $website: String,\n    $location: String,\n    $budget: String\n    $about: String\n  ) {\n    addRequest(\n      firstName: $firstName,\n      lastName: $lastName,\n      projectId: $projectId,\n      email: $email,\n      company: $company,\n      website: $website,\n      location: $location,\n      budget: $budget,\n      about: $about\n    ) {\n      _id\n    }\n  }\n"]);
 
   _templateObject2 = function _templateObject2() {
     return data;
@@ -46,7 +52,7 @@ function _templateObject2() {
 }
 
 function _templateObject() {
-  var data = (0, _taggedTemplateLiteral2.default)(["\n  mutation addRequest(\n    $firstName: String!,\n    $lastName: String!,\n    $projectId: String!,\n    $email: String!,\n    $company: String,\n    $website: String,\n    $location: String,\n    $budget: String\n    $about: String\n  ) {\n    addRequest(\n      firstName: $firstName,\n      lastName: $lastName,\n      projectId: $projectId,\n      email: $email,\n      company: $company,\n      website: $website,\n      location: $location,\n      budget: $budget,\n      about: $about\n    ) {\n      _id\n    }\n  }\n"]);
+  var data = (0, _taggedTemplateLiteral2.default)(["\n  query projectTemplate($projectId: ID!) {\n    projectTemplate(_id: $projectId) {\n      title\n      description\n      exampleUrl\n      _id\n    }\n  }\n"]);
 
   _templateObject = function _templateObject() {
     return data;
@@ -55,19 +61,38 @@ function _templateObject() {
   return data;
 }
 
-var addRequestMutation = (0, _graphqlTag.default)(_templateObject());
+var GET_TEMPLATE_QUERY = (0, _graphqlTag.default)(_templateObject());
+exports.GET_TEMPLATE_QUERY = GET_TEMPLATE_QUERY;
 
-function Contact(props) {
+function ContactPage(props) {
   var projectId = props.projectId;
   return _react.default.createElement(_reactApollo.Query, {
-    query: (0, _graphqlTag.default)(_templateObject2(), projectId)
+    query: GET_TEMPLATE_QUERY,
+    variables: {
+      projectId: projectId
+    }
   }, function (_ref) {
     var loading = _ref.loading,
         error = _ref.error,
         data = _ref.data;
-    if (loading) return _react.default.createElement("p", null, "Loading...");
-    if (error) return _react.default.createElement("p", null, "Error :(");
+    if (loading) return _react.default.createElement(_loading.default, null);
+    if (error) return _react.default.createElement(_alert.default, {
+      message: error.message
+    });
     return _react.default.createElement(ContactFormPage, data.projectTemplate);
+  });
+}
+
+var ADD_REQUEST = (0, _graphqlTag.default)(_templateObject2());
+
+function ContactFormPage(props) {
+  return _react.default.createElement(_reactApollo.Mutation, {
+    mutation: ADD_REQUEST
+  }, function (addRequest, mutationState) {
+    return _react.default.createElement(ContactFormPageComponent, (0, _extends2.default)({
+      mutationState: mutationState,
+      addRequest: addRequest
+    }, props));
   });
 }
 
@@ -76,18 +101,12 @@ var ContactFormPageComponent =
 function (_React$PureComponent) {
   (0, _inherits2.default)(ContactFormPageComponent, _React$PureComponent);
 
-  function ContactFormPageComponent() {
-    var _getPrototypeOf2;
-
-    var _temp, _this;
+  function ContactFormPageComponent(props) {
+    var _this;
 
     (0, _classCallCheck2.default)(this, ContactFormPageComponent);
-
-    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
-      args[_key] = arguments[_key];
-    }
-
-    return (0, _possibleConstructorReturn2.default)(_this, (_temp = _this = (0, _possibleConstructorReturn2.default)(this, (_getPrototypeOf2 = (0, _getPrototypeOf3.default)(ContactFormPageComponent)).call.apply(_getPrototypeOf2, [this].concat(args))), _this.state = {
+    _this = (0, _possibleConstructorReturn2.default)(this, (0, _getPrototypeOf2.default)(ContactFormPageComponent).call(this, props));
+    _this.initialState = {
       confirm: false,
       error: null,
       website: '',
@@ -98,59 +117,56 @@ function (_React$PureComponent) {
       location: '',
       email: '',
       about: ''
-    }, _this.hideModal = function () {
-      return _this.setState({
-        confirm: false
-      });
-    }, _this.handleChange = function (e, _ref2) {
+    };
+
+    _this.restoreState = function () {
+      return _this.setState(_this.initialState);
+    };
+
+    _this.handleChange = function (e, _ref2) {
       var name = _ref2.name,
           value = _ref2.value;
       return _this.setState((0, _defineProperty2.default)({}, name, value));
-    }, _this.handleSubmit = function () {
+    };
+
+    _this.handleSubmit = function () {
       var _this$props = _this.props,
-          mutate = _this$props.mutate,
+          addRequest = _this$props.addRequest,
           title = _this$props.title,
           _id = _this$props._id;
       var _this$state = _this.state,
           confirm = _this$state.confirm,
           error = _this$state.error,
-          request = (0, _objectWithoutProperties2.default)(_this$state, ["confirm", "error"]); // const data = {
-      //   event: 'project_request_submission', ...request, projectId: _id, projectTitle: title,
-      // };
-
-      mutate({
+          request = (0, _objectWithoutProperties2.default)(_this$state, ["confirm", "error"]);
+      addRequest({
         variables: (0, _objectSpread2.default)({}, request, {
           projectId: _id
         })
       });
 
       _firstcutAnalytics.default.trackFormSubmission((0, _objectSpread2.default)({
+        name: 'CONTACT_FORM',
         projectId: _id,
         projectTitle: title
-      }, request)); // Meteor.call('postRequest', data, (err) => {
-      //   if (err) {
-      //     this.setState({ error: err });
-      //   } else {
-      //     this.setState({
-      //       confirm: true, firstName: '', lastName: '', website: '', company: '', email: '', budget: '', location: '', about: '',
-      //     });
-      //   }
-      // });
+      }, request));
 
-    }, _temp));
+      _this.setState({
+        confirm: true
+      });
+    };
+
+    _this.state = _this.initialState;
+    return _this;
   }
 
   (0, _createClass2.default)(ContactFormPageComponent, [{
     key: "render",
     value: function render() {
-      var _this$props2 = this.props,
-          title = _this$props2.title,
-          description = _this$props2.description,
-          exampleUrl = _this$props2.exampleUrl;
       var _this$state2 = this.state,
           confirm = _this$state2.confirm,
           error = _this$state2.error,
           fields = (0, _objectWithoutProperties2.default)(_this$state2, ["confirm", "error"]);
+      var mutationState = this.props.mutationState;
       var columnStyle = {
         paddingTop: '100px'
       };
@@ -158,24 +174,19 @@ function (_React$PureComponent) {
         style: {
           height: '100%'
         }
-      }, _react.default.createElement(_firstcutUi.Modal, {
+      }, mutationState.error && _react.default.createElement(_alert.default, {
+        visible: mutationState.error,
+        type: "error",
+        message: mutationState.error.message
+      }), _react.default.createElement(ConfirmationModal, {
         open: confirm,
-        basic: true,
-        size: "small",
-        onClick: this.hideModal
-      }, _react.default.createElement(_firstcutUi.Header, {
-        icon: "checkmark",
-        content: "Thank you for your request"
-      }), _react.default.createElement(_firstcutUi.Modal.Content, null, "We will be in touch soon!"), _react.default.createElement(_firstcutUi.Modal.Actions, null, _react.default.createElement(_firstcutUi.Button, {
-        color: "green",
-        inverted: true,
-        onClick: this.hideModal
-      }, "CONFIRM"))), _react.default.createElement(_firstcutUi.Grid, {
+        onClick: this.restoreState,
+        onConfirm: this.restoreState
+      }), _react.default.createElement(_firstcutUi.Grid, {
         stackable: true,
         style: {
           height: '100%'
         },
-        onClick: this.hideModal,
         reversed: "computer"
       }, _react.default.createElement(_firstcutUi.Grid.Column, {
         mobile: 16,
@@ -209,7 +220,7 @@ function (_React$PureComponent) {
         tablet: 16,
         computer: 8
       }, _react.default.createElement(ContactForm, {
-        formFields: fields,
+        fieldValues: fields,
         handleSubmit: this.handleSubmit,
         handleChange: this.handleChange
       }))));
@@ -218,22 +229,22 @@ function (_React$PureComponent) {
   return ContactFormPageComponent;
 }(_react.default.PureComponent);
 
-var ContactFormPage = (0, _reactApollo.graphql)(addRequestMutation)(ContactFormPageComponent);
-
 function ContactForm(props) {
   var handleChange = props.handleChange,
       handleSubmit = props.handleSubmit,
-      formFields = props.formFields;
-  var firstName = formFields.firstName,
-      lastName = formFields.lastName,
-      website = formFields.website,
-      company = formFields.company,
-      email = formFields.email,
-      budget = formFields.budget,
-      location = formFields.location,
-      about = formFields.about;
+      fieldValues = props.fieldValues;
+  var firstName = fieldValues.firstName,
+      lastName = fieldValues.lastName,
+      website = fieldValues.website,
+      company = fieldValues.company,
+      email = fieldValues.email,
+      budget = fieldValues.budget,
+      location = fieldValues.location,
+      about = fieldValues.about;
   return _react.default.createElement("div", {
-    className: "signup__form"
+    style: {
+      maxWidth: '400px'
+    }
   }, _react.default.createElement(_firstcutUi.Header, {
     color: "green",
     align: "left"
@@ -283,14 +294,31 @@ function ContactForm(props) {
     placeholder: "Anything about this project you would like us to know before we contact you?",
     name: "about",
     value: about
-  })), _react.default.createElement(_firstcutUi.Responsive, {
-    as: _firstcutUi.Form.Button,
+  })), _react.default.createElement(_firstcutUi.Form.Button, {
     fluid: true,
     color: "green",
-    maxWidth: 100000,
     content: "SUBMIT",
     onClick: handleSubmit
   })));
+}
+
+function ConfirmationModal(props) {
+  var open = props.open,
+      onConfirm = props.onConfirm,
+      onClick = props.onClick;
+  return _react.default.createElement(_firstcutUi.Modal, {
+    open: open,
+    basic: true,
+    size: "small",
+    onClick: onClick
+  }, _react.default.createElement(_firstcutUi.Header, {
+    icon: "checkmark",
+    content: "Thank you for your request"
+  }), _react.default.createElement(_firstcutUi.Modal.Content, null, "We will be in touch soon!"), _react.default.createElement(_firstcutUi.Modal.Actions, null, _react.default.createElement(_firstcutUi.Button, {
+    color: "green",
+    inverted: true,
+    onClick: onConfirm
+  }, "CONFIRM")));
 }
 
 function ProjectDetails(props) {
@@ -312,5 +340,5 @@ function ProjectDetails(props) {
   }), _react.default.createElement("i", null, description));
 }
 
-var _default = Contact;
+var _default = ContactPage;
 exports.default = _default;

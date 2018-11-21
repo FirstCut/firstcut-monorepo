@@ -1,15 +1,304 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`app should match snapshot after query load 1`] = `
+<div
+  style={
+    Object {
+      "height": "100%",
+    }
+  }
+>
+  <img
+    className="ui image"
+    src="/marketplace.png"
+    style={
+      Object {
+        "height": "25px",
+        "left": 0,
+        "marginLeft": "20px",
+        "marginTop": "20px",
+        "position": "absolute",
+        "top": 0,
+      }
+    }
+  />
+</div>
+`;
+
 exports[`contact page should match snapshot after query load 1`] = `
-<i
-  aria-hidden="true"
-  className="spinner loading icon"
-/>
+<div
+  style={
+    Object {
+      "height": "100%",
+    }
+  }
+>
+  <div
+    className="ui stackable computer reversed grid"
+    style={
+      Object {
+        "height": "100%",
+      }
+    }
+  >
+    <div
+      align="center"
+      className="eight wide computer sixteen wide mobile sixteen wide tablet column"
+      style={
+        Object {
+          "paddingTop": "100px",
+        }
+      }
+    >
+      <div
+        style={
+          Object {
+            "maxWidth": "500px",
+          }
+        }
+      >
+        <div
+          align="left"
+          className="ui green header"
+        >
+          Title
+        </div>
+        <div
+          className="ui embed"
+          onClick={[Function]}
+          style={
+            Object {
+              "marginBottom": "20px",
+            }
+          }
+        >
+          <i
+            aria-hidden="true"
+            className="video play icon"
+          />
+        </div>
+        <i>
+          description
+        </i>
+      </div>
+    </div>
+    <div
+      align="center"
+      className="eight wide computer sixteen wide mobile sixteen wide tablet column"
+      style={
+        Object {
+          "paddingTop": "100px",
+        }
+      }
+    >
+      <div
+        style={
+          Object {
+            "maxWidth": "400px",
+          }
+        }
+      >
+        <div
+          align="left"
+          className="ui green header"
+        >
+          Contact us
+        </div>
+        <form
+          className="ui form"
+          onSubmit={[Function]}
+        >
+          <div
+            className="equal width fields"
+          >
+            <div
+              className="field"
+            >
+              <div
+                className="required field"
+              >
+                <div
+                  className="ui input"
+                >
+                  <input
+                    name="firstName"
+                    onChange={[Function]}
+                    placeholder="First Name"
+                    required={true}
+                    type="text"
+                    value=""
+                  />
+                </div>
+              </div>
+            </div>
+            <div
+              className="field"
+            >
+              <div
+                className="required field"
+              >
+                <div
+                  className="ui input"
+                >
+                  <input
+                    name="lastName"
+                    onChange={[Function]}
+                    placeholder="Last Name"
+                    required={true}
+                    type="text"
+                    value=""
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            className="field"
+          >
+            <div
+              className="required field"
+            >
+              <div
+                className="ui input"
+              >
+                <input
+                  name="email"
+                  onChange={[Function]}
+                  placeholder="Email"
+                  required={true}
+                  type="text"
+                  value=""
+                />
+              </div>
+            </div>
+          </div>
+          <div
+            className="field"
+          >
+            <div
+              className="required field"
+            >
+              <div
+                className="ui input"
+              >
+                <input
+                  name="company"
+                  onChange={[Function]}
+                  placeholder="Company Name"
+                  required={true}
+                  type="text"
+                  value=""
+                />
+              </div>
+            </div>
+          </div>
+          <div
+            className="field"
+          >
+            <div
+              className="field"
+            >
+              <div
+                className="ui input"
+              >
+                <input
+                  name="website"
+                  onChange={[Function]}
+                  placeholder="Company Website"
+                  type="text"
+                  value=""
+                />
+              </div>
+            </div>
+          </div>
+          <div
+            className="field"
+          >
+            <div
+              className="field"
+            >
+              <div
+                className="ui input"
+              >
+                <input
+                  name="location"
+                  onChange={[Function]}
+                  placeholder="Where would you like to shoot your video?"
+                  type="text"
+                  value=""
+                />
+              </div>
+            </div>
+          </div>
+          <div
+            className="field"
+          >
+            <div
+              className="field"
+            >
+              <div
+                className="ui input"
+              >
+                <input
+                  name="budget"
+                  onChange={[Function]}
+                  placeholder="What is your estimated budget range?"
+                  type="text"
+                  value=""
+                />
+              </div>
+            </div>
+          </div>
+          <div
+            className="field"
+          >
+            <div
+              className="field"
+            >
+              <textarea
+                name="about"
+                onChange={[Function]}
+                onInput={[Function]}
+                placeholder="Anything about this project you would like us to know before we contact you?"
+                rows={3}
+                style={
+                  Object {
+                    "resize": "",
+                  }
+                }
+                value=""
+              />
+            </div>
+          </div>
+          <div
+            className="field"
+          >
+            <button
+              className="ui green fluid button"
+              onClick={[Function]}
+              role="button"
+            >
+              SUBMIT
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
 `;
 
 exports[`explore marketplace page should match snapshot after query load 1`] = `
-<i
-  aria-hidden="true"
-  className="spinner loading icon"
-/>
+<div
+  className="ui container"
+  style={
+    Object {
+      "paddingTop": "100px",
+    }
+  }
+>
+  <div
+    className="ui centered cards"
+  />
+</div>
 `;

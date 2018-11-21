@@ -12,10 +12,10 @@ var _objectWithoutProperties2 = _interopRequireDefault(require("@babel/runtime/h
 var Analytics = {
   init: function init() {
     var options = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-    var analytics = null;
+    console.log(window.analytics);
 
     if (options.development) {
-      analytics = {
+      window.analyics = {
         load: function load() {
           console.log('Analytics load');
         },
@@ -32,11 +32,11 @@ var Analytics = {
           console.log('Analytics group');
         }
       };
-    } else {
-      analytics = initMixpanel();
+    } else if (!window.analytics) {
+      initMixpanel();
     }
 
-    analytics.load('q7fljn00pJH2VTzpOAv08t2AH5d2tfFy');
+    window.analytics.load('q7fljn00pJH2VTzpOAv08t2AH5d2tfFy');
   },
   trackError: function trackError(data) {
     this.track('Error', data);

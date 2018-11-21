@@ -23,9 +23,17 @@ var _reactRouterDom = require("react-router-dom");
 
 var _pages = require("./pages");
 
-var _header = require("./components/header");
+var _header = _interopRequireDefault(require("./components/header"));
 
 var _firstcutAnalytics = _interopRequireDefault(require("firstcut-analytics"));
+
+var _history = require("history");
+
+// track navigation events
+var history = (0, _history.createBrowserHistory)();
+history.listen(function (location) {
+  _firstcutAnalytics.default.trackNavigationEvent(location.pathname);
+});
 
 var App =
 /*#__PURE__*/
@@ -50,25 +58,20 @@ function (_React$PureComponent) {
         style: {
           height: '100%'
         }
-      }, _react.default.createElement(_header.Header, null), _react.default.createElement(_reactRouterDom.BrowserRouter, null, _react.default.createElement(_reactRouterDom.Switch, null, _react.default.createElement(_reactRouterDom.Route, {
+      }, _react.default.createElement(_header.default, null), _react.default.createElement(_reactRouterDom.Router, {
+        history: history
+      }, _react.default.createElement(_reactRouterDom.Switch, null, _react.default.createElement(_reactRouterDom.Route, {
         path: "/",
         exact: true,
         name: "marketplace",
-        render: function render() {
-          _firstcutAnalytics.default.trackNavigationEvent('marketplace');
-
-          return _react.default.createElement(_pages.ExploreMarketplacePage, null);
-        }
+        component: _pages.ExploreMarketplacePage
       }), _react.default.createElement(_reactRouterDom.Route, {
         path: "/contact/:_id",
         exact: true,
         name: "contact",
         render: function render(props) {
           var _id = props.match.params._id;
-
-          _firstcutAnalytics.default.trackNavigationEvent("/contact/".concat(_id));
-
-          return _react.default.createElement(_pages.Contact, {
+          return _react.default.createElement(_pages.ContactPage, {
             projectId: _id
           });
         }
