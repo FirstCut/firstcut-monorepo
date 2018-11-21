@@ -6,3 +6,10 @@ exports[`contact page should match snapshot after query load 1`] = `
   className="spinner loading icon"
 />
 `;
+
+exports[`explore marketplace page should match snapshot after query load 1`] = `
+<i
+  aria-hidden="true"
+  className="spinner loading icon"
+/>
+`;

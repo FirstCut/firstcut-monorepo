@@ -58,6 +58,17 @@ describe('explore marketplace page', () => {
     );
     expect(wrapper.find(Loading)).toBeDefined();
   });
+
+  test('should match snapshot after query load', async () => {
+    const component = renderer.create(
+      <MockedProvider mocks={mocks} addTypename={false}>
+        <ExploreMarketplacePage />
+      </MockedProvider>,
+    );
+    const tree = component.toJSON();
+    await wait(0);
+    expect(tree).toMatchSnapshot();
+  });
 });
 
 describe('contact page', () => {
