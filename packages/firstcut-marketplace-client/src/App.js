@@ -35,7 +35,10 @@ class App extends React.PureComponent {
                 path="/contact/:_id"
                 exact
                 name="contact"
-                component={ContactPage}
+                render={(props) => {
+                  const { _id } = props.match.params;
+                  return <ContactPage projectId={_id}/>
+                }}
               />
             </Switch>
           </Router>

@@ -1,1 +1,0 @@
-exports.ValidatedMethod = jest.fn();

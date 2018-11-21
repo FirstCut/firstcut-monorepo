@@ -1,7 +1,7 @@
 {
 		"private": true,
 		"publishConfig": {
-			"access": "private"
+				"access": "private"
 		},
 		"devDependencies": {
 				"@babel/cli": "^7.0.0-beta.51",
@@ -17,6 +17,8 @@
 				"babel-loader": "^8.0.0-beta",
 				"babel-polyfill": "^6.26.0",
 				"concurrently": "^3.5.1",
+				"enzyme": "^3.7.0",
+				"enzyme-adapter-react-16": "^1.7.0",
 				"eslint": "5.6.0",
 				"eslint-config-airbnb": "^17.0.0",
 				"eslint-plugin-import": "^2.13.0",
@@ -28,6 +30,7 @@
 				"jest": "^23.6.0",
 				"lerna": "^3.4.0",
 				"source-map-loader": "^0.2.3",
+				"waait": "^1.0.2",
 				"webpack": "4.19.1",
 				"webpack-cli": "^2.0.12",
 				"webpack-dev-server": "3.1.9"
@@ -56,20 +59,18 @@
 		],
 		"jest": {
 				"moduleNameMapper": {
-					"semantic-ui-react": "<rootDir>/jest/mocks/semantic-ui.mock.js"
+					"\\.(css|less)$": "<rootDir>/__mocks__/styleMock.js"
 				},
-				"setupFiles": [
-					"<rootDir>/jest/setup.js"
-				],
+				"setupFiles": [],
 				"testMatch": [
-					"**/__tests__/**/*.js?(x)",
-					"**/?(*.)+(spec|test|jest).js?(x)"
+						"**/__tests__/**/*.js?(x)",
+						"**/?(*.)+(spec|test|jest).js?(x)"
 				],
 				"testPathIgnorePatterns": [
-					"/node_modules/",
-					"/apps/",
-					"/test_meteor/",
-					"/lib/"
+						"/node_modules/",
+						"/apps/",
+						"/test_meteor/",
+						"/lib/"
 				]
 		}
 }

@@ -8,22 +8,21 @@ import Analytics from 'firstcut-analytics';
 import Loading from '../components/loading';
 import Alert from '../components/alert';
 
+export const GET_TEMPLATE_QUERY = gql`
+  query projectTemplate($projectId: ID!) {
+    projectTemplate(_id: $projectId) {
+      title
+      description
+      exampleUrl
+      _id
+    }
+  }
+`;
+
 function ContactPage(props) {
-  const projectId = props.match.params._id;
+  const { projectId } = props;
   return (
-    <Query
-      query={gql`
-        query projectTemplate($projectId: ID!) {
-          projectTemplate(_id: $projectId) {
-            title
-            description
-            exampleUrl
-            _id
-          }
-        }
-      `}
-    variables={{ projectId }}
-    >
+    <Query query={GET_TEMPLATE_QUERY} variables={{ projectId }}>
       {({ loading, error, data }) => {
         if (loading) return <Loading />;
         if (error) return <Alert message={error.message} />;
@@ -107,7 +106,6 @@ class ContactFormPageComponent extends React.PureComponent {
     const {
       confirm, error, ...fields
     } = this.state;
-
     const { mutationState } = this.props;
     const columnStyle = { paddingTop: '100px' };
     return (

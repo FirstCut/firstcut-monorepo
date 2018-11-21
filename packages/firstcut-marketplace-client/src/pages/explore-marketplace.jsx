@@ -6,20 +6,20 @@ import ProjectList from '../components/projects';
 import Loading from '../components/loading';
 import Alert from '../components/alert';
 
+export const GET_PROJECT_TEMPLATES_QUERY = gql`
+  {
+    projectTemplates {
+      title
+      description
+      exampleThumb
+      exampleUrl
+      _id
+    }
+  }
+`;
+
 const ExploreMarketplacePage = () => (
-  <Query
-    query={gql`
-      {
-        projectTemplates {
-          title
-          description
-          exampleThumb
-          exampleUrl
-          _id
-        }
-      }
-    `}
-  >
+  <Query query={GET_PROJECT_TEMPLATES_QUERY}>
     {({ loading, error, data }) => {
       if (loading) return <Loading/>
       if (error) return <Alert message={error.message} />;

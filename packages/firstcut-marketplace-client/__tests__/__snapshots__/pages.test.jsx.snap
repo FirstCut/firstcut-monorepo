@@ -1,0 +1,8 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`contact page should match snapshot after query load 1`] = `
+<i
+  aria-hidden="true"
+  className="spinner loading icon"
+/>
+`;
