@@ -1,11 +1,3 @@
 # `firstcut-project-templates`
 
-> TODO: description
-
-## Usage
-
-```
-const firstcutProjectTemplates = require('firstcut-project-templates');
-
-// TODO: DEMONSTRATE API
-```
+Graphql schemas and resolvers for project templates

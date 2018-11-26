@@ -34,11 +34,9 @@ function () {
       var channel = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : this.config.defaultChannel;
       var accessToken = this.config.accessToken;
       var slack = new _client.WebClient(accessToken);
-      console.log(slack);
       var result = (0, _objectSpread2.default)({
         channel: channel
       }, content);
-      console.log(result);
       return slack.chat.postMessage(result);
     }
   }]);

@@ -1,11 +1,3 @@
 # `firstcut-ui`
 
-> TODO: description
-
-## Usage
-
-```
-const firstcutUi = require('firstcut-ui');
-
-// TODO: DEMONSTRATE API
-```
+Firstcut wrapper for generic react ui components (currently primarily a wrapper for semantic ui)

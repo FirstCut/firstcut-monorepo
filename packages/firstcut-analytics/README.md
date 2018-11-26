@@ -1,11 +1,10 @@
 # `firstcut-analytics`
 
-> TODO: description
+Analytics tracker for firstcut.
 
 ## Usage
 
 ```
-const firstcutAnalytics = require('firstcut-analytics');
+import Analytics from 'firstcut-analytics';
 
-// TODO: DEMONSTRATE API
 ```
