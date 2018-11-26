@@ -12,7 +12,9 @@ class Slack {
   postMessage(content, channel = this.config.defaultChannel) {
     const { accessToken } = this.config;
     const slack = new WebClient(accessToken);
+    console.log(slack);
     const result = { channel, ...content };
+    console.log(result);
     return slack.chat.postMessage(result);
   }
 }

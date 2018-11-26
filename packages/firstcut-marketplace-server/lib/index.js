@@ -4,9 +4,9 @@ var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWild
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _regenerator = _interopRequireDefault(require("@babel/runtime/regenerator"));
-
 var _objectSpread2 = _interopRequireDefault(require("@babel/runtime/helpers/objectSpread"));
+
+var _regenerator = _interopRequireDefault(require("@babel/runtime/regenerator"));
 
 var _asyncToGenerator2 = _interopRequireDefault(require("@babel/runtime/helpers/asyncToGenerator"));
 
@@ -54,9 +54,7 @@ var eventMiddleware = {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                (0, _firstcutEventHandler.default)((0, _objectSpread2.default)({
-                  event: _firstcutEventHandler.EVENTS.PROJECT_REQUEST
-                }, args));
+                console.log('project requests');
                 _context.next = 3;
                 return resolve(parent, args, context, info);
 
@@ -87,14 +85,18 @@ var eventMiddleware = {
           while (1) {
             switch (_context2.prev = _context2.next) {
               case 0:
-                _context2.next = 2;
+                console.log('HANDLING EVENT');
+                (0, _firstcutEventHandler.default)((0, _objectSpread2.default)({
+                  event: _firstcutEventHandler.EVENTS.PROJECT_REQUEST
+                }, args));
+                _context2.next = 4;
                 return resolve(parent, args, context, info);
 
-              case 2:
+              case 4:
                 result = _context2.sent;
                 return _context2.abrupt("return", result);
 
-              case 4:
+              case 6:
               case "end":
                 return _context2.stop();
             }

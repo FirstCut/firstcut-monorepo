@@ -5,46 +5,45 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.getChannel = getChannel;
-exports.postMessage = postMessage;
+exports.default = void 0;
 
 var _objectSpread2 = _interopRequireDefault(require("@babel/runtime/helpers/objectSpread"));
 
+var _classCallCheck2 = _interopRequireDefault(require("@babel/runtime/helpers/classCallCheck"));
+
+var _createClass2 = _interopRequireDefault(require("@babel/runtime/helpers/createClass"));
+
 var _client = require("@slack/client");
 
-var _slack = require("./slack.schemas");
+var Slack =
+/*#__PURE__*/
+function () {
+  function Slack(conf) {
+    (0, _classCallCheck2.default)(this, Slack);
 
-function getChannel() {
-  if (Meteor.isTest) {
-    return 'devtesting';
+    if (!conf || !conf.accessToken) {
+      throw new Error('slack package requires slack accessToken');
+    }
+
+    this.config = conf;
   }
 
-  if (Meteor.settings.public.environment === 'development') {
-    return 'devtesting';
-  }
+  (0, _createClass2.default)(Slack, [{
+    key: "postMessage",
+    value: function postMessage(content) {
+      var channel = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : this.config.defaultChannel;
+      var accessToken = this.config.accessToken;
+      var slack = new _client.WebClient(accessToken);
+      console.log(slack);
+      var result = (0, _objectSpread2.default)({
+        channel: channel
+      }, content);
+      console.log(result);
+      return slack.chat.postMessage(result);
+    }
+  }]);
+  return Slack;
+}();
 
-  if (Meteor.settings.public.environment === 'production') {
-    return 'postproduction';
-  }
-
-  throw Meteor.Error('unsatisfied-conditions', 'Could not retrieve channel. Is not test, development, or production environment.');
-}
-
-function postMessage(content, channel) {
-  var access_token = Meteor.settings.slack.api_token;
-  var slack = new _client.WebClient(access_token);
-  var client_id = Meteor.settings.slack.client_id;
-  var client_secret = Meteor.settings.slack.client_secret;
-
-  if (!channel || Meteor.settings.public.environment === 'development') {
-    channel = getChannel();
-  }
-
-  var result = (0, _objectSpread2.default)({
-    channel: channel
-  }, content);
-
-  _slack.SlackContentSchema.validate(result);
-
-  return slack.chat.postMessage(result);
-}
+var _default = Slack;
+exports.default = _default;

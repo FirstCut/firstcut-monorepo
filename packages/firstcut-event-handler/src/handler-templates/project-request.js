@@ -9,14 +9,14 @@ const ProjectRequest = new Map({
   },
   generateActions(eventData) {
     const {
-      first, last, email, company, about, projectId, location, budget,
+      firstName, lastName, email, company, about, projectId, location, budget,
     } = eventData;
     return [
       {
         type: ACTIONS.slack_notify,
         channel: 'projectrequests',
         content: {
-          text: `*Name*: ${first} ${last}\n *Company*: ${company} \n *Project id*: ${projectId}\n *Email*: ${email}\n *About*: ${about}, *Budget* : ${budget}, *Location*: ${location}`,
+          text: `*Name*: ${firstName} ${lastName}\n *Company*: ${company} \n *Project id*: ${projectId}\n *Email*: ${email}\n *About*: ${about}\n, *Budget* : ${budget}\n, *Location*: ${location}\n`,
           mrkdwn: true,
         },
       }];
