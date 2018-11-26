@@ -33,6 +33,11 @@ function _templateObject() {
   return data;
 }
 
+/**
+ * ExploreMarketplacePage
+ * 
+ * Queries the graphql api for project templates and displays them.
+ */
 var GET_PROJECT_TEMPLATES_QUERY = (0, _graphqlTag.default)(_templateObject());
 exports.GET_PROJECT_TEMPLATES_QUERY = GET_PROJECT_TEMPLATES_QUERY;
 

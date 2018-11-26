@@ -6,6 +6,12 @@ import ProjectList from '../components/projects';
 import Loading from '../components/loading';
 import Alert from '../components/alert';
 
+/**
+ * ExploreMarketplacePage
+ * 
+ * Queries the graphql api for project templates and displays them.
+ */
+
 export const GET_PROJECT_TEMPLATES_QUERY = gql`
   {
     projectTemplates {

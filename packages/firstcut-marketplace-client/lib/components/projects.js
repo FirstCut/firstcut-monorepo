@@ -15,6 +15,11 @@ var _firstcutUi = require("firstcut-ui");
 
 var _reactRouterDom = require("react-router-dom");
 
+/**
+ * ProjectList
+ *
+ * Displays the list of project templates in card format
+ */
 function ProjectList(props) {
   var projects = props.projects;
   var cards = projects.map(function (project) {

@@ -11,6 +11,11 @@ var _react = _interopRequireDefault(require("react"));
 
 var _firstcutUi = require("firstcut-ui");
 
+/**
+ * Loading
+ *
+ * Generic loading component
+ */
 function Loading(props) {
   return _react.default.createElement(_firstcutUi.Icon, {
     loading: true,

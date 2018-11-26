@@ -8,16 +8,6 @@ import Analytics from 'firstcut-analytics';
 import Loading from '../components/loading';
 import Alert from '../components/alert';
 
-/**
- * ContactPage
- *
- * Displays a project template's information (description, title, example video)
- * along with a contact form.
- *
- * The contact form inserts a project request into the database via the graphql api
- * @param projectId { string } the id of the project template to display
- */
-
 export const GET_TEMPLATE_QUERY = gql`
   query projectTemplate($projectId: ID!) {
     projectTemplate(_id: $projectId) {
@@ -29,6 +19,8 @@ export const GET_TEMPLATE_QUERY = gql`
   }
 `;
 
+#
+#
 function ContactPage(props) {
   const { projectId } = props;
   return (

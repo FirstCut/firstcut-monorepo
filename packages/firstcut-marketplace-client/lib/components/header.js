@@ -11,6 +11,11 @@ var _react = _interopRequireDefault(require("react"));
 
 var _firstcutUi = require("firstcut-ui");
 
+/**
+ * Header
+ *
+ * Header component for the app's layout. Displays the firstcut logo
+ */
 function Header(props) {
   var logoStyle = {
     position: 'absolute',

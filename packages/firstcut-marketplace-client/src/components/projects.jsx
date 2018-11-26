@@ -3,6 +3,12 @@ import React from 'react';
 import { Image, Card } from 'firstcut-ui';
 import { Link } from 'react-router-dom';
 
+/**
+ * ProjectList
+ *
+ * Displays the list of project templates in card format
+ */
+
 function ProjectList(props) {
   const { projects } = props;
   const cards = projects.map(project => (

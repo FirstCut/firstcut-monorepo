@@ -13,8 +13,18 @@ var _propTypes = _interopRequireDefault(require("prop-types"));
 
 var _firstcutUi = require("firstcut-ui");
 
+/**
+ * Alert
+ *
+ * Displays an alert to the user
+ */
 function Alert(props) {
+  var header = props.header,
+      message = props.message,
+      _props$visible = props.visible,
+      visible = _props$visible === void 0 ? true : _props$visible;
   return _react.default.createElement(_firstcutUi.Modal, {
+    open: visible,
     header: props.header,
     content: props.message
   });
@@ -22,7 +32,8 @@ function Alert(props) {
 
 Alert.propTypes = {
   message: _propTypes.default.string,
-  header: _propTypes.default.string
+  header: _propTypes.default.string,
+  visible: _propTypes.default.bool
 };
 var _default = Alert;
 exports.default = _default;

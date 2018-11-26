@@ -61,6 +61,15 @@ function _templateObject() {
   return data;
 }
 
+/**
+ * ContactPage
+ *
+ * Displays a project template's information (description, title, example video)
+ * along with a contact form.
+ *
+ * The contact form inserts a project request into the database via the graphql api
+ * @param projectId { string } the id of the project template to display
+ */
 var GET_TEMPLATE_QUERY = (0, _graphqlTag.default)(_templateObject());
 exports.GET_TEMPLATE_QUERY = GET_TEMPLATE_QUERY;
 

@@ -1,6 +1,13 @@
 import React from 'react';
 import { Image } from 'firstcut-ui';
 
+
+/**
+ * Header
+ *
+ * Header component for the app's layout. Displays the firstcut logo
+ */
+
 function Header(props) {
   const logoStyle = {
     position: 'absolute',
