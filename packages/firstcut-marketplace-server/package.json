@@ -25,6 +25,7 @@
     "url": "https://github.com/FirstCut/firstcut-monorepo/issues"
   },
   "dependencies": {
+    "firstcut-event-handler": "^1.0.0",
     "firstcut-project-requests": "^1.0.0",
     "firstcut-project-templates": "^1.0.0",
     "graphql-middleware": "^2.0.2",

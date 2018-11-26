@@ -6,6 +6,9 @@ import { GraphQLServer } from 'graphql-yoga';
 import { makeExecutableSchema } from 'graphql-tools';
 import gql from 'graphql-tag';
 import { applyMiddleware } from 'graphql-middleware';
+import handleEvent, { EVENTS } from 'firstcut-event-handler';
+
+const isDevelopment = process.env.NODE_ENV === 'development';
 
 const baseQuery = gql`
   type Query {
@@ -15,22 +18,16 @@ const baseQuery = gql`
 
 const resolvers = merge(resolvers, requestResolvers, templateResolvers);
 
-const logInput = async (resolve, root, args, context, info) => {
-  const result = await resolve(root, args, context, info);
-  return result;
-};
-
 const eventMiddleware = {
   Query: {
     projectTemplates: async (resolve, parent, args, context, info) => {
-      console.log('PROJECT TEMP{LAtes');
+      handleEvent({ event: EVENTS.PROJECT_REQUEST, ...args });
       const result = await resolve(parent, args, context, info);
       return result;
     },
   },
   Mutation: {
     addRequest: async (resolve, parent, args, context, info) => {
-      console.log('ADD REQUEST MIDDLEWARE');
       const result = await resolve(parent, args, context, info);
       return result;
     },
@@ -38,7 +35,11 @@ const eventMiddleware = {
 
 };
 
-const schema = makeExecutableSchema({ typeDefs: [baseQuery, templateTypeDefs, requestTypeDefs], resolvers });
+const schema = makeExecutableSchema({
+  typeDefs: [baseQuery, templateTypeDefs, requestTypeDefs],
+  resolvers,
+});
+
 const withMiddleware = applyMiddleware(
   schema,
   eventMiddleware,
@@ -49,12 +50,12 @@ const server = new GraphQLServer({
 });
 
 const port = process.env.PORT || 4000;
-const playground = (process.env.NODE_ENV === 'development');
 const options = {
   port,
-  playground,
+  playground: isDevelopment,
   endpoint: '/graphql',
 };
+
 server.start(options, () => console.log(
   '🚀 Server ready at', port,
 ));
