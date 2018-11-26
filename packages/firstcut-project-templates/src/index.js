@@ -1,5 +1,5 @@
 
-import { gql } from 'apollo-server';
+import gql from 'graphql-tag';
 import { _ } from 'lodash';
 import projectTemplates from './project-templates';
 

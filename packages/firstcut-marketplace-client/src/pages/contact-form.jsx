@@ -99,7 +99,7 @@ class ContactFormPageComponent extends React.PureComponent {
     const { confirm, error, ...request } = this.state;
     addRequest({ variables: { ...request, projectId: _id }});
     Analytics.trackFormSubmission({ name: 'CONTACT_FORM', projectId: _id, projectTitle: title, ...request });
-    this.setState({confirm: true});
+    this.setState({ confirm: true });
   }
 
   render() {

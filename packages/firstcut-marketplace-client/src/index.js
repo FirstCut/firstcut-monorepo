@@ -7,8 +7,10 @@ import * as serviceWorker from './serviceWorker';
 import ApolloClient from 'apollo-boost';
 import { ApolloProvider } from 'react-apollo';
 
+console.log(process.env);
+const SERVER_ROOT = (process.env.NODE_ENV === 'development') ? 'http://localhost:4000' : 'http://52.43.83.221';
 const client = new ApolloClient({
-  uri: "http://localhost:4000/graphql"
+  uri: `${SERVER_ROOT}/graphql`
 });
 
 ReactDOM.render((

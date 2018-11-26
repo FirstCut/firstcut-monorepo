@@ -10,7 +10,7 @@ exports.resolvers = exports.typeDefs = void 0;
 
 var _taggedTemplateLiteral2 = _interopRequireDefault(require("@babel/runtime/helpers/taggedTemplateLiteral"));
 
-var _apolloServer = require("apollo-server");
+var _graphqlTag = _interopRequireDefault(require("graphql-tag"));
 
 var _lodash = require("lodash");
 
@@ -32,7 +32,7 @@ function init(c) {
   collection = c;
 }
 
-var typeDefs = (0, _apolloServer.gql)(_templateObject());
+var typeDefs = (0, _graphqlTag.default)(_templateObject());
 exports.typeDefs = typeDefs;
 var resolvers = {
   Query: {

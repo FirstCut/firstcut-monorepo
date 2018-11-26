@@ -1,6 +1,6 @@
 version: '2'
 services:
-  marketplace:
+  client:
     build: .
     volumes:
       - .:/usr/app
@@ -8,15 +8,16 @@ services:
     command: npm run run:marketplace
     ports:
       - "3000:3000"
-      - "4000:4000"
     env_file:
       - dev.env
-  # server:
-  #   build: .
-  #   command: meteor run --settings settings.json
-  #   volumes:
-  #     - .:/usr/app/
-  #     - /usr/app/node_modules
-  #     - /usr/app/packages/firstcut-marketplace-server
-  #   ports:
-  #     - "3000:3000"
+  server:
+    build: .
+    command: meteor run --settings settings.json
+    volumes:
+      - .:/usr/app/
+      - /usr/app/node_modules
+      - /usr/app/packages/firstcut-marketplace-server
+    ports:
+      - "3000:3000"
+    env_file:
+      - dev.env

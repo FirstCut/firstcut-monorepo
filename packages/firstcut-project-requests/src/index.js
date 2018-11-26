@@ -1,5 +1,5 @@
 
-import { gql } from 'apollo-server';
+import gql from 'graphql-tag';
 
 let collection = null;
 function init(c) {

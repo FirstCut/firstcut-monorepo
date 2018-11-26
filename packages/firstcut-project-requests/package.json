@@ -24,5 +24,6 @@
     "url": "https://github.com/FirstCut/firstcut-monorepo/issues"
   },
   "dependencies": {
+    "graphql-tag": "^2.10.0"
   }
 }

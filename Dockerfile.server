@@ -6,3 +6,4 @@ RUN npm install -g lerna react-scripts
 COPY . .
 
 RUN npm run build:babel && lerna bootstrap
+CMD npm run run:server

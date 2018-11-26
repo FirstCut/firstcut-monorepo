@@ -2,7 +2,10 @@ import { resolvers as templateResolvers, typeDefs as templateTypeDefs, init as i
 import { resolvers as requestResolvers, typeDefs as requestTypeDefs, init as initRequests } from 'firstcut-project-requests';
 import { merge } from 'lodash';
 import { MongoClient } from 'mongodb';
-import { ApolloServer, gql } from 'apollo-server';
+import { GraphQLServer } from 'graphql-yoga';
+import { makeExecutableSchema } from 'graphql-tools';
+import gql from 'graphql-tag';
+import { applyMiddleware } from 'graphql-middleware';
 
 const baseQuery = gql`
   type Query {
@@ -11,12 +14,50 @@ const baseQuery = gql`
 `;
 
 const resolvers = merge(resolvers, requestResolvers, templateResolvers);
-const server = new ApolloServer({
-  typeDefs: [baseQuery, templateTypeDefs, requestTypeDefs],
-  resolvers,
-  tracing: true,
-  cacheControl: true,
+
+const logInput = async (resolve, root, args, context, info) => {
+  const result = await resolve(root, args, context, info);
+  return result;
+};
+
+const eventMiddleware = {
+  Query: {
+    projectTemplates: async (resolve, parent, args, context, info) => {
+      console.log('PROJECT TEMP{LAtes');
+      const result = await resolve(parent, args, context, info);
+      return result;
+    },
+  },
+  Mutation: {
+    addRequest: async (resolve, parent, args, context, info) => {
+      console.log('ADD REQUEST MIDDLEWARE');
+      const result = await resolve(parent, args, context, info);
+      return result;
+    },
+  },
+
+};
+
+const schema = makeExecutableSchema({ typeDefs: [baseQuery, templateTypeDefs, requestTypeDefs], resolvers });
+const withMiddleware = applyMiddleware(
+  schema,
+  eventMiddleware,
+);
+
+const server = new GraphQLServer({
+  schema: withMiddleware,
 });
+
+const port = process.env.PORT || 4000;
+const playground = (process.env.NODE_ENV === 'development');
+const options = {
+  port,
+  playground,
+  endpoint: '/graphql',
+};
+server.start(options, () => console.log(
+  '🚀 Server ready at', port,
+));
 
 const url = process.env.MONGO_URL;
 const dbName = 'firstcut-dev';
@@ -27,4 +68,4 @@ MongoClient.connect(url, (err, client) => {
   initRequests(db.collection('project_requests'));
 });
 
-server.listen({ port: 4000 }).then(() => console.log(`Running at http://localhost:4000${server.graphqlPath}`));
+// server.listen({ port: PORT }).then(() => console.log(`Running at http://localhost:${PORT}${server.graphqlPath}`));
