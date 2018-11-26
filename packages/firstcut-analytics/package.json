@@ -1,7 +1,7 @@
 {
   "name": "firstcut-analytics",
   "version": "1.0.0",
-  "description": "> TODO: description",
+  "description": "Analytics tracker for firstcut",
   "author": "Lucy Richards <lucyannerichards@gmail.com>",
   "homepage": "https://dmk255.github.io/lerna-webpack-example/tree/master/packages/firstcut-analytics#readme",
   "license": "ISC",

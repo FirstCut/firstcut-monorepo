@@ -1,7 +1,7 @@
 {
   "name": "firstcut-marketplace-server",
   "version": "1.0.0",
-  "description": "> TODO: description",
+  "description": "a graphql backend for the marketplace webapp",
   "author": "Lucy Richards <lucyannerichards@gmail.com>",
   "homepage": "https://dmk255.github.io/lerna-webpack-example/tree/master/packages/firstcut-marketplace-server#readme",
   "license": "ISC",

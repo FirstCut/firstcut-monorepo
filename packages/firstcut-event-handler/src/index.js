@@ -2,9 +2,9 @@
 import EventHandlerTemplates from './handler-templates';
 import { ACTIONS, sendSlackNotification } from './actions';
 
+// passes data to the specified event's template
+// which generates actions to execute
 async function handleEvent(args) {
-  console.log('HANDLING EVENT');
-  console.log(args);
   const actions = getActionsForEvent(args);
   // TODO: insert result to history once complete
   const result = await execute(actions);

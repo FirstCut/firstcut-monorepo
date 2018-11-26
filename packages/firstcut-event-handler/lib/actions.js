@@ -12,6 +12,7 @@ var _objectSpread2 = _interopRequireDefault(require("@babel/runtime/helpers/obje
 
 var _firstcutSlack = _interopRequireDefault(require("firstcut-slack"));
 
+// defines what action types are supported -- soon to include calendar events, emails, etc
 var ACTIONS = {
   SLACK_NOTIFY: 'slack_notify'
 };

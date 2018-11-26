@@ -1,5 +1,6 @@
 {
   "name": "firstcut-slack",
+  "description": "Firstcut wrapper for slack api",
   "private": true,
   "version": "0.0.0",
   "main": "lib/index.js",

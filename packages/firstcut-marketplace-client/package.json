@@ -1,6 +1,7 @@
 {
   "name": "firstcut-marketplace-client",
   "version": "0.1.0",
+  "description": "React with Apollo Client front end for the marketplace webapp",
   "private": true,
   "dependencies": {
     "apollo-boost": "^0.1.21",

@@ -1,6 +1,7 @@
 
 import Slack from 'firstcut-slack';
 
+// defines what action types are supported -- soon to include calendar events, emails, etc
 export const ACTIONS = {
   SLACK_NOTIFY: 'slack_notify',
 };

@@ -1,7 +1,7 @@
 {
   "name": "firstcut-ui",
   "version": "1.0.0",
-  "description": "> TODO: description",
+  "description": "Firstcut wrapper for generic react ui components (currently primarily a wrapper for semantic ui)",
   "author": "Lucy Richards <lucyannerichards@gmail.com>",
   "homepage": "https://dmk255.github.io/lerna-webpack-example/tree/master/packages/firstcut-ui#readme",
   "license": "ISC",

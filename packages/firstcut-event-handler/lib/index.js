@@ -18,6 +18,8 @@ var _handlerTemplates = _interopRequireDefault(require("./handler-templates"));
 
 var _actions = require("./actions");
 
+// passes data to the specified event's template
+// which generates actions to execute
 function handleEvent(_x) {
   return _handleEvent.apply(this, arguments);
 } // TODO: auto generate this from event handlers themselves
@@ -32,18 +34,16 @@ function _handleEvent() {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
-            console.log('HANDLING EVENT');
-            console.log(args);
             actions = getActionsForEvent(args); // TODO: insert result to history once complete
 
-            _context.next = 5;
+            _context.next = 3;
             return execute(actions);
 
-          case 5:
+          case 3:
             result = _context.sent;
             return _context.abrupt("return", result);
 
-          case 7:
+          case 5:
           case "end":
             return _context.stop();
         }
