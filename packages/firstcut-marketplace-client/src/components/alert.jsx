@@ -10,7 +10,7 @@ import { Modal } from 'firstcut-ui';
 
 function Alert(props) {
   const { header, message, visible=true } = props;
-  return (<Modal open={visible} header={props.header} content={props.message}/>);
+  return (<Modal open={visible} header={header} content={message}/>);
 }
 
 Alert.propTypes = {

@@ -25,8 +25,8 @@ function Alert(props) {
       visible = _props$visible === void 0 ? true : _props$visible;
   return _react.default.createElement(_firstcutUi.Modal, {
     open: visible,
-    header: props.header,
-    content: props.message
+    header: header,
+    content: message
   });
 }
 
