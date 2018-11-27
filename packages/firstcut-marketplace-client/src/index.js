@@ -8,7 +8,7 @@ import ApolloClient from 'apollo-boost';
 import { ApolloProvider } from 'react-apollo';
 
 console.log(process.env);
-const SERVER_ROOT = (process.env.NODE_ENV === 'development') ? 'http://localhost:4000' : 'http://52.43.83.221';
+const SERVER_ROOT = (process.env.NODE_ENV === 'development') ? 'http://localhost:4000' : 'https://api.firstcut.io';
 const client = new ApolloClient({
   uri: `${SERVER_ROOT}/graphql`
 });
