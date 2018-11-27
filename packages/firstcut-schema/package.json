@@ -1,7 +1,7 @@
 {
-  "name": "firstcut-event-handler",
+  "name": "firstcut-schema",
   "version": "1.0.0",
-  "description": "A executes the side effects of firstcut events such as project requests, etc. Sends slack notifications, emails, creates calendar events, etc",
+  "description": "Wrapper for building and validating json schemas",
   "author": "Lucy Richards <lucyannerichards@gmail.com>",
   "homepage": "https://github.com/FirstCut/firstcut-monorepo#readme",
   "license": "ISC",
@@ -24,9 +24,6 @@
     "url": "https://github.com/FirstCut/firstcut-monorepo/issues"
   },
   "dependencies": {
-    "firstcut-schema": "^1.0.0",
-    "firstcut-slack": "^0.0.0",
-    "immutable": "^4.0.0-rc.12",
-    "lodash": "^4.17.11"
+    "ajv": "^6.5.5"
   }
 }

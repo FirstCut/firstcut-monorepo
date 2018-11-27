@@ -1,12 +1,12 @@
 {
   "name": "firstcut-slack",
-  "description": "Firstcut wrapper for slack api",
   "private": true,
   "version": "0.0.0",
   "main": "lib/index.js",
   "dependencies": {
     "@babel/runtime": "^7.1.2",
     "@slack/client": "^4.8.0",
+    "firstcut-schema": "^1.0.0",
     "lodash": "^4.17.11"
   }
 }

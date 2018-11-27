@@ -1,5 +1,5 @@
 
-import EventHandlerTemplates from './handler-templates';
+import { getActionsForEvent } from './template.utils';
 import { ACTIONS, sendSlackNotification } from './actions';
 
 // passes data to the specified event's template
@@ -15,11 +15,6 @@ async function handleEvent(args) {
 export const EVENTS = {
   PROJECT_REQUEST: 'project_request',
 };
-
-export function getActionsForEvent(args) {
-  const { event } = args;
-  return EventHandlerTemplates[event].get('generateActions')(args);
-}
 
 function execute(actions) {
   return new Promise((resolve, reject) => {

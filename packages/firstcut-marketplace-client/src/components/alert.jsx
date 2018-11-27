@@ -7,7 +7,6 @@ import { Modal } from 'firstcut-ui';
  *
  * Displays an alert to the user
  */
-
 function Alert(props) {
   const { header, message, visible=true } = props;
   return (<Modal open={visible} header={header} content={message}/>);

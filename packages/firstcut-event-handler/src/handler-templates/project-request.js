@@ -13,7 +13,7 @@ const ProjectRequest = new Map({
     } = eventData;
     return [
       {
-        type: ACTIONS.slack_notify,
+        type: ACTIONS.SLACK_NOTIFY,
         channel: 'projectrequests',
         content: {
           text: `*Name*: ${firstName} ${lastName}\n *Company*: ${company} \n *Project id*: ${projectId}\n *Email*: ${email}\n *About*: ${about}\n, *Budget* : ${budget}\n, *Location*: ${location}\n`,

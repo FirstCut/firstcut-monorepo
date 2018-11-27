@@ -1,54 +1,42 @@
 
+import { _ } from 'lodash';
+import HandleEventTemplates from '../src/handler-templates';
+import { getActionsForEvent, getTemplateKey } from '../src/template.utils';
+import { EVENTS } from '../src';
+import { ActionSchemas } from '../src/actions';
 
-const firstcutEventHandler = require('..');
+jest.mock('firstcut-slack');
 
-import HandleEventTemplates from '../src/index';
-import ActionValidator from './actiontest.utils';
+const ActionValidator = {
+  validate(data) {
+    const actions = getActionsForEvent(data);
+    _.forEach(actions, action => this.validateAction(action));
+  },
 
-const templates = [
-  HandleEventTemplates.project_request,
-];
-
-const testAdminOwner = jest.fn().mockImplementation(() => ({ firstName: 'First', lastName: 'Last', email: 'produceremail' }));
-const testClient = jest.fn().mockImplementation(() => ({ firstName: 'First', lastName: 'Last', email: 'clientemail' }));
-
-const TestModel = jest.fn().mockImplementation(() => function () {
-  return {
-    adminOwner: jest.fn(() => testAdminOwner),
-    clientOwner: jest.fn(() => testClient),
-  };
-});
-
-const testRecords = {
-  cutId: new TestModel({}),
-};
-
-const modelImplementation = {
-  findOne: jest.fn().mockImplementation(query => testRecords[query._id]),
-  fromId: jest.fn().mockImplementation(id => testRecords[id]),
-};
-
-const Models = {
-  Cut: modelImplementation,
-  Job, // must be original job in order to validate job creation actions
+  validateAction(action) {
+    const schema = ActionSchemas[action.type];
+    if (!schema) {
+      throw new Error(`schema undefined for action ${action.type}`);
+    }
+    schema.validate(action);
+  },
 };
 
 const TEST_DATA = {
-  feedback_submitted_by_client: {
-    record_id: 'cutId',
+  [EVENTS.project_request]: {
+    projectId: 'projectId',
+    firstName: 'first',
+    lastName: 'last',
   },
 };
 
 describe('all actions', () => {
   test('should generate valid actions given valid inputs', () => {
-    expect.assertions(ActionTemplates.length);
-    templates.map((template) => {
-      const data = TEST_DATA[template.get('key')];
-      expect(() => ActionValidator.validate({
-        template,
-        data,
-        Models,
-      })).not.toThrow();
+    expect.assertions(HandleEventTemplates.length);
+    _.map(HandleEventTemplates, (template) => {
+      const key = getTemplateKey(template);
+      const data = TEST_DATA[key];
+      expect(() => ActionValidator.validate({ event: key, ...data })).not.toThrow();
     });
   });
 });

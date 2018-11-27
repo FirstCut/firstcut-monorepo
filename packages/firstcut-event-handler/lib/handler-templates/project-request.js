@@ -24,7 +24,7 @@ var ProjectRequest = new _immutable.Map({
         location = eventData.location,
         budget = eventData.budget;
     return [{
-      type: _actions.ACTIONS.slack_notify,
+      type: _actions.ACTIONS.SLACK_NOTIFY,
       channel: 'projectrequests',
       content: {
         text: "*Name*: ".concat(firstName, " ").concat(lastName, "\n *Company*: ").concat(company, " \n *Project id*: ").concat(projectId, "\n *Email*: ").concat(email, "\n *About*: ").concat(about, "\n, *Budget* : ").concat(budget, "\n, *Location*: ").concat(location, "\n"),

@@ -5,7 +5,6 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.getActionsForEvent = getActionsForEvent;
 exports.default = exports.EVENTS = void 0;
 
 var _regenerator = _interopRequireDefault(require("@babel/runtime/regenerator"));
@@ -14,7 +13,7 @@ var _objectSpread2 = _interopRequireDefault(require("@babel/runtime/helpers/obje
 
 var _asyncToGenerator2 = _interopRequireDefault(require("@babel/runtime/helpers/asyncToGenerator"));
 
-var _handlerTemplates = _interopRequireDefault(require("./handler-templates"));
+var _template = require("./template.utils");
 
 var _actions = require("./actions");
 
@@ -34,7 +33,7 @@ function _handleEvent() {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
-            actions = getActionsForEvent(args); // TODO: insert result to history once complete
+            actions = (0, _template.getActionsForEvent)(args); // TODO: insert result to history once complete
 
             _context.next = 3;
             return execute(actions);
@@ -57,11 +56,6 @@ var EVENTS = {
   PROJECT_REQUEST: 'project_request'
 };
 exports.EVENTS = EVENTS;
-
-function getActionsForEvent(args) {
-  var event = args.event;
-  return _handlerTemplates.default[event].get('generateActions')(args);
-}
 
 function execute(actions) {
   return new Promise(function (resolve, reject) {
