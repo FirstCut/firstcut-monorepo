@@ -30,7 +30,7 @@ const TEST_DATA = {
   },
 };
 
-describe('all actions', () => {
+describe('all events', () => {
   test('should generate valid actions given valid inputs', () => {
     expect.assertions(HandleEventTemplates.length);
     _.map(HandleEventTemplates, (template) => {
