@@ -7,11 +7,13 @@ const projectTemplates = [
     exampleThumb: 'https://s3-us-west-2.amazonaws.com/firstcut-app/project_templates/Screen+Shot+2018-11-26+at+5.04.12+PM.png',
     _id: 'customer_testimonial',
   },
-  // {
-  //   title: 'Editor on demand',
-  //   description: 'Aready have some footage or an existing video you would like to trim or polish? We have professional editors that can turn anything into a stunning video.',
-  //   _id: 'editor_on_demand',
-  // },
+  {
+    title: 'Editor on demand',
+    description: 'Aready have some footage or an existing video you would like to trim or polish? We have professional editors that can turn anything into a stunning video.',
+    exampleUrl: 'https://drive.google.com/open?id=1I3LsmMNe4MQawgDSugyegjXVAlkU-_DA',
+    exampleThumb: 'https://drive.google.com/open?id=1I3LsmMNe4MQawgDSugyegjXVAlkU-_DA',
+    _id: 'editor_on_demand',
+  },
   {
     title: 'Industry experts series',
     description: 'You know your team is made of rockstars - so let the world know it! Our video series will postition you as experts in your industry. A professional videographer will come to your office, record your team members responding to trending questions in your industry, and then turn that footage a series of short, powerful videos.',
@@ -40,11 +42,13 @@ const projectTemplates = [
     exampleThumb: 'https://s3-us-west-2.amazonaws.com/firstcut-app/project_templates/Screen+Shot+2018-11-26+at+5.27.26+PM.png',
     _id: 'welcome_video',
   },
-  // {
-  //   title: 'Event promotion',
-  //   description: 'Hosting a live event or a webinar? Boost attendance and increase ROI of your event with a professional video promo.',
-  //   _id: 'event_promotion',
-  // },
+  {
+    title: 'Event promotion',
+    description: 'Hosting a live event or a webinar? Boost attendance and increase ROI of your event with a professional video promo.',
+    exampleUrl: 'https://www.youtube.com/watch?v=1UTXZ_W88pM',
+    exampleThumb: 'https://drive.google.com/open?id=11Z68zJA5udMuU4g9L5hbjrJ1osFqVOTG',
+    _id: 'event_promotion',
+  },
   {
     title: 'Event highlights',
     description: 'Are you using live events in your marketing playbook? Our videographers can capture the highlights of your event and postproduce the footage into a professional video. These videos boost your brand and are powerful promo ads for your next event.',

@@ -42,6 +42,7 @@
 				"dev": "concurrently \"yarn watch\" \"lerna run dev --stream\"",
 				"run:marketplace": "concurrently \"yarn run:client\" \"yarn run:server\"",
 				"run:client": "npm --prefix packages/firstcut-marketplace-client run start",
+				"run:client-prod": "npm --prefix packages/firstcut-marketplace-client run start-prod",
 				"run:server": "npm --prefix packages/firstcut-marketplace-server run start",
 				"lint": "eslint --cache --ignore-path .gitignore ./packages/*/src",
 				"test": "jest --watch",
