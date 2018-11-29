@@ -2,8 +2,9 @@ FROM node:11.2.0
 WORKDIR /usr/app
 
 COPY package.json .
-RUN npm install -g lerna react-scripts serve
+RUN npm install -g lerna react-scripts yarn gulp
 COPY . .
 
-RUN npm run build:babel && lerna bootstrap
+RUN echo y | lerna clean && npm run build:babel && lerna bootstrap
+EXPOSE 3000
 CMD npm run run:client

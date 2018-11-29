@@ -73,7 +73,7 @@ function execute(actions) {
 
 function executeAction(action) {
   switch (action.type) {
-    case _actions.ACTIONS.slack_notify:
+    case _actions.ACTIONS.SLACK_NOTIFY:
       return (0, _actions.sendSlackNotification)(action);
 
     default:

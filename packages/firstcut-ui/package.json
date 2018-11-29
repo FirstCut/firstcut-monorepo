@@ -18,8 +18,7 @@
     "url": "git+https://github.com/FirstCut/firstcut-monorepo.git"
   },
   "scripts": {
-    "test": "echo \"Error: run tests from root\" && exit 1",
-    "build": "cd semantic && gulp build"
+    "test": "echo \"Error: run tests from root\" && exit 1"
   },
   "bugs": {
     "url": "https://github.com/FirstCut/firstcut-monorepo/issues"

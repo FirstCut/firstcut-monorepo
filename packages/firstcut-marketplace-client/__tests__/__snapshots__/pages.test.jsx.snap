@@ -76,6 +76,10 @@ exports[`contact page should match snapshot after query load 1`] = `
             aria-hidden="true"
             className="video play icon"
           />
+          <img
+            className="placeholder"
+            src="http://example.thumb.com"
+          />
         </div>
         <i>
           description

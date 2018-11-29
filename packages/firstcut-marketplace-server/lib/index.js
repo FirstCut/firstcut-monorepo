@@ -54,15 +54,14 @@ var eventMiddleware = {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                console.log('project requests');
-                _context.next = 3;
+                _context.next = 2;
                 return resolve(parent, args, context, info);
 
-              case 3:
+              case 2:
                 result = _context.sent;
                 return _context.abrupt("return", result);
 
-              case 5:
+              case 4:
               case "end":
                 return _context.stop();
             }
@@ -85,18 +84,17 @@ var eventMiddleware = {
           while (1) {
             switch (_context2.prev = _context2.next) {
               case 0:
-                console.log('HANDLING EVENT');
                 (0, _firstcutEventHandler.default)((0, _objectSpread2.default)({
                   event: _firstcutEventHandler.EVENTS.PROJECT_REQUEST
                 }, args));
-                _context2.next = 4;
+                _context2.next = 3;
                 return resolve(parent, args, context, info);
 
-              case 4:
+              case 3:
                 result = _context2.sent;
                 return _context2.abrupt("return", result);
 
-              case 6:
+              case 5:
               case "end":
                 return _context2.stop();
             }

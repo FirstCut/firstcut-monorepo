@@ -28,7 +28,7 @@ function execute(actions) {
 
 function executeAction(action) {
   switch (action.type) {
-    case ACTIONS.slack_notify:
+    case ACTIONS.SLACK_NOTIFY:
       return sendSlackNotification(action);
     default:
       throw new Error(`Action ${action.type} not supported.`);

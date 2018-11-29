@@ -21,14 +21,12 @@ const resolvers = merge(resolvers, requestResolvers, templateResolvers);
 const eventMiddleware = {
   Query: {
     projectTemplates: async (resolve, parent, args, context, info) => {
-      console.log('project requests');
       const result = await resolve(parent, args, context, info);
       return result;
     },
   },
   Mutation: {
     addRequest: async (resolve, parent, args, context, info) => {
-      console.log('HANDLING EVENT');
       handleEvent({ event: EVENTS.PROJECT_REQUEST, ...args });
       const result = await resolve(parent, args, context, info);
       return result;

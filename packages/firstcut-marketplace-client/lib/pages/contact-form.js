@@ -52,7 +52,7 @@ function _templateObject2() {
 }
 
 function _templateObject() {
-  var data = (0, _taggedTemplateLiteral2.default)(["\n  query projectTemplate($projectId: ID!) {\n    projectTemplate(_id: $projectId) {\n      title\n      description\n      exampleUrl\n      _id\n    }\n  }\n"]);
+  var data = (0, _taggedTemplateLiteral2.default)(["\n  query projectTemplate($projectId: ID!) {\n    projectTemplate(_id: $projectId) {\n      title\n      description\n      exampleUrl\n      exampleThumb\n      _id\n    }\n  }\n"]);
 
   _templateObject = function _templateObject() {
     return data;
@@ -175,7 +175,9 @@ function (_React$PureComponent) {
           confirm = _this$state2.confirm,
           error = _this$state2.error,
           fields = (0, _objectWithoutProperties2.default)(_this$state2, ["confirm", "error"]);
-      var mutationState = this.props.mutationState;
+      var _this$props2 = this.props,
+          mutationState = _this$props2.mutationState,
+          projectProps = (0, _objectWithoutProperties2.default)(_this$props2, ["mutationState"]);
       var columnStyle = {
         paddingTop: '100px'
       };
@@ -209,7 +211,7 @@ function (_React$PureComponent) {
         style: {
           height: '75px'
         }
-      }), _react.default.createElement(ProjectDetails, this.props), _react.default.createElement(_firstcutUi.Responsive, {
+      }), _react.default.createElement(ProjectDetails, projectProps), _react.default.createElement(_firstcutUi.Responsive, {
         as: _firstcutUi.Image,
         minWidth: 1085,
         src: "/desktop.png",
@@ -333,7 +335,7 @@ function ConfirmationModal(props) {
 function ProjectDetails(props) {
   var title = props.title,
       description = props.description,
-      exampleUrl = props.exampleUrl;
+      visualProps = (0, _objectWithoutProperties2.default)(props, ["title", "description"]);
   return _react.default.createElement("div", {
     style: {
       maxWidth: '500px'
@@ -341,12 +343,28 @@ function ProjectDetails(props) {
   }, _react.default.createElement(_firstcutUi.Header, {
     color: "green",
     align: "left"
-  }, title), _react.default.createElement(_firstcutUi.Embed, {
-    url: exampleUrl,
-    style: {
-      marginBottom: '20px'
-    }
-  }), _react.default.createElement("i", null, description));
+  }, title), _react.default.createElement(VisualComponent, visualProps), _react.default.createElement("i", null, description));
+}
+
+function VisualComponent(props) {
+  var exampleUrl = props.exampleUrl,
+      exampleThumb = props.exampleThumb;
+  var componentStyle = {
+    marginBottom: '20px'
+  };
+
+  if (exampleUrl) {
+    return _react.default.createElement(_firstcutUi.Embed, {
+      url: exampleUrl,
+      placeholder: exampleThumb,
+      style: componentStyle
+    });
+  }
+
+  return _react.default.createElement(_firstcutUi.Image, {
+    src: exampleThumb,
+    style: componentStyle
+  });
 }
 
 var _default = ContactPage;

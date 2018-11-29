@@ -24,6 +24,7 @@ export const GET_TEMPLATE_QUERY = gql`
       title
       description
       exampleUrl
+      exampleThumb
       _id
     }
   }
@@ -116,7 +117,7 @@ class ContactFormPageComponent extends React.PureComponent {
     const {
       confirm, error, ...fields
     } = this.state;
-    const { mutationState } = this.props;
+    const { mutationState, ...projectProps } = this.props;
     const columnStyle = { paddingTop: '100px' };
     return (
       <div style={{ height: '100%' }}>
@@ -147,7 +148,7 @@ class ContactFormPageComponent extends React.PureComponent {
                 height: '75px',
               }}
             />
-            <ProjectDetails {...this.props} />
+            <ProjectDetails {...projectProps} />
             <Responsive
               as={Image}
               minWidth={1085}
@@ -292,13 +293,13 @@ function ConfirmationModal(props) {
 }
 
 function ProjectDetails(props) {
-  const { title, description, exampleUrl } = props;
+  const { title, description, ...visualProps } = props;
   return (
     <div style={{ maxWidth: '500px' }}>
       <Header color="green" align="left">
         { title }
       </Header>
-      <Embed url={exampleUrl} style={{ marginBottom: '20px' }} />
+      <VisualComponent {...visualProps}/>
       <i>
         { description }
       </i>
@@ -306,4 +307,12 @@ function ProjectDetails(props) {
   );
 }
 
+function VisualComponent(props) {
+  const { exampleUrl, exampleThumb } = props;
+  const componentStyle = { marginBottom: '20px' };
+  if (exampleUrl) {
+    return <Embed url={exampleUrl} placeholder={exampleThumb} style={componentStyle} /> ;
+  }
+  return <Image src={exampleThumb} style={componentStyle}/>;
+}
 export default ContactPage;

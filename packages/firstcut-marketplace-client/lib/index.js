@@ -18,10 +18,10 @@ var _apolloBoost = _interopRequireDefault(require("apollo-boost"));
 
 var _reactApollo = require("react-apollo");
 
-console.log(process.env);
-var SERVER_ROOT = process.env.NODE_ENV === 'development' ? 'http://localhost:4000' : 'http://52.43.83.221';
+// const SERVER_ROOT = (process.env.NODE_ENV === 'development') ? 'http://localhost:4000' : 'https://api.firstcut.io';
 var client = new _apolloBoost.default({
-  uri: "".concat(SERVER_ROOT, "/graphql")
+  // uri: `https://api.firstcut.io/graphql`
+  uri: "http://localhost:4000/graphql"
 });
 
 _reactDom.default.render(_react.default.createElement(_reactApollo.ApolloProvider, {
