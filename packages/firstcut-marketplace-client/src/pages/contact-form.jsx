@@ -122,7 +122,7 @@ class ContactFormPageComponent extends React.PureComponent {
     return (
       <div style={{ height: '100%' }}>
         { mutationState.error &&
-          <Alert visible={mutationState.error} type='error' message={mutationState.error.message} />
+          <Alert message={mutationState.error.message} />
         }
         <ConfirmationModal
           open={confirm}

@@ -2,9 +2,9 @@
 const projectTemplates = [
   {
     title: 'Customer testimonial',
-    description: 'Market your product with a 2 minute video testimonial. A professional videograhper will come to you or your client for a shoot and interview, then postproduce your footage into powerful marketing content.',
-    exampleUrl: 'https://s3-us-west-2.amazonaws.com/firstcut-app/project_templates/videos/SaaStr+testimonial+v2.mp4',
-    exampleThumb: 'https://s3-us-west-2.amazonaws.com/firstcut-app/project_templates/Screen+Shot+2018-11-26+at+5.04.12+PM.png',
+    description: 'Market your product with a 2 minute video testimonial. A professional videographer will come to you or your client for a shoot and interview, then postproduce your footage into powerful marketing content.',
+    exampleUrl: 'https://www.youtube.com/embed/mh6m9v87Aow',
+    exampleThumb: 'https://s3-us-west-2.amazonaws.com/firstcut-app/project_templates/Screen+Shot+2018-11-30+at+8.52.51+AM.png',
     _id: 'customer_testimonial',
   },
   {
