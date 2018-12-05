@@ -7,10 +7,9 @@ import * as serviceWorker from './serviceWorker';
 import ApolloClient from 'apollo-boost';
 import { ApolloProvider } from 'react-apollo';
 
-// const SERVER_ROOT = (process.env.NODE_ENV === 'development') ? 'http://localhost:4000' : 'https://api.firstcut.io';
+const SERVER_ROOT = (process.env.NODE_ENV === 'development') ? 'http://localhost:4000' : 'https://api.firstcut.io';
 const client = new ApolloClient({
-  uri: `https://api.firstcut.io/graphql`
-  // uri: `http://localhost:4000/graphql`
+  uri: `${SERVER_ROOT}/graphql`
 });
 
 ReactDOM.render((
@@ -19,7 +18,4 @@ ReactDOM.render((
   </ApolloProvider>
   ), document.getElementById('root'));
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: http://bit.ly/CRA-PWA
 serviceWorker.unregister();
