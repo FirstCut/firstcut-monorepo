@@ -7,8 +7,11 @@ import { makeExecutableSchema } from 'graphql-tools';
 import gql from 'graphql-tag';
 import { applyMiddleware } from 'graphql-middleware';
 import handleEvent, { EVENTS } from 'firstcut-event-handler';
+import config from './config';
 
-const isDevelopment = process.env.NODE_ENV === 'development';
+const {
+  PORT, ENV, GRAPHQL_ENDPOINT, MONGO_URL, DB_NAME,
+} = config;
 
 const baseQuery = gql`
   type Query {
@@ -49,24 +52,21 @@ const server = new GraphQLServer({
   schema: withMiddleware,
 });
 
-const port = process.env.PORT || 4000;
 const options = {
-  port,
-  playground: isDevelopment,
-  endpoint: '/graphql',
+  port: PORT,
+  playground: ENV === 'development',
+  endpoint: GRAPHQL_ENDPOINT,
 };
 
 server.start(options, () => console.log(
-  '🚀 Server ready at', port,
+  '🚀 Server ready at', PORT,
 ));
 
-const url = process.env.MONGO_URL;
-const dbName = 'firstcut-dev';
-
-MongoClient.connect(url, (err, client) => {
-  const db = client.db(dbName);
+MongoClient.connect(MONGO_URL, (err, client) => {
+  const db = client.db(DB_NAME);
   initProjectTemplates(db.collection('project_templates'));
   initRequests(db.collection('project_requests'));
 });
 
-// server.listen({ port: PORT }).then(() => console.log(`Running at http://localhost:${PORT}${server.graphqlPath}`));
+// export the server for testing
+export default server;
